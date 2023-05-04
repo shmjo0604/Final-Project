@@ -15,23 +15,23 @@ import lombok.ToString;
 @AllArgsConstructor
 public class Member {
 
-    // 회원아이디(sequence)
+    // 아이디 (PK)
     private String id;
-    // 회원비밀번호
+    // 비밀번호
     private String password;
-    // 회원이름
+    // 이름
     private String name;
-    // 회원이메일
+    // 이메일
     private String email;
-    // 회원전화번호
+    // 전화번호
     private String phone;
     // 성별(M,W)
     private String gender;
     // 생년월일
     private String birth;
-    // 회원가입일자
+    // 가입일자
     private Date regdate;
-    // 회원가입여부(0,1)
+    // 탈퇴여부(0,1)
     private int chk;
     
 }

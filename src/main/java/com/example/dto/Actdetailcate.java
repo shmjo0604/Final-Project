@@ -3,13 +3,13 @@ package com.example.dto;
 import lombok.Data;
 
 @Data
-public class Actdetailcate {
+public class ActDetailCate {
 
-    // 101,102,103
-    private long code;
-    // 하위 카테고리 명칭
+    // 클래스 하위 분류 번호 (PK)
+    private long code; 
+    // 클래스 하위 분류 명칭
     private String actcate;
-    // 1, 2, 3
+    // 클래스 상위 분류 번호 (FK)
     private long actcode;
 
 }

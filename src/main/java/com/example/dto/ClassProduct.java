@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class ClassProduct {
 
-    // 클래스 코드(sequence)
+    // 클래스코드 (sequence) (PK)
 	private long classcode;
 	// 제목
 	private String title;
@@ -37,11 +37,11 @@ public class ClassProduct {
 	private Date regdate;
 	// 승인여부(0,1)
 	private int chk;
-	// 상세지역카테고리
+	// 상세 지역 카테고리 (FK)
 	private int localcode;
-	// 액티비티디테일카테고리
-	private int actcode;
-	// 회원아이디(시퀀스)
+	// 상세 클래스 분류 카테고리 (FK)
+	private int actdetailcode;
+	// 회원 아이디 (FK)
 	private String memberid;
     
 }
