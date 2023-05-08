@@ -27,6 +27,8 @@ public class ClassProduct {
 	private long price;
 	// 소개글
 	private String intro;
+	// 상호명
+	private String nickname;
 	// 강사소개
 	private String instructor;
 	// 커리큘럼
@@ -35,7 +37,7 @@ public class ClassProduct {
 	private long hit;
 	// 등록일자
 	private Date regdate;
-	// 승인여부(0,1)
+	// 승인여부 ( 0, 1 )
 	private int chk;
 	// 상세 지역 카테고리 (FK)
 	private int localcode;
