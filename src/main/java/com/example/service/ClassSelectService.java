@@ -1,11 +1,15 @@
 package com.example.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.example.dto.ActDetailCate;
 import com.example.dto.ActivityCate;
 import com.example.dto.CityCate;
+import com.example.dto.ClassUnitView;
+import com.example.dto.LocalCate;
 
 @Service
 public interface ClassSelectService {
@@ -15,5 +19,15 @@ public interface ClassSelectService {
 
     // 클래스 상위 분류 호출
     public List<ActivityCate> selectActivityCateList();
+
+    // 지역 하위 분류 호출
+    public List<LocalCate> selectLocalCateList(int citycode);
+
+    // 클래스 하위 분류 호출
+    public List<ActDetailCate> selectActDetailCateList(int actcode);
+
+    // 클래스 조회
+    public List<ClassUnitView> selectClassUnitViewList(Map<String, Object> map);
+
 
 }

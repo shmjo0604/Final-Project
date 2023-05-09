@@ -1,12 +1,16 @@
 package com.example.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.dto.ActDetailCate;
 import com.example.dto.ActivityCate;
 import com.example.dto.CityCate;
+import com.example.dto.ClassUnitView;
+import com.example.dto.LocalCate;
 import com.example.mapper.ClassSelectMapper;
 
 @Service
@@ -31,6 +35,39 @@ public class ClassSelectServiceImpl implements ClassSelectService {
             return cMapper.selectActivityCateList();
         }
         catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<LocalCate> selectLocalCateList(int citycode) {
+        try {
+            return cMapper.selectLocalCateList(citycode);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<ActDetailCate> selectActDetailCateList(int actcode) {
+        try {
+            return cMapper.selectActDetailCateList(actcode);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<ClassUnitView> selectClassUnitViewList(Map<String, Object> map) {
+        try {
+            return cMapper.selectClassUnitViewList(map);
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return null;
         }

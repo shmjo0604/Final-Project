@@ -3,43 +3,42 @@
 
 <mapper namespace="com.example.mapper.ClassSelectMapper">
 
-    <!-- 1. 클래스 조회
+    <!--1. 클래스 조회-->
     <select id="selectClassUnitViewList" parameterType="map" resultType="ClassUnitView">
-        <script>
-		SELECT s.* FROM classsessionview s
+        
+		SELECT s.* FROM classunitview s
 		<trim prefix='WHERE' prefixOverrides='AND || OR '>
-            <if test = 'map.citycode != 0' >
-                citycode = #{map.citycode}
+            <if test = 'citycode != 0'>
+                citycode = #{citycode}
             </if>
-            <if test = 'map.localcode != 0'>
-                AND localcode = #{map.localcode}
+            <if test = 'localcode != 0'>
+                AND localcode = #{localcode}
             </if>
-		    <if test = 'map.activitycode != 0'>
-			    AND activitycode = #{map.activitycode}
+		    <if test = 'activitycode != 0'>
+			    AND activitycode = #{activitycode}
 		    </if>
-            <if test = 'map.actcode != 0'>
-                AND actdetailcode = #{map.actdetailcode}
+            <if test = 'actcode != 0'>
+                AND actdetailcode = #{actdetailcode}
             </if>
-            <if test = 'map.classdate != null'>
-                AND classdate = #{map.classdate}
+            <if test = 'classdate != null'>
+                AND classdate = #{classdate}
             </if>
-            <if test = 'map.classlevel != 0'>
-                AND classlevel = #{map.classlevel}
+            <if test = 'classlevel != 0'>
+                AND classlevel = #{classlevel}
             </if>
-            <if test = 'map.minprice != 0'>
-                AND totalprice <![CDATA[ > ]]> #{map.minprice}
+            <if test = 'minprice != 0'>
+                AND totalprice <![CDATA[ > ]]> #{minprice}
             </if>
-            <if test = 'map.maxprice != 0'>
-                AND totalprice <![CDATA[ < ]]> #{map.maxprice}
+            <if test = 'maxprice != 0'>
+                AND totalprice <![CDATA[ < ]]> #{maxprice}
             </if>
-		    <if test = 'map.keyword != null'>
-			    AND (title || intro || citycate || localcate || actdetailcate || activitycate) LIKE '%' ||  #{map.keyword} || '%'
+		    <if test = 'keyword != null'>
+			    AND (title || intro || citycate || localcate || actdetailcate || activitycate) LIKE '%' ||  #{keyword} || '%'
 		    </if>
+            AND chk = 1 ORDER BY s.classcode DESC
 		</trim>
-		AND chk = 1
-		ORDER BY s.classcode DESC
-		</script>
-    </select> -->
+		
+    </select>
 
     <!-- 2. 지역 상위 분류 조회 -->
     <select id="selectCityCateList" resultType="CityCate">

@@ -26,16 +26,10 @@ public class ClassSelectController {
             return "redirect:/class/select.do?search=list";
         }
 
-        if(search.equals("list")) {
-            List<ActivityCate> list1 = cService.selectActivityCateList();
-            List<CityCate> list2 = cService.selectCityCateList();
-            model.addAttribute("list1", list1);
-            model.addAttribute("list2", list2);
-        }
-
-        else if(search.equals("map")) {
-
-        }
+        List<ActivityCate> list1 = cService.selectActivityCateList();
+        List<CityCate> list2 = cService.selectCityCateList();
+        model.addAttribute("list1", list1);
+        model.addAttribute("list2", list2);
 
         return "/class/select";
     }
