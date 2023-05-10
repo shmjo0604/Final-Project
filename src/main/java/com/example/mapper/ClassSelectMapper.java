@@ -15,43 +15,6 @@ import com.example.dto.LocalCate;
 public interface ClassSelectMapper {
 
     // 1. 클래스 조회 -> 날짜, 지역, 클래스 카테고리, 난이도, 가격 전달 받아서(pagination)
-	// @Select({
-	// 	" <script> ",
-	// 	" SELECT s.* FROM classsessionview s ",
-	// 	" <trim prefix='WHERE' prefixOverrides='AND || OR '> ",
-	// 	" <if test = 'map.citycode != 0' > ",
-	// 		" citycode = #{map.citycode} ",
-	// 	" </if> ",
-	// 	" <if test = 'map.localcode != 0'> ",
-	// 		" AND localcode = #{map.localcode} ",
-	// 	" </if> ",
-	// 	" <if test = 'map.activitycode != 0'> ",
-	// 		" AND activitycode = #{map.activitycode} ",
-	// 	" </if> ",
-	// 	" <if test = 'map.actcode != 0'> ",
-	// 		" AND actcode = #{map.actcode} ",
-	// 	" </if> ",
-	// 	" <if test = 'map.classdate != null'> ",
-	// 		" AND classdate = #{map.classdate} ",
-	// 	" </if> ",
-	// 	" <if test = 'map.classlevel != 0'> ",
-	// 		" AND classlevel = #{map.classlevel} ",
-	// 	" </if> ",
-	// 	" <if test = 'map.minprice != 0'> ",
-	// 		" AND totalprice <![CDATA[ > ]]> #{map.minprice} ",
-	// 	" </if> ",
-	// 	" <if test = 'map.maxprice != 0'> ",
-	// 		" AND totalprice <![CDATA[ < ]]> #{map.maxprice} ",
-	// 	" </if> ",
-	// 	" <if test = 'map.keyword != null'> ",
-	// 		" AND (title || intro || citycate || localcate || actdetailcate || actcate) LIKE '%' ||  #{map.keyword} || '%' ",
-	// 		/* " OR talent LIKE '%' ||  #{map.keyword} || '%' ", */
-	// 	" </if> ",
-	// 	" </trim> ",
-	// 	" AND chk = 1 ",
-	// 	" ORDER BY s.classcode DESC ",
-	// 	" </script> "
-	// })
 	public List<ClassUnitView> selectClassUnitViewList(Map<String, Object> map);
 	
 	/*
@@ -104,23 +67,15 @@ public interface ClassSelectMapper {
 	public List<ClassUnitView> selectClassProductList();
 
 	// 4. 지역 상위 카테고리 조회
-
-	// @Select({ " SELECT c.* FROM citycate c ORDER BY c.code ASC " })
 	public List<CityCate> selectCityCateList();
 
 	// 5. 지역 하위 카테고리 조회 -> 상위 카테고리 코드 외래키로 전달 받아서
-
-	// @Select({ " SELECT l.* FROM localcate l WHERE citycode = #{citycode} ORDER BY l.code ASC " })
 	public List<LocalCate> selectLocalCateList(int citycode);
 
 	// 6. 클래스 상위 카테고리 조회
-
-	// @Select({ " SELECT a.* FROM activitycate a ORDER BY a.code ASC " })
 	public List<ActivityCate> selectActivityCateList();
 
 	// 7. 클래스 하위 카테고리 조회 -> 상위 카테고리 코드 외래키로 전달 받아서
-
-	// @Select({ " SELECT a.* FROM actdetailcate a WHERE actcode = #{actcode} ORDER BY a.code ASC " })
 	public List<ActDetailCate> selectActDetailCateList(int actcode);
 
 }

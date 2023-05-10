@@ -24,6 +24,12 @@ public class MemberController {
 
     }
 
+    @PostMapping(value = "/findId.do")
+    public String findIdPOST() {
+        
+        return "redirect:/login.do";
+    }
+
     @GetMapping(value = "/mypage.do")
     public String mypageGET() {
 

@@ -1,0 +1,280 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	height : 100%;
+}
+
+/* (1) 로고 */
+.logo {
+	font-family: 'Permanent Marker', cursive;
+}
+
+/* (2) 메뉴 항목 */
+.nav-item {
+	margin-left: 50px;
+}
+
+.dropdown:hover .dropdown-menu { /* 드롭다운 자동으로 노출*/
+	display: block;
+	margin-top: 0;
+}
+
+#navbarSupportedContent>.dropdown-menu {
+	max-width: fit-content;
+	background-color: blue;
+}
+
+.dropdown-toggle:hover {
+	color: forestgreen;
+}
+
+/* (3) 클래스등록&로그인 */
+/* .btn-outline-success {
+	
+} */
+
+.btn-outline-secondary {
+	margin-left: 10px;
+}
+
+/* 슬라이드 */
+#carouselExampleIndicators {
+	height: 350px;
+	overflow: hidden;
+}
+
+/* 카테고리 */
+.category {
+	height: 1000px;
+}
+
+.post {
+	margin-top: 100px;
+	margin-bottom: 100px;
+	height: 300px;
+}
+
+/* Footer */
+#footer_top {
+	margin-top: 50px;
+}
+
+.footer_menu {
+	display: inline;
+}
+
+.left {
+	position: relative;
+	background-color: #EAF4F4;
+	display: grid;
+	justify-content: center;
+}
+
+.changepage {
+	margin:auto;
+	float: right;
+}
+
+#btn_cate{
+	width:200px;
+	text-align: center; /* 중앙정렬 */
+}
+
+/* 카테고리 선택시 색상 변경 */
+.left2, .btn_1 {
+	grid-template-columns: 20px 200px;
+	justify-content: center;
+	justify-items: center;
+	align-content: stretch;
+	gap: 20px 20px;
+}
+.btn_c, .btn_after, .btn_before {
+	font-weight: bold;
+	font-size: 18px;
+ 	width: 130px;
+ 	height: 40px;
+ 	border: 0;
+ 	border-radius: 10px;
+}
+.btn_c:hover {
+	box-shadow: 0 3px 5px rgba(0,0,0,0.3), 0 3px 5px rgba(0,0,0,0.5);
+  	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.btn_after:hover{
+	box-shadow: 0 3px 5px rgba(0,0,0,0.3), 0 3px 5px rgba(0,0,0,0.5);
+  	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.btn_before:hover{
+	box-shadow: 0 3px 5px rgba(0,0,0,0.3), 0 3px 5px rgba(0,0,0,0.5);
+  	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.sidebar {
+	background-color: white;
+	outline: green;
+	color: #004000;
+	border-radius: 20px;
+}
+.sidebar.active {
+	background-color: #008080;
+  	color: white;
+}
+/*  */
+
+.btn_1 {
+	text-decoration: none;
+	display: inline-block;
+	padding: 8px 16px;
+	margin: 20px;
+}
+
+.btn_in {
+	color: white;
+	font-size: 22px;
+	background: #9abf7f;
+	min-height: 30px;
+	min-width: 120px;
+	margin: 5px;
+	border-radius: 20px;
+}
+
+.btn_in:hover {
+	color: white;
+	background-color: #419428;
+	transition: 0.4s;
+}
+
+.btn_before {
+	color: white;
+	font-size: 20px;
+	background: #FFB077;
+	min-height: 30px;
+	min-width: 120px;
+	margin: 5px;
+	border-radius: 20px;
+}
+
+.btn_before:hover {
+	color: white;
+	background-color: #F08650;
+	transition: 0.4s;
+}
+
+.btn_after {
+	color: white;
+	font-size: 20px;
+	background: #9abf7f;
+	min-height: 30px;
+	min-width: 120px;
+	margin: 5px;
+	border-radius: 20px;
+}
+
+.btn_after:hover {
+	color: white;
+	background-color: #419428;
+	transition: 0.4s;
+}
+
+.btn_image {
+	border: 2px solid black;
+	background-color: white;
+	color: black;
+	padding: 5px 10px;
+	font-size: 16px;
+	cursor: pointer;
+	border-color: #2196F3;
+	color: dodgerblue;
+	border-radius: 5px;
+}
+
+.btn_image:hover {
+	background: #2196F3;
+	color: white;
+}
+
+#price {
+	outline-color: green;
+	text-align: right;
+	margin-right: 5px;
+	padding: 8px;
+	font-size: 20px;
+	border-radius: 10px;
+}
+
+#price:hover {
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.sns {
+	margin-right: 20px;
+}
+
+.sns_2 {
+	display: inline;
+	width: 300px;
+	margin: 0px 50px 0px 10px;
+}
+
+.text, .link{
+	outline-color: green;
+	width: 35%;
+	padding: 5px 5px;
+	margin: 1px 0;
+	box-sizing: border-box;
+}
+
+.tool {
+	position: relative;
+	display: inline-block;
+	margin: auto;
+}
+
+.tool .tooltip-content {
+	visibility: hidden;
+	width: 350px;
+	background-color: #008080;
+	padding-top: 15px;
+	color: white;
+	text-align: center;
+	position: absolute;
+	z-index: 1;
+	bottom: 180%;
+	left: 50%;
+	margin-left: -150px;
+	border-radius: 20px;
+}
+
+.tool .tooltip-content::after {
+	content: " ";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -10px;
+	border-width: 10px;
+	border-style: solid;
+	border-color: #008080 transparent transparent transparent;
+}
+
+.tool:hover .tooltip-content {
+	visibility: visible;
+}
+
+#wrapper {
+	margin-right: auto;
+	margin-left: auto;
+	max-width: 1400px;
+	height: auto;
+	min-height: 100%;
+	display: flex;
+	/* padding-bottom: 130px; */
+}
+
+
+/* footer {
+  height: 130px;
+  position : relative;
+  transform : translateY(-100%);
+} */
