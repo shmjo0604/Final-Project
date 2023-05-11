@@ -12,7 +12,7 @@ import com.example.dto.ClassProduct;
 import com.example.dto.LocalCate;
 
 @Mapper
-public interface ClassManageMapper {
+public interface ClassMapper {
 
     /* 클래스 관리 - (1) 클래스 등록 관련 기능 */    
 

@@ -10,6 +10,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {
 	"com.example.controller",
 	"com.example.service",
+	"com.example.service.class",
+	"com.example.service.member",
 	"com.example.restcontroller"
 })
 public class FinalProjectApplication {

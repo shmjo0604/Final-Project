@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.dto.ActDetailCate;
 import com.example.dto.ClassUnitView;
 import com.example.dto.LocalCate;
-import com.example.service.ClassSelectService;
+import com.example.service.classproduct.ClassSelectService;
 
 import lombok.extern.slf4j.Slf4j;
 

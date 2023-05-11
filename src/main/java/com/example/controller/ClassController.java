@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,18 +12,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.config.KakaoLocalAPI;
 import com.example.dto.ActivityCate;
 import com.example.dto.CityCate;
 import com.example.dto.ClassProduct;
-import com.example.service.ClassManageService;
-import com.example.service.ClassSelectService;
+import com.example.service.classproduct.ClassInsertService;
+import com.example.service.classproduct.ClassSelectService;
+
+import lombok.extern.slf4j.Slf4j;
+
 
 @Controller
 @RequestMapping(value = "/class")
+@Slf4j
 public class ClassController {
 
+    final String format = "ClassController => {}";
+
     @Autowired ClassSelectService cService;
-    @Autowired ClassManageService mService;
+    @Autowired ClassInsertService iService;
 
     @GetMapping(value = "select.do")
     public String selectGET(@RequestParam(name = "search", defaultValue = "", required = false) String search, Model model) {
@@ -53,7 +61,14 @@ public class ClassController {
         @ModelAttribute ClassProduct obj
     ) {
 
-        int ret = mService.insertClassOne(obj);
+        Map<String, String> map = KakaoLocalAPI.getCoordinate(obj.getAddress1());
+        obj.setLatitude(map.get("x"));
+        obj.setLongitude(map.get("y"));
+        //obj.setMemberid(id); <- 아이디 추가 필요! (security session에 저장된 ID 정보를 호출)
+
+        log.info(format, obj.toString());
+        
+        int ret = iService.insertClassOne(obj);
 
         if(ret==1) {
             return "redirect:/member/mypage.do?menu=";

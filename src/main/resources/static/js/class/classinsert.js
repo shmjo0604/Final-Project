@@ -729,7 +729,7 @@ function insertClass() {
 
     var input8 = document.createElement("input");
     input8.type = "number";
-    input8.name = "actcode";
+    input8.name = "actdetailcode";
     input8.value = actcode.value;
     form.appendChild(input8);
 
