@@ -10,7 +10,7 @@
     </insert>
 
     <!-- 2. 아이디 중복 확인 -->
-    <select id="selectMemberIDCheck" parameterType="string">
+    <select id="selectMemberIDCheck" parameterType="string" resultType="int">
         SELECT count(*) cnt from member m where id = #{id}
     </select>
 
@@ -26,7 +26,7 @@
 
     <!-- 5. 아이디 찾기 -->
     <select id="selectFindMemberId" parameterType="Member" resultType="Member">
-        SELECT m.id from member m where name = #{obj.name} and phone =#{obj.phone} and email = #{obj.email} and chk = 1
+        SELECT m.id from member m where name = #{name} and phone =#{phone} and email = #{email} and chk = 1
     </select>
 
     <!-- 6. 회원 정보 수정 -->
