@@ -108,7 +108,7 @@
 	</div>
 
     <!-- ****비밀번호 찾기 modal**** -->
-    <!--modal1. 아이디 찾기-->
+    <!--modal1. 아이디 존재 유무 확인-->
     <div class="modal fade" id="findPwfirstModal" tabindex="-1"
     aria-labelledby="findPwfirstModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -120,32 +120,17 @@
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body" style="height: 500px;">
-                    <h3 class="text-center mb-4">아이디 찾기</h3>
+                    <h3 class="text-center mb-4">아이디 입력</h3>
                     <div class="container">
                         <div class="form-floating mb-4">
-                            <input type="text" name="modal_name" id="modal_name" class="form-control" value="test8"/> 
-                            <label for="name" class="form-label" >등록하신 이름을 입력해주세요</label>
-                        </div>
-                        <div class="form-floating mb-4">
-                            <input type="text" name="modal_email" id="modal_email" class="form-control" value="test8@email.com" />
-                             <label for="email" class="form-label" >등록하신 이메일을 입력해주세요</label>
-                        </div>
-                        <div class="form-floating mb-4">
-                            <input type="text" name="modal_phone" id="modal_phone" class="form-control" value="010-8888-0888"/>
-                             <label for="phone" class="form-label">등록하신 전화번호를 입력해주세요</label>
-                        </div>
-                        <div id="printBox" class="mt-2" style="display:none;">
-                            <p class="text-center">입력하신 정보와 일치하는 아이디 목록입니다.</p>
-                            <div class="col border" style="height: 180px;">
-                                <div id="printId"></div>
-                                <button class="btn btn-primary">비밀번호 찾기</button>
-                            </div>
+                            <input type="text" name="modal_id" id="modal1_id" class="form-control" value="test8"/> 
+                            <label for="name" class="form-label" >아이디를 입력해주세요</label>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="button" class="btn btn-success" th:onclick="findIdAction()" value="아이디 찾기" />
-                    <button class="btn btn-primary" data-bs-target="#findPwSecondModal" data-bs-toggle="modal">다음</button>
+                    <button class="btn btn-success" th:onclick="findPwIdCheck()">다음</button>
+                    <!-- <button class="btn btn-primary" data-bs-target="#findPwSecondModal" data-bs-toggle="modal">다음</button> -->
                     <button type="button" class="btn btn-secondary"
                         onclick="resetAction1()">취소</button>
                 </div>
@@ -153,7 +138,7 @@
         </div>
     </div>
 
-    <!--modal2. 비밀번호 찾기-->
+    <!--modal2. 이메일 인증-->
     <div class="modal fade" id="findPwSecondModal" tabindex="-1"
     aria-labelledby="findPwSecondModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -165,33 +150,59 @@
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body" style="height: 500px;">
-                    <h3 class="text-center mb-4">비밀번호 찾기</h3>
+                    <h3 class="text-center mb-4">이메일 인증</h3>
                     <div class="container">
                         <div class="form-floating mb-4">
-                            <input type="text" name="modal_name" id="modal_name" class="form-control" value="test8"/> 
-                            <label for="name" class="form-label" >등록하신 이름을 입력해주세요</label>
+                            <input type="text" name="modal_id" id="modal2_email" class="form-control" value="test8"/> 
+                            <label for="name" class="form-label" >인증번호를 전송할 이메일을 입력해주세요</label>
                         </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" th:onclick="findPwEmailAuth()">인증</button>
+                    <th:block>
+                        <button class="btn btn-primary" data-bs-target="#findPwSecondModal" data-bs-toggle="modal">다음</button>
+                    </th:block>
+                    <button type="button" class="btn btn-secondary"
+                        onclick="resetAction2()">취소</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--modal3. 비밀번호 변경-->
+    <div class="modal fade" id="findPwThirdModal" tabindex="-1"
+    aria-labelledby="findPwThirdModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <div class="me-auto"></div>
+                    <h5 class="modal-title" id="findPwThirdModalLabel">비밀번호 찾기</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="height: 500px;">
+                    <h3 class="text-center mb-4">비밀번호 변경</h3>
+                    <div class="container">
                         <div class="form-floating mb-4">
-                            <input type="text" name="modal_email" id="modal_email" class="form-control" value="test8@email.com" />
-                             <label for="email" class="form-label" >등록하신 이메일을 입력해주세요</label>
-                        </div>
-                        <div class="form-floating mb-4">
-                            <input type="text" name="modal_phone" id="modal_phone" class="form-control" value="010-8888-0888"/>
+                            <input type="text" name="id" id="modal3_id" class="form-control" />
                              <label for="phone" class="form-label">등록하신 전화번호를 입력해주세요</label>
                         </div>
-                        <div id="printBox" class="mt-2" style="display:none;">
-                            <p class="text-center">입력하신 정보와 일치하는 아이디 목록입니다.</p>
-                            <div class="col border" style="height: 180px;">
-                                <div id="printId"></div>
-                                <button class="btn btn-primary">비밀번호 찾기</button>
-                            </div>
+                        <div class="form-floating mb-4">
+                            <input type="text" name="password" id="modal3_password" class="form-control" value="pw1"/> 
+                            <label for="name" class="form-label" >새 비밀번호를 입력해주세요</label>
                         </div>
+                        <div class="form-floating mb-4">
+                            <input type="text" id="modal3_password1" class="form-control" value="test8@email.com" />
+                             <label for="email" class="form-label" >새 비밀번호를 한 번 더 입력해주세요</label>
+                        </div>
+                        
                     </div>
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-success" th:onclick="findIdAction()" value="아이디 찾기" />
                     <button type="button" class="btn btn-secondary"
-                        onclick="resetAction2()">취소</button>
+                        onclick="resetAction3()">취소</button>
                 </div>
             </div>
         </div>
@@ -205,6 +216,8 @@
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <script>
         const contextPath = $('#contextPathHolder').attr('data-contextPath');
+
+        var userId = null;
 
 		function loginAction() {
 			const id = document.getElementById("id");
@@ -257,7 +270,7 @@
 				return false;
             }
 
-            const url = contextPath + '/api/member/findId.json';
+            const url = contextPath + '/api/member/findid.json';
             const headers = { "Content-Type": "application/json" };
             const { data } = await axios.get(url, 
                 {params : {name : modal_name.value, email : modal_email.value, phone : modal_phone.value}}, 
@@ -307,6 +320,55 @@
 
         function resetAction2() {
             $("#findPwSecondModal").modal('hide');
+        }
+
+        function resetAction3() {
+            $("#findPwThirdModal").modal('hide');
+        }
+
+        async function findPwIdCheck() {
+
+            const id = document.getElementById("modal1_id");
+
+            if (id.value.length <= 0) {
+				alert('아이디를 입력하세요');
+				id.focus();
+				return false;
+			}
+
+            const url = contextPath + '/api/member/idcheck.json?id='+id.value;
+            const headers = { "Content-Type": "application/json" };
+            const { data } = await axios.get(url, { headers });
+            //console.log(data);
+
+            if(data.ret === 0) {
+                alert('존재하지 않는 아이디입니다.');
+                id.value = null;
+                id.focus();
+            }
+            else if(data.ret === 1) {
+                userId = id;
+                resetAction1();
+                $("#findPwSecondModal").modal('show');
+            }
+
+        }
+        async function findPwEmailAuth() {
+
+            const email = document.getElementById("modal2_email");
+
+            const url = contextPath + '/api/member/findpw.json';
+            const headers = { "Content-Type": "application/json" };
+            const body = {email : email.value}
+            const { data } = await axios.post(url, body, { headers });
+
+            //console.log(data);
+
+            if(data.code !== null) {
+                alert('입력하신 이메일로 인증번호를 전송했습니다.');
+
+            }
+
         }
 	</script>
 </body>

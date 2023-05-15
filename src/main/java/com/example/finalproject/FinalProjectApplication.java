@@ -12,7 +12,9 @@ import org.springframework.context.annotation.ComponentScan;
 	"com.example.service",
 	"com.example.service.class",
 	"com.example.service.member",
-	"com.example.restcontroller"
+	"com.example.service",
+	"com.example.restcontroller",
+	"com.example.config"
 })
 public class FinalProjectApplication {
 
