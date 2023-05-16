@@ -13,7 +13,6 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import com.example.service.RedisUtil;
 
-import io.lettuce.core.RedisURI;
 import lombok.RequiredArgsConstructor;
 
 @Service

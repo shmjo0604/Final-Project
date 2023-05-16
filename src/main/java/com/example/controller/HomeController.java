@@ -19,6 +19,12 @@ public class HomeController {
         
     }
 
+    @GetMapping(value = "/test.do")
+    public String testGET() {
+
+        return "header1";
+    }
+
     
     
 }

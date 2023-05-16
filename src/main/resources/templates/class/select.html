@@ -41,6 +41,8 @@
         </th:block>
     </div>
 
+    <!--footer 영역-->
+
     <!--jQuery-->
     <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
     <!--axios library-->
@@ -61,7 +63,9 @@
             dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
             dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
             showMonthAfterYear: true,
-            yearSuffix: '년'
+            yearSuffix: '년',
+            minDate: "-0D",
+            maxDate: "+2M"
         });
 
         $(function () {

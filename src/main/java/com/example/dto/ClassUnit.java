@@ -25,11 +25,13 @@ public class ClassUnit {
   // 할인률
   private String discount;
   // 클래스 추가금액
-  private int addprice;
+  private long addprice;
   // 클래스 난이도 => (입문자, 경험자, 숙련자)
   private String classlevel;
   // 등록일자
   private Date regdate;
+  // 삭제 확인(default -> 1, 삭제 시 -> 0)
+  private int chk;
   // 클래스 코드 (FK)
   private long classcode;
 }

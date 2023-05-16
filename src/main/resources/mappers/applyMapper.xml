@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.ApplyMapper">
+    
+<insert id="insertApplyOne" parameterType="Apply">
+    INSERT INTO APPLY(person, payment, unitno, memberid) 
+    VALUES(#{person}, #{payment}, #{unitno}, #{memberid})
+</insert>
+
+<update id="updateApplyCancel" parameterType="long">
+    UPDATE APPLY SET chk = 2 WHERE no = #{no}
+</update>
+
+<update id="updateApplyComplete" parameterType="long">
+    UPDATE APPLY SET chk = 3 WHERE no = #{no}
+</update>
+
+<insert id="insertApplyStatusOne" parameterType="ApplyStatus">
+    INSERT INTO APPLYSTATUS(applyno, chk) VALUES(#{applyno}, #{chk})
+</insert>
+
+</mapper>
