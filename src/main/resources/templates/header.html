@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <header th:fragment="headerFragment">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <div class="container">
+    
+                <!-- (1) 로고 -->
+                <div class="navbar-brand d-flex align-items-center lh-1 me-10 transition-opacity opacity-75-hover">
+                    <!-- 로고 아이콘 추가예정 -->
+                    <a th:href="@{/home.do}" class="logo nav-link">Special Day</a>
+                </div>
+                <!-- / 로고 -->
+                
+                <!-- (2) 메뉴 항목 -->
+                <div class="collapse navbar-collapse justify-content-center align-items-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown position-static">
+                            <a class="nav-link" th:href="@{/class/select.do}">클래스 조회</a>
+                           
+                            <!--  드롭다운 메뉴
+                            <div class="dropdown-menu dropdown-megamenu">
+                                <div class="container">
+                                    <div class=""></div>
+                                </div>
+                            </div>
+                            -->
+                            
+                        </li>    
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">공지사항</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">이용안내</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">FAQ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/member/mypage.do}">마이페이지</a>
+                        </li>
+                    </ul>           
+                     
+                </div>
+                <!-- / 메뉴 항목 -->
+    
+                <!-- (3) 클래스등록&로그인 -->
+                <div class="d-none d-lg-flex">
+                    <th:block th:if="${user == null}">
+                        <a th:href="@{/class/insert.do}" class="btn btn-outline-success" role="button">클래스 등록</a>
+                        <a th:href="@{/login.do}" class="btn btn-outline-secondary" role="button">로그인</a>
+                    </th:block>
+                    <th:block th:if="${user != null}">
+                        <a th:href="@{/class/insert.do}" class="btn btn-outline-success" role="button">클래스 등록</a>
+                        <form th:action="@{/logout.do}" method="post" style="display:inline-block;">
+                            <button class="btn btn-outline-success" type="submit">
+                            로그아웃
+                            </button>
+                        </form>
+                    </th:block>
+                </div>
+                <!-- / 클래스등록&로그인 -->
+            </div>
+        </nav>
+    </header>
+</body>
+</html>
