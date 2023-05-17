@@ -13,60 +13,10 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <!--Bootstrap 용 Icon CDN-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <style>
-                /* (1) 로고 */
-        .logo {
-            font-family: 'Permanent Marker', cursive;
-        }
-
-        /* (2) 메뉴 항목 */
-        .nav-item {
-            margin-left: 50px;
-        }
-
-        .dropdown:hover .dropdown-menu { /* 드롭다운 자동으로 노출*/
-            display: block;
-            margin-top: 0;
-        }
-
-        #navbarSupportedContent>.dropdown-menu {
-            max-width: fit-content;
-            background-color: blue;
-        }
-
-        .dropdown-toggle:hover {
-            color: forestgreen;
-        }
-
-        /* (3) 클래스등록&로그인 */
-        /* .btn-outline-success {
-            
-        } */
-
-        .btn-outline-secondary {
-            margin-left: 10px;
-        }
-
-        /* 슬라이드 */
-        #carouselExampleIndicators {
-            height: 350px;
-            overflow: hidden;
-        }
-
-        /* 카테고리 */
-        .category {
-            height: 1000px;
-        }
-
-        .post {
-            margin-top: 100px;
-            margin-bottom: 100px;
-            height: 300px;
-        }
-    </style>
 </head>
 <body>
-    <header th:replace="~{header :: headerFragment}"></header>
+    <header th:replace="~{/fragments/header.html :: header}"></header>
     <button class="btn btn-primary">작성하기</button>
+    <footer th:replace="~{/fragments/footer.html :: footer}"></footer>
 </body>
 </html>
