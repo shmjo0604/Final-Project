@@ -79,6 +79,12 @@ public class ClassController {
         
     }
 
+    @GetMapping(value = "/unit.do")
+    public String unitGET() {
+
+        return "/class/unit";
+    }
+
 
 
     

@@ -25,6 +25,12 @@ public class HomeController {
         return "header1";
     }
 
+    @GetMapping(value = "/headerlist.do")
+    public String headerlistGET() {
+
+        return "headerlist";
+    }
+
     
     
 }

@@ -161,7 +161,7 @@
                 </div>
                 <div id="authbox" style="display:none;">
                     <hr class="divider">
-                    인증번호 : <input type="text"> <span id="time"></span>
+                    인증번호 : <input id="modal2_authnum" type="text"> <span id="time"></span> <button class="btn btn-outline-success" th:onclick="checkauthnum()">확인</button>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-success" th:onclick="findPwEmailAuth()">인증</button>
@@ -372,7 +372,7 @@
             console.log(data);
 
             if (data.code !== null) {
-                alert('입력하신 이메일로 인증번호를 전송했습니다.');
+                //alert('입력하신 이메일로 인증번호를 전송했습니다.');
                 $("#authbox").css("display", "block");
                 var display = $("#time");
                 // 유효시간 설정
@@ -386,6 +386,12 @@
                 }
             }
 
+        }
+
+        function checkauthnum() {
+
+            const authnum = $("#modal2_authnum");
+            console.log(authnum.val());
         }
 
         function startTimer(count, display) {
