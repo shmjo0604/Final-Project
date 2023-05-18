@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.dto.Authnum;
 import com.example.dto.Member;
+import com.example.service.RedisUtil;
 import com.example.service.member.MailService;
 import com.example.service.member.MemberService;
 
@@ -28,6 +30,7 @@ public class RestMemberController {
 
     @Autowired MemberService mService;
     @Autowired MailService mailService;
+    @Autowired RedisUtil redisUtil;
 
     final String format = "RestMemberController => {}";
 
@@ -73,12 +76,36 @@ public class RestMemberController {
 
         Map<String, Object> retMap = new HashMap<>();
 
-        String code = mailService.sendEmail(obj.getEmail());
+        String email = mailService.sendEmail(obj.getEmail());
 
-        retMap.put("code", code);
+        retMap.put("email", email);
 
         return retMap;
 
+    }
+
+    @PostMapping(value = "/verifyauthnum.json")
+    public Map<String, Integer> verifyauthnumPOST(@RequestBody Authnum obj) {
+    
+        //log.info(format, obj.toString());
+        //log.info(format, obj.getAuthnum());
+
+        Map<String, Integer> retMap = new HashMap<>();
+
+        String authnum = redisUtil.getData(obj.getEmail());
+        //log.info(format, authnum);
+
+        if(authnum == null) {
+            retMap.put("status", -1);
+        }
+        if(obj.getAuthnum().equals(authnum)) {
+            retMap.put("status", 200);
+        }
+        if(!obj.getAuthnum().equals(authnum)) {
+            retMap.put("status", 0);
+        }
+
+        return retMap;
     }
 
     

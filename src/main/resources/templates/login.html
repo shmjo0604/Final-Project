@@ -156,6 +156,7 @@
                             <input type="text" name="modal_id" id="modal2_email" class="form-control"
                                 value="shmjo0604@gmail.com" />
                             <label for="name" class="form-label">인증번호를 전송할 이메일을 입력해주세요</label>
+                            <button class="btn btn-success" th:onclick="findPwEmailAuth()">인증</button>
                         </div>
                     </div>
                 </div>
@@ -164,11 +165,7 @@
                     인증번호 : <input id="modal2_authnum" type="text"> <span id="time"></span> <button class="btn btn-outline-success" th:onclick="checkauthnum()">확인</button>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success" th:onclick="findPwEmailAuth()">인증</button>
-                    <th:block>
-                        <button class="btn btn-primary" data-bs-target="#findPwSecondModal"
-                            data-bs-toggle="modal">다음</button>
-                    </th:block>
+                    <button id="modal2_next" class="btn btn-primary" style="display: none;" data-bs-target="#findPwThirdModal" data-bs-toggle="modal">다음</button>
                     <button type="button" class="btn btn-secondary" onclick="resetAction2()">취소</button>
                 </div>
             </div>
@@ -217,10 +214,13 @@
     <script th:src="@{/js/axios.min.js}"></script>
     <!--Bootstrap 용 js -->
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <!--SweetAlert2 JS-->
+    <script th:src="@{/js/sweetalert2@11.js}"></script>
     <script>
         const contextPath = $('#contextPathHolder').attr('data-contextPath');
 
         var userId = null;
+        var userEmail = null;
 
         function loginAction() {
             const id = document.getElementById("id");
@@ -360,20 +360,20 @@
         var timer = null;
         var isRunning = false;
 
-        async function findPwEmailAuth() {
+        function findPwEmailAuth() {
 
             const email = document.getElementById("modal2_email");
+            userEmail = email.value;
 
             const url = contextPath + '/api/member/findpw.json';
             const headers = { "Content-Type": "application/json" };
             const body = { email: email.value }
-            const { data } = await axios.post(url, body, { headers });
+            const { data } = axios.post(url, body, { headers });
 
-            console.log(data);
+            //console.log(data);
+            //console.log(userEmail);
 
-            if (data.code !== null) {
-                //alert('입력하신 이메일로 인증번호를 전송했습니다.');
-                $("#authbox").css("display", "block");
+            $("#authbox").css("display", "block");
                 var display = $("#time");
                 // 유효시간 설정
                 var leftSec = 180;
@@ -384,14 +384,48 @@
                 } else {
                     startTimer(leftSec, display);
                 }
-            }
 
         }
 
-        function checkauthnum() {
+        async function checkauthnum() {
 
             const authnum = $("#modal2_authnum");
-            console.log(authnum.val());
+            //console.log(authnum.val());
+
+            const url = contextPath + '/api/member/verifyauthnum.json';
+            const headers = { "Content-Type": "application/json" };
+            const body = { email : userEmail, authnum : authnum.val() };
+            const { data } = await axios.post(url, body, { headers });
+            
+            console.log(data);
+
+            const status = data.status;
+
+            if(status===0) {
+
+                Swal.fire({
+                icon: 'error',
+                title: '인증번호가 일치하지 않습니다.',
+                showConfirmButton: true
+                })
+
+                return false;
+            }
+            if(status===-1) {
+
+
+            }
+            if(status===200) {
+
+                Swal.fire({
+                icon: 'success',
+                title: '인증 완료했습니다.',
+                showConfirmButton: true
+                })
+
+                $("#modal2_next").css("display", "block");
+            }
+
         }
 
         function startTimer(count, display) {

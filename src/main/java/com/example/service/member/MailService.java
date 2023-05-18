@@ -78,11 +78,15 @@ public class MailService {
 
         MimeMessage emailForm = createEmailForm(toEmail); // 메일 전송에 필요한 정보 설정
         
-        redisUtil.setDataExpire(authNum, toEmail, 60 * 3L); // 메일 전송 시, redis에 일정 시간동안 저장
+        if (redisUtil.existData(toEmail)) {  
+            redisUtil.deleteData(toEmail);  
+        }
+
+        redisUtil.setDataExpire(toEmail, authNum, 60 * 5L); // 메일 전송 시, redis에 일정 시간동안 저장
         
         mailSender.send(emailForm); // 실제 메일 전송
 
-        return authNum; // 인증 코드 반환
+        return toEmail; // 이메일 반환
 
     }
 

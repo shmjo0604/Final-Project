@@ -29,8 +29,14 @@ public class RedisUtil {
 
     }
 
+    public boolean existData(String key) {
+
+        return Boolean.TRUE.equals(stringRedisTemplate.hasKey(key));
+        
+    }
+
     // Data 삭제
-    public void deleteDta(String key) {
+    public void deleteData(String key) {
         stringRedisTemplate.delete(key);
     }
 
