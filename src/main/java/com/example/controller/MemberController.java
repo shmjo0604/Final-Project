@@ -1,14 +1,32 @@
 package com.example.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.dto.Member;
+import com.example.service.member.MemberService;
+
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 @RequestMapping(value = "/member")
 public class MemberController {
+
+    final String format = "MemberController => {}";
+
+    @Autowired MemberService mService;
+
+    BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 
     @GetMapping(value = "/join.do")
     public String joinGET() {
@@ -18,9 +36,24 @@ public class MemberController {
     }
 
     @PostMapping(value = "/join.do")
-    public String joinPOST() {
+    public String joinPOST(@ModelAttribute Member obj, HttpSession httpSession) {
 
-        return "redirect:/login.do";
+        log.info(format, obj.getPassword());
+
+        obj.setPassword(bcpe.encode(obj.getPassword()));
+
+        int ret = mService.insertMemberOne(obj);
+
+        log.info(format, ret);
+
+        if(ret == 1) {
+            httpSession.setAttribute("alertMessage", "회원 가입 완료했습니다.");
+            httpSession.setAttribute("alertUrl", "/home.do");
+            return "redirect:/alert.do";
+        }
+        else {
+            return "redirect:/member/join.do";
+        }
 
     }
 

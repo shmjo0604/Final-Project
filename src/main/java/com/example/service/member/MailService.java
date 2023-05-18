@@ -77,7 +77,8 @@ public class MailService {
     public String sendEmail(String toEmail) throws MessagingException, UnsupportedEncodingException {
 
         MimeMessage emailForm = createEmailForm(toEmail); // 메일 전송에 필요한 정보 설정
-        redisUtil.setDataExpire(authNum, toEmail, 60 * 3L);
+        
+        redisUtil.setDataExpire(authNum, toEmail, 60 * 3L); // 메일 전송 시, redis에 일정 시간동안 저장
         
         mailSender.send(emailForm); // 실제 메일 전송
 

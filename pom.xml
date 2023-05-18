@@ -53,6 +53,11 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>3.0.0</version>
 		</dependency>
+		<!--security-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 		<!-- DB session 정보 관리 -->
 		<dependency>
 			<groupId>org.springframework.session</groupId>
