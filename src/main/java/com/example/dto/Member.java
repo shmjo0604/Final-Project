@@ -33,7 +33,5 @@ public class Member {
     private Date regdate;
     // 탈퇴여부(0,1)
     private int chk;
-    // 신규 비밀번호
-    private String newPassword;
     
 }

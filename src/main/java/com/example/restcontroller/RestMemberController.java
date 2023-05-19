@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +32,7 @@ public class RestMemberController {
     @Autowired MemberService mService;
     @Autowired MailService mailService;
     @Autowired RedisUtil redisUtil;
+    BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 
     final String format = "RestMemberController => {}";
 
@@ -103,6 +105,32 @@ public class RestMemberController {
         }
         if(!obj.getAuthnum().equals(authnum)) {
             retMap.put("status", 0);
+        }
+
+        return retMap;
+    }
+
+    @PostMapping(value = "/findpwaction.json")
+    public Map<String, Object> findpwactionPOST(@RequestBody Member obj) {
+
+        Map<String, Object> retMap = new HashMap<>();
+
+        log.info(format, obj.getPassword());
+
+        try {
+            Member member = mService.selectMemberOne(obj.getId());
+
+            log.info(format, member.toString());
+
+            member.setPassword(bcpe.encode(obj.getPassword()));
+
+            int ret = mService.updateMemberPassword(member);
+
+            retMap.put("ret", ret);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            retMap.put("ret", -1);
         }
 
         return retMap;

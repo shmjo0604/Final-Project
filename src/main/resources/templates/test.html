@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+
+<body>
+    <!-- 결제하기 버튼 생성 -->
+    <button onclick="requestPay()">결제하기</button>
+    
+
+    <!--jQuery-->
+    <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
+    <!--portone js-->
+    <script th:src="@{/js/iamport.payment-1.2.0.js}"></script>
+  
+        
+   
+<script>
+
+var IMP = window.IMP;
+IMP.init('imp27884386');
+
+function requestPay() {
+   //iamport 대신 자신의 "가맹점 식별코드"를 사용
+  IMP.request_pay({
+    pg: "html5_inicis",
+    pay_method: "card",
+    merchant_uid : 'merchant_'+new Date().getTime(),
+    name : '결제테스트',
+    amount : 14000,
+    buyer_email : 'iamport@siot.do',
+    buyer_name : '구매자',
+    buyer_tel : '010-1234-5678',
+    buyer_addr : '서울특별시 강남구 삼성동',
+    buyer_postcode : '123-456'
+  }, function (rsp) { // callback
+    //   if (rsp.success) {
+    //     ...,
+    //     // 결제 성공 시 로직,
+    //     ...
+    //   } else {
+    //     ...,
+    //     // 결제 실패 시 로직,
+    //     ...
+    //   }
+  });
+}
+</script>
+
+    <!-- <p>
+        <label for="timer">남은 시간:</label>
+        <input id="timer" type="text" value="" readonly />
+    </p>
+    <script>
+        const timer = document.getElementById('timer'); //스코어 기록창-분
+        let min = 1;
+        let sec = 60;
+        let time = min * sec * 1000;
+
+        timer.value = '0' + min + ":" + '00';
+
+        function TIMER() {
+            playtime = setInterval(function () {
+                time = time - 1000; //1초씩 줄어듦
+                min = time / (60 * 1000); //초를 분으로 나눠준다.
+
+                if (sec > 0) { //sec=60 에서 1씩 빼서 출력해준다.
+                    sec = sec - 1;
+                    timer.value = '0' + Math.floor(min) + ':' + sec; //실수로 계산되기 때문에 소숫점 아래를 버리고 출력해준다.
+                    
+                    if(sec < 10) {
+                        timer.value = '0' + Math.floor(min) + ':' + '0' + sec;
+                    }
+
+                }
+                if (sec === 0) {
+                    // 0에서 -1을 하면 -59가 출력된다.
+                    // 그래서 0이 되면 바로 sec을 60으로 돌려주고 value에는 0을 출력하도록 해준다.
+                    sec = 60;
+                    timer.value = '0' + Math.floor(min) + ':' + '00'
+                }
+
+            }, 1000); //1초마다 
+        }
+
+        TIMER();
+
+        setTimeout(function () {
+
+            clearInterval(playtime);
+
+        }, time);//3분이 되면 타이머를 삭제한다.
+    </script> -->
+</body>
+
+</html>

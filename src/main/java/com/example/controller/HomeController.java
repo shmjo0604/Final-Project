@@ -25,6 +25,12 @@ public class HomeController {
     @GetMapping(value = "/test.do")
     public String testGET() {
 
+        return "test";
+    }
+
+    @GetMapping(value = "/header1.do")
+    public String header1GET() {
+
         return "header1";
     }
 
@@ -41,6 +47,11 @@ public class HomeController {
         model.addAttribute("alertUrl", httpSession.getAttribute("alertUrl"));
 
         return "alert";
+    }
+
+    @GetMapping(value = "/403error.do")
+    public String error403GET() {
+        return "403";
     }
 
     

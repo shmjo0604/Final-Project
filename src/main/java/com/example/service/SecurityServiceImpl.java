@@ -15,7 +15,10 @@ import com.example.dto.LoginUser;
 import com.example.dto.Member;
 import com.example.mapper.MemberMapper;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class SecurityServiceImpl implements UserDetailsService {
 
     final String format = "SecurityServiceImpl => {}";
@@ -25,7 +28,7 @@ public class SecurityServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        //log.info(format, username)
+        log.info(format, username);
 
         Member ret = mMapper.selectMemberOne(username);
 

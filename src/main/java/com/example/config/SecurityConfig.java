@@ -30,8 +30,10 @@ public class SecurityConfig {
             .antMatchers("/apply", "/apply/*").authenticated()
             .antMatchers("/member/join.do").permitAll()
             .antMatchers("/member", "/member/*").authenticated()
-            .antMatchers("/admin", "/admin/*").hasAnyAuthority("ROLE_admin")
+            .antMatchers("/admin", "/admin/*").hasAnyAuthority("ROLE_ADMIN")
             .anyRequest().permitAll();
+
+        http.exceptionHandling().accessDeniedPage("/403error.do");
 
         /* 로그인 처리 */
         http.formLogin()

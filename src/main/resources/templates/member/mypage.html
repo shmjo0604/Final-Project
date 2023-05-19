@@ -16,13 +16,95 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}">
     <!--font awesome 용-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        html, body { 
+            margin: 0; 
+            padding: 0;
+            height: 100%;
+        }
+
+        #body-wrapper{
+            min-height: 100%;
+            position: relative;
+        }
+
+        #body-content {
+            padding-bottom: 150px; 
+            margin-top: 120px;
+        }
+
+        footer{
+            position: absolute;  
+            height: 150px;
+        }
+
+        /* mypage css */
+        .sidevar > .sidevar-menu > ul > li {list-style: none;}
+        .sidevar > .sidevar-menu > ul > li > ul > li {list-style: none;}
+        .sidevar > .sidevar-menu > ul > li > a {text-decoration: none; color: black;}
+        .sidevar > .sidevar-menu > ul > li > ul > li > a {text-decoration: none; color: black;}
+    </style>
 </head>
 <body>
     <!--header 영역-->
     <header></header>
 
     <!--main 영역-->
+    <div id="body-wrapper">
+        <div id="body-content" class="container">
+            
+                <div class="row">
+                    <!--left-->
+                    <div class="col-md-3">
+                        <div class="sidevar">
+                            <div class="sidevar-header">
+                                <a style="margin-left: 30px; font-size: large; font-weight: bolder; ">마이페이지</a>
+                            </div>
+                            <div class="sidevar-menu" >
+                                <ul>
+                                    <hr style="border: 2px solid; color: forestgreen"/>
+                                    <li><a href="#">신청내역관리</a></li><hr/>
+                                    <li><a href="#">리뷰관리</a></li><hr/>
+                                    <li>
+                                        <a class="opener" data-toggle="collapse">계정관리</a>
+                                        <ul>
+                                            <li><a href="#">개인정보변경</a></li>
+                                            <li><a href="#">비밀번호재설정</a></li>
+                                            <li><a href="#">탈퇴하기</a></li>
+                                        </ul>
+                                    </li>
+                                    <hr/>
+                                    <li><a href="#">문의하기</a></li><hr/>
+                                </ul>
+
+                                
+                            </div>
+                        </div>
+                        
+                    </div><!--/left-->
+                    
+                    <!--right-->
+                    <div class="col-md-9">
+                    <h2>Content</h2>
+                    <p>
+                        Rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae 
+                        dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores 
+                        eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, 
+                        sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. 
+                        Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut.              
+                        Rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae 
+                        dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores 
+                        eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, 
+                        sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. 
+                        Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut!</p>
     
+                    </div><!--/right-->
+                </div><!--/row-->
+
+                
+
+        </div>
+    </div>
 
 
     <!--footer 영역-->

@@ -13,9 +13,9 @@ import org.springframework.context.annotation.ComponentScan;
 	"com.example.service.classproduct",
 	"com.example.service.classunit",
 	"com.example.service.member",
-	"com.example.service",
 	"com.example.restcontroller",
-	"com.example.config"
+	"com.example.config",
+	"com.example.filter"
 })
 public class FinalProjectApplication {
 
