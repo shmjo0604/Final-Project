@@ -1,0 +1,92 @@
+<div th:fragment="menu_review" class="col-md-8" style="margin-left: 30px;">
+    <style>
+        .box {
+                width:80%;
+                height:150px;
+                background:#FFF;
+                border-radius: 15px;
+                margin:20px;
+                
+        }
+
+        .box h3 {
+            padding-top: 10px;
+            text-align:center;
+            font-weight: bold;
+            font-size: large;
+        }
+
+        .box h1 {
+            padding-top: 12px;
+            text-align:center;
+            font-size: 50px
+        }
+
+        .effect{
+                -webkit-box-shadow: 0 5px 6px -6px #777;
+                -moz-box-shadow: 0 5px 6px -6px #777;
+                box-shadow: 0 5px 6px -6px #777;
+        }
+    </style>
+    <div class="row-md-3">
+        <p style="font-weight: bolder; font-size: large;">리뷰관리</p>
+        <div class="row" style="background-color: honeydew; border-radius: 15px;">
+            <div class="col-sm-4">
+                <div class="box effect">
+                    <h3>작성수</h3>
+                    <h1>1</h1>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="box effect">
+                    <h3>조회수</h3>
+                    <h1>7</h1>
+                </div>
+            </div> 
+            <div class="col-sm-4">
+                <div class="box effect">
+                    <h3>평균별점</h3>
+                    <h1>4.0</h1>
+                    <a style="color: darkgreen; margin-left: 65px;">★★★★☆</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-md-9" style="margin-top: 50px;">
+        <hr/>
+        <div class="btn-group" role="group" style="margin-bottom: 10px;">
+            <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle float-right" data-bs-toggle="dropdown" aria-expanded="false">날짜순</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">최신순</a></li>
+                <li><a class="dropdown-item" href="#">오래된순</a></li>
+            </ul>
+        </div>
+            
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>카테고리</th>
+                    <th>클래스명</th>
+                    <th>참여날짜</th>
+                    <th>상세내용</th>
+                    <th>별점</th>
+                    <th>이미지</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>베이킹</td>
+                    <td>수제 레터링 케이크</td>
+                    <td>2023-05-10</td>
+                    <td>항상 생각만 했지...</td>
+                    <td style="color: darkgreen;">★★★★☆</td>
+                    <td>이미지</td>
+                    <td><button class="btn btn-sm btn-primary">조회</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

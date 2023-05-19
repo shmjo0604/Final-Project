@@ -1,0 +1,94 @@
+<div th:fragment="menu_apply" class="col-md-8" style="margin-left: 30px;">
+    <style>
+        .box {
+                width:80%;
+                height:150px;
+                background:#FFF;
+                border-radius: 15px;
+                margin:20px;
+                
+        }
+
+        .box h3 {
+            padding-top: 10px;
+            text-align:center;
+            font-weight: bold;
+            font-size: large;
+        }
+
+        .box h1 {
+            padding-top: 12px;
+            text-align:center;
+            font-size: 50px
+        }
+
+        .effect{
+                -webkit-box-shadow: 0 5px 6px -6px #777;
+                -moz-box-shadow: 0 5px 6px -6px #777;
+                box-shadow: 0 5px 6px -6px #777;
+        }
+    </style>
+    <div class="row-md-3">
+        <p style="font-weight: bolder; font-size: large;">신청관리</p>
+        <div class="row" style="background-color: honeydew; border-radius: 15px;">
+            <div class="col-sm-4">
+                <div class="box effect">
+                    <h3>신청완료</h3>
+                    <h1>1</h1>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="box effect">
+                    <h3>참여완료</h3>
+                    <h1>0</h1>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="box effect">
+                    <h3>신청취소</h3>
+                    <h1>0</h1>
+                </div>
+            </div>   
+        </div>
+    </div>
+    <div class="row-md-9" style="margin-top: 50px;">
+        <hr/>
+        <div class="btn-group" role="group" style="margin-bottom: 10px;">
+            <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle float-right" data-bs-toggle="dropdown" aria-expanded="false">전체상태</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">신청완료</a></li>
+                <li><a class="dropdown-item" href="#">참여완료</a></li>
+                <li><a class="dropdown-item" href="#">신청취소</a></li>
+            </ul>
+        </div>
+            
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>카테고리</th>
+                    <th>클래스이미지</th>
+                    <th>클래스명</th>
+                    <th>신청인원</th>
+                    <th>신청가격</th>
+                    <th>처리상태</th>
+                    <th>리뷰작성</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>예술</td>
+                    <td>이미지</td>
+                    <td>유화 원데이클래스</td>
+                    <td>1</td>
+                    <td>25000</td>
+                    <td>신청완료</td>
+                    <td><button class="btn btn-sm btn-secondary disabled">작성하기</button></td>
+                    <td><button class="btn btn-sm btn-danger">취소</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
