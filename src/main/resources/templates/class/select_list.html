@@ -148,7 +148,8 @@
         <script th:src="@{/js/axios.min.js}"></script>
         <!--Bootstrap 용 js -->
         <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-        
+        <!--twbsPagination js-->
+        <script th:src="@{/js/jquery.twbsPagination.min.js}"></script>
         <script>
             const contextPath = $('#contextPathHolder').attr('data-contextPath');
 
@@ -376,9 +377,6 @@
 					next : '다음',
                     
 					onPageClick : function(event, page) {
-						//$('#page-content').text('Page ' + page);
-						//window.location.href = "select.do?page=" + page;
-						//alert(page); 
 						searchClassAction(page);
 					}
 				});
@@ -422,7 +420,7 @@
 
             };
         </script>
-        <script th:src="@{/js/jquery.twbsPagination.min.js}"></script>
+        
     </main>
 </body>
 
