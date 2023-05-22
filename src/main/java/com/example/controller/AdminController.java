@@ -14,5 +14,11 @@ public class AdminController {
         return "/admin/home";
     }
 
+    @GetMapping(value = "/login.do")
+    public String loginGET() {
+
+        return "/admin/login";
+    }
+
 
 }

@@ -116,7 +116,7 @@
 
                 <div class="row mb-3 ">
                     <div class="text-center">
-                        <button class="btn btn-outline-success" onclick="resetSearchOption()"><i
+                        <button class="btn btn-outline-success" onclick="resetSearchOption(1)"><i
                                 class="bi bi-arrow-clockwise me-2"></i>검색 조건 초기화</button>
                         <button class="btn btn-outline-primary" type="button" onclick="searchClassAction()"><i
                                 class="bi bi-search me-2"></i>검색</button>
@@ -134,14 +134,21 @@
                     <!-- 동적 생성 -->
                 </div>
             </div>
+
+            <div class="d-flex justify-content-center">
+                <ul id="pagination-demo" class="pagination-sm"></ul>
+            </div>
         </section>
+
+
 
         <!--jQuery-->
         <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
         <!--axios library-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.5/axios.min.js"></script>
+        <script th:src="@{/js/axios.min.js}"></script>
         <!--Bootstrap 용 js -->
         <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        
         <script>
             const contextPath = $('#contextPathHolder').attr('data-contextPath');
 
@@ -152,10 +159,9 @@
             var classlevel = 0;
             var minprice = 0;
             var maxprice = 0;
-            var classdate = null;
-            var keyword = null;
-
-            searchClassAction();
+            var classdate = "";
+            var keyword = "";
+            //var page = 1;
 
             async function getLocalcate(code) {
                 console.log(code);
@@ -276,13 +282,13 @@
                 classlevel = e.target.value;
             })
 
-            async function searchClassAction() {
+            async function searchClassAction(page) {
 
                 if ($('#classdate').val().length !== 0) {
                     classdate = $("#classdate").val();
                 }
                 else {
-                    classdate = null;
+                    classdate = "";
                 }
 
                 if ($('#minprice').val().length !== 0) {
@@ -302,7 +308,7 @@
                     keyword = $('#keyword').val();
                 }
                 else {
-                    keyword = null;
+                    keyword = "";
                 }
 
                 const url = contextPath + "/api/class/selectclasslist.json";
@@ -315,14 +321,24 @@
                             citycode: citycode, activitycode: activitycode,
                             localcode: localcode, actcode: actcode,
                             classlevel: classlevel, classdate: classdate,
-                            minprice: minprice, maxprice: maxprice, keyword: keyword
+                            minprice: minprice, maxprice: maxprice, keyword: keyword, page: page
                         }
                     },
                     { headers });
+
+                //console.log(data.pages);
+
+                //var pages = Number(data.pages);
+                //console.log(typeof Number(pages));
+
+                initPagination(Number(data.pages));
+
                 console.log(data);
 
                 const classlist = $('#classlist')[0];
+
                 classlist.innerHTML = '';
+                
                 for (let obj of data.list) {
                     classlist.innerHTML +=
 
@@ -346,8 +362,27 @@
                         '</div>';
 
                 }
-
             };
+
+            searchClassAction(1);
+
+            function initPagination(pages) {
+				$('#pagination-demo').twbsPagination({
+					totalPages : pages,
+					visiblePages : 5,
+					first : '처음',
+					last : '마지막',
+					prev : '이전',
+					next : '다음',
+                    
+					onPageClick : function(event, page) {
+						//$('#page-content').text('Page ' + page);
+						//window.location.href = "select.do?page=" + page;
+						//alert(page); 
+						searchClassAction(page);
+					}
+				});
+			};
 
             function resetSearchOption() {
 
@@ -382,11 +417,12 @@
                 classlevel = 0;
                 minprice = 0;
                 maxprice = 0;
-                classdate = null;
-                keyword = null;
+                classdate = "";
+                keyword = "";
 
             };
         </script>
+        <script th:src="@{/js/jquery.twbsPagination.min.js}"></script>
     </main>
 </body>
 

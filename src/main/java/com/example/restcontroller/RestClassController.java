@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,8 @@ import lombok.extern.slf4j.Slf4j;
 public class RestClassController {
     
     @Autowired ClassSelectService cService;
+
+    @Value("${classselect.page}") int pageEach;
 
     final String format = "RestClassSelectCateController => {}";
 
@@ -68,11 +71,24 @@ public class RestClassController {
 
         Map<String, Object> retMap = new HashMap<>();
 
+        String pageStr = (String)map.get("page");
+        int page = Integer.parseInt(pageStr);
+
+        log.info(format, page);
+
+        map.put("first", (page*pageEach)-(pageEach-1));
+        map.put("last", page*pageEach);
+
+        log.info(format, map.toString());
+
         List<ClassUnitView> list = cService.selectClassUnitViewList(map);
+        long total = cService.selectClassCountTotal(map);
 
         log.info(format, list.toString());
+        log.info(format, total);
 
         retMap.put("list", list);
+        retMap.put("pages", ((total-1)/pageEach)+1);
 
         return retMap;
 

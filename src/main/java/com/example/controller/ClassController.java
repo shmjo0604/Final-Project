@@ -32,7 +32,7 @@ public class ClassController {
     @Autowired ClassSelectService cService;
     @Autowired ClassInsertService iService;
 
-    @GetMapping(value = "select.do")
+    @GetMapping(value = "/select.do")
     public String selectGET(@RequestParam(name = "search", defaultValue = "", required = false) String search, Model model) {
 
         if(search.equals("")) {
@@ -47,7 +47,17 @@ public class ClassController {
         return "/class/select";
     }
 
-    @GetMapping(value = "insert.do")
+    @GetMapping(value = "/selectone.do")
+    public String selectoneGET(@RequestParam(name = "classcode", defaultValue = "0") long classcode) {
+
+        if(classcode == 0) {
+            return "redirect:/class/select.do?search=list";
+        }
+
+        return "class/selectone";
+    }
+
+    @GetMapping(value = "/insert.do")
     public String insertGET(Model model) {
 
         model.addAttribute("actlist", cService.selectActivityCateList());
@@ -56,7 +66,7 @@ public class ClassController {
         return "/class/insert";
     }
 
-    @PostMapping(value = "insert.do")
+    @PostMapping(value = "/insert.do")
     public String insertPOST(
         @ModelAttribute ClassProduct obj
     ) {

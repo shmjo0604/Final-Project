@@ -72,5 +72,16 @@ public class ClassSelectServiceImpl implements ClassSelectService {
             return null;
         }
     }
+
+    @Override
+    public long selectClassCountTotal(Map<String, Object> map) {
+        try {
+            return cMapper.selectClassCountTotal(map);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
     
 }

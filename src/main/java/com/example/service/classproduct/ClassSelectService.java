@@ -29,5 +29,9 @@ public interface ClassSelectService {
     // 클래스 조회
     public List<ClassUnitView> selectClassUnitViewList(Map<String, Object> map);
 
+    // 클래스 조회
+
+    // 클래스 조회 (총 개수)
+    public long selectClassCountTotal(Map<String, Object> map);
 
 }

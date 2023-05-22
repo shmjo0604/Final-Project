@@ -11,12 +11,12 @@ import com.example.dto.CityCate;
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
 import com.example.dto.LocalCate;
-import com.example.mapper.ClassMapper;
+import com.example.mapper.ClassInsertMapper;
 
 @Service
 public class ClassInsertServiceImpl implements ClassInsertService {
 
-    @Autowired ClassMapper cMapper;
+    @Autowired ClassInsertMapper cMapper;
 
     @Override
     public int insertClassOne(ClassProduct obj) {
@@ -74,7 +74,7 @@ public class ClassInsertServiceImpl implements ClassInsertService {
     }
 
     @Override
-    public int insertClassImage(ClassImage obj) {
+    public int insertClassImage(List<ClassImage> obj) {
         try {
             return cMapper.insertClassImage(obj);
         }

@@ -61,10 +61,8 @@ public interface ClassSelectMapper {
 	// 		" </if> ", " ORDER BY s.classcode DESC ", " </script> " })
 	public List<ClassUnitView> selectClassSessionViewList2(Map<String, Object> map);
 
-	// 3. 클래스 전체 조회
-
-	// @Select({ " SELECT s.* FROM classsessionview s " })
-	public List<ClassUnitView> selectClassProductList();
+	// 1-3. 클래스 조회 (총 개수)
+	public long selectClassCountTotal(Map<String, Object> map);
 
 	// 4. 지역 상위 카테고리 조회
 	public List<CityCate> selectCityCateList();
@@ -77,5 +75,8 @@ public interface ClassSelectMapper {
 
 	// 7. 클래스 하위 카테고리 조회 -> 상위 카테고리 코드 외래키로 전달 받아서
 	public List<ActDetailCate> selectActDetailCateList(int actcode);
+
+	// 8. 클래스 상세페이지 조회
+	public ClassUnitView selectClassUnitViewOne(long classcode);
 
 }

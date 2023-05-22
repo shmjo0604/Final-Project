@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
-import com.example.mapper.ClassMapper;
+import com.example.mapper.ClassManageMapper;
 
 @Service
 public class ClassManageServiceImpl implements ClassManageService {
 
-    @Autowired ClassMapper cMapper;
+    @Autowired ClassManageMapper cMapper;
 
     @Override
     public List<ClassProduct> selectMyClassList(String id) {

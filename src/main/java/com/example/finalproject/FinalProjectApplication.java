@@ -4,8 +4,10 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
+@PropertySource(value = {"classpath:global.properties"})
 @MapperScan(basePackages = {"com.example.mapper"})
 @ComponentScan(basePackages = {
 	"com.example.controller",

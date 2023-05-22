@@ -1,43 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.mapper.ClassMapper">
-
-    <!-- 1. 클래스 등록 -->
-    <insert id="insertClassOne" parameterType="ClassProduct">
-        INSERT INTO classproduct( title, postcode, address1, address2, address3, price, instructor, intro, curriculum, 
-        localcode, actdetailcode, nickname, memberid, latitude, longitude )
-        VALUES ( #{title}, #{postcode}, #{address1}, #{address2}, #{address3}, #{price}, #{instructor}, #{intro}, #{curriculum}, 
-        #{localcode}, #{actdetailcode}, #{nickname}, #{memberid}, #{latitude}, #{longitude} )
-    </insert>
-
-    <!-- 2. 지역 상위 분류 조회 -->
-    <select id="selectCityCateList" resultType="CityCate">
-        SELECT c.* FROM citycate c ORDER BY c.code ASC
-    </select>
-
-    <!-- 3. 지역 하위 분류 조회(by 상위 분류 코드) -->
-    <select id="selectLocalCateList" parameterType="int" resultType="LocalCate">
-        SELECT l.* FROM localcate l WHERE citycode = #{citycode} ORDER BY l.code ASC
-    </select>
-
-    <!-- 4. 클래스 상위 분류 조회 -->
-    <select id="selectActivityCateList" resultType="ActivityCate">
-        SELECT a.* FROM activitycate a ORDER BY a.code ASC
-    </select>
-
-    <!-- 5. 클래스 하위 분류 조회 (by 상위 분류 코드) -->
-    <select id="selectActDetailCateList" parameterType="int" resultType="ActDetailCate">
-        SELECT a.* FROM actdetailcate a WHERE actcode = #{actcode} ORDER BY a.code ASC
-    </select>
-
-    <!-- 6. 클래스 이미지 등록 -->
-    <insert id="insertClassImage" parameterType="ClassImage">
-        INSERT INTO classimage(filename, filedata, filetype, filesize, typechk, classcode)
-        VALUES(#{filename}, #{filedata}, #{filetype}, #{filesize}, #{typechk}, #{classcode})
-    </insert>
-
-    <!-- ****************** -->
+<mapper namespace="com.example.mapper.ClassManageMapper">
 
     <!-- 1. 내 클래스 전체 조회 -->
     <select id="selectMyClassList" parameterType="string" resultType="ClassProduct">
@@ -80,6 +44,5 @@
     <delete id="deleteClassImageOne" parameterType="long">
         DELETE FROM classimage WHERE no = #{no}
     </delete>
-
 
 </mapper>

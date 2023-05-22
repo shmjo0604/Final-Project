@@ -13,6 +13,8 @@ public class Review {
 	private String content;
 	// 평점(1,2,3,4,5)
 	private int rating;
+	// 추천수
+	private long hit;
 	// 리뷰 등록 일자
 	private Date regdate;
 

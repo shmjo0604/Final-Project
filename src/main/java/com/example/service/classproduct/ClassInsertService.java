@@ -32,6 +32,6 @@ public interface ClassInsertService {
     public List<ActDetailCate> selectActDetailCateList(int actcode);
 
     // 6. 클래스 이미지 등록
-    public int insertClassImage(ClassImage obj);
+    public int insertClassImage(List<ClassImage> obj);
 
 }
