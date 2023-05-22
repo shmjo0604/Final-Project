@@ -59,15 +59,15 @@
                             <div class="sidevar-menu" >
                                 <ul>
                                     <hr style="border: 2px solid; color: forestgreen"/>
-                                    <li><a href="#">신청관리</a></li><hr/>
-                                    <li><a href="#">리뷰관리</a></li><hr/>
-                                    <li><a href="#">문의내역</a></li><hr/>
+                                    <li><a href="@{/mypage.do(menu=1)">신청관리</a></li><hr/>
+                                    <li><a href="@{/mypage.do(menu=2)">리뷰관리</a></li><hr/>
+                                    <li><a href="@{/mypage.do(menu=3)">문의내역</a></li><hr/>
                                     <li>
                                         <a class="opener" data-toggle="collapse">계정관리</a>
                                         <ul>
-                                            <li><a href="#">개인정보변경</a></li>
-                                            <li><a href="#">비밀번호재설정</a></li>
-                                            <li><a href="#">탈퇴하기</a></li>
+                                            <li><a href="@{/mypage.do(menu=4)">개인정보변경</a></li>
+                                            <li><a href="@{/mypage.do(menu=5)">비밀번호재설정</a></li>
+                                            <li><a href="@{/mypage.do(menu=6)">탈퇴하기</a></li>
                                         </ul>
                                     </li>
                                     <hr/>
@@ -84,8 +84,14 @@
 
                     <!--/right-->
                 </div><!--/row-->
+
         </div>
     </div>
+
+
+
+
+    
     
     <footer th:replace="~{/fragments/footer.html :: footer}"></footer>
 
