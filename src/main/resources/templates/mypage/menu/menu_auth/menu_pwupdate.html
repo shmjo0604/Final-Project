@@ -1,0 +1,36 @@
+<div th:fragment="menu_pwupdate" class="col-md-8" style="margin-left: 30px;">
+    <style>
+        .form-label { font-size: medium; color: gray;}
+        .form-control {float: left; width: 80%;}
+        .form-btn { float: left; background-color: rgb(22, 155, 51); color: white; margin-left: 5px; }
+    </style>
+    <hr/>
+    <p>| 비밀번호 변경</p>
+    <div class="container">
+        <div class="row">
+            <div style="margin-top: 50px;">
+                <label for="name" class="form-label"> 현재 비밀번호</label>
+                <div style="display: inline-block; width: 100%; height: fit-content;">
+                    <input id="password" class="form-control" type ="password" placeholder ="기존 비밀번호를 입력해주세요." name ="password" value =""/><br />
+                </div>
+            </div>
+
+            <div style="margin-top: 50px;">
+                <label for="name" class="form-label"> 변경할 비밀번호</label>
+                <div style="display: inline-block; width: 100%; height: fit-content;">
+                    <input id="password" class="form-control" type ="password" placeholder ="변경할 비밀번호를 입력해주세요." name ="password" value =""/><br />
+                </div>
+            </div>
+
+            <div style="margin-top: 50px;">
+                <label for="name" class="form-label"> 재입력</label>
+                <div style="display: inline-block; width: 100%; height: fit-content;">
+                    <input id="password" class="form-control" type ="password" placeholder ="변경할 비밀번호를 재입력해주세요." name ="password" value =""/><br />
+                    
+                </div>
+            </div>
+
+            <input style="margin-top: 20px; width: 80%;" type="button" value="변경하기" class="btn btn-sm form-btn"/>
+        </div>
+    </div>    
+</div>

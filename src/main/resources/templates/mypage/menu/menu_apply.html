@@ -1,38 +1,10 @@
 <div th:fragment="menu_apply" class="col-md-8" style="margin-left: 30px;">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>
-        /* 카드 드롭다운 버튼 함수 */
-        function showDropdown(classcode) {
-            if(classcode === 1){
-                document.getElementById("myDropdown1").classList.toggle("show");
-            }
-            else if(classcode === 2){
-                document.getElementById("myDropdown2").classList.toggle("show");
-            }
-            else if(classcode === 3){
-                document.getElementById("myDropdown3").classList.toggle("show");
-            }
-            
-        }
-
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-    </script>
+    <!--********************************************************************************************************************************************************************-->
+    <!--********************************************************************** 1. 통계 박스 ********************************************************************************-->
+    <!--********************************************************************************************************************************************************************-->
 
     <style>
-
         /* 처리상태 count box(상단) */
         .box {
                 width:80%;
@@ -61,11 +33,10 @@
                 -moz-box-shadow: 0 5px 6px -6px #777;
                 box-shadow: 0 5px 6px -6px #777;
         }
-       
-
     </style>
+
     <div class="row-md-3">
-        <p style="font-weight: bolder; font-size: large;">신청관리</p>
+        <p style="font-weight: bolder; font-size: large;">신청내역</p>
         <div class="row" style="background-color: honeydew; border-radius: 15px;">
             <div class="col-sm-4">
                 <div class="box effect">
@@ -89,282 +60,133 @@
     </div>
     <div class="row-md-9" style="margin-top: 50px;">
         <hr/>
-        <div class="btn-group" role="group" style="margin-bottom: 10px;">
-            <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle float-right" data-bs-toggle="dropdown" aria-expanded="false">전체상태</button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">신청완료</a></li>
-                <li><a class="dropdown-item" href="#">참여완료</a></li>
-                <li><a class="dropdown-item" href="#">신청취소</a></li>
-            </ul>
+        <div style="display: inline-block; margin-top: 40px; width: 100%;">
+            <div style="float: left; font-weight: bold;">| 신청 클래스 정보</div>
+            <div style="float: right;">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle float-right" data-bs-toggle="dropdown" aria-expanded="false">전체상태</button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">신청완료</a></li>
+                        <li><a class="dropdown-item" href="#">참여완료</a></li>
+                        <li><a class="dropdown-item" href="#">신청취소</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group" role="group" >
+                    <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">신청순</button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">최신순</a></li>
+                        <li><a class="dropdown-item" href="#">오래된순</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="btn-group" role="group" style="margin-bottom: 10px;">
-            <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">신청순</button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">최신순</a></li>
-                <li><a class="dropdown-item" href="#">오래된순</a></li>
-            </ul>
-        </div>
+        
+       
+        <!--*****************************************************************************************************************************************************************-->
+        <!--********************************************************************** 2. 테이블 ********************************************************************************-->
+        <!--*****************************************************************************************************************************************************************-->
+        <style>
+            .center {text-align: center;}
+        </style>
             
-        <table class="table table-bordered">
+        <table class="table table-bordered center">
             <thead>
-                <tr>
-                    <th>신청일자</th>
-                    <th>상품정보</th>
-                    <th>신청인원</th>
-                    <th>신청가격</th>
+                <tr style="background-color: floralwhite;">
+                    <th style="text-align: center;">신청일자</th>
+                    <th>클래스정보</th>
+                    <th>신청정보</th>
+                    <th>결제금액</th>
                     <th>처리상태</th>
-                    <th>결제내역/취소</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody style="vertical-align: middle;">
                 <tr>
-                    <td>2023-05-25</td>
-                    <td height="0">
-                        <img src="https://cdnimage.ebn.co.kr/news/202003/news_1583367095_1024915_main1.jpg" style="width: 100px; height: 100px;">
-                        <p>유화 원데이클래스</p>
+                    <td>
+                        <p>2023-05-25</p>
+                        <div style="display: flex; flex-direction: column; align-items: center;">        
+                            <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px;">상세보기 ></button>
+                            <button class="btn btn-sm btn-danger" style="height: 30px; width: 90px; margin-top: 5px;">신청취소</button>
+                        </div>
                     </td>
-                    <td>1명</td>
+                    <td>
+                        <img src="https://cdnimage.ebn.co.kr/news/202003/news_1583367095_1024915_main1.jpg" style="width: 100px; height: 100px;">
+                        <a href="#"><p style="margin-top: 10px;">레터링 케이크 만들기</p></a>
+                    </td>
+                    <td>
+                        <!-- th:text="${}"-->
+                        <p>일자 : 2023-06-01</p>
+                        <p>시간 : 15:00 ~ 21:00</p>
+                        <p>난이도 : 입문자</p>
+                        <p>신청인원 : 1명</p>
+                    </td>
                     <td style="font-weight: bold;">25,000원</td>
                     <td>
                         <p  style="text-align: center;">신청완료</p>
-                        <button class="btn btn-sm btn-secondary disabled">작성하기</button>
-                       
-                    </td>
-                    <td>
-                        <button class="btn btn-sm btn-danger" style="width: 90px; height: 30px;">신청취소</button>
-                        <button class="btn btn-sm btn-outline-success" style="width: 90px; height: 30px; margin-top: 10px;">상세보기</button>
+                        <button class="btn btn-sm btn-secondary disabled" style="height: 30px; width: 90px;">작성완료</button>
                     </td>
                 </tr>
+
+
+                <!-- 처리상태별 예시 -->
                 <tr>
-                    <td>2023-05-20</td>
-                    <td height="0">
-                        <img src="https://www.thykingdomcome.global/sites/default/files/2020-01/seminar_0.jpg" style="width: 100px; height: 100px;">
-                        <p>레터링 케이크 만들기</p>
+                    <td>
+                        <p>2023-05-22</p>
+                        <div style="display: flex; flex-direction: column; align-items: center;">        
+                            <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px;">상세보기 ></button>
+                            <button class="btn btn-sm btn-danger" style="height: 30px; width: 90px; margin-top: 5px;">신청취소</button>
+                        </div>
                     </td>
-                    <td>2명</td>
-                    <td style="font-weight: bold;">110,000원</td>
+                    <td>
+                        <img src="https://cdnimage.ebn.co.kr/news/202003/news_1583367095_1024915_main1.jpg" style="width: 100px; height: 100px;">
+                        <a href="#"><p style="margin-top: 10px;">서핑 여름 특강</p></a>
+                    </td>
+                    <td>
+                        <!-- th:text="${}"-->
+                        <p>일자 : 2023-06-01</p>
+                        <p>시간 : 15:00 ~ 21:00</p>
+                        <p>난이도 : 입문자</p>
+                        <p>신청인원 : 1명</p>
+                    </td>
+                    <td style="font-weight: bold;">55,000원</td>
                     <td>
                         <p  style="text-align: center;">참여완료</p>
-                        <button class="btn btn-sm btn-secondary">작성하기</button>
-                       
-                    </td>
-                    <td>
-                        <button class="btn btn-sm btn-danger" style="width: 90px; height: 30px;">신청취소</button>
-                        <button class="btn btn-sm btn-outline-success" style="width: 90px; height: 30px; margin-top: 10px;">상세보기</button>
+                        <button class="btn btn-sm btn-secondary" style="height: 30px; width: 90px;">리뷰작성 ></button>
                     </td>
                 </tr>
                 <tr>
-                    <td>2023-05-18</td>
-                    <td height="0">
-                        <img src="https://www.thykingdomcome.global/sites/default/files/2020-01/seminar_0.jpg" style="width: 100px; height: 100px;">
-                        <p>서핑 클래스</p>
+                    <td>
+                        <p>2023-05-20</p>
+                        <div style="display: flex; flex-direction: column; align-items: center;">        
+                            <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px;">상세보기 ></button>
+                            <button class="btn btn-sm btn-danger disabled" style="height: 30px; width: 90px; margin-top: 5px;">신청취소</button>
+                        </div>
                     </td>
-                    <td>1명</td>
-                    <td style="font-weight: bold;">100,000원</td>
+                    <td>
+                        <img src="https://cdnimage.ebn.co.kr/news/202003/news_1583367095_1024915_main1.jpg" style="width: 100px; height: 100px;">
+                        <a href="#"><p style="margin-top: 10px;">유화 원데이클래스</p></a>
+                    </td>
+                    <td>
+                        <!-- th:text="${}"-->
+                        <p>일자 : 2023-06-01</p>
+                        <p>시간 : 15:00 ~ 21:00</p>
+                        <p>난이도 : 입문자</p>
+                        <p>신청인원 : 1명</p>
+                    </td>
+                    <td style="font-weight: bold;">155,000원</td>
                     <td>
                         <p  style="text-align: center;">신청취소</p>
-                        <button class="btn btn-sm btn-secondary disabled">작성하기</button>
-                       
-                    </td>
-                    <td>
-                        <button class="btn btn-sm btn-danger disabled" style="width: 90px; height: 30px;">신청취소</button>
-                        <button class="btn btn-sm btn-outline-success" style="width: 90px; height: 30px; margin-top: 10px;">상세보기</button>
+                        <button class="btn btn-sm btn-secondary disabled" style="height: 30px; width: 90px;">리뷰작성 ></button>
                     </td>
                 </tr>
+
+                <!-- 신청 클래스 없을경우 -->
+                <!-- <tr>
+                    <h7>신청내역이 존재하지 않습니다.</h7>
+                    <button>클래스 조회</button>
+                </tr> -->
             </tbody>
         </table>
 
-        <style>
-            .icons li {
-                height: 6px;
-                width: 3px;
-                margin-top: 0.5px;
-                vertical-align: top;
-                pointer-events: none;
-            }
-
-            .dropbtn {
-                color: #777;
-                font-size: 5px;
-                cursor: pointer;
-            }
-
-            /* .dropbtn:hover, .dropbtn:focus {
-                background-color: #f1f1f1;
-                border-radius: 50%;
-            } */
-
-            .dropdown-content {
-                display: none;
-                position: relative;
-                background-color: #f9f9f9;
-                min-width: 160px;
-                overflow: auto;
-                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                z-index: 1;
-            }
-
-            .dropdown-content a {
-                color: black;
-                padding: 12px 16px;
-                text-decoration: none;
-                display: block;
-            }
-
-            .dropdown a:hover {background-color: #f1f1f1}
-
-            .show {display:block;}
-        </style>
-        
-        <div class="row">
-            <div class="col-4">
-                <div class="card shadow-sm">
-                    <div class="card">
-                        <!-- 1. 카드 헤더 -->
-                        <div class="card-header" style="display: inline-block;">
-                            <!--(1) 결제일자-->
-                            <div style="float: left; width: 90%; height:auto; "><a style="width: 20%;">결제일자 : 2023-05-25</a></div>
-                            <!-- (2) 드롭다운 버튼-->
-                            <div class="dropdown" style=" float: left; width: 10%; height: 25px;">
-                                <!-- three dots -->
-                                <ul class="dropbtn icons btn-right" onclick="showDropdown(1)">
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                </ul>
-                                <!-- menu -->
-                                <div id="myDropdown1" class="dropdown-content">
-                                    <a href="#">취소</a>
-                                    <a href="#">리뷰작성</a>
-                                </div>
-                            </div>       
-                        </div>
-
-                        <style>
-                            .class-wrap {width: 100%; height: 200px; background-color: darkgray;}
-                            .class-wrap img{width: 100%; vertical-align: middle;}
-                            .class-title{position: absolute; margin-top: 160px; left: 50%; width: 100%; transform: translate(-50%, -50%); text-align: center; font-weight: bold; font-size: medium; background-color: rgb(255,255,255,0.8);}
-                        </style>
-                        <!-- 2. 카드 이미지 -->
-                        <div class="class-wrap">
-                            <div class="class-image">
-                                <img class="card-img-top" src="" alt="클래스 썸네일 이미지"/>
-                            </div>
-                            <div class="class-title">
-                                <p style="padding-top: 5px;">레터링 케이크 만들기</p>
-                            </div>
-                        </div>
-                        
-                        <!-- 3. 카드 내용(클래스 결제 정보) -->
-                        <div class="card-body">
-                            <p class="card-text" style="font-weight: normal; font-size: medium;">신청인원 : 1명</p>
-                            <p class="card-text" style="font-weight: normal; font-size: medium;">결제금액 : 25,000원</p>
-                            <p class="card-text" style="font-weight: normal; font-size: medium;">처리상태 : 신청완료</p>
-                            <a href="#" class="btn btn-sm btn-success" style="width: 100%;">상세보기</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-4">
-                <div class="card shadow-sm">
-                    <div class="card">
-                        <!-- 1. 카드 헤더 -->
-                        <div class="card-header" style="display: inline-block;">
-                            <!--(1) 결제일자-->
-                            <div style="float: left; width: 90%; height:auto; "><a style="width: 20%;">결제일자 : 2023-05-25</a></div>
-                            <!-- (2) 드롭다운 버튼-->
-                            <div class="dropdown" style=" float: left; width: 10%; height: 25px;">
-                                <!-- three dots -->
-                                <ul class="dropbtn icons btn-right" onclick="showDropdown(2)">
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                </ul>
-                                <!-- menu -->
-                                <div id="myDropdown2" class="dropdown-content">
-                                    <a href="#">취소</a>
-                                    <a href="#">리뷰작성</a>
-                                </div>
-                            </div>       
-                        </div>
-
-                        <style>
-                            .class-wrap {width: 100%; height: 200px; background-color: darkgray;}
-                            .class-wrap img{width: 100%; vertical-align: middle;}
-                            .class-title{position: absolute; margin-top: 160px; left: 50%; width: 100%; transform: translate(-50%, -50%); text-align: center; font-weight: bold; font-size: medium; background-color: rgb(255,255,255,0.8);}
-                        </style>
-                        <!-- 2. 카드 이미지 -->
-                        <div class="class-wrap">
-                            <div class="class-image">
-                                <img class="card-img-top" src="" alt="클래스 썸네일 이미지"/>
-                            </div>
-                            <div class="class-title">
-                                <p style="padding-top: 5px;">레터링 케이크 만들기</p>
-                            </div>
-                        </div>
-                        
-                        <!-- 3. 카드 내용(클래스 결제 정보) -->
-                        <div class="card-body">
-                            <p class="card-text" style="font-weight: normal; font-size: medium;">신청인원 : 1명</p>
-                            <p class="card-text" style="font-weight: normal; font-size: medium;">결제금액 : 25,000원</p>
-                            <p class="card-text" style="font-weight: normal; font-size: medium;">처리상태 : 신청완료</p>
-                            <a href="#" class="btn btn-sm btn-success" style="width: 100%;">상세보기</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-4">
-                <div class="card shadow-sm">
-                    <div class="card">
-                        <!-- 1. 카드 헤더 -->
-                        <div class="card-header" style="display: inline-block;">
-                            <!--(1) 결제일자-->
-                            <div style="float: left; width: 90%; height:auto; "><a style="width: 20%;">결제일자 : 2023-05-25</a></div>
-                            <!-- (2) 드롭다운 버튼-->
-                            <div class="dropdown" style=" float: left; width: 10%; height: 25px;">
-                                <!-- three dots -->
-                                <ul class="dropbtn icons btn-right" onclick="showDropdown(3)">
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                </ul>
-                                <!-- menu -->
-                                <div id="myDropdown3" class="dropdown-content">
-                                    <a href="#">취소</a>
-                                    <a href="#">리뷰작성</a>
-                                </div>
-                            </div>       
-                        </div>
-
-                        <style>
-                            .class-wrap {width: 100%; height: 200px; background-color: darkgray;}
-                            .class-wrap img{width: 100%; vertical-align: middle;}
-                            .class-title{position: absolute; margin-top: 160px; left: 50%; width: 100%; transform: translate(-50%, -50%); text-align: center; font-weight: bold; font-size: medium; background-color: rgb(255,255,255,0.8);}
-                        </style>
-                        <!-- 2. 카드 이미지 -->
-                        <div class="class-wrap">
-                            <div class="class-image">
-                                <img class="card-img-top" src="" alt="클래스 썸네일 이미지"/>
-                            </div>
-                            <div class="class-title">
-                                <p style="padding-top: 5px;">레터링 케이크 만들기</p>
-                            </div>
-                        </div>
-                        
-                        <!-- 3. 카드 내용(클래스 결제 정보) -->
-                        <div class="card-body">
-                            <p class="card-text" style="font-weight: normal; font-size: medium;">신청인원 : 1명</p>
-                            <p class="card-text" style="font-weight: normal; font-size: medium;">결제금액 : 25,000원</p>
-                            <p class="card-text" style="font-weight: normal; font-size: medium;">처리상태 : 신청완료</p>
-                            <a href="#" class="btn btn-sm btn-success" style="width: 100%;">상세보기</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 

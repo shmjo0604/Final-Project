@@ -28,7 +28,7 @@
                 box-shadow: 0 5px 6px -6px #777;
         }
     </style>
-    <div class="row-md-3">
+    <div class="row-md-4">
         <p style="font-weight: bolder; font-size: large;">문의내역</p>
         <div class="row" style="background-color: honeydew; border-radius: 15px;">
             <div class="col-sm-4">
@@ -51,57 +51,76 @@
             </div>   
         </div>
     </div>
-    <div class="row-md-9" style="margin-top: 50px;">
-        <hr/>
-        <div class="btn-group" role="group" style="margin-bottom: 10px;">
-            <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">전체문의</button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">서비스문의</a></li>
-                <li><a class="dropdown-item" href="#">클래스문의</a></li>
-            </ul>
-        </div>
-        <div class="btn-group" role="group" style="margin-bottom: 10px;">
-            <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">처리상태</button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">진행중</a></li>
-                <li><a class="dropdown-item" href="#">답변완료</a></li>
-            </ul>
-        </div>
-        <div class="btn-group" role="group" style="margin-bottom: 10px;">
-            <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">날짜순</button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">최신순</a></li>
-                <li><a class="dropdown-item" href="#">오래된순</a></li>
-            </ul>
-        </div>
-            
-        <table class="table">
+
+    <!--*****************************************************************************************************************************************************************-->
+    <!--********************************************************************** 1. 서비스 문의내역 ***********************************************************************-->
+    <!--*****************************************************************************************************************************************************************-->
+
+    <div class="row-md-4" style="margin-top: 50px;">
+
+        <div style="display: inline-block; margin-top: 40px; width: 100%;">
+            <div style="float: left; font-weight: bold;">| 문의 내역 확인</div>
+            <div style="float: right;">
+                <!-- <div class="btn-group" role="group" style="margin-bottom: 10px;">
+                    <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">전체문의</button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">서비스문의</a></li>
+                        <li><a class="dropdown-item" href="#">클래스문의</a></li>
+                    </ul>
+                </div> -->
+                <div class="btn-group" role="group" style="margin-bottom: 10px;">
+                    <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">처리상태</button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">진행중</a></li>
+                        <li><a class="dropdown-item" href="#">답변완료</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group" role="group" style="margin-bottom: 10px;">
+                    <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">날짜순</button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">최신순</a></li>
+                        <li><a class="dropdown-item" href="#">오래된순</a></li>
+                    </ul>
+                </div>
+            </div>
+         </div>
+        
+        <style>
+            .center {text-align: center;}
+        </style>
+        
+        <table class="table table-bordered center">
             <thead>
                 <tr>
                     <th>번호</th>
+                    <th>작성일자</th>
                     <th>문의유형</th>
                     <th>제목</th>
                     <th>내용</th>
                     <th>처리상태</th>
-                    <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody style="vertical-align: middle;">
                 <tr>
                     <td>1</td>
+                    <td>2023-05-23</td>
                     <td>서비스문의</td>
-                    <td><a href="#">환불 언제까지 가능하나요?</a></td>
+                    <td><a href="#" style="text-decoration-line: none; color: black;">환불 언제까지 가능하나요?</a></td>
                     <td>결제한거 환불요청하고 싶...</td>
-                    <td>진행중</td>
+                    <td style="color: red">답변대기</td>
                    
         
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td>클래스문의</td>
-                    <td><a href="#">할인 문의드립니다.</a></td>
+                    <td>2023-05-20</td>
+                    <td>
+                        <p>클래스문의</p>
+                        <a href="#" style="text-decoration-line: none;">[클래스 보러가기]</a>
+                    </td>
+                    <td><a href="#" style="text-decoration-line: none; color: black;">할인 문의드립니다.</a></td>
                     <td>지난번에 참여했을때 할인...</td>
-                    <td>답변완료</td>
+                    <td style="color: blue">답변완료</td>
                     
 
                 </tr>
