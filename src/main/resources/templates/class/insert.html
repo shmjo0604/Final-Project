@@ -27,19 +27,20 @@
     <!-- header 영역 -->
     <header></header>
 
+    <form id="form_insert" th:action="@{insert.do}" method="post" enctype="multipart/form-data">
     <!-- main 영역 -->
     <div id="wrapper" class="col-11 border-top" >
         <div class="left col-3 m-4" id="btn_cate">
         <div class="left2 m-4">
-            <button id="sidebar1" class="btn_c sidebar btn-outline-success m-3 active" onclick="pagecate()">카테고리</button>
+            <button id="sidebar1" class="btn_c sidebar btn-outline-success m-3 active" type="button" onclick="pagecate()">카테고리</button>
             <br />
-            <button id="sidebar2" class="btn_c sidebar btn-outline-success m-3" onclick="pageinstructor()">강사소개</button>
+            <button id="sidebar2" class="btn_c sidebar btn-outline-success m-3" type="button" onclick="pageinstructor()">강사소개</button>
             <br />
-            <button id="sidebar3" class="btn_c sidebar btn-outline-success m-3" onclick="pageintro()">클래스소개</button>
+            <button id="sidebar3" class="btn_c sidebar btn-outline-success m-3" type="button" onclick="pageintro()">클래스소개</button>
             <br />
-            <button id="sidebar4" class="btn_c sidebar btn-outline-success m-3" onclick="pagecorri()">커리큘럼</button>
+            <button id="sidebar4" class="btn_c sidebar btn-outline-success m-3" type="button" onclick="pagecorri()">커리큘럼</button>
             <br />
-            <button id="sidebar5" class="btn_c sidebar btn-outline-success m-3" onclick="pageprice()">가격</button>
+            <button id="sidebar5" class="btn_c sidebar btn-outline-success m-3" type="button" onclick="pageprice()">가격</button>
             <br />
         </div>
         </div>
@@ -96,23 +97,21 @@
                     <div class="post">
                         <section>
                             <input type="text" class="text mb-3" id="sample6_postcode"
-                                placeholder="우편번호" name="postcode"> <input
+                                placeholder="우편번호"> <input
                                 type="button" class="btn btn-sm btn-primary m-2"
                                 onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
                                 <h6 style="display:inline; padding-right:50px; color: #FF8E8E">(필수)</h6>
                                 <br>
-                            <input type="text" class="text" id="sample6_address" placeholder="주소"
-                                name="address"><br>
+                            <input type="text" class="text" id="sample6_address" placeholder="주소"> <br>
                             <br> <input type="text" class="text" id="sample6_detailAddress"
-                                placeholder="상세주소" name="detailaddress"> <input
-                                type="text" class="text" id="sample6_extraAddress" placeholder="참고항목"
-                                name="extraAddress">
+                                placeholder="상세주소"> <input
+                                type="text" class="text" id="sample6_extraAddress" placeholder="참고항목">
                         </section>
                     </div>
 
                     <div class="changepage">
                         <div class="btn_1">
-                            <button class="btn_after non-click btn" onclick="nextMenu1()">다음&raquo;</button>
+                            <button class="btn_after non-click btn" type="button" onclick="nextMenu1()">다음&raquo;</button>
                         </div>
                     </div>
                 </div>
@@ -129,7 +128,7 @@
                                 th:src="@{/image/default.png}"
                                 style="width: 200px; height: 150px; cursor: pointer;"
                                 class="mb-3" onclick="clickItemImage()" /> <input type="file"
-                                name="file" id="file" class="form-control"
+                                name="profile" id="file" class="form-control"
                                 onchange="changeItemImage(this)" >
                         </div>
 
@@ -144,7 +143,7 @@
                         <h6 style="display:inline; font-weight:bold;">상호명 및 닉네임
                         <h6 style="display:inline; padding-right:50px; color: #FF8E8E">(필수)</h6></h6>
                         <p>
-                            <input type="text" class="text" id="nickname" name="nickname" maxlength="50"
+                            <input type="text" class="text" id="nickname" maxlength="50"
                                 placeholder="ex)나무이야기" autofocus required>
                         </p>
                     </section>
@@ -197,8 +196,8 @@
 
                     <div class="changepage">
                         <div class="btn_1">
-                            <button class="btn_before btn non-click" onclick="prevMenu2()">&laquo;이전</button>
-                            <button class="btn_after btn non-click" onclick="nextMenu2()">다음&raquo;</button>
+                            <button class="btn_before btn non-click" type="button" onclick="prevMenu2()">&laquo;이전</button>
+                            <button class="btn_after btn non-click" type="button" onclick="nextMenu2()">다음&raquo;</button>
                         </div>
                     </div>
                 </div>
@@ -211,7 +210,7 @@
                         <p style="display:inline; font-weight:bold;">클래스 제목</p>
                         <h6 style="display:inline; padding-right:50px; color: #FF8E8E">(필수)</h6>
                         <p>
-                            <input type="text" id="title" class="text" name="title" maxlength="50"
+                            <input type="text" id="title" class="text" maxlength="50"
                                 placeholder="ex)원데이 목공 클래스" autofocus required>
                         </p>
                     </section><br>
@@ -240,8 +239,8 @@
 
                     <div class="changepage">
                         <div class="btn_1">
-                            <button class="btn_before btn non-click" onclick="prevMenu3()">&laquo;이전</button>
-                            <button class="btn_after btn non-click" onclick="nextMenu3()">다음&raquo;</button>
+                            <button class="btn_before btn non-click" type="button" onclick="prevMenu3()">&laquo;이전</button>
+                            <button class="btn_after btn non-click" type="button" onclick="nextMenu3()">다음&raquo;</button>
                         </div>
                     </div>
                 </div>
@@ -276,8 +275,8 @@
 
                     <div class="changepage">
                         <div class="btn_1">
-                            <button class="btn_before non-click btn" onclick="prevMenu4()">&laquo;이전</button>
-                            <button class="btn_after non-click btn" onclick="nextMenu4()">다음&raquo;</button>
+                            <button class="btn_before non-click btn" type="button" onclick="prevMenu4()">&laquo;이전</button>
+                            <button class="btn_after non-click btn" type="button" onclick="nextMenu4()">다음&raquo;</button>
                         </div>
                     </div>
                 </div>
@@ -300,7 +299,7 @@
                             </div>
                         </div><br>
                         
-                        <input id="price" name="price" type="text" style="margin-top:10px;"
+                        <input id="price" type="text" style="margin-top:10px;"
                             placeholder="금액을 입력하세요" maxlength="10" onkeyup="addCommas(this)"autofocus> 
                             <span style="font-size: 20px; margin-left: 2px;">원</span>
                     </div>
@@ -308,14 +307,30 @@
 
                 <div class="changepage">
                     <div class="btn_1">
-                        <button class="btn_before btn non-click" onclick="prevMenu5()">&laquo;
+                        <button class="btn_before btn non-click" type="button" onclick="prevMenu5()">&laquo;
                             이전</button>
-                        <button class="btn_after btn" onclick="insertClass()">등록</button>
+                        <button class="btn_after btn" type="button" onclick="insertClass()">등록</button>
                     </div>
                 </div>
             </div>
+
+            <div style="display:none;">
+                <input id="form_title" type="text" name="title">
+                <input id="form_postcode" type="text" name="postcode">
+                <input id="form_address1" type="text" name="address1">
+                <input id="form_address2" type="text" name="address2">
+                <input id="form_address3" type="text" name="address3">
+                <input id="form_price" type="number" name="price">
+                <input id="form_localcode" type="number" name="localcode">
+                <input id="form_actdetailcode" type="number" name="actdetailcode">
+                <input id="form_instructor" name="instructor">
+                <input id="form_intro" name="intro">
+                <input id="form_curriculum" name="curriculum">
+                <input id="form_nickname" type="text" name="nickname">
+            </div>
         </div>
     </div>
+    </form>
 
     <!--footer 영역-->
     <footer></footer>

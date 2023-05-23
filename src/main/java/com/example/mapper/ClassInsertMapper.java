@@ -32,6 +32,9 @@ public interface ClassInsertMapper {
     public List<ActDetailCate> selectActDetailCateList(int actcode);
 
     // 6. 클래스 이미지 일괄 등록
-    public int insertClassImage(List<ClassImage> obj);
+    public int insertClassImage(List<ClassImage> list);
+
+    // 7. 가장 최근에 등록한 클래스 코드 조회
+    public long selectClasscodeRecent(String id);
 
 }

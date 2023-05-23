@@ -17,7 +17,7 @@ public interface ClassInsertService {
     /* 클래스 등록 관련 기능 */    
 
     // 1. 클래스 등록
-    public int insertClassOne(ClassProduct obj);
+    public int insertClassOne(ClassProduct obj, List<ClassImage> list);
 
     // 2. 지역 상위 카테고리 조회
     public List<CityCate> selectCityCateList();

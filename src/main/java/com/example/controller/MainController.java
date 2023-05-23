@@ -25,7 +25,8 @@ public class MainController {
     @GetMapping(value = "/test.do")
     public String testGET() {
 
-        return "test";
+        //return "test";
+        return "/test/productdetail";
     }
 
     @GetMapping(value = "/header1.do")
@@ -45,6 +46,8 @@ public class MainController {
 
         model.addAttribute("alertMessage", httpSession.getAttribute("alertMessage"));
         model.addAttribute("alertUrl", httpSession.getAttribute("alertUrl"));
+        httpSession.removeAttribute("alertMessage");
+        httpSession.removeAttribute("alertUrl");
 
         return "alert";
     }

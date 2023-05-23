@@ -19,9 +19,23 @@ public class ClassInsertServiceImpl implements ClassInsertService {
     @Autowired ClassInsertMapper cMapper;
 
     @Override
-    public int insertClassOne(ClassProduct obj) {
+    public int insertClassOne(ClassProduct obj, List<ClassImage> list) {
         try {
-            return cMapper.insertClassOne(obj);
+            int ret = cMapper.insertClassOne(obj);
+            if(ret == 1) {
+                long classcode = cMapper.selectClasscodeRecent(obj.getMemberid());
+                for(ClassImage img : list) {
+                    img.setClasscode(classcode);
+                }
+                System.out.println(list.toString());
+                int result = cMapper.insertClassImage(list);
+                System.out.println(result);
+                return result;
+            }
+            else {
+                return 0;
+            }
+            
         }
         catch(Exception e) {
             e.printStackTrace();

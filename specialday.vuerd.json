@@ -3,9 +3,9 @@
     "version": "2.2.11",
     "width": 6000,
     "height": 6000,
-    "scrollTop": -1489.6666642162525,
-    "scrollLeft": -2251.8333158161795,
-    "zoomLevel": 0.5,
+    "scrollTop": -563.8333676722295,
+    "scrollLeft": -2156.83331959114,
+    "zoomLevel": 0.8,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -258,7 +258,7 @@
           "active": false,
           "left": 2054.1254,
           "top": 24.0138,
-          "zIndex": 82,
+          "zIndex": 15,
           "widthName": 60,
           "widthComment": 71.5703125,
           "color": "#FF9800"
@@ -413,7 +413,7 @@
           "active": false,
           "left": 2827.5578,
           "top": 234.413,
-          "zIndex": 78,
+          "zIndex": 12,
           "widthName": 60,
           "widthComment": 71.5703125,
           "color": "#89E990"
@@ -545,7 +545,7 @@
           "active": false,
           "left": 3686.1804,
           "top": 25.5741,
-          "zIndex": 100,
+          "zIndex": 18,
           "widthName": 60,
           "widthComment": 71.5703125,
           "color": "#3153E9"
@@ -999,7 +999,7 @@
           "active": false,
           "left": 2412.2611,
           "top": 591.8162,
-          "zIndex": 94,
+          "zIndex": 16,
           "widthName": 98.484375,
           "widthComment": 115.140625,
           "color": "#00FF42"
@@ -1062,7 +1062,7 @@
           "active": false,
           "left": 2824.512,
           "top": 1546.0926,
-          "zIndex": 42,
+          "zIndex": 9,
           "widthName": 84.43701171875,
           "widthComment": 120,
           "color": "#1300FF"
@@ -1125,7 +1125,7 @@
           "active": false,
           "left": 2014.9407,
           "top": 1536.9736,
-          "zIndex": 6,
+          "zIndex": 1,
           "widthName": 60,
           "widthComment": 119,
           "color": "#673AB7"
@@ -1211,7 +1211,7 @@
           "active": false,
           "left": 2046.5957,
           "top": 1219.2086,
-          "zIndex": 8,
+          "zIndex": 2,
           "widthName": 69.869140625,
           "widthComment": 120,
           "color": "#F586EE"
@@ -1412,7 +1412,7 @@
           "active": false,
           "left": 3297.6064,
           "top": 950.0901,
-          "zIndex": 59,
+          "zIndex": 11,
           "widthName": 79.21923828125,
           "widthComment": 80,
           "color": "#FFEB3B"
@@ -1498,7 +1498,7 @@
           "active": false,
           "left": 2840.9627,
           "top": 1216.1686,
-          "zIndex": 45,
+          "zIndex": 10,
           "widthName": 94.83447265625,
           "widthComment": 120,
           "color": "#03A9F4"
@@ -1837,7 +1837,7 @@
           "active": false,
           "left": 3301.6949,
           "top": 524.168,
-          "zIndex": 97,
+          "zIndex": 17,
           "widthName": 69.10107421875,
           "widthComment": 120,
           "color": "#F44336"
@@ -1946,7 +1946,7 @@
           "active": false,
           "left": 3956.0427,
           "top": 322.9535,
-          "zIndex": 80,
+          "zIndex": 13,
           "widthName": 74.9091796875,
           "widthComment": 120,
           "color": "#217CA8"
@@ -2122,9 +2122,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 1678.3357,
-          "top": 597.2453,
-          "zIndex": 81,
+          "left": 1712.711,
+          "top": 753.4953,
+          "zIndex": 21,
           "widthName": 105.13037109375,
           "widthComment": 120,
           "color": "#009688"
@@ -2233,7 +2233,7 @@
           "active": false,
           "left": 2821.6713,
           "top": 30.4306,
-          "zIndex": 14,
+          "zIndex": 6,
           "widthName": 60,
           "widthComment": 97.5703125,
           "color": "#62DBD9"
@@ -2319,7 +2319,7 @@
           "active": false,
           "left": 1721.9953,
           "top": 1027.0965,
-          "zIndex": 11,
+          "zIndex": 3,
           "widthName": 62.9501953125,
           "widthComment": 120,
           "color": "#FF00BD"
@@ -2382,7 +2382,7 @@
           "active": false,
           "left": 1167.7355,
           "top": 881.4029,
-          "zIndex": 12,
+          "zIndex": 4,
           "widthName": 60,
           "widthComment": 60,
           "color": "#D0FF00"
@@ -2560,7 +2560,7 @@
           "active": false,
           "left": 1057.6902,
           "top": 50.1295,
-          "zIndex": 102,
+          "zIndex": 20,
           "widthName": 81.015625,
           "widthComment": 60,
           "color": "#FF0055"
@@ -2738,7 +2738,7 @@
           "active": false,
           "left": 1055.6299,
           "top": 414.5975,
-          "zIndex": 101,
+          "zIndex": 19,
           "widthName": 60,
           "widthComment": 60,
           "color": "#F600FF"
@@ -2755,9 +2755,9 @@
         "value": "관심사 추가 고려",
         "ui": {
           "active": false,
-          "left": 2055.9166046612822,
-          "top": 393.07499391535805,
-          "zIndex": 16,
+          "left": 2069.4582707898508,
+          "top": 319.1166635208646,
+          "zIndex": 23,
           "width": 127,
           "height": 100
         },
@@ -2767,9 +2767,9 @@
         "value": "제공 및 유의사항\n- 제공 : 와이파이, 주차공간, 포토존, 반려동물\n- 건강 및 안전사항 : 손세정제, 실내소독, 거리두기",
         "ui": {
           "active": false,
-          "left": 2235.9074354804543,
-          "top": 391.6388944078373,
-          "zIndex": 13,
+          "left": 2229.6574357288073,
+          "top": 318.7222306386183,
+          "zIndex": 24,
           "width": 363,
           "height": 100
         },
@@ -2779,9 +2779,9 @@
         "value": "최종 : 장바구니 /위시리스트 고려",
         "ui": {
           "active": false,
-          "left": 1885.9677100128233,
-          "top": 390.41201532457467,
-          "zIndex": 17,
+          "left": 1901.5927093919413,
+          "top": 316.453684930081,
+          "zIndex": 22,
           "width": 127,
           "height": 100
         },
@@ -3017,8 +3017,8 @@
           "columnIds": [
             "72ddb2cb-fcfa-41a0-aaf8-708eaab1eaa0"
           ],
-          "x": 2194.59790703125,
-          "y": 703.4953,
+          "x": 2228.9732070312502,
+          "y": 859.7453,
           "direction": "right"
         },
         "constraintName": "fk_classproduct_to_approvalimage",

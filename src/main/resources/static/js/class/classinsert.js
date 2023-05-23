@@ -579,7 +579,7 @@ function insertClass() {
     const address3 = document.getElementById("sample6_extraAddress");
     const price = document.getElementById("price");
     const localcode = document.getElementById("localselect");
-    const actcode = document.getElementById("actdetailselect");
+    const actdetailcode = document.getElementById("actdetailselect");
 
 
     /* console.log(title.value);
@@ -679,85 +679,92 @@ function insertClass() {
 
     // 4. 동적 form 태그 생성
 
-    var form = document.createElement("form");
+    var form = document.getElementById("form_insert");
 
-    form.action = "insert.do";
-    form.method = "post";
-    form.style.display = "none";
+    document.getElementById("form_title").value = title.value;
+    document.getElementById("form_postcode").value = postcode.value;
+    document.getElementById("form_address1").value = address1.value;
+    document.getElementById("form_address2").value = address2.value;
+    document.getElementById("form_address3").value = address3.value;
+    document.getElementById("form_price").value = price.value.replace(/[^\d]+/g, '');
+    document.getElementById("form_localcode").value = localcode.value;
+    document.getElementById("form_actdetailcode").value = actdetailcode.value;
+    document.getElementById("form_instructor").value = instructor;
+    document.getElementById("form_intro").value = intro;
+    document.getElementById("form_curriculum").value = curriculum;
+    document.getElementById("form_nickname").value = nickname.value;
 
-    var input1 = document.createElement("input");
-    input1.type = "text";
-    input1.name = "title";
-    input1.value = title.value;
-    form.appendChild(input1);
+    // var input1 = document.createElement("input");
+    // input1.type = "text";
+    // input1.name = "title";
+    // input1.value = title.value;
+    // form.appendChild(input1);
 
-    var input2 = document.createElement("input");
-    input2.type = "text";
-    input2.name = "postcode";
-    input2.value = postcode.value;
-    form.appendChild(input2);
+    // var input2 = document.createElement("input");
+    // input2.type = "text";
+    // input2.name = "postcode";
+    // input2.value = postcode.value;
+    // form.appendChild(input2);
 
-    var input3 = document.createElement("input");
-    input3.type = "text";
-    input3.name = "address1";
-    input3.value = address1.value;
-    form.appendChild(input3);
+    // var input3 = document.createElement("input");
+    // input3.type = "text";
+    // input3.name = "address1";
+    // input3.value = address1.value;
+    // form.appendChild(input3);
 
-    var input4 = document.createElement("input");
-    input4.type = "text";
-    input4.name = "address2";
-    input4.value = address2.value;
-    form.appendChild(input4);
+    // var input4 = document.createElement("input");
+    // input4.type = "text";
+    // input4.name = "address2";
+    // input4.value = address2.value;
+    // form.appendChild(input4);
 
-    var input5 = document.createElement("input");
-    input5.type = "text";
-    input5.name = "address3";
-    input5.value = address3.value;
-    form.appendChild(input5);
+    // var input5 = document.createElement("input");
+    // input5.type = "text";
+    // input5.name = "address3";
+    // input5.value = address3.value;
+    // form.appendChild(input5);
 
-    var input6 = document.createElement("input");
-    input6.type = "number";
-    input6.name = "price";
-    input6.value = price.value.replace(/[^\d]+/g, '');
-    form.appendChild(input6);
+    // var input6 = document.createElement("input");
+    // input6.type = "number";
+    // input6.name = "price";
+    // input6.value = price.value.replace(/[^\d]+/g, '');
+    // form.appendChild(input6);
 
-    var input7 = document.createElement("input");
-    input7.type = "number";
-    input7.name = "localcode";
-    input7.value = localcode.value;
-    form.appendChild(input7);
+    // var input7 = document.createElement("input");
+    // input7.type = "number";
+    // input7.name = "localcode";
+    // input7.value = localcode.value;
+    // form.appendChild(input7);
 
-    var input8 = document.createElement("input");
-    input8.type = "number";
-    input8.name = "actdetailcode";
-    input8.value = actcode.value;
-    form.appendChild(input8);
+    // var input8 = document.createElement("input");
+    // input8.type = "number";
+    // input8.name = "actdetailcode";
+    // input8.value = actcode.value;
+    // form.appendChild(input8);
 
-    var input9 = document.createElement("input");
-    input9.type = "text";
-    input9.name = "instructor";
-    input9.value = instructor;
-    form.appendChild(input9);
+    // var input9 = document.createElement("input");
+    // input9.type = "text";
+    // input9.name = "instructor";
+    // input9.value = instructor;
+    // form.appendChild(input9);
 
-    var input10 = document.createElement("input");
-    input10.type = "text";
-    input10.name = "intro";
-    input10.value = intro;
-    form.appendChild(input10);
+    // var input10 = document.createElement("input");
+    // input10.type = "text";
+    // input10.name = "intro";
+    // input10.value = intro;
+    // form.appendChild(input10);
 
-    var input11 = document.createElement("input");
-    input11.type = "text";
-    input11.name = "curriculum";
-    input11.value = curriculum;
-    form.appendChild(input11);
+    // var input11 = document.createElement("input");
+    // input11.type = "text";
+    // input11.name = "curriculum";
+    // input11.value = curriculum;
+    // form.appendChild(input11);
 
-    var input12 = document.createElement("input");
-    input12.type = "text";
-    input12.name = "nickname";
-    input12.value = nickname.value;
-    form.appendChild(input12);
-
-    document.body.appendChild(form);
+    // var input12 = document.createElement("input");
+    // input12.type = "text";
+    // input12.name = "nickname";
+    // input12.value = nickname.value;
+    // form.appendChild(input12);
 
     // 5. 전송
 

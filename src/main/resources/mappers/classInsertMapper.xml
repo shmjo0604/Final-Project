@@ -32,9 +32,19 @@
     </select>
 
     <!-- 6. 클래스 이미지 등록 -->
-    <insert id="insertClassImage" parameterType="list">
-        INSERT INTO classimage(filename, filedata, filetype, filesize, typechk, classcode)
-        VALUES(#{filename}, #{filedata}, #{filetype}, #{filesize}, #{typechk}, #{classcode})
+    <insert id="insertClassImage" parameterType="java.util.List">
+        INSERT INTO classimage(no, filename, filedata, filetype, filesize, typechk, classcode)
+        SELECT seq_classimage_no.NEXTVAL, T1.* FROM(
+            <foreach item="obj" collection="list" separator=" UNION ALL ">
+                SELECT '${obj.filename}' filename, '${obj.filedata}' filedata, '${obj.filetype}' filetype,
+                ${obj.filesize} filesize, ${obj.typechk} typechk, ${obj.classcode} classcode FROM DUAL
+            </foreach>
+        ) T1
     </insert>
+
+    <!-- 7. 가장 최근에 등록한 클래스 코드 조회 -->
+    <select id="selectClasscodeRecent" parameterType="string" resultType="long">
+        SELECT MAX(c.classcode) FROM classproduct c WHERE memberid = #{id} 
+    </select>
 
 </mapper>
