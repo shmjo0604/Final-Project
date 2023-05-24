@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.dto.ActDetailCate;
 import com.example.dto.ActivityCate;
 import com.example.dto.CityCate;
+import com.example.dto.ClassProduct;
 import com.example.dto.ClassUnitView;
 import com.example.dto.LocalCate;
 import com.example.mapper.ClassSelectMapper;
@@ -83,5 +84,18 @@ public class ClassSelectServiceImpl implements ClassSelectService {
             return -1;
         }
     }
+
+    @Override
+    public ClassProduct selectClassProductOne(long classcode) {
+        try {
+            return cMapper.selectClassProductOne(classcode);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+   
     
 }

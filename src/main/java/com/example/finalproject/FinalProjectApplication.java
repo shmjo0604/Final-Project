@@ -13,7 +13,6 @@ import org.springframework.context.annotation.PropertySource;
 	"com.example.controller",
 	"com.example.service",
 	"com.example.service.classproduct",
-	"com.example.service.classunit",
 	"com.example.service.member",
 	"com.example.restcontroller",
 	"com.example.config",

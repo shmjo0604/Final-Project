@@ -1,11 +1,18 @@
 package com.example.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -19,11 +26,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.config.KakaoLocalAPI;
 import com.example.dto.ActivityCate;
+import com.example.dto.Apply;
 import com.example.dto.CityCate;
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
+import com.example.dto.ClassUnit;
+import com.example.dto.ClassUnitView;
 import com.example.service.classproduct.ClassInsertService;
+import com.example.service.classproduct.ClassManageService;
 import com.example.service.classproduct.ClassSelectService;
+import com.example.service.classproduct.ClassUnitService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,10 +46,13 @@ public class ClassController {
 
     final String format = "ClassController => {}";
 
-    @Autowired
-    ClassSelectService cService;
-    @Autowired
-    ClassInsertService iService;
+    @Autowired ClassSelectService cService;
+    @Autowired ClassInsertService iService;
+    @Autowired ClassManageService manageService;
+    @Autowired ClassUnitService unitService;
+
+    @Autowired ResourceLoader resourceLoader;
+    @Value("${default.image}") String defaultImg;
 
     @GetMapping(value = "/select.do")
     public String selectGET(@RequestParam(name = "search", defaultValue = "", required = false) String search,
@@ -56,11 +71,22 @@ public class ClassController {
     }
 
     @GetMapping(value = "/selectone.do")
-    public String selectoneGET(@RequestParam(name = "classcode", defaultValue = "0") long classcode) {
+    public String selectoneGET(
+        @RequestParam(name = "classcode", defaultValue = "0") long classcode,
+        Model model
+        ) {
 
         if (classcode == 0) {
             return "redirect:/class/select.do?search=list";
         }
+
+        ClassProduct obj = cService.selectClassProductOne(classcode);
+
+        model.addAttribute("obj", obj);
+
+        List<ClassUnit> list = unitService.selectUnitList(classcode);
+
+        model.addAttribute("list", list);
 
         return "class/selectone";
     }
@@ -154,7 +180,13 @@ public class ClassController {
     }
 
     @GetMapping(value = "/apply.do")
-    public String applyGET() {
+    public String applyGET(@ModelAttribute Apply obj, Model model) {
+
+        // 복수가 올 수 있네...
+
+        ClassUnitView result = unitService.selectClassUnitViewOne(obj.getUnitno());        
+
+        model.addAttribute("obj", result);
 
         return "/apply/insert";
     }
@@ -164,5 +196,33 @@ public class ClassController {
 
         return "redirect:/home.do";
     }
+
+    @GetMapping(value = "/image")
+    public ResponseEntity<byte[]> classImage(
+        @RequestParam(name = "no", defaultValue = "0", required = false) long no
+        ) throws IOException {
+
+            log.info(format, no);
+
+            ClassImage obj = manageService.selectClassImageOne(no);
+
+            HttpHeaders headers = new HttpHeaders();
+
+            if(obj != null) {
+
+                if(obj.getFilesize() > 0) {
+                    headers.setContentType(MediaType.parseMediaType(obj.getFiletype()));
+
+                    ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(obj.getFiledata(), headers, HttpStatus.OK);
+                    
+                    return response;
+                }
+            }
+
+            InputStream is = resourceLoader.getResource(defaultImg).getInputStream();
+            headers.setContentType(MediaType.IMAGE_PNG);
+            return new ResponseEntity<>(is.readAllBytes(), headers, HttpStatus.OK);
+    }
+    
 
 }

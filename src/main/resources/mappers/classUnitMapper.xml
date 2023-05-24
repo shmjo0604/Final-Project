@@ -43,4 +43,9 @@
         </foreach>)
 </update>
 
+<!--(5) ClassUnitView 하나 조회-->
+<select id="selectClassUnitViewOne" parameterType="long" resultType="ClassUnitView">
+    SELECT u.* FROM classunitview u WHERE no = #{unitno}
+</select>
+
 </mapper>

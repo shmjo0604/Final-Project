@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.example.dto.ActDetailCate;
 import com.example.dto.ActivityCate;
 import com.example.dto.CityCate;
+import com.example.dto.ClassProduct;
 import com.example.dto.ClassUnitView;
 import com.example.dto.LocalCate;
 
@@ -76,7 +77,7 @@ public interface ClassSelectMapper {
 	// 7. 클래스 하위 카테고리 조회 -> 상위 카테고리 코드 외래키로 전달 받아서
 	public List<ActDetailCate> selectActDetailCateList(int actcode);
 
-	// 8. 클래스 상세페이지 조회
-	public ClassUnitView selectClassUnitViewOne(long classcode);
+	// 8. 클래스 하나 정보 조회
+	public ClassProduct selectClassProductOne(long classcode);
 
 }

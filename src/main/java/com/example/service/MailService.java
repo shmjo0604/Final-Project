@@ -1,4 +1,4 @@
-package com.example.service.member;
+package com.example.service;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
@@ -10,8 +10,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
-
-import com.example.service.RedisUtil;
 
 import lombok.RequiredArgsConstructor;
 
@@ -89,8 +87,5 @@ public class MailService {
         return toEmail; // 이메일 반환
 
     }
-
-    // 5. 인증 번호로 유효한 인증 번호인지 확인
-    //public String verifyEmail(String key) throws 
-
+    
 }

@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dto.Authnum;
 import com.example.dto.Member;
+import com.example.service.MailService;
 import com.example.service.RedisUtil;
-import com.example.service.member.MailService;
 import com.example.service.member.MemberService;
 
 import lombok.extern.slf4j.Slf4j;

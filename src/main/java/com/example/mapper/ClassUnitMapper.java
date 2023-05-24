@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.dto.ClassUnit;
+import com.example.dto.ClassUnitView;
 
 @Mapper
 public interface ClassUnitMapper {
@@ -32,5 +33,8 @@ public interface ClassUnitMapper {
 	
 	/* (4-1) ClassUnit 일괄 삭제 */
     public int updateUnitBatchInactive(Map<String, Object> map);
+
+	/* (5) ClassUnitView 하나 조회 */
+	public ClassUnitView selectClassUnitViewOne(long unitno);
 
 }

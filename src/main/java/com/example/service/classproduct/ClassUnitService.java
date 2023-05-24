@@ -1,4 +1,4 @@
-package com.example.service.classunit;
+package com.example.service.classproduct;
 
 import java.util.List;
 import java.util.Map;
@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.example.dto.ClassUnit;
+import com.example.dto.ClassUnitView;
 
 @Service
 public interface ClassUnitService {
@@ -30,5 +31,8 @@ public interface ClassUnitService {
 	
 	/* (4-1) ClassUnit 일괄 삭제 */
     public int updateUnitBatchInactive(Map<String, Object> map);
+
+	/* (5) ClassUnitView 하나 조회 */
+	public ClassUnitView selectClassUnitViewOne(long unitno);
 
 }

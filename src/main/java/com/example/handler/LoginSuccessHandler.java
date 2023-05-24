@@ -23,17 +23,23 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
         HttpSession httpSession = request.getSession();
 
-        log.info(format, httpSession.getAttribute("url"));
+        String url = (String)httpSession.getAttribute("url");
+
+        log.info(format, url);
 
         String role = authentication.getAuthorities().toArray()[0].toString();
 
         log.info(format, role);
 
         if(role.equals("ROLE_USER")) {
-            response.sendRedirect(request.getContextPath() + (String)httpSession.getAttribute("url"));
+            if(url == null) {
+                response.sendRedirect(request.getContextPath() + "/home.do");
+            }
+            else {
+                response.sendRedirect(request.getContextPath() + url);
+            }
         }
 
     }
 
-    
 }

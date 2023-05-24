@@ -2,6 +2,8 @@ package com.example.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,8 +32,10 @@ public class MainController {
     }
 
     @GetMapping(value = "/header1.do")
-    public String header1GET() {
+    public String header1GET(@AuthenticationPrincipal User user, Model model) {
 
+        model.addAttribute("user", user);
+        
         return "header1";
     }
 
@@ -46,6 +50,7 @@ public class MainController {
 
         model.addAttribute("alertMessage", httpSession.getAttribute("alertMessage"));
         model.addAttribute("alertUrl", httpSession.getAttribute("alertUrl"));
+        
         httpSession.removeAttribute("alertMessage");
         httpSession.removeAttribute("alertUrl");
 

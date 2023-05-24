@@ -1,4 +1,4 @@
-package com.example.service.classunit;
+package com.example.service.classproduct;
 
 import java.util.List;
 import java.util.Map;
@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.dto.ClassUnit;
+import com.example.dto.ClassUnitView;
 import com.example.mapper.ClassUnitMapper;
 
 @Service
@@ -88,6 +89,17 @@ public class ClassUnitServiceImpl implements ClassUnitService {
         catch(Exception e) {
             e.printStackTrace();
             return -1;
+        }
+    }
+
+    @Override
+    public ClassUnitView selectClassUnitViewOne(long unitno) {
+        try {
+            return cMapper.selectClassUnitViewOne(unitno);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
     

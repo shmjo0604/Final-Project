@@ -24,8 +24,14 @@ public interface ClassManageService {
     // 4. 클래스 내용 수정
     public int updateClassOne(ClassProduct obj);
 
-    // 5. 클래스 이미지 번호 리스트 조회
-    public List<Long> selectClassImageNoList(long classcode);
+    // 5-1. 클래스 강사 프로필 이미지 번호 조회
+    public long selectClassProfileImageNo(long classcode);
+
+    // 5-2. 클래스 메인 이미지 번호 조회
+    public long selectClassMainImageNo(long classcode);
+
+    // 5-3. 클래스 이미지 번호 리스트 조회
+    public List<Long> selectClassSubImageNoList(long classcode);
 
     // 6. 클래스 이미지 1개 불러오기
     public ClassImage selectClassImageOne(long no);

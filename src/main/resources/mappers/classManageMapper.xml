@@ -25,9 +25,19 @@
             curriculum = #{curriculum} WHERE classcode = #{classcode}
     </update>
 
-    <!-- 5. 클래스 이미지 번호 리스트 조회 -->
-    <select id="selectClassImageNoList" parameterType="long">
-        SELECT i.no FROM classimage i WHERE i.classcode = #{classcode}
+    <!-- 5-1. 클래스 프로필 이미지 번호 조회 -->
+    <select id="selectClassProfileImageNo" parameterType="long" resultType="long">
+        SELECT i.no FROM classimage i WHERE i.classcode = #{classcode} AND i.typechk = 1
+    </select>
+
+    <!-- 5-2. 클래스 메인 이미지 번호 조회 -->
+    <select id="selectClassMainImageNo" parameterType="long" resultType="long">
+        SELECT i.no FROM classimage i WHERE i.classcode = #{classcode} AND i.typechk = 2
+    </select>
+
+    <!-- 5-3. 클래스 서브 이미지 번호 리스트 조회 -->
+    <select id="selectClassSubImageNoList" parameterType="long" resultType="long">
+        SELECT i.no FROM classimage i WHERE i.classcode = #{classcode} AND i.typechk = 3
     </select>
 
     <!-- 6. 클래스 이미지 1개 불러오기 -->

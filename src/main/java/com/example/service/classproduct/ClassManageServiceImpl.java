@@ -59,9 +59,31 @@ public class ClassManageServiceImpl implements ClassManageService {
     }
 
     @Override
-    public List<Long> selectClassImageNoList(long classcode) {
+    public long selectClassProfileImageNo(long classcode) {
         try {
-            return cMapper.selectClassImageNoList(classcode);
+            return cMapper.selectClassProfileImageNo(classcode);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    @Override
+    public long selectClassMainImageNo(long classcode) {
+        try {
+            return cMapper.selectClassMainImageNo(classcode);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    @Override
+    public List<Long> selectClassSubImageNoList(long classcode) {
+        try {
+            return cMapper.selectClassSubImageNoList(classcode);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -101,5 +123,7 @@ public class ClassManageServiceImpl implements ClassManageService {
             return -1;
         }
     }
+
+    
     
 }
