@@ -13,6 +13,11 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <!--Bootstrap 용 Icon CDN-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <!-- font awesome용 css CDN  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
         html, body { 
             margin: 0; 
@@ -77,12 +82,12 @@
                     </div><!--/left-->
                     
                     <!--right-->
-                    <div th:replace="~{/mypage/menu/menu_apply.html :: menu_apply}"></div>
+                    <!-- <div th:replace="~{/mypage/menu/menu_apply.html :: menu_apply}"></div> -->
                     <!-- <div th:replace="~{/mypage/menu/menu_review.html :: menu_review}"></div> -->
                     <!-- <div th:replace="~{/mypage/menu/menu_ask.html :: menu_ask}"></div> -->
                     <!-- <div th:replace="~{/mypage/menu/menu_auth/menu_infoupdate.html :: menu_infoupdate}"></div> -->
                     <!-- <div th:replace="~{/mypage/menu/menu_auth/menu_pwupdate.html :: menu_pwupdate}"></div> -->
-                    <!-- <div th:replace="~{/mypage/menu/menu_auth/menu_signout.html :: menu_signout}"></div> -->
+                    <div th:replace="~{/mypage/menu/menu_auth/menu_signout.html :: menu_signout}"></div>
                     <!--/right-->
                 </div><!--/row-->
 
@@ -93,5 +98,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    <!-- font awesome용 스크립트 CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
+        integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 </html>

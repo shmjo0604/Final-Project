@@ -1,35 +1,38 @@
 <div th:fragment="menu_infoupdate" class="col-md-8" style="margin-left: 30px;">
     <style>
         .form-label { font-size: medium; color: gray;}
-        .form-control {}
-        .btn {height: 30px; width: 100px;}
+        .form-control {float: left; width: 100%;}
+        .form-btn {margin-top: 50px; height: 35px; width: 100px; float: right; }
+        input::placeholder{font-size: small;}
     </style>
-    <hr/>
     <p>| 나의 정보</p>
-    <div class="container">
+    <div class="container"  style="border: 1px solid gainsboro; padding-top: 50px; padding-bottom: 50px; padding-left: 30px; padding-right: 30px; display: inline-block;" >
         <div class="row">
-            <div style="display: inline-block; margin-top: 50px;">
-                <label for="name" class="form-label">이름</label>
-                <div>
+            <div>
+                <label for="name" class="form-label" style="font-weight: bold;">이름</label>
+                <div style="display: inline-block; width: 100%;">
                     <input id="name" class="form-control" type ="text" placeholder ="변경할 이름을 입력하세요." name ="name" value ="홍길동"/><br />
-                    <input type="button" value="수정하기" class="btn btn-sm" style="background-color: rgb(22, 155, 51); color: white;"/>
                 </div>
             </div>
 
-            <div style="display: inline-block; margin-top: 50px;">
-                <label for="phone" class="form-label">연락처</label>
-                <div>
-                    <input id="phone" class="form-control w-25" type ="text" placeholder ="전화번호" name ="phone" value ="010-1234-5678"/><br />
-                    <input type="button" value="재인증" class="btn btn-sm" style="background-color: rgb(22, 155, 51); color: white;"/>
+            <div style="margin-top: 50px;">
+                <label for="name" class="form-label" style="font-weight: bold;">연락처</label>
+                <div style="display: inline-block; width: 100%;">
+                    <input id="phone" class="form-control" type ="text" placeholder ="변경할 연락처를 입력하세요." name ="phone" value ="010-1234-5678"/><br />
                 </div>
             </div>
-            
-            <div style="display: inline-block; margin-top: 50px;">
-                <label for="email" class="form-label">이메일</label>
-                <input id="email" class="form-control w-25" type ="text" placeholder ="이메일" name ="email" value ="hong1234@naver.com"/><br />
-                <input type="button" value="인증하기" class="btn btn-sm" style="background-color: rgb(22, 155, 51); color: white;"/>
+
+            <div style="margin-top: 50px;">
+                <label for="name" class="form-label" style="font-weight: bold;">이메일</label>
+                <div style="display: inline-block; width: 100%;">
+                    <input id="email" class="form-control" type ="text" placeholder ="변경할 이메일을 입력하세요." name ="email" value ="hong3434@naver.com"/><br />
+                </div>
             </div>
-            <!-- <input type ="button" value ="정보변경" class ="btn btn-primary"/> -->
+
+            <div style="display: inline-block;">
+                <input type="button" value="저장하기" class="btn btn-sm btn-success form-btn"/>
+            </div>
+            
         </div>
     </div>
 
