@@ -9,16 +9,16 @@
 
 	<!-- CSS모음-->
 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
-	<link rel="stylesheet" th:href="@{/css/home.css}" />
-	<link rel="stylesheet" th:href="@{/css/class/productdetail.css}" />
+	<!-- <link rel="stylesheet" th:href="@{/css/home.css}" /> -->
+	<link rel="stylesheet" th:href="@{/css/class/product.css}" />
 	<!-- 부트스트랩 아이콘  CDN-->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
-  
 
-	
+
+
 </head>
 
-<body>
+<body class="pt-5">
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light bg-white">
 			<div class="container">
@@ -36,7 +36,6 @@
 					<ul class="navbar-nav">
 						<li class="nav-item dropdown position-static">
 							<a class="nav-link" href="">클래스 조회</a>
-
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">공지사항</a>
@@ -67,99 +66,87 @@
 		</nav>
 	</header>
 	<hr />
-
-
 	<!---------------------------------------------- 클래스 소개 --------------------------------------------------------------------->
 
-	<div class="container-fluid mb-sm-5" id="container_main">
+	<div class="container mb-lg-5 container-fluid">
+		<!-- 클래스 소개 -->
 		<div class="row mt-5 mb-2 d-flex flex-nowrap">
-			<div class="row col-7 mx-1 " style=" height: 600px; background-color: #E9F3DC; border: 5px solid green;
-			border-radius: 5%;">
-				<div style="position: relative; left: -25px; bottom: 15px; width: 60px; height: 1px; "><i
-						class="bi bi-paperclip"></i></div>
+			<div class="row col-7 mx-1 " style=" height: 520px; ">
+
 				<div class="row d-flex flex-nowrap mt-5">
 					<div class="col-9">
-						<div class="d-sm-inline-flex  float-end" style="margin-right: 25px;"></i>
-							<div style=" position: relative; top: -5px; margin-right: 20px;"><i
-									class="bi bi-universal-access"></i>입문</div>
-							<div style="margin-right: 20px;"><i class="bi bi-heart-fill"></i>100</div>
-							<div style=" position: relative;"><i class="bi bi-star-fill" id="star"></i>4.0/4.5</div>
-						</div>
-						<img class="images  mx-1" id="mainimage" th:src="@{/images/default.png}"
-							style="background-color: white;">
+						<div class="float-start d-sm-inline-flex mx-2 mb-2" style="width: 60px; height: 20px; 
+						color: #575757; font-size: 0.8rem;" ><a class="catagory" href="#">카테고리1</a></div>
+						<div class="float-start d-sm-inline-flex  mb-2" style="height: 20px;
+						color: #575757; font-size: 0.8rem;" >></div>
+						<div class="float-start d-sm-inline-flex mx-2" style="width: 70px; height: 20px;
+						color: #575757; font-size: 0.8rem;" ><a class="catagory" href="#">카테고리2</a></div>
+						<img class="images  mx-1" th:src="@{/images/default.png}">
 						<div class="d-sm-inline-flex " style="text-align: center;">
-							<div class="mt-3 mx-1" style="width: 100px ; height: 20px; background-color: #E9F3DC;
+							<div class="mt-2 mx-2" style="width: 100px ; height: 20px; background-color: #E9F3DC;
 						border-radius: 5%; border: 1px solid rgba(0, 0, 0, 0.2); background-color:rgba(0, 0, 0, 0.2)">
 								<a th:href="@{/class/view.do}" style="text-decoration: none;">
 									<p class="" style=" font-size:small; color: rgba(0, 0, 0, 0.7)">#친구와 같이</p>
 								</a>
 							</div>
-							<div class="mt-3 mx-1" style="width: 100px ; height: 20px; background-color: #E9F3DC;
+							<div class="mt-2 mx-1" style="width: 100px ; height: 20px; background-color: #E9F3DC;
 							border-radius: 5%; border: 1px solid rgba(0, 0, 0, 0.2); background-color:rgba(0, 0, 0, 0.2)">
 								<a th:href="@{/class/view.do}" style="text-decoration: none;">
-									<p class="" style=" font-size:small; color: rgba(0, 0, 0, 0.7)">#친구와 같이</p>
+									<p class="" style=" font-size:small; color: rgba(0, 0, 0, 0.7)">#실내에서</p>
 								</a>
 							</div>
-							<div class="mt-3 mx-1" style="width: 100px ; height: 20px; background-color: #E9F3DC;
+							<div class="mt-2 mx-1" style="width: 100px ; height: 20px; background-color: #E9F3DC;
 						border-radius: 5%; border: 1px solid rgba(0, 0, 0, 0.2); background-color:rgba(0, 0, 0, 0.2)">
 								<a th:href="@{/class/view.do}" style="text-decoration: none;">
-									<p class="" style=" font-size:small; color: rgba(0, 0, 0, 0.7)">#친구와 같이</p>
+									<p class="" style=" font-size:small; color: rgba(0, 0, 0, 0.7)">#편의시설</p>
 								</a>
 							</div>
 						</div>
+						<div class="d-sm-inline-flex float-end mt-2 mx-2" ></i>
+							<div><i class="bi bi-heart-fill mx-1"></i>100</div>
+							<div class="mx-2"><i class="bi bi-star-fill mx-1"></i>4.0(5)</div>
+						</div>
 					</div>
-					<div class="col-3  mx-3 align-self-center" style="height: 500px;">
+					<div class="col-3 align-self-center" style="height: 500px;">
 						<div class="images2 mb-4 mt-5">
-							<img class="images1" th:src="@{/image/default.png}" onclick="change1()">
+							<img class="images1" th:src="@{/images/default.png}">
 						</div>
 						<div class="images2 mb-4 mt-5">
-							<img class="images1" id="image2" th:src="@{/image/default.png}" onclick="change2()">
+							<img class="images1"  th:src="@{/images/default.png}">
 						</div>
 						<div class="images2 mb-5 mt-5">
-							<img class="images1 " id="image3" th:src="@{/image/default.png}" onclick="change3()">
+							<img class="images1 " th:src="@{/images/default.png}">
 						</div>
 					</div>
 
 				</div>
 			</div>
-			<div class="col-4 mx-3 " id="calendar"
-				style="position: fixed; right: 300PX; z-index: 10; text-align: center;">
+
+			<!------------------------------- 캘린더-------------------------------------------->
+			<div class="col-lg-4 mx-3 " id="calendar"
+				style="position: fixed; right: 300PX; text-align: center;">
 				<div>
-					<h5 class="mt-4">일정</h5>
+					<h5 class="mt-3">클래스 일정</h5>
 					<a class="float-end mx-1" th:href="@{/class/view.do}" style="text-decoration: none; font-size: smaller;  color: gray;
-					position: relative; bottom: 5px;">일정관리</a>
-					<div style="height: 300px; position: relative; top: -30px;">
-						<img class="mt-4" th:src="@{/images/달력.png}"
-							style="width: 470px; height: 290px;border: 1px solid gray; ">
+					position: relative; bottom: 1rem;">유닛 관리</a>
+					<div style="height: 250px; position: relative; top: -30px;">
+						<img class="mt-3" th:src="@{/images/달력.png}"
+							style="width: 420px; height: 250px;border: 1px solid gray; ">
 					</div>
 				</div>
-				<a class="float-end mx-1" th:href="@{/class/view.do}" style="text-decoration: none; font-size: smaller;
-					position: relative; bottom: -25px; color: gray;">유닛관리</a>
-				<div class="mt-5" id="scroll3">
+				<div class="mt-3" id="scroll3">
 					<table class="table table-hover" id="table1">
 						<tbody>
 							<c:forEach var="obj" items="${list1}">
 								<tr>
-									</td>
 									<td style="display: block;">
-										<div class="mx-3 mt-1" style="width: 420px; height: 80px; background-color: white;
-										 box-shadow:0 5px 20px rgba(0, 0, 0, 0.3); border-radius: 0px 100px 100px 0px;
-										 border: 1px solid gray;">
-											<h6 class="float-start mx-5 mt-4">2023년 5월 31일(수) 오후2시-5시</h6>
+										<div class="gx-2 mt-1" style="width: 390px; height: 50px; border: 1px solid gray;">
+											<h6 class="float-start mx-5 mt-3">2023년 5월 31일(수) 오후2시-5시</h6>
 										</div>
 									</td>
 									<td style="display: block;">
-										<div class="mx-3 mt-1" style="width: 420px; height: 80px; background-color: white;
-										 box-shadow:0 5px 20px rgba(0, 0, 0, 0.3); border-radius: 0px 100px 100px 0px;
-										 border: 1px solid gray;">
-											<h6 class="float-start mx-5 mt-4">2023년 6월 6일(화) 오후3시-6시</h6>
-										</div>
-									</td>
-									<td style="display: block;">
-										<div class="mx-3 mt-1" style="width: 420px; height: 80px; background-color: white;
-										 box-shadow:0 5px 20px rgba(0, 0, 0, 0.3); border-radius: 0px 100px 100px 0px;
-										 border: 1px solid gray;">
-											<h6 class="float-start mx-5 mt-4"></h6>
+										<div class="gx-2 mt-1" style="width: 390px; height: 50px; border: 1px solid gray;">
+											<h6 class="float-start mx-5 mt-3">2023년 6월 6일(화) 오후3시-6시</h6>
 										</div>
 									</td>
 								</tr>
@@ -167,124 +154,173 @@
 						</tbody>
 					</table>
 				</div>
-				<div>
-					<div class="mt-3"
-						style="width: 200px; height: 100px; position: relative; left: 130px; bottom: -3px;">현재인원:
-						(10/30)</div>
-					<div class="float-end mx-2" style="position: relative; top: -100px;"> 인원 : <input type="number"
-							style="width: 100px; height: 30px;" />
+				<div></div>
+				<div class="mt-2" id="scroll3" style="border: 1px solid gray; width: 420px; height: 125px;">
+					<div class="mt-2 mx-2" style="border: 1px solid blue; width: 390px; height: 110px;">
+					<div class="mt-2" style="width: 200px; height: 100px; position: relative;  bottom: -3px;left: -10px;">신청가능 인원: 3명	
 					</div>
-					<input
-						style="width: 450px; height: 70px; background-color: #B2B2E2; position: relative; top: -85px; "
-						type="button" value="신청하기">
+					<div class="float-end mx-3" style="position: relative; top: -98px;"> 인원 : <input type="number"
+							style="width: 80px; height: 30px;" />
+					</div>
+					<div  class="mx-2" style="border: 1px solid gray; width: 360px; height: 50px; position: relative;
+					top: -60px; right: -5px;" ><p class="mt-3" style="position: relative; left: 140px;"> 15000원 x 3명 = 45000원</p></div>
 				</div>
+				<div class="mt-2 mx-2" style="border: 1px solid blue; width: 390px; height: 110px;">
+					<div class="mt-2" style="width: 200px; height: 100px; position: relative;  bottom: -3px;left: -10px;">신청가능 인원: 3명	
+					</div>
+					<div class="float-end mx-3" style="position: relative; top: -98px;"> 인원 : <input type="number"
+							style="width: 80px; height: 30px;" />
+					</div>
+					<div  class="mx-2" style="border: 1px solid gray; width: 360px; height: 50px; position: relative;
+					top: -60px; right: -5px;" ><p class="mt-3" style="position: relative; left: 140px;"> 15000원 x 3명 = 45000원</p></div>
+				</div>
+				</div>
+				<button class="classbtn mt-3" style="width: 200px; height: 50px; background-color: #FDC708;"type="button">
+					<a  href="#">장바구니</a></button>
+				<button class="classbtn mt-3" style="width: 200px; height: 50px; background-color: #9AD98A;"type="button">
+					<a href="#">신청하기</a></button>
+				<button class="classbtn mt-2" style="width: 400px; height: 50px; background-color: #F6A0A0;"type="button">
+					<a href="#">문의하기</a></button>
 			</div>
 		</div>
+
+		<!-------------------------- 탭&네비게이션------------------------------------>
+		<!-- <div class="col-lg-7 mx-1 " style=" height:100px"> -->
+			<ul class="col-lg-7 mx-1 mt-2 mb-5 nav nav-tabs sticky-lg-top bg-white " id="myTab" role="tablist">
+				<li class="nav-item mt-4" role="presentation" >
+					<div class="nav-link active" data-bs-toggle="tab"  type="button" role="tab" ><a class="navclick" href="#class">클래스 소개</a></div>
+				</li>
+				<li class="nav-item mt-4" >
+					<div class="nav-link" data-bs-toggle="tab"  type="button" role="tab"><a class="navclick" href="#curriculum">커리큘럼</a></div>
+				</li>
+				<li class="nav-item mt-4">
+					<div class="nav-link" data-bs-toggle="tab"  type="button" role="tab"><a class="navclick" href="#instructor">강사소개</a></div>
+				</li>
+				<li class="nav-item mt-4" >
+					<div class="nav-link" data-bs-toggle="tab"  type="button" role="tab"><a class="navclick" href="#maps">위치</a></div>
+				  </li>
+				  <li class="nav-item mt-4" >
+					<div class="nav-link" data-bs-toggle="tab"  type="button" role="tab"><a class="navclick" href="#review">리뷰</a></div>
+				  </li>
+				  <li class="nav-item mt-4" >
+					<div class="nav-link" data-bs-toggle="tab"  type="button" role="tab"><a class="navclick" href="#inquery">문의</a></div>
+				  </li>
+			  </ul>
+		<!-- </div> -->
+
 		<!-- 클래스 소개 -->
-		<div class="row d-flex flex-nowrap ">
-			<div class="row col-7 mx-1 mt-4 " style=" height: 600px; background-color: #E9F3DC; border: 5px solid green;
-			border-radius: 5%; text-align: center;">
-				<div style="position: relative; left: -20px; bottom: 20px; width: 60px; height: 1px; "><i
-						class="bi bi-paperclip"></i></div>
-				<h5 class="mt-1 mx-1" style="position: relative; top: -100px;">클래스 소개</h5>
-				<div class="mx-1 text-wrap" style="position: relative; top: -100px;">
-					<p>
-						클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용,
-						클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용
-						(INTRO)
-						클래스 내용, 클래스 내용,
-						클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용,
-						클래스 내용, 클래스 내용,
-						클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용, 클래스 내용
-						(INTRO)
+		<div class="row d-flex flex-nowrap"  id="class" >
+			<div class="row col-sm-7 mx-1 mt-1" style=" height: auto; border-radius: 5%;">
+			<div class="float-start" >
+				<h3 class="mb-5">타이틀</h3></div>
+				<div class="mx-1 mb-5 text-wrap " >
+					<p class="classcontent">
+						최적의 환경에서 숙련된 강사님이 친절히 가르켜 드리겠습니다!
+
+						평소 그림에 관심이 있거나 나만의 작품을 가지고 싶으셨던 분들 모이세요
 					</p>
+						<button class="btn btn-light mt-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+						 더보기
+						</button>
+					  <div class="collapse" id="collapseExample">
+						<div class="card card-body">
+						  자세한 내용은 여기에 표시됩니다.<br/>
+						  자세한 내용은 여기에 표시됩니다.<br/>
+						  자세한 내용은 여기에 표시됩니다.
+
+						</div>
+					  </div>
 				</div>
+				<hr style="position: relative; top: -30px;" >
 			</div>
 		</div>
 
-
-		<!--  커리큘럼 -->
-		<div class="row d-flex flex-nowrap">
-			<div class="row col-7 mx-1 mt-5" style=" height: auto; background-color: #E9F3DC; border: 5px solid green;
-			border-radius: 5%; text-align: center;">
-				<div style="position: relative; left: -20px; bottom: 20px; width: 60px; height: 1px; "><i
-						class="bi bi-paperclip"></i></div>
-				<h5 class="mt-4 mx-1 ">커리큘럼 소개</h5>
-				<div class=" mb-2 mx-2 d-flex justify-content-center" style="width: 680px; height: 200px;">
-					<div><img class="images3 mt-2 mx-3 float-start" th:src="@{/image/default.png}" /></div>
-					<div class="mt-2" style="width: 500px; height:180px; border: 1px solid black;">
+		<!--  커리큘럼 -->	
+			<div class="col-7 mx-1 mt-3 " id="curriculum" style=" height: auto;
+			border-radius: 5%;">
+			<h3 class="mb-5 mt-4">커리큘럼</h3>
+				<div class=" mb-2 mx-2 d-flex justify-content-center" style="width: 680px; height: 200px;
+				text-align: center;">
+					<div><img class="images3 mt-2 mx-3 float-start" th:src="@{/images/default.png}" /></div>
+					<div class="mt-2" style="width: 500px; height:180px; border: 1px solid gray;">
 						<p class="mt-4">Step1</p>
 					</div>
 				</div>
-				<!-- <div style="border: 1px solid dimgray; height: 1px; width: 700px;
-				position: relative; bottom: 10px; left: 20px;"></div> -->
-				<div class=" mb-2 mx-2 d-flex justify-content-center" style="width: 680px; height: 200px;">
-					<div><img class="images3 mt-2 mx-3 float-start" th:src="@{/image/default.png}" /></div>
-					<div class="mt-2" style="width: 500px; height:180px; border: 1px solid black;">
+				<div class=" mb-2 mx-2 d-flex justify-content-center" style="width: 680px; height: 200px;
+				text-align: center;">
+					<div><img class="images3 mt-2 mx-3 float-start" th:src="@{/images/default.png}" /></div>
+					<div class="mt-2" style="width: 500px; height:180px; border: 1px solid gray;">
 						<p class="mt-4">Step2</p>
 					</div>
 				</div>
 
-				<div class=" mb-2 mx-2 d-flex justify-content-center" style="width: 680px; height: 200px;">
-					<div><img class="images3 mt-2 mx-3 float-start" th:src="@{/image/default.png}" /></div>
-					<div class="mt-2" style="width: 500px; height:180px; border: 1px solid black;">
+				<div class=" mb-2 mx-2 d-flex justify-content-center" style="width: 680px; height: 200px;
+				text-align: center;">
+					<div><img class="images3 mt-2 mx-3 float-start" th:src="@{/images/default.png}" /></div>
+					<div class="mt-2" style="width: 500px; height:180px; border: 1px solid gray;">
 						<p class="mt-4">Step3</p>
 					</div>
 				</div>
+				<hr class="mt-3"/>
 			</div>
-		</div>
-
-		<!-- 강사 소개 -->
-		<div class="row d-flex flex-nowrap">
-			<div class="row col-7 mx-1 mt-5 " style=" height: 600px; background-color: #E9F3DC; border: 5px solid green;
-			border-radius: 5%; text-align: center;">
-				<div style="position: relative; left: -20px; bottom: 20px; width: 60px; height: 1px; "><i
-						class="bi bi-paperclip"></i></div>
-				<h5 class="mt-4 mx-1">강사소개</h5>
-				<div class="row d-flex">
-					<div class="col-5 mx-3" style=" height: 400px;">
-						<div class=" mx-1" style=" width: 290px; height: 230px;">
-							<img class="images4 mt-1" th:src="@{/image/강사.png}" />
-						</div>
-						<div class="mx-3" style=" width: 265px; height: 170px;
-						border: 1px solid gray;">
-							<p class="mt-5">간단소개</p>
-						</div>
+		
+		<!-- 강사 소개 -->	
+			<div class="col-7 mx-1 mt-5" id="instructor" style=" height: auto; border-radius: 5%;" >
+				<h3 class="mb-5 mt-4">강사소개</h3>
+				<div class="d-sm-inline-flex mb-5">
+				<div class="mx-4" style="border: 1px solid lightgray; width: 310px; height: 180px;" >
+					<div class="d-sm-inline-flex" style="position: relative;">
+					<div class="mt-4 mx-1" style="width: 45px; height: 45px;">
+						<img style="width: 70px; height: 70px;; "th:src="@{/images/강사.png}">
 					</div>
-					<div class="col-6 mx-2" style="height: 400px; border: 1px solid gray;">
-						<p class="mt-5">자세한 소개</p>
-					</div>
+					<p class="mx-4" style="position: relative; top: 65px; font-size: 1.5rem; color: gray">홍길동</p>
+					<img class="logo1 m" th:src="@{/images/logo.svg}" />
 				</div>
+					<div class="d-sm-inline-flex">
+					<div style="width: 210px; height: 3px; background-color: rgba(0, 0, 0, 0.3);
+					position: relative; top: 20px; left: -1px;"></div>
+						<div style="width: 70px; height: 3px; background-color: #72AF50;
+						position: relative; top: 20px; left: 29px;"></div>
+					</div>
+					<p class="mx-4 mt-3" style="font-size: 0.7rem; color: gray;
+					position: relative; top: 5px;">p.h : </p>
+					<p class="mx-4" style="font-size: 0.7rem; color: gray;
+					position: relative; top: -8px;">email : </p>
+					<div style="width: 310px; height: 20px; background-color: #72AF50;
+					position: relative; top: -18px; left: -1px;"></div>
+				</div>
+				<div class="mx-4" style="border: 1px solid lightgray; width: 310px; height: 180px;" >
+					<div  style="width: 310px; height: 20px; background-color: #72AF50;
+					position: relative; left: -1px;"></div>
+					<p class="gx-1" style= "font-size: 1rem; color: dimgray;text-align: center; position: relative; top: 30px;">
+						초보자도 환영<br/>
+						나이불문 환영<br/>
+						최선을 다해 알려드리겠습니다.</p>	
+				</div>
+				</div>
+				<hr/>		
 			</div>
-		</div>
-
+			
 		<!-- 위치 -->
-		<div class="row d-flex flex-nowrap">
-			<div class=" mt-5 col-7 " style=" height: 500px; background-color: #E9F3DC; border: 5px solid green;
-			border-radius: 5%; text-align: center;">
-				<div style="position: relative; left: -20px; bottom: 15px; width: 60px; height: 1px; ">
-					<i class="bi bi-paperclip"></i>
-				</div>
-				<h5 class="mt-4 mx-1">위치</h5>
-				<div class="mt-1 mx-4" id="map" style="width:700px;height:320px; border: 1px solid dimgray; "></div>
-				<i class="bi bi-geo-alt-fill float-start mt-4 mx-4"></i>
+		<div class="row d-flex flex-nowrap" id="maps">
+			<div class=" mt-4 col-7 " style=" height: 500px; border-radius: 5%; ">
+				<h3 class=" mt-3 mb-3 ">위치</h3>
+				<hr style="position: relative; bottom: -450px;"/>
+				<div class= "mx-2" id="map" style="width:750px;height:340px; border: 1px solid dimgray; "></div>
+				<i class="bi bi-geo-alt-fill float-start mt-3 mx-3"></i>		
 				<span class="float-start mt-4" style="text-decoration: underline; font-weight: bold;
-				text-decoration-thickness : 2px; text-underline-offset: 5px;">부산 대연동 address1, address2 ,address3 </span>
+				text-decoration-thickness : 2px; text-underline-offset: 5px;">부산 대연동 address1, address2 ,address3 </span>				
 			</div>
-		</div>
+		</div>	
 
 		<!-- 리뷰 -->
-		<div class="row d-flex flex-nowrap">
-			<div class=" mt-5 col-7 " style=" height: 530px; background-color: #E9F3DC; border: 5px solid green;
-			border-radius: 5%; text-align: center;">
-				<div style="position: relative; left: -20px; bottom: 15px; width: 60px; height: 1px; ">
-					<i class="bi bi-paperclip"></i>
-				</div>
-				<h5 class="mt-4 mb-3 mx-1">리뷰</h5>
-				<div id="scroll">
+		<div class="row d-flex flex-nowrap" id="review">
+			<div class=" mt-4 col-7 " style=" height: 530px; border-radius: 5%;">
+				<h3 class=" mt-5 mb-3 ">리뷰</h3>
+				<div class="mt-4 mb-5">
 					<table id="table1">
 						<tbody>
-							<c:forEach var="obj" items="${list1}">
+							<c:forEach var="obj" items="${list}">
 								<tr>
 									<td style="display: block;">
 										<div class="mx-4 mt-3 row" style="width: 680px; height: 120px; background-color: white;
@@ -292,11 +328,11 @@
 											<div class="mt-3 col-3"
 												style="width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
 												<img style="width: 50px; height: 50px;  border-radius: 50%; margin-right: 10px;"
-													th:src="@{/image/리뷰사람.png}">
+													th:src="@{/images/리뷰사람.png}">
 											</div>
 											<div class="col-10 mt-2" style=" height: 93px; ">
 												<span class="mx-1 float-start" id="name"
-													style="color: gray; position: relative; top: 10px; left: -10px;">*미숙</span>
+													style="color: gray; position: relative; top: 10px; left: -10px;">*미숙 </span>
 												<span class="mx-1 float-start" id="date"
 													style="color: gray; position: relative; top: 10px; left: -10px;">5월12일</span>
 												<span class="mx-1 float-start" id="classname"
@@ -307,16 +343,16 @@
 												<div style="position: relative; left: -5px;">
 													<div class="float-start mt-3" style="margin-right: 5px;"><img
 															style="width: 20px; height: 20px;"
-															th:src="@{/image/별.png}"></div>
+															th:src="@{/images/별.png}"></div>
 													<div class="float-start mt-3" style="margin-right: 5px;"><img
 															style="width: 20px; height: 20px;"
-															th:src="@{/image/별.png}"></div>
+															th:src="@{/images/별.png}"></div>
 													<div class="float-start mt-3" style="margin-right: 5px;"><img
 															style="width: 20px; height: 20px;"
-															th:src="@{/image/별.png}"></div>
+															th:src="@{/images/별.png}"></div>
 													<div class="float-start mt-3" style="margin-right: 5px;"><img
 															style="width: 20px; height: 20px;"
-															th:src="@{/image/별.png}"></div>
+															th:src="@{/images/별.png}"></div>
 												</div>
 												<br />
 
@@ -331,7 +367,6 @@
 														<p>슬라이드 구현......</p>
 													</details>
 												</div>
-
 											</div>
 										</div>
 									</td>
@@ -341,7 +376,7 @@
 											<div class="mt-3 col-3"
 												style="width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
 												<img style="width: 50px; height: 50px;  border-radius: 50%; margin-right: 10px;"
-													th:src="@{/image/강사.png}" />
+													th:src="@{/images/강사.png}" />
 											</div>
 											<div class="col-10 mt-2" style=" height: 93px; ">
 												<span class="mx-1 float-start" id="name"
@@ -356,16 +391,16 @@
 												<div style="position: relative; left: -5px;">
 													<div class="float-start mt-3" style="margin-right: 5px;"><img
 															style="width: 20px; height: 20px;"
-															th:src="@{/image/별.png}"></div>
+															th:src="@{/images/별.png}"></div>
 													<div class="float-start mt-3" style="margin-right: 5px;"><img
 															style="width: 20px; height: 20px;"
-															th:src="@{/image/별.png}"></div>
+															th:src="@{/images/별.png}"></div>
 													<div class="float-start mt-3" style="margin-right: 5px;"><img
 															style="width: 20px; height: 20px;"
-															th:src="@{/image/별.png}"></div>
+															th:src="@{/images/별.png}"></div>
 													<div class="float-start mt-3" style="margin-right: 5px;"><img
 															style="width: 20px; height: 20px;"
-															th:src="@{/image/별.png}"></div>
+															th:src="@{/images/별.png}"></div>
 												</div>
 												<br />
 
@@ -380,7 +415,6 @@
 														<p>슬라이드 구현......</p>
 													</details>
 												</div>
-
 											</div>
 										</div>
 									</td>
@@ -390,7 +424,7 @@
 											<div class="mt-3 col-3"
 												style="width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
 												<img style="width: 50px; height: 50px;  border-radius: 50%; margin-right: 10px;"
-													th:src="@{/image/리뷰사람.png}">
+													th:src="@{/images/리뷰사람.png}">
 											</div>
 											<div class="col-10 mt-2" style=" height: 93px; ">
 												<span class="mx-1 float-start" id="name"
@@ -405,16 +439,16 @@
 												<div style="position: relative; left: -5px;">
 													<div class="float-start mt-3" style="margin-right: 5px;"><img
 															style="width: 20px; height: 20px;"
-															th:src="@{/image/별.png}"></div>
+															th:src="@{/images/별.png}"></div>
 													<div class="float-start mt-3" style="margin-right: 5px;"><img
 															style="width: 20px; height: 20px;"
-															th:src="@{/image/별.png}"></div>
+															th:src="@{/images/별.png}"></div>
 													<div class="float-start mt-3" style="margin-right: 5px;"><img
 															style="width: 20px; height: 20px;"
-															th:src="@{/image/별.png}"></div>
+															th:src="@{/images/별.png}"></div>
 													<div class="float-start mt-3" style="margin-right: 5px;"><img
 															style="width: 20px; height: 20px;"
-															th:src="@{/image/별.png}"></div>
+															th:src="@{/images/별.png}"></div>
 												</div>
 												<br />
 
@@ -429,33 +463,31 @@
 														<p>슬라이드 구현......</p>
 													</details>
 												</div>
-
 											</div>
-										</div>
-									</td>
-									<td style="display: block;">
-										<div class="mx-3 mt-3" style="width: 690px; height: 110px; background-color: white;
-											border: 1px solid lightgray; border-radius: 10px 10px 10px 10px; box-shadow:0 5px 20px rgba(0, 0, 0, 0.3);">
 										</div>
 									</td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
+					<!-- 레스트로 구현 필요-->
+					<div class="d-lg-flex mt-2 justify-content-center">
+					<th:block th:each="num : ${#numbers.sequence(1,pages)}">
+						<a class="pagenation mx-1" th:href="@{/class/view.do(page=${num})}" th:text="${num}"></a>
+					</th:block>
 				</div>
+				</div>
+				<hr/>
 			</div>
 		</div>
-		<div class="row d-flex flex-nowrap">
-			<div class=" mt-5 col-7 " style=" height: 330px; background-color: #E9F3DC; border: 5px solid green;
-			border-radius: 10px 10px 10px 10px ; text-align: center;">
-				<div style="position: relative; left: -20px; bottom: 15px; width: 60px; height: 1px; ">
-					<i class="bi bi-paperclip"></i>
-				</div>
-				<h5 class="mt-4 mb-3 mx-1">문의</h5>
-				<div id="scroll2">
+		<!-- 문의 -->
+		<div class="row d-flex flex-nowrap" id="inquery">
+			<div class=" mt-5 col-7 " style=" height: 330px; border-radius: 10px 10px 10px 10px ;">
+				<h3 class=" mt-4 mb-3 ">문의</h3>
+				<div >
 					<table id="table1">
 						<tbody>
-							<c:forEach var="obj" items="${list2}">
+							<c:forEach var="obj" items="${list}">
 								<tr>
 									<td style="display: block;">
 										<div class="mx-4 mt-3" style="width: 680px; height: 60px; background-color:  rgba(226, 226, 226, 0.4);
@@ -481,7 +513,6 @@
 													<p class="mt-2 mx-2 float-start">네 당일날 신청가능합니다.</p>
 												</div>
 											</details>
-
 										</div>
 									</td>
 									<td style="display: block;">
@@ -493,19 +524,17 @@
 										<div class="mx-4 mt-3" style="width: 680px; height: 60px; background-color:  rgba(226, 226, 226, 0.4);
 											 border-radius: 10px 10px 10px 10px; box-shadow:0 5px 20px rgba(0, 0, 0, 0.3);">
 										</div>
-									</td>
-									<td style="display: block;">
-										<div class="mx-4 mt-3" style="width: 680px; height: 60px; background-color:  rgba(226, 226, 226, 0.4);
-											 border-radius: 10px 10px 10px 10px; box-shadow:0 5px 20px rgba(0, 0, 0, 0.3);">
-										</div>
-									</td>
+									</td>									
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
+					<div class="d-lg-flex mt-2 justify-content-center">
+						<th:block th:each="num : ${#numbers.sequence(1,pages)}">
+							<a class="pagenation mx-1" th:href="@{/class/view.do(page=${num})}" th:text="${num}"></a>
+						</th:block>
+					</div>
 				</div>
-				<a th:href="@{/class/view.do}" style="text-decoration: none;">
-					<input class="btn btn-success float-end mx-2 mt-2" type="button" value="문의하기" /></a>
 			</div>
 		</div>
 	</div>
@@ -560,12 +589,10 @@
 	<!---------------------------------- 스크립트------------------------------------------------------------>
 
 	<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-	<link rel="stylesheet" th:href="@{/js/bootstrap.min.js}" />
-
+	<script th:src="@{/js/bootstrap.min.js}"></script>
 
 	<!-- 카카오 지도 스크립트-->
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a44836f45855569bb09376d83f428cda"></script>
+	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a44836f45855569bb09376d83f428cda"></script>
 	<script>
 		var container = document.getElementById('map');
 		var options = {
@@ -602,6 +629,18 @@
 			markers.push(marker);
 		}
 	</script>
+	<script>
+		const triggerTabList = document.querySelectorAll('#myTab button')
+triggerTabList.forEach(triggerEl => {
+  const tabTrigger = new bootstrap.Tab(triggerEl)
+
+  triggerEl.addEventListener('click', event => {
+    event.preventDefault()
+    tabTrigger.show()
+  })
+})
+	</script>
+	
 
 </body>
 

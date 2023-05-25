@@ -28,7 +28,12 @@ public class MainController {
     public String testGET() {
 
         //return "test";
-        return "/class/productdetail";
+        return "/test/productdetail";
+    }
+
+    @GetMapping(value = "/test1.do")
+    public String test1GET() {
+        return "/test/selectone";
     }
 
     @GetMapping(value = "/header1.do")
