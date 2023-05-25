@@ -308,7 +308,7 @@ function changeItemImage(e) {
     }
     else {
         // 이미지 첨부 취소 시, 이미지 제거
-        img.src = '${pageContext.request.contextPath}/resources/images/default.png';
+        img.src = '/static/image/default.png';
     }
 }
 
@@ -322,6 +322,25 @@ function insertItemImage() {
     else {
         const form = document.getElementById("form");
         form.submit();
+    }
+}
+
+function clickClassMain() {
+    document.getElementById("file_classMain").click();
+}
+
+function changeClassMain(e) {
+    const img = document.getElementById("insert_classMain");
+    console.log(e.files);
+    if (e.files.length > 0) {
+
+        img.src = URL.createObjectURL(e.files[0]);
+
+        console.log(URL.createObjectURL(e.files[0]));
+    }
+    else {
+        // 이미지 첨부 취소 시, 이미지 제거
+        img.src = '/static/image/default.png';
     }
 }
 

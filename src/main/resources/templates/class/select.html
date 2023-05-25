@@ -6,6 +6,8 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>클래스 검색</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!--웹 페이지 아이콘 변경-->
+    <link rel="icon" th:href="@{/image/specialday.ico}">
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -19,7 +21,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <!-- datepicker css -->
     <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
+    <!-- CSS-->
     <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/class/classselect.css}">
     <!--thymeleaf contextpath-->
     <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
 </head>
@@ -42,7 +46,7 @@
     </div>
 
     <!--footer 영역-->
-
+    <footer th:replace="~{footer :: footerFragment}"></footer>
     
     
     <!-- datepicker js -->

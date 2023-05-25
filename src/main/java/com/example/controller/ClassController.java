@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
@@ -27,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.config.KakaoLocalAPI;
 import com.example.dto.ActivityCate;
 import com.example.dto.Apply;
+import com.example.dto.ApplyList;
 import com.example.dto.CityCate;
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
@@ -55,8 +58,10 @@ public class ClassController {
     @Value("${default.image}") String defaultImg;
 
     @GetMapping(value = "/select.do")
-    public String selectGET(@RequestParam(name = "search", defaultValue = "", required = false) String search,
-            Model model) {
+    public String selectGET(
+        @RequestParam(name = "search", defaultValue = "", required = false) String search,
+        @AuthenticationPrincipal User user,
+        Model model) {
 
         if (search.equals("")) {
             return "redirect:/class/select.do?search=list";
@@ -64,6 +69,7 @@ public class ClassController {
 
         List<ActivityCate> list1 = cService.selectActivityCateList();
         List<CityCate> list2 = cService.selectCityCateList();
+        model.addAttribute("user", user);
         model.addAttribute("list1", list1);
         model.addAttribute("list2", list2);
 
@@ -92,8 +98,11 @@ public class ClassController {
     }
 
     @GetMapping(value = "/insert.do")
-    public String insertGET(Model model) {
+    public String insertGET(@AuthenticationPrincipal User user, Model model) {
 
+        if(user != null) {
+            model.addAttribute("user", user);
+        }
         model.addAttribute("actlist", cService.selectActivityCateList());
         model.addAttribute("citylist", cService.selectCityCateList());
 
@@ -105,8 +114,8 @@ public class ClassController {
             @ModelAttribute ClassProduct obj,
             @AuthenticationPrincipal User user,
             @RequestParam(name = "profile", required = false) MultipartFile profileImg,
-            @RequestParam(name = "classimg", required = false) List<MultipartFile> classSubImg,
-            @RequestParam(name = "thumbnail", required = false) MultipartFile classMainImg)
+            @RequestParam(name = "classSub", required = false) List<MultipartFile> classSubImg,
+            @RequestParam(name = "classMain", required = false) MultipartFile classMainImg)
             throws IOException {
 
         //log.info(format, profileImg);
@@ -174,21 +183,56 @@ public class ClassController {
     }
 
     @GetMapping(value = "/unit.do")
-    public String unitGET() {
+    public String unitGET(@RequestParam(name = "classcode", defaultValue = "0", required = false) long classcode) {
+
+        if(classcode == 0) {
+            return "redirect:/member/myclass.do";
+        }
+
+        // 여기서 unit 정보가 있으면 조회해서 list로 넘겨야 하는데, 달력이 문제네 restcontroller로 할 거면 화면만 띄우면 되고
 
         return "/class/unit";
     }
 
     @GetMapping(value = "/apply.do")
-    public String applyGET(@ModelAttribute Apply obj, Model model) {
+    public String applyGET(@ModelAttribute ApplyList applyList, Model model, HttpSession httpSession) {
 
-        // 복수가 올 수 있네...
+        List<Apply> list = applyList.getApplylist();
+        
+        log.info(format, list.toString());
 
-        ClassUnitView result = unitService.selectClassUnitViewOne(obj.getUnitno());        
+        int outcome=1;
 
-        model.addAttribute("obj", result);
+        List<ClassUnitView> infolist = new ArrayList<>();
 
+        for(Apply obj : list) {
+
+            ClassUnitView result = unitService.selectClassUnitViewOne(obj.getUnitno());
+
+            int remain = result.getMaximum()-result.getCnt();
+
+            if(remain > obj.getPerson()) {
+                result.setPerson(obj.getPerson());
+                infolist.add(result);
+            }
+            else {
+                outcome = 0;
+                String message = "신청 인원을 초과하여 신청이 불가능합니다.";
+                httpSession.setAttribute("message", message);
+                // httpSession.setAttribute("url", ); 주소는 장바구니 url로 이동을 시켜야겠네, 어디서 왔는지를 확인할 수 있으면 좋지
+            }
+            
+        }
+
+        if(outcome == 0) {
+
+            return "redirect:/alert.do";
+            
+        }
+
+        model.addAttribute("list", infolist);
         return "/apply/insert";
+        
     }
 
     @PostMapping(value = "/apply.do")
