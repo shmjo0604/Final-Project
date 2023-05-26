@@ -68,7 +68,7 @@ public class MemberController {
     @GetMapping(value = "/mypage.do")
     public String mypageGET() {
 
-        return "/member/mypage";
+        return "/member/mypage/main";
 
     }
 
