@@ -5,17 +5,16 @@
         input::placeholder{font-size: small;}
         .form-btn {margin-top: 40px; height: 35px; width: 100px; float: right; }
         .form-chk{float: left; margin-top: 50px;}
-
+        .modal-body > div {text-align: center;}
     </style>
     
     <p>| 회원탈퇴</p>
     <div class="container" style="border: 1px solid gainsboro; padding-top: 50px; padding-bottom: 50px; padding-left: 30px; padding-right: 30px; display: inline-block;" >
         <div class="row">
-
             <div>
-                <label for="name" class="form-label" style="font-weight: bold;"> 비밀번호</label>
+                <label class="form-label" style="font-weight: bold;"> 비밀번호</label>
                 <div style="display: inline-block; width: 100%;">
-                    <input id="password" class="form-control" type ="password" placeholder ="스폐셜데이에 가입하신 비밀번호를 입력해주세요." name ="password" value =""/><br />
+                    <input id="password" class="form-control" type ="password" placeholder ="가입하신 비밀번호를 입력해주세요." name ="password" value =""/><br />
                 </div>
             </div>
 
@@ -29,39 +28,52 @@
 
             <div style="display: inline-block;">
                 <input type="checkbox" class="form-chk" name="chk">
-                <label for="checkbox" style="font-size: small; float: left; margin-top: 46px; margin-left: 10px;">주의사항을 모두 확인하였습니다.</label>
-                <input type="button" value="탈퇴하기" class="btn btn-sm btn-success form-btn" data-bs-toggle="modal" data-bs-target="#signout"/>
+                <label for="checkbox" style="font-size: small; float: left; margin-top: 46px; margin-left: 10px;">주의사항을 모두 확인하였습니다.</label> <!-- 체크했을 때 탈퇴하기 버튼 활성화되도록 -->
+                <!-- <input type="button" value="탈퇴하기" class="btn btn-sm btn-success form-btn" data-bs-toggle="modal" data-bs-target="#signout"/> -->
+                <input type="button" value="탈퇴하기" class="btn btn-sm btn-success form-btn" onclick="signout()"/>
             </div>
         </div>
     </div>   
-    
-    <style>
 
-    </style>
-    
 
-    <!-- Modal -->
-    <div class="modal fade" id="signout" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <!-- Modal(1) 회원탈퇴 성공시  -->
+    <div class="modal fade" id="signoutPass" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body" style="display: inline-block;">
-                <center><i class="fas fa-duotone fa-shield-check" style="--fa-primary-color: #2fb15b; --fa-secondary-color: #5fbf92; margin-bottom: 10px;"></i></center>
-                <center><label >회원 탈퇴 완료</label></center>
-                <center><label style="color: gray; font-weight: bold; font-size: small;">회원 탈퇴 신청이 완료되었습니다.</label></center><br/>
-                <center><a href=""><button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="height: 35px; width: 80px;">확인</button></a></center>
+            <div class="modal-content">
+                <div class="modal-body" style="display: inline-block;">
+                    <div style="margin-bottom: 10px;"><i class="fas fa-duotone fa-shield-check"></i></div><!-- 적절한 아이콘 추후 변경 -->
+                    <div><label>회원 탈퇴 완료</label></div>
+                    <div><label style="color: gray; font-weight: bold; font-size: small;">회원 탈퇴 신청이 완료되었습니다.</label></div><br/>
+                    <div><a href=""><button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="height: 35px; width: 80px;">확인</button></a></div> <!-- 홈으로 이동 -->
+                </div>
             </div>
-        </div>
         </div>
     </div>
 
+    <!-- Modal(2) 회원탈퇴 실패시 -->
+    <div class="modal fade" id="signoutFail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body" style="display: inline-block;">
+                    <div style="margin-bottom: 10px;"><i class="fas fa-duotone fa-shield-check"></i></div><!-- 적절한 아이콘 추후 변경 -->
+                    <div><label>회원 탈퇴 실패</label></div>
+                    <div><label style="color: gray; font-weight: bold; font-size: small;">비밀번호를 확인해주세요.</label></div><br/>
+                    <div><button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="height: 35px; width: 80px;">확인</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function signout() {
+        // 조건문(비밀번호 일치여부)
+         const modal = new bootstrap.Modal(document.getElementById("signoutPass"), {});
+        //  const modal = new bootstrap.Modal(document.getElementById("signoutFail"), {});
+         modal.show();
+      }
+    </script>
+
+
 </div>
 
-<script>
-    $("#signout").click(function(){
-        var option = {
-            maxWidth:"900"
-        }
 
-
-    })
-</script>
