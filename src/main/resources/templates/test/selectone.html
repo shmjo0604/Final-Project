@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.111.3">
-    <title>Blog Template · Bootstrap v5.3</title>
-
+    <title>클래스 제목</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/blog/">
     <!--웹 페이지 아이콘 변경-->
     <link rel="icon" th:href="@{/image/logo.ico}">
@@ -22,20 +22,18 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <!--CSS-->
     <link rel="stylesheet" th:href="@{/css/main.css}">
+    <!--Bootstrap 용 Icon CDN-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <!--font awesome 용-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <!--thymeleaf contextpath-->
-    <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}"/>
-
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-    <link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json">
-    <link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
+    <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}" />
     <meta name="theme-color" content="#712cf9">
     <style>
+        .link-secondary {
+            background-color: #d3eed1;
+            border-radius: 5px;
+        }
         .bd-placeholder-img {
             font-size: 1.125rem;
             text-anchor: middle;
@@ -112,7 +110,20 @@
         .slider img {
             height: 500px !important;
         }
-        
+
+        .bi-star-fill {
+            /* font-size: 20px; */
+            /* line-height: 30px; */
+            color: rgb(26, 255, 0);
+            /* text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black; */
+        }
+
+        .bi-heart-fill {
+            /* font-size: 20px;
+            line-height: 20px; */
+            color: red;
+            /* text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black; */
+        }
     </style>
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
@@ -123,21 +134,21 @@
     <header th:replace="~{header :: headerFragment}"></header>
 
     <div class="container">
-        
+
         <div class="nav-scroller py-1 mb-2">
             <nav class="nav d-flex justify-content-start">
-                <a class="p-2 link-secondary" href="#">클래스 소개</a>
-                <a class="p-2 link-secondary" href="#">커리큘럼 소개</a>
-                <a class="p-2 link-secondary" href="#">강사 소개</a>
-                <a class="p-2 link-secondary" href="#">위치</a>
-                <a class="p-2 link-secondary" href="#">리뷰</a>
-                <a class="p-2 link-secondary" href="#">문의</a>
+                <a class="p-2 link-secondary nav-link me-1" href="#">클래스 소개</a>
+                <a class="p-2 link-secondary nav-link me-1" href="#">커리큘럼 소개</a>
+                <a class="p-2 link-secondary nav-link me-1" href="#">강사 소개</a>
+                <a class="p-2 link-secondary nav-link me-1" href="#">위치</a>
+                <a class="p-2 link-secondary nav-link me-1" href="#">리뷰</a>
+                <a class="p-2 link-secondary nav-link me-1" href="#">문의</a>
             </nav>
         </div>
+        <hr>
     </div>
 
     <main class="container">
-        
 
         <!-- <div class="row mb-2">
             <div class="col-md-6">
@@ -203,24 +214,44 @@
                     </div> -->
                 </div>
 
-                <h3 class="pb-4 mb-4 fst-italic border-bottom">
-                    클래스 제목
-                </h3>
+                <div class="border-bottom d-flex">
+                    <h3 class="pb-2 mb-4">
+                        클래스 제목
+                    </h3>
+                    <div class="ms-auto d-flex justify-content-between">
+                        <h4 class="mx-2"><i class="bi bi-heart-fill"></i>
+                            <p class="ms-2 mt-1" style="display:inline-block;">100</p>
+                        </h4>
+                        <h4 class="ms-2 align-items-center"><i class="bi bi-star-fill"></i>
+                            <p class="ms-2 mt-1" style="display:inline-block;">4.0</p>
+                        </h4>
+                    </div>
+                </div>
+
 
                 <article class="blog-post">
-                    <h2 class="blog-post-title mb-1">클래스 소개</h2>
+                    <h3 class="blog-post-title my-3">클래스 소개</h3>
+
+                    <div class="d-flex justify-content-start">
+                        <p class="border rounded p-1 me-1" style=" font-size:small; color: rgba(0, 0, 0, 0.7)">#친구와 같이
+                        </p>
+                        <p class="border rounded p-1 me-1" style=" font-size:small; color: rgba(0, 0, 0, 0.7)">#실내에서</p>
+                        <p class="border rounded p-1 me-1" style=" font-size:small; color: rgba(0, 0, 0, 0.7)">#편의시설</p>
+                    </div>
+
                     <p class="blog-post-meta">January 1, 2021 by <a href="#">Mark</a></p>
 
                     <p>This blog post shows a few different types of content that’s supported and styled with Bootstrap.
                         Basic typography, lists, tables, images, code, and more are all supported as expected.</p>
-                    
+
                     <p>This is some additional paragraph placeholder content. It has been written to fill the available
                         space and show how a longer snippet of text affects the surrounding content. We'll repeat it
                         often to keep the demonstration flowing, so be on the lookout for this exact same string of
                         text.</p>
 
                     <hr>
-                    <h2>Blockquotes</h2>
+
+                    <h3 class="my-3">커리큘럼 소개</h3>
                     <p>This is an example blockquote in action:</p>
                     <blockquote class="blockquote">
                         <p>Quoted text goes here.</p>
@@ -229,7 +260,10 @@
                         space and show how a longer snippet of text affects the surrounding content. We'll repeat it
                         often to keep the demonstration flowing, so be on the lookout for this exact same string of
                         text.</p>
-                    <h3>Example lists</h3>
+
+                    <hr>
+
+                    <h3 class="my-3">강사 소개</h3>
                     <p>This is some additional paragraph placeholder content. It's a slightly shorter version of the
                         other highly repetitive body text used throughout. This is an example unordered list:</p>
                     <ul>
@@ -252,10 +286,14 @@
                         <dt>JavaScript (JS)</dt>
                         <dd>The programming language used to build advanced Web sites and applications</dd>
                     </dl>
-                    <h2>Inline HTML elements</h2>
+
+                    <hr>
+
+                    <h3>위치</h3>
                     <p>HTML defines a long list of available inline tags, a complete list of which can be found on the
                         <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">Mozilla Developer
-                            Network</a>.</p>
+                            Network</a>.
+                    </p>
                     <ul>
                         <li><strong>To bold text</strong>, use <code
                                 class="language-plaintext highlighter-rouge">&lt;strong&gt;</code>.</li>
@@ -276,105 +314,40 @@
                         </li>
                     </ul>
                     <p>Most of these elements are styled by browsers with few modifications on our part.</p>
-                    <h2>Heading</h2>
-                    <p>This is some additional paragraph placeholder content. It has been written to fill the available
-                        space and show how a longer snippet of text affects the surrounding content. We'll repeat it
-                        often to keep the demonstration flowing, so be on the lookout for this exact same string of
-                        text.</p>
-                    <h3>Sub-heading</h3>
-                    <p>This is some additional paragraph placeholder content. It has been written to fill the available
-                        space and show how a longer snippet of text affects the surrounding content. We'll repeat it
-                        often to keep the demonstration flowing, so be on the lookout for this exact same string of
-                        text.</p>
-                    <pre><code>Example code block</code></pre>
-                    <p>This is some additional paragraph placeholder content. It's a slightly shorter version of the
-                        other highly repetitive body text used throughout.</p>
+
+                    <hr>
+
+                    <h3>리뷰</h3>
+                    
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                          <div class="col-md-3">
+                            <img th:src="@{/image/리뷰사람.png}" class="img-fluid rounded-start" alt="...">
+                          </div>
+                          <div class="col-md-9">
+                            <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    <hr>
+
+                    <h3>문의</h3>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum unde porro aliquid eaque
+                        asperiores recusandae, molestiae id architecto commodi ex ad pariatur facilis itaque fugit. Odit
+                        iste nesciunt nulla. Consequatur tempore, facere velit eaque facilis, est voluptate temporibus
+                        corrupti laudantium enim repudiandae nam repellat culpa, et sint possimus beatae laborum.</p>
                 </article>
-
-                <article class="blog-post">
-                    <h2 class="blog-post-title mb-1">Another blog post</h2>
-                    <p class="blog-post-meta">December 23, 2020 by <a href="#">Jacob</a></p>
-
-                    <p>This is some additional paragraph placeholder content. It has been written to fill the available
-                        space and show how a longer snippet of text affects the surrounding content. We'll repeat it
-                        often to keep the demonstration flowing, so be on the lookout for this exact same string of
-                        text.</p>
-                    <blockquote>
-                        <p>Longer quote goes here, maybe with some <strong>emphasized text</strong> in the middle of it.
-                        </p>
-                    </blockquote>
-                    <p>This is some additional paragraph placeholder content. It has been written to fill the available
-                        space and show how a longer snippet of text affects the surrounding content. We'll repeat it
-                        often to keep the demonstration flowing, so be on the lookout for this exact same string of
-                        text.</p>
-                    <h3>Example table</h3>
-                    <p>And don't forget about tables in these posts:</p>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Upvotes</th>
-                                <th>Downvotes</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Alice</td>
-                                <td>10</td>
-                                <td>11</td>
-                            </tr>
-                            <tr>
-                                <td>Bob</td>
-                                <td>4</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>Charlie</td>
-                                <td>7</td>
-                                <td>9</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td>Totals</td>
-                                <td>21</td>
-                                <td>23</td>
-                            </tr>
-                        </tfoot>
-                    </table>
-
-                    <p>This is some additional paragraph placeholder content. It's a slightly shorter version of the
-                        other highly repetitive body text used throughout.</p>
-                </article>
-
-                <article class="blog-post">
-                    <h2 class="blog-post-title mb-1">New feature</h2>
-                    <p class="blog-post-meta">December 14, 2020 by <a href="#">Chris</a></p>
-
-                    <p>This is some additional paragraph placeholder content. It has been written to fill the available
-                        space and show how a longer snippet of text affects the surrounding content. We'll repeat it
-                        often to keep the demonstration flowing, so be on the lookout for this exact same string of
-                        text.</p>
-                    <ul>
-                        <li>First list item</li>
-                        <li>Second list item with a longer description</li>
-                        <li>Third list item to close it out</li>
-                    </ul>
-                    <p>This is some additional paragraph placeholder content. It's a slightly shorter version of the
-                        other highly repetitive body text used throughout.</p>
-                </article>
-
-                <nav class="blog-pagination" aria-label="Pagination">
-                    <a class="btn btn-outline-primary rounded-pill" href="#">Older</a>
-                    <a class="btn btn-outline-secondary rounded-pill disabled">Newer</a>
-                </nav>
-
             </div>
 
             <div class="col-md-4">
                 <div class="position-sticky" style="top: 2rem;">
                     <div class="p-4 mb-3 bg-body-tertiary rounded">
-                        <h4 class="fst-italic">About</h4>
+                        <h3>클래스 일정</h3>
                         <p class="mb-0">Customize this section to tell your visitors a little bit about your
                             publication, writers, content, or something else entirely. Totally up to you.</p>
                     </div>
@@ -411,13 +384,7 @@
 
     </main>
 
-    <footer class="blog-footer">
-        <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a
-                href="https://twitter.com/mdo">@mdo</a>.</p>
-        <p>
-            <a href="#">Back to top</a>
-        </p>
-    </footer>
+    <footer th:replace="~{footer :: footerFragment}"></footer>
 
 
     <!--jQuery-->
@@ -425,11 +392,11 @@
     <!--bxslider-->
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
     <script>
-        $(document).ready(function() {
-          $('.slider').bxSlider({
-            mode: 'fade',
-            height: 200
-          });
+        $(document).ready(function () {
+            $('.slider').bxSlider({
+                mode: 'fade',
+                height: 200
+            });
         });
     </script>
 </body>

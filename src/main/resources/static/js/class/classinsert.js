@@ -293,7 +293,10 @@ const quill3 = new Quill('#editor3', {
     theme: 'snow'
 });
 
-/* 이미지 함수 */
+/****** 이미지 함수 ******/
+
+/*** 프로필 이미지  ***/
+
 function clickItemImage() {
     document.getElementById("file").click();
 }
@@ -308,7 +311,7 @@ function changeItemImage(e) {
     }
     else {
         // 이미지 첨부 취소 시, 이미지 제거
-        img.src = '/static/image/default.png';
+        img.src = contextPath + '/image/default.png';
     }
 }
 
@@ -325,13 +328,17 @@ function insertItemImage() {
     }
 }
 
+/*** 클래스 메인 이미지  ***/
+
 function clickClassMain() {
     document.getElementById("file_classMain").click();
 }
 
 function changeClassMain(e) {
     const img = document.getElementById("insert_classMain");
+
     console.log(e.files);
+
     if (e.files.length > 0) {
 
         img.src = URL.createObjectURL(e.files[0]);
@@ -340,9 +347,55 @@ function changeClassMain(e) {
     }
     else {
         // 이미지 첨부 취소 시, 이미지 제거
-        img.src = '/static/image/default.png';
+        img.src = contextPath + "/image/default.png";
     }
 }
+
+/*** 클래스 서브 이미지  ***/
+
+var append_files = [];
+
+function changeClassSub(e) {
+
+    var files = e.target.files;
+
+    console.log(files);
+
+    var filesArray = Array.prototype.slice.call(files);
+
+    filesArray.forEach(function(f) {
+
+        if(!f.type.match("image.*")) {
+            alert("파일은 이미지 확장자만 가능합니다.");
+            return;
+        }
+        
+        console.log(append_files.length);
+        console.log($("#file_classSub"));
+
+        if(append_files.length+1 > 10) {
+            alert("클래스 이미지는 10개까지 등록이 가능합니다.");
+            return;
+        }
+
+        append_files.push(f);
+
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+
+            var add_img = $('<img class="mx-1 my-2">');
+            add_img.attr("src", e.target.result);
+            add_img.css("width", "75px");
+            add_img.css("height", "75px");
+            
+
+            $("#input-addimage").append(add_img);
+        };
+        reader.readAsDataURL(f);
+    });
+}
+
 
 /* 세자리 단위 콤마입력 함수 */
 function addCommas(x) {

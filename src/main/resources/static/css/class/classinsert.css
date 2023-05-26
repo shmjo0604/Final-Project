@@ -220,6 +220,22 @@ footer {
 	visibility: visible;
 }
 
+#portfolio .portfolio-item {
+    cursor: pointer;
+    position: relative;
+}
+
+#portfolio .portfolio-item .portfolio-item-caption {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    background-color: #1abc9c;
+}
+#portfolio .portfolio-item .portfolio-item-caption:hover {
+    opacity: 1;
+}
+
 /* #wrapper {
 	margin-right: auto;
 	margin-left: auto;

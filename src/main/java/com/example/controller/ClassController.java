@@ -118,7 +118,9 @@ public class ClassController {
             @RequestParam(name = "classMain", required = false) MultipartFile classMainImg)
             throws IOException {
 
-        //log.info(format, profileImg);
+        log.info(format, profileImg);
+        log.info(format, classSubImg);
+        log.info(format, classMainImg);
 
         // 1.Rest API 호출 -> 주소 기반 위도, 경도 값 반환(Map)
 
@@ -160,6 +162,7 @@ public class ClassController {
         }
 
         if (classMainImg != null) {
+            
             ClassImage classMain = new ClassImage();
 
             classMain.setFilename(classMainImg.getOriginalFilename());

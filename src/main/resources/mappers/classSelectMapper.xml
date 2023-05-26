@@ -39,6 +39,7 @@
                 AND s.chk = 1 ORDER BY s.no DESC
             </trim> ) s
             WHERE s.rnum <![CDATA[ >= ]]> ${first} AND s.rnum <![CDATA[ <= ]]> ${last} ORDER BY s.no DESC
+            
     </select>
 
     <!-- 1-2. 클래스 조회 -->

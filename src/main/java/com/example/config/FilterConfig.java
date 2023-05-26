@@ -15,7 +15,6 @@ public class FilterConfig {
         FilterRegistrationBean<UrlFilter> filterReg = new FilterRegistrationBean<>();
         filterReg.setFilter(urlFilter);
 
-        filterReg.addUrlPatterns("/header1.do");
         filterReg.addUrlPatterns("/member/*");
         filterReg.addUrlPatterns("/class/*");
         filterReg.addUrlPatterns("/apply/*");

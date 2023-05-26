@@ -3,8 +3,11 @@ package com.example.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,14 +49,20 @@ public class MemberController {
         log.info(format, ret);
 
         if(ret == 1) {
-            httpSession.setAttribute("alertMessage", "회원 가입 완료했습니다.");
-            httpSession.setAttribute("alertUrl", "/home.do");
-            return "redirect:/alert.do";
+            // httpSession.setAttribute("alertMessage", "회원 가입 완료했습니다.");
+            // httpSession.setAttribute("alertUrl", "/home.do");
+            return "redirect:joinsuccess.do";
         }
         else {
             return "redirect:/member/join.do";
         }
 
+    }
+
+    @GetMapping(value = "/joinsuccess.do")
+    public String joinsuccessGET() {
+
+        return "/member/joinsuccess";
     }
 
     @GetMapping(value = "/mypage.do")
@@ -70,6 +79,16 @@ public class MemberController {
 
         return "redirect:/mypage.do?menu="+menu;
         
+    }
+
+    @GetMapping(value = "/myclass.do")
+    public String myclassGET(
+        @AuthenticationPrincipal User user,
+        Model model
+    ) {
+
+        model.addAttribute("user", user);
+        return "/member/myclass";
     }
     
 }

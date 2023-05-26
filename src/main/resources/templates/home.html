@@ -6,6 +6,8 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>SPECIAL DAY</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!--웹 페이지 아이콘 변경-->
+    <link rel="icon" th:href="@{/image/logo.ico}">
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -13,94 +15,344 @@
         rel="stylesheet">
     <!--Bootstrap 용 CSS-->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <!--CSS-->
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
     <!--Bootstrap 용 Icon CDN-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <style>
-        /* (1) 로고 */
-        .logo {
-            font-family: 'Permanent Marker', cursive;
-        }
-
-        /* (2) 메뉴 항목 */
-        .nav-item {
-            margin-left: 50px;
-        }
-
-        .dropdown:hover .dropdown-menu {
-            /* 드롭다운 자동으로 노출*/
-            display: block;
-            margin-top: 0;
-        }
-
-        #navbarSupportedContent>.dropdown-menu {
-            max-width: fit-content;
-            background-color: blue;
-        }
-
-        .dropdown-toggle:hover {
-            color: forestgreen;
-        }
-
-        /* (3) 클래스등록&로그인 */
-        /* .btn-outline-success {
-            
-        } */
-
-        .btn-outline-secondary {
-            margin-left: 10px;
-        }
-
-        /* 슬라이드 */
-        #carouselExampleIndicators {
-            height: 350px;
-            overflow: hidden;
-        }
-
-        /* 카테고리 */
-        .category {
-            height: 1000px;
-        }
-
-        .post {
-            margin-top: 100px;
-            margin-bottom: 100px;
-            height: 300px;
-        }
-    </style>
+    <!--font awesome 용-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
 </head>
 
 <body>
     <header th:replace="~{header :: headerFragment}"></header>
 
-    <button onclick="swal()">alert</button>
+    <div id="container" role="main" style="position: relative; min-height: 100%;">
+        <div id="main">
+            <!-- 광고 슬라이드 영역 -->
+            <div id="main_01">
+                <div class="banner">
+                    <div class="prev btnmove" id="prev">
+                        <a href="#" class="prev1" title="이전"><i class="fas fa-chevron-left"></i></a>
+                    </div>
+                    <div class="next btnmove" id="next">
+                        <a href="#" class="next1" title="다음"><i class="fas fa-chevron-right"></i></a>
+                    </div>
 
-    <footer></footer>
-    <!--SweetAlert2 JS-->
-    <script th:src="@{/js/sweetalert2@11.js}"></script>
-    <script>
-        var swal = () => {
+                    <div class="controlBox">
+                        <div class="btns">
+                            <a href="#" class="playBtn"><i class="fa fa-play"></i></a>
+                            <a href="#" class="stopBtn"><i class="fa fa-pause"></i></a>
+                        </div>
+                    </div>
+                    <div class="rolling">
+                        <ul class="slide">
+                            <li><a href="#"><img th:src="@{/image/Design.png}" alt="슬라이드1" class="banner-img"></a></li>
+                            <li><a href="#"><img th:src="@{/image/flower.png}" alt="슬라이드2" class="banner-img"></a></li>
+                            <li><a href="#"><img th:src="@{/image/향수배너.png}" alt="슬라이드3" class="banner-img"></a></li>
+                            <li><a href="#"><img th:src="@{/image/가정.png}" alt="슬라이드4" class="banner-img"></a></li>
+                            <li><a href="#"><img th:src="@{/image/ring.png}" alt="슬라이드5" class="banner-img"></a></li>
+                        </ul>
+                    </div>
 
-            Swal.fire({
-                title: '정말 삭제하시겠습니까?',
-                text: "삭제하면 복구가 불가능합니다.",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#30d665',
-                //cancelButtonColor: '#d33',
-                confirmButtonText: '확인',
-                cancelButtonText: '취소'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
+                </div>
+
+            </div>
+
+            <!-- 아이콘 영역-->
+            <div class="icon row">
+                <ul class="icon-list">
+                    <li>
+                        <a href="#" class="cate-a">
+                            <div class="cate">
+                                <img th:src="@{/image/도자기.png}" id="cate-icon" alt="도자기">
+                                <span>
+                                    <p class="icon-name">공예</p>
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="cate-a">
+                            <div class="cate">
+                                <img th:src="@{/image/스포츠.png}" id="cate-icon" alt="스포츠/건강">
+                                <span>
+                                    <p class="icon-name">스포츠</p>
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="cate-a">
+                            <div class="cate">
+                                <img th:src="@{/image/미술1.png}" id="cate-icon" alt="미술">
+                                <span>
+                                    <p class="icon-name">미술</p>
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="cate-a">
+                            <div class="cate">
+                                <img th:src="@{/image/쿠킹.png}" id="cate-icon" alt="쿠킹">
+                                <span>
+                                    <p class="icon-name">쿠킹</p>
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="icon row">
+                <ul class="icon-list">
+                    <li>
+                        <a href="#" class="cate-a">
+                            <div class="cate">
+                                <img th:src="@{/image/도자기.png}" id="cate-icon" alt="도자기">
+                                <span>
+                                    <p class="icon-name">공예</p>
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="cate-a">
+                            <div class="cate">
+                                <img th:src="@{/image/스포츠.png}" id="cate-icon" alt="스포츠/건강">
+                                <span>
+                                    <p class="icon-name">스포츠</p>
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="cate-a">
+                            <div class="cate">
+                                <img th:src="@{/image/미술1.png}" id="cate-icon" alt="미술">
+                                <span>
+                                    <p class="icon-name">미술</p>
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="cate-a">
+                            <div class="cate">
+                                <img th:src="@{/image/쿠킹.png}" id="cate-icon" alt="쿠킹">
+                                <span>
+                                    <p class="icon-name">쿠킹</p>
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 소개 영역 -->
+            <div class="main-service">
+                <h3 class="seb-title"> 스폐설 데이 안내 영역 </h2>
+                    <div id="tabMenu">
+                        <input type="radio" id="tab1" name="tabs" checked>
+                        <label for="tab1">공지사항</label>
+                        <input type="radio" id="tab2" name="tabs">
+                        <label for="tab2">갤러리</label>
+
+                        <div id="notice" class="tabContent">
+                            <h2>공지사항 내용입니다.</h2>
+                            <ul class="notice1">
+                                <li><a href="#">클래스 이용 안내사항입니다.</a></li>
+                                <li><a href="#">[참가모집] 카약 체험에 초대합니다.</a></li>
+                                <li><a href="#">[참가모집] 여름 방학 기간, 오름 체험단을 모집합니다.</a></li>
+                                <li><a href="#">[이벤트]가정의 달을 맞이하여 이벤트를 진행합니다.</a></li>
+                                <li><a href="#">[홍보]이번주 인기 클래스를 소개합니다.</a></li>
+                            </ul>
+                        </div>
+                        <div id="gallery" class="tabContent">
+                            <h2>갤러리 내용입니다.</h2>
+                            <ul>
+                                <li><img src="images/img-1.jpg"></li>
+                                <li><img src="images/img-2.jpg"></li>
+                                <li><img src="images/img-3.jpg"></li>
+                                <li><img src="images/img-1.jpg"></li>
+                                <li><img src="images/img-2.jpg"></li>
+                                <li><img src="images/img-3.jpg"></li>
+                            </ul>
+                        </div>
+                    </div>
+            </div>
+
+            <!-- 새로운 클래스  소개 영역 -->
+            <div class="main-newclass">
+                <h3 class="seb-title"> 새로운 클래스 소개 영역 </h2>
+                    <div class="newclass">
+                        <div class="class">
+                            <a href="#" class="new-c1">
+                                <div class="new-c2">
+                                    <img th:src="@{/image/flower.jpg}" width="300" id="flower-img" alt="꽃꽂이">
+                                    <span>
+                                        <p class="class-name">플라워 원데이 클래스</p>
+                                        <p class="local">부산 대연동</p>
+                                        <p class="price">50000 원</p>
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="class">
+                            <a href="#" class="new-c1">
+                                <div class="new-c2">
+                                    <img th:src="@{/image/서핑.jpg}" width="300" id="flower-img" alt="서핑">
+                                    <span>
+                                        <p class="class-name">서핑 원데이 클래스</p>
+                                        <p class="local">부산 대연동</p>
+                                        <p class="price">80000 원</p>
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="class">
+                            <a href="#" class="new-c1">
+                                <div class="new-c2">
+                                    <img th:src="@{/image/향수.jpg}" width="300" id="flower-img" alt="향수">
+                                    <span>
+                                        <p class="class-name">향수 원데이 클래스</p>
+                                        <p class="local">부산 대연동</p>
+                                        <p class="price">70000 원</p>
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="newclass">
+                        <div class="class">
+                            <a href="#" class="new-c1">
+                                <div class="new-c2">
+                                    <img th:src="@{/image/flower.jpg}" width="300" id="flower-img" alt="꽃꽂이">
+                                    <span>
+                                        <p class="class-name">플라워 원데이 클래스</p>
+                                        <p class="local">부산 대연동</p>
+                                        <p class="price">50000 원</p>
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="class">
+                            <a href="#" class="new-c1">
+                                <div class="new-c2">
+                                    <img th:src="@{/image/서핑.jpg}" width="300" id="flower-img" alt="서핑">
+                                    <span>
+                                        <p class="class-name">서핑 원데이 클래스</p>
+                                        <p class="local">부산 대연동</p>
+                                        <p class="price">80000 원</p>
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="class">
+                            <a href="#" class="new-c1">
+                                <div class="new-c2">
+                                    <img th:src="@{/image/향수.jpg}" width="300" id="flower-img" alt="향수">
+                                    <span>
+                                        <p class="class-name">향수 원데이 클래스</p>
+                                        <p class="local">부산 대연동</p>
+                                        <p class="price">70000 원</p>
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+            </div>
+
+            <!-- 커뮤니티 영역 -->
+            <div class="main-cumu">
+                <h3 class="seb-title"> 커뮤니티 영역 </h2>
+                    <div id="tabMenu">
+
+
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="script/slide.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var nowNum = 0;
+            var bannerObj = $('.slide li');
+            var maxLength = bannerObj.length;
+            var timer = 3000; // 자동 롤링되는 타임 설정
+            var autoRun = setInterval(function(){rollingFn('right');},timer);
+            var stopBtn = $('.stopBtn');
+            var playBtn = $('.playBtn');
+            bannerObj.eq(nowNum).fadeIn();
+            $('.nextBtn').bind('click',function(){
+                rollingFn('right');
+            });
+            $('.prevBtn').bind('click',function(){
+                rollingFn('left');
+            });
+            stopBtn.bind('click',function(){
+                stopAndGoFn(true);
+            });
+            playBtn.bind('click',function(){
+                stopAndGoFn(false);
+            });
+            function rollingFn(direction){
+                if(direction=='right'){
+                    nowNum = nowNum+1;
+                    if(nowNum>maxLength-1){
+                        nowNum = 0;
+                    }
+                }else{
+                    nowNum = nowNum-1;
+                    if(nowNum<0){
+                        nowNum = maxLength-1;
+                    }
                 }
-            })
+                bannerObj.hide().eq(nowNum).fadeIn();
+            }
+            function stopAndGoFn(bool){
+                if(bool==true){
+                    clearInterval(autoRun);
+                }else if(bool==false){
+                    clearInterval(autoRun);			
+                    autoRun = setInterval(function(){rollingFn('right');},timer);
+                }
+            }
+        });
 
-        }
+
+    // 페이지 좌우로 넘기기
+        $(document).ready(function(){
+	var nowNum = 0;
+	var maxLength = $('.slide li').length;
+	$('.slide li').eq(nowNum).show();
+	$('.next').bind('click',function(){
+		nowNum = nowNum+1;
+		if(nowNum>maxLength-1){
+			nowNum = 0;
+		}
+		console.log(nowNum);
+		$('.slide li').hide();
+		$('.slide li').eq(nowNum).show();
+	    });
+
+    $('.prev').bind('click',function(){
+		nowNum = nowNum-1;
+		if(nowNum>maxLength+1){
+			nowNum = 0;
+		}
+		console.log(nowNum);
+		$('.slide li').hide();
+		$('.slide li').eq(nowNum).show();
+	    });
+    });
     </script>
 </body>
+
+
 
 </html>

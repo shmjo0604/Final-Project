@@ -27,8 +27,7 @@ public class MainController {
     @GetMapping(value = "/test.do")
     public String testGET() {
 
-        //return "test";
-        return "/test/productdetail";
+        return "test";
     }
 
     @GetMapping(value = "/test1.do")
@@ -36,18 +35,18 @@ public class MainController {
         return "/test/selectone";
     }
 
-    @GetMapping(value = "/header1.do")
+    @GetMapping(value = "/applytest.do")
     public String header1GET(@AuthenticationPrincipal User user, Model model) {
 
         model.addAttribute("user", user);
         
-        return "header1";
+        return "/class/apply";
     }
 
-    @GetMapping(value = "/headerlist.do")
+    @GetMapping(value = "/test2.do")
     public String headerlistGET() {
 
-        return "headerlist";
+        return "/test/productdetail";
     }
 
     @GetMapping(value = "/alert.do")
