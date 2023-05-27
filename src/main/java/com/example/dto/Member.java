@@ -34,4 +34,7 @@ public class Member {
     // 탈퇴여부(0,1)
     private int chk;
     
+    // 신규 비밀번호
+    private String newpassword;
+    
 }

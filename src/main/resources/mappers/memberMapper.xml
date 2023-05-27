@@ -41,7 +41,7 @@
 
     <!-- 8. 회원 탈퇴 -->
     <update id="deleteMemberOne" parameterType="Member">
-        UPDATE member set chk = 0 where id = #{id} and password = #{password}
+        UPDATE member set chk = 0 where id = #{id}
     </update>
 
 </mapper>

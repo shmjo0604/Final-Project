@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -110,8 +111,8 @@ public class RestMemberController {
         return retMap;
     }
 
-    @PostMapping(value = "/findpwaction.json")
-    public Map<String, Object> findpwactionPOST(@RequestBody Member obj) {
+    @PutMapping(value = "/findpwaction.json")
+    public Map<String, Object> findpwactionPUT(@RequestBody Member obj) {
 
         Map<String, Object> retMap = new HashMap<>();
 
@@ -136,5 +137,102 @@ public class RestMemberController {
         return retMap;
     }
 
+    @PostMapping(value = "/verifyPw.json")
+    public Map<String, Object> verifyPwPOST(@RequestBody Member obj) {
+
+        Map<String, Object> retMap = new HashMap<>();
+        
+        log.info(format, obj.getPassword());
+
+        Member ret = mService.selectMemberOne(obj.getId());
+
+        retMap.put("ret", 0);
+
+        if(bcpe.matches(obj.getPassword(), ret.getPassword())) {
+            retMap.put("ret", 1);
+        }
+
+        return retMap;
+
+    }
+
+    @PutMapping(value = "/updateinfo.json")
+    public Map<String, Object> updateinfoPUT(@RequestBody Member obj) {
+
+        Map<String, Object> retMap = new HashMap<>();
+        
+        log.info(format, obj.toString());
+
+        int ret = mService.updateMemberOne(obj);
+
+        retMap.put("ret", ret);
+
+        if(ret == 1) {
+            Member member = mService.selectMemberOne(obj.getId());
+            retMap.put("member", member);
+        }
+
+        return retMap;
+    }
+
+    @PutMapping(value = "/updatepw.json")
+    public Map<String, Object> updatepwPUT(@RequestBody Member obj) {
+
+        Map<String, Object> retMap = new HashMap<>();
+
+        Member member = mService.selectMemberOne(obj.getId());
+
+        
+        if(bcpe.matches(obj.getPassword(), member.getPassword())) {
+
+            obj.setPassword(bcpe.encode(obj.getNewpassword()));
+            int ret = mService.updateMemberPassword(obj);
+
+            if(ret == 1) {
+
+                retMap.put("status", 200);
+
+            }
+            else {
+                retMap.put("status", 0);
+            }
+
+        }
+        else {
+            retMap.put("status", -1);
+        }   
+
+        return retMap;
+    }
+
+    @PutMapping(value = "/signout.json")
+    public Map<String, Object> signoutPUT(@RequestBody Member obj) {
+
+        Map<String, Object> retMap = new HashMap<>();
+
+        Member member = mService.selectMemberOne(obj.getId());
+
+        if(bcpe.matches(obj.getPassword(), member.getPassword())) {
+
+            int ret = mService.deleteMemberOne(obj);
+
+            if(ret == 1) {
+
+                retMap.put("status", 200);
+
+            }
+            
+            else {
+                retMap.put("status", 0);
+            }
+
+        }
+        else {
+            retMap.put("status", -1);
+        }   
+
+        return retMap;
+
+    }
     
 }

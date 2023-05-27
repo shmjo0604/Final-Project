@@ -23,22 +23,21 @@
         .form-floating > .form-control {
             height: 100%;
         }
-        .card {
-			margin-top: 250px;
-			margin-left: -90px;
+
+        #login-card {
+			/* margin-top: 250px; */
+			/* margin-left: -90px; */
 			border-color: #23ba15;
-			width: 600px;
-
-
+    
 		}
 
-		.logo-wrap img {
-			width: 600px;
+		/* .logo-wrap img {
+			width: 100%;
 			height: 150px;
-		}
+		} */
 
-		.d-flex button {
-			position: relative;
+		#login-button {
+			
 			width: 120px;
 			height: 48px;
 			font-size: 20px;
@@ -48,6 +47,15 @@
 			border-radius: 5px;
 
 		}
+
+        .login-divider {
+
+            width: 0;
+            border-right: 1px solid #e3e6f0;
+            height: calc(3.75rem - 2rem);
+            margin: auto 0.75rem;
+
+        }
 
 		.footer {
 			padding-left: 45px;
@@ -74,9 +82,9 @@
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-lg-5">
-                    <div class="card shadow-lg border-0 rounded-lg">
+                    <div id="login-card" class="card shadow-lg border-0 rounded-lg w-100 mt-5">
                         <div class="logo-wrap" style="text-align: center; margin-top: 8%; margin-bottom: 5%;">
-							<img th:src="@{/image/logo.svg}" alt="로고 이미지" />
+							<img class="p-4" th:src="@{/image/logo.svg}" alt="로고 이미지" />
 						</div>
                         <div class="card-body">
                             <form id="form" th:action="@{/loginaction.do}" method="post">
@@ -89,20 +97,24 @@
                                         name="password" value="pw2">
                                     <label>패스워드</label>
                                 </div>
-                                <ul class="find-wrap" id="find-wrap" style="padding-left: 24%;">
+                                <div class="find-wrap d-flex justify-content-center" id="find-wrap">
 									<a class="text" type="button" th:href="@{/member/join.do}"
-										style="text-decoration: none; color: rgb(118, 118, 118);">회원가입 |</a>
+										style="text-decoration: none; color: rgb(118, 118, 118);">회원가입</a>
 
+                                    <div class="login-divider d-none d-sm-block"></div>
+                                    
 									<a class="text" type="button" onclick="findId()"
-										style="text-decoration: none; color: rgb(118, 118, 118);">아이디 찾기 |</a>
+										style="text-decoration: none; color: rgb(118, 118, 118);">아이디 찾기</a>
+
+                                    <div class="login-divider d-none d-sm-block"></div>
 
 									<a class="text" type="button" onclick="findPw()"
-										style="text-decoration: none; color: rgb(118, 118, 118);">비밀번호 재설정</a>
-								</ul>
-								<div class="d-flex align-items-center mt-4 mb-0">
+										style="text-decoration: none; color: rgb(118, 118, 118);">비밀번호 찾기</a>
+								</div>
+								<div class="d-flex align-items-center justify-content-center mt-4 mb-0">
 									<!-- Controller -->
-									<button class="btn btn-outline-success" type="button"
-										style="margin-left: 200px; width: 150px;" onclick="loginAction()">로그인</button>
+									<button id="login-button" class="btn btn-outline-success" type="button"
+										style="width: 150px;" onclick="loginAction()">로그인</button>
 									<!-- RestController -->
 									<!-- <button class="btn btn-primary" type="button" onclick="ajaxLoginAction()">로그인</button> -->
 								</div>
@@ -577,7 +589,7 @@
                 const url = contextPath + '/api/member/findpwaction.json';
                 const headers = { "Content-Type": "application/json" };
                 const body = { id: userId, password: password.value };
-                const { data } = await axios.post(url, body, { headers });
+                const { data } = await axios.put(url, body, { headers });
 
                 //console.log(data.ret);
 

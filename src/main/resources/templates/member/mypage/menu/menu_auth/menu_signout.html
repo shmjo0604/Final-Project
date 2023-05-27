@@ -14,7 +14,7 @@
             <div>
                 <label class="form-label" style="font-weight: bold;"> 비밀번호</label>
                 <div style="display: inline-block; width: 100%;">
-                    <input id="password" class="form-control" type ="password" placeholder ="가입하신 비밀번호를 입력해주세요." name ="password" value =""/><br />
+                    <input id="signout-password" class="form-control" type ="password" placeholder ="가입하신 비밀번호를 입력해주세요." name ="password" value =""/><br />
                 </div>
             </div>
 
@@ -27,10 +27,10 @@
             </div>
 
             <div style="display: inline-block;">
-                <input type="checkbox" class="form-chk" name="chk">
+                <input id="signout-chk" type="checkbox" class="form-chk" name="chk">
                 <label for="checkbox" style="font-size: small; float: left; margin-top: 46px; margin-left: 10px;">주의사항을 모두 확인하였습니다.</label> <!-- 체크했을 때 탈퇴하기 버튼 활성화되도록 -->
                 <!-- <input type="button" value="탈퇴하기" class="btn btn-sm btn-success form-btn" data-bs-toggle="modal" data-bs-target="#signout"/> -->
-                <input type="button" value="탈퇴하기" class="btn btn-sm btn-success form-btn" onclick="signout()"/>
+                <input id="signout-button" type="button" value="탈퇴하기" class="btn btn-sm btn-success form-btn" onclick="signout()" disabled/>
             </div>
         </div>
     </div>   
@@ -44,7 +44,7 @@
                     <div style="margin-bottom: 10px;"><i class="fas fa-duotone fa-shield-check"></i></div><!-- 적절한 아이콘 추후 변경 -->
                     <div><label>회원 탈퇴 완료</label></div>
                     <div><label style="color: gray; font-weight: bold; font-size: small;">회원 탈퇴 신청이 완료되었습니다.</label></div><br/>
-                    <div><a href=""><button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="height: 35px; width: 80px;">확인</button></a></div> <!-- 홈으로 이동 -->
+                    <div><a th:href="@{/logout.do}"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="height: 35px; width: 80px;">확인</button></a></div> <!-- 홈으로 이동 -->
                 </div>
             </div>
         </div>
@@ -63,17 +63,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function signout() {
-        // 조건문(비밀번호 일치여부)
-         const modal = new bootstrap.Modal(document.getElementById("signoutPass"), {});
-        //  const modal = new bootstrap.Modal(document.getElementById("signoutFail"), {});
-         modal.show();
-      }
-    </script>
-
-
 </div>
 
 

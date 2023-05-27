@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
@@ -28,13 +26,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.config.KakaoLocalAPI;
 import com.example.dto.ActivityCate;
-import com.example.dto.Apply;
-import com.example.dto.ApplyList;
 import com.example.dto.CityCate;
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
 import com.example.dto.ClassUnit;
-import com.example.dto.ClassUnitView;
 import com.example.service.classproduct.ClassInsertService;
 import com.example.service.classproduct.ClassManageService;
 import com.example.service.classproduct.ClassSelectService;
@@ -197,52 +192,6 @@ public class ClassController {
         return "/class/unit";
     }
 
-    @GetMapping(value = "/apply.do")
-    public String applyGET(@ModelAttribute ApplyList applyList, Model model, HttpSession httpSession) {
-
-        List<Apply> list = applyList.getApplylist();
-        
-        log.info(format, list.toString());
-
-        int outcome=1;
-
-        List<ClassUnitView> infolist = new ArrayList<>();
-
-        for(Apply obj : list) {
-
-            ClassUnitView result = unitService.selectClassUnitViewOne(obj.getUnitno());
-
-            int remain = result.getMaximum()-result.getCnt();
-
-            if(remain > obj.getPerson()) {
-                result.setPerson(obj.getPerson());
-                infolist.add(result);
-            }
-            else {
-                outcome = 0;
-                String message = "신청 인원을 초과하여 신청이 불가능합니다.";
-                httpSession.setAttribute("message", message);
-                // httpSession.setAttribute("url", ); 주소는 장바구니 url로 이동을 시켜야겠네, 어디서 왔는지를 확인할 수 있으면 좋지
-            }
-            
-        }
-
-        if(outcome == 0) {
-
-            return "redirect:/alert.do";
-            
-        }
-
-        model.addAttribute("list", infolist);
-        return "/apply/insert";
-        
-    }
-
-    @PostMapping(value = "/apply.do")
-    public String applyPOST() {
-
-        return "redirect:/home.do";
-    }
 
     @GetMapping(value = "/image")
     public ResponseEntity<byte[]> classImage(
