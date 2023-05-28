@@ -10,7 +10,7 @@ public class Apply {
 	// 신청 참여 인원
 	private int person;
 	// 결제 금액
-	private long payment;
+	private int payment;
 	// 최종 신청 상태 확인 -> 1 : 결제 완료(default) / 2 : 결제 취소 / 3 : 참여 완료
 	private int chk; 
 	// 회원 아이디(구매자) (FK)

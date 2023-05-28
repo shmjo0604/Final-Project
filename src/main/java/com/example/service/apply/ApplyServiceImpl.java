@@ -1,4 +1,4 @@
-package com.example.service.classproduct;
+package com.example.service.apply;
 
 import java.util.List;
 import java.util.Map;

@@ -24,12 +24,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.config.KakaoLocalAPI;
 import com.example.dto.ActivityCate;
 import com.example.dto.CityCate;
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
 import com.example.dto.ClassUnit;
+import com.example.service.KakaoLocalAPI;
 import com.example.service.classproduct.ClassInsertService;
 import com.example.service.classproduct.ClassManageService;
 import com.example.service.classproduct.ClassSelectService;

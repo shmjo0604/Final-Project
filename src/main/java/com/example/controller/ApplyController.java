@@ -29,7 +29,7 @@ public class ApplyController {
 
     @Autowired ClassUnitService unitService;
 
-    @GetMapping(value = "/apply.do")
+    @GetMapping(value = "/insert.do")
     public String applyGET(@ModelAttribute ApplyList applyList, Model model, HttpSession httpSession) {
 
         List<Apply> list = applyList.getApplylist();
@@ -70,7 +70,7 @@ public class ApplyController {
         
     }
 
-    @PostMapping(value = "/apply.do")
+    @PostMapping(value = "/insert.do")
     public String applyPOST() {
 
         return "redirect:/home.do";

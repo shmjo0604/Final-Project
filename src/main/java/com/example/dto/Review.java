@@ -14,7 +14,7 @@ public class Review {
 	// 평점(1,2,3,4,5)
 	private int rating;
 	// 추천수
-	private long hit;
+	private int hit;
 	// 리뷰 등록 일자
 	private Date regdate;
 

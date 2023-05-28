@@ -10,6 +10,6 @@ public class ActDetailCate {
     // 클래스 하위 분류 명칭
     private String actcate;
     // 클래스 상위 분류 번호 (FK)
-    private long actcode;
+    private int actcode;
 
 }

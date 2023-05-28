@@ -1,4 +1,4 @@
-package com.example.config;
+package com.example.service;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

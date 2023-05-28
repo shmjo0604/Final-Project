@@ -24,7 +24,7 @@ public class ClassProduct {
 	// 경도
 	private String longitude;
 	// 가격
-	private long price;
+	private int price;
 	// 소개글
 	private String intro;
 	// 상호명

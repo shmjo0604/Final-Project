@@ -61,30 +61,4 @@ public class MainController {
         return "403";
     }
 
-    @GetMapping(value = "/test.do")
-    public String testGET() {
-
-        return "test";
-    }
-
-    @GetMapping(value = "/test1.do")
-    public String test1GET() {
-        return "/test/selectone";
-    }
-
-    @GetMapping(value = "/applytest.do")
-    public String header1GET(@AuthenticationPrincipal User user, Model model) {
-
-        model.addAttribute("user", user);
-        
-        return "/class/apply";
-    }
-
-    @GetMapping(value = "/test2.do")
-    public String headerlistGET() {
-
-        return "/test/productdetail";
-    }
-
-
 }

@@ -24,7 +24,7 @@ public class ClassUnitView {
 	// 경도
 	private String longitude;
 	// 가격
-	private long price;
+	private int price;
 	// 소개글
 	private String intro;
 	// 커리큘럼
@@ -62,7 +62,7 @@ public class ClassUnitView {
 	// 클래스 추가금액
 	private int addprice;
 	// 클래스 난이도(입문자, 경험자)
-	private String classlevel;
+	private int classlevel;
 	// 등록일자
 	private Date unitregdate; 
 	// 지역 하위 분류 명칭
@@ -78,7 +78,7 @@ public class ClassUnitView {
 	// 클래스 상위 분류 명칭
 	private String activitycate;
 	// 1인당 총 가격 => ( 기본 가격 + 추가 가격 ) * (1 - 할인율)
-	private long totalprice;
+	private int totalprice;
     
 	// 신청할 인원수
 	private int person;
