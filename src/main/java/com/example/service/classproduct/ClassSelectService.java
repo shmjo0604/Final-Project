@@ -15,25 +15,31 @@ import com.example.dto.LocalCate;
 @Service
 public interface ClassSelectService {
 
-    // 1. 클래스 조회
+    // 1-1. 클래스 조회 (날짜 있는 경우)
     public List<ClassUnitView> selectClassUnitViewList(Map<String, Object> map);
 
-    // 3. 클래스 조회 (총 개수)
+    // 1-2. 클래스 조회 (날짜 없는 경우)
+    public List<ClassProduct> selectClassProductViewList(Map<String, Object> map);
+
+    // 2-1. 클래스 조회 (총 개수 1-1)
     public long selectClassCountTotal(Map<String, Object> map);
     
-    // 4. 지역 상위 분류 호출
+    // 2-2. 클래스 조회 (총 개수 1-2)
+    public long selectClassCountTotalV2(Map<String, Object> map);
+
+    // 3. 지역 상위 분류 호출
     public List<CityCate> selectCityCateList();
 
-    // 5. 클래스 상위 분류 호출
+    // 4. 클래스 상위 분류 호출
     public List<ActivityCate> selectActivityCateList();
 
-    // 6. 지역 하위 분류 호출
+    // 5. 지역 하위 분류 호출
     public List<LocalCate> selectLocalCateList(int citycode);
 
-    // 7. 클래스 하위 분류 호출
+    // 6. 클래스 하위 분류 호출
     public List<ActDetailCate> selectActDetailCateList(int actcode);
 
-    // 8. 클래스 하나 정보 조회
+    // 7. 클래스 하나 정보 조회
 	public ClassProduct selectClassProductOne(long classcode);
 
 

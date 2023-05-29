@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 import com.example.dto.ActDetailCate;
 import com.example.dto.ActivityCate;
 import com.example.dto.CityCate;
-import com.example.dto.ClassImage;
+
 import com.example.dto.ClassProduct;
 import com.example.dto.LocalCate;
+import com.example.entity.ClassImage;
 
 @Service
 public interface ClassInsertService {
@@ -32,6 +33,6 @@ public interface ClassInsertService {
     public List<ActDetailCate> selectActDetailCateList(int actcode);
 
     // 6. 클래스 이미지 등록
-    public int insertClassImage(List<ClassImage> obj);
+    public int insertClassImage(List<com.example.dto.ClassImage> obj);
 
 }

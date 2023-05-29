@@ -147,7 +147,7 @@ html .ui-button.ui-state-disabled:active {
 
 .ui-widget-header .ui-icon {
 	background-image:
-		url('../image/btns.png');
+		url('../../image/btns.png');
 }
 
 .ui-icon-circle-triangle-e {

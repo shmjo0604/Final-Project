@@ -80,6 +80,8 @@ public class ClassUnitView {
 	// 1인당 총 가격 => ( 기본 가격 + 추가 가격 ) * (1 - 할인율)
 	private int totalprice;
     
+	// 클래스 메인 이미지 번호
+	private long mainImg;
 	// 신청할 인원수
 	private int person;
 }

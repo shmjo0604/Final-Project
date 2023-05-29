@@ -43,8 +43,37 @@
     </select>
 
     <!-- 1-2. 클래스 조회 -->
+    <select id="selectClassProductViewList" parameterType="map" resultType="ClassProduct">
+    SELECT s.classcode, s.title, s.price, s.address1, s.address2, s.address3, s.latitude, s.longitude, s.hit, s.rnum FROM ( 
+            SELECT  ROW_NUMBER() OVER(ORDER BY s.regdate DESC) AS rnum, s.* FROM classproductview s
+            <trim prefix='WHERE' prefixOverrides='AND || OR '>
+                <if test = 'citycode != 0'>
+                    citycode = #{citycode}
+                </if>
+                <if test = 'localcode != 0'>
+                    AND localcode = #{localcode}
+                </if>
+                <if test = 'activitycode != 0'>
+                    AND activitycode = #{activitycode}
+                </if>
+                <if test = 'actcode != 0'>
+                    AND actdetailcode = #{actdetailcode}
+                </if>
+                <if test = 'minprice != 0'>
+                    AND price <![CDATA[ > ]]> #{minprice}
+                </if>
+                <if test = 'maxprice != 0'>
+                    AND price <![CDATA[ < ]]> #{maxprice}
+                </if>
+                <if test = 'keyword != ""'>
+                    AND (title || intro || citycate || localcate || actdetailcate || activitycate) LIKE '%' ||  #{keyword} || '%'
+                </if>
+                AND s.chk = 1 ORDER BY s.classcode DESC
+            </trim> ) s
+            WHERE s.rnum <![CDATA[ >= ]]> ${first} AND s.rnum <![CDATA[ <= ]]> ${last} ORDER BY s.classcode DESC
+    </select>
 
-    <!-- 1-3. 클래스 조회 (전체 개수)-->
+    <!-- 2-1. 클래스 조회 (전체 개수 1-1번)-->
     <select id="selectClassCountTotal" parameterType="map" resultType="long">
 
         SELECT count(*) FROM classunitview s
@@ -74,7 +103,36 @@
                     AND totalprice <![CDATA[ < ]]> #{maxprice}
                 </if>
                 <if test = 'keyword != ""'>
-                    AND (title || intro || citycate || localcate || actdetailcate || activitycate) LIKE '%' ||  #{keyword} || '%'
+                    AND (title || intro || citycate || localcate || actdetailcate || activitycate) LIKE '%' || #{keyword} || '%'
+                </if>
+                AND s.chk = 1
+            </trim>
+    </select>
+
+    <!-- 2-2. 클래스 조회 (전체 개수 1-2번)-->
+    <select id="selectClassCountTotalV2" parameterType="map" resultType="long">
+        SELECT  count(*) FROM classproductview s
+            <trim prefix='WHERE' prefixOverrides='AND || OR '>
+                <if test = 'citycode != 0'>
+                    citycode = #{citycode}
+                </if>
+                <if test = 'localcode != 0'>
+                    AND localcode = #{localcode}
+                </if>
+                <if test = 'activitycode != 0'>
+                    AND activitycode = #{activitycode}
+                </if>
+                <if test = 'actcode != 0'>
+                    AND actdetailcode = #{actdetailcode}
+                </if>
+                <if test = 'minprice != 0'>
+                    AND price <![CDATA[ > ]]> #{minprice}
+                </if>
+                <if test = 'maxprice != 0'>
+                    AND price <![CDATA[ < ]]> #{maxprice}
+                </if>
+                <if test = 'keyword != ""'>
+                    AND (title || intro || citycate || localcate || actdetailcate || activitycate) LIKE '%' || #{keyword} || '%'
                 </if>
                 AND s.chk = 1
             </trim>
@@ -101,7 +159,7 @@
     </select>
 
     <!-- 6. 클래스 상세페이지 조회 -->
-    <select id="selectClassUnitViewOne" parameterType="long" resultType="ClassProduct">
+    <select id="selectClassProductOne" parameterType="long" resultType="ClassProduct">
         SELECT c.* FROM classproduct c WHERE classcode = #{classcode}
     </select>
 

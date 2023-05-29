@@ -26,9 +26,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.dto.ActivityCate;
 import com.example.dto.CityCate;
-import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
 import com.example.dto.ClassUnit;
+import com.example.entity.ClassImage;
 import com.example.service.KakaoLocalAPI;
 import com.example.service.classproduct.ClassInsertService;
 import com.example.service.classproduct.ClassManageService;
@@ -71,7 +71,7 @@ public class ClassController {
         return "/class/select";
     }
 
-    @GetMapping(value = "/selectone.do")
+    @GetMapping(value = "/product.do")
     public String selectoneGET(
         @RequestParam(name = "classcode", defaultValue = "0") long classcode,
         Model model
@@ -82,12 +82,16 @@ public class ClassController {
         }
 
         ClassProduct obj = cService.selectClassProductOne(classcode);
+        long mainImg = manageService.selectClassMainImageNo(classcode);
+        List<Long> subImg = manageService.selectClassSubImageNoList(classcode);
+        long profile = manageService.selectClassProfileImageNo(classcode);
+
+        log.info(format, obj.toString());
 
         model.addAttribute("obj", obj);
-
-        List<ClassUnit> list = unitService.selectUnitList(classcode);
-
-        model.addAttribute("list", list);
+        model.addAttribute("mainImg", mainImg);
+        model.addAttribute("subImg", subImg);
+        model.addAttribute("profile", profile);
 
         return "class/selectone";
     }
@@ -143,6 +147,7 @@ public class ClassController {
         list.add(profile);
 
         if (classSubImg != null) {
+
             for (MultipartFile file : classSubImg) {
 
                 ClassImage classSub = new ClassImage();
@@ -173,7 +178,7 @@ public class ClassController {
         log.info(format, ret);
 
         if (ret == 1) {
-            return "redirect:/member/mypage.do?menu=";
+            return "redirect:/member/myclass.do?menu=";
         } else {
             return "redirect:/class/insert.do";
         }
@@ -200,13 +205,16 @@ public class ClassController {
 
             log.info(format, no);
 
-            ClassImage obj = manageService.selectClassImageOne(no);
+            com.example.dto.ClassImage obj = manageService.selectClassImageOne(no);
+
+            log.info(format, obj.toString());
 
             HttpHeaders headers = new HttpHeaders();
 
             if(obj != null) {
 
                 if(obj.getFilesize() > 0) {
+
                     headers.setContentType(MediaType.parseMediaType(obj.getFiletype()));
 
                     ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(obj.getFiledata(), headers, HttpStatus.OK);

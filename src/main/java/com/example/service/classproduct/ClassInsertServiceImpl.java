@@ -12,25 +12,42 @@ import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
 import com.example.dto.LocalCate;
 import com.example.mapper.ClassInsertMapper;
+import com.example.repository.ClassImageRepository;
 
 @Service
 public class ClassInsertServiceImpl implements ClassInsertService {
 
     @Autowired ClassInsertMapper cMapper;
+    @Autowired ClassImageRepository cImageRepository;
 
     @Override
-    public int insertClassOne(ClassProduct obj, List<ClassImage> list) {
+    public int insertClassOne(ClassProduct obj, List<com.example.entity.ClassImage> list) {
         try {
             int ret = cMapper.insertClassOne(obj);
+
             if(ret == 1) {
+
                 long classcode = cMapper.selectClasscodeRecent(obj.getMemberid());
-                for(ClassImage img : list) {
-                    img.setClasscode(classcode);
+
+                for(com.example.entity.ClassImage img : list) {
+
+                    com.example.entity.ClassProduct product = new com.example.entity.ClassProduct();
+
+                    product.setClasscode(classcode);
+
+                    img.setClassproduct(product);
+
+                    //img.setClasscode(classcode);
                 }
+                
                 System.out.println(list.toString());
-                int result = cMapper.insertClassImage(list);
-                System.out.println(result);
-                return result;
+
+                cImageRepository.saveAll(list);
+                //int result = cMapper.insertClassImage(list);
+
+                //System.out.println(result);
+
+                return 1;
             }
             else {
                 return 0;
