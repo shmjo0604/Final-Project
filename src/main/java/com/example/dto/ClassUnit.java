@@ -23,7 +23,7 @@ public class ClassUnit {
   // 종료 시간 (21:00)
   private String classend;
   // 할인률
-  private String discount;
+  private int discount;
   // 클래스 추가금액
   private int addprice;
   // 클래스 난이도 => (1 : 입문자, 2 : 경험자, 3 : 숙련자)

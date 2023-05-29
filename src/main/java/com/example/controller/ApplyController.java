@@ -31,42 +31,43 @@ public class ApplyController {
 
     @GetMapping(value = "/insert.do")
     public String applyGET(@ModelAttribute ApplyList applyList, Model model, HttpSession httpSession) {
-
-        List<Apply> list = applyList.getApplylist();
-        
-        log.info(format, list.toString());
-
-        int outcome=1;
-
-        List<ClassUnitView> infolist = new ArrayList<>();
-
-        for(Apply obj : list) {
-
-            ClassUnitView result = unitService.selectClassUnitViewOne(obj.getUnitno());
-
-            int remain = result.getMaximum()-result.getCnt();
-
-            if(remain > obj.getPerson()) {
-                result.setPerson(obj.getPerson());
-                infolist.add(result);
-            }
-            else {
-                outcome = 0;
-                String message = "신청 인원을 초과하여 신청이 불가능합니다.";
-                httpSession.setAttribute("message", message);
-                // httpSession.setAttribute("url", ); 주소는 장바구니 url로 이동을 시켜야겠네, 어디서 왔는지를 확인할 수 있으면 좋지
-            }
-            
-        }
-
-        if(outcome == 0) {
-
-            return "redirect:/alert.do";
-            
-        }
-
-        model.addAttribute("list", infolist);
         return "/apply/insert";
+
+        // List<Apply> list = applyList.getApplylist();
+        
+        // log.info(format, list.toString());
+
+        // int outcome=1;
+
+        // List<ClassUnitView> infolist = new ArrayList<>();
+
+        // for(Apply obj : list) {
+
+        //     ClassUnitView result = unitService.selectClassUnitViewOne(obj.getUnitno());
+
+        //     int remain = result.getMaximum()-result.getCnt();
+
+        //     if(remain > obj.getPerson()) {
+        //         result.setPerson(obj.getPerson());
+        //         infolist.add(result);
+        //     }
+        //     else {
+        //         outcome = 0;
+        //         String message = "신청 인원을 초과하여 신청이 불가능합니다.";
+        //         httpSession.setAttribute("message", message);
+        //         // httpSession.setAttribute("url", ); 주소는 장바구니 url로 이동을 시켜야겠네, 어디서 왔는지를 확인할 수 있으면 좋지
+        //     }
+            
+        // }
+
+        // if(outcome == 0) {
+
+        //     return "redirect:/alert.do";
+            
+        // }
+
+        // model.addAttribute("list", infolist);
+        // return "/apply/insert";
         
     }
 

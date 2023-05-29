@@ -127,5 +127,13 @@ public class MemberController {
         model.addAttribute("user", user);
         return "/member/myclass";
     }
+
+    @GetMapping(value = "/basket.do")
+    public String basketGET(
+        @AuthenticationPrincipal User user,
+        Model model
+    ) {
+        return "/member/basket";
+    }
     
 }

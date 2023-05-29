@@ -36,5 +36,11 @@ public class TestController {
         return "/test/productdetail";
     }
 
+    @GetMapping(value = "/a.do")
+    public String alistGET() {
+
+        return "/a";
+    }
+
     
 }
