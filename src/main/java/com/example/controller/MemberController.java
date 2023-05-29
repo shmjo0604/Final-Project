@@ -81,18 +81,16 @@ public class MemberController {
         String id = user.getUsername();
 
         if(menu == 0) {
-            return "redirect:/member/mypage.do?(menu=1)";
+            return "redirect:/member/mypage.do?menu=1";
         }
 
         if(menu == 1) {
             List<ClassProduct> list = cService.selectMyClassList(id);
             //log.info(format, list.toString());
-            return "redirect:/member/mypage.do?(menu=1)";
         }
 
         else if(menu == 2) {
 
-            return "redirect:/member/mypage.do?(menu=2)";
         }
 
         else if(menu == 3) {
@@ -120,14 +118,40 @@ public class MemberController {
         
     }
 
+
     @GetMapping(value = "/myclass.do")
     public String myclassGET(
+        @RequestParam(name = "menu", defaultValue = "0") int menu,
         @AuthenticationPrincipal User user,
         Model model
     ) {
+        String id = user.getUsername();
+
+        if(menu == 0) {
+            // return "member/myclass_menu1";
+            return "redirect:/member/myclass.do?menu=1";
+        }
+
+        if(menu == 1) {
+            List<ClassProduct> list = cService.selectMyClassList(id);
+            model.addAttribute("list", list);
+            //log.info(format, list.toString());
+            // return "member/myclass_menu1";
+        }
+
+        else if(menu == 2) {
+
+        }
 
         model.addAttribute("user", user);
         return "/member/myclass";
+    }
+
+    @PostMapping(value = "/myclass.do")
+    public String myclassPOST(
+        @RequestParam(name = "menu", defaultValue = "0", required = false) int menu
+    ){
+        return "redirect:/myclass.do?menu="+menu;
     }
     
 }

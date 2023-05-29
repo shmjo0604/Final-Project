@@ -1,4 +1,4 @@
-<div th:fragment="menu_admin">
+<div th:fragment="menu_1" class="col-9" style="min-height: 100vh;">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
@@ -94,13 +94,13 @@
 
 <div class="container">
     <div class="m-3" style="border-bottom:2px dotted #bcbcbc; min-height: 40px; font-size: large; font-weight: bold;">클래스 조회</div>
-        <div class="row m-3">
+        <div class="row m-1">
             <div class="col-4">
                 <div class="card shadow-sm">
                     <div class="card">
                         <div class="card-header" style="display: inline-block;">
-                            <div style="float: left; width: 90%; height:auto;"><a style="width: 20%;">등록일자 :
-                                    2023-05-25</a></div>
+                            <div style="float: left; width: 90%; height:auto;"><a style="width: 20%;">
+                                등록일자 : <input name="regdate" th:value="${obj.regdate}" readonly /></a></div>
                             <div class="dropdown" style=" float: left; width: 10%; height: 25px;">
                                 <!-- three dots -->
                                 <div class="dropbtn icons btn-right" onclick="showDropdown(1)">
@@ -108,9 +108,9 @@
                                 </div>
                                 <!-- menu -->
                                 <div id="myDropdown1" class="dropdown-content">
-                                    <a href="#">등록</a>
-                                    <a href="#">수정</a>
-                                    <a href="#">삭제</a>
+                                    <a class="btn" id="imput_btn" th:href="@{/member/unit/insert.do( classcode=${obj.classcode} )}">등록</a>
+                                    <a class="btn" id="modify_btn" href="#">수정</a>
+                                    <a class="btn" id="delete_btn" href="#">삭제</a>
                                 </div>
                             </div>
                         </div>
@@ -193,3 +193,23 @@
         </div>
     </div>
 </div>
+
+<script>
+	let form = $("#infoForm");
+	
+	$("#input_btn").on("click", function(e){
+		form.find("#bno").remove();
+		form.attr("action", "/member/unit/insert");
+		form.submit();
+	});
+	
+	$("#modify_btn").on("click", function(e){
+		form.attr("action", "/class/modify");
+		form.submit();
+	});	
+
+    $("#delete_btn").on("click", function(e){
+		form.attr("action", "/class/delete");
+		form.submit();
+	});	
+</script>	
