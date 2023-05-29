@@ -1,0 +1,180 @@
+<div th:fragment="menu_admin">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+        /* 카드 드롭다운 버튼 함수 */
+        function showDropdown(classcode) {
+            if(classcode === 1){
+                document.getElementById("myDropdown1").classList.toggle("show");
+            }
+            else if(classcode === 2){
+                document.getElementById("myDropdown2").classList.toggle("show");
+            }
+            else if(classcode === 3){
+                document.getElementById("myDropdown3").classList.toggle("show");
+            }
+            
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .icons img {
+            height: 20px;
+            width: 20px;
+            margin-top: 0.5px;
+            vertical-align: top;
+            pointer-events: none;
+            cursor: pointer;
+        }
+        .dropbtn {
+            cursor: pointer;
+        }
+        .dropbtn:hover img{
+            transform: scale(1.12);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: relative;
+            background-color: rgb(255, 255, 255);
+            min-width: 130px;
+            overflow: auto;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 8%;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown a:hover {
+            background-color: #f1f1f1;
+           
+        }
+        .show {display:block;}
+
+        .noact{
+            float: right;
+            font-size: 13px;
+            color: dimgray;
+            margin-top: 5px;
+        }
+        .noact:hover{
+            color: black;
+        }
+        /* .btn{
+            background-color: rgb(242, 250, 249);
+            color: black;
+        } */
+    </style>
+
+    <div class="row">
+        <div class="col-4">
+            <div class="card shadow-sm">
+                <div class="card">
+                    <div class="card-header" style="display: inline-block;">
+                        <div style="float: left; width: 90%; height:auto;"><a style="width: 20%;">등록일자 : 2023-05-25</a></div>
+                        <div class="dropdown" style=" float: left; width: 10%; height: 25px;">
+                            <!-- three dots -->
+                            <div class="dropbtn icons btn-right" onclick="showDropdown(1)">
+                                <img th:src="@{/image/icon-zoom.png}" width="24" alt="더보기">
+                            </div>
+                            <!-- menu -->
+                            <div id="myDropdown1" class="dropdown-content">
+                                <a href="#">등록</a>
+                                <a href="#">수정</a>
+                                <a href="#">삭제</a>
+                            </div>
+                        </div>       
+                    </div>
+                    
+                    <img src="" style="width: 100%; height: 200px; background-color: darkgray;"/>
+                    <div class="card-body">
+                        <p class="card-title" style="font-weight: bold; font-size: large;">레터링 케이크 만들기</p>
+                        <p class="card-text" style="font-weight: normal; font-size: medium;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas sed sem ut malesuada.</p>
+                        <a href="#" class="btn btn-sm btn-success" style="width: 100%;">클래스 상세보기</a>
+                        <a href="#" class="noact">비활성화</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card shadow-sm">
+                <div class="card">
+                    <div class="card-header" style="display: inline-block;">
+                        <div style="float: left; width: 90%; height:auto;"><a style="width: 20%;">등록일자 : 2023-05-25</a></div>
+                        <div class="dropdown" style=" float: left; width: 10%; height: 25px;">
+                            <!-- three dots -->
+                            <div class="dropbtn icons btn-right" onclick="showDropdown(2)">
+                                <img th:src="@{/image/icon-zoom.png}" width="24" alt="더보기">
+                            </div>
+                            <!-- menu -->
+                            <div id="myDropdown2" class="dropdown-content">
+                                <a href="#">등록</a>
+                                <a href="#">수정</a>
+                                <a href="#">삭제</a>
+                            </div>
+                        </div>       
+                    </div>
+                    
+                    <img src="" style="width: 100%; height: 200px; background-color: darkgray;"/>
+                    <div class="card-body">
+                        <p class="card-title" style="font-weight: bold; font-size: large;">레터링 케이크 만들기</p>
+                        <p class="card-text" style="font-weight: normal; font-size: medium;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas sed sem ut malesuada.</p>
+                        <a href="#" class="btn btn-sm btn-success" style="width: 100%;">클래스 상세보기</a>
+                        <a href="#" class="noact">비활성화</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card shadow-sm">
+                <div class="card">
+                    <div class="card-header" style="display: inline-block;">
+                        <div style="float: left; width: 90%; height:auto;"><a style="width: 20%;">등록일자 : 2023-05-25</a></div>
+                        <div class="dropdown" style="float: left; width: 10%; height: 25px;">
+                            <!-- three dots -->
+                            <div class="dropbtn icons btn-right" onclick="showDropdown(3)">
+                                <img th:src="@{/image/icon-zoom.png}" alt="더보기">
+                            </div>
+                            <!-- menu -->
+                            <div id="myDropdown3" class="dropdown-content">
+                                <a href="#">등록</a>
+                                <a href="#">수정</a>
+                                <a href="#">삭제</a>
+                            </div>
+                        </div>       
+                    </div>
+                    
+                    <img src="" style="width: 100%; height: 200px; background-color: darkgray;"/>
+                    <div class="card-body">
+                        <p class="card-title" style="font-weight: bold; font-size: large;">레터링 케이크 만들기</p>
+                        <p class="card-text" style="font-weight: normal; font-size: medium;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas sed sem ut malesuada.</p>
+                        <a href="#" class="btn btn-sm btn-success" style="width: 100%;">클래스 상세보기</a>
+                        <a href="#" class="noact">비활성화</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

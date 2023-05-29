@@ -1,0 +1,213 @@
+<div th:fragment="menu_admin">
+
+    <div id="main">
+        <div id="maintable">
+
+            <h3>문의 내역 조회</h3><br />
+
+            <table style="margin-left: auto; margin-top: 3px; margin-bottom: 3px; border:none;">
+                <tr>
+                        <td style="padding-left: 5px; border:none;"><select class="custom-select" id="_choice" name="choice">
+                                <option selected>선택</option>
+                                <option value="title">클래스명</option>
+                                <option value="writer">작성자</option>
+                                <option value="content">처리상태</option>
+                        </select></td>
+                        
+                        <td style="padding-left: 5px; border:none;" class="align-middle">
+                        <input type="text" class="form-control" id="_search" name="search" placeholder="검색어"></td>
+                        
+                        <td style="padding-left: 5px; border:none;">
+                            <span><button type="button" class="btn btn-success" id="btnSearch">검색</button></span>
+                        </td>
+                </tr>
+            </table>	
+
+            <table class="table table-lg table-hover">
+                <thead>
+                    <tr class="table-success">
+                        <th scope="col" ></th>
+                        <th scope="col">클래스명</th>
+                        <th scope="col">작성자</th>
+                        <th scope="col">문의제목</th>
+                        <th scope="col">문의내용</th>
+                        <th scope="col">날짜</th>
+                        <th scope="col">처리상태</th>
+                        <th scope="col">작성</th>
+                    </tr>
+                </thead>
+
+                <!-- <tbody>
+                        <tr th:each="obj : ${list}">
+                            <td th:text="${obj.no}""></td>
+                            <td th:text="${obj.title}""></td>
+                            <td th:text="${obj.writer}""></td>
+                            <td th:text="${obj.qnatitle}""></td>
+                            <td th:text="${obj.qnacontent}""></td>
+                            <td th:text="${obj.regdate}""></td>
+                            <td th:text="${obj.chk}""></td>
+                            <td><button id="createBtn" type="button" class="btn btn-outline-success"  data-toggle="modal" data-target="#myModal">답변하기</button></td>
+                        </tr>
+                </tbody> -->
+
+                <tbody class="table-group-divider">
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>도자기만들기</td>
+                        <td>박보검</td>
+                        <td>시간문의</td>
+                        <td>도자기 완성본을 받는데 얼마나 걸리나요?</td>
+                        <td>2022-05-22</td>
+                        <td style="color: #444444;">답변대기</td>
+                        <td><button id="createBtn" type="button" class="btn btn-outline-success"  data-toggle="modal" data-target="#myModal">답변하기</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>도자기만들기</td>
+                        <td>이제훈</td>
+                        <td>난이도</td>
+                        <td>초보자도 쉽게 할 수 있을까요?</td>
+                        <td>2022-05-22</td>
+                        <td style="color: #444444;">답변대기</td>
+                        <td><button id="createBtn" type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">답변하기</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>플라워클래스</td>
+                        <td>강동원</td>
+                        <td>꽃종류</td>
+                        <td>5월달에는 어떤 꽃 종류가 많나요?</td>
+                        <td>2022-05-22</td>
+                        <td style="color: crimson;">답변완료</td>
+                        <td><button id="createBtn" type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">답변하기</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td>패들보드</td>
+                        <td>박서준</td>
+                        <td>계절</td>
+                        <td>지금 바닷물이 많이 차갑진 않나요?</td>
+                        <td>2022-05-22</td>
+                        <td style="color: #444444;">답변대기</td>
+                        <td><button id="createBtn" type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">답변하기</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td>반지만들기</td>
+                        <td>김우빈</td>
+                        <td>추가재료</td>
+                        <td>추가재료에 대한 가격이 어떻게 되나요?</td>
+                        <td>2022-05-23</td>
+                        <td style="color: #444444;">답변대기</td>
+                        <td><button id="createBtn" type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#myModal1">답변하기</button></td>
+                    </tr>
+                </tbody>
+                
+            </table>
+
+            <!-- 모달 -->
+            <div class="modal modal-center fade" id="myModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">답변하기</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-question">
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>질문</td>
+                                <td><input type="text" name="qna" th:value="${qnacontent}" class="form-control" readonly></td>
+                            </tr>
+
+                            <tr>
+                                <td>답변</td>
+                                <td><textarea name="answer" id="answer" cols="92" rows="10"></textarea></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                      <input type="submit" class="btn btn-primary" value="등록">
+                    </div>
+                  </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <div class="container">
+        <nav aria-label="Page navigation">
+            <ul class="pagination" id="pagination"></ul>
+        </nav>
+    </div>
+    
+    <script>
+        let totalCount = 23; //글의 총수
+        let pageSize =10;
+        let pageNumber = 1; // 현재 페이지
+        
+        let _totalPages = totalCount / 10
+        
+        // 10  만약 글이 23개 있다면 10개로 나눠서 페이지당 글 구성이 10개 10개 3개가 된다는 말.
+        if(totalCount % 10 > 0){
+            _totalPages++;
+        }
+        
+        $('#pagination').twbsPagination({ 
+            startPage:1,
+            totalPages: _totalPages,
+            //페이지당 보이는 글의수는 10개
+            visiblePages: 10,
+            
+            //" « "라는 문자열로 최신글 방향을 표시
+            first:'<span sris-hidden="true">«</span>' ,
+            
+            //" » "라는 문자열로 마지막글 방향을 표시
+            last:'<span sris-hidden="true">»</span>' ,
+            
+            prev:"이전",
+            next:"다음",
+            onPageClick: function (event, page) {
+            
+            //확인을 위해 클릭한 페이지의 번호를 알림창으로 출력	
+                alert(page); 
+                    }
+             })
+
+    var action=0;
+    var url='';
+    var type='';
+    var bno='';
+
+    $(document).ready(function(){
+
+        // 답변하기 버튼 클릭
+        $("#createBtn").click(function(){
+            action='create';
+            type='POST'
+            $("#modal-title").text("답변작성");
+            $("#myModal").modal();
+        })
+    })
+
+    // 20글자 이상시 글자수 자동조절
+    function textLengthOverCut(txt, len, lastTxt) {
+        if (len == "" || len == null) { // 기본값
+            len = 20;
+        }
+        if (lastTxt == "" || lastTxt == null) { // 기본값
+            lastTxt = "...";
+        }
+        if (txt.length > len) {
+            txt = txt.substr(0, len) + lastTxt;
+        }
+        return txt;
+    }
+
+    </script>	
+    
+</div>

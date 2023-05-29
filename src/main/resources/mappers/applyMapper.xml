@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.ApplyMapper">
+
+<!-- 1. 클래스 일괄 신청 -->    
+<insert id="insertApplyBatch" parameterType="list">
+    INSERT INTO APPLY(no, person, payment, unitno, memberid)
+    SELECT seq_apply_no.NEXTVAL, T1.* FROM(
+        <foreach item="obj" collection="list" separator=" UNION ALL ">
+            SELECT ${obj.person} person, ${obj.payment} payment, ${obj.unitno} unitno, '${obj.memberid}' memberid 
+            FROM DUAL
+        </foreach>
+    ) T1
+</insert>
+
+<!-- 2. 클래스 신청 상태 기록 -->
+<insert id="insertApplyStatusBatch" parameterType="list">
+    INSERT INTO applystatus(no, applyno, chk)
+    SELECT seq_applystatus_no.NEXTVAL, T1.* FROM(
+        <foreach item="obj" collection="list" separator=" UNION ALL ">
+            SELECT ${obj.applyno} applyno, ${obj.chk} chk FROM DUAL
+        </foreach>
+    ) T1
+</insert>
+
+<!-- 3. 클래스 신청 취소 -->
+<update id="updateApplyCancel" parameterType="Apply">
+    UPDATE APPLY SET chk = 2 WHERE no = #{no}
+</update>
+
+<!-- 4. 클래스 참여 완료 -->
+<update id="updateApplyComplete" parameterType="list">
+    UPDATE APPLY SET chk = 3 WHERE no In (
+        <foreach item="obj" collection="list" separator=" , ">
+            #{obj.no}
+        </foreach>
+    )
+</update>
+
+<!-- 5. 클래스 신청 성공 시, 인원수 변경 -->
+<update id="updateClassUnitApplySuccess" parameterType="list">
+    UPDATE classunit SET
+        cnt = (CASE 
+            <foreach item="obj" collection="list" separator=" ">
+                WHEN no = #{obj.unitno} THEN cnt + #{obj.person}
+            </foreach>
+        END)
+        WHERE no IN(
+            <foreach item="obj" collection="list" separator=" ">
+                #{obj.unitno}
+            </foreach>
+        )
+</update>
+
+<!-- 6. 클래스 신청 취소 시, 인원수 변경 -->
+<update id="updateClassUnitApplyCancel" parameterType="Apply">
+    UPDATE classunit SET cnt = cnt - #{person} WHERE no = #{unitno}
+</update>
+
+<!-- 7. 클래스 신청 상태(chk = 1)인 것만 조회 -->
+<select id="selectApplyListById" parameterType="map" resultType="ApplyView">
+    SELECT a.* FROM(
+        SELECT ROW_NUMBER() OVER(ORDER BY a.applyregdate DESC) AS rnum, 
+        a.* FROM applyview a WHERE memberid = #{id}
+        ) a WHERE a.rnum <![CDATA[ >= ]]> ${first} AND s.rnum <![CDATA[ <= ]]> ${last} ORDER BY a.no DESC
+</select>
+
+</mapper>
