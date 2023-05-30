@@ -35,8 +35,20 @@
                         <th scope="col">작성</th>
                     </tr>
                 </thead>
-
+                
                 <tbody>
+                    <tr th:each="obj : ${list}">
+                        <td th:text="${obj.no}"></td>
+                        <td th:text="${obj.title}"></td>
+                        <td class="txt" th:text="${obj.content}"></td>
+                        <td th:text="${obj.regdate}"></td>
+                        <td th:text="${obj.chk}"></td>
+                        <td th:text="${obj.memberid}"></td>
+                        <td><button id="createBtn" type="button" class="btn btn-outline-success"  data-toggle="modal" data-target="#myModal">답변하기</button></td>
+                    </tr>
+                </tbody>
+
+                <!-- <tbody>
                         <tr th:each="obj : ${list}">
                             <td th:text="${obj.no}"></td>
                             <td th:text="${obj.title}"></td>
@@ -47,7 +59,7 @@
                             <td th:text="${obj.chk}"></td>
                             <td><button id="createBtn" type="button" class="btn btn-outline-success"  data-toggle="modal" data-target="#myModal">답변하기</button></td>
                         </tr>
-                </tbody>
+                </tbody> -->
 
                 <!-- <tbody class="table-group-divider">
                     <tr>
