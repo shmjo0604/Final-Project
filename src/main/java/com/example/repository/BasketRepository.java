@@ -7,5 +7,7 @@ import com.example.entity.Basket;
 
 @Repository
 public interface BasketRepository extends JpaRepository<Basket, Long> {
+
+    // Basket findByMemberIdAndUnitNo(String memberid, Long unitno);
     
 }

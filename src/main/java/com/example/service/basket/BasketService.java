@@ -1,5 +1,7 @@
 package com.example.service.basket;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Basket;
@@ -14,6 +16,12 @@ public interface BasketService {
     public int updateBasketOne(Basket obj);
 
     // 3. 선택 상품 삭제
-    public int deleteBasketOne(Basket obj);
+    public int deleteBasketOne(int obj);
+
+    // 4. 카트 목록
+    public List<Basket> BasketList(String member);
+
+    // 5. 장바구니 데이터 체크
+    public Basket checBasket(Basket obj);
     
 }

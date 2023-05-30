@@ -9,11 +9,14 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!--CSS-->
+    <!-- <link rel="stylesheet" th:href="@{/css/main.css}"> -->
+    <link rel="stylesheet" th:href="@{/css/basket/basket.css}">
 </head>
 <style>
-    body {
+    /* body {
         margin: 0;
-        /* background-color: #7addc9; */
+        background-color: #7addc9;
     }
 
     * {
@@ -223,7 +226,7 @@
         background-color: green;
         color: white;
         border: none;
-    }
+    } */
     
     
     
@@ -233,6 +236,7 @@
     <h3>장바구니</h3>
     <section class="cart">
         <div class="cart__information">
+            <input type="hidden" value="${login.userid}" id="login_userid">
             <ul>
                 <li>장바구니 상품은 최대 30일간 저장됩니다.</li>
                 <li>장바구니에서 확인해야하는 정보로 추후 수정</li>
@@ -300,6 +304,7 @@
 
                     <td colspan="3">
                         <button class="cart__list__optionbtn" type="button" id="delBtn">선택상품 삭제</button>
+                        <button id="mycart_btn">장바구니</button>
                     </td>
                     
                     <td></td>
@@ -323,7 +328,7 @@
     function close_pop(flag) {
         $('#myModal').hide();
     };
-    
+
 
     // 체크박스 선택해서 삭제하는 기능
     // $('#delBtn').click(function() {
