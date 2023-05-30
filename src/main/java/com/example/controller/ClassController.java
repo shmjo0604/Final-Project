@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
@@ -28,8 +30,12 @@ import com.example.dto.ActivityCate;
 import com.example.dto.Apply;
 import com.example.dto.CityCate;
 import com.example.dto.ClassProduct;
+import com.example.dto.ClassUnit;
+import com.example.entity.Basket;
 import com.example.entity.ClassImage;
+import com.example.entity.Member;
 import com.example.service.KakaoLocalAPI;
+import com.example.service.basket.BasketService;
 import com.example.service.classproduct.ClassInsertService;
 import com.example.service.classproduct.ClassManageService;
 import com.example.service.classproduct.ClassSelectService;
@@ -48,6 +54,7 @@ public class ClassController {
     @Autowired ClassInsertService iService;
     @Autowired ClassManageService manageService;
     @Autowired ClassUnitService unitService;
+    @Autowired BasketService basketService;
 
     @Autowired ResourceLoader resourceLoader;
     @Value("${default.image}") String defaultImg;
@@ -74,11 +81,16 @@ public class ClassController {
     @GetMapping(value = "/product.do")
     public String selectoneGET(
         @RequestParam(name = "classcode", defaultValue = "0") long classcode,
-        Model model
+        Model model,
+        @AuthenticationPrincipal User user
         ) {
 
         if (classcode == 0) {
             return "redirect:/class/select.do?search=list";
+        }
+
+        if (user != null) {
+            model.addAttribute("user", user);
         }
 
         ClassProduct obj = cService.selectClassProductOne(classcode);
@@ -92,16 +104,33 @@ public class ClassController {
         model.addAttribute("mainImg", mainImg);
         model.addAttribute("subImg", subImg);
         model.addAttribute("profile", profile);
+        
 
         return "class/selectone";
     }
 
     @PostMapping(value = "/product.do")
-    public String productPOST(@ModelAttribute Apply apply) {
+    public String productPOST(@ModelAttribute Apply apply, HttpSession httpSession) {
 
-        log.info(apply.toString());
+        //log.info(apply.toString());
 
-        return "redirect:/apply/insert.do";
+        long unitno = apply.getUnitno();
+        
+        ClassUnit obj = cService.selectClassUnitOne(unitno);
+
+        if(obj.getMaximum()-obj.getCnt() > apply.getPerson()) {
+
+            httpSession.setAttribute("unitno", unitno);
+            httpSession.setAttribute("person", apply.getPerson());
+
+            return "redirect:/apply/insert.do";
+        }
+        else {
+
+            return "redirect:/alert.do";
+        }
+
+        
     }
 
     @GetMapping(value = "/insert.do")
@@ -203,6 +232,34 @@ public class ClassController {
         // 여기서 unit 정보가 있으면 조회해서 list로 넘겨야 하는데, 달력이 문제네 restcontroller로 할 거면 화면만 띄우면 되고
 
         return "/class/unit";
+    }
+
+    @PostMapping(value = "/basket.do")
+    public String basketPOST(
+        @RequestParam(name = "unitno") long unitno,
+        @RequestParam(name = "cnt") int cnt,
+        @AuthenticationPrincipal User user
+        ) {
+
+        String id = user.getUsername();
+
+        Member member = new Member();
+        member.setId(id);
+
+        com.example.entity.ClassUnit classunit = new com.example.entity.ClassUnit();
+        classunit.setNo(unitno);
+
+        Basket obj = new Basket();
+        
+        obj.setCnt(cnt);
+        obj.setMember(member);
+        obj.setClassunit(classunit);
+
+        int ret = basketService.insertBasketOne(obj);
+        
+        log.info(format, ret);
+
+        return "redirect:alert.do";
     }
 
 
