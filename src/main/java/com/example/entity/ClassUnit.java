@@ -61,7 +61,7 @@ public class ClassUnit {
   private int classlevel;
   
   // 할인률
-  private String discount;
+  private int discount;
   
   // 클래스 추가금액
   private int addprice;
