@@ -7,12 +7,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dto.ActDetailCate;
 import com.example.dto.ClassProduct;
+import com.example.dto.ClassUnit;
 import com.example.dto.ClassUnitView;
 import com.example.dto.LocalCate;
 import com.example.service.classproduct.ClassSelectService;
@@ -120,6 +122,52 @@ public class RestClassController {
 
         }
 
+        return retMap;
+
+    }
+
+    @GetMapping(value = "selectunit.json")
+    public Map<String, Object> selectunitGET(@ModelAttribute ClassUnit obj) {
+
+        Map<String, Object> retMap = new HashMap<>();
+
+        //log.info(format, obj.toString());
+
+        List<ClassUnit> list = cService.selectClassUnitList(obj);
+
+        log.info(format, list.toString());
+
+        retMap.put("ret", 0);
+
+        if(!list.isEmpty()) {
+            
+            retMap.put("ret", 1);
+            retMap.put("list", list);
+
+        }
+
+        return retMap;
+    }
+
+    @GetMapping(value = "/selectunitone.json")
+    public Map<String, Object> selectunitoneGET(@RequestParam(name = "no") long no) {
+
+        Map<String, Object> retMap = new HashMap<>();
+
+        log.info(format, no);
+
+        ClassUnit obj = cService.selectClassUnitOne(no);
+
+        retMap.put("ret", 0);
+
+        if(obj != null) {
+
+           log.info(format, obj.toString());
+           retMap.put("ret", 1);
+           retMap.put("obj", obj); 
+
+        }
+        
         return retMap;
 
     }

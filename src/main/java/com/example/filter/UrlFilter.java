@@ -30,7 +30,7 @@ public class UrlFilter extends OncePerRequestFilter {
 
             HttpSession httpSession = request.getSession();
 
-            if (!path.contains("login") && !path.contains("logout") && !path.contains("join")) {
+            if (!path.contains("login") && !path.contains("logout") && !path.contains("join") && !path.contains("image")) {
 
                 if (query == null) {
                     httpSession.setAttribute("url", path);

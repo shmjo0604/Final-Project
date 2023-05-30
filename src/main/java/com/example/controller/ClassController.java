@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.dto.ActivityCate;
+import com.example.dto.Apply;
 import com.example.dto.CityCate;
 import com.example.dto.ClassProduct;
-import com.example.dto.ClassUnit;
 import com.example.entity.ClassImage;
 import com.example.service.KakaoLocalAPI;
 import com.example.service.classproduct.ClassInsertService;
@@ -96,6 +96,14 @@ public class ClassController {
         return "class/selectone";
     }
 
+    @PostMapping(value = "/product.do")
+    public String productPOST(@ModelAttribute Apply apply) {
+
+        log.info(apply.toString());
+
+        return "redirect:/apply/insert.do";
+    }
+
     @GetMapping(value = "/insert.do")
     public String insertGET(@AuthenticationPrincipal User user, Model model) {
 
@@ -126,9 +134,9 @@ public class ClassController {
         Map<String, String> map = KakaoLocalAPI.getCoordinate(obj.getAddress1());
 
         // 2. ClassProduct 객체 obj에 위도, 경도, 사용자 ID SET
-        obj.setLatitude(map.get("x"));
-        obj.setLongitude(map.get("y"));
-        obj.setMemberid(user.getUsername()); // security session에 저장된 ID 정보를 호출
+        obj.setLatitude(map.get("y"));
+        obj.setLongitude(map.get("x"));
+        obj.setMemberid(user.getUsername());  // security session에 저장된 ID 정보를 호출
 
         // 3. 결과 확인
         log.info(format, obj.toString());

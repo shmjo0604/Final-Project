@@ -30,10 +30,15 @@
     <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}" />
     <meta name="theme-color" content="#712cf9">
     <style>
+        @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&display=swap');
+        body {
+            font-family : 'Nanum Gothic';
+        }
         .link-secondary {
             background-color: #d3eed1;
             border-radius: 5px;
         }
+
         .bd-placeholder-img {
             font-size: 1.125rem;
             text-anchor: middle;
@@ -124,6 +129,24 @@
             color: red;
             /* text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black; */
         }
+
+        .productbody {
+            background-color: white;
+        }
+
+        /* 일요일 날짜 빨간색 */
+        .fc-day-sun a {
+            color: red;
+            text-decoration: none;
+        }
+
+        /* 토요일 날짜 파란색 */
+        .fc-day-sat a {
+            color: blue;
+            text-decoration: none;
+        }
+        
+        
     </style>
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
@@ -133,7 +156,7 @@
     <!-- header 영역 -->
     <header th:replace="~{header :: headerFragment}"></header>
 
-    <div class="container">
+    <div class="container productbody">
 
         <div class="nav-scroller py-1 mb-2">
             <nav class="nav d-flex justify-content-start">
@@ -148,7 +171,7 @@
         <hr>
     </div>
 
-    <main class="container">
+    <main class="container productbody">
 
         <!-- <div class="row mb-2">
             <div class="col-md-6">
@@ -197,7 +220,7 @@
         </div> -->
 
         <div class="row g-5">
-            <div class="col-md-8">
+            <div class="col-md-7">
 
                 <p>카테고리1 > 카테고리2</p>
                 <div class="p-2 p-md-3 mb-4 rounded bg-dark">
@@ -218,25 +241,27 @@
 
                 <div class="border-bottom">
                     <div class="d-flex">
-                        <h3 class="pb-2 mb-4" th:text="${obj.title}">
-                            
-                        </h3>
-                        
+                        <div class="d-flex align-items-center mb-4">
+                            <h3><i class="bi bi-snow2 me-2"></i></h3>
+                            <h3 th:text="${obj.title}"></h3>
+                        </div>
+
                         <div class="ms-auto d-flex justify-content-between">
                             <h4 class="mx-2"><i class="bi bi-heart-fill"></i>
-                                <p class="ms-2 mt-1" style="display:inline-block;">100</p>
+                                <span class="ms-2 mt-1" style="display:inline-block;">100</span>
                             </h4>
-                            <h4 class="ms-2 align-items-center"><i class="bi bi-star-fill"></i>
-                                <p class="ms-2 mt-1" style="display:inline-block;">4.0</p>
+                            <h4 class="ms-2"><i class="bi bi-star-fill"></i>
+                                <span class="ms-2 mt-1" style="display:inline-block;">4.0</span>
                             </h4>
                         </div>
                     </div>
-                    
+
                 </div>
 
 
                 <article class="blog-post">
-                    <h3 class="blog-post-title my-3">클래스 소개</h3>
+                    <h3 class="blog-post-title d-flex align-items-center my-3"><i
+                            class="bi bi-file-text-fill me-2"></i><span>클래스 소개</span></h3>
 
                     <div class="d-flex justify-content-start">
                         <p class="border rounded p-1 me-1" style=" font-size:small; color: rgba(0, 0, 0, 0.7)">#친구와 같이
@@ -249,44 +274,49 @@
 
                     <hr>
 
-                    <h3 class="my-3">커리큘럼 소개</h3>
-                    
+                    <h3 class="d-flex align-items-center my-3"><i class="bi bi-signpost-fill me-2"></i><span>커리큘럼
+                            소개</span></h3>
+
                     <div th:utext="${obj.curriculum}"></div>
 
                     <hr>
 
-                    <h3 class="my-3">강사 소개</h3>
-                    
+                    <h3 class="d-flex align-items-center my-3"><i class="bi bi-person-vcard me-2"></i><span>강사 소개</span>
+                    </h3>
+
                     <div th:utext="${obj.instructor}"></div>
 
                     <hr>
 
-                    <h3>위치</h3>
-                    
-                    <div class= "mx-2" id="map" style="width:750px;height:340px; border: 1px solid dimgray; "></div>
+                    <h3 class="d-flex align-items-center mb-3"><i class="bi bi-geo-alt-fill me-2"></i><span>위치</span>
+                    </h3>
+
+                    <div class="mx-2" id="map" style="width:750px;height:340px; border: 1px solid dimgray; "></div>
 
                     <hr>
 
-                    <h3>리뷰</h3>
-                    
+                    <h3 class="d-flex align-items-center mb-3"><i class="bi bi-stars me-2"></i><span>리뷰</span></h3>
+
                     <div class="card mb-3">
                         <div class="row g-0">
-                          <div class="col-md-3">
-                            <img th:src="@{/image/리뷰사람.png}" class="img-fluid rounded-start" alt="...">
-                          </div>
-                          <div class="col-md-9">
-                            <div class="card-body">
-                              <h5 class="card-title">Card title</h5>
-                              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            <div class="col-md-3">
+                                <img th:src="@{/image/리뷰사람.png}" class="img-fluid rounded-start" alt="...">
                             </div>
-                          </div>
+                            <div class="col-md-9">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">This is a wider card with supporting text below as a natural
+                                        lead-in to additional content. This content is a little bit longer.</p>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </div>
                         </div>
-                      </div>
+                    </div>
 
                     <hr>
 
-                    <h3>문의</h3>
+                    <h3 class="d-flex align-items-center mb-3"><i class="bi bi-question-square me-2"></i><span>문의</span>
+                    </h3>
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum unde porro aliquid eaque
                         asperiores recusandae, molestiae id architecto commodi ex ad pariatur facilis itaque fugit. Odit
                         iste nesciunt nulla. Consequatur tempore, facere velit eaque facilis, est voluptate temporibus
@@ -294,15 +324,50 @@
                 </article>
             </div>
 
-            <div class="col-md-4">
-                <div class="position-sticky" style="top: 2rem;">
-                    <div class="p-4 mb-3 bg-body-tertiary rounded">
-                        <h3>클래스 일정</h3>
-                        <p class="mb-0">Customize this section to tell your visitors a little bit about your
-                            publication, writers, content, or something else entirely. Totally up to you.</p>
+            <div class="col-md-5">
+                <div class="position-sticky" style="top: 1rem;">
+                    <div class="p-1 mb-3 bg-body-tertiary rounded">
+                        <h3 class="d-flex align-items-center mb-3 justify-content-center"><i
+                                class="bi bi-calendar-event me-2"></i><span>클래스 일정</span></h3>
+
+                        <div id='calendar' class="mb-2"></div>
+
+                        <div id="unitbox" class="border mb-2" style="width: 100%; height: 150px; overflow-y: auto; display: none;">
+                            <table id="utable" class="table table-hover">
+                                <thead class="table-success">
+                                    <tr>
+                                        <th>날짜</th>
+                                        <th>시작</th>
+                                        <th>종료</th>
+                                        <th>할인율</th>
+                                        <th>추가금액</th>
+                                        <th>난이도</th>
+                                        <th>최대인원</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="unittable" class="table-group-divider">
+        
+                                    <!-- 동적 생성 -->
+                                    
+                                </tbody>
+                                
+                            </table>
+                        </div>
+
+                        <div id="applybox" class="border mb-2" style="height: 230px;">
+
+                        </div>
+
+                        <div class="d-flex">
+                            <button class="classbtn w-50 me-2" style="height: 50px; background-color: #FDC708;" type="button">
+                                장바구니</button>
+                            <button class="classbtn w-50" style="height: 50px; background-color: #9AD98A;" type="button" th:onclick="applyAction()">
+                                신청하기</button>
+                        </div>
+                        
                     </div>
 
-                    <div class="p-4">
+                    <!-- <div class="p-4">
                         <h4 class="fst-italic">Archives</h4>
                         <ol class="list-unstyled mb-0">
                             <li><a href="#">March 2021</a></li>
@@ -318,35 +383,51 @@
                             <li><a href="#">May 2020</a></li>
                             <li><a href="#">April 2020</a></li>
                         </ol>
-                    </div>
+                    </div> -->
 
-                    <div class="p-4">
-                        <h4 class="fst-italic">Elsewhere</h4>
-                        <ol class="list-unstyled">
-                            <li><a href="#">GitHub</a></li>
-                            <li><a href="#">Twitter</a></li>
-                            <li><a href="#">Facebook</a></li>
-                        </ol>
-                    </div>
+                    
                 </div>
             </div>
         </div>
 
     </main>
 
+    <!--form 태그 (post->get)-->
+    <!--unitno, person -->
+    <form id="form-apply" th:action="@{product.do}" method="post" style="display: none;">
+        <input id="unitno" name="unitno" type="number">
+        <input id="person" name="person" type="number">
+    </form>
+
+    <form id="form-basket" style="display: none;"></form>
+
+
     <footer th:replace="~{footer :: footerFragment}"></footer>
 
 
     <!--jQuery-->
     <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
+    <!--axios library-->
+    <script th:src="@{/js/axios.min.js}"></script>
     <!--bxslider-->
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <!--fullcalendar-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.0.0-alpha.4/plugins/gcal.js"></script>
+    <script th:src="@{/js/index.global.js}"></script>
+    <script th:src="@{/js/gcal.js}"></script>
     <!-- kakao map library -->
     <script type="text/javascript"
-    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4847ab83c2fe2a7607fbdad0614a758b"></script>
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4847ab83c2fe2a7607fbdad0614a758b"></script>
     <script th:inline="javascript">
-         /*<![CDATA[*/
+
+        /*<![CDATA[*/
+
+        const contextPath = $('#contextPathHolder').attr('data-contextPath');
+        const classcode = /*[[${obj.classcode}]]*/'';
+        const price = /*[[${obj.price}]]*/'';
+
+        var totalprice = 0;
 
         $(document).ready(function () {
             $('.slider').bxSlider({
@@ -355,46 +436,196 @@
             });
         });
 
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                googleCalendarApiKey: 'AIzaSyDL8tig_8-Hvx4DdJ0j4KTGPz39oUGVVFk',
+                initialView: 'dayGridMonth',
+                // headerToolbar: {
+                //     left: 'prev,next today',
+                //     center: 'title',
+                //     right: 'dayGridMonth'
+                // },
+                // eventSources: // 한국 기념일 ko.south_korea 추가
+                //     [{
+                //         googleCalendarId: "ko.south_korea#holiday@group.v.calendar.google.com"
+                //         , className: "koHolidays"
+                //         , color: "#80ff00"
+                //         , textColor: "#FFFFFF"
+                //     }],
+                height: 500,
+                expandRows: true,
+
+                titleFormat: function (date) { // title 설정
+                    return date.date.year + "년 " + (date.date.month + 1) + "월";
+                }
+                , columnHeaderText: function (date) {
+                    return weekList[date.getDay()]; // 헤더 var weekList = ['일','월','화','수','목','금','토']; 
+                },
+
+                dateClick: async function (info) {
+                    //console.log(info.dateStr);
+
+                    const url = contextPath + '/api/class/selectunit.json?classdate=' + info.dateStr + '&classcode=' + classcode;
+                    const headers = { "Content-Type": "application/json" };
+                    const { data } = await axios.get(url, { headers });
+
+                    console.log(data);
+
+                    const table = $("#unittable")[0];
+
+                    table.innerHTML="";
+
+                    if(data.ret === 1) {
+
+                        for(let obj of data.list) {
+
+                            var classlevel = '';
+
+                            if(obj.classlevel === 1) {
+                                classlevel = '입문자';
+                            }
+                            else if(obj.classlevel === 2) {
+                                classlevel = '경험자';
+                            }
+                            else if(obj.classlevel === 3) {
+                                classlevel = '숙련자';
+                            }
+
+                            table.innerHTML+= 
+                                '<tr onclick="unitSelect(' + obj.no + ')">' + 
+                                    '<td>' + obj.classdate + '</td>' +
+                                    '<td>' + obj.classstart + '</td>' +
+                                    '<td>' + obj.classend + '</td>' +
+                                    '<td>' + obj.discount + '%' + '</td>' +
+                                    '<td>' + obj.addprice + '원' + '</td>' +
+                                    '<td>' + classlevel + '</td>' +
+                                    '<td>' + obj.maximum + '명' + '</td>' +
+                                '</tr>' 
+
+                            $("#unitbox").css("display", "block");
+                        }
+                    }
+
+                    //alert('Date: ' + info.dateStr);
+                    //alert('Resource ID: ' + info.resource.id);
+                },
+                eventClick: function (info) {
+
+                    //클릭시 구글캘린더 url로 가는것을 막는다.
+
+                    info.jsEvent.stopPropagation();
+                    info.jsEvent.preventDefault();
+                }
+
+            });
+
+            calendar.render();
+
+        });
+
+        async function unitSelect(no) {
+
+            console.log(no);
+            $("#unitno").attr("value", no);
+
+            const url = contextPath + '/api/class/selectunitone.json?no=' + no;
+            const headers = { "Content-Type": "application/json" };
+            const { data } = await axios.get(url, { headers });
+
+            const box = document.querySelector("#applybox");
+
+            box.innerHTML="";
+
+            if(data.ret === 1) {
+
+                var remain = data.obj.maximum - data.obj.cnt;
+                totalprice = (price + data.obj.addprice) * (100-data.obj.discount) / 100;
+
+                box.innerHTML += 
+                    '<div class="container mt-3"> ' +
+                        '<div class="d-flex justify-content-between">' +
+                            '<span>신청 가능 인원 : ' + remain + '명' + '</span>' +
+                            '신청 인원수 선택 : ' + '<select id="select-remain" onchange="selectperson(this.value)"></select>' + '</span>' +
+                        '</div>' +
+                        '<div class="my-3">' +
+                            '<span>가격(1인) : ' + totalprice + '원' + '</span>' +
+                        '</div>' +
+                        '<div>' +
+                            '<div>총 결제 금액 : ' + '<span id="payment"></span>' + '</div>'
+                    '</div>';
+                       
+                var text="";
+                
+                text+= '<option>인원수를 선택하세요.</option>';
+                
+                for(let i=1; i<=remain; i++) {
+                    
+                    text+= '<option value="' + i + '">' + i + '</option>'
+
+                }
+
+                $("#select-remain")[0].innerHTML = text;         
+                
+            }
+
+        }
+
+        function selectperson(person) {
+
+            //console.log(person);
+            $("#person").attr("value", person);
+
+            const payment = document.querySelector("#payment");
+            payment.innerHTML="";
+            
+            payment.innerHTML+= totalprice * person + '원';
+        }
+
         const lat = /*[[${obj.latitude}]]*/"";
         const lng = /*[[${obj.longitude}]]*/"";
 
-        console.log(Number(lat));
-        console.log(Number(lng));
+        //console.log(Number(lat));
+        //console.log(Number(lng));
 
         var container = document.getElementById('map');
-		var options = {
-			center: new kakao.maps.LatLng(lng, lat), // 지도의 중심 위치, 경도
-			level: 5 //지도의 레벨
-		};
+        var options = {
+            center: new kakao.maps.LatLng(lat, lng), // 지도의 중심 위치, 경도
+            level: 5 //지도의 레벨
+        };
 
-		// 실제로 맵이 생성되는 시점
-		var map = new kakao.maps.Map(container, options);
-		// 지도를 클릭했을때 클릭한 위치에 마커를 추가하도록 지도에 클릭이벤트를 등록합니다
-		kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
-			// 클릭한 위치에 마커를 표시합니다 
-			addMarker(mouseEvent.latLng);
-		});
+        // 실제로 맵이 생성되는 시점
+        var map = new kakao.maps.Map(container, options);
+        // 지도를 클릭했을때 클릭한 위치에 마커를 추가하도록 지도에 클릭이벤트를 등록합니다
+        kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+            // 클릭한 위치에 마커를 표시합니다 
+            addMarker(mouseEvent.latLng);
+        });
 
-		// 지도에 표시된 마커 객체를 가지고 있을 배열입니다
-		var markers = [];
+        // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
+        var markers = [];
 
-		// 마커 하나를 지도위에 표시합니다 
-		addMarker(new kakao.maps.LatLng());
+        // 마커 하나를 지도위에 표시합니다 
+        addMarker(new kakao.maps.LatLng(lat, lng));
 
-		// 마커를 생성하고 지도위에 표시하는 함수입니다
-		function addMarker(position) {
+        // 마커를 생성하고 지도위에 표시하는 함수입니다
+        function addMarker(position) {
 
-			// 마커를 생성합니다
-			var marker = new kakao.maps.Marker({
-				position: position
-			});
+            // 마커를 생성합니다
+            var marker = new kakao.maps.Marker({
+                position: position
+            });
 
-			// 마커가 지도 위에 표시되도록 설정합니다
-			marker.setMap(map);
+            // 마커가 지도 위에 표시되도록 설정합니다
+            marker.setMap(map);
 
-			// 생성된 마커를 배열에 추가합니다
-			markers.push(marker);
-		}
+            // 생성된 마커를 배열에 추가합니다
+            markers.push(marker);
+        }
+
+        function applyAction() {
+            $("#form-apply").submit();
+        }
 
         /*]]>*/
     </script>

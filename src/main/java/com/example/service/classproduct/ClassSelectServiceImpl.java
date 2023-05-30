@@ -10,6 +10,7 @@ import com.example.dto.ActDetailCate;
 import com.example.dto.ActivityCate;
 import com.example.dto.CityCate;
 import com.example.dto.ClassProduct;
+import com.example.dto.ClassUnit;
 import com.example.dto.ClassUnitView;
 import com.example.dto.LocalCate;
 import com.example.mapper.ClassManageMapper;
@@ -70,14 +71,18 @@ public class ClassSelectServiceImpl implements ClassSelectService {
         try {
 
             List<ClassUnitView> list = cMapper.selectClassUnitViewList(map);
-            
-            for(ClassUnitView obj : list) {
 
-                long mainImgNo = manageMapper.selectClassMainImageNo(obj.getClasscode());
-                obj.setMainImg(mainImgNo);
+            if(list != null) {
+
+                for(ClassUnitView obj : list) {
+
+                    long mainImgNo = manageMapper.selectClassMainImageNo(obj.getClasscode());
+                    obj.setMainImg(mainImgNo);
+    
+                }
 
             }
-
+            
             return list;
         }
         catch (Exception e) {
@@ -114,11 +119,15 @@ public class ClassSelectServiceImpl implements ClassSelectService {
 
             List<ClassProduct> list = cMapper.selectClassProductViewList(map);
 
-            for(ClassProduct obj : list) {
+            if(list != null) {
 
-                long mainImgNo = manageMapper.selectClassMainImageNo(obj.getClasscode());
-                obj.setMainImg(mainImgNo);
-                
+                for(ClassProduct obj : list) {
+
+                    long mainImgNo = manageMapper.selectClassMainImageNo(obj.getClasscode());
+                    obj.setMainImg(mainImgNo);
+                    
+                }
+
             }
 
             return list;
@@ -137,6 +146,28 @@ public class ClassSelectServiceImpl implements ClassSelectService {
         catch(Exception e) {
             e.printStackTrace();
             return -1;
+        }
+    }
+
+    @Override
+    public List<ClassUnit> selectClassUnitList(ClassUnit obj) {
+        try {
+            return cMapper.selectClassUnitList(obj);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ClassUnit selectClassUnitOne(long no) {
+        try {
+            return cMapper.selectClassUnitOne(no);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
