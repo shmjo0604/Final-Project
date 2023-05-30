@@ -10,7 +10,7 @@
 
     <!-- 2. 클래스 1개 조회 -->
     <select id="selectClassOne" parameterType="long" resultType="ClassProduct">
-        SELECT c.* FROM classproduct c WHERE classcode = #{classcode}
+        SELECT c.* FROM classproductview c WHERE classcode = #{classcode}
     </select>
 
     <!-- 3. 클래스 삭제 (휴면 처리) -->

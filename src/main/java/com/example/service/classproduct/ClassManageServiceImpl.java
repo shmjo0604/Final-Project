@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
+import com.example.entity.ClassInquiry;
 import com.example.mapper.ClassManageMapper;
 
 @Service
@@ -47,6 +48,8 @@ public class ClassManageServiceImpl implements ClassManageService {
     @Override
     public int updateClassInactive(ClassProduct obj) {
         try {
+
+
             return cMapper.updateClassInactive(obj);
         }
         catch (Exception e) {
@@ -58,6 +61,8 @@ public class ClassManageServiceImpl implements ClassManageService {
     @Override
     public int updateClassOne(ClassProduct obj) {
         try {
+
+            
             return cMapper.updateClassOne(obj);
         }
         catch (Exception e) {
@@ -129,6 +134,17 @@ public class ClassManageServiceImpl implements ClassManageService {
         catch (Exception e) {
             e.printStackTrace();
             return -1;
+        }
+    }
+
+    @Override
+    public List<ClassInquiry> selectClassInquiryList(long classcode) {
+        try {
+            return cMapper.selectClassInquiryList(classcode);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

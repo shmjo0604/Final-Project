@@ -116,9 +116,9 @@
                                     </div>
                                     <!-- menu -->
                                     <div id="myDropdown1" class="dropdown-content">
-                                        <a class="btn" id="imput_btn" th:href="@{/classunit/insert.do( classcode=${obj.classcode} )}">등록</a>
-                                        <a class="btn" id="modify_btn" th:href="@{/class/selectone.do( classcode=${obj.classcode} )}">수정</a>
-                                        <a class="btn" id="delete_btn" onclick="alert('삭제 하시겠습니까?')">삭제</a>
+                                        <a class="btn" id="imput_btn" th:href="@{/classunit/insert.do( classcode=${obj.classcode} )}">일정 등록</a>
+                                        <a class="btn" id="modify_btn" th:href="@{/member/update.do( classcode=${obj.classcode} )}">수정</a>
+                                        <a class="btn" id="delete_btn" th:href="@{/member/delete.do(classcode=${obj.classcode} )}"  onclick="deletePost();">삭제</a>
                                     </div>
                                 </div>
                             </div>
@@ -142,15 +142,13 @@
 
 <script>
 /* 삭제 버튼 */
-    $("#delete_btn").on("click", function(e){
-        prompt('삭제하시겠습니까?')
-            if( result != false){
-                form.attr("action", "/member/delete");
-                form.attr("method", "post");
-                form.submit();
-            }
-    });
-
+    function deletePost(){
+        if( !confirm('삭제하시겠습니까?') ){
+            return false;
+        }else{
+            document.getElementById('deleteForm').submit();
+        }
+    }
 /*------------------------------------------------*/
     function click(noact) {
         if( result == true) {

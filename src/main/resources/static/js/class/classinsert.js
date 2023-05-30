@@ -2,6 +2,10 @@
 const contextPath = $('#contextPathHolder').attr('data-contextPath');
 var localcode = 0;
 var actcode = 0;
+const citycode1 = /*[[${obj.citycode}]]*/'';
+// console.log(citycode1)
+const localcode1 = /*[[${obj.localcode}]]*/'';
+$("#cate1").val("citycode1").prop("selected", true);
 
 /* postcode */
 function sample6_execDaumPostcode() {
@@ -737,7 +741,7 @@ function insertClass() {
         return false;
     } 
 	
-    if( content_length3 < 30) {
+    if( content_length3 < 20) {
         alert("커리큘럼 내용을 작성하세요.");
         pagecorri();
         return false;
@@ -858,3 +862,4 @@ function insertClass() {
 // nonClick.forEach((e) => {
 //     e.addEventListener("click", handleClick);
 // });
+

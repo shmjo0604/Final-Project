@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.dto.ClassProduct;
 import com.example.dto.Member;
+import com.example.entity.ClassInquiry;
 import com.example.service.classproduct.ClassManageService;
+import com.example.service.classproduct.ClassSelectService;
 import com.example.service.member.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +33,8 @@ public class MemberController {
     final String format = "MemberController => {}";
 
     @Autowired MemberService mService;
-    @Autowired ClassManageService cService;
+    @Autowired ClassManageService cService; 
+    @Autowired ClassSelectService c1Service;
 
     BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 
@@ -138,11 +141,12 @@ public class MemberController {
             model.addAttribute("list", list);
             
             log.info("myclass selectlist => {}", list.toString());
-            // return "member/myclass_menu1";
         }
 
         else if(menu == 2) {
-
+            List<ClassInquiry> list = cService.selectClassInquiryList(classcode);
+            model.addAttribute("list", list);
+            log.info("myclass inquiry selectlist => {}", list.toString());
         }
 
         model.addAttribute("user", user);
@@ -155,5 +159,39 @@ public class MemberController {
     ){
         return "redirect:/myclass.do?menu="+menu;
     }
+
+    @GetMapping(value = "/update.do")
+    public String myClassupdateGET( @AuthenticationPrincipal User user,
+    @RequestParam(name = "classcode", defaultValue = "0")long classcode,
+        Model model 
+    ){
+        ClassProduct obj = cService.selectClassOne(classcode);
+
+        log.info(format, obj.toString());
+        long profileImg = cService.selectClassProfileImageNo(classcode);
+        long mainImg = cService.selectClassMainImageNo(classcode);
+
+        model.addAttribute("actlist", c1Service.selectActivityCateList());
+        model.addAttribute("citylist", c1Service.selectCityCateList());
+        model.addAttribute("obj", obj);
+        model.addAttribute("user", user);
+        model.addAttribute("profileImg", profileImg);
+        model.addAttribute("mainImg", mainImg);
+        model.addAttribute("subImg", cService.selectClassSubImageNoList(classcode));
+        return "/class/update";
+    }
     
+
+    @PostMapping(value = "/myclass/delete.do")
+    public String myclassdeletePOST( @AuthenticationPrincipal User user,
+        @ModelAttribute ClassProduct obj, 
+        Model model
+    ) {
+        int ret = cService.updateClassInactive(obj);
+        if(ret ==1 ){
+            return "redirect:/member/myclass.do";
+        }
+        return "/member/myclass";
+    }
+
 }

@@ -44,7 +44,7 @@ public interface ClassManageMapper {
     public int deleteClassImageOne(long no);
 
     // 9. 클래스 문의 전체 조회
-    //public List<ClassInquiry> selectClassInquiryList(long classcode);
+    public List<ClassInquiry> selectClassInquiryList(long classcode);
     
 
 }
