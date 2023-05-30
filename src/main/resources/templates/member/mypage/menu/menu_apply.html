@@ -147,6 +147,7 @@
                     </td>
                     <td style="font-size: small;">
                         <a href="#"><p style="margin-top: 10px;">서핑 여름 특강</p></a>
+                        <!-- <div name="applyno">신청번호 : 1</div> -->
                         <div>일자 : 2023-06-01</div>
                         <div>시간 : 15:00 ~ 21:00</div>
                         <div>난이도 : 입문자</div>
@@ -157,7 +158,7 @@
                     <td class="center">
                         <p style="text-align: center;">참여완료</p>
                         <button  class="btn btn-sm btn-secondary"  type="button" style="height: 30px; width: 90px;"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal">리뷰작성 ></button>
+                        data-bs-toggle="modal" data-bs-target="#exampleModal">리뷰작성></button>
                     </td>
                 </tr>
                 <tr>
@@ -234,10 +235,12 @@
                              border: 1px solid #d3d3d3;"/>
                              </div>
                               </div> 
-                             <input type="file" name="file" id="file1" accept="image/*">
-                             <!-- <input type="file"  id="file2" accept="image/*" style="display: none;">
-                             <input type="file"  id="file3" accept="image/*" style="display: none;">
-                             <input type="file"  id="file4" accept="image/*" style="display: none;"> -->
+                              <input  type="hidden" name="no" value="1"/>
+                              <!-- <input type="hidden" name="no" value"${obj.applyno}"/> -->
+                             <input multiple="multiple" type="file" name="file1" id="file1" accept="image/*">
+                             <input multiple="multiple" type="file" name="file1" id="file2" accept="image/*" >
+                             <input multiple="multiple" type="file" name="file1" id="file3" accept="image/*" >
+                             <input multiple="multiple" type="file" name="file1" id="file4" accept="image/*" >
    
                                <div class="d-flex justify-content-between mt-2" id="labels">
                                    <div><label for="file1" class="d-sm-inline-flex mx-2 mt-2"

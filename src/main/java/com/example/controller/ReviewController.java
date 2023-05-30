@@ -1,6 +1,8 @@
 package com.example.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,13 +32,21 @@ public class ReviewController {
     @PostMapping(value = "insert.do")
     public String insertPOST(@ModelAttribute Review review,
     @ModelAttribute ReviewImage reviewimage,
-    @RequestParam(name = "file") MultipartFile file) throws IOException {
+    @RequestParam(name = "file1")  List<MultipartFile> files) throws IOException {
 
-            reviewimage.setFilesize(file.getSize());
-            reviewimage.setFiledata(file.getInputStream().readAllBytes());
-            reviewimage.setFiletype(file.getContentType());
-            reviewimage.setFilename(file.getOriginalFilename());
-    
+            List<ReviewImage> list = new ArrayList<>();
+
+            for(MultipartFile multipartfile : files){
+                
+            reviewimage.setFilesize(multipartfile.getSize());
+            reviewimage.setFiledata(multipartfile.getInputStream().readAllBytes());
+            reviewimage.setFiletype(multipartfile.getContentType());
+            reviewimage.setFilename(multipartfile.getOriginalFilename());
+
+            list.add(reviewimage);
+            }
+           
+            System.out.println(list.toString()+"메롱");
             log.info(format,review.toString());
             log.info(format,reviewimage.toString()); 
             
