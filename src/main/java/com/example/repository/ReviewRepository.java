@@ -7,5 +7,7 @@ import com.example.entity.Review;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
+
+    
     
 }

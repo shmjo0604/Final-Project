@@ -5,7 +5,9 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value = "/test")
@@ -36,11 +38,36 @@ public class TestController {
         return "/test/productdetail";
     }
 
-    @GetMapping(value = "/a.do")
-    public String alistGET() {
-
-        return "/a";
-    }
-
+    @GetMapping(value = "/customercenter.do")
+    public String customercenterGET(
+        @RequestParam(name = "menu", defaultValue = "0") int menu,
+        @AuthenticationPrincipal User user,
+        Model model
+    ) {
+        String id = user.getUsername();
+        
+        if(menu == 0) {
+            return "redirect:/test/customercenter.do?menu=1";
+        }
     
+         if(menu == 1) {
+            
+        }
+
+        else if(menu == 2) {
+    
+        }
+
+        model.addAttribute("user", user);
+
+        return "/inquery/customercenter";
+            
+        }
+
+@PostMapping(value = "/customercenter.do")
+public String customercenterPOST() {
+
+    return "redirect:/test/customercenter.do?menu=1";
+}
+
 }

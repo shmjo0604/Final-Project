@@ -1,5 +1,11 @@
-<div th:fragment="menu_apply" class="col-md-8" style="margin-left: 30px;">
 
+
+<div th:fragment="menu_apply" class="col-md-8" style="margin-left: 30px;">
+    <head>
+        <link rel="stylesheet" th:href="@{/css/review/review.css}" />
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" th:href="@{/css/review/snow.css}" />
+    </head>
     <!--********************************************************************************************************************************************************************-->
     <!--********************************************************************** 1. 통계 박스 ********************************************************************************-->
     <!--********************************************************************************************************************************************************************-->
@@ -12,7 +18,6 @@
                 background:#FFF;
                 border-radius: 15px;
                 margin:20px;
-                
         }
 
         .box h3 {
@@ -151,7 +156,8 @@
                     <td style="font-weight: bold;" class="center">55,000원</td>
                     <td class="center">
                         <p style="text-align: center;">참여완료</p>
-                        <button class="btn btn-sm btn-secondary" style="height: 30px; width: 90px;">리뷰작성 ></button>
+                        <button  class="btn btn-sm btn-secondary"  type="button" style="height: 30px; width: 90px;"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal">리뷰작성 ></button>
                     </td>
                 </tr>
                 <tr>
@@ -186,6 +192,129 @@
             </tbody>
         </table>
 
+        <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #008000; height: 50px;">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form th:action="@{/review/insert.do}" id="myform" name="myform" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row d-flex flex-nowrap" style="height: 110px;">
+                                <div class="row col-md-6 mx-3" style="border: 1px solid #d3d3d3;">
+                                    <img class=" mt-2" name="mainimage" th:src="@{/images/드로잉.jpg}" style="width: 110px; height: 90px;
+                                    position: relative; left: -15px;">
+                                    <div class="reviewcontent col-8 mt-1 " style="height: 90px; position: relative; left: -15px;">
+                                        <p class="mt-2">이름: 드로잉 </p>
+                                        <p>일자: 2023-05-31</p>
+                                        <p>시간: 15:00 ~ 20:00</p>
+                                        <p>난이도 : 입문자</p>
+                                        <p>인원: 2명</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <fieldset >
+                                        <input type="radio"
+                                            name="rating" value="5" id="rate1"><label 
+                                            for="rate1">★</label> <input type="radio" name="rating"
+                                            value="4" id="rate2"><label for="rate2">★</label> <input
+                                            type="radio" name="rating" value="3" id="rate3"><label
+                                            for="rate3">★</label> <input type="radio" name="rating"
+                                            value="2" id="rate4"><label for="rate4">★</label> <input
+                                            type="radio" name="rating" value="1" id="rate5"><label
+                                            for="rate5">★</label>
+                                    </fieldset>
+                                </div>
+                            </div>
+                           
+                           <div class="mt-2">
+                            <div> <input class="mt-1 mx-3"  id="editor" name="content" style="height: 300px; width: 740px; position: relative; left: -15px;
+                             border: 1px solid #d3d3d3;"/>
+                             </div>
+                              </div> 
+                             <input type="file" name="file" id="file1" accept="image/*">
+                             <!-- <input type="file"  id="file2" accept="image/*" style="display: none;">
+                             <input type="file"  id="file3" accept="image/*" style="display: none;">
+                             <input type="file"  id="file4" accept="image/*" style="display: none;"> -->
+   
+                               <div class="d-flex justify-content-between mt-2" id="labels">
+                                   <div><label for="file1" class="d-sm-inline-flex mx-2 mt-2"
+                                   style="border: 1px dashed gray; width: 160px; height: 150px;">
+                                   <i class="bi bi-images"></i></label></div>
+                                   <label for="file2" class="d-sm-inline-flex mx-2 mt-2"
+                                   style="border: 1px dashed gray; width: 160px; height: 150px;">
+                                   <i class="bi bi-images"></i></label>
+                                   <label for="file3" class="d-sm-inline-flex mx-2 mt-2"
+                                   style="border: 1px dashed gray; width: 160px; height: 150px;">
+                                   <i class="bi bi-images"></i></label>
+                                   <div><label for="file4" class="d-sm-inline-flex mx-2 mt-2"
+                                   style="border: 1px dashed gray; width: 160px; height: 150px;">
+                                   <i class="bi bi-images"></i></label></div>
+                               </div>
+                           </div>
+                           <div class="modal-footer">
+                               <input type="submit" class="btn btn-none" value="등록하기" style="background-color: #008000;
+                               position: relative; left: -250px; width: 250px; height: 70px; font-size: larger; font-weight: bold;
+                               color: white;">
+                           </div>
+                               </div>           
+                       </div>
+                   </form>
+               </div>
+               
+           </div> 
+           <script th:src="@{/js/bootstrap.min.js}"></script>
+            <script th:src="@{/js/quill.js}"></script>
+   
+    <!-- Initialize Quill editor -->
+	<script>
+		const toolbarOptions = [ [ 'bold', 'italic', 'underline', 'strike' ], // toggled buttons
+		[ 'blockquote', 'code-block' ], [ {
+			'header' : 1
+		}, {
+			'header' : 2
+		} ], // custom button values
+		[ {
+			'list' : 'ordered'
+		}, {
+			'list' : 'bullet'
+		} ], [ {
+			'script' : 'sub'
+		}, {
+			'script' : 'super'
+		} ], // superscript/subscript
+		[ {
+			'indent' : '-1'
+		}, {
+			'indent' : '+1'
+		} ], // outdent/indent
+		[ {
+			'direction' : 'rtl'
+		} ], // text direction[ {'size' : [ 'small', false, 'large', 'huge' ]} ], // custom dropdown
+		[ {
+			'header' : [ 1, 2, 3, 4, 5, 6, false ]
+		} ], [ {
+			'color' : []
+		}, {
+			'background' : []
+		} ], // dropdown with defaults from theme
+		[ {
+			'font' : []
+		} ], [ {
+			'align' : []
+		} ], ];
+		// 위쪽에 있는 태그중에서 id가 editor인것을 찾아서 toolbar는 toolbarOptions 값으로 대체하고 테마를 snow로 해서 변경
+		const quill = new Quill('#editor', {
+			modules : {
+				toolbar : toolbarOptions
+			},
+			theme : 'snow'
+		});
+	</script>
     </div>
 </div>
+
+    
 

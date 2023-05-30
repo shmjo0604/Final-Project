@@ -47,7 +47,7 @@ public class Review {
   // 추천수
   private int hit;
 
-  // 신청 테이블
+  //신청 테이블
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "no", referencedColumnName = "NO")
   @MapsId
