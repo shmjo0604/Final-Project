@@ -122,6 +122,7 @@ public class MemberController {
     @GetMapping(value = "/myclass.do")
     public String myclassGET(
         @RequestParam(name = "menu", defaultValue = "0") int menu,
+        @RequestParam(name = "classcode", defaultValue = "0", required = false) long classcode,
         @AuthenticationPrincipal User user,
         Model model
     ) {
@@ -135,7 +136,8 @@ public class MemberController {
         if(menu == 1) {
             List<ClassProduct> list = cService.selectMyClassList(id);
             model.addAttribute("list", list);
-            //log.info(format, list.toString());
+            
+            log.info("myclass selectlist => {}", list.toString());
             // return "member/myclass_menu1";
         }
 

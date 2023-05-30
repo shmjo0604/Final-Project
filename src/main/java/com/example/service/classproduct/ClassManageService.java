@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
+import com.example.entity.ClassInquiry;
 
 @Service
 public interface ClassManageService {
@@ -41,5 +42,8 @@ public interface ClassManageService {
 
     // 8. 클래스 이미지 삭제
     public int deleteClassImageOne(long no);
+
+    // 9. 클래스 문의 전체 조회
+    //public List<ClassInquiry> selectClassInquiryList(long classcode);
 
 }

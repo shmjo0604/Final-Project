@@ -17,7 +17,15 @@ public class ClassManageServiceImpl implements ClassManageService {
     @Override
     public List<ClassProduct> selectMyClassList(String id) {
         try {
-            return cMapper.selectMyClassList(id);
+            List<ClassProduct> list = cMapper.selectMyClassList(id);
+            if(list != null ){
+                for (ClassProduct classProduct : list) {
+                    long classcode = classProduct.getClasscode();
+                    long mainImg = cMapper.selectClassMainImageNo(classcode);
+                    classProduct.setMainImg(mainImg);
+                }
+            }
+            return list;
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -124,6 +132,5 @@ public class ClassManageServiceImpl implements ClassManageService {
         }
     }
 
-    
     
 }

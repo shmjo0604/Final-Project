@@ -46,4 +46,6 @@ public class ClassProduct {
 	// 회원 아이디 (FK)
 	private String memberid;
     
+	//클래스메인이미지번호
+	private long mainImg;
 }

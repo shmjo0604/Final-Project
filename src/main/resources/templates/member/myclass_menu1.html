@@ -1,5 +1,6 @@
 <div th:fragment="menu_1" class="col-9" style="min-height: 100vh;">
 
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
         /* 카드 드롭다운 버튼 함수 */
@@ -92,124 +93,91 @@
         } */
     </style>
 
-<div class="container">
-    <div class="m-3" style="border-bottom:2px dotted #bcbcbc; min-height: 40px; font-size: large; font-weight: bold;">클래스 조회</div>
-        <div class="row m-1">
-            <div class="col-4">
-                <div class="card shadow-sm">
-                    <div class="card">
-                        <div class="card-header" style="display: inline-block;">
-                            <div style="float: left; width: 90%; height:auto;"><a style="width: 20%;">
-                                등록일자 : <input name="regdate" th:value="${obj.regdate}" readonly /></a></div>
-                            <div class="dropdown" style=" float: left; width: 10%; height: 25px;">
-                                <!-- three dots -->
-                                <div class="dropbtn icons btn-right" onclick="showDropdown(1)">
-                                    <img th:src="@{/image/icon-zoom.png}" width="24" alt="더보기">
-                                </div>
-                                <!-- menu -->
-                                <div id="myDropdown1" class="dropdown-content">
-                                    <a class="btn" id="imput_btn" th:href="@{/member/unit/insert.do( classcode=${obj.classcode} )}">등록</a>
-                                    <a class="btn" id="modify_btn" href="#">수정</a>
-                                    <a class="btn" id="delete_btn" href="#">삭제</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <img src="" style="width: 100%; height: 200px; background-color: darkgray;" />
-                        <div class="card-body">
-                            <p class="card-title" style="font-weight: bold; font-size: large;">레터링 케이크 만들기</p>
-                            <p class="card-text" style="font-weight: normal; font-size: medium;">Lorem ipsum dolor sit
-                                amet, consectetur adipiscing elit. Nullam egestas sed sem ut malesuada.</p>
-                            <a href="#" class="btn btn-sm btn-success" style="width: 100%;">클래스 상세보기</a>
-                            <a href="#" class="noact">비활성화</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-4">
-                <div class="card shadow-sm">
-                    <div class="card">
-                        <div class="card-header" style="display: inline-block;">
-                            <div style="float: left; width: 90%; height:auto;"><a style="width: 20%;">등록일자 :
-                                    2023-05-25</a></div>
-                            <div class="dropdown" style=" float: left; width: 10%; height: 25px;">
-                                <!-- three dots -->
-                                <div class="dropbtn icons btn-right" onclick="showDropdown(2)">
-                                    <img th:src="@{/image/icon-zoom.png}" width="24" alt="더보기">
-                                </div>
-                                <!-- menu -->
-                                <div id="myDropdown2" class="dropdown-content">
-                                    <a href="#">등록</a>
-                                    <a href="#">수정</a>
-                                    <a href="#">삭제</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <img src="" style="width: 100%; height: 200px; background-color: darkgray;" />
-                        <div class="card-body">
-                            <p class="card-title" style="font-weight: bold; font-size: large;">레터링 케이크 만들기</p>
-                            <p class="card-text" style="font-weight: normal; font-size: medium;">Lorem ipsum dolor sit
-                                amet, consectetur adipiscing elit. Nullam egestas sed sem ut malesuada.</p>
-                            <a href="#" class="btn btn-sm btn-success" style="width: 100%;">클래스 상세보기</a>
-                            <a href="#" class="noact">비활성화</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-4">
-                <div class="card shadow-sm">
-                    <div class="card">
-                        <div class="card-header" style="display: inline-block;">
-                            <div style="float: left; width: 90%; height:auto;"><a style="width: 20%;">등록일자 :
-                                    2023-05-25</a></div>
-                            <div class="dropdown" style="float: left; width: 10%; height: 25px;">
-                                <!-- three dots -->
-                                <div class="dropbtn icons btn-right" onclick="showDropdown(3)">
-                                    <img th:src="@{/image/icon-zoom.png}" alt="더보기">
-                                </div>
-                                <!-- menu -->
-                                <div id="myDropdown3" class="dropdown-content">
-                                    <a href="#">등록</a>
-                                    <a href="#">수정</a>
-                                    <a href="#">삭제</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <img src="" style="width: 100%; height: 200px; background-color: darkgray;" />
-                        <div class="card-body">
-                            <p class="card-title" style="font-weight: bold; font-size: large;">레터링 케이크 만들기</p>
-                            <p class="card-text" style="font-weight: normal; font-size: medium;">Lorem ipsum dolor sit
-                                amet, consectetur adipiscing elit. Nullam egestas sed sem ut malesuada.</p>
-                            <a href="#" class="btn btn-sm btn-success" style="width: 100%;">클래스 상세보기</a>
-                            <a href="#" class="noact">비활성화</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="container">
+        <div class="m-3"
+            style="border-bottom:2px dotted #bcbcbc; min-height: 40px; font-size: large; font-weight: bold;">클래스 조회
         </div>
+        
+        <th:block th:each="obj : ${list}">
+                <div class="row m-1">
+                <div class="col-4">
+                    <div class="card shadow-sm">
+                        <div class="card">
+                            <div class="card-header" style="display: inline-block;">
+                                <div style="float: left; width: 90%; height:auto;"><a style="width: 20%;">
+                                        <span>등록일자 :</span> 
+                                        <!-- <input name="date" th:value="${obj.regdate}" readonly /> -->
+                                        <div th:text="${#dates.format(obj.regdate, 'yyyy.MM.dd HH:mm:ss')}"></div>
+                                        </a></div>
+                                <div class="dropdown" style=" float: left; width: 10%; height: 25px;">
+                                    <!-- three dots -->
+                                    <div class="dropbtn icons btn-right" onclick="showDropdown(1)">
+                                        <img th:src="@{/image/icon-zoom.png}" width="24" alt="더보기">
+                                    </div>
+                                    <!-- menu -->
+                                    <div id="myDropdown1" class="dropdown-content">
+                                        <a class="btn" id="imput_btn" th:href="@{/classunit/insert.do( classcode=${obj.classcode} )}">등록</a>
+                                        <a class="btn" id="modify_btn" th:href="@{/class/selectone.do( classcode=${obj.classcode} )}">수정</a>
+                                        <a class="btn" id="delete_btn" onclick="alert('삭제 하시겠습니까?')">삭제</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <img th:src="@{/class/image(no=${obj.mainImg})}" style="width: 100%; height: 200px; background-color: darkgray;" />
+                            <div class="card-body">
+                                <p class="card-title" style="font-weight: bold; font-size: large;" th:text="${obj.title}"></p>
+                                상호명 : <p class="card-nickname" style="font-weight: normal; font-size: medium; float: right;" th:text="${obj.nickname}"></p>
+                                <!-- <p class="card-text" style="font-weight: normal; font-size: medium;" th:utext="${obj.intro}"></p> -->
+                                <a th:href="@{/class/product.do(classcode=${obj.classcode} )}" class="btn btn-sm btn-success" style="width: 100%;">클래스 상세보기</a>
+                                <a href="#" onclick="alert('비활성화 하시겠습니까?')" name="noact" class="noact">비활성화</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </th:block>
+
     </div>
 </div>
 
 <script>
-	let form = $("#infoForm");
-	
-	$("#input_btn").on("click", function(e){
-		form.find("#bno").remove();
-		form.attr("action", "/member/unit/insert");
-		form.submit();
-	});
-	
-	$("#modify_btn").on("click", function(e){
-		form.attr("action", "/class/modify");
-		form.submit();
-	});	
-
+/* 삭제 버튼 */
     $("#delete_btn").on("click", function(e){
-		form.attr("action", "/class/delete");
-		form.submit();
-	});	
-</script>	
+        prompt('삭제하시겠습니까?')
+            if( result != false){
+                form.attr("action", "/member/delete");
+                form.attr("method", "post");
+                form.submit();
+            }
+    });
+
+/*------------------------------------------------*/
+    function click(noact) {
+        if( result == true) {
+            alert('비활성화 되었습니다.');
+        }
+        else{
+            alert('활성화 상태입니다.');
+        }
+    }
+
+
+//---------------------------------------------------- 
+    let form = $("#infoForm");
+
+    $("#input_btn").on("click", function (e) {
+        form.find("#bno").remove();
+        form.attr("action", "/member/unit/insert");
+        form.submit();
+    });
+
+    $("#modify_btn").on("click", function (e) {
+        form.attr("action", "/class/modify");
+        form.submit();
+    });
+
+    $("#delete_btn").on("click", function (e) {
+        form.attr("action", "/class/delete");
+        form.submit();
+    });	
+</script>
