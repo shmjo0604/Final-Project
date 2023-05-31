@@ -159,18 +159,18 @@
                     <a href="#">
                         <p style="margin-top: 10px;">서핑 여름 특강</p>
                     </a>
-                    <div name="no" id="no" style="display: none;">1</div> 
-                    <div id="classdate">일자 : 2023-06-01</div>
-                    <div id="classstart">시간 : 15:00 ~ 21:00</div>
-                    <div id="classlevel">난이도 : 입문자</div>
-                    <div id="price">1인기준 금액 : 25000</div>
-                    <div id="cnt">신청인원 : 1명</div>
+                    <div name="no" style="display: none;">1</div> 
+                    <div>일자 : 2023-06-01</div>
+                    <div>시간 : 15:00 ~ 21:00</div>
+                    <div>난이도 : 입문자</div>
+                    <div >1인기준 금액 : 25000</div>
+                    <div >신청인원 : 1명</div>
                 </td>
                 <td style="font-weight: bold;" class="center">55,000원</td>
                 <td class="center">
                     <p style="text-align: center;">참여완료</p>
                     <button class="btn btn-sm btn-secondary" type="button" style="height: 30px; width: 90px;"
-                     onclick="modalAction()">리뷰작성></button>
+                     onclick="modalAction('6월1일','15:00','입문자','10000원','2명')">리뷰작성></button>
                 </td>
             </tr>
             <tr>
@@ -229,11 +229,15 @@
                                     <!-- 클래스 간략한 정보 -->
                                     <div class="reviewcontent col-8 mt-1 "
                                         style="height: 90px; position: relative; left: -15px;">
-                                        <p class="mt-2">이름: 드로잉 ${obj.title} </p>
-                                        <p>일자: 2023-05-31 ${obj.classdate}</p>
-                                        <p>시간: 15:00 ~ 20:00 <br />
-                                        <p>${obj.classstart}~${obj.classend}</p>
-                                        <p>난이도 : 입문자 ${obj.classlevel}</p>
+
+                                        
+                                        <input  class="mt-2" id="classdate" type="text">
+                                        <input  id="classstart" type="text">
+                                        <input  id="classlevel" type="text">
+                                        <input  id="price" type="text">
+                                        <input  id="cnt" type="text">
+                                        <input  id="no" type="hidden">
+                                        
                                     </div>
                                 </div>
 
@@ -305,5 +309,5 @@
     <!-- 스크립트 -->
     
     <script th:src="@{/js/quill.js}"></script>
-    <script th:src="@{/js/review/insert.js}"></script>
+    <script th:src="@{/js/review/reviewinsert.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>

@@ -51,7 +51,7 @@ public class ReviewController {
 
  
             log.info(format,review.toString());
-            
+
             List<ReviewImage> list = new ArrayList<>();
 
                if(files != null){
@@ -71,7 +71,7 @@ public class ReviewController {
           log.info(format,list.toString());
             
             reviewService.insertReview(review);
-            reviewImageService.insertReviewImage(reviewimage);
+            // reviewImageService.insertReviewImage(reviewimage);
             
             return "redirect:/member/mypage.do?menu=";
     }

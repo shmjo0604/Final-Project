@@ -120,7 +120,25 @@ function getEditorContent() {
     form.submit();
 }
 
-function modalAction(){
+function modalAction(no,classdate,classstart,classlevel,price,cnt){
     const modal = new bootstrap.Modal(document.getElementById("exampleModal"),{});
+
+        const no1 = document.getElementById("no");
+		const classdate1 = document.getElementById("classdate");
+		const classstart1 = document.getElementById("classstart");
+		const classlevel1 = document.getElementById("classlevel");
+		const price1 = document.getElementById("price");
+		const cnt1 = document.getElementById("cnt");
+
+        console.log(no)
+        console.log(classdate)
+
+        no1.value=no
+        no1.value=classdate
+        no1.value=classstart
+        no1.value=classlevel
+        no1.value=price
+        no1.value=cnt
+        
 		modal.show(); 
 }
