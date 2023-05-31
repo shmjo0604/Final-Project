@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,7 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
 import com.example.dto.Member;
-import com.example.dto.ClassInquiry;
+import com.example.entity.ClassInquiry;
+import com.example.repository.ClassInquiryRepository;
 import com.example.service.classproduct.ClassManageService;
 import com.example.service.classproduct.ClassSelectService;
 import com.example.service.member.MemberService;
@@ -127,6 +129,7 @@ public class MemberController {
     public String myclassGET(
         @RequestParam(name = "menu", defaultValue = "0") int menu,
         @RequestParam(name = "classcode", defaultValue = "0", required = false) long classcode,
+        @RequestParam(name="page", required = false) Integer page, @RequestParam(name="size", required = false) Integer size,
         @AuthenticationPrincipal User user,
         Model model
     ) {
@@ -145,9 +148,11 @@ public class MemberController {
         }
 
         else if(menu == 2) {
-            List<ClassInquiry> list2 = cService.selectClassInquiryList(classcode);
-            model.addAttribute("list2", list2);
-            log.info("myclass inquiry selectlist => {}", list2.toString());
+            // PageRequest pageRequest = PageRequest.of(page, size);
+            
+            List<ClassInquiry> list = cService.selectClassInquiryList(classcode);
+            model.addAttribute("list", list);
+            log.info("myclass inquiry selectlist => {}", list.toString());
         }
 
         model.addAttribute("user", user);
@@ -199,6 +204,7 @@ public class MemberController {
         @ModelAttribute ClassProduct obj, 
         Model model
     ) {
+        log.info(format, obj.toString());
         int ret = cService.updateClassInactive(obj);
         if(ret ==1 ){
             return "/member/myclass";
@@ -206,6 +212,12 @@ public class MemberController {
         return "/member/myclass";
     }
 
-
+    // @PostMapping(value = "/myclass.do")
+    // public String myClassInquiryPOST(
+    //     @ModelAttribute ClassInquiry obj,
+    //     Model model
+    // ){
+    //     return "/member/myclass";
+    // }
 
 }

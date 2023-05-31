@@ -25,7 +25,8 @@
             <table class="table table-lg table-hover m-3">
                 <thead>
                     <tr class="table-success">
-                        <th scope="col" ></th>
+                        <th scope="col">NO</th>
+                        <th scope="col">클래스명</th>
                         <th scope="col">문의제목</th>
                         <th scope="col">문의내용</th>
                         <th scope="col">날짜</th>
@@ -36,8 +37,9 @@
                 </thead>
                 
                 <tbody>
-                    <tr th:each="obj : ${list2}">
+                    <tr th:each="obj : ${list}">
                         <td th:text="${obj.no}"></td>
+                        <td th:text="${obj.classtitle}"></td>
                         <td th:text="${obj.title}"></td>
                         <td class="txt" th:text="${obj.content}"></td>
                         <td th:text="${obj.regdate}"></td>
@@ -142,7 +144,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                      <input type="submit" class="btn btn-primary" value="등록">
+                      <input type="button" class="btn btn-primary" value="등록">
                     </div>
                   </div>
                 </div>
@@ -158,37 +160,37 @@
     </div>
     
     <script>
-        let totalCount = 23; //글의 총수
-        let pageSize =10;
-        let pageNumber = 1; // 현재 페이지
+        // let totalCount = 23; //글의 총수
+        // let pageSize =10;
+        // let pageNumber = 1; // 현재 페이지
         
-        let _totalPages = totalCount / 10
+        // let _totalPages = totalCount / 10
         
-        // 10  만약 글이 23개 있다면 10개로 나눠서 페이지당 글 구성이 10개 10개 3개가 된다는 말.
-        if(totalCount % 10 > 0){
-            _totalPages++;
-        }
+        // // 10  만약 글이 23개 있다면 10개로 나눠서 페이지당 글 구성이 10개 10개 3개가 된다는 말.
+        // if(totalCount % 10 > 0){
+        //     _totalPages++;
+        // }
         
-        $('#pagination').twbsPagination({ 
-            startPage:1,
-            totalPages: _totalPages,
-            //페이지당 보이는 글의수는 10개
-            visiblePages: 10,
+        // $('#pagination').twbsPagination({ 
+        //     startPage:1,
+        //     totalPages: _totalPages,
+        //     //페이지당 보이는 글의수는 10개
+        //     visiblePages: 10,
             
-            //" « "라는 문자열로 최신글 방향을 표시
-            first:'<span sris-hidden="true">«</span>' ,
+        //     //" « "라는 문자열로 최신글 방향을 표시
+        //     first:'<span sris-hidden="true">«</span>' ,
             
-            //" » "라는 문자열로 마지막글 방향을 표시
-            last:'<span sris-hidden="true">»</span>' ,
+        //     //" » "라는 문자열로 마지막글 방향을 표시
+        //     last:'<span sris-hidden="true">»</span>' ,
             
-            prev:"이전",
-            next:"다음",
-            onPageClick: function (event, page) {
+        //     prev:"이전",
+        //     next:"다음",
+        //     onPageClick: function (event, page) {
             
-            //확인을 위해 클릭한 페이지의 번호를 알림창으로 출력	
-                alert(page); 
-                    }
-             })
+        //     //확인을 위해 클릭한 페이지의 번호를 알림창으로 출력	
+        //         alert(page); 
+        //             }
+        //      })
 
     var action=0;
     var url='';

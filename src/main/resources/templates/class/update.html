@@ -419,6 +419,12 @@ $("#cate1").val(citycode1).prop("selected", true);
 getLocalcate(citycode1);
 
 
+const activitycode1 = /*[[${obj.activitycode}]]*/'';
+const actdetailcode1 = /*[[${obj.actdetailcode}]]*/'';
+console.log(activitycode1);
+console.log(actdetailcode1);
+$("#cate3").val(activitycode1).prop("selected", true);
+getActivitycate(activitycode1);
 
 /* postcode */
 function sample6_execDaumPostcode() {
@@ -541,7 +547,7 @@ async function getActivitycate(code) {
         }
         $('#actdetailselect').append(options);
 
-        // $("#actdetailselect").val(activitycode1).prop("selected", true);
+        $("#actdetailselect").val(actdetailcode1).prop("selected", true);
 
     }
 }
@@ -954,10 +960,10 @@ function nextMenu2() {
     console.log(content_length);
     console.log(content);
 
-    if (file.value === "") {
-        alert("이미지 파일을 첨부하세요.");
-        return false;
-    }
+    // if (file.value === "") {
+    //     alert("이미지 파일을 첨부하세요.");
+    //     return false;
+    // }
     if (nickname.value === "") {
         alert("상호명을 작성하세요.");
         nickname.focus();
@@ -1134,11 +1140,12 @@ function updateClass() {
         return false;
     }
 
-    if (file.value === "") {
-        alert("이미지 파일을 첨부하세요.");
-        pageinstructor();
-        return false;
-    }
+    // if (file.value === "") {
+    //     alert("이미지 파일을 첨부하세요.");
+    //     pageinstructor();
+    //     return false;
+    // }
+
     if (nickname.value === "") {
         alert("상호명을 작성하세요.");
         pageinstructor()
