@@ -1,9 +1,13 @@
 package com.example.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.entity.Basket;
 import com.example.entity.Member;
+import com.example.repository.BasketRepository;
+import com.example.repository.MemberRepository;
 import com.example.service.basket.BasketService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,7 +32,8 @@ import lombok.extern.slf4j.Slf4j;
 public class BasketController {
 
     final String format = "BasketController => {}";
-
+    final BasketRepository bRepository;
+    final MemberRepository mRepository;
     @Autowired BasketService bService;
 
     @PostMapping(value = "/basket.do")
@@ -50,7 +57,7 @@ public class BasketController {
     @GetMapping(value = "/member/basket/{memberId}")
 	public String basketPageGET(@PathVariable("memberid") String memberId, Model model) {
 		
-		model.addAttribute("cartInfo", bService.BasketList(memberId));
+		// model.addAttribute("cartInfo", bService.BasketList(memberId));
 		
 		return "/home";
 	}
@@ -78,10 +85,26 @@ public class BasketController {
 
 
 
-    // 장바구니 페이지 접속
+    // 장바구니 페이지 접속 및 리스트 출력
     // 127.0.0.1:8080/specialday/member/basket.do
     @GetMapping(value = "/basket.do")
-    public String  BasketGET() {
+    public String  BasketGET(Model model,
+    @AuthenticationPrincipal User user ) {
+        log.info(format,user.getUsername());
+        
+        //회원정보
+        Member member = mRepository.findById(user.getUsername()).orElse(null);
+        log.info(format, member.getId());  //오류발생시점 stackoverflow
+        
+       
+        
+        List<Basket> list = bRepository.findByMember_idOrderByNoDesc(member.getId());
+        for(Basket  obj: list ){    //반복문을 이용한다
+            log.info(format, obj.getCnt());
+        }
+        
+        model.addAttribute("list", list);
+
         try{
             return "/member/basket";
         } catch (Exception e) {

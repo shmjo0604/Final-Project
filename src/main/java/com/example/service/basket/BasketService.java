@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.dto.Member;
 import com.example.entity.Basket;
 
 @Service
@@ -19,7 +20,7 @@ public interface BasketService {
     public int deleteBasketOne(int obj);
 
     // 4. 카트 목록
-    public List<Basket> BasketList(String member);
+    public List<Basket> basketList(String memberid);
 
     // 5. 장바구니 데이터 체크
     public Basket checBasket(Basket obj);

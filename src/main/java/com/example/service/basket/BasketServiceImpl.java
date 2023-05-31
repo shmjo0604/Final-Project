@@ -2,32 +2,31 @@ package com.example.service.basket;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Basket;
-import com.example.mapper.BasketMapper;
+import com.example.repository.BasketRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class BasketServiceImpl implements BasketService{
 
-    @Autowired BasketMapper bMapper;
+    final BasketRepository bRepository;
+
 
 
      //1. 장바구니 추가
     @Override
     public int insertBasketOne( Basket obj) {
         
-        // 장바구니 데이터 체크
-        Basket basket = bMapper.checBasket(obj);
-
-        if(basket != null) {
-            return 2;
-        }
+        // 장바구니 추가
+       
 
         // 장바구니 등록 & 에러 시  0 반환
         try {
-            return bMapper.insertBasketOne(obj);
+            return 1;
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -37,13 +36,9 @@ public class BasketServiceImpl implements BasketService{
 
     // 2. 카트 목록
     @Override
-    public List<Basket> BasketList(String member) {
-
-        // 장바구니 데이터 체크
-        List<Basket> basket = bMapper.BasketList(member);
-
+    public List<Basket> basketList(String memberid) {
         try{
-            return bMapper.BasketList(member);
+            return bRepository.findByMember_idOrderByNoDesc(memberid);
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -55,7 +50,7 @@ public class BasketServiceImpl implements BasketService{
     @Override
     public int updateBasketOne(Basket obj) {
         try{
-            return bMapper.updateBasketOne(obj);
+            return 1;
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -67,7 +62,7 @@ public class BasketServiceImpl implements BasketService{
     @Override
     public int deleteBasketOne(int obj) {
             try{
-                return bMapper.deleteBasketOne(obj);
+                return 1;
             }
             catch(Exception e) {
                 e.printStackTrace();
@@ -81,7 +76,7 @@ public class BasketServiceImpl implements BasketService{
     @Override
     public Basket checBasket(Basket obj) {
         try{
-            return bMapper.checBasket(obj);
+            return null;
         }
         catch(Exception e) {
             e.printStackTrace();
