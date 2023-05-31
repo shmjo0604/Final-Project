@@ -1,12 +1,14 @@
 package com.example.dto;
 
-import java.util.List;
-
 import lombok.Data;
 
 @Data
 public class ApplyList {
 
-    private List<Apply> applylist;
+    private int[] unitnoArray;
+    
+    private int[] personArray;
+
+    private int[] paymentArray;
     
 }

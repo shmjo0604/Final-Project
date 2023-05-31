@@ -394,7 +394,7 @@
 
     <!--form 태그 (post->get)-->
     <!--unitno, person -->
-    <form id="form-apply" th:action="@{product.do}" method="post" style="display: none;">
+    <form id="form-apply" th:action="@{/apply/insert.do}" method="get" style="display: none;">
         <input id="unitno" name="unitno" type="number">
         <input id="person" name="person" type="number">
     </form>

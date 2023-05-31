@@ -22,6 +22,8 @@
     <!--font awesome 용-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <!--thymeleaf contextpath-->
+    <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}" />
 </head>
 
 <style>
@@ -259,6 +261,7 @@
                     <tbody>
                         <tr class="cart__list__detail">
                             <td id="unit_no">1</td>
+                            <input type="hidden" name="unitno[]" th:value="${obj.no}">
                             <!-- <td><img src="" alt="클래스 썸네일"></td> -->
                             <td><img class="w-25" th:src="@{/class/image(no=${mainImg})}"></td>
                             <td>
@@ -274,11 +277,17 @@
                                 <th:block th:if="${obj.classlevel == 3}">
                                     <p>난이도 : 숙련자</p>
                                 </th:block>
-                                <p th:text="|${person}명|"></p>
+                                <div class="d-flex justify-content-center">
+                                    <p>신청 인원 : </p>
+                                    <input type="text" class="form-control-plaintext w-25" th:value="|${person}명|">
+                                    <input type="hidden" class="form-control-plaintext w-25" name="person[]" th:value="${person}">
+                                </div>
                             </td>
 
                             <td>
-                                <span class="price" th:text="|${obj.totalprice}원|"></span><br>
+                                <input type="text" class="form-control-plaintext w-25" th:value="|${obj.totalprice}원|">
+                                <input type="hidden" class="form-control-plaintext w-25" name="payment[]" th:value="${obj.totalprice}">
+                                
                             </td>
                             <!-- <td>무료</td> -->
 
@@ -310,38 +319,108 @@
 </body>
 <!--jQuery-->
 <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
+<!--axios library-->
+<script th:src="@{/js/axios.min.js}"></script>
 <!--Bootstrap 용 js -->
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 <!--portone js-->
 <script th:src="@{/js/iamport.payment-1.2.0.js}"></script>
-<script>
-        var IMP = window.IMP;
-        IMP.init('imp27884386');
+<script th:inline="javascript">
 
-        function requestPay() {
-            //iamport 대신 자신의 "가맹점 식별코드"를 사용
-            IMP.request_pay({
-                pg: "html5_inicis",
-                pay_method: "card",
-                merchant_uid: 'merchant_' + new Date().getTime(),
-                name: '결제테스트',
-                amount: 14000,
-                buyer_email: 'iamport@siot.do',
-                buyer_name: '구매자',
-                buyer_tel: '010-1234-5678',
-                buyer_addr: '서울특별시 강남구 삼성동',
-                buyer_postcode: '123-456'
-            }, function (rsp) { // callback
-                //   if (rsp.success) {
-                //     ...,
-                //     // 결제 성공 시 로직,
-                //     ...
-                //   } else {
-                //     ...,
-                //     // 결제 실패 시 로직,
-                //     ...
-                //   }
-            });
+    const contextPath = $('#contextPathHolder').attr('data-contextPath');
+
+    var IMP = window.IMP;
+    IMP.init('imp27884386');
+
+    function requestPay() {
+
+        // 결제 성공 후 처리 할 정보
+
+        var unitnoLength = $("input[name='unitno[]']").length;
+        var personLength = $("span[name='person[]']").length;
+        var paymentLength = $("span[name='payment[]']").length;
+
+        var unitnoArray = new Array();
+        var personArray = new Array();
+        var paymentArray = new Array();
+
+        for(let i=0; i<unitnoLength; i++) {
+            unitnoArray[i] = $("input[name='unitno[]']")[i].value;
+            personArray[i] = $("input[name='person[]']")[i].value;
+            paymentArray[i] = $("input[name='payment[]']")[i].value;
         }
+
+        // var unitnoArray = [];
+        // var personArray = [];
+        // var paymentArray = [];
+
+        // $("input[name=payment[]]").each(function(index, item) {
+        //     paymentArray.push($(item).val());
+        // });
+
+        // $("input[name=person[]]").each(function(index, item) {
+        //     personArray.push($(item).val());
+        // });
+
+        // $("input[name=unitno[]]").each(function(index, item) {
+        //     unitnoArray.push($(item).val());
+        // });
+
+        console.log(unitnoArray);
+        console.log(personArray);
+        console.log(paymentArray);
+
+        //iamport 대신 자신의 "가맹점 식별코드"를 사용
+        IMP.request_pay({
+            pg: "html5_inicis",
+            pay_method: "card",
+            merchant_uid: 'merchant_' + new Date().getTime(),
+            name: 'SPECIALDAY',
+            amount: 100,
+            buyer_email: /*[[${member.email}]]*/'',
+            buyer_name: /*[[${member.name}]]*/'',
+            buyer_tel: /*[[${member.phone}]]*/'',
+            buyer_addr: '서울특별시 강남구 삼성동',
+            buyer_postcode: '123-456'
+        }, async function (rsp) { // callback
+
+            console.log(rsp);
+            
+            // 1. 결제 검증
+
+            // $.ajax({
+            //     type : "POST",
+            //     url : contextPath + "/verifyiamport/" + rsp.imp_uid
+            // })
+
+            const url = contextPath + '/api/verifyiamport.json';
+            const headers = { "Content-Type": "application/json" };
+            const body = {imp_uid : rsp.imp_uid};
+
+            await axios.post(url, body, { headers }).then(async function(result) {
+
+                console.log(result);
+
+                if(rsp.paid_amount === result.data.response.amount) {
+
+                    alert("결제가 완료되었습니다.");
+
+                    const url = contextPath + '/api/apply/success.json';
+                    const headers = { "Content-Type": "application/json" };
+                    const body = {unitnoArray : unitnoArray, personArray : personArray, paymentArray : paymentArray};
+                    const { data } = await axios.post(url, body, { headers });
+
+                    console.log(data);
+
+                }
+                
+                else {
+                    alert("결제에 실패했습니다." + "에러코드 : " + rsp.error_code+ "에러 메시지 : " + rsp.error_message);
+                }
+
+            }) 
+
+        });
+    }
 </script>
 </html>

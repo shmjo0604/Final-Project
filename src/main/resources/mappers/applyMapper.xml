@@ -63,7 +63,12 @@
     SELECT a.* FROM(
         SELECT ROW_NUMBER() OVER(ORDER BY a.applyregdate DESC) AS rnum, 
         a.* FROM applyview a WHERE memberid = #{id}
-        ) a WHERE a.rnum <![CDATA[ >= ]]> ${first} AND s.rnum <![CDATA[ <= ]]> ${last} ORDER BY a.no DESC
+        ) a WHERE a.rnum <![CDATA[ >= ]]> ${first} AND a.rnum <![CDATA[ <= ]]> ${last} ORDER BY a.no DESC
+</select>
+
+<!--8. 클래스 신청 번호 조회 (등록한 개수만큼)-->
+<select id="selectInsertedApplyNoList" parameterType="map" resultType="long">
+    SELECT a.NO FROM (SELECT ROW_NUMBER() OVER(ORDER BY NO desc) rnum, * FROM apply a WHERE memberid = #{id} ORDER BY NO DESC) a WHERE rnum <![CDATA[ >= ]]> 1 AND rnum <![CDATA[ <= ]]> #{count};
 </select>
 
 </mapper>
