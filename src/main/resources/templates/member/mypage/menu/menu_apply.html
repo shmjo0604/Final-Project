@@ -1,9 +1,7 @@
-
-
 <div th:fragment="menu_apply" class="col-md-8" style="margin-left: 30px;">
+
     <head>
         <link rel="stylesheet" th:href="@{/css/review/review.css}" />
-        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
         <link rel="stylesheet" th:href="@{/css/review/snow.css}" />
     </head>
     <!--********************************************************************************************************************************************************************-->
@@ -13,30 +11,30 @@
     <style>
         /* 처리상태 count box(상단) */
         .box {
-                width:80%;
-                height:150px;
-                background:#FFF;
-                border-radius: 15px;
-                margin:20px;
+            width: 80%;
+            height: 150px;
+            background: #FFF;
+            border-radius: 15px;
+            margin: 20px;
         }
 
         .box h3 {
             padding-top: 10px;
-            text-align:center;
+            text-align: center;
             font-weight: bold;
             font-size: large;
         }
 
         .box h1 {
             padding-top: 12px;
-            text-align:center;
+            text-align: center;
             font-size: 50px
         }
 
-        .effect{
-                -webkit-box-shadow: 0 5px 6px -6px #777;
-                -moz-box-shadow: 0 5px 6px -6px #777;
-                box-shadow: 0 5px 6px -6px #777;
+        .effect {
+            -webkit-box-shadow: 0 5px 6px -6px #777;
+            -moz-box-shadow: 0 5px 6px -6px #777;
+            box-shadow: 0 5px 6px -6px #777;
         }
     </style>
 
@@ -60,24 +58,26 @@
                     <h3>신청취소</h3>
                     <h1>0</h1>
                 </div>
-            </div>   
+            </div>
         </div>
     </div>
     <div class="row-md-9" style="margin-top: 50px;">
-        <hr/>
+        <hr />
         <div style="display: inline-block; margin-top: 40px; width: 100%;">
             <div style="float: left; font-weight: bold;">| 신청 클래스 정보</div>
             <div style="float: right;">
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">전체상태</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">전체상태</button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">신청완료</a></li>
                         <li><a class="dropdown-item" href="#">참여완료</a></li>
                         <li><a class="dropdown-item" href="#">신청취소</a></li>
                     </ul>
                 </div>
-                <div class="btn-group" role="group" >
-                    <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">신청순</button>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">신청순</button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">최신순</a></li>
                         <li><a class="dropdown-item" href="#">오래된순</a></li>
@@ -85,239 +85,225 @@
                 </div>
             </div>
         </div>
-        
-       
-        <!--*****************************************************************************************************************************************************************-->
-        <!--********************************************************************** 2. 테이블 ********************************************************************************-->
-        <!--*****************************************************************************************************************************************************************-->
-        <style>
-            .center {text-align: center;}
-        </style>
-            
-        <table class="table table-bordered">
-            <thead>
-                <tr style="background-color: rgb(219, 217, 217); text-align: center;">
-                    <th>결제일자</th>
-                    <th>이미지</th>
-                    <th>신청 정보</th>
-                    <th>결제금액</th>
-                    <th>처리상태</th>
-                </tr>
-            </thead>
-            <tbody style="vertical-align: middle;">
-                <tr>
-                    <td class="center">
-                        <p>2023-05-25</p>
-                        <div style="display: flex; flex-direction: column; align-items: center;">        
-                            <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px;">상세보기 ></button>
-                            <button class="btn btn-sm btn-danger" style="height: 30px; width: 90px; margin-top: 5px;">신청취소</button>
-                        </div>
-                    </td>
-                    <td class="center">
-                        <img src="https://cdnimage.ebn.co.kr/news/202003/news_1583367095_1024915_main1.jpg" style="width: 100px; height: 100px;">         
-                    </td>
-                    <td style="font-size: small;">
-                        <a href="#"><p style="margin-top: 10px;">레터링 케이크 만들기</p></a>
-                        <div>일자 : 2023-06-01</div>
-                        <div>시간 : 15:00 ~ 21:00</div>
-                        <div>난이도 : 입문자</div>
-                        <div>1인기준 금액 : 25000</div>
-                        <div>신청인원 : 1명</div>
-                    </td>
-                    <td style="font-weight: bold;" class="center">25,000원</td>
-                    <td class="center">
-                        <p  style="text-align: center;">신청완료</p>
-                        <button class="btn btn-sm btn-secondary disabled" style="height: 30px; width: 90px;">작성완료</button>
-                    </td>
-                </tr>
+    </div>
+
+    <!--*****************************************************************************************************************************************************************-->
+    <!--********************************************************************** 2. 테이블 ********************************************************************************-->
+    <!--*****************************************************************************************************************************************************************-->
+    <style>
+        .center {
+            text-align: center;
+        }
+    </style>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr style="background-color: rgb(219, 217, 217); text-align: center;">
+                <th>결제일자</th>
+                <th>이미지</th>
+                <th>신청 정보</th>
+                <th>결제금액</th>
+                <th>처리상태</th>
+            </tr>
+        </thead>
+        <tbody style="vertical-align: middle;">
+            <tr>
+                <td class="center">
+                    <p>2023-05-25</p>
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px;">상세보기
+                            ></button>
+                        <button class="btn btn-sm btn-danger"
+                            style="height: 30px; width: 90px; margin-top: 5px;">신청취소</button>
+                    </div>
+                </td>
+                <td class="center">
+                    <img src="https://cdnimage.ebn.co.kr/news/202003/news_1583367095_1024915_main1.jpg"
+                        style="width: 100px; height: 100px;">
+                </td>
+                <td style="font-size: small;">
+                    <a href="#">
+                        <p style="margin-top: 10px;">레터링 케이크 만들기</p>
+                    </a>
+                    <div>일자 : 2023-06-01</div>
+                    <div>시간 : 15:00 ~ 21:00</div>
+                    <div>난이도 : 입문자</div>
+                    <div>1인기준 금액 : 25000</div>
+                    <div>신청인원 : 1명</div>
+                </td>
+                <td style="font-weight: bold;" class="center">25,000원</td>
+                <td class="center">
+                    <p style="text-align: center;">신청완료</p>
+                    <button class="btn btn-sm btn-secondary disabled" style="height: 30px; width: 90px;">작성완료</button>
+                </td>
+            </tr>
 
 
-                <!-- 처리상태별 예시 -->
-                <tr>
-                    <td class="center">
-                        <p>2023-05-22</p>
-                        <div style="display: flex; flex-direction: column; align-items: center;">        
-                            <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px;">상세보기 ></button>
-                            <button class="btn btn-sm btn-danger" style="height: 30px; width: 90px; margin-top: 5px;">신청취소</button>
-                        </div>
-                    </td>
-                    <td class="center">
-                        <img src="https://cdnimage.ebn.co.kr/news/202003/news_1583367095_1024915_main1.jpg" style="width: 100px; height: 100px;">
-                        
-                    </td>
-                    <td style="font-size: small;">
-                        <a href="#"><p style="margin-top: 10px;">서핑 여름 특강</p></a>
-                        <!-- <div name="applyno">신청번호 : 1</div> -->
-                        <div>일자 : 2023-06-01</div>
-                        <div>시간 : 15:00 ~ 21:00</div>
-                        <div>난이도 : 입문자</div>
-                        <div>1인기준 금액 : 25000</div>
-                        <div>신청인원 : 1명</div>
-                    </td>
-                    <td style="font-weight: bold;" class="center">55,000원</td>
-                    <td class="center">
-                        <p style="text-align: center;">참여완료</p>
-                        <button  class="btn btn-sm btn-secondary"  type="button" style="height: 30px; width: 90px;"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal">리뷰작성></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="center">
-                        <p>2023-05-20</p>
-                        <div style="display: flex; flex-direction: column; align-items: center;">        
-                            <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px;">상세보기 ></button>
-                            <button class="btn btn-sm btn-danger disabled" style="height: 30px; width: 90px; margin-top: 5px;">신청취소</button>
-                        </div>
-                    </td>
-                    <td class="center">
-                        <img src="https://cdnimage.ebn.co.kr/news/202003/news_1583367095_1024915_main1.jpg" style="width: 100px; height: 100px;">
-                    </td>
-                    <td style="font-size: small;">
-                        <a href="#"><p style="margin-top: 10px;">유화 원데이클래스</p></a>
-                        <div>일자 : 2023-06-01</div>
-                        <div>시간 : 15:00 ~ 21:00</div>
-                        <div>난이도 : 입문자</div>
-                        <div>1인기준 금액 : 25000</div>
-                        <div>신청인원 : 1명</div>
-                    </td>
-                    <td style="font-weight: bold;" class="center">155,000원</td>
-                    <td class="center">
-                        <p  style="text-align: center;">신청취소</p>
-                        <button class="btn btn-sm btn-secondary disabled" style="height: 30px; width: 90px;">리뷰작성 ></button>
-                    </td>
-                </tr>
+            <!-- 처리상태별 예시 -->
+            <tr>
+                <td class="center">
+                    <p>2023-05-22</p>
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px;">상세보기
+                            ></button>
+                        <button class="btn btn-sm btn-danger"
+                            style="height: 30px; width: 90px; margin-top: 5px;">신청취소</button>
+                    </div>
+                </td>
+                <td class="center">
+                    <img src="https://cdnimage.ebn.co.kr/news/202003/news_1583367095_1024915_main1.jpg"
+                        style="width: 100px; height: 100px;">
 
-                <!-- 클래스 신청내역이 없을 경우-->
-                <!-- <h7>클래스 신청내역이 존재하지 않습니다.</h7>
-                <button>클래스 조회 화면으로 가는 버튼</button> -->               
-            </tbody>
-        </table>
+                </td>
+                <td style="font-size: small;">
+                    <a href="#">
+                        <p style="margin-top: 10px;">서핑 여름 특강</p>
+                    </a>
+                    <div name="no" id="no" style="display: none;">1</div> 
+                    <div id="classdate">일자 : 2023-06-01</div>
+                    <div id="classstart">시간 : 15:00 ~ 21:00</div>
+                    <div id="classlevel">난이도 : 입문자</div>
+                    <div id="price">1인기준 금액 : 25000</div>
+                    <div id="cnt">신청인원 : 1명</div>
+                </td>
+                <td style="font-weight: bold;" class="center">55,000원</td>
+                <td class="center">
+                    <p style="text-align: center;">참여완료</p>
+                    <button class="btn btn-sm btn-secondary" type="button" style="height: 30px; width: 90px;"
+                     onclick="modalAction()">리뷰작성></button>
+                </td>
+            </tr>
+            <tr>
+                <td class="center">
+                    <p>2023-05-20</p>
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px;">상세보기
+                            ></button>
+                        <button class="btn btn-sm btn-danger disabled"
+                            style="height: 30px; width: 90px; margin-top: 5px;">신청취소</button>
+                    </div>
+                </td>
+                <td class="center">
+                    <img src="https://cdnimage.ebn.co.kr/news/202003/news_1583367095_1024915_main1.jpg"
+                        style="width: 100px; height: 100px;">
+                </td>
+                <td style="font-size: small;">
+                    <a href="#">
+                        <p style="margin-top: 10px;">유화 원데이클래스</p>
+                    </a>
+                    <div>일자 : 2023-06-01</div>
+                    <div>시간 : 15:00 ~ 21:00</div>
+                    <div>난이도 : 입문자</div>
+                    <div>1인기준 금액 : 25000</div>
+                    <div>신청인원 : 1명</div>
+                </td>
+                <td style="font-weight: bold;" class="center">155,000원</td>
+                <td class="center">
+                    <p style="text-align: center;">신청취소</p>
+                    <button class="btn btn-sm btn-secondary disabled" style="height: 30px; width: 90px;">리뷰작성 ></button>
+                </td>
+            </tr>
 
-        <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- 클래스 신청내역이 없을 경우-->
+            <!-- <h7>클래스 신청내역이 존재하지 않습니다.</h7>
+                <button>클래스 조회 화면으로 가는 버튼</button> -->
+        </tbody>
+    </table>
+
+
+    <!-- 리뷰 모달 -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #008000; height: 50px;">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form th:action="@{/review/insert.do}" id="myform" name="myform" method="post" enctype="multipart/form-data">
+                <form th:action="@{/review/insert.do}" id="myform" method="post" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="container-fluid">
                             <div class="row d-flex flex-nowrap" style="height: 110px;">
                                 <div class="row col-md-6 mx-3" style="border: 1px solid #d3d3d3;">
                                     <img class=" mt-2" name="mainimage" th:src="@{/images/드로잉.jpg}" style="width: 110px; height: 90px;
                                     position: relative; left: -15px;">
-                                    <div class="reviewcontent col-8 mt-1 " style="height: 90px; position: relative; left: -15px;">
-                                        <p class="mt-2">이름: 드로잉 </p>
-                                        <p>일자: 2023-05-31</p>
-                                        <p>시간: 15:00 ~ 20:00</p>
-                                        <p>난이도 : 입문자</p>
-                                        <p>인원: 2명</p>
+
+                                    <!-- 클래스 간략한 정보 -->
+                                    <div class="reviewcontent col-8 mt-1 "
+                                        style="height: 90px; position: relative; left: -15px;">
+                                        <p class="mt-2">이름: 드로잉 ${obj.title} </p>
+                                        <p>일자: 2023-05-31 ${obj.classdate}</p>
+                                        <p>시간: 15:00 ~ 20:00 <br />
+                                        <p>${obj.classstart}~${obj.classend}</p>
+                                        <p>난이도 : 입문자 ${obj.classlevel}</p>
                                     </div>
                                 </div>
+
+                                <!-- 별점 레이팅 -->
                                 <div class="col-md-6">
-                                    <fieldset >
-                                        <input type="radio"
-                                            name="rating" value="5" id="rate1"><label 
-                                            for="rate1">★</label> <input type="radio" name="rating"
-                                            value="4" id="rate2"><label for="rate2">★</label> <input
-                                            type="radio" name="rating" value="3" id="rate3"><label
-                                            for="rate3">★</label> <input type="radio" name="rating"
-                                            value="2" id="rate4"><label for="rate4">★</label> <input
-                                            type="radio" name="rating" value="1" id="rate5"><label
-                                            for="rate5">★</label>
+                                    <fieldset>
+                                        <input type="radio" name="rating" value="5" id="rate1"><label
+                                            for="rate1">★</label> <input type="radio" name="rating" value="4"
+                                            id="rate2"><label for="rate2">★</label> <input type="radio" name="rating"
+                                            value="3" id="rate3"><label for="rate3">★</label> <input type="radio"
+                                            name="rating" value="2" id="rate4"><label for="rate4">★</label> <input
+                                            type="radio" name="rating" value="1" id="rate5"><label for="rate5">★</label>
                                     </fieldset>
                                 </div>
                             </div>
-                           
-                           <div class="mt-2">
-                            <div> <input class="mt-1 mx-3"  id="editor" name="content" style="height: 300px; width: 740px; position: relative; left: -15px;
-                             border: 1px solid #d3d3d3;"/>
-                             </div>
-                              </div> 
-                              <input  type="hidden" name="no" value="1"/>
-                              <!-- <input type="hidden" name="no" value"${obj.applyno}"/> -->
-                             <input multiple="multiple" type="file" name="file1" id="file1" accept="image/*">
-                             <input multiple="multiple" type="file" name="file1" id="file2" accept="image/*" >
-                             <input multiple="multiple" type="file" name="file1" id="file3" accept="image/*" >
-                             <input multiple="multiple" type="file" name="file1" id="file4" accept="image/*" >
-   
-                               <div class="d-flex justify-content-between mt-2" id="labels">
-                                   <div><label for="file1" class="d-sm-inline-flex mx-2 mt-2"
-                                   style="border: 1px dashed gray; width: 160px; height: 150px;">
-                                   <i class="bi bi-images"></i></label></div>
-                                   <label for="file2" class="d-sm-inline-flex mx-2 mt-2"
-                                   style="border: 1px dashed gray; width: 160px; height: 150px;">
-                                   <i class="bi bi-images"></i></label>
-                                   <label for="file3" class="d-sm-inline-flex mx-2 mt-2"
-                                   style="border: 1px dashed gray; width: 160px; height: 150px;">
-                                   <i class="bi bi-images"></i></label>
-                                   <div><label for="file4" class="d-sm-inline-flex mx-2 mt-2"
-                                   style="border: 1px dashed gray; width: 160px; height: 150px;">
-                                   <i class="bi bi-images"></i></label></div>
-                               </div>
-                           </div>
-                           <div class="modal-footer">
-                               <input type="submit" class="btn btn-none" value="등록하기" style="background-color: #008000;
+
+                              <!-- 에디터 -->
+                            <div class="mt-2">
+                                <div>
+                                    <div style="margin-top: 10px; background-color: white;">
+                                        <div id="editor" name="content" style="height: 300px;"></div>
+                                    </div>
+                                </div>
+
+                                 <!-- 리뷰 이미지(file) -->
+                                <input type="hidden" name="no" value="1" />                  
+        
+                                <!-- <input type="hidden" name="apply.no" value or th:text : 레스트로 받아온 값 /> -->
+                                <input class="form-control" type="file" name="files" id="click_reviewimage1"
+                                    style="display: none;" onchange="readURL1(this)">
+                                <input class="form-control" type="file" name="files" id="click_reviewimage2"
+                                    style="display: none;" onchange="readURL2(this)">
+                                <input class="form-control" type="file" name="files" id="click_reviewimage3"
+                                    style="display: none;" onchange="readURL3(this)">
+                                <input class="form-control" type="file" name="files" id="click_reviewimage4"
+                                    style="display: none;" onchange="readURL4(this)">
+
+                                <!-- 리뷰 이미지(image) -->
+                                <div class="d-flex justify-content-between mt-2" id="labels">
+                                    <div><img for="file1" id="insert_reviewimage1" class="d-sm-inline-flex mx-2 mt-2"
+                                            style="border: 1px dashed gray; width: 160px; height: 150px;" src=""
+                                            onclick="preview1(this)" />
+                                    </div>
+                                    <div><img for="file1" id="insert_reviewimage2" class="d-sm-inline-flex mx-2 mt-2"
+                                            style="border: 1px dashed gray; width: 160px; height: 150px;" src=""
+                                            onclick="preview2()" />
+                                    </div>
+                                    <div><img for="file1" id="insert_reviewimage3" class="d-sm-inline-flex mx-2 mt-2"
+                                            style="border: 1px dashed gray; width: 160px; height: 150px;" src=""
+                                            onclick="preview3()" />
+                                    </div>
+                                    <div><img for="file1" id="insert_reviewimage4" class="d-sm-inline-flex mx-2 mt-2"
+                                            style="border: 1px dashed gray; width: 160px; height: 150px;" src=""
+                                            onclick="preview4()" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="button" class="btn btn-none" value="등록하기" style="background-color: #008000;
                                position: relative; left: -250px; width: 250px; height: 70px; font-size: larger; font-weight: bold;
-                               color: white;">
-                           </div>
-                               </div>           
-                       </div>
-                   </form>
-               </div>
-               
-           </div> 
-           <script th:src="@{/js/bootstrap.min.js}"></script>
-            <script th:src="@{/js/quill.js}"></script>
-   
-    <!-- Initialize Quill editor -->
-	<script>
-		const toolbarOptions = [ [ 'bold', 'italic', 'underline', 'strike' ], // toggled buttons
-		[ 'blockquote', 'code-block' ], [ {
-			'header' : 1
-		}, {
-			'header' : 2
-		} ], // custom button values
-		[ {
-			'list' : 'ordered'
-		}, {
-			'list' : 'bullet'
-		} ], [ {
-			'script' : 'sub'
-		}, {
-			'script' : 'super'
-		} ], // superscript/subscript
-		[ {
-			'indent' : '-1'
-		}, {
-			'indent' : '+1'
-		} ], // outdent/indent
-		[ {
-			'direction' : 'rtl'
-		} ], // text direction[ {'size' : [ 'small', false, 'large', 'huge' ]} ], // custom dropdown
-		[ {
-			'header' : [ 1, 2, 3, 4, 5, 6, false ]
-		} ], [ {
-			'color' : []
-		}, {
-			'background' : []
-		} ], // dropdown with defaults from theme
-		[ {
-			'font' : []
-		} ], [ {
-			'align' : []
-		} ], ];
-		// 위쪽에 있는 태그중에서 id가 editor인것을 찾아서 toolbar는 toolbarOptions 값으로 대체하고 테마를 snow로 해서 변경
-		const quill = new Quill('#editor', {
-			modules : {
-				toolbar : toolbarOptions
-			},
-			theme : 'snow'
-		});
-	</script>
+                               color: white;" onclick="getEditorContent()">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-</div>
-
+    <!-- 스크립트 -->
     
-
+    <script th:src="@{/js/quill.js}"></script>
+    <script th:src="@{/js/review/insert.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>

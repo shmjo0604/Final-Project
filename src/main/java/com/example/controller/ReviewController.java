@@ -1,18 +1,29 @@
 package com.example.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.dto.ClassImage;
 import com.example.entity.Review;
 import com.example.entity.ReviewImage;
+import com.example.service.classproduct.ClassManageService;
 import com.example.service.review.ReviewImageService;
 import com.example.service.review.ReviewService;
 
@@ -25,34 +36,66 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ReviewController {
 
+    @Autowired ResourceLoader resourceLoader;
+    @Value("${default.image}") String defaultImg;
+    
     final ReviewService reviewService;
     final ReviewImageService reviewImageService;
+    final ClassManageService manageService;
     final String format = "reviewController => {}";
 
     @PostMapping(value = "insert.do")
     public String insertPOST(@ModelAttribute Review review,
-    @ModelAttribute ReviewImage reviewimage,
-    @RequestParam(name = "file1")  List<MultipartFile> files) throws IOException {
+    @RequestParam(name = "files",required = false) List<MultipartFile> files)
+    throws IOException {
 
+ 
+            log.info(format,review.toString());
+            
             List<ReviewImage> list = new ArrayList<>();
 
-            for(MultipartFile multipartfile : files){
-                
-            reviewimage.setFilesize(multipartfile.getSize());
-            reviewimage.setFiledata(multipartfile.getInputStream().readAllBytes());
-            reviewimage.setFiletype(multipartfile.getContentType());
-            reviewimage.setFilename(multipartfile.getOriginalFilename());
+               if(files != null){
 
-            list.add(reviewimage);
+                for(MultipartFile multipartfile : files){
+
+                    ReviewImage obj = new ReviewImage();
+
+                    obj.setFilesize(multipartfile.getSize());
+                    obj.setFiledata(multipartfile.getInputStream().readAllBytes());
+                    obj.setFiletype(multipartfile.getContentType());
+                    obj.setFilename(multipartfile.getOriginalFilename());
+
+                    list.add(obj);
+            }   
+          }
+          log.info(format,list.toString());
+            
+            reviewService.insertReview(review);
+            reviewImageService.insertReviewImage(reviewimage);
+            
+            return "redirect:/member/mypage.do?menu=";
+    }
+
+    @GetMapping(value = "/image")
+    public ResponseEntity<byte[]> image(@RequestParam(name = "no", defaultValue = "0") long no)
+    throws IOException {
+        System.out.println(no);
+        ClassImage obj = manageService.selectClassImageOne(no);
+        System.out.println(obj);
+  
+        HttpHeaders headers = new HttpHeaders(); //import org.springframework....
+    
+
+        if (obj != null) { // 이미지가 존재하는지 확인
+            if (obj.getFilesize() > 0) {
+                headers.setContentType(MediaType.parseMediaType(obj.getFiletype()));
+                return new ResponseEntity<>(obj.getFiledata(), headers, HttpStatus.OK);
             }
-           
-            System.out.println(list.toString()+"메롱");
-            log.info(format,review.toString());
-            log.info(format,reviewimage.toString()); 
-            
-            // reviewService.insertReview(review);
-            // reviewImageService.insertReviewImage(reviewimage);
-            
-            return "/member/mypage/mypage";
+        }
+
+        // 이미지가 없을경우
+        InputStream is = resourceLoader.getResource(defaultImg).getInputStream(); // exception발생됨
+        headers.setContentType(MediaType.IMAGE_PNG);
+        return new ResponseEntity<>(is.readAllBytes(),headers,HttpStatus.OK);
     }
 }
