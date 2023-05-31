@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
-import com.example.entity.ClassInquiry;
+import com.example.dto.ClassInquiry;
 
 @Mapper
 public interface ClassManageMapper {

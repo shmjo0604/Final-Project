@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
-import com.example.entity.ClassInquiry;
+import com.example.dto.ClassInquiry;
 import com.example.mapper.ClassManageMapper;
 
 @Service
@@ -48,8 +48,6 @@ public class ClassManageServiceImpl implements ClassManageService {
     @Override
     public int updateClassInactive(ClassProduct obj) {
         try {
-
-
             return cMapper.updateClassInactive(obj);
         }
         catch (Exception e) {

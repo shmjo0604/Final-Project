@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
 import com.example.dto.Member;
-import com.example.entity.ClassInquiry;
+import com.example.dto.ClassInquiry;
 import com.example.service.classproduct.ClassManageService;
 import com.example.service.classproduct.ClassSelectService;
 import com.example.service.member.MemberService;
@@ -144,9 +145,9 @@ public class MemberController {
         }
 
         else if(menu == 2) {
-            List<ClassInquiry> list = cService.selectClassInquiryList(classcode);
-            model.addAttribute("list", list);
-            log.info("myclass inquiry selectlist => {}", list.toString());
+            List<ClassInquiry> list2 = cService.selectClassInquiryList(classcode);
+            model.addAttribute("list2", list2);
+            log.info("myclass inquiry selectlist => {}", list2.toString());
         }
 
         model.addAttribute("user", user);
@@ -161,7 +162,7 @@ public class MemberController {
     }
 
     @GetMapping(value = "/update.do")
-    public String myClassupdateGET( @AuthenticationPrincipal User user,
+    public String myclassUpdateGET( @AuthenticationPrincipal User user,
     @RequestParam(name = "classcode", defaultValue = "0")long classcode,
         Model model 
     ){
@@ -180,6 +181,17 @@ public class MemberController {
         model.addAttribute("subImg", cService.selectClassSubImageNoList(classcode));
         return "/class/update";
     }
+
+    @PostMapping(value = "/update.do")
+    public String myclassUpdatePOST( @AuthenticationPrincipal User user,
+    @ModelAttribute ClassProduct obj, @ModelAttribute ClassImage obj2,
+        Model model  
+        ){
+            cService.updateClassOne(obj);
+            cService.updateClassImageOne(obj2);
+
+            return "redirect:/home.do";
+        }
     
 
     @PostMapping(value = "/myclass/delete.do")
@@ -189,9 +201,11 @@ public class MemberController {
     ) {
         int ret = cService.updateClassInactive(obj);
         if(ret ==1 ){
-            return "redirect:/member/myclass.do";
+            return "/member/myclass";
         }
         return "/member/myclass";
     }
+
+
 
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
-import com.example.entity.ClassInquiry;
+import com.example.dto.ClassInquiry;
 
 @Service
 public interface ClassManageService {
