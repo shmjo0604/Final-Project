@@ -1,11 +1,3 @@
-
-input::placeholder {
-    position: relative;
-    float: right;
-    left: -300px;
-    top: 13px;
-}
-
 /* 별점 */
 
 #myform fieldset{
@@ -27,34 +19,49 @@ input::placeholder {
     text-shadow: 0 0 0 #f0f0f0;
 }
 #myform label:hover{
-    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);    
 }
 #myform label:hover ~ label{
     text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+    
 }
+#myform input[type=radio]:hover ~ label{
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    color: rgba(250, 208, 0, 0.99);
+}
+
 #myform input[type=radio]:checked ~ label{
-    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    color: rgba(250, 208, 0, 0.99);
+   
 }
-#reviewContents {
-    width: 100%;
-    height: 150px;
-    padding: 10px;
-    box-sizing: border-box;
-    border: solid 1.5px #D3D3D3;
-    border-radius: 5px;
-    font-size: 16px;
-    resize: none;
-}
+
+/* 클래스 간략 정보 */
+
 .reviewcontent{
     font-size: small;
-    line-height: 30%;
-    
+    line-height: 30%; 
+}
+
+.summary{
+    font-size: smaller;
+    width: 200px;
+    height: 18px;
+}
+
+.summary > input{
+    border: 0px;
 }
 
 form input::file-selector-button {
     display: none;
 
   }
+
+#contentstyle{
+    display: none
+}
+
 .bi-images{
     font-size: 40px;
     line-height: 40px;
@@ -64,7 +71,6 @@ form input::file-selector-button {
     top: 35%;
 }
 
-/* #labels input [type=file]  {
-   color: red;
-   background-color: red;
-} */
+.carousel-control-next-icon{
+    color: gray;
+}

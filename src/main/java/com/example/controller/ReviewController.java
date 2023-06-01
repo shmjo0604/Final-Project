@@ -44,22 +44,28 @@ public class ReviewController {
     final ClassManageService manageService;
     final String format = "reviewController => {}";
 
+    @GetMapping(value = "select.do")
+    public String selectPOST(){
+        return "/inquery/reviewselect";
+    }
+
     @PostMapping(value = "insert.do")
     public String insertPOST(@ModelAttribute Review review,
     @RequestParam(name = "files",required = false) List<MultipartFile> files)
     throws IOException {
-
- 
+        
             log.info(format,review.toString());
-
             List<ReviewImage> list = new ArrayList<>();
 
-               if(files != null){
+               if(review != null){
+                // reviewService.insertReview(review);
+              }
 
+               if(files != null){
                 for(MultipartFile multipartfile : files){
 
                     ReviewImage obj = new ReviewImage();
-
+                    obj.setReview(review);
                     obj.setFilesize(multipartfile.getSize());
                     obj.setFiledata(multipartfile.getInputStream().readAllBytes());
                     obj.setFiletype(multipartfile.getContentType());
@@ -68,12 +74,10 @@ public class ReviewController {
                     list.add(obj);
             }   
           }
-          log.info(format,list.toString());
-            
-            reviewService.insertReview(review);
-            // reviewImageService.insertReviewImage(reviewimage);
-            
-            return "redirect:/member/mypage.do?menu=";
+                    log.info(format,list.toString());
+                 // reviewImageService.insertReviewImage(list);
+         
+                 return "redirect:/member/mypage.do?menu=";                       
     }
 
     @GetMapping(value = "/image")
@@ -85,7 +89,6 @@ public class ReviewController {
   
         HttpHeaders headers = new HttpHeaders(); //import org.springframework....
     
-
         if (obj != null) { // 이미지가 존재하는지 확인
             if (obj.getFilesize() > 0) {
                 headers.setContentType(MediaType.parseMediaType(obj.getFiletype()));

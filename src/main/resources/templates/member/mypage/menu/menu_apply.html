@@ -13,7 +13,7 @@
         .box {
             width: 80%;
             height: 150px;
-            background: #FFF;
+            background: #FFF;   
             border-radius: 15px;
             margin: 20px;
         }
@@ -158,8 +158,7 @@
                 <td style="font-size: small;">
                     <a href="#">
                         <p style="margin-top: 10px;">서핑 여름 특강</p>
-                    </a>
-                    <div name="no" style="display: none;">1</div> 
+                    </a> 
                     <div>일자 : 2023-06-01</div>
                     <div>시간 : 15:00 ~ 21:00</div>
                     <div>난이도 : 입문자</div>
@@ -170,7 +169,7 @@
                 <td class="center">
                     <p style="text-align: center;">참여완료</p>
                     <button class="btn btn-sm btn-secondary" type="button" style="height: 30px; width: 90px;"
-                     onclick="modalAction('6월1일','15:00','입문자','10000원','2명')">리뷰작성></button>
+                     onclick="modalAction('2','도자기 슥','6월1일','15:00','입문자','10000원','2명')">리뷰작성></button>
                 </td>
             </tr>
             <tr>
@@ -223,21 +222,19 @@
                         <div class="container-fluid">
                             <div class="row d-flex flex-nowrap" style="height: 110px;">
                                 <div class="row col-md-6 mx-3" style="border: 1px solid #d3d3d3;">
-                                    <img class=" mt-2" name="mainimage" th:src="@{/images/드로잉.jpg}" style="width: 110px; height: 90px;
+                                    <img class=" mt-2" name="mainimage" th:src="@{/image/도자기.png}" style="width: 110px; height: 90px;
                                     position: relative; left: -15px;">
 
                                     <!-- 클래스 간략한 정보 -->
-                                    <div class="reviewcontent col-8 mt-1 "
+                                    <div class="reviewcontent col-8 mt-2 "
                                         style="height: 90px; position: relative; left: -15px;">
-
-                                        
-                                        <input  class="mt-2" id="classdate" type="text">
-                                        <input  id="classstart" type="text">
-                                        <input  id="classlevel" type="text">
-                                        <input  id="price" type="text">
-                                        <input  id="cnt" type="text">
-                                        <input  id="no" type="hidden">
-                                        
+                                        <div class="summary">이름: <input  id="title" type="text"></div>
+                                        <div class="summary">날짜: <input  id="classdate" type="text"></div>
+                                        <div class="summary">시간: <input  id="classstart" type="text"></div>
+                                        <div class="summary">난이도: <input  id="classlevel" type="text"></div>
+                                        <div class="summary">가격: <input  id="price" type="text"></div>
+                                        <!-- <div class="summary">인원: <input  id="cnt" type="text"></div> -->
+                                        <input class="summary " id="no" name="no" type="hidden">
                                     </div>
                                 </div>
 
@@ -262,10 +259,6 @@
                                     </div>
                                 </div>
 
-                                 <!-- 리뷰 이미지(file) -->
-                                <input type="hidden" name="no" value="1" />                  
-        
-                                <!-- <input type="hidden" name="apply.no" value or th:text : 레스트로 받아온 값 /> -->
                                 <input class="form-control" type="file" name="files" id="click_reviewimage1"
                                     style="display: none;" onchange="readURL1(this)">
                                 <input class="form-control" type="file" name="files" id="click_reviewimage2"
@@ -310,4 +303,4 @@
     
     <script th:src="@{/js/quill.js}"></script>
     <script th:src="@{/js/review/reviewinsert.js}"></script>
-    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

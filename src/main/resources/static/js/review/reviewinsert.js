@@ -1,5 +1,4 @@
-//Initialize Quill editor 
-
+// Initialize Quill editor 
 const toolbarOptions = [['bold', 'italic', 'underline', 'strike'], // toggled buttons
 ['blockquote', 'code-block'], [{
     'header': 1
@@ -43,6 +42,8 @@ const quill = new Quill('#editor', {
     },
     theme: 'snow'
 });
+
+// 리뷰이미지 함수(1234)
 
 function preview1() {
     document.getElementById("click_reviewimage1").click();
@@ -104,6 +105,8 @@ function readURL4(input) {
     }
 }
 
+// 에디터 내용 전달
+
 function getEditorContent() {
 
     const content = quill.root.innerHTML; //위쪽의 editor객체를 통해서 가져오기
@@ -114,31 +117,37 @@ function getEditorContent() {
     var input = document.createElement("input");
     input.type = "text";
     input.name = "content";
+    input.id= "contentstyle"
     input.value = content;
     form.appendChild(input);
 
     form.submit();
 }
 
-function modalAction(no,classdate,classstart,classlevel,price,cnt){
+// 신청번호 받아서 프로덕트유닛 내용 불러오기
+
+function modalAction(no,title,classdate,classstart,classlevel,price,cnt){
     const modal = new bootstrap.Modal(document.getElementById("exampleModal"),{});
 
+    console.log(cnt)
+    console.log(price)    
+
         const no1 = document.getElementById("no");
+        const title1 = document.getElementById("title");
 		const classdate1 = document.getElementById("classdate");
 		const classstart1 = document.getElementById("classstart");
 		const classlevel1 = document.getElementById("classlevel");
 		const price1 = document.getElementById("price");
-		const cnt1 = document.getElementById("cnt");
+		// const cnt1 = document.getElementById("cnt");
 
-        console.log(no)
-        console.log(classdate)
 
         no1.value=no
-        no1.value=classdate
-        no1.value=classstart
-        no1.value=classlevel
-        no1.value=price
-        no1.value=cnt
+        title1.value=title
+        classdate1.value=classdate
+        classstart1.value=classstart
+        classlevel1.value=classlevel
+        price1.value=price
+        // cnt1.value=cnt
         
 		modal.show(); 
 }

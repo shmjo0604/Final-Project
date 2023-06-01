@@ -1,5 +1,7 @@
 package com.example.service.review;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.entity.ReviewImage;
@@ -14,9 +16,9 @@ public class ReviewImageServiceImpl implements ReviewImageService {
     final ReviewImageRepository reviewImageRepository;
 
     @Override
-    public int insertReviewImage(ReviewImage obj) {
+    public int insertReviewImage(List<ReviewImage> obj) {
 
-    reviewImageRepository.save(obj);
+    reviewImageRepository.saveAll(obj);
         return 1;
     }
 }
