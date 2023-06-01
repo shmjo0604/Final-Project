@@ -154,7 +154,6 @@ public class MemberController {
             // PageRequest pageRequest = PageRequest.of(page, size);
             
             List<ClassInquiryView> list = cService.selectClassInquiryList(owner);
-            //List<ClassInquiryView> list = civRepository.findByMemberidOrderByNoDesc(id);
             System.out.println("test용=>"+list.toString());
 
             model.addAttribute("list", list);

@@ -33,7 +33,7 @@ public class ClassInquiryView {
     @Column(name = "CHK")
     private int chk;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "REGDATE")
     private Date regdate;
 

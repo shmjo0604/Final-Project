@@ -11,7 +11,5 @@ import com.example.entity.ClassInquiryView;
 public interface ClassInquiryViewRepository extends JpaRepository<ClassInquiryView, Long>{
   
     List<ClassInquiryView> findByOwnerOrderByNoDesc( String owner );
-    // public List<ClassInquiryView> findAllByOrderByNoDesc();
 
-    // List<ClassInquiryView> findByClasscodeInOrderByNoDesc( List<Long> no );
 }
