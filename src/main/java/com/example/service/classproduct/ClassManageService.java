@@ -25,8 +25,6 @@ public interface ClassManageService {
     // 3_2. 클래스 비활성화
     public int updateClassNonactive(ClassProduct obj);
 
-
-
     // 4. 클래스 내용 수정
     public int updateClassOne(ClassProduct obj);
 
@@ -51,5 +49,7 @@ public interface ClassManageService {
     // 9. 클래스 문의 전체 조회
     public List<ClassInquiryView> selectClassInquiryList(String owner);
 
+    // 10. 클래스 문의 1개 조회
+    public ClassInquiryView selectClassInquiryOne(long no);
     
 }

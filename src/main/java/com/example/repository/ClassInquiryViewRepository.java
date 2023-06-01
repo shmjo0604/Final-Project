@@ -10,6 +10,8 @@ import com.example.entity.ClassInquiryView;
 @Repository
 public interface ClassInquiryViewRepository extends JpaRepository<ClassInquiryView, Long>{
   
+    ClassInquiryView findByNo(Long no);
+    
     List<ClassInquiryView> findByOwnerOrderByNoDesc( String owner );
 
 }

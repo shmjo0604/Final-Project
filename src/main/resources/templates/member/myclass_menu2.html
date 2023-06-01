@@ -49,8 +49,9 @@
                         <td th:text="${#dates.format(obj.regdate, 'yyyy.MM.dd HH:mm:ss')}"></td>
                         <td th:text="${obj.chk}"></td>
                         <td th:text="${obj.memberid}"></td>
-                        <td><button type="button" id="createBtn" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#myModal">
-                            답변하기</button></td>
+                        <td><button type="button" id="createBtn" class="btn btn-outline-success" data-bs-toggle="modal"
+                                data-bs-target="#myModal">
+                                답변하기</button></td>
                     </tr>
                 </tbody>
 
@@ -58,33 +59,44 @@
             </table>
 
             <!-- Modal -->
-            <div class="modal modal-center fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal modal-center fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">답변하기</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button th:value="${obj.no}" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-question">
                         </div>
                         <div class="modal-body">
                             <table class="table table-bordered">
-                                <tr>
-                                    <td>질문</td>
-                                    <td><input type="text" name="ques" th:value="${obj.content}" class="form-control"
-                                            readonly></td>
-                                </tr>
+                                <th:block th:each="obj2 : ${obj2}">
+                                    <tr>
+                                        <td>문의내용</td>
+                                        <td><input type="text" th:value="${obj2.content}" id="content" class="form-control"
+                                                readonly></td>
+                                    </tr>
+                                </th:block>
 
-                                <tr>
-                                    <td>답변</td>
-                                    <td>
-                                        <textarea name="answer" id="answer" style="width:100%;" rows="10"></textarea>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>답변</td>
+                                        <td>
+                                            <textarea name="answer" id="answer" style="width:100%;"
+                                                rows="10"></textarea>
+                                        </td>
+                                    </tr>
                             </table>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+
+                            <!-- <form method="post" id="insertForm"
+                                th:action="@{/member/inquiry/insert.do(classcode=${obj.classcode} )}">
+                                <button type="button" class="btn btn-primary" onclick="insertPost()"
+                                    style="border: 0;">등록</button>
+                            </form> -->
+
                             <input type="button" class="btn btn-primary" value="등록">
                         </div>
                     </div>

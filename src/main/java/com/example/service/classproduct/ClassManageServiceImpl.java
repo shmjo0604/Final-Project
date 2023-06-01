@@ -159,5 +159,15 @@ public class ClassManageServiceImpl implements ClassManageService {
         }
     }
 
+    @Override
+    public ClassInquiryView selectClassInquiryOne(long no) {
+       try {
+            return cRepository.findByNo( no );
+       } catch (Exception e) {
+        e.printStackTrace();
+        return null;
+    }
+    }
+
     
 }

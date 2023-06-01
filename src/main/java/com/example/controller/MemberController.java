@@ -41,6 +41,7 @@ public class MemberController {
     @Autowired ClassManageService cService; 
     @Autowired ClassSelectService c1Service;
 
+
     BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 
     @GetMapping(value = "/join.do")
@@ -131,6 +132,7 @@ public class MemberController {
     public String myclassGET(
         @RequestParam(name = "menu", defaultValue = "0") int menu,
         @RequestParam(name = "classcode", defaultValue = "0", required = false) long classcode,
+        @RequestParam(name = "no", defaultValue = "0", required = false) long no,
         @RequestParam(name="page", required = false) Integer page, @RequestParam(name="size", required = false) Integer size,
         @AuthenticationPrincipal User user,
         Model model
@@ -155,8 +157,12 @@ public class MemberController {
             
             List<ClassInquiryView> list = cService.selectClassInquiryList(owner);
             System.out.println("test용=>"+list.toString());
+            
+            ClassInquiryView obj2 = cService.selectClassInquiryOne(no);
 
             model.addAttribute("list", list);
+            model.addAttribute("obj2", obj2 );
+
             log.info("myclass inquiry selectlist => {}", list.toString());
         }
 
@@ -222,11 +228,12 @@ public class MemberController {
         return "/member/myclass";
     }
 
-    // @PostMapping(value = "/myclass.do")
+    // @PostMapping(value = "/myclass/inquiry.do")
     // public String myClassInquiryPOST(
-    //     @ModelAttribute ClassInquiry obj,
+    //     @ModelAttribute ClassInquiryView obj,
     //     Model model
     // ){
+
     //     return "/member/myclass";
     // }
 
