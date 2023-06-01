@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class CommunityServiceImpl implements CommunityService {
+    
     @Autowired
     CommunityRepository cRepository;
 

@@ -18,6 +18,8 @@ public class FilterConfig {
         filterReg.addUrlPatterns("/member/*");
         filterReg.addUrlPatterns("/class/*");
         filterReg.addUrlPatterns("/apply/*");
+        filterReg.addUrlPatterns("/classunit/*");
+        filterReg.addUrlPatterns("/community/*");
 
         return filterReg;
     }

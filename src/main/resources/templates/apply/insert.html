@@ -280,14 +280,16 @@
                                 <div class="d-flex justify-content-center">
                                     <p>신청 인원 : </p>
                                     <input type="text" class="form-control-plaintext w-25" th:value="|${person}명|">
-                                    <input type="hidden" class="form-control-plaintext w-25" name="person[]" th:value="${person}">
+                                    <input type="hidden" class="form-control-plaintext w-25" name="person[]"
+                                        th:value="${person}">
                                 </div>
                             </td>
 
                             <td>
                                 <input type="text" class="form-control-plaintext w-25" th:value="|${obj.totalprice}원|">
-                                <input type="hidden" class="form-control-plaintext w-25" name="payment[]" th:value="${obj.totalprice}">
-                                
+                                <input type="hidden" class="form-control-plaintext w-25" name="payment[]"
+                                    th:value="${obj.totalprice}">
+
                             </td>
                             <!-- <td>무료</td> -->
 
@@ -316,115 +318,117 @@
     <!--footer 영역-->
     <footer th:replace="~{footer :: footerFragment}"></footer>
 
-</body>
-<!--jQuery-->
-<script th:src="@{/js/jquery-3.6.4.min.js}"></script>
-<!--axios library-->
-<script th:src="@{/js/axios.min.js}"></script>
-<!--Bootstrap 용 js -->
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-<!--portone js-->
-<script th:src="@{/js/iamport.payment-1.2.0.js}"></script>
-<script th:inline="javascript">
 
-    const contextPath = $('#contextPathHolder').attr('data-contextPath');
+    <!--jQuery-->
+    <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
+    <!--axios library-->
+    <script th:src="@{/js/axios.min.js}"></script>
+    <!--Bootstrap 용 js -->
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <!--portone js-->
+    <script th:src="@{/js/iamport.payment-1.2.0.js}"></script>
+    <script th:inline="javascript">
 
-    var IMP = window.IMP;
-    IMP.init('imp27884386');
+        const contextPath = $('#contextPathHolder').attr('data-contextPath');
 
-    function requestPay() {
+        var IMP = window.IMP;
+        IMP.init('imp27884386');
 
-        // 결제 성공 후 처리 할 정보
+        function requestPay() {
 
-        var unitnoLength = $("input[name='unitno[]']").length;
-        var personLength = $("span[name='person[]']").length;
-        var paymentLength = $("span[name='payment[]']").length;
+            // 결제 성공 후 처리 할 정보
 
-        var unitnoArray = new Array();
-        var personArray = new Array();
-        var paymentArray = new Array();
+            var unitnoLength = $("input[name='unitno[]']").length;
+            var personLength = $("span[name='person[]']").length;
+            var paymentLength = $("span[name='payment[]']").length;
 
-        for(let i=0; i<unitnoLength; i++) {
-            unitnoArray[i] = $("input[name='unitno[]']")[i].value;
-            personArray[i] = $("input[name='person[]']")[i].value;
-            paymentArray[i] = $("input[name='payment[]']")[i].value;
-        }
+            var unitnoArray = new Array();
+            var personArray = new Array();
+            var paymentArray = new Array();
 
-        // var unitnoArray = [];
-        // var personArray = [];
-        // var paymentArray = [];
+            for (let i = 0; i < unitnoLength; i++) {
+                unitnoArray[i] = $("input[name='unitno[]']")[i].value;
+                personArray[i] = $("input[name='person[]']")[i].value;
+                paymentArray[i] = $("input[name='payment[]']")[i].value;
+            }
 
-        // $("input[name=payment[]]").each(function(index, item) {
-        //     paymentArray.push($(item).val());
-        // });
+            // var unitnoArray = [];
+            // var personArray = [];
+            // var paymentArray = [];
 
-        // $("input[name=person[]]").each(function(index, item) {
-        //     personArray.push($(item).val());
-        // });
+            // $("input[name=payment[]]").each(function(index, item) {
+            //     paymentArray.push($(item).val());
+            // });
 
-        // $("input[name=unitno[]]").each(function(index, item) {
-        //     unitnoArray.push($(item).val());
-        // });
+            // $("input[name=person[]]").each(function(index, item) {
+            //     personArray.push($(item).val());
+            // });
 
-        console.log(unitnoArray);
-        console.log(personArray);
-        console.log(paymentArray);
+            // $("input[name=unitno[]]").each(function(index, item) {
+            //     unitnoArray.push($(item).val());
+            // });
 
-        //iamport 대신 자신의 "가맹점 식별코드"를 사용
-        IMP.request_pay({
-            pg: "html5_inicis",
-            pay_method: "card",
-            merchant_uid: 'merchant_' + new Date().getTime(),
-            name: 'SPECIALDAY',
-            amount: 100,
-            buyer_email: /*[[${member.email}]]*/'',
-            buyer_name: /*[[${member.name}]]*/'',
-            buyer_tel: /*[[${member.phone}]]*/'',
-            buyer_addr: '서울특별시 강남구 삼성동',
-            buyer_postcode: '123-456'
-        }, async function (rsp) { // callback
+            console.log(unitnoArray);
+            console.log(personArray);
+            console.log(paymentArray);
 
-            console.log(rsp);
-            
-            // 1. 결제 검증
+            //iamport 대신 자신의 "가맹점 식별코드"를 사용
+            IMP.request_pay({
+                pg: "html5_inicis",
+                pay_method: "card",
+                merchant_uid: 'merchant_' + new Date().getTime(),
+                name: 'SPECIALDAY',
+                amount: 100,
+                buyer_email: /*[[${member.email}]]*/'',
+                buyer_name: /*[[${member.name}]]*/'',
+                buyer_tel: /*[[${member.phone}]]*/'',
+                buyer_addr: '서울특별시 강남구 삼성동',
+                buyer_postcode: '123-456'
+            }, async function (rsp) { // callback
 
-            // $.ajax({
-            //     type : "POST",
-            //     url : contextPath + "/verifyiamport/" + rsp.imp_uid
-            // })
+                console.log(rsp);
 
-            const url = contextPath + '/api/verifyiamport.json';
-            const headers = { "Content-Type": "application/json" };
-            const body = {imp_uid : rsp.imp_uid};
+                // 1. 결제 검증
 
-            await axios.post(url, body, { headers }).then(async function(result) {
+                // $.ajax({
+                //     type : "POST",
+                //     url : contextPath + "/verifyiamport/" + rsp.imp_uid
+                // })
 
-                console.log(result);
+                const url = contextPath + '/api/verifyiamport.json';
+                const headers = { "Content-Type": "application/json" };
+                const body = { imp_uid: rsp.imp_uid };
 
-                if(rsp.paid_amount === result.data.response.amount) {
+                await axios.post(url, body, { headers }).then(async function (result) {
 
-                    alert("결제가 완료되었습니다.");
+                    console.log(result);
 
-                    const url = contextPath + '/api/apply/success.json';
-                    const headers = { "Content-Type": "application/json" };
-                    const body = {unitnoArray : unitnoArray, personArray : personArray, paymentArray : paymentArray};
-                    const { data } = await axios.post(url, body, { headers });
+                    if (rsp.paid_amount === result.data.response.amount) {
 
-                    //console.log(data);
+                        alert("결제가 완료되었습니다.");
 
-                    if(data.ret === 1) {
-                       // window.location.href = contextPath + '/member/mypage.do?menu=1';
+                        const url = contextPath + '/api/apply/success.json';
+                        const headers = { "Content-Type": "application/json" };
+                        const body = { unitnoArray: unitnoArray, personArray: personArray, paymentArray: paymentArray };
+                        const { data } = await axios.post(url, body, { headers });
+
+                        //console.log(data);
+
+                        if (data.ret === 1) {
+                            // window.location.href = contextPath + '/member/mypage.do?menu=1';
+                        }
+
                     }
 
-                }
-                
-                else {
-                    alert("결제에 실패했습니다." + "에러코드 : " + rsp.error_code+ "에러 메시지 : " + rsp.error_message);
-                }
+                    else {
+                        alert("결제에 실패했습니다." + "에러코드 : " + rsp.error_code + "에러 메시지 : " + rsp.error_message);
+                    }
 
-            }) 
+                })
 
-        });
-    }
-</script>
+            });
+        }
+    </script>
+</body>
+
 </html>

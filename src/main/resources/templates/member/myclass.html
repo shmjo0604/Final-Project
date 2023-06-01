@@ -90,6 +90,7 @@
 <body>
     <!-- header 영역 -->
     <header th:replace="~{header :: headerFragment}"></header>
+
     <div id="wrapper">
         <div class="container border-top">
             <div class="maincontent row">
@@ -106,7 +107,7 @@
                                         클래스 조회</a>
                                 </li>
                                 <li class="menu">
-                                    <a th:href="@{myclass.do?(menu=2)}"
+                                    <a th:href="@{myclass.do(menu=2)}"
                                         style="text-decoration: none; font-weight: bold; color: cornsilk;">
                                         <span class="material-symbols-outlined"
                                             style="color: white; vertical-align: middle;">quiz</span>
@@ -133,7 +134,12 @@
 
     <footer th:replace="~{footer :: footerFragment}"></footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <!--jQuery-->
+    <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
+    <!--Bootstrap 용 js -->
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <!--Main js-->
+    <script th:src="@{/js/main.js}"></script>
 </body>
 
 </html>

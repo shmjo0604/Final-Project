@@ -222,17 +222,55 @@ public class ClassController {
 
     }
 
-    @GetMapping(value = "/unit.do")
-    public String unitGET(@RequestParam(name = "classcode", defaultValue = "0", required = false) long classcode) {
+    @GetMapping(value = "/update.do")
+    public String myclassUpdateGET( @AuthenticationPrincipal User user,
+    @RequestParam(name = "classcode", defaultValue = "0")long classcode,
+        Model model 
+    ){
+        ClassProduct obj = manageService.selectClassOne(classcode);
 
-        if(classcode == 0) {
-            return "redirect:/member/myclass.do";
+        log.info(format, obj.toString());
+        long profileImg = manageService.selectClassProfileImageNo(classcode);
+        long mainImg = manageService.selectClassMainImageNo(classcode);
+
+        model.addAttribute("actlist", cService.selectActivityCateList());
+        model.addAttribute("citylist", cService.selectCityCateList());
+        model.addAttribute("obj", obj);
+        model.addAttribute("user", user);
+        model.addAttribute("profileImg", profileImg);
+        model.addAttribute("mainImg", mainImg);
+        model.addAttribute("subImg", manageService.selectClassSubImageNoList(classcode));
+        return "/class/update";
+    }
+
+    @PostMapping(value = "/update.do")
+    public String myclassUpdatePOST( @AuthenticationPrincipal User user,
+    @ModelAttribute ClassProduct obj, @ModelAttribute com.example.dto.ClassImage obj2,
+        Model model  
+        ){
+            int ret = manageService.updateClassOne(obj);
+            int ret2 = manageService.updateClassImageOne(obj2);
+            log.info("update class --- => {}", obj.toString());
+            log.info("update image --- => {}", obj2.toString());
+
+        if (ret == 1 || ret2 == 1 ) {
+                return "redirect:/member/myclass.do";
+        } else {
+            return "redirect:/member/update.do?classcode=";
         }
+    }
 
-        // 여기서 unit 정보가 있으면 조회해서 list로 넘겨야 하는데, 달력이 문제네 restcontroller로 할 거면 화면만 띄우면 되고
-        
-
-        return "/class/unit";
+    @PostMapping(value = "/delete.do")
+    public String myclassdeletePOST( @AuthenticationPrincipal User user,
+        @ModelAttribute ClassProduct obj, 
+        Model model
+    ) {
+        log.info(format, obj.toString());
+        int ret = manageService.updateClassInactive(obj);
+        if(ret ==1 ){
+            return "redirect:/home.do";
+        }
+        return "/member/myclass";
     }
 
     @PostMapping(value = "/basket.do")

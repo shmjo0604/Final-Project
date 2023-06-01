@@ -6,6 +6,8 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>SPECIAL DAY : 회원가입</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!--웹 페이지 아이콘 변경-->
+    <link rel="icon" th:href="@{/image/logo.ico}">
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -31,10 +33,6 @@
             --font-color: #4e4e4e;
             --main-color: #23ba15;
 
-        }
-
-        .col-lg-7 {
-            padding-top: 70px;
         }
 
         .d-grid {
@@ -74,7 +72,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7">
-                    <div class="card mt-3" style="border: 1px solid gainsboro; background-color: rgb(255, 255, 255);">
+                    <div class="card" style="border: 1px solid gainsboro; background-color: rgb(255, 255, 255);">
 
                         <div class="logo-wrap" style="text-align: center;  margin-top: 6%;  margin-bottom: 4%;">
                             <a th:href="@{/home.do}">
@@ -139,8 +137,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mt-4 mb-0">
-                                    <button class="btn btn-primary" type="button" onclick="joinAction()">회원가입</button>
+                                <div class="mt-4 mb-0 d-flex justify-content-center">
+                                    <button class="btn btn-primary me-2" type="button" onclick="joinAction()">회원가입</button>
                                     <a th:href="@{/home.do}" class="btn btn-outline-success float-right">홈으로</a>
                                 </div>
 
@@ -162,6 +160,10 @@
     <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
     <!--axios library-->
     <script th:src="@{/js/axios.min.js}"></script>
+    <!--Bootstrap 용 js -->
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <!--Main js-->
+    <script th:src="@{/js/main.js}"></script>
     <script>
         const contextPath = $('#contextPathHolder').attr('data-contextPath');
 

@@ -156,7 +156,7 @@ public class MemberController {
             // PageRequest pageRequest = PageRequest.of(page, size);
             
             List<ClassInquiryView> list = cService.selectClassInquiryList(owner);
-            System.out.println("test용=>"+list.toString());
+            // System.out.println("test용=>", list.toString());
             
             ClassInquiryView obj2 = cService.selectClassInquiryOne(no);
 
@@ -177,56 +177,7 @@ public class MemberController {
         return "redirect:/myclass.do?menu="+menu;
     }
 
-    @GetMapping(value = "/update.do")
-    public String myclassUpdateGET( @AuthenticationPrincipal User user,
-    @RequestParam(name = "classcode", defaultValue = "0")long classcode,
-        Model model 
-    ){
-        ClassProduct obj = cService.selectClassOne(classcode);
-
-        log.info(format, obj.toString());
-        long profileImg = cService.selectClassProfileImageNo(classcode);
-        long mainImg = cService.selectClassMainImageNo(classcode);
-
-        model.addAttribute("actlist", c1Service.selectActivityCateList());
-        model.addAttribute("citylist", c1Service.selectCityCateList());
-        model.addAttribute("obj", obj);
-        model.addAttribute("user", user);
-        model.addAttribute("profileImg", profileImg);
-        model.addAttribute("mainImg", mainImg);
-        model.addAttribute("subImg", cService.selectClassSubImageNoList(classcode));
-        return "/class/update";
-    }
-
-    @PostMapping(value = "/update.do")
-    public String myclassUpdatePOST( @AuthenticationPrincipal User user,
-    @ModelAttribute ClassProduct obj, @ModelAttribute ClassImage obj2,
-        Model model  
-        ){
-            int ret = cService.updateClassOne(obj);
-            int ret2 =cService.updateClassImageOne(obj2);
-            log.info("update class --- => {}", obj.toString());
-            log.info("update image --- => {}", obj2.toString());
-
-        if (ret == 1 || ret2 == 1 ) {
-                return "redirect:/member/myclass.do";
-        } else {
-            return "redirect:/member/update.do?classcode=";
-        }
-    }
-
-    @PostMapping(value = "/myclass/delete.do")
-    public String myclassdeletePOST( @AuthenticationPrincipal User user,
-        @ModelAttribute ClassProduct obj, 
-        Model model
-    ) {
-        log.info(format, obj.toString());
-        int ret = cService.updateClassInactive(obj);
-        if(ret ==1 ){
-            return "redirect:/home.do";
-        }
-        return "/member/myclass";
-    }
+    
 
     // @PostMapping(value = "/myclass/inquiry.do")
     // public String myClassInquiryPOST(

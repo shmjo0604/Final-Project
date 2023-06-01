@@ -407,6 +407,7 @@
     </form>
 
 
+    <!--footer 영역-->
     <footer th:replace="~{footer :: footerFragment}"></footer>
 
 
@@ -414,14 +415,18 @@
     <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
     <!--axios library-->
     <script th:src="@{/js/axios.min.js}"></script>
+    <!--Bootstrap 용 js -->
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <!--Main js-->
+    <script th:src="@{/js/main.js}"></script>s
     <!--bxslider-->
     <script th:src="@{/js/jquery.bxslider.min.js}"></script>
-    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <!--fullcalendar-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.0.0-alpha.4/plugins/gcal.js"></script>
     <script th:src="@{/js/index.global.js}"></script>
     <script th:src="@{/js/gcal.js}"></script>
     <!-- kakao map library -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4847ab83c2fe2a7607fbdad0614a758b"></script>
     <script th:inline="javascript">

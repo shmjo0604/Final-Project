@@ -5,6 +5,8 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>unit페이지</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!--웹 페이지 아이콘 변경-->
+    <link rel="icon" th:href="@{/image/logo.ico}">
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -80,30 +82,34 @@
     
     <!--footer 영역-->
     <footer th:replace="~{footer :: footerFragment}"></footer>
+
+    <!--Bootstrap 용 js -->
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <!--Main js-->
+    <script th:src="@{/js/main.js}"></script>
+    <script>
+        // const tab1 = document.getElementById("tab1");
+        // const tab2 = document.getElementById("tab2");
+    
+        // const content1 = document.getElementById("content1");
+        // const content2 = document.getElementById("content2");
+    
+        // tab1.addEventListener("click", function () {
+        //     tab1.classList.add("active");
+        //     tab2.classList.remove("active");
+    
+        //     content1.classList.add("active");
+        //     content2.classList.remove("active");
+        // });
+    
+        // tab2.addEventListener("click", function () {
+        //     tab1.classList.remove("active");
+        //     tab2.classList.add("active");
+    
+        //     content1.classList.remove("active");
+        //     content2.classList.add("active");
+        // });
+    </script>
+
 </body>
-
-<script>
-    // const tab1 = document.getElementById("tab1");
-    // const tab2 = document.getElementById("tab2");
-
-    // const content1 = document.getElementById("content1");
-    // const content2 = document.getElementById("content2");
-
-    // tab1.addEventListener("click", function () {
-    //     tab1.classList.add("active");
-    //     tab2.classList.remove("active");
-
-    //     content1.classList.add("active");
-    //     content2.classList.remove("active");
-    // });
-
-    // tab2.addEventListener("click", function () {
-    //     tab1.classList.remove("active");
-    //     tab2.classList.add("active");
-
-    //     content1.classList.remove("active");
-    //     content2.classList.add("active");
-    // });
-</script>
-
 </html>

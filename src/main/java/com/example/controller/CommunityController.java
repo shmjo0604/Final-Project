@@ -1,10 +1,7 @@
 package com.example.controller;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -27,17 +24,17 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping(value = "/community")
 @RequiredArgsConstructor
-
 public class CommunityController {
+
     final String format = "CommunityController => {}";
     final CommunityRepository communityRepository;
-    private Object Community;
 
     // 커뮤니티 글작성
     @GetMapping(value = "/insert.do")
     public String insertGET(
             @AuthenticationPrincipal User user,
             Model model) {
+
         if (user != null) {
             model.addAttribute("user", user);
         }
@@ -61,7 +58,13 @@ public class CommunityController {
     // 커뮤니티 게시판 보기
     @GetMapping(value = "/selectlist.do")
     public String selectlistGET(Model model, @AuthenticationPrincipal User user) {
+
         List<Community> list = communityRepository.findAllByOrderByNoDesc();
+
+        for(Community obj : list) {
+            log.info(format, obj.toString());
+        }
+
         model.addAttribute("list", list);
 
         return "/community/selectlist";
@@ -105,6 +108,7 @@ public class CommunityController {
             
             communityRepository.deleteByNo(no);
             return "redirect:/community/selectlist.do";
+
         } catch (Exception e) {
           e.printStackTrace();
           return"redirect:/home.do";
