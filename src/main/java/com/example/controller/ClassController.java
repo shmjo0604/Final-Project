@@ -137,7 +137,7 @@ public class ClassController {
     public String insertGET(@AuthenticationPrincipal User user, Model model) {
 
         if(user != null) {
-            model.addAttribute("user", user);
+        model.addAttribute("user", user);
         }
         model.addAttribute("actlist", cService.selectActivityCateList());
         model.addAttribute("citylist", cService.selectCityCateList());
