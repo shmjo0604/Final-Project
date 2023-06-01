@@ -410,7 +410,11 @@
                     const body = {unitnoArray : unitnoArray, personArray : personArray, paymentArray : paymentArray};
                     const { data } = await axios.post(url, body, { headers });
 
-                    console.log(data);
+                    //console.log(data);
+
+                    if(data.ret === 1) {
+                       // window.location.href = contextPath + '/member/mypage.do?menu=1';
+                    }
 
                 }
                 

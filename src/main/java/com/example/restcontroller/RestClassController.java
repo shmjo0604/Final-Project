@@ -67,12 +67,12 @@ public class RestClassController {
 
     }
 
-    @GetMapping(value = "selectclasslist.json")
+    @GetMapping(value = "/selectclasslist.json")
     public Map<String, Object> selectclassGET(@RequestParam Map<String, Object> map) {
 
         Map<String, Object> retMap = new HashMap<>();
 
-        //log.info(format, map.toString());
+        log.info(format, map.toString());
 
         String pageStr = (String)map.get("page");
         int page = Integer.parseInt(pageStr);

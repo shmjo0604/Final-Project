@@ -354,7 +354,9 @@
                             </table>
                         </div>
 
-                        <div id="applybox" class="border mb-2" style="height: 230px;">
+                        <div id="applybox" class="border mb-2" style="height: 230px; display: none;">
+
+                            <!-- 동적 생성 -->
 
                         </div>
 
@@ -413,7 +415,7 @@
     <!--axios library-->
     <script th:src="@{/js/axios.min.js}"></script>
     <!--bxslider-->
-    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <script th:src="@{/js/jquery.bxslider.min.js}"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <!--fullcalendar-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.0.0-alpha.4/plugins/gcal.js"></script>
@@ -569,7 +571,9 @@
 
                 }
 
-                $("#select-remain")[0].innerHTML = text;         
+                $("#select-remain")[0].innerHTML = text;
+                
+                $("#applybox").css("display", "block");
                 
             }
 
