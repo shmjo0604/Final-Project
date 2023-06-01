@@ -17,8 +17,6 @@ public class ClassUnitController {
         @AuthenticationPrincipal User user,
         Model model) {
 
-        String id = user.getUsername();
-
         if(menu == 0){
             return "redirect:/classunit/myunit.do?menu=1";
         }
@@ -33,5 +31,4 @@ public class ClassUnitController {
 
         return "/classunit/unit";
     }
-    
 }
