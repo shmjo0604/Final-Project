@@ -1,22 +1,20 @@
 package com.example.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.dto.Apply;
-import com.example.dto.ApplyList;
 import com.example.dto.ClassUnitView;
+import com.example.dto.Member;
+import com.example.service.classproduct.ClassManageService;
 import com.example.service.classproduct.ClassUnitService;
+import com.example.service.member.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,44 +26,49 @@ public class ApplyController {
     final String format = "ApplyController => {}";
 
     @Autowired ClassUnitService unitService;
+    @Autowired ClassManageService manageService;
+    @Autowired MemberService mService;
 
     @GetMapping(value = "/insert.do")
-    public String applyGET(@ModelAttribute ApplyList applyList, Model model, HttpSession httpSession) {
+    public String applyGET(
+        Model model, 
+        @AuthenticationPrincipal User user,
+        @RequestParam(name = "unitno", defaultValue = "0", required = false) long unitno,
+        @RequestParam(name = "person", defaultValue = "0", required = false) int person) {
 
-        List<Apply> list = applyList.getApplylist();
-        
-        log.info(format, list.toString());
+        log.info(format, unitno);
+        log.info(format, person);
 
-        int outcome=1;
-
-        List<ClassUnitView> infolist = new ArrayList<>();
-
-        for(Apply obj : list) {
-
-            ClassUnitView result = unitService.selectClassUnitViewOne(obj.getUnitno());
-
-            int remain = result.getMaximum()-result.getCnt();
-
-            if(remain > obj.getPerson()) {
-                result.setPerson(obj.getPerson());
-                infolist.add(result);
-            }
-            else {
-                outcome = 0;
-                String message = "신청 인원을 초과하여 신청이 불가능합니다.";
-                httpSession.setAttribute("message", message);
-                // httpSession.setAttribute("url", ); 주소는 장바구니 url로 이동을 시켜야겠네, 어디서 왔는지를 확인할 수 있으면 좋지
-            }
-            
+        if(unitno == 0 || person == 0) {
+            return "redirect:/class/select.do";
         }
 
-        if(outcome == 0) {
+        ClassUnitView obj = unitService.selectClassUnitViewOne(unitno);
 
+        //log.info(format, obj.toString());
+
+        if(obj.getMaximum()-obj.getCnt() < person) {
+
+            // httpsession에 message, url 저장
             return "redirect:/alert.do";
+        }
+
+        long mainImg = manageService.selectClassMainImageNo(obj.getClasscode());
+
+        if(user != null) {
+
+            String id = user.getUsername();
+            Member member = mService.selectMemberOne(id);
+            model.addAttribute("member", member);
             
         }
 
-        model.addAttribute("list", infolist);
+        model.addAttribute("obj", obj);
+        model.addAttribute("mainImg", mainImg);
+        model.addAttribute("person", person);
+        model.addAttribute("user", user);
+        
+        
         return "/apply/insert";
         
     }

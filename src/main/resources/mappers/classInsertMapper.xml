@@ -36,7 +36,7 @@
         INSERT INTO classimage(no, filename, filedata, filetype, filesize, typechk, classcode)
         SELECT seq_classimage_no.NEXTVAL, T1.* FROM(
             <foreach item="obj" collection="list" separator=" UNION ALL ">
-                SELECT '${obj.filename}' filename, '${obj.filedata}' filedata, '${obj.filetype}' filetype,
+                SELECT '${obj.filename}' filename, #{obj.filedata} filedata, '${obj.filetype}' filetype,
                 ${obj.filesize} filesize, ${obj.typechk} typechk, ${obj.classcode} classcode FROM DUAL
             </foreach>
         ) T1

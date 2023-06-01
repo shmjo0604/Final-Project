@@ -10,14 +10,17 @@ import com.example.dto.ActDetailCate;
 import com.example.dto.ActivityCate;
 import com.example.dto.CityCate;
 import com.example.dto.ClassProduct;
+import com.example.dto.ClassUnit;
 import com.example.dto.ClassUnitView;
 import com.example.dto.LocalCate;
+import com.example.mapper.ClassManageMapper;
 import com.example.mapper.ClassSelectMapper;
 
 @Service
 public class ClassSelectServiceImpl implements ClassSelectService {
 
     @Autowired ClassSelectMapper cMapper;
+    @Autowired ClassManageMapper manageMapper;
 
     @Override
     public List<CityCate> selectCityCateList() {
@@ -66,7 +69,21 @@ public class ClassSelectServiceImpl implements ClassSelectService {
     @Override
     public List<ClassUnitView> selectClassUnitViewList(Map<String, Object> map) {
         try {
-            return cMapper.selectClassUnitViewList(map);
+
+            List<ClassUnitView> list = cMapper.selectClassUnitViewList(map);
+
+            if(list != null) {
+
+                for(ClassUnitView obj : list) {
+
+                    long mainImgNo = manageMapper.selectClassMainImageNo(obj.getClasscode());
+                    obj.setMainImg(mainImgNo);
+    
+                }
+
+            }
+            
+            return list;
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -91,6 +108,64 @@ public class ClassSelectServiceImpl implements ClassSelectService {
             return cMapper.selectClassProductOne(classcode);
         }
         catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<ClassProduct> selectClassProductViewList(Map<String, Object> map) {
+        try {
+
+            List<ClassProduct> list = cMapper.selectClassProductViewList(map);
+
+            if(list != null) {
+
+                for(ClassProduct obj : list) {
+
+                    long mainImgNo = manageMapper.selectClassMainImageNo(obj.getClasscode());
+                    obj.setMainImg(mainImgNo);
+                    
+                }
+
+            }
+
+            return list;
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public long selectClassCountTotalV2(Map<String, Object> map) {
+        try {
+            return cMapper.selectClassCountTotalV2(map);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    @Override
+    public List<ClassUnit> selectClassUnitList(ClassUnit obj) {
+        try {
+            return cMapper.selectClassUnitList(obj);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ClassUnit selectClassUnitOne(long no) {
+        try {
+            return cMapper.selectClassUnitOne(no);
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return null;
         }

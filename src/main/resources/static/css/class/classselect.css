@@ -147,7 +147,7 @@ html .ui-button.ui-state-disabled:active {
 
 .ui-widget-header .ui-icon {
 	background-image:
-		url('../image/btns.png');
+		url('../../image/btns.png');
 }
 
 .ui-icon-circle-triangle-e {
@@ -226,4 +226,115 @@ html .ui-button.ui-state-disabled:active {
 	background: rgb(181, 228, 228);
 	/* 	background: linear-gradient(180deg, rgba(181,228,228,0.7) 0%, rgba(224,244,238,0) 100%); */
 	--bs-card-border-width: 0;
+}
+
+.wrap {
+	position: absolute;
+	left: 0;
+	bottom: 40px;
+	width: auto;
+	height: 132px;
+	margin-left: -144px;
+	text-align: left;
+	overflow: hidden;
+	font-size: 12px;
+	font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+	line-height: 1.5;
+}
+
+.wrap * {
+	padding: 0;
+	margin: 0;
+}
+
+.wrap .info {
+	width: auto;
+	height: 120px;
+	border-radius: 5px;
+	border-bottom: 2px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-radius: 5px;
+	overflow: hidden;
+	background: #fff;
+}
+
+.wrap .info:nth-child(1) {
+	border: 0;
+	box-shadow: 0px 1px 2px greenyellow;
+}
+
+.info .head {
+	height: 30px;
+	background: rgb(247, 249, 247);
+	border-bottom: 1px solid #ddd;
+	font-size: 15px;
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+}
+
+.info .close {
+	width: 15px;
+	height: 15px;
+	background: url(../../image/x-circle.svg);
+	background-size: cover;
+	border: none;
+	margin-left: 5px;
+}
+
+.info .close:hover {
+	cursor: pointer;
+}
+
+.info .body {
+	position: relative;
+	display: flex;
+	height: 90px;
+	width: auto;
+}
+
+.info .infobox {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 70%;
+}
+
+.infobox .address {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;} */
+
+.info .imgbox {
+	width: 30%;
+}
+
+.info img {
+	position: absolute;
+	width: 30%;
+	height: 90px;
+	border: 1px solid #ddd;
+	color: #888;
+	overflow: hidden;
+	border-bottom-left-radius: 5px;
+}
+
+.info:after {
+	content: '';
+	position: absolute;
+	margin-left: -12px;
+	left: 50%;
+	bottom: 0;
+	width: 22px;
+	height: 12px;
+	background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+}
+
+.info .link {
+	color: #5085BB;
 }

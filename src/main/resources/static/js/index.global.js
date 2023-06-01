@@ -1840,6 +1840,7 @@ var FullCalendar = (function (exports) {
             this.weekDow = settings.locale.week.dow;
             this.weekDoy = settings.locale.week.doy;
             if (settings.weekNumberCalculation === 'ISO') {
+                
                 this.weekDow = 1;
                 this.weekDoy = 4;
             }

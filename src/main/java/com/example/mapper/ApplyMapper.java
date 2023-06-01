@@ -33,4 +33,6 @@ public interface ApplyMapper {
     // 7. 클래스 신청 내역 조회 -> 페이징 처리(id, first, last)
     public List<ApplyView> selectApplyListById(Map<String, Object> map);
 
+    // 8. 클래스 신청 번호 조회
+    public List<Long> selectInsertedApplyNoList(Map<String, Object> map);
 }

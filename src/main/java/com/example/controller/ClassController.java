@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
@@ -25,11 +27,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.dto.ActivityCate;
+import com.example.dto.Apply;
 import com.example.dto.CityCate;
-import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
 import com.example.dto.ClassUnit;
+import com.example.entity.Basket;
+import com.example.entity.ClassImage;
+import com.example.entity.Member;
 import com.example.service.KakaoLocalAPI;
+import com.example.service.basket.BasketService;
 import com.example.service.classproduct.ClassInsertService;
 import com.example.service.classproduct.ClassManageService;
 import com.example.service.classproduct.ClassSelectService;
@@ -48,6 +54,7 @@ public class ClassController {
     @Autowired ClassInsertService iService;
     @Autowired ClassManageService manageService;
     @Autowired ClassUnitService unitService;
+    @Autowired BasketService basketService;
 
     @Autowired ResourceLoader resourceLoader;
     @Value("${default.image}") String defaultImg;
@@ -71,25 +78,59 @@ public class ClassController {
         return "/class/select";
     }
 
-    @GetMapping(value = "/selectone.do")
+    @GetMapping(value = "/product.do")
     public String selectoneGET(
         @RequestParam(name = "classcode", defaultValue = "0") long classcode,
-        Model model
+        Model model,
+        @AuthenticationPrincipal User user
         ) {
 
         if (classcode == 0) {
             return "redirect:/class/select.do?search=list";
         }
 
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
+
         ClassProduct obj = cService.selectClassProductOne(classcode);
+        long mainImg = manageService.selectClassMainImageNo(classcode);
+        List<Long> subImg = manageService.selectClassSubImageNoList(classcode);
+        long profile = manageService.selectClassProfileImageNo(classcode);
+
+        log.info(format, obj.toString());
 
         model.addAttribute("obj", obj);
-
-        List<ClassUnit> list = unitService.selectUnitList(classcode);
-
-        model.addAttribute("list", list);
+        model.addAttribute("mainImg", mainImg);
+        model.addAttribute("subImg", subImg);
+        model.addAttribute("profile", profile);
+        
 
         return "class/selectone";
+    }
+
+    @PostMapping(value = "/product.do")
+    public String productPOST(@ModelAttribute Apply apply, HttpSession httpSession) {
+
+        //log.info(apply.toString());
+
+        long unitno = apply.getUnitno();
+        
+        ClassUnit obj = cService.selectClassUnitOne(unitno);
+
+        if(obj.getMaximum()-obj.getCnt() > apply.getPerson()) {
+
+            httpSession.setAttribute("unitno", unitno);
+            httpSession.setAttribute("person", apply.getPerson());
+
+            return "redirect:/apply/insert.do";
+        }
+        else {
+
+            return "redirect:/alert.do";
+        }
+
+        
     }
 
     @GetMapping(value = "/insert.do")
@@ -122,9 +163,9 @@ public class ClassController {
         Map<String, String> map = KakaoLocalAPI.getCoordinate(obj.getAddress1());
 
         // 2. ClassProduct 객체 obj에 위도, 경도, 사용자 ID SET
-        obj.setLatitude(map.get("x"));
-        obj.setLongitude(map.get("y"));
-        obj.setMemberid(user.getUsername()); // security session에 저장된 ID 정보를 호출
+        obj.setLatitude(map.get("y"));
+        obj.setLongitude(map.get("x"));
+        obj.setMemberid(user.getUsername());  // security session에 저장된 ID 정보를 호출
 
         // 3. 결과 확인
         log.info(format, obj.toString());
@@ -143,6 +184,7 @@ public class ClassController {
         list.add(profile);
 
         if (classSubImg != null) {
+
             for (MultipartFile file : classSubImg) {
 
                 ClassImage classSub = new ClassImage();
@@ -173,7 +215,7 @@ public class ClassController {
         log.info(format, ret);
 
         if (ret == 1) {
-            return "redirect:/member/mypage.do?menu=";
+            return "redirect:/member/myclass.do?menu=";
         } else {
             return "redirect:/class/insert.do";
         }
@@ -192,6 +234,34 @@ public class ClassController {
         return "/class/unit";
     }
 
+    @PostMapping(value = "/basket.do")
+    public String basketPOST(
+        @RequestParam(name = "unitno") long unitno,
+        @RequestParam(name = "cnt") int cnt,
+        @AuthenticationPrincipal User user
+        ) {
+
+        String id = user.getUsername();
+
+        Member member = new Member();
+        member.setId(id);
+
+        com.example.entity.ClassUnit classunit = new com.example.entity.ClassUnit();
+        classunit.setNo(unitno);
+
+        Basket obj = new Basket();
+        
+        obj.setCnt(cnt);
+        obj.setMember(member);
+        obj.setClassunit(classunit);
+
+        int ret = basketService.insertBasketOne(obj);
+        
+        log.info(format, ret);
+
+        return "redirect:alert.do";
+    }
+
 
     @GetMapping(value = "/image")
     public ResponseEntity<byte[]> classImage(
@@ -200,13 +270,16 @@ public class ClassController {
 
             log.info(format, no);
 
-            ClassImage obj = manageService.selectClassImageOne(no);
+            com.example.dto.ClassImage obj = manageService.selectClassImageOne(no);
+
+            log.info(format, obj.toString());
 
             HttpHeaders headers = new HttpHeaders();
 
             if(obj != null) {
 
                 if(obj.getFilesize() > 0) {
+
                     headers.setContentType(MediaType.parseMediaType(obj.getFiletype()));
 
                     ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(obj.getFiledata(), headers, HttpStatus.OK);

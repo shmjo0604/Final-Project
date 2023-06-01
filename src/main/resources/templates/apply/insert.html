@@ -22,6 +22,8 @@
     <!--font awesome 용-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <!--thymeleaf contextpath-->
+    <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}" />
 </head>
 
 <style>
@@ -45,13 +47,6 @@
 
     a {
         color: black;
-    }
-
-    img {
-        display: block;
-        width: 80%;
-        height: 80px;
-        margin: auto;
     }
 
     .cart {
@@ -81,7 +76,7 @@
     table {
         border-top: solid 1.5px black;
         border-collapse: collapse;
-        width: 100%;
+        /* width: 100%; */
         font-size: 14px;
     }
 
@@ -250,73 +245,186 @@
 <body>
     <header th:replace="~{header :: headerFragment}"></header>
 
-    <h3>신청 정보 확인 및 결제</h3>
-    <section class="cart">
-        <table class="cart__list">
-            <form>
-                <thead style="background-color: gainsboro;">
-                    <tr>
-                        <td>번호</td>
-                        <td>이미지</td>
-                        <td>클래스 신청 정보</td>
-                        <td>결제금액</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="cart__list__detail">
-                        <td id="unit_no">1</td>
-                        <!-- <td><img src="" alt="클래스 썸네일"></td> -->
-                        <td><img class="image1" th:src="@{/도지.png}"></td>
-                        <td>
-                            <a href="#">수영 클래스</a>
-                            <p>일자: 2023-05-05</p>
-                            <p>시간: 18:00 ~ 20:00</p>
-                            <p>난이도 : 입문자</p>
-                            <h7>1명</h7>
-                        </td>
+    <div class="container">
+        <h3>신청 정보 확인 및 결제</h3>
+        <section class="cart">
+            <table class="cart__list">
+                <form>
+                    <thead style="background-color: gainsboro;">
+                        <tr>
+                            <td>번호</td>
+                            <td>이미지</td>
+                            <td>클래스 신청 정보</td>
+                            <td>결제금액</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="cart__list__detail">
+                            <td id="unit_no">1</td>
+                            <input type="hidden" name="unitno[]" th:value="${obj.no}">
+                            <!-- <td><img src="" alt="클래스 썸네일"></td> -->
+                            <td><img class="w-25" th:src="@{/class/image(no=${mainImg})}"></td>
+                            <td>
+                                <a href="#" th:text="${obj.title}"></a>
+                                <p th:text="|일자 : ${obj.classdate}|"></p>
+                                <p th:text="|시간 : ${obj.classstart}~${obj.classend}|"></p>
+                                <th:block th:if="${obj.classlevel == 1}">
+                                    <p>난이도 : 입문자</p>
+                                </th:block>
+                                <th:block th:if="${obj.classlevel == 2}">
+                                    <p>난이도 : 경험자</p>
+                                </th:block>
+                                <th:block th:if="${obj.classlevel == 3}">
+                                    <p>난이도 : 숙련자</p>
+                                </th:block>
+                                <div class="d-flex justify-content-center">
+                                    <p>신청 인원 : </p>
+                                    <input type="text" class="form-control-plaintext w-25" th:value="|${person}명|">
+                                    <input type="hidden" class="form-control-plaintext w-25" name="person[]" th:value="${person}">
+                                </div>
+                            </td>
 
-                        <td>
-                            <span class="price">15,000원</span><br>
-                        </td>
-                        <!-- <td>무료</td> -->
+                            <td>
+                                <input type="text" class="form-control-plaintext w-25" th:value="|${obj.totalprice}원|">
+                                <input type="hidden" class="form-control-plaintext w-25" name="payment[]" th:value="${obj.totalprice}">
+                                
+                            </td>
+                            <!-- <td>무료</td> -->
 
-                    <tr class="cart__list__detail3">
-                        <td>총합금액</td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <span class="price2">15,000원</span><br>
-                        </td>
-                    </tr>
+                        <tr class="cart__list__detail3">
+                            <td>총합금액</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <span class="price2" th:text="|${obj.totalprice}원|"></span><br>
+                            </td>
+                        </tr>
 
-                    </tfoot>
-            </form>
+                        </tfoot>
+                </form>
 
 
-        </table>
-        <div class="cart__mainbtns">
-            <button class="cart__bigorderbtn left" type="submit">쇼핑 계속하기</button>
-            <button class="cart__bigorderbtn right" type="submit">결제하기</button>
-        </div>
-    </section>
+            </table>
+            <div class="cart__mainbtns">
+                <button class="cart__bigorderbtn left" type="button">쇼핑 계속하기</button>
+                <!-- 결제하기 버튼 생성 -->
+                <button class="cart__bigorderbtn right" type="button" onclick="requestPay()">결제하기</button>
+            </div>
+        </section>
+    </div>
 
     <!--footer 영역-->
     <footer th:replace="~{footer :: footerFragment}"></footer>
 
 </body>
+<!--jQuery-->
+<script th:src="@{/js/jquery-3.6.4.min.js}"></script>
+<!--axios library-->
+<script th:src="@{/js/axios.min.js}"></script>
+<!--Bootstrap 용 js -->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<!--portone js-->
+<script th:src="@{/js/iamport.payment-1.2.0.js}"></script>
+<script th:inline="javascript">
 
-<script type="text/javascript">
+    const contextPath = $('#contextPathHolder').attr('data-contextPath');
 
-    jQuery(document).ready(function () {
-        $('#myModal').show();
-    });
-    //팝업 Close 기능
-    function close_pop(flag) {
-        $('#myModal').hide();
-    };
+    var IMP = window.IMP;
+    IMP.init('imp27884386');
 
+    function requestPay() {
+
+        // 결제 성공 후 처리 할 정보
+
+        var unitnoLength = $("input[name='unitno[]']").length;
+        var personLength = $("span[name='person[]']").length;
+        var paymentLength = $("span[name='payment[]']").length;
+
+        var unitnoArray = new Array();
+        var personArray = new Array();
+        var paymentArray = new Array();
+
+        for(let i=0; i<unitnoLength; i++) {
+            unitnoArray[i] = $("input[name='unitno[]']")[i].value;
+            personArray[i] = $("input[name='person[]']")[i].value;
+            paymentArray[i] = $("input[name='payment[]']")[i].value;
+        }
+
+        // var unitnoArray = [];
+        // var personArray = [];
+        // var paymentArray = [];
+
+        // $("input[name=payment[]]").each(function(index, item) {
+        //     paymentArray.push($(item).val());
+        // });
+
+        // $("input[name=person[]]").each(function(index, item) {
+        //     personArray.push($(item).val());
+        // });
+
+        // $("input[name=unitno[]]").each(function(index, item) {
+        //     unitnoArray.push($(item).val());
+        // });
+
+        console.log(unitnoArray);
+        console.log(personArray);
+        console.log(paymentArray);
+
+        //iamport 대신 자신의 "가맹점 식별코드"를 사용
+        IMP.request_pay({
+            pg: "html5_inicis",
+            pay_method: "card",
+            merchant_uid: 'merchant_' + new Date().getTime(),
+            name: 'SPECIALDAY',
+            amount: 100,
+            buyer_email: /*[[${member.email}]]*/'',
+            buyer_name: /*[[${member.name}]]*/'',
+            buyer_tel: /*[[${member.phone}]]*/'',
+            buyer_addr: '서울특별시 강남구 삼성동',
+            buyer_postcode: '123-456'
+        }, async function (rsp) { // callback
+
+            console.log(rsp);
+            
+            // 1. 결제 검증
+
+            // $.ajax({
+            //     type : "POST",
+            //     url : contextPath + "/verifyiamport/" + rsp.imp_uid
+            // })
+
+            const url = contextPath + '/api/verifyiamport.json';
+            const headers = { "Content-Type": "application/json" };
+            const body = {imp_uid : rsp.imp_uid};
+
+            await axios.post(url, body, { headers }).then(async function(result) {
+
+                console.log(result);
+
+                if(rsp.paid_amount === result.data.response.amount) {
+
+                    alert("결제가 완료되었습니다.");
+
+                    const url = contextPath + '/api/apply/success.json';
+                    const headers = { "Content-Type": "application/json" };
+                    const body = {unitnoArray : unitnoArray, personArray : personArray, paymentArray : paymentArray};
+                    const { data } = await axios.post(url, body, { headers });
+
+                    //console.log(data);
+
+                    if(data.ret === 1) {
+                       // window.location.href = contextPath + '/member/mypage.do?menu=1';
+                    }
+
+                }
+                
+                else {
+                    alert("결제에 실패했습니다." + "에러코드 : " + rsp.error_code+ "에러 메시지 : " + rsp.error_message);
+                }
+
+            }) 
+
+        });
+    }
 </script>
-
-
-
 </html>

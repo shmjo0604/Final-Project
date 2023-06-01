@@ -295,7 +295,7 @@
                     last: '마지막',
                     prev: '이전',
                     next: '다음',
-                    initiateStartPageClick:false,
+                    initiateStartPageClick: false,
                     onPageClick: function (event, page) {
                         searchClassAction(page);
                     }
@@ -358,31 +358,72 @@
 
                         initPagination(Number(response.data.pages));
 
-                        for (let obj of response.data.list) {
-                            classlist.innerHTML +=
+                        if (response.data.type === "A") {
 
-                                '<div class="col">' +
-                                '<a href="product.do?classcode=' + obj.classcode + '" class="nav-link">' +
-                                '<div class="card shadow-sm">' +
-                                '<div class="card-header text-center">' + obj.title + '</div>' +
-                                '<div class="card-body">' +
-                                '<p class="card-text"> 날짜 : ' + obj.classdate + '</p>' +
-                                '<p class="card-text"> 가격(1인) : ' + obj.price + '원' + '</p>' +
-                                '<p class="card-text"> 주소 : ' + obj.address1 + " " + obj.address2 + " " + obj.address3 + '</p>' +
-                                /* '<div class="d-flex justify-content-between align-items-center">' + 
-                                    '<div>' +
-                                        '<button class="btn btn-sm btn-outline-success">' + '<a href="product.do?classcode=' 
-                                                + obj.classcode + '" class="nav-link">' + '상세 정보 조회' + '</a>' + '</button>' +
-                                    '<div>' +
-                                '</div>' + */
-                                '</div>' +
-                                '</div>' +
-                                '</a>' +
-                                '</div>';
+                            for (let obj of response.data.list) {
+
+                                if (obj.address3 === null) {
+                                    obj.address3 = "";
+                                }
+
+                                classlist.innerHTML +=
+
+                                    '<div class="col">' +
+                                    '<a href="product.do?classcode=' + obj.classcode + '" class="nav-link">' +
+                                    '<div class="card shadow-sm">' +
+                                    '<div class="card-header text-center">' + obj.title + '</div>' +
+                                    '<img class="card-img-top" src="' + contextPath + '/class/image?no=' + obj.mainImg + '">' +
+                                    '<div class="card-body">' +
+                                    '<p class="card-text"> 가격(1인) : ' + obj.price + '원' + '</p>' +
+                                    '<p class="card-text"> 주소 : ' + obj.address1 + " " + obj.address2 + " " + obj.address3 + '</p>' +
+                                    /* '<div class="d-flex justify-content-between align-items-center">' + 
+                                        '<div>' +
+                                            '<button class="btn btn-sm btn-outline-success">' + '<a href="product.do?classcode=' 
+                                                    + obj.classcode + '" class="nav-link">' + '상세 정보 조회' + '</a>' + '</button>' +
+                                        '<div>' +
+                                    '</div>' + */
+                                    '</div>' +
+                                    '</div>' +
+                                    '</a>' +
+                                    '</div>';
+                            }
+
+                        }
+
+                        else if (response.data.type === "B") {
+
+                            for (let obj of response.data.list) {
+
+                                if (obj.address3 === null) {
+                                    obj.address3 = "";
+                                }
+
+                                classlist.innerHTML +=
+
+                                    '<div class="col">' +
+                                    '<a href="product.do?classcode=' + obj.classcode + '" class="nav-link">' +
+                                    '<div class="card shadow-sm">' +
+                                    '<div class="card-header text-center">' + obj.title + '</div>' +
+                                    '<img class="card-img-top" src="' + contextPath + '/class/image?no=' + obj.mainImg + '">' +
+                                    '<div class="card-body">' +
+                                    '<p class="card-text"> 날짜 : ' + obj.classdate + '</p>' +
+                                    '<p class="card-text"> 가격(1인) : ' + obj.price + '원' + '</p>' +
+                                    '<p class="card-text"> 주소 : ' + obj.address1 + " " + obj.address2 + " " + obj.address3 + '</p>' +
+                                    /* '<div class="d-flex justify-content-between align-items-center">' + 
+                                        '<div>' +
+                                            '<button class="btn btn-sm btn-outline-success">' + '<a href="product.do?classcode=' 
+                                                    + obj.classcode + '" class="nav-link">' + '상세 정보 조회' + '</a>' + '</button>' +
+                                        '<div>' +
+                                    '</div>' + */
+                                    '</div>' +
+                                    '</div>' +
+                                    '</a>' +
+                                    '</div>';
+                            }
+
                         }
 
                     })
-
 
             };
 
