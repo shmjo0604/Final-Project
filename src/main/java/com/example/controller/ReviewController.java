@@ -47,11 +47,13 @@ public class ReviewController {
     final ClassManageService manageService;
     final String format = "reviewController => {}";
 
+    // 
     @GetMapping(value = "select.do")
     public String selectPOST(){
-        return "/inquery/reviewselect";
+        return "/review/reviewselect";
     }
 
+    // 리뷰 내용, 리뷰 이미지 데이터 추가
     @PostMapping(value = "insert.do")
     public String insertPOST(@ModelAttribute Review review,
     @RequestParam(name = "files",required = false) List<MultipartFile> files)
@@ -83,6 +85,7 @@ public class ReviewController {
                  return "redirect:/member/mypage.do?menu=";                       
     }
 
+    // 이미지 뛰우기 
     @GetMapping(value = "/image")
     public ResponseEntity<byte[]> image(@RequestParam(name = "no", defaultValue = "0") long no)
     throws IOException {
@@ -105,6 +108,7 @@ public class ReviewController {
         return new ResponseEntity<>(is.readAllBytes(),headers,HttpStatus.OK);
     }
 
+    //고객센터 페이지
     @GetMapping(value = "/customercenter.do")
     public String customercenterGET(
         @RequestParam(name = "menu", defaultValue = "0") int menu,
@@ -114,7 +118,7 @@ public class ReviewController {
         String id = user.getUsername();
         
         if(menu == 0) {
-            return "redirect:/test/customercenter.do?menu=1";
+            return "redirect:/review/customercenter.do?menu=1";
         }
     
          if(menu == 1) {
@@ -126,14 +130,9 @@ public class ReviewController {
         }
         model.addAttribute("user", user);
 
-        return "/inquery/customercenter";         
+        return "/review/customercenter";         
         }
 
-@PostMapping(value = "/customercenter.do")
-public String customercenterPOST() {
-
-    return "redirect:/test/customercenter.do?menu=1";
-}
 
 }
 
