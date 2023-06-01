@@ -36,5 +36,4 @@ public class TestController {
         return "/test/productdetail";
     }
 
-    
 }
