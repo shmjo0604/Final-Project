@@ -11,6 +11,7 @@ import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
 import com.example.dto.LocalCate;
 
+
 @Mapper
 public interface ClassInsertMapper {
 

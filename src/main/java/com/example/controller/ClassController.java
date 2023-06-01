@@ -230,6 +230,7 @@ public class ClassController {
         }
 
         // 여기서 unit 정보가 있으면 조회해서 list로 넘겨야 하는데, 달력이 문제네 restcontroller로 할 거면 화면만 띄우면 되고
+        
 
         return "/class/unit";
     }
