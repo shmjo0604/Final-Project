@@ -20,6 +20,7 @@ import com.example.entity.Member;
 import com.example.repository.BasketRepository;
 import com.example.repository.MemberRepository;
 import com.example.service.basket.BasketService;
+import com.example.service.classproduct.ClassUnitService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +36,7 @@ public class BasketController {
     final BasketRepository bRepository;
     final MemberRepository mRepository;
     @Autowired BasketService bService;
+    @Autowired ClassUnitService unitService;
 
     @PostMapping(value = "/basket.do")
     public String BasketPOST(Basket basket, HttpServletRequest request) {
@@ -73,7 +75,7 @@ public class BasketController {
     }
 
     // 3. 상품 정보 삭제
-    @PostMapping(value = "/basket/delete")
+    @PostMapping(value = "/basket")
     public String deleteBasketPOST(int obj) {
 
         bService.deleteBasketOne(obj);
@@ -100,6 +102,7 @@ public class BasketController {
         
         List<Basket> list = bRepository.findByMember_idOrderByNoDesc(member.getId());
         for(Basket  obj: list ){    //반복문을 이용한다
+            
             log.info(format, obj.getCnt());
         }
         

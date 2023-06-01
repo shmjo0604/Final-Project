@@ -38,42 +38,30 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <form name="frm">
                     <tr class="cart__list__detail" th:each="obj : ${list}">
-                        <td><input type="checkbox" name="Chk_list" ></td>
-                        <td th:text="${obj.no}" id="unit_no" name="unit_no" >1</td>
-                        <td th:text="${obj.cnt}" id="cnt"></td>
+                        <td><input type="checkbox"  name='selectall' 
+                            value='selectall' ></td>
                         <td >
-                            <a th:text="${obj.member.id}" href="#">수영 클래스</a>
-                            <p th:text="${obj.classunit.classdate}"></p>
-                            <p th:text="${obj.classunit.classstart}"></p>
-                            <p th:text="${obj.classunit.classend}"></p>
-                            <p th:text="${obj.classunit.classlevel}"></p>
-                            <h7 th:text="${obj.classunit.addprice}" id="price"></h7><br />
+                            <th:block th:each="no : ${#numbers.sequence(1,1)}" >
+	                            <div th:text="${obj.no}" class="unit_no" id="unit_no" name="unit_no" ></div>
+                            </th:block>
+                        </td>
+                        <td th:text="${obj.cnt}" class="cnt" id="cnt"></td>
+                        <td >
+                            <a th:text="${obj.member.id}" href="#" >수영 클래스</a>
+                            <p th:text="${obj.classunit.classdate}" class="date"></p>
+                            <p th:text="${obj.classunit.classstart}" class="starttime"></p>
+                            <p th:text="${obj.classunit.classend}" class="endtime"></p>
+                            <p th:text="${obj.classunit.classlevel}"  class="level"></p>
+                            <h7 th:text="${obj.classunit.addprice}" id="num1" value="num1" class="addprice"></h7><br />
                             <button type="submit" >옵션 수정</button>
                         </td>
                         <td >
-                            <input class="text" id="result" value="" readonly="readonly"></span><br>
+                            <input type="text" id="sum" value="" size="5"></input><br>
                         </td>
                     </tr>
-
-                    <tr class="cart__list__detail2">
-                        <td><input type="checkbox" name="Chk_list"></td>
-                        <td id="unit_no">2</td>
-                        <td><img class="image1" th:src="@{/도지.png}"></td>
-                        <!-- <td><img src="/도지.png" alt="클래스 썸네일"></td> -->
-                        <td>
-                            <a href="#">수영 클래스</a>
-                            <p>일자: 2023-05-05</p>
-                            <p>시간: 18:00 ~ 20:00</p>
-                            <p>난이도 : 입문자</p>
-                            <h7>명당 가격 : 15,000</h7><br />
-                            <button type="submit" >옵션 수정</button>
-                        </td>
-                        <td>
-                            <span class="price">15,000원</span><br>
-                        </td>
-                    </tr>
-
+                    </form>
                     
                     <tr class="cart__list__detail3">
                         <td>총합금액</td>
@@ -116,51 +104,11 @@
 </body>
 
 <script type="text/javascript">
-
-    // jQuery(document).ready(function () {
-    //     $('#myModal').show();
-    // });
-    // //팝업 Close 기능
-    // function close_pop(flag) {
-    //     $('#myModal').hide();
-    // };
-
-    // const open = () => {
-    // document.querySelector(".modal").classList.remove("hidden");
-    // }
-
-    // const close = () => {
-    // document.querySelector(".modal").classList.add("hidden");
-    // }
-
-    // document.querySelector(".openBtn").addEventListener("click", open);
-    // document.querySelector(".closeBtn").addEventListener("click", close);
-    // document.querySelector(".bg").addEventListener("click", close);
-
-    /////합
     
-    var num = document.getElementById('num');
-    num.addEventListener('change', function () {
-        var result = document.getElementById('result');
-        var price = document.getElementById('price');
-        var cnt = document.getElementById('cnt')
-        result.value = Number(price.value) * Number(cnt.value) * Number(this.value);
-    });
+    
+    
 
-
-    // 체크박스 선택해서 삭제하는 기능
-    // $('#delBtn').click(function() {
-    //     if($("input:checkbox[name='Chk_list']:checked").length === 0) {
-    //         alert("삭제할 항목을 선택해 주세요.");
-    //         return;
-    //     }
-
-    //     $("input:checkbox[name='Chk_list']:checked").each(function(k,kVal){
-    //         console.log("kVal ::", kVal.parentElement.parentElement.parentElement);
-    //         let a = kVal.parentElement.parentElement.parentElement;
-    //         $(a).remove();
-    //     });
-    // });
+ 
 
 </script>
 

@@ -261,3 +261,28 @@ td {
     color: white;
     border: none;
   }
+
+  .date:before  {
+    content: "일자 : ";
+  }
+
+  .starttime:before  {
+    content: "시작시간 : ";
+  }
+
+  .endtime:before  {
+    content: "종료시간 : ";
+  }
+
+  .level:before  {
+    content: "난이도 : ";
+  }
+
+  .addprice:before  {
+    content: "명당 가격 : ";
+  }
+
+  
+  
+  
+  
