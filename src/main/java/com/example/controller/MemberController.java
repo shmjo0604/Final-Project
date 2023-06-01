@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,20 +19,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
 import com.example.dto.Member;
-import com.example.entity.ClassInquiry;
-import com.example.repository.ClassInquiryRepository;
+import com.example.entity.ClassInquiryView;
+import com.example.repository.ClassInquiryViewRepository;
 import com.example.service.classproduct.ClassManageService;
 import com.example.service.classproduct.ClassSelectService;
 import com.example.service.member.MemberService;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
 @RequestMapping(value = "/member")
+@RequiredArgsConstructor
 public class MemberController {
 
     final String format = "MemberController => {}";
+    final ClassInquiryViewRepository civRepository;
 
     @Autowired MemberService mService;
     @Autowired ClassManageService cService; 
@@ -133,6 +135,7 @@ public class MemberController {
         @AuthenticationPrincipal User user,
         Model model
     ) {
+        String owner = user.getUsername();
         String id = user.getUsername();
 
         if(menu == 0) {
@@ -150,7 +153,10 @@ public class MemberController {
         else if(menu == 2) {
             // PageRequest pageRequest = PageRequest.of(page, size);
             
-            List<ClassInquiry> list = cService.selectClassInquiryList(classcode);
+            List<ClassInquiryView> list = cService.selectClassInquiryList(owner);
+            //List<ClassInquiryView> list = civRepository.findByMemberidOrderByNoDesc(id);
+            System.out.println("test용=>"+list.toString());
+
             model.addAttribute("list", list);
             log.info("myclass inquiry selectlist => {}", list.toString());
         }

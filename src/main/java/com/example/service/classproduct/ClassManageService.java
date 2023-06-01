@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
-import com.example.entity.ClassInquiry;
+import com.example.entity.ClassInquiryView;
 
 @Service
 public interface ClassManageService {
@@ -24,6 +24,8 @@ public interface ClassManageService {
 
     // 3_2. 클래스 비활성화
     public int updateClassNonactive(ClassProduct obj);
+
+
 
     // 4. 클래스 내용 수정
     public int updateClassOne(ClassProduct obj);
@@ -47,7 +49,7 @@ public interface ClassManageService {
     public int deleteClassImageOne(long no);
 
     // 9. 클래스 문의 전체 조회
-    public List<ClassInquiry> selectClassInquiryList(long classcode);
+    public List<ClassInquiryView> selectClassInquiryList(String owner);
 
     
 }

@@ -13,7 +13,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
-
 @Data
 @Immutable
 @Entity
@@ -22,7 +21,7 @@ public class ClassInquiryView {
     
     @Id
     @Column(name = "NO")
-    private long no;
+    private Long no;
 
     @Column(name = "TITLE")
     private String title;
@@ -42,10 +41,12 @@ public class ClassInquiryView {
     private String classtitle;
 
     @Column(name = "CLASSCODE")
-    private long classcode;
+    private Long classcode;
 
     @Column(name = "MEMBERID")
     private String memberid;
 
+    @Column(name = "OWNER")
+    private String owner;
 
 }

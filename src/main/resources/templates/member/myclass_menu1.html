@@ -144,7 +144,10 @@
                                     class="btn btn-sm btn-success" id="target_btn" style="width: 100%;">클래스 상세보기</a>
 
                                 <!-- 상태 -->
-                                
+                                <th:block th:if="${obj.chk == 0 || obj.chk== 2 }">
+                                    <input type="button" class="btn btn-sm" onclick="fieldsetDisable()"
+                                        value="비활성화 하기" style="margin-top: 10px; text-decoration: underline; background-color: transparent; float: right;" />
+                                </th:block>
 
                                 <th:block th:if="${obj.chk == 0 || obj.chk== 1 }">
                                     <input type="button" class="btn btn-sm" onclick="fieldsetDisable()"

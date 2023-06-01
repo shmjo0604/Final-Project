@@ -7,15 +7,15 @@ import org.springframework.stereotype.Service;
 
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
-import com.example.entity.ClassInquiry;
+import com.example.entity.ClassInquiryView;
 import com.example.mapper.ClassManageMapper;
-import com.example.repository.ClassInquiryRepository;
+import com.example.repository.ClassInquiryViewRepository;
 
 @Service
 public class ClassManageServiceImpl implements ClassManageService {
 
     @Autowired ClassManageMapper cMapper;
-    @Autowired ClassInquiryRepository cRepository;
+    @Autowired ClassInquiryViewRepository cRepository;
 
     @Override
     public List<ClassProduct> selectMyClassList(String id) {
@@ -138,9 +138,9 @@ public class ClassManageServiceImpl implements ClassManageService {
     }
 
     @Override
-    public List<ClassInquiry> selectClassInquiryList(long classcode) {
+    public List<ClassInquiryView> selectClassInquiryList( String owner ) {
         try {
-            return cRepository.findByClassproduct_classcodeOrderByNoDesc(classcode);
+            return cRepository.findByOwnerOrderByNoDesc( owner );
          }
          catch (Exception e) {
              e.printStackTrace();
