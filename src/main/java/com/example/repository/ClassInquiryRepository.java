@@ -7,5 +7,5 @@ import com.example.entity.ClassInquiry;
 
 @Repository
 public interface ClassInquiryRepository extends JpaRepository<ClassInquiry, Long> {
-    
+   
 }

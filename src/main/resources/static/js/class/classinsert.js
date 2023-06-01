@@ -1,8 +1,4 @@
 
-const contextPath = $('#contextPathHolder').attr('data-contextPath');
-var localcode = 0;
-var actcode = 0;
-
 /* postcode */
 function sample6_execDaumPostcode() {
     new daum.Postcode(
@@ -606,7 +602,7 @@ function nextMenu4() {
     const content = quill3.root.innerHTML;
     const content_length3 = quill3.getLength();
 
-    if (content_length3 < 30) {
+    if (content_length3 < 20) {
         alert("커리큘럼 내용을 작성하세요.");
         content.focus();
         return false;
@@ -737,7 +733,7 @@ function insertClass() {
         return false;
     } 
 	
-    if( content_length3 < 30) {
+    if( content_length3 < 20) {
         alert("커리큘럼 내용을 작성하세요.");
         pagecorri();
         return false;
@@ -858,3 +854,4 @@ function insertClass() {
 // nonClick.forEach((e) => {
 //     e.addEventListener("click", handleClick);
 // });
+

@@ -7,17 +7,28 @@ import org.springframework.stereotype.Service;
 
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
+import com.example.entity.ClassInquiryView;
 import com.example.mapper.ClassManageMapper;
+import com.example.repository.ClassInquiryViewRepository;
 
 @Service
 public class ClassManageServiceImpl implements ClassManageService {
 
     @Autowired ClassManageMapper cMapper;
+    @Autowired ClassInquiryViewRepository cRepository;
 
     @Override
     public List<ClassProduct> selectMyClassList(String id) {
         try {
-            return cMapper.selectMyClassList(id);
+            List<ClassProduct> list = cMapper.selectMyClassList(id);
+            if(list != null ){
+                for (ClassProduct classProduct : list) {
+                    long classcode = classProduct.getClasscode();
+                    long mainImg = cMapper.selectClassMainImageNo(classcode);
+                    classProduct.setMainImg(mainImg);
+                }
+            }
+            return list;
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -50,6 +61,8 @@ public class ClassManageServiceImpl implements ClassManageService {
     @Override
     public int updateClassOne(ClassProduct obj) {
         try {
+
+            
             return cMapper.updateClassOne(obj);
         }
         catch (Exception e) {
@@ -124,6 +137,37 @@ public class ClassManageServiceImpl implements ClassManageService {
         }
     }
 
-    
+    @Override
+    public List<ClassInquiryView> selectClassInquiryList( String owner ) {
+        try {
+            return cRepository.findByOwnerOrderByNoDesc( owner );
+         }
+         catch (Exception e) {
+             e.printStackTrace();
+             return null;
+         }
+    }
+
+    @Override
+    public int updateClassNonactive(ClassProduct obj) {
+        try {
+            return cMapper.updateClassNonactive(obj);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    @Override
+    public ClassInquiryView selectClassInquiryOne(long no) {
+       try {
+            return cRepository.findByNo( no );
+       } catch (Exception e) {
+        e.printStackTrace();
+        return null;
+    }
+    }
+
     
 }

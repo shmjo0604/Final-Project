@@ -16,22 +16,31 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
 import com.example.dto.Member;
+import com.example.entity.ClassInquiryView;
+import com.example.repository.ClassInquiryViewRepository;
 import com.example.service.classproduct.ClassManageService;
+import com.example.service.classproduct.ClassSelectService;
 import com.example.service.member.MemberService;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
 @RequestMapping(value = "/member")
+@RequiredArgsConstructor
 public class MemberController {
 
     final String format = "MemberController => {}";
+    final ClassInquiryViewRepository civRepository;
 
     @Autowired MemberService mService;
-    @Autowired ClassManageService cService;
+    @Autowired ClassManageService cService; 
+    @Autowired ClassSelectService c1Service;
+
 
     BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 
@@ -118,14 +127,114 @@ public class MemberController {
         
     }
 
+
     @GetMapping(value = "/myclass.do")
     public String myclassGET(
+        @RequestParam(name = "menu", defaultValue = "0") int menu,
+        @RequestParam(name = "classcode", defaultValue = "0", required = false) long classcode,
+        @RequestParam(name = "no", defaultValue = "0", required = false) long no,
+        @RequestParam(name="page", required = false) Integer page, @RequestParam(name="size", required = false) Integer size,
         @AuthenticationPrincipal User user,
         Model model
     ) {
+        String owner = user.getUsername();
+        String id = user.getUsername();
+
+        if(menu == 0) {
+            // return "member/myclass_menu1";
+            return "redirect:/member/myclass.do?menu=1";
+        }
+
+        if(menu == 1) {
+            List<ClassProduct> list = cService.selectMyClassList(id);
+            model.addAttribute("list", list);
+            
+            log.info("myclass selectlist => {}", list.toString());
+        }
+
+        else if(menu == 2) {
+            // PageRequest pageRequest = PageRequest.of(page, size);
+            
+            List<ClassInquiryView> list = cService.selectClassInquiryList(owner);
+            System.out.println("test용=>"+list.toString());
+            
+            ClassInquiryView obj2 = cService.selectClassInquiryOne(no);
+
+            model.addAttribute("list", list);
+            model.addAttribute("obj2", obj2 );
+
+            log.info("myclass inquiry selectlist => {}", list.toString());
+        }
 
         model.addAttribute("user", user);
         return "/member/myclass";
     }
-    
+
+    @PostMapping(value = "/myclass.do")
+    public String myclassPOST(
+        @RequestParam(name = "menu", defaultValue = "0", required = false) int menu
+    ){
+        return "redirect:/myclass.do?menu="+menu;
+    }
+
+    @GetMapping(value = "/update.do")
+    public String myclassUpdateGET( @AuthenticationPrincipal User user,
+    @RequestParam(name = "classcode", defaultValue = "0")long classcode,
+        Model model 
+    ){
+        ClassProduct obj = cService.selectClassOne(classcode);
+
+        log.info(format, obj.toString());
+        long profileImg = cService.selectClassProfileImageNo(classcode);
+        long mainImg = cService.selectClassMainImageNo(classcode);
+
+        model.addAttribute("actlist", c1Service.selectActivityCateList());
+        model.addAttribute("citylist", c1Service.selectCityCateList());
+        model.addAttribute("obj", obj);
+        model.addAttribute("user", user);
+        model.addAttribute("profileImg", profileImg);
+        model.addAttribute("mainImg", mainImg);
+        model.addAttribute("subImg", cService.selectClassSubImageNoList(classcode));
+        return "/class/update";
+    }
+
+    @PostMapping(value = "/update.do")
+    public String myclassUpdatePOST( @AuthenticationPrincipal User user,
+    @ModelAttribute ClassProduct obj, @ModelAttribute ClassImage obj2,
+        Model model  
+        ){
+            int ret = cService.updateClassOne(obj);
+            int ret2 =cService.updateClassImageOne(obj2);
+            log.info("update class --- => {}", obj.toString());
+            log.info("update image --- => {}", obj2.toString());
+
+        if (ret == 1 || ret2 == 1 ) {
+                return "redirect:/member/myclass.do";
+        } else {
+            return "redirect:/member/update.do?classcode=";
+        }
+    }
+
+    @PostMapping(value = "/myclass/delete.do")
+    public String myclassdeletePOST( @AuthenticationPrincipal User user,
+        @ModelAttribute ClassProduct obj, 
+        Model model
+    ) {
+        log.info(format, obj.toString());
+        int ret = cService.updateClassInactive(obj);
+        if(ret ==1 ){
+            return "redirect:/home.do";
+        }
+        return "/member/myclass";
+    }
+
+    // @PostMapping(value = "/myclass/inquiry.do")
+    // public String myClassInquiryPOST(
+    //     @ModelAttribute ClassInquiryView obj,
+    //     Model model
+    // ){
+
+    //     return "/member/myclass";
+    // }
+
 }

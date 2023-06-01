@@ -37,7 +37,7 @@ public class ClassProduct {
 	private long hit;
 	// 등록일자
 	private Date regdate;
-	// 승인여부 ( 0, 1 )
+	// 승인여부 ( 0, 1, 2, 3 )
 	private int chk;
 	// 상세 지역 카테고리 (FK)
 	private int localcode;
@@ -46,6 +46,14 @@ public class ClassProduct {
 	// 회원 아이디 (FK)
 	private String memberid;
     
-	// 클래스 메인 이미지 번호
+	//클래스 프로필 이미지 번호
+	private long profileImg;
+	//클래스 메인 이미지 번호
 	private long mainImg;
+	//클래스 이미지 리스트 번호
+	private long listImg;
+	//클래스 시티코드
+	private int citycode;
+	//클래스 엑티브코드
+	private int activitycode;
 }

@@ -10,14 +10,19 @@
 
     <!-- 2. 클래스 1개 조회 -->
     <select id="selectClassOne" parameterType="long" resultType="ClassProduct">
-        SELECT c.* FROM classproduct c WHERE classcode = #{classcode}
+        SELECT c.* FROM classproductview c WHERE classcode = #{classcode}
     </select>
 
-    <!-- 3. 클래스 삭제 (휴면 처리) -->
+    <!-- 3. 클래스 삭제 -->
     <update id="updateClassInactive" parameterType="ClassProduct">
-        
+        UPDATE classproduct SET chk = 2 WHERE classcode=#{classcode}
     </update>
 
+    <!-- 3-2. 클래스 비활성화 (휴면 처리) -->
+    <update id="updateClassNonactive" parameterType="ClassProduct">
+        UPDATE classproduct SET chk = 3 WHERE classcode=#{classcode}
+    </update>
+    
     <!-- 4. 클래스 내용 수정 --> 
     <update id="updateClassOne" parameterType="ClassProduct">
         UPDATE classproduct SET title = #{title}, postcode = #{postcode}, address1 = #{address1}, address2 = #{address2}, address3 = #{address3}, 
@@ -54,5 +59,6 @@
     <delete id="deleteClassImageOne" parameterType="long">
         DELETE FROM classimage WHERE no = #{no}
     </delete>
+
 
 </mapper>

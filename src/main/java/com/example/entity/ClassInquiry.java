@@ -45,7 +45,7 @@ public class ClassInquiry {
 
   // 문의날짜
   @CreationTimestamp
-  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   @Column(name = "REGDATE", insertable = true, updatable = false)
   private Date regdate;
 
