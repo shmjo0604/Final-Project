@@ -148,5 +148,16 @@ public class ClassManageServiceImpl implements ClassManageService {
          }
     }
 
+    @Override
+    public int updateClassNonactive(ClassProduct obj) {
+        try {
+            return cMapper.updateClassNonactive(obj);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
     
 }

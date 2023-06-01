@@ -21,6 +21,9 @@ public interface ClassManageMapper {
     // 3. 클래스 삭제 -> delete 사용 불가
     public int updateClassInactive(ClassProduct obj);
 
+    // 3_2. 클래스 비활성화 
+    public int updateClassNonactive(ClassProduct obj);
+
     // 4. 클래스 내용 수정
     public int updateClassOne(ClassProduct obj);
 

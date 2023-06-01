@@ -37,7 +37,7 @@ public class ClassProduct {
 	private long hit;
 	// 등록일자
 	private Date regdate;
-	// 승인여부 ( 0, 1 )
+	// 승인여부 ( 0, 1, 2, 3 )
 	private int chk;
 	// 상세 지역 카테고리 (FK)
 	private int localcode;

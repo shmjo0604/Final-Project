@@ -484,8 +484,6 @@ function sample6_execDaumPostcode() {
 async function getLocalcate(code) {
     //console.log(code);
 
-    
-
     if (code == 1 || code == "") {
         $('#localselect').children('option').remove();
         $('#localselect').append('<option>전체</option>');
@@ -1037,7 +1035,7 @@ function nextMenu4() {
     const content = quill3.root.innerHTML;
     const content_length3 = quill3.getLength();
 
-    if (content_length3 < 30) {
+    if (content_length3 < 20) {
         alert("커리큘럼 내용을 작성하세요.");
         content.focus();
         return false;

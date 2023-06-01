@@ -192,12 +192,17 @@ public class MemberController {
     @ModelAttribute ClassProduct obj, @ModelAttribute ClassImage obj2,
         Model model  
         ){
-            cService.updateClassOne(obj);
-            cService.updateClassImageOne(obj2);
+            int ret = cService.updateClassOne(obj);
+            int ret2 =cService.updateClassImageOne(obj2);
+            log.info("update class --- => {}", obj.toString());
+            log.info("update image --- => {}", obj2.toString());
 
-            return "redirect:/home.do";
+        if (ret == 1 || ret2 == 1 ) {
+                return "redirect:/member/myclass.do";
+        } else {
+            return "redirect:/member/update.do?classcode=";
         }
-    
+    }
 
     @PostMapping(value = "/myclass/delete.do")
     public String myclassdeletePOST( @AuthenticationPrincipal User user,
@@ -207,7 +212,7 @@ public class MemberController {
         log.info(format, obj.toString());
         int ret = cService.updateClassInactive(obj);
         if(ret ==1 ){
-            return "/member/myclass";
+            return "redirect:/home.do";
         }
         return "/member/myclass";
     }
