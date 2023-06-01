@@ -27,6 +27,7 @@ public class SecurityConfig {
         /* 권한 설정 */
         http.authorizeRequests()
             .antMatchers("/class/insert.do").authenticated()
+            .antMatchers("/class/update.do").authenticated()
             .antMatchers("/apply", "/apply/*").authenticated()
             .antMatchers("/member/join.do").permitAll()
             .antMatchers("/member", "/member/*").authenticated()
