@@ -9,5 +9,18 @@ import com.example.entity.Community;
 
 @Repository
 public interface CommunityRepository extends JpaRepository<Community, Long> {
+
     public List<Community> findAllByOrderByNoDesc();
+
+    public Community findByNo(long no);
+
+    // public int updateByNo(Community obj);
+
+    public int deleteByNo(long no);
+
+
+   
+    
+
+
 }
