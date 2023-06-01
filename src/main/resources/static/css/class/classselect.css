@@ -253,6 +253,7 @@ html .ui-button.ui-state-disabled:active {
 	border-radius: 5px;
 	border-bottom: 2px solid #ccc;
 	border-right: 1px solid #ccc;
+	border-radius: 5px;
 	overflow: hidden;
 	background: #fff;
 }
@@ -298,7 +299,7 @@ html .ui-button.ui-state-disabled:active {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: auto;
+	width: 70%;
 }
 
 .infobox .address {
@@ -308,13 +309,19 @@ html .ui-button.ui-state-disabled:active {
 }
 
 /* .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;} */
-.info .img {
+
+.info .imgbox {
+	width: 30%;
+}
+
+.info img {
 	position: absolute;
-	top: 6px;
-	left: 5px;
+	width: 30%;
+	height: 90px;
 	border: 1px solid #ddd;
 	color: #888;
 	overflow: hidden;
+	border-bottom-left-radius: 5px;
 }
 
 .info:after {

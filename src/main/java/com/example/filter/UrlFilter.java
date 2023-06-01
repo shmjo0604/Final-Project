@@ -26,7 +26,7 @@ public class UrlFilter extends OncePerRequestFilter {
             String path = request.getServletPath(); // -> /item/selectone.do
             String query = request.getQueryString(); // no=10 (? 없음)
 
-            log.info("UrlFilter => {}, {}, {}", contextPath, path, query);
+            // log.info("UrlFilter => {}, {}, {}", contextPath, path, query);
 
             HttpSession httpSession = request.getSession();
 
