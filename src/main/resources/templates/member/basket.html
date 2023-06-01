@@ -9,230 +9,18 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!--CSS-->
+    <!-- <link rel="stylesheet" th:href="@{/css/main.css}"> -->
+    <link rel="stylesheet" th:href="@{/css/basket/basket.css}">
 </head>
 <style>
-    body {
-        margin: 0;
-        /* background-color: #7addc9; */
-    }
-
-    * {
-        box-sizing: border-box;
-    }
-
-    h3 {
-        font-size: 25px;
-    }
-
-    p,
-    span {
-        margin: 0;
-    }
-
-    a {
-        color: black;
-    }
-
-    img {
-        display: block;
-        width: 80%;
-        height: 80px;
-        margin: auto;
-    }
-
-    .cart {
-        width: 80%;
-        margin: auto;
-        padding: 30px;
-    }
-
-    .cart__list {
-        background-color: white;
-    }
-
-    .cart ul {
-        background-color: whitesmoke;
-        padding: 30px;
-        margin-bottom: 50px;
-        border: whitesmoke solid 1px;
-        border-radius: 5px;
-        font-size: 13px;
-        font-weight: 300;
-    }
-
-    .cart ul :first-child {
-        color: limegreen;
-    }
-
-    table {
-        border-top: solid 1.5px black;
-        border-collapse: collapse;
-        width: 100%;
-        font-size: 14px;
-    }
-
-    thead {
-        text-align: center;
-        font-weight: bold;
-    }
-
-    tbody {
-        font-size: 12px;
-    }
-
-    td {
-        padding: 15px 0px;
-        border-bottom: 1px solid lightgrey;
-    }
-
-   
-
-    .cart__list__smartstore {
-        font-size: 12px;
-        color: gray;
-    }
-
-    .cart__list__option {
-        vertical-align: top;
-        padding: 20px;
-    }
-
-    .cart__list__option p {
-        margin-bottom: 25px;
-        position: relative;
-    }
-
-    .cart__list__option p::after {
-        content: "";
-        width: 90%;
-        height: 1px;
-        background-color: lightgrey;
-        left: 0px;
-        top: 25px;
-        position: absolute;
-    }
-
-    .cart__list__optionbtn {
-        background-color: white;
-        font-size: 10px;
-        border: lightgrey solid 1px;
-        padding: 7px;
-    }
-    
-    .cart__list__detail :nth-child(1),
-    .cart__list__detail :nth-child(2),
-    .cart__list__detail :nth-child(3),
-    .cart__list__detail :nth-child(4),
-    .cart__list__detail :nth-child(5) {
-        text-align: center;
-    }
-
-    .cart__list__detail :nth-child(3) {
-        vertical-align: top;
-    }
-
-    .cart__list__detail :nth-child(3) a {
-        font-size: 12px;
-    }
-
-    .cart__list__detail :nth-child(3) p {
-        margin-top: 6px;
-        font-weight: bold;
-    }
-
-    .cart__list__detail :nth-child(4),
-    .cart__list__detail :nth-child(5),
-    .cart__list__detail :nth-child(6) {
-        border-left: 2px solid whitesmoke;
-        text-align: center;
-    }
-
-    .cart__list__detail :nth-child(5) button {
-        background-color: green;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 4px 8px;
-        font-size: 12px;
-        margin-top: 5px;
-    }
-
-    .cart__list__detail2 :nth-child(3) p {
-        margin-top: 6px;
-        font-size: 12px;
-        font-weight: bold;
-        vertical-align: top;
-    }
-
-    .cart__list__detail2 :nth-child(4),
-    .cart__list__detail2 :nth-child(5),
-    .cart__list__detail2 :nth-child(6) {
-        border-left: 2px solid whitesmoke;
-        text-align: center;
-    }
-
-    .cart__list__detail2 :nth-child(1),
-    .cart__list__detail2 :nth-child(2),
-    .cart__list__detail2 :nth-child(3),
-    .cart__list__detail2 :nth-child(4),
-    .cart__list__detail2 :nth-child(5) {
-        text-align: center;
-    }
-
-    .cart__list__detail2 :nth-child(5) button {
-        background-color: green;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 4px 8px;
-        font-size: 12px;
-        margin-top: 5px;
-    }
-
-    .cart__list__detail3 :nth-child(1),
-    .cart__list__detail3 :nth-child(5) {
-        text-align: center;
-    }
-
-    .price {
-        font-weight: bold;
-    }
-
-    .cart__mainbtns {
-        width: 420px;
-        height: 200px;
-        padding-top: 40px;
-        display: block;
-        margin: auto;
-    }
-
-    .cart__bigorderbtn {
-        width: 200px;
-        height: 50px;
-        font-size: 16px;
-        margin: auto;
-        border-radius: 5px;
-    }
-
-    .cart__bigorderbtn.left {
-        background-color: white;
-        border: 1px lightgray solid;
-    }
-
-    .cart__bigorderbtn.right {
-        background-color: green;
-        color: white;
-        border: none;
-    }
-    
-    
-    
 </style>
 
 <body>
     <h3>장바구니</h3>
     <section class="cart">
         <div class="cart__information">
+            <input type="hidden" value="${login.userid}" id="login_userid">
             <ul>
                 <li>장바구니 상품은 최대 30일간 저장됩니다.</li>
                 <li>장바구니에서 확인해야하는 정보로 추후 수정</li>
@@ -244,48 +32,36 @@
                     <tr>
                         <td></td>
                         <td>번호</td>
-                        <td>이미지</td>
+                        <td>인원수</td>
                         <td>클래스 신청 정보</td>
-                        <td>결제금액</td>
+                        <td>결제 금액</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="cart__list__detail">
-                        <td><input type="checkbox" name="Chk_list"></td>
-                        <td id="unit_no">1</td>
-                        <td><img class="image1" th:src="@{/도지.png}"></td>
-                        <!-- <td><img src="/도지.png" alt="클래스 썸네일"></td> -->
-                        <td>
-                            <a href="#">수영 클래스</a>
-                            <p>일자: 2023-05-05</p>
-                            <p>시간: 18:00 ~ 20:00</p>
-                            <p>난이도 : 입문자</p>
-                            <h7>명당 가격 : 15,000</h7><br />
+                    <form name="frm">
+                    <tr class="cart__list__detail" th:each="obj : ${list}">
+                        <td><input type="checkbox"  name='selectall' 
+                            value='selectall' ></td>
+                        <td >
+                            <th:block th:each="no : ${#numbers.sequence(1,1)}" >
+	                            <div th:text="${obj.no}" class="unit_no" id="unit_no" name="unit_no" ></div>
+                            </th:block>
+                        </td>
+                        <td th:text="${obj.cnt}" class="cnt" id="cnt"></td>
+                        <td >
+                            <a th:text="${obj.member.id}" href="#" >수영 클래스</a>
+                            <p th:text="${obj.classunit.classdate}" class="date"></p>
+                            <p th:text="${obj.classunit.classstart}" class="starttime"></p>
+                            <p th:text="${obj.classunit.classend}" class="endtime"></p>
+                            <p th:text="${obj.classunit.classlevel}"  class="level"></p>
+                            <h7 th:text="${obj.classunit.addprice}" id="num1" value="num1" class="addprice"></h7><br />
                             <button type="submit" >옵션 수정</button>
                         </td>
-                        <td>
-                            <span class="price">15,000원</span><br>
+                        <td >
+                            <input type="text" id="sum" value="" size="5"></input><br>
                         </td>
                     </tr>
-
-                    <tr class="cart__list__detail2">
-                        <td><input type="checkbox" name="Chk_list"></td>
-                        <td id="unit_no">2</td>
-                        <td><img class="image1" th:src="@{/도지.png}"></td>
-                        <!-- <td><img src="/도지.png" alt="클래스 썸네일"></td> -->
-                        <td>
-                            <a href="#">수영 클래스</a>
-                            <p>일자: 2023-05-05</p>
-                            <p>시간: 18:00 ~ 20:00</p>
-                            <p>난이도 : 입문자</p>
-                            <h7>명당 가격 : 15,000</h7><br />
-                            <button type="submit" >옵션 수정</button>
-                        </td>
-                        <td>
-                            <span class="price">15,000원</span><br>
-                        </td>
-                    </tr>
-
+                    </form>
                     
                     <tr class="cart__list__detail3">
                         <td>총합금액</td>
@@ -300,6 +76,19 @@
 
                     <td colspan="3">
                         <button class="cart__list__optionbtn" type="button" id="delBtn">선택상품 삭제</button>
+                        <button class="openBtn" type="button">옵션수정</button>
+                        <div class="modal hidden">
+                            <div class="bg"></div>
+                            <div class="modalBox">
+                                    <p>수영 클래스</p>
+                                    <p>일자: 2023-05-05</p>
+                                    <p>시간: 18:00 ~ 20:00</p>
+                                    <p>난이도 : 입문자</p>
+                                    <p>신청 인원: 1명</p><hr />
+                                    <p>가격: 15000</p>
+                                <button class="closeBtn">수정</button>
+                            </div>
+                        </div>
                     </td>
                     
                     <td></td>
@@ -309,35 +98,17 @@
         </table>
         <div class="cart__mainbtns">
             <button class="cart__bigorderbtn left" type="submit">쇼핑 계속하기</button>
-            <input type="button" class="cart__bigorderbtn right" onclick="location.href='purchasecheck.do';" value="결제화면으로" />
+            <input type="button" class="cart__bigorderbtn right" onclick="location.href='*/apply/insert.do';" value="결제화면으로" />
         </div>
     </section>
 </body>
 
 <script type="text/javascript">
-
-    jQuery(document).ready(function () {
-        $('#myModal').show();
-    });
-    //팝업 Close 기능
-    function close_pop(flag) {
-        $('#myModal').hide();
-    };
+    
+    
     
 
-    // 체크박스 선택해서 삭제하는 기능
-    // $('#delBtn').click(function() {
-    //     if($("input:checkbox[name='Chk_list']:checked").length === 0) {
-    //         alert("삭제할 항목을 선택해 주세요.");
-    //         return;
-    //     }
-
-    //     $("input:checkbox[name='Chk_list']:checked").each(function(k,kVal){
-    //         console.log("kVal ::", kVal.parentElement.parentElement.parentElement);
-    //         let a = kVal.parentElement.parentElement.parentElement;
-    //         $(a).remove();
-    //     });
-    // });
+ 
 
 </script>
 
