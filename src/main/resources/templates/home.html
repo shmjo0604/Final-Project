@@ -68,7 +68,7 @@
                     <li>
                         <a href="#" class="cate-a">
                             <div class="cate">
-                                <img th:src="@{/image/도자기.png}" id="cate-icon" alt="도자기">
+                                <img th:src="@{/image/공예.png}" id="cate-icon" alt="도자기">
                                 <span>
                                     <p class="icon-name">공예</p>
                                 </span>
@@ -80,7 +80,7 @@
                             <div class="cate">
                                 <img th:src="@{/image/스포츠.png}" id="cate-icon" alt="스포츠/건강">
                                 <span>
-                                    <p class="icon-name">스포츠</p>
+                                    <p class="icon-name">스포츠/건강</p>
                                 </span>
                             </div>
                         </a>
@@ -91,16 +91,6 @@
                                 <img th:src="@{/image/미술1.png}" id="cate-icon" alt="미술">
                                 <span>
                                     <p class="icon-name">미술</p>
-                                </span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="cate-a">
-                            <div class="cate">
-                                <img th:src="@{/image/쿠킹.png}" id="cate-icon" alt="쿠킹">
-                                <span>
-                                    <p class="icon-name">쿠킹</p>
                                 </span>
                             </div>
                         </a>
@@ -113,39 +103,29 @@
                     <li>
                         <a href="#" class="cate-a">
                             <div class="cate">
-                                <img th:src="@{/image/도자기.png}" id="cate-icon" alt="도자기">
-                                <span>
-                                    <p class="icon-name">공예</p>
-                                </span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="cate-a">
-                            <div class="cate">
-                                <img th:src="@{/image/스포츠.png}" id="cate-icon" alt="스포츠/건강">
-                                <span>
-                                    <p class="icon-name">스포츠</p>
-                                </span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="cate-a">
-                            <div class="cate">
-                                <img th:src="@{/image/미술1.png}" id="cate-icon" alt="미술">
-                                <span>
-                                    <p class="icon-name">미술</p>
-                                </span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="cate-a">
-                            <div class="cate">
-                                <img th:src="@{/image/쿠킹.png}" id="cate-icon" alt="쿠킹">
+                                <img th:src="@{/image/쿠킹.png}" id="cate-icon" alt="도자기">
                                 <span>
                                     <p class="icon-name">쿠킹</p>
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="cate-a">
+                            <div class="cate">
+                                <img th:src="@{/image/음악.png}" id="cate-icon" alt="스포츠/건강">
+                                <span>
+                                    <p class="icon-name">음악/영상</p>
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="cate-a">
+                            <div class="cate">
+                                <img th:src="@{/image/뷰티.png}" id="cate-icon" alt="미술">
+                                <span>
+                                    <p class="icon-name">뷰티</p>
                                 </span>
                             </div>
                         </a>
@@ -190,81 +170,32 @@
             <div class="main-newclass">
                 <h3 class="seb-title"> 새로운 클래스 소개 영역 </h2>
                     <div class="newclass">
-                        <div class="class">
-                            <a href="#" class="new-c1">
-                                <div class="new-c2">
-                                    <img th:src="@{/image/flower.jpg}" width="300" id="flower-img" alt="꽃꽂이">
-                                    <span>
-                                        <p class="class-name">플라워 원데이 클래스</p>
-                                        <p class="local">부산 대연동</p>
-                                        <p class="price">50000 원</p>
-                                    </span>
+                        <div class="row row-cols-1 row-cols-md-3">
+                            <th:block th:each="obj : ${list}" th:if="${obj.chk == 1}">
+                                <div class="col">
+                                    <div class="class">
+                                        <a th:href="@{/class/product.do( classcode=${ obj.classcode } )}" class="new-c1">
+                                            <div class="new-c2">
+                                                <div class="class-image">
+                                                    <img th:src="@{/class/image(no=${obj.mainImg})}" alt="클래스 메인 이미지"
+                                                    width="300" />
+                                                </div>
+                                                <span>
+                                                    <p class="class-name" th:text="${obj.title}"></p>
+                                                    <p class="local" th:text="${obj.address1}"></p>
+                                                    <div class="row">
+                                                        <p class="price col-10" th:text="${obj.price}"></p>
+                                                        <span class="col-2" style="font-size: 15px; color: rgb(31, 40, 61); padding: 0%;">원</span>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="class">
-                            <a href="#" class="new-c1">
-                                <div class="new-c2">
-                                    <img th:src="@{/image/서핑.jpg}" width="300" id="flower-img" alt="서핑">
-                                    <span>
-                                        <p class="class-name">서핑 원데이 클래스</p>
-                                        <p class="local">부산 대연동</p>
-                                        <p class="price">80000 원</p>
-                                    </span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="class">
-                            <a href="#" class="new-c1">
-                                <div class="new-c2">
-                                    <img th:src="@{/image/향수.jpg}" width="300" id="flower-img" alt="향수">
-                                    <span>
-                                        <p class="class-name">향수 원데이 클래스</p>
-                                        <p class="local">부산 대연동</p>
-                                        <p class="price">70000 원</p>
-                                    </span>
-                                </div>
-                            </a>
+                            </th:block>
                         </div>
                     </div>
-                    <div class="newclass">
-                        <div class="class">
-                            <a href="#" class="new-c1">
-                                <div class="new-c2">
-                                    <img th:src="@{/image/flower.jpg}" width="300" id="flower-img" alt="꽃꽂이">
-                                    <span>
-                                        <p class="class-name">플라워 원데이 클래스</p>
-                                        <p class="local">부산 대연동</p>
-                                        <p class="price">50000 원</p>
-                                    </span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="class">
-                            <a href="#" class="new-c1">
-                                <div class="new-c2">
-                                    <img th:src="@{/image/서핑.jpg}" width="300" id="flower-img" alt="서핑">
-                                    <span>
-                                        <p class="class-name">서핑 원데이 클래스</p>
-                                        <p class="local">부산 대연동</p>
-                                        <p class="price">80000 원</p>
-                                    </span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="class">
-                            <a href="#" class="new-c1">
-                                <div class="new-c2">
-                                    <img th:src="@{/image/향수.jpg}" width="300" id="flower-img" alt="향수">
-                                    <span>
-                                        <p class="class-name">향수 원데이 클래스</p>
-                                        <p class="local">부산 대연동</p>
-                                        <p class="price">70000 원</p>
-                                    </span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                </h3>
             </div>
 
             <!-- 커뮤니티 영역 -->

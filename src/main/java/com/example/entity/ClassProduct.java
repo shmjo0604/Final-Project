@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -125,5 +126,8 @@ public class ClassProduct {
   @ToString.Exclude
   @OneToMany(mappedBy = "classproduct", fetch = FetchType.LAZY)
   private List<ClassInquiry> classinquiryList = new ArrayList<>();
+
+  @Transient
+  private long mainImg;
 
 }

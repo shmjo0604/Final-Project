@@ -308,10 +308,11 @@ ul,ol,li {
     color: #323232;
 }
 .price{
-    margin: 0 1rem;
+    margin: 0 auto;
     font-size: 15px;
     color: rgb(31, 40, 61);
     text-align: right;
+    padding: 0%;
 }
 .local{
     display: flex;
@@ -319,7 +320,7 @@ ul,ol,li {
     align-items: center;
     -webkit-box-pack: center;
     justify-content: center;
-    margin: 2px 10px 2px 55%;
+    margin: 2px 10px 2px 30%;
     padding: 2px 8px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -327,7 +328,7 @@ ul,ol,li {
     box-sizing: border-box;
     border: 1px solid rgb(0, 150, 136);
     border-radius: 3px;
-    min-width: 2rem;
+    min-width: 3rem;
     color: rgb(81, 91, 96);
     background-color: rgb(242, 250, 249);
     font-size: 12px;

@@ -10,12 +10,14 @@ import com.example.dto.ClassProduct;
 import com.example.entity.ClassInquiryView;
 import com.example.mapper.ClassManageMapper;
 import com.example.repository.ClassInquiryViewRepository;
+import com.example.repository.MainRepository;
 
 @Service
 public class ClassManageServiceImpl implements ClassManageService {
 
     @Autowired ClassManageMapper cMapper;
     @Autowired ClassInquiryViewRepository cRepository;
+    @Autowired MainRepository mRepository;
 
     @Override
     public List<ClassProduct> selectMyClassList(String id) {
@@ -179,6 +181,5 @@ public class ClassManageServiceImpl implements ClassManageService {
             return -1;
         }
     }
-
     
 }
