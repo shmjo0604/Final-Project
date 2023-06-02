@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Basket;
+import com.example.entity.BasketView;
 import com.example.repository.BasketRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -36,9 +37,9 @@ public class BasketServiceImpl implements BasketService{
 
     // 2. 카트 목록
     @Override
-    public List<Basket> basketList(String memberid) {
+    public List<BasketView> basketList(String memberid) {
         try{
-            return bRepository.findByMember_idOrderByNoDesc(memberid);
+            return bRepository.findByMemberidOrderByNoDesc(memberid);
         }
         catch(Exception e) {
             e.printStackTrace();

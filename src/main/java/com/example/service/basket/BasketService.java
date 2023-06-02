@@ -1,10 +1,13 @@
 package com.example.service.basket;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+
 import com.example.entity.Basket;
+import com.example.entity.BasketView;
 
 @Service
 public interface BasketService {
@@ -19,9 +22,12 @@ public interface BasketService {
     public int deleteBasketOne(int obj);
 
     // 4. 카트 목록
-    public List<Basket> basketList(String memberid);
+    public List<BasketView> basketList(String memberid);
 
     // 5. 장바구니 데이터 체크
     public Basket checBasket(Basket obj);
+
+    // 4. 카트 목록
+    // public List<BasketView> basketList(Map<String, Object> map);
     
 }

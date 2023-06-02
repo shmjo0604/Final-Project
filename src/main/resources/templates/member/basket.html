@@ -50,7 +50,7 @@
                 <tbody>
                     <form name="frm">
                     <tr class="cart__list__detail" th:each="obj : ${list}">
-                        <td><input type="checkbox"  name='selectall' 
+                         <td><input type="checkbox"  name='selectall' 
                             value='selectall' ></td>
                         <td >
                             <th:block th:each="no : ${#numbers.sequence(1,1)}" >
@@ -59,16 +59,16 @@
                         </td>
                         <td th:text="${obj.cnt}" class="cnt" id="cnt"></td>
                         <td >
-                            <a th:text="${obj.member.id}" href="#" >수영 클래스</a>
-                            <p th:text="${obj.classunit.classdate}" class="date"></p>
-                            <p th:text="${obj.classunit.classstart}" class="starttime"></p>
-                            <p th:text="${obj.classunit.classend}" class="endtime"></p>
-                            <p th:text="${obj.classunit.classlevel}"  class="level"></p>
-                            <h7 th:text="${obj.classunit.addprice}" id="num1" value="num1" class="addprice"></h7><br />
+                            <a th:text="${obj.title}" href="#" >수영 클래스</a>
+                            <p th:text="${obj.classdate}" class="date"></p>
+                            <p th:text="${obj.classstart}" class="starttime"></p>
+                            <p th:text="${obj.classend}" class="endtime"></p>
+                            <p th:text="${obj.classlavel}"  class="level"></p>
+                            <h7 th:text="${obj.totalprice}" id="num1" value="num1" class="addprice"></h7><br /> 
                             <button type="submit" >옵션 수정</button>
                         </td>
                         <td >
-                            <input type="text" id="sum" value="" size="5"></input><br>
+                            <p  th:text="${obj.totalprice}"></input><br>
                         </td>
                     </tr>
                     </form>
@@ -85,7 +85,10 @@
                     
 
                     <td colspan="3">
-                        <button class="cart__list__optionbtn" type="button" id="delBtn">선택상품 삭제</button>
+                        <form method="post" class="dropdown-item" id="deleteForm"
+                        th:action="@{/member/basket.do(no=${obj.no} )}">
+                        <button onclick="deletePost()" class="cart__list__optionbtn" type="button" id="delBtn">선택상품 삭제</button>
+                        </form>
                         <button class="openBtn" type="button">옵션수정</button>
                         <div class="modal hidden">
                             <div class="bg"></div>
@@ -110,6 +113,11 @@
             <button class="cart__bigorderbtn left" type="submit">쇼핑 계속하기</button>
             <input type="button" class="cart__bigorderbtn right" onclick="location.href='*/apply/insert.do';" value="결제화면으로" />
         </div>
+        
+
+
+
+
     </section>
 
     <!--footer 영역-->
