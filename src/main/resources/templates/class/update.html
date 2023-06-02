@@ -260,11 +260,14 @@
                                                 <h6 style="display:inline; font-weight:bold;">추가 클래스 이미지</h6>
                                                 <h6 style="display:inline; padding-right:50px; color: blue">(선택)</h6>
                                                 <div class="my-3">
-                                                    <img id="insert_classSub" th:src="@{/class/image(no=${subImg})}"
-                                                        style="width: 200px; height: 150px; cursor: pointer;"
-                                                        class="mb-3" onclick="clickClassSub()" />
                                                     <div id="input-addimage" style="height: 200px;"
-                                                        class="mb-3 border rounded w-100 d-flex flex-wrap"></div>
+                                                    class="mb-3 border rounded w-100 d-flex flex-wrap">
+                                                        <th:block th:each="subImg : ${subImg}">
+                                                            <img id="insert_classSub" th:src="@{/class/image(no=${subImg})}"
+                                                                style="width: 100px; height: 80px; cursor: pointer;"
+                                                                class="mb-3" onclick="clickClassSub()" /> 
+                                                        </th:block>
+                                                    </div>
                                                     <input type="file" multiple name="classSub" id="file_classSub"
                                                         class="form-control w-100" onchange="changeClassSub(event)">
                                                 </div>

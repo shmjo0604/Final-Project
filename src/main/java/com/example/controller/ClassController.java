@@ -226,9 +226,10 @@ public class ClassController {
     public String myclassUpdateGET(@AuthenticationPrincipal User user,
         @RequestParam(name = "classcode", defaultValue = "0") long classcode,
         Model model) {
-        ClassProduct obj = manageService.selectClassOne(classcode);
 
+        ClassProduct obj = manageService.selectClassOne(classcode);
         log.info(format, obj.toString());
+        
         long profileImg = manageService.selectClassProfileImageNo(classcode);
         long mainImg = manageService.selectClassMainImageNo(classcode);
 
@@ -247,15 +248,15 @@ public class ClassController {
         @ModelAttribute ClassProduct obj,
         @ModelAttribute com.example.dto.ClassImage obj2,
         @RequestParam(name = "classcode", defaultValue = "0") long classcode,
-        Model model) throws IOException {
+        Model model) {
     
         int ret = manageService.updateClassOne(obj);
         int ret2 = manageService.updateClassImageOne(obj2);
         log.info("update class --- => {}", obj.toString());
         log.info("update image --- => {}", obj2.toString());
         if ( ret == 1 || ret2 == 1) {
-            log.info("update success class ----=>{}", ret);
-            log.info("update success image ----=>{}", ret2);
+            log.info("update success class ---- =>{}", ret);
+            log.info("update success image ---- =>{}", ret2);
             return "redirect:/member/myclass.do";
         } else {
             return "redirect:/class/update.do?classcode=" +classcode;
