@@ -142,7 +142,7 @@ public class ClassManageServiceImpl implements ClassManageService {
     @Override
     public List<ClassInquiryView> selectClassInquiryList( String owner ) {
         try {
-            return cRepository.findByOwnerOrderByNoDesc( owner );
+            return cRepository.findByOwnerOrderByNoDesc(owner);
          }
          catch (Exception e) {
              e.printStackTrace();
@@ -164,7 +164,7 @@ public class ClassManageServiceImpl implements ClassManageService {
     @Override
     public ClassInquiryView selectClassInquiryOne(long no) {
        try {
-            return cRepository.findByNo( no );
+            return cRepository.findByNo(no);
        } catch (Exception e) {
         e.printStackTrace();
         return null;
