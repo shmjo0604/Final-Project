@@ -1,3 +1,4 @@
+const contextPath = $('#contextPathHolder').attr('data-contextPath');
 
 /* postcode */
 function sample6_execDaumPostcode() {
