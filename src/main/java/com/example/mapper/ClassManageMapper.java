@@ -24,6 +24,9 @@ public interface ClassManageMapper {
     // 3_2. 클래스 비활성화 
     public int updateClassNonactive(ClassProduct obj);
 
+    // 3_3. 클래스 활성화 
+    public int updateClassActive(ClassProduct obj);
+
     // 4. 클래스 내용 수정
     public int updateClassOne(ClassProduct obj);
 

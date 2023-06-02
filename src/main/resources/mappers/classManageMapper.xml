@@ -18,9 +18,14 @@
         UPDATE classproduct SET chk = 2 WHERE classcode=#{classcode}
     </update>
 
-    <!-- 3-2. 클래스 비활성화 (휴면 처리) -->
+    <!-- 3-2. 클래스 비활성화 -->
     <update id="updateClassNonactive" parameterType="ClassProduct">
         UPDATE classproduct SET chk = 3 WHERE classcode=#{classcode}
+    </update>
+
+    <!-- 3-3. 클래스 활성화 -->
+    <update id="updateClassActive" parameterType="ClassProduct">
+        UPDATE classproduct SET chk = 1 WHERE classcode=#{classcode}
     </update>
     
     <!-- 4. 클래스 내용 수정 --> 
