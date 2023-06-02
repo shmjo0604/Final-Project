@@ -249,6 +249,13 @@ public class ClassController {
         @ModelAttribute com.example.dto.ClassImage obj2,
         @RequestParam(name = "classcode", defaultValue = "0") long classcode,
         Model model) {
+            // 1.Rest API 호출 -> 주소 기반 위도, 경도 값 반환(Map)
+            Map<String, String> map = KakaoLocalAPI.getCoordinate(obj.getAddress1());
+
+            // 2. ClassProduct 객체 obj에 위도, 경도, 사용자 ID SET
+            obj.setLatitude(map.get("y"));
+            obj.setLongitude(map.get("x"));
+            obj.setMemberid(user.getUsername()); // security session에 저장된 ID 정보를 호출
     
         int ret = manageService.updateClassOne(obj);
         int ret2 = manageService.updateClassImageOne(obj2);

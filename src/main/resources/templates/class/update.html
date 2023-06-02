@@ -375,7 +375,7 @@
                                             <h6 style="display:inline; font-weight:bold;">가격
                                                 <h6 style="display:inline; padding-right:50px; color: #FF8E8E">(필수)</h6>
                                             </h6>
-                                            <div class="tool">
+                                            <div class="tool">addCommas
                                                 <span> <img id="insert-img" th:src="@{/image/물음표.png}"
                                                         style="width: 20px; height: 20px; cursor: pointer;"> 도움말
                                                 </span>
@@ -386,7 +386,7 @@
                                             </div><br>
 
                                             <input id="price" th:value="${obj.price}" type="text" class="my-3"
-                                                placeholder="금액을 입력하세요" maxlength="10" onkeyup="addCommas(this)"
+                                                placeholder="금액을 입력하세요" maxlength="10" onkeypress="addCommas(this)"
                                                 autofocus>
                                             <span style="font-size: 20px; margin-left: 2px;">원</span>
                                         </div>
@@ -882,7 +882,9 @@
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
-        $("#price:text").on("keyup", function () {
+        const price = "";
+        Number(price).toLocaleString();
+        $("#price:text").on("input", function () {
             $(this).val(addCommas($(this).val().replace(/[^0-9]/g, "")));
         });
 
