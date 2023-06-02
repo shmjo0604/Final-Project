@@ -13,14 +13,19 @@ import com.example.dto.ClassProduct;
 import com.example.dto.ClassUnit;
 import com.example.dto.ClassUnitView;
 import com.example.dto.LocalCate;
+import com.example.entity.ClassInquiry;
 import com.example.mapper.ClassManageMapper;
 import com.example.mapper.ClassSelectMapper;
+import com.example.repository.ClassInquiryRepository;
+import com.example.repository.ClassProductRepository;
 
 @Service
 public class ClassSelectServiceImpl implements ClassSelectService {
 
     @Autowired ClassSelectMapper cMapper;
     @Autowired ClassManageMapper manageMapper;
+    @Autowired ClassProductRepository cRepository;
+    @Autowired ClassInquiryRepository cInquiryRepository;
 
     @Override
     public List<CityCate> selectCityCateList() {
@@ -168,6 +173,39 @@ public class ClassSelectServiceImpl implements ClassSelectService {
         catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public int updateClassProductHit(com.example.entity.ClassProduct obj) {
+        
+        try {
+            
+            com.example.entity.ClassProduct result = cRepository.findById(obj.getClasscode()).orElse(null);
+
+            result.setHit(result.getHit()+1);
+            
+            cRepository.save(result);
+
+            return 1;
+        }
+
+        catch(Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+
+    }
+
+    @Override
+    public int insertClassInquiryOne(ClassInquiry obj) {
+        try {
+            cInquiryRepository.save(obj);
+            return 1;
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return -1;
         }
     }
 

@@ -6,8 +6,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +22,8 @@ import com.example.dto.ClassProduct;
 import com.example.dto.ClassUnit;
 import com.example.dto.ClassUnitView;
 import com.example.dto.LocalCate;
+import com.example.entity.ClassInquiry;
+import com.example.entity.Member;
 import com.example.service.classproduct.ClassSelectService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 public class RestClassController {
     
     @Autowired ClassSelectService cService;
-
+    
     @Value("${classselect.page}") int pageEach;
 
     final String format = "RestClassSelectCateController => {}";
@@ -170,6 +177,52 @@ public class RestClassController {
         
         return retMap;
 
+    }
+
+    @PutMapping(value = "/updatehit.json")
+    public Map<String, Object> updatehitPUT(@RequestBody com.example.entity.ClassProduct obj) {
+
+        Map<String, Object> retMap = new HashMap<>();
+
+        log.info(format, obj.toString());
+
+        int ret = cService.updateClassProductHit(obj);
+
+        retMap.put("ret", ret);
+
+        return retMap;
+
+    }
+
+    @PostMapping(value = "/insertinquiry.json")
+    public Map<String, Object> insertinquiryPOST(@RequestBody Map<String, Object> map, @AuthenticationPrincipal User user) {
+
+        Map<String, Object> retMap = new HashMap<>();
+
+        log.info(format, map.toString());
+
+        ClassInquiry classInquiry = new ClassInquiry();
+
+        String classcodeStr = (String)map.get("classcode");
+
+        com.example.entity.ClassProduct classProduct = new com.example.entity.ClassProduct();
+        classProduct.setClasscode(Long.parseLong(classcodeStr));
+
+        log.info(format, classProduct.toString());
+
+        Member member = new Member();
+        member.setId(user.getUsername());
+
+        classInquiry.setTitle((String)map.get("title"));
+        classInquiry.setContent((String)map.get("content"));
+        classInquiry.setClassproduct(classProduct);
+        classInquiry.setMember(member);
+
+        int ret = cService.insertClassInquiryOne(classInquiry);
+
+        retMap.put("ret", ret);
+
+        return retMap;
     }
 
 }

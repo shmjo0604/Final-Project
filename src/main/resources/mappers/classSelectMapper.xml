@@ -173,4 +173,7 @@
         SELECT c.* FROM classunit c WHERE no = #{no}
     </select>
 
+    <!-- 10. 클래스 조회수 증가 -->
+    
+
 </mapper>

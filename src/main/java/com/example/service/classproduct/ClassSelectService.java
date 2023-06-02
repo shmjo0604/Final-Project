@@ -12,6 +12,7 @@ import com.example.dto.ClassProduct;
 import com.example.dto.ClassUnit;
 import com.example.dto.ClassUnitView;
 import com.example.dto.LocalCate;
+import com.example.entity.ClassInquiry;
 
 @Service
 public interface ClassSelectService {
@@ -48,5 +49,11 @@ public interface ClassSelectService {
 
     // 9. 클래스 유닛 하나 조회
     public ClassUnit selectClassUnitOne(long no);
+
+    // 10. 클래스 조회수 증가
+    public int updateClassProductHit(com.example.entity.ClassProduct obj);
+
+    // 11. 클래스 문의 등록
+    public int insertClassInquiryOne(ClassInquiry obj);
 
 }

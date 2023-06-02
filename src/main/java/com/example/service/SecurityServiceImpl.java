@@ -32,7 +32,7 @@ public class SecurityServiceImpl implements UserDetailsService {
 
         Member ret = mMapper.selectMemberOne(username);
 
-        if(ret != null) {
+        if(ret != null && ret.getChk() == 1) {
 
             String[] strRole = {"ROLE_USER"};
             Collection<GrantedAuthority> role = AuthorityUtils.createAuthorityList(strRole);

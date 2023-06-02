@@ -317,10 +317,52 @@
 
                     <h3 class="d-flex align-items-center mb-3"><i class="bi bi-question-square me-2"></i><span>문의</span>
                     </h3>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum unde porro aliquid eaque
-                        asperiores recusandae, molestiae id architecto commodi ex ad pariatur facilis itaque fugit. Odit
-                        iste nesciunt nulla. Consequatur tempore, facere velit eaque facilis, est voluptate temporibus
-                        corrupti laudantium enim repudiandae nam repellat culpa, et sint possimus beatae laborum.</p>
+                    <div class="card bg-light mb-3">
+                        <div class="card-body">
+                            <!-- Comment form-->
+                            <div class="mb-3">
+                                <input id="inquiry_title" class="form-control w-50 mb-2" placeholder="제목을 입력하세요.">
+                                <textarea id="inquiry_content" class="form-control mb-2" rows="5" placeholder="문의 내용을 입력하세요."></textarea>
+                                <div class="d-flex justify-content-end">
+                                    <button type="button" class="btn btn-outline-success" onclick="insertInquiry()">확인</button>
+                                </div>
+                            </div>
+                            <hr>
+                            <!-- Comment with nested comments-->
+                            <div class="d-flex mb-4">
+                                <!-- Parent comment-->
+                                <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                <div class="ms-3">
+                                    <div class="fw-bold">Commenter Name</div>
+                                    If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
+                                    <!-- Child comment 1-->
+                                    <div class="d-flex mt-4">
+                                        <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                        <div class="ms-3">
+                                            <div class="fw-bold">Commenter Name</div>
+                                            And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
+                                        </div>
+                                    </div>
+                                    <!-- Child comment 2-->
+                                    <div class="d-flex mt-4">
+                                        <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                        <div class="ms-3">
+                                            <div class="fw-bold">Commenter Name</div>
+                                            When you put money directly to a problem, it makes a good headline.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Single comment-->
+                            <div class="d-flex">
+                                <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                <div class="ms-3">
+                                    <div class="fw-bold">Commenter Name</div>
+                                    When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </article>
             </div>
 
@@ -369,25 +411,6 @@
                         
                     </div>
 
-                    <!-- <div class="p-4">
-                        <h4 class="fst-italic">Archives</h4>
-                        <ol class="list-unstyled mb-0">
-                            <li><a href="#">March 2021</a></li>
-                            <li><a href="#">February 2021</a></li>
-                            <li><a href="#">January 2021</a></li>
-                            <li><a href="#">December 2020</a></li>
-                            <li><a href="#">November 2020</a></li>
-                            <li><a href="#">October 2020</a></li>
-                            <li><a href="#">September 2020</a></li>
-                            <li><a href="#">August 2020</a></li>
-                            <li><a href="#">July 2020</a></li>
-                            <li><a href="#">June 2020</a></li>
-                            <li><a href="#">May 2020</a></li>
-                            <li><a href="#">April 2020</a></li>
-                        </ol>
-                    </div> -->
-
-                    
                 </div>
             </div>
         </div>
@@ -643,6 +666,23 @@
 
         function basketAction() {
             $("#form-basket").submit();
+        }
+
+        async function insertInquiry() {
+
+            const title = document.querySelector("#inquiry_title");
+            const content = document.querySelector("#inquiry_content");
+
+            const url = contextPath + '/api/class/insertinquiry.json';
+            const headers = { "Content-Type": "application/json" };
+            const body = {title : title.value, content: content.value, classcode: classcode};
+
+            const { data } = await axios.post(url, body, { headers });
+
+            console.log(data);
+            
+
+
         }
 
         /*]]>*/
