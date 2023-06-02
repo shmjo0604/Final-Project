@@ -15,12 +15,10 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.entity.ClassProduct;
 import com.example.repository.MainRepository;
 import com.example.service.classproduct.ClassManageService;
-import com.example.service.member.MemberService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,8 +35,6 @@ public class MainController {
     public String homeGET(@AuthenticationPrincipal User user,
         Model model
     ) {
-        // long mainImg = manageService.selectClassMainImageNo(classcode);
-        
         List<ClassProduct> list = mRepository.findAllTopSixByOrderByClasscodeDesc();
         if(!list.isEmpty()){
             for (ClassProduct obj : list ) {
@@ -49,7 +45,8 @@ public class MainController {
         }
 
         model.addAttribute("list", list);
-            log.info("select one=> {}", list);
+        model.addAttribute("user", user);
+        log.info("select one=> {}", list);
         
         return "home";
     }

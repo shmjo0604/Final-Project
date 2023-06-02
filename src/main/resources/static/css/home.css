@@ -150,7 +150,7 @@ div {
 
 .cate {
     padding: 0.5rem 0;
-    border-radius: 20%;
+    border-radius: 10%;
 }
 .cate:hover{
     transform: scale(1.05);
@@ -159,7 +159,6 @@ div {
 }
 
 #cate-icon {
-    border-radius: 20%;
     width: 120px;
     height: 120px;
     justify-content: center;

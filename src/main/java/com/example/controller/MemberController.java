@@ -129,7 +129,6 @@ public class MemberController {
     @GetMapping(value = "/myclass.do")
     public String myclassGET(
             @RequestParam(name = "menu", defaultValue = "0") int menu,
-            @RequestParam(name = "classcode", defaultValue = "0", required = false) long classcode,
             @RequestParam(name = "no", defaultValue = "0", required = false) long no,
             @RequestParam(name = "page", required = false) Integer page,
             @RequestParam(name = "size", required = false) Integer size,

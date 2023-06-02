@@ -34,7 +34,7 @@
 
     <!-- main 영역 -->
     <div id="wrapper">
-        <form id="form_update" th:action="@{update.do}" method="post" enctype="multipart/form-data">
+        <form id="form_update" th:action="@{update.do( classcode=${obj.classcode} )}" method="post" enctype="multipart/form-data">
             <div class="container border-top">
                 <div class="maincontent row">
                     <div class="leftside col-2" id="btn_cate">
@@ -413,6 +413,7 @@
                             <input id="form_instructor" name="instructor">
                             <input id="form_intro" name="intro">
                             <input id="form_curriculum" name="curriculum">
+                            <input id="form_nickname" type="text" name="nickname">
                             <input id="form_nickname" type="text" name="nickname">
                         </div>
                     </div>
@@ -1117,8 +1118,8 @@
             const nickname = document.getElementById("nickname");
             const content = quill1.root.innerHTML;
             const content_length = quill1.getLength();
-            /* const content_length2 = quill2.getLength();
-            const content_length3 = quill3.getLength(); */
+            const content_length2 = quill2.getLength();
+            const content_length3 = quill3.getLength();
             const title = document.getElementById("title");
             const postcode = document.getElementById("sample6_postcode");
             const address1 = document.getElementById("sample6_address");
@@ -1227,7 +1228,7 @@
 
             // 4. 동적 form 태그 생성
 
-            var form = document.getElementById("form_insert");
+            var form = document.getElementById("form_update");
 
             document.getElementById("form_title").value = title.value;
             document.getElementById("form_postcode").value = postcode.value;

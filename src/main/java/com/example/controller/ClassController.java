@@ -223,10 +223,9 @@ public class ClassController {
     }
 
     @GetMapping(value = "/update.do")
-    public String myclassUpdateGET( @AuthenticationPrincipal User user,
-    @RequestParam(name = "classcode", defaultValue = "0")long classcode,
-        Model model 
-    ){
+    public String myclassUpdateGET(@AuthenticationPrincipal User user,
+        @RequestParam(name = "classcode", defaultValue = "0") long classcode,
+        Model model) {
         ClassProduct obj = manageService.selectClassOne(classcode);
 
         log.info(format, obj.toString());
@@ -244,19 +243,22 @@ public class ClassController {
     }
 
     @PostMapping(value = "/update.do")
-    public String myclassUpdatePOST( @AuthenticationPrincipal User user,
-    @ModelAttribute ClassProduct obj, @ModelAttribute com.example.dto.ClassImage obj2,
-        Model model  
-        ){
-            int ret = manageService.updateClassOne(obj);
-            int ret2 = manageService.updateClassImageOne(obj2);
-            log.info("update class --- => {}", obj.toString());
-            log.info("update image --- => {}", obj2.toString());
-
-        if (ret == 1 || ret2 == 1 ) {
-                return "redirect:/member/myclass.do";
+    public String myclassUpdatePOST(@AuthenticationPrincipal User user,
+        @ModelAttribute ClassProduct obj,
+        @ModelAttribute com.example.dto.ClassImage obj2,
+        @RequestParam(name = "classcode", defaultValue = "0") long classcode,
+        Model model) throws IOException {
+    
+        int ret = manageService.updateClassOne(obj);
+        int ret2 = manageService.updateClassImageOne(obj2);
+        log.info("update class --- => {}", obj.toString());
+        log.info("update image --- => {}", obj2.toString());
+        if ( ret == 1 || ret2 == 1) {
+            log.info("update success class ----=>{}", ret);
+            log.info("update success image ----=>{}", ret2);
+            return "redirect:/member/myclass.do";
         } else {
-            return "redirect:/member/update.do?classcode=";
+            return "redirect:/class/update.do?classcode=" +classcode;
         }
     }
 
