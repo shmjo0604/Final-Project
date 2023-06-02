@@ -113,11 +113,11 @@
                                                     th:href="@{/classunit/myunit.do( classcode=${obj.classcode} )}">일정
                                                     등록</a></li>
                                             <li> <a class="dropdown-item" id="modify_btn"
-                                                    th:href="@{/member/update.do( classcode=${obj.classcode} )}">수정</a>
+                                                    th:href="@{/class/update.do( classcode=${obj.classcode} )}">수정</a>
                                             </li>
                                             <li>
                                                 <form method="post" class="dropdown-item" id="deleteForm"
-                                                    th:action="@{/member/myclass/delete.do(classcode=${obj.classcode} )}">
+                                                    th:action="@{/class/delete.do(classcode=${obj.classcode} )}">
                                                     <button onclick="deletePost()"
                                                         style="border: 0; background-color: transparent;">삭제</button>
                                                 </form>

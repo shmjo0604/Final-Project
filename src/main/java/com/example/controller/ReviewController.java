@@ -44,10 +44,11 @@ public class ReviewController {
     
     final ReviewService reviewService;
     final ReviewImageService reviewImageService;
-    final ClassManageService manageService;
     final String format = "reviewController => {}";
 
-    // 
+
+    
+    // 리뷰보기 모달
     @GetMapping(value = "select.do")
     public String selectPOST(){
         return "/review/reviewselect";
@@ -86,27 +87,27 @@ public class ReviewController {
     }
 
     // 이미지 뛰우기 
-    @GetMapping(value = "/image")
-    public ResponseEntity<byte[]> image(@RequestParam(name = "no", defaultValue = "0") long no)
-    throws IOException {
-        System.out.println(no);
-        ClassImage obj = manageService.selectClassImageOne(no);
-        System.out.println(obj);
+    // @GetMapping(value = "/image")
+    // public ResponseEntity<byte[]> image(@RequestParam(name = "no", defaultValue = "0") long no)
+    // throws IOException {
+    //     System.out.println(no);
+    //     ClassImage obj = manageService.selectClassImageOne(no);
+    //     System.out.println(obj);
   
-        HttpHeaders headers = new HttpHeaders(); //import org.springframework....
+    //     HttpHeaders headers = new HttpHeaders(); //import org.springframework....
     
-        if (obj != null) { // 이미지가 존재하는지 확인
-            if (obj.getFilesize() > 0) {
-                headers.setContentType(MediaType.parseMediaType(obj.getFiletype()));
-                return new ResponseEntity<>(obj.getFiledata(), headers, HttpStatus.OK);
-            }
-        }
+    //     if (obj != null) { // 이미지가 존재하는지 확인
+    //         if (obj.getFilesize() > 0) {
+    //             headers.setContentType(MediaType.parseMediaType(obj.getFiletype()));
+    //             return new ResponseEntity<>(obj.getFiledata(), headers, HttpStatus.OK);
+    //         }
+    //     }
 
-        // 이미지가 없을경우
-        InputStream is = resourceLoader.getResource(defaultImg).getInputStream(); // exception발생됨
-        headers.setContentType(MediaType.IMAGE_PNG);
-        return new ResponseEntity<>(is.readAllBytes(),headers,HttpStatus.OK);
-    }
+    //     // 이미지가 없을경우
+    //     InputStream is = resourceLoader.getResource(defaultImg).getInputStream(); // exception발생됨
+    //     headers.setContentType(MediaType.IMAGE_PNG);
+    //     return new ResponseEntity<>(is.readAllBytes(),headers,HttpStatus.OK);
+    // }
 
     //고객센터 페이지
     @GetMapping(value = "/customercenter.do")
@@ -133,6 +134,7 @@ public class ReviewController {
         return "/review/customercenter";         
         }
 
+        
 
 }
 

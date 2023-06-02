@@ -59,11 +59,11 @@
 </update>
 
 <!-- 7. 클래스 신청 상태(chk = 1)인 것만 조회 -->
-<select id="selectApplyListById" parameterType="map" resultType="ApplyView">
+<select id="selectApplyListById" parameterType="map" resultType="com.example.dto.ApplyView">
     SELECT a.* FROM(
         SELECT ROW_NUMBER() OVER(ORDER BY a.applyregdate DESC) AS rnum, 
         a.* FROM applyview a WHERE memberid = #{id}
-        ) a WHERE a.rnum <![CDATA[ >= ]]> ${first} AND a.rnum <![CDATA[ <= ]]> ${last} ORDER BY a.no DESC
+        ) a WHERE a.rnum <![CDATA[ >= ]]> ${first} AND a.rnum <![CDATA[ <= ]]> ${last} ORDER BY a.unitno DESC
 </select>
 
 <!--8. 클래스 신청 번호 조회 (등록한 개수만큼)-->
