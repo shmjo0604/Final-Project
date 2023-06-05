@@ -26,20 +26,68 @@
           max-width: 1100px;
           margin: 0 auto;
         }
+
+        /* 오른쪽 사이드바 */
+        .show-right-side-bar-btn {
+            float: right;
+        }
+
+        #right-side-bar {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 350px;
+            height: 100%;
+            background-color: rgb(204, 228, 119);
+            transition: right 0.5s, background-color 0.5s;
+            z-index: 2;
+        }
+
+        #right-side-bar.active {
+            right: 0;
+            background-color: rgb(237, 243, 235);
+        }
+
+        #right-side-bar-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            display: none;
+        }
+
+        #closeButton {
+            cursor: pointer;
+        }
+
     </style>
     
-    <div class="row">
-        <div class="col-md-9">
-            <div id='calendar'>
-                *개설강의에 대한 상세일정을 등록해주세요.
+    <div id='calendar'></div>
+    <div style="margin-top: 5px; font-size: small; font-weight: normal; color: gray;">*개설강의에 대한 상세일정을 등록해주세요.</div>
+    
+    <div id="right-side-bar">
+        <div style="margin: 20px;">
+            <div class="sidevar-header">
+                <div id="closeButton"><i class="fa-solid fa-x" style="float: left; margin-top: 5px;"></i></div>
+                <div style="font-weight: bold; font-size: large; margin-left: 10px; float: left;">전체 일정</div><br/>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div>
-
+            <hr />
+            <div class="sidevar-body">
+                <div style="display: inline-block; width: 100%;">
+                    <div class="checkbox" style="float: left; margin-top: 8px;"><input type="checkbox" name="all_chk" id="all_chk"><label for="all_chk" style="margin-left: 3px;">전체선택</label></div>
+                    <div style="float: right;"><input type="button" value="일정 전체 삭제" class="btn btn-sm btn-secondary" id="addCalendar"></div><br />
+                </div>
+                <div class="unit-list" style="margin-top: 20px;">
+                    <!-- <div class="unit" style="border: 1px solid rgb(201, 197, 197); background-color: white; border-radius: 5px; height: 100px; padding: 10px; margin-top: 10px;"></div> -->
+                </div>
             </div>
-        </div>
+            
+        </div>        
     </div>
+    <div id="right-side-bar-bg"></div>
+
 
 
     <!-- 일정 추가 modal -->
@@ -150,6 +198,8 @@
     <script th:src="@{/js/classunit/menu_unitmanage.js}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.5/axios.min.js"></script>
     <script type="text/javascript" th:inline="javascript">
+        
+
         document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -157,13 +207,13 @@
             headerToolbar : { // 헤더에 표시할 툴 바
                 start : 'prev next today',
                 center : 'title',
-                 end : 'addEventButton'
+                 end : 'addEventButton selectEventButton'
             },
             customButtons: {
-                    addEventButton: { // 추가한 버튼 설정
-                        text : "일정 추가",  // 버튼 내용
-                        click : function(){ // 버튼 클릭 시 이벤트 추가
-                            $("#calendarModal").modal("show"); // modal 나타내기
+                    addEventButton: { 
+                        text : "일정 추가",  
+                        click : function(){ 
+                            $("#calendarModal").modal("show"); 
 
                             $("#addCalendar").on("click",function(){  // modal의 추가 버튼 클릭 시
                                 var content = $("#calendar_content").val();
@@ -188,6 +238,14 @@
                                 // }
                             });
                         }
+                    },
+                    selectEventButton: { // 추가한 버튼 설정
+                        text : "전체 일정",  // 버튼 내용
+                        click : function(){ // 버튼 클릭 시 이벤트 추가
+                            selectAll();
+                            showRightSideBar(); // 오른쪽 사이드바를 보여주는 함수 호출
+                           
+                        }
                     }
             },
             titleFormat : function(date) {
@@ -211,12 +269,12 @@
             calendar.render();
         });
         
-        
+        // 일정등록 취소 - 모달창 닫기 
         function cancel() {
             $("#calendarModal").modal("hide"); 
         }
         
-        
+        // 일정등록 
         async function add(){
             const classcode = document.getElementById("classcode").value;
             const min = document.getElementById("minimum").value;
@@ -267,7 +325,6 @@
             }
         }
 
-
         // 클래스 난이도별 추가 금액 입력란 활성화
         var radioBtns = document.querySelectorAll('.radio-value');
 
@@ -280,10 +337,122 @@
         radioBtns.forEach(function(radioBtn) {
             radioBtn.addEventListener('click', handleRadioClick);
         });
+
+        // ********************************************************************************************************************************************
+
+        // 오른쪽 사이드바 열기
+        function showRightSideBar() {
+        var rightSideBar = document.getElementById('right-side-bar');
+        var rightSideBarBg = document.getElementById('right-side-bar-bg');
+        rightSideBar.classList.add('active');
+        rightSideBarBg.style.display = 'block';
+        }
+
+        // 오른쪽 사이드바 닫기
+        function hideRightSideBar() {
+        var rightSideBar = document.getElementById('right-side-bar');
+        var rightSideBarBg = document.getElementById('right-side-bar-bg');
+        rightSideBar.classList.remove('active');
+        rightSideBarBg.style.display = 'none';
+        }
+
+        // 닫기 버튼 클릭 이벤트 처리
+        document.getElementById('closeButton').addEventListener('click', hideRightSideBar);
+
+        // 오른쪽 사이드바 배경 클릭 시 닫기
+        // document.getElementById('right-side-bar-bg').addEventListener('click', hideRightSideBar);
+
+
+        //일정 조회
+        const ccode = /*[[${classcode}]]*/""; // ClassUnitController에서 받은 classcode
+
+        async function selectAll(){
+            const classcode = document.getElementById("classcode").value;
+            console.log(classcode);
+            
+            // GET 호출
+            let url = /*[[@{/api/classunit/selectunitlist.json}]]*/"";
+            url += `?classcode=${ccode}`;
+            console.log(url);
+            const headers = {"Content-Type":"application/json"};
+            const { data } = await axios.get(url, { headers:headers });
+            // console.log('반환 결과', data);
+
+            const unitList = document.querySelector(".unit-list");
+            unitList.innerHTML = ""; // 기존 내용 초기화
+
+            // 데이터 출력
+            data.list.forEach(item => {
+                const div = document.createElement("div");
+                div.classList.add("unit");
+                div.style.border = "1px solid rgb(201, 197, 197)";
+                div.style.backgroundColor = "white";
+                div.style.borderRadius = "5px";
+                div.style.height = "120px";
+                div.style.padding = "10px";
+                div.style.marginTop = "10px";
+
+                const [year, month, day] = item.classdate.split('-');
+
+                // classstart와 classend 시간 변환
+                const startTime = new Date(`2000-01-01T${item.classstart}`);
+                const endTime = new Date(`2000-01-01T${item.classend}`);
+                const startHour = startTime.getHours();
+                const startMinute = startTime.getMinutes();
+                const endHour = endTime.getHours();
+                const endMinute = endTime.getMinutes();
+                
+                // 시간 형식 변환 함수
+                const formatTime = (hour, minute) => {
+                    let period = "오전";
+                    let formattedHour = hour;
+                    
+                    if (hour >= 12) {
+                        period = "오후";
+                        formattedHour = hour === 12 ? 12 : hour - 12;
+                    }
+                    
+                    return `${period} ${formattedHour}:${String(minute).padStart(2, '0')}`;
+                };
+
+                // classlevel 변환 함수
+                const getClassLevel = (level) => {
+                    switch (level) {
+                        case 1:
+                            return "입문자";
+                        case 2:
+                            return "경험자";
+                        case 3:
+                            return "숙련자";
+                        default:
+                            return "";
+                    }
+                };
+
+                div.innerHTML = `<div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <span style="font-weight: bold; font-size: large; color:green">${year}년 ${month}월 ${day}일 (${item.classday.charAt(0)})</span><br>
+                                        <span style="font-size: small; color:gray; font-weight: bold;">${formatTime(startHour, startMinute)} ~ ${formatTime(endHour, endMinute)}</span><br>
+                                        <span style="font-size: small; color:gray; font-weight: bold;">난이도: ${getClassLevel(item.classlevel)}</span>
+                                    </div>
+                                    <div style="text-align: right; margin-top:50px;">
+                                        <span style="font-size: small; color:gray; font-weight: bold;">신청인원: ${item.cnt} / ${item.maximum}</span>
+                                    </div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <button style="width: 49%; border: 1px solid gray" class="btn btn-sm btn-update">수정</button>
+                                    <button style="width: 49%; border: 1px solid gray" class="btn btn-sm btn-delete">삭제</button>
+                                </div>`;
+
+                unitList.appendChild(div);
+            });
+        }   
+        
+        
+       
+        
     </script>
 
-
-    
 
 </div>
 
