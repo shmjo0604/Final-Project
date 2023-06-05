@@ -40,24 +40,33 @@
             <form>
                 <thead style="background-color: gainsboro;">
                     <tr>
-                        <td></td>
+                        <td>
+                            <div class="all_check_input_div">
+                                <input type="checkbox" class="all_check_input input_size_20" checked="checked">
+                                <span class="all_chcek_span">전체선택</span>
+                            </div>
+                        </td>
                         <td>번호</td>
                         <td>인원수</td>
+                        <td>클래스 이미지</td>
                         <td>클래스 신청 정보</td>
                         <td>결제 금액</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <form name="frm">
+                  <form th:action="@{/member/basket.do}" method="post" id="form" name="frm">
                     <tr class="cart__list__detail" th:each="obj : ${list}">
-                         <td><input type="checkbox"  name='selectall' 
-                            value='selectall' ></td>
+                       <td><input type="checkbox" name="chk[]" th:value="${obj.no.longValue()}" checked="checked"></td>
                         <td >
                             <th:block th:each="no : ${#numbers.sequence(1,1)}" >
-	                            <div th:text="${obj.no}" class="unit_no" id="unit_no" name="unit_no" ></div>
+	                            <div th:text="${obj.no.longValue()}" class="unit_no" id="unit_no" name="unit_no" ></div>
                             </th:block>
                         </td>
                         <td th:text="${obj.cnt}" class="cnt" id="cnt"></td>
+                        <td>
+                            <img th:src="@{/member/basket(classcode=${mainImg})}">
+                        </td> 
+                        <!-- classcode를 이용 해서 클래스 image를 띄우는 법-->
                         <td >
                             <a th:text="${obj.title}" href="#" >수영 클래스</a>
                             <p th:text="${obj.classdate}" class="date"></p>
@@ -68,7 +77,7 @@
                             <button type="submit" >옵션 수정</button>
                         </td>
                         <td >
-                            <p  th:text="${obj.totalprice}"></input><br>
+                            <p  th:text="${obj.totalprice}" name="totalprice"></input><br>
                         </td>
                     </tr>
                     </form>
@@ -78,17 +87,17 @@
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td></td>
                         <td>
-                            <span class="price">30,000원</span><br>
+                            <span class="totalprice">30,000원</span><br>
                         </td>
                     </tr>
                     
 
-                    <td colspan="3">
-                        <form method="post" class="dropdown-item" id="deleteForm"
-                        th:action="@{/member/basket.do(no=${obj.no} )}">
+                    <td colspan="6">
+                        <!-- <form method="post" class="dropdown-item" id="deleteForm"
+                        th:action="@{/member/basket.do(no=${obj.no} )}"> -->
                         <button onclick="deletePost()" class="cart__list__optionbtn" type="button" id="delBtn">선택상품 삭제</button>
-                        </form>
                         <button class="openBtn" type="button">옵션수정</button>
                         <div class="modal hidden">
                             <div class="bg"></div>
@@ -102,6 +111,7 @@
                                 <button class="closeBtn">수정</button>
                             </div>
                         </div>
+                    <!-- </form> -->
                     </td>
                     
                     <td></td>
@@ -113,6 +123,21 @@
             <button class="cart__bigorderbtn left" type="submit">쇼핑 계속하기</button>
             <input type="button" class="cart__bigorderbtn right" onclick="location.href='*/apply/insert.do';" value="결제화면으로" />
         </div>
+
+        <script>
+
+            /* 체크박스 전체 선택 */
+        $(".all_check_input").on("click", function(){
+
+            /* 체크박스 체크/해제 */
+	    if($(".all_check_input").prop("checked")){
+            $(".individual_cart_checkbox").attr("checked", true);
+	    } else{
+		$(".individual_cart_checkbox").attr("checked", false);
+	    }
+            });
+
+        </script>
         
 
 

@@ -1,11 +1,18 @@
 package com.example.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.server.reactive.HttpHandler;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -17,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.entity.Basket;
 import com.example.entity.BasketView;
+import com.example.entity.ClassImage;
 import com.example.entity.Member;
 import com.example.repository.BasketRepository;
 import com.example.repository.MemberRepository;
@@ -39,8 +47,8 @@ public class BasketController {
     final MemberRepository mRepository;
     @Autowired BasketService bService;
     @Autowired ClassUnitService unitService;
-
     @Autowired ClassManageService classManageService;
+    
 
     // 장바구니 페이지 접속 및 리스트 출력
     // 127.0.0.1:8080/specialday/member/basket.do
@@ -48,7 +56,7 @@ public class BasketController {
     @GetMapping(value = "/basket.do")
     public String  BasketGET(Model model,
     @AuthenticationPrincipal User user,
-    @RequestParam(name = "classcode", defaultValue = "0")long classcode ) {
+    @RequestParam(name = "no", defaultValue = "0")long no ) {
 
         log.info(format,user.getUsername());
         
@@ -57,22 +65,43 @@ public class BasketController {
         log.info(format, member.getId());  //오류발생시점 stackoverflow
         
         List<BasketView> list = bRepository.findByMemberidOrderByNoDesc(member.getId());
-        long mainImg = classManageService.selectClassMainImageNo(classcode);
+        long mainImg = classManageService.selectClassMainImageNo(no);
 
         for(BasketView  obj: list ){    //반복문을 이용한다
             
-            log.info(format, obj.getClasscode());
+            log.info(format, obj.getNo());
         }
-        
+
+            
         model.addAttribute("list", list);
         model.addAttribute("user", user);
-        model.addAttribute("mainImg",mainImg);
+        model.addAttribute("mainImg", mainImg);
 
         log.info(format, list.toString());
 
         return "/member/basket";
         
     }
+
+     
+
+    // @GetMapping(value = "/basket.do")
+    // public ResponseEntity<byte[]> image(@RequestParam(name = "no", defaultValue = "0") long no) throws IOException {
+    //     ClassImage obj = classManageService.selectClassMainImageNo(no);
+    //     HttpHandler handlers = new HttpHeaders();
+
+    //     if(obj != null) {
+    //         if(obj.getFilesize() > 0) {
+    //             headers.setContentType( MediaType.parseMediaType( obj.getFiletype() ) );
+    //             return new ResponseEntity<>(obj.getFiledata(),headers, HttpStatus.OK);
+    //         }
+    //     }
+    //     //이미지가 없을 경우
+    //     InputStream is = resourceLoader.getResource(defaultImage).getInputStream(); // exception 발생됨.
+    //     headers.setContentType(MediaType.IMAGE_PNG);
+    //     return new ResponseEntity<>( is.readAllBytes(), headers, HttpStatus.OK );
+    // }
+
 
     @PostMapping(value = "/basket.do")
     public String BasketPOST(Basket basket, HttpServletRequest request) {
