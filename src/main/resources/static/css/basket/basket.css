@@ -181,8 +181,11 @@ td {
     text-align: center;
 }
 
-.price {
+.totalprice {
     font-weight: bold;
+    text-align: center;
+    display: block;
+    margin: auto;
 }
 
 .cart__mainbtns {
@@ -282,6 +285,14 @@ td {
     content: "명당 가격 : ";
   }
 
+  .cnt {
+    font-weight: bold;
+    text-align: center;
+    justify-content: center;
+    margin: 0 auto;
+    
+    
+  }
   
   
   
