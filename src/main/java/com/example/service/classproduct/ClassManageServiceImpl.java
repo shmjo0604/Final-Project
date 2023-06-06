@@ -10,12 +10,14 @@ import com.example.dto.ClassProduct;
 import com.example.entity.ClassInquiryView;
 import com.example.mapper.ClassManageMapper;
 import com.example.repository.ClassInquiryViewRepository;
+import com.example.repository.MainRepository;
 
 @Service
 public class ClassManageServiceImpl implements ClassManageService {
 
     @Autowired ClassManageMapper cMapper;
     @Autowired ClassInquiryViewRepository cRepository;
+    @Autowired MainRepository mRepository;
 
     @Override
     public List<ClassProduct> selectMyClassList(String id) {
@@ -140,7 +142,7 @@ public class ClassManageServiceImpl implements ClassManageService {
     @Override
     public List<ClassInquiryView> selectClassInquiryList( String owner ) {
         try {
-            return cRepository.findByOwnerOrderByNoDesc( owner );
+            return cRepository.findByOwnerOrderByNoDesc(owner);
          }
          catch (Exception e) {
              e.printStackTrace();
@@ -162,12 +164,22 @@ public class ClassManageServiceImpl implements ClassManageService {
     @Override
     public ClassInquiryView selectClassInquiryOne(long no) {
        try {
-            return cRepository.findByNo( no );
+            return cRepository.findByNo(no);
        } catch (Exception e) {
         e.printStackTrace();
         return null;
     }
     }
 
+    @Override
+    public int updateClassActive(ClassProduct obj) {
+        try {
+            return cMapper.updateClassActive(obj);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
     
 }

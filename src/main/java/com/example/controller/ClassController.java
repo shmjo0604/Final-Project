@@ -223,13 +223,13 @@ public class ClassController {
     }
 
     @GetMapping(value = "/update.do")
-    public String myclassUpdateGET( @AuthenticationPrincipal User user,
-    @RequestParam(name = "classcode", defaultValue = "0")long classcode,
-        Model model 
-    ){
-        ClassProduct obj = manageService.selectClassOne(classcode);
+    public String myclassUpdateGET(@AuthenticationPrincipal User user,
+        @RequestParam(name = "classcode", defaultValue = "0") long classcode,
+        Model model) {
 
+        ClassProduct obj = manageService.selectClassOne(classcode);
         log.info(format, obj.toString());
+        
         long profileImg = manageService.selectClassProfileImageNo(classcode);
         long mainImg = manageService.selectClassMainImageNo(classcode);
 
@@ -244,19 +244,29 @@ public class ClassController {
     }
 
     @PostMapping(value = "/update.do")
-    public String myclassUpdatePOST( @AuthenticationPrincipal User user,
-    @ModelAttribute ClassProduct obj, @ModelAttribute com.example.dto.ClassImage obj2,
-        Model model  
-        ){
-            int ret = manageService.updateClassOne(obj);
-            int ret2 = manageService.updateClassImageOne(obj2);
-            log.info("update class --- => {}", obj.toString());
-            log.info("update image --- => {}", obj2.toString());
+    public String myclassUpdatePOST(@AuthenticationPrincipal User user,
+        @ModelAttribute ClassProduct obj,
+        @ModelAttribute com.example.dto.ClassImage obj2,
+        @RequestParam(name = "classcode", defaultValue = "0") long classcode,
+        Model model) {
+            // 1.Rest API 호출 -> 주소 기반 위도, 경도 값 반환(Map)
+            Map<String, String> map = KakaoLocalAPI.getCoordinate(obj.getAddress1());
 
-        if (ret == 1 || ret2 == 1 ) {
-                return "redirect:/member/myclass.do";
+            // 2. ClassProduct 객체 obj에 위도, 경도, 사용자 ID SET
+            obj.setLatitude(map.get("y"));
+            obj.setLongitude(map.get("x"));
+            obj.setMemberid(user.getUsername()); // security session에 저장된 ID 정보를 호출
+    
+        int ret = manageService.updateClassOne(obj);
+        int ret2 = manageService.updateClassImageOne(obj2);
+        log.info("update class --- => {}", obj.toString());
+        log.info("update image --- => {}", obj2.toString());
+        if ( ret == 1 || ret2 == 1) {
+            log.info("update success class ---- =>{}", ret);
+            log.info("update success image ---- =>{}", ret2);
+            return "redirect:/member/myclass.do";
         } else {
-            return "redirect:/member/update.do?classcode=";
+            return "redirect:/class/update.do?classcode=" +classcode;
         }
     }
 
