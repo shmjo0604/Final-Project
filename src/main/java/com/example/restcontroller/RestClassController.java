@@ -6,11 +6,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +19,7 @@ import com.example.dto.ClassProduct;
 import com.example.dto.ClassUnit;
 import com.example.dto.ClassUnitView;
 import com.example.dto.LocalCate;
-import com.example.entity.ClassInquiry;
-import com.example.entity.Member;
+import com.example.service.classproduct.ClassInquiryService;
 import com.example.service.classproduct.ClassSelectService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 public class RestClassController {
     
     @Autowired ClassSelectService cService;
+    @Autowired ClassInquiryService inquiryService;
     
     @Value("${classselect.page}") int pageEach;
 
@@ -45,8 +42,8 @@ public class RestClassController {
         @RequestParam(name = "refcode") int refcode
         ) {
         
-        log.info(format, chk);
-        log.info(format, refcode);
+        //log.info(format, chk);
+        //log.info(format, refcode);
 
         Map<String, Object> retmap = new HashMap<>();
 
@@ -79,7 +76,10 @@ public class RestClassController {
 
         Map<String, Object> retMap = new HashMap<>();
 
-        log.info(format, map.toString());
+        //log.info(format, map.toString());
+
+        String optionStr = (String)map.get("option");
+        int option = Integer.parseInt(optionStr);
 
         String pageStr = (String)map.get("page");
         int page = Integer.parseInt(pageStr);
@@ -91,41 +91,85 @@ public class RestClassController {
 
         String classdate = (String)map.get("classdate");
 
-        if(classdate.equals("")) {
+        if(option == 1) {
 
-            // 1. 타입 A 조회 -> 날짜가 없는 경우
+            if(classdate.equals("")) {
 
-            log.info(format, map.toString());
-
-            List<ClassProduct> list = cService.selectClassProductViewList(map);
-            long total = cService.selectClassCountTotalV2(map);
-
-            //log.info(format, list.toString());
-            //log.info(format, total);
-
-            retMap.put("ret", 1);
-            retMap.put("type", "A");
-            retMap.put("list", list);
-            retMap.put("pages", ((total-1)/pageEach)+1);
-
+                // 1. 타입 A 조회 -> 날짜가 없는 경우
+    
+                //log.info(format, map.toString());
+    
+                List<ClassProduct> list = cService.selectClassProductViewList(map);
+                long total = cService.selectClassCountTotalV2(map);
+    
+                //log.info(format, list.toString());
+                //log.info(format, total);
+    
+                retMap.put("ret", 1);
+                retMap.put("type", "A");
+                retMap.put("list", list);
+                retMap.put("pages", ((total-1)/pageEach)+1);
+    
+            }
+    
+            else {
+    
+                // 1. 타입 B 조회 -> 날짜가 있는 경우
+    
+                //log.info(format, map.toString());
+    
+                List<ClassUnitView> list = cService.selectClassUnitViewList(map);
+                long total = cService.selectClassCountTotal(map);
+    
+                //log.info(format, list.toString());
+                //log.info(format, total);
+    
+                retMap.put("ret", 1);
+                retMap.put("type", "B");
+                retMap.put("list", list);
+                retMap.put("pages", ((total-1)/pageEach)+1);
+    
+            }
         }
+        else if(option == 2) {
 
-        else {
+            if(classdate.equals("")) {
 
-            // 1. 타입 B 조회 -> 날짜가 있는 경우
-
-            //log.info(format, map.toString());
-
-            List<ClassUnitView> list = cService.selectClassUnitViewList(map);
-            long total = cService.selectClassCountTotal(map);
-
-            //log.info(format, list.toString());
-            //log.info(format, total);
-
-            retMap.put("ret", 1);
-            retMap.put("type", "B");
-            retMap.put("list", list);
-            retMap.put("pages", ((total-1)/pageEach)+1);
+                // 1. 타입 A 조회 -> 날짜가 없는 경우
+    
+                //log.info(format, map.toString());
+    
+                List<ClassProduct> list = cService.selectClassProductViewList2(map);
+                long total = cService.selectClassCountTotalV2(map);
+    
+                //log.info(format, list.toString());
+                //log.info(format, total);
+    
+                retMap.put("ret", 1);
+                retMap.put("type", "A");
+                retMap.put("list", list);
+                retMap.put("pages", ((total-1)/pageEach)+1);
+    
+            }
+    
+            else {
+    
+                // 1. 타입 B 조회 -> 날짜가 있는 경우
+    
+                //log.info(format, map.toString());
+    
+                List<ClassUnitView> list = cService.selectClassUnitViewList2(map);
+                long total = cService.selectClassCountTotal(map);
+    
+                //log.info(format, list.toString());
+                //log.info(format, total);
+    
+                retMap.put("ret", 1);
+                retMap.put("type", "B");
+                retMap.put("list", list);
+                retMap.put("pages", ((total-1)/pageEach)+1);
+    
+            }
 
         }
 
@@ -142,7 +186,7 @@ public class RestClassController {
 
         List<ClassUnit> list = cService.selectClassUnitList(obj);
 
-        log.info(format, list.toString());
+        //log.info(format, list.toString());
 
         retMap.put("ret", 0);
 
@@ -161,7 +205,7 @@ public class RestClassController {
 
         Map<String, Object> retMap = new HashMap<>();
 
-        log.info(format, no);
+        //log.info(format, no);
 
         ClassUnit obj = cService.selectClassUnitOne(no);
 
@@ -184,7 +228,7 @@ public class RestClassController {
 
         Map<String, Object> retMap = new HashMap<>();
 
-        log.info(format, obj.toString());
+        // log.info(format, obj.toString());
 
         int ret = cService.updateClassProductHit(obj);
 
@@ -194,35 +238,5 @@ public class RestClassController {
 
     }
 
-    @PostMapping(value = "/insertinquiry.json")
-    public Map<String, Object> insertinquiryPOST(@RequestBody Map<String, Object> map, @AuthenticationPrincipal User user) {
-
-        Map<String, Object> retMap = new HashMap<>();
-
-        log.info(format, map.toString());
-
-        ClassInquiry classInquiry = new ClassInquiry();
-
-        String classcodeStr = (String)map.get("classcode");
-
-        com.example.entity.ClassProduct classProduct = new com.example.entity.ClassProduct();
-        classProduct.setClasscode(Long.parseLong(classcodeStr));
-
-        log.info(format, classProduct.toString());
-
-        Member member = new Member();
-        member.setId(user.getUsername());
-
-        classInquiry.setTitle((String)map.get("title"));
-        classInquiry.setContent((String)map.get("content"));
-        classInquiry.setClassproduct(classProduct);
-        classInquiry.setMember(member);
-
-        int ret = cService.insertClassInquiryOne(classInquiry);
-
-        retMap.put("ret", ret);
-
-        return retMap;
-    }
 
 }

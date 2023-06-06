@@ -12,16 +12,21 @@ import com.example.dto.ClassProduct;
 import com.example.dto.ClassUnit;
 import com.example.dto.ClassUnitView;
 import com.example.dto.LocalCate;
-import com.example.entity.ClassInquiry;
 
 @Service
 public interface ClassSelectService {
 
-    // 1-1. 클래스 조회 (날짜 있는 경우)
+    // 1-1. 클래스 조회 (최신순, 날짜 있는 경우)
     public List<ClassUnitView> selectClassUnitViewList(Map<String, Object> map);
 
-    // 1-2. 클래스 조회 (날짜 없는 경우)
+    // 1-2. 클래스 조회 (최신순, 날짜 없는 경우)
     public List<ClassProduct> selectClassProductViewList(Map<String, Object> map);
+
+    // 1-3. 클래스 조회(조회순, 날짜 O)
+    public List<ClassUnitView> selectClassUnitViewList2(Map<String, Object> map);
+
+    // 1-4. 클래스 조회(조회순, 날짜 X)
+    public List<ClassProduct> selectClassProductViewList2(Map<String, Object> map);
 
     // 2-1. 클래스 조회 (총 개수 1-1)
     public long selectClassCountTotal(Map<String, Object> map);
@@ -52,8 +57,5 @@ public interface ClassSelectService {
 
     // 10. 클래스 조회수 증가
     public int updateClassProductHit(com.example.entity.ClassProduct obj);
-
-    // 11. 클래스 문의 등록
-    public int insertClassInquiryOne(ClassInquiry obj);
 
 }

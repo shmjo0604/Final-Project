@@ -21,6 +21,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.ToString;
 
@@ -123,6 +125,7 @@ public class ClassProduct {
 
   // 클래스 문의
   @ToString.Exclude
+  @JsonIgnore
   @OneToMany(mappedBy = "classproduct", fetch = FetchType.LAZY)
   private List<ClassInquiry> classinquiryList = new ArrayList<>();
 
