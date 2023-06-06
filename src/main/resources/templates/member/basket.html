@@ -97,8 +97,8 @@
                     <td colspan="6">
                         <!-- <form method="post" class="dropdown-item" id="deleteForm"
                         th:action="@{/member/basket.do(no=${obj.no} )}"> -->
-                        <button onclick="deletePost()" class="cart__list__optionbtn" type="button" id="delBtn">선택상품 삭제</button>
-                        <button class="openBtn" type="button">옵션수정</button>
+                        <button  th:onclick="formAction1(1)" class="cart__list__optionbtn" type="button" id="delBtn">선택상품 삭제</button>
+                        <button th:onclick="formAction1(2)" class="openBtn" type="button">옵션수정</button>
                         <div class="modal hidden">
                             <div class="bg"></div>
                             <div class="modalBox">
@@ -124,7 +124,7 @@
             <input type="button" class="cart__bigorderbtn right" onclick="location.href='*/apply/insert.do';" value="결제화면으로" />
         </div>
 
-        <script>
+        <!-- <script>
 
             /* 체크박스 전체 선택 */
         $(".all_check_input").on("click", function(){
@@ -137,12 +137,21 @@
 	    }
             });
 
+        </script> -->
+
+        <script th:inline="javascript" type="text/javascript">
+        function formAction1(code) {
+            const form = document.getElementById('form');
+            if(code === 1) {
+                form.action = /*[[@{/board2/updatebatch.pknu}]]*/'';
+            }
+            else if(code === 2) {
+                form.action = /*[[@{/board2/deletebatch.pknu}]]*/'';
+            }
+            form.submit();
+        }
         </script>
         
-
-
-
-
     </section>
 
     <!--footer 영역-->

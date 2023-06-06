@@ -1,18 +1,13 @@
 package com.example.controller;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.reactive.HttpHandler;
+import org.springframework.boot.actuate.trace.http.HttpTrace.Session;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -24,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.entity.Basket;
 import com.example.entity.BasketView;
-import com.example.entity.ClassImage;
 import com.example.entity.Member;
 import com.example.repository.BasketRepository;
 import com.example.repository.MemberRepository;
@@ -45,6 +39,7 @@ public class BasketController {
     final String format = "BasketController => {}";
     final BasketRepository bRepository;
     final MemberRepository mRepository;
+    final HttpSession httpSession; // 세션객체
     @Autowired BasketService bService;
     @Autowired ClassUnitService unitService;
     @Autowired ClassManageService classManageService;
@@ -53,6 +48,8 @@ public class BasketController {
     // 장바구니 페이지 접속 및 리스트 출력
     // 127.0.0.1:8080/specialday/member/basket.do
 
+    //classmanage service 5-2 이미지를 출력하는데 classcode는 뜨지만 
+    //classimage no로는 어떻게 띄워야 할지 모르겠습니다...
     @GetMapping(value = "/basket.do")
     public String  BasketGET(Model model,
     @AuthenticationPrincipal User user,
@@ -120,25 +117,46 @@ public class BasketController {
 
     }
 
-    // 3. 상품 정보 수정
-    @PostMapping(value = "/basket/update")
-    public String updateBasketPOST(Basket obj) {
+    // 3. 상품 정보 수정 Board2 Controller 참고함
+    // @SuppressWarnings("unchecked")
+    // @GetMapping(value="/update.do")
+    // public String updateBatchGET(Model model){
+    //     try {
+    //         List<BigDecimal> chk = (List<BigDecimal>) httpSession.getAttribute("chk[]");
+    //         List<BasketView> list =  bRepository.findAllById(no);
+    //         model.addAttribute("list", list);
+    //         return "/basket/update";
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //         return "redirect:/home.do";
+    //     }
+    // }
 
-        bService.updateBasketOne(obj);
-
-        return "redirect:/basket/" + obj.getMember(); 
-
-    }
+    // 3. 상품 정보 수정 Boardcontroller를 보고 참고함
+    // @PostMapping(value = "/basket/update")
+    // public String updateBasketPOST(@RequestParam(name="chk[]") List<BigDecimal> chk ,
+    //     Basket obj) {
+    //         try {
+    //             httpSession.setAttribute("chk[]", chk);
+    //             bService.updateBasketOne(obj);
+    //             return "redirect:/basket/" + obj.getMember(); 
+    //         } catch (Exception e) {
+    //         e.printStackTrace();
+    //         return "redirect:/home.do";
+    //     }
+    // }
 
     // 3. 상품 정보 삭제
-    @PostMapping(value = "/basket")
-    public String deleteBasketPOST(int obj) {
+    // @PostMapping(value = "/basket")
+    // public String deleteBasketPOST(int obj) {
 
-        bService.deleteBasketOne(obj);
+    //     int ret = bService.deleteBasketOne(obj);
+    //     if (ret == 1) {
+    //         return "redirect:basket.do";
+    //     }
+    //     return "redirect:/basket/" + obj; 
 
-        return "redirect:/basket/" + obj; 
-
-    }
+    // }
 
     
 }
