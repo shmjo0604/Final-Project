@@ -31,9 +31,7 @@
     <meta name="theme-color" content="#712cf9">
     <style>
         @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&display=swap');
-        body {
-            font-family : 'Nanum Gothic';
-        }
+
         .link-secondary {
             background-color: #d3eed1;
             border-radius: 5px;
@@ -145,8 +143,10 @@
             color: blue;
             text-decoration: none;
         }
-        
-        
+
+        .bx-wrapper .bx-controls-direction a {
+            z-index: 1010;
+        }
     </style>
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
@@ -156,255 +156,342 @@
     <!-- header 영역 -->
     <header th:replace="~{header :: headerFragment}"></header>
 
-    <div class="container productbody">
+    <div id="wrapper">
+        <div class="container productbody">
 
-        <div class="nav-scroller py-1 mb-2">
-            <nav class="nav d-flex justify-content-start">
-                <a class="p-2 link-secondary nav-link me-1" href="#">클래스 소개</a>
-                <a class="p-2 link-secondary nav-link me-1" href="#">커리큘럼 소개</a>
-                <a class="p-2 link-secondary nav-link me-1" href="#">강사 소개</a>
-                <a class="p-2 link-secondary nav-link me-1" href="#">위치</a>
-                <a class="p-2 link-secondary nav-link me-1" href="#">리뷰</a>
-                <a class="p-2 link-secondary nav-link me-1" href="#">문의</a>
-            </nav>
+            <div class="nav-scroller py-1 mb-2">
+                <nav class="nav d-flex justify-content-start">
+                    <a class="p-2 link-secondary nav-link me-1 inner_anchor" href="#intro">클래스 소개</a>
+                    <a class="p-2 link-secondary nav-link me-1 inner_anchor" href="#curriculum">커리큘럼 소개</a>
+                    <a class="p-2 link-secondary nav-link me-1 inner_anchor" href="#instructor">강사 소개</a>
+                    <a class="p-2 link-secondary nav-link me-1 inner_anchor" href="#address">위치</a>
+                    <a class="p-2 link-secondary nav-link me-1 inner_anchor" href="#review">리뷰</a>
+                    <a class="p-2 link-secondary nav-link me-1 inner_anchor" href="#inquiry">문의</a>
+                </nav>
+            </div>
+            <hr>
         </div>
-        <hr>
-    </div>
 
-    <main class="container productbody">
+        <main class="container productbody">
 
-        <!-- <div class="row mb-2">
-            <div class="col-md-6">
-                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                    <div class="col p-4 d-flex flex-column position-static">
-                        <strong class="d-inline-block mb-2 text-primary">World</strong>
-                        <h3 class="mb-0">Featured post</h3>
-                        <div class="mb-1 text-body-secondary">Nov 12</div>
-                        <p class="card-text mb-auto">This is a wider card with supporting text below as a natural
-                            lead-in to additional content.</p>
-                        <a href="#" class="stretched-link">Continue reading</a>
-                    </div>
-                    <div class="col-auto d-none d-lg-block">
-                        <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
-                            role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
-                            focusable="false">
-                            <title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                                dy=".3em">Thumbnail</text>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div
-                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                    <div class="col p-4 d-flex flex-column position-static">
-                        <strong class="d-inline-block mb-2 text-success">Design</strong>
-                        <h3 class="mb-0">Post title</h3>
-                        <div class="mb-1 text-body-secondary">Nov 11</div>
-                        <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to
-                            additional content.</p>
-                        <a href="#" class="stretched-link">Continue reading</a>
-                    </div>
-                    <div class="col-auto d-none d-lg-block">
-                        <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
-                            role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
-                            focusable="false">
-                            <title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                                dy=".3em">Thumbnail</text>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-        <div class="row g-5">
-            <div class="col-md-7">
-
-                <p>카테고리1 > 카테고리2</p>
-                <div class="p-2 p-md-3 mb-4 rounded bg-dark">
-
-                    <div class="slider">
-                        <img th:src="@{/class/image(no=${mainImg})}">
-                        <th:block th:each="tmp : ${subImg}">
-                            <img th:src="@{/class/image(no=${tmp})}">
-                        </th:block>
-                    </div>
-                    <!-- <div class="col-md-6 px-0">
-                        <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
-                        <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and
-                            efficiently about what’s most interesting in this post’s contents.</p>
-                        <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
-                    </div> -->
-                </div>
-
-                <div class="border-bottom">
-                    <div class="d-flex">
-                        <div class="d-flex align-items-center mb-4">
-                            <h3><i class="bi bi-snow2 me-2"></i></h3>
-                            <h3 th:text="${obj.title}"></h3>
+            <!-- <div class="row mb-2">
+                <div class="col-md-6">
+                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <strong class="d-inline-block mb-2 text-primary">World</strong>
+                            <h3 class="mb-0">Featured post</h3>
+                            <div class="mb-1 text-body-secondary">Nov 12</div>
+                            <p class="card-text mb-auto">This is a wider card with supporting text below as a natural
+                                lead-in to additional content.</p>
+                            <a href="#" class="stretched-link">Continue reading</a>
                         </div>
-
-                        <div class="ms-auto d-flex justify-content-between">
-                            <h4 class="mx-2"><i class="bi bi-heart-fill"></i>
-                                <span class="ms-2 mt-1" style="display:inline-block;">100</span>
-                            </h4>
-                            <h4 class="ms-2"><i class="bi bi-star-fill"></i>
-                                <span class="ms-2 mt-1" style="display:inline-block;">4.0</span>
-                            </h4>
+                        <div class="col-auto d-none d-lg-block">
+                            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
+                                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
+                                focusable="false">
+                                <title>Placeholder</title>
+                                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                                    dy=".3em">Thumbnail</text>
+                            </svg>
                         </div>
                     </div>
-
                 </div>
+                <div class="col-md-6">
+                    <div
+                        class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <strong class="d-inline-block mb-2 text-success">Design</strong>
+                            <h3 class="mb-0">Post title</h3>
+                            <div class="mb-1 text-body-secondary">Nov 11</div>
+                            <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to
+                                additional content.</p>
+                            <a href="#" class="stretched-link">Continue reading</a>
+                        </div>
+                        <div class="col-auto d-none d-lg-block">
+                            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
+                                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
+                                focusable="false">
+                                <title>Placeholder</title>
+                                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                                    dy=".3em">Thumbnail</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
 
+            <div class="row g-5">
+                <div class="col-md-7">
 
-                <article class="blog-post">
-                    <h3 class="blog-post-title d-flex align-items-center my-3"><i
-                            class="bi bi-file-text-fill me-2"></i><span>클래스 소개</span></h3>
+                    <p>카테고리1 > 카테고리2</p>
+                    <div class="p-2 p-md-3 mb-4 rounded bg-dark">
 
-                    <div class="d-flex justify-content-start">
-                        <p class="border rounded p-1 me-1" style=" font-size:small; color: rgba(0, 0, 0, 0.7)">#친구와 같이
-                        </p>
-                        <p class="border rounded p-1 me-1" style=" font-size:small; color: rgba(0, 0, 0, 0.7)">#실내에서</p>
-                        <p class="border rounded p-1 me-1" style=" font-size:small; color: rgba(0, 0, 0, 0.7)">#편의시설</p>
+                        <div class="slider">
+                            <img th:src="@{/class/image(no=${mainImg})}">
+                            <th:block th:each="tmp : ${subImg}">
+                                <img th:src="@{/class/image(no=${tmp})}">
+                            </th:block>
+                        </div>
+                        <!-- <div class="col-md-6 px-0">
+                            <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
+                            <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and
+                                efficiently about what’s most interesting in this post’s contents.</p>
+                            <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
+                        </div> -->
                     </div>
 
-                    <div th:utext="${obj.intro}"></div>
-
-                    <hr>
-
-                    <h3 class="d-flex align-items-center my-3"><i class="bi bi-signpost-fill me-2"></i><span>커리큘럼
-                            소개</span></h3>
-
-                    <div th:utext="${obj.curriculum}"></div>
-
-                    <hr>
-
-                    <h3 class="d-flex align-items-center my-3"><i class="bi bi-person-vcard me-2"></i><span>강사 소개</span>
-                    </h3>
-
-                    <div th:utext="${obj.instructor}"></div>
-
-                    <hr>
-
-                    <h3 class="d-flex align-items-center mb-3"><i class="bi bi-geo-alt-fill me-2"></i><span>위치</span>
-                    </h3>
-
-                    <div class="mx-2" id="map" style="width:750px;height:340px; border: 1px solid dimgray; "></div>
-
-                    <hr>
-
-                    <h3 class="d-flex align-items-center mb-3"><i class="bi bi-stars me-2"></i><span>리뷰</span></h3>
-
-                    <div class="card mb-3">
-                        <div class="row g-0">
-                            <div class="col-md-3">
-                                <img th:src="@{/image/리뷰사람.png}" class="img-fluid rounded-start" alt="...">
+                    <div class="border-bottom">
+                        <div class="d-flex">
+                            <div class="d-flex align-items-center mb-4">
+                                <h3><i class="bi bi-snow2 me-2"></i></h3>
+                                <h3 th:text="${obj.title}"></h3>
                             </div>
-                            <div class="col-md-9">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural
-                                        lead-in to additional content. This content is a little bit longer.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+
+                            <div class="ms-auto d-flex justify-content-between">
+                                <h4 class="mx-2"><i class="bi bi-heart-fill"></i>
+                                    <span class="ms-2 mt-1" style="display:inline-block;">100</span>
+                                </h4>
+                                <h4 class="ms-2"><i class="bi bi-star-fill"></i>
+                                    <span class="ms-2 mt-1" style="display:inline-block;">4.0</span>
+                                </h4>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <article class="blog-post">
+                        <div id="intro">
+                            <h3 class="blog-post-title d-flex align-items-center my-3"><i
+                                    class="bi bi-file-text-fill me-2"></i><span>클래스 소개</span></h3>
+
+                            <div class="d-flex justify-content-start">
+                                <p class="border rounded p-1 me-1" style=" font-size:small; color: rgba(0, 0, 0, 0.7)">
+                                    #친구와
+                                    같이
+                                </p>
+                                <p class="border rounded p-1 me-1" style=" font-size:small; color: rgba(0, 0, 0, 0.7)">
+                                    #실내에서
+                                </p>
+                                <p class="border rounded p-1 me-1" style=" font-size:small; color: rgba(0, 0, 0, 0.7)">
+                                    #편의시설
+                                </p>
+                            </div>
+
+                            <div th:utext="${obj.intro}"></div>
+                        </div>
+
+                        <hr>
+
+                        <div id="curriculum">
+                            <h3 class="d-flex align-items-center my-3"><i
+                                    class="bi bi-signpost-fill me-2"></i><span>커리큘럼
+                                    소개</span></h3>
+
+                            <div th:utext="${obj.curriculum}"></div>
+                        </div>
+
+
+                        <hr>
+
+                        <div id="instructor">
+                            <h3 class="d-flex align-items-center my-3"><i class="bi bi-person-vcard me-2"></i><span>강사
+                                    소개</span>
+                            </h3>
+                            <div th:utext="${obj.instructor}"></div>
+                        </div>
+
+                        <hr>
+
+                        <div id="address">
+                            <h3 class="d-flex align-items-center mb-3"><i
+                                    class="bi bi-geo-alt-fill me-2"></i><span>위치</span>
+                            </h3>
+
+                            <div class="mx-2" id="map" style="width:750px;height:340px; border: 1px solid dimgray; ">
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div id="review">
+                            <h3 class="d-flex align-items-center mb-3"><i class="bi bi-stars me-2"></i><span>리뷰</span>
+                            </h3>
+
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-3">
+                                        <img th:src="@{/image/리뷰사람.png}" class="img-fluid rounded-start" alt="...">
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card title</h5>
+                                            <p class="card-text">This is a wider card with supporting text below as a
+                                                natural
+                                                lead-in to additional content. This content is a little bit longer.</p>
+                                            <p class="card-text"><small class="text-muted">Last updated 3 mins
+                                                    ago</small>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        <hr>
+
+                        <div id="inquiry">
+                            <h3 class="d-flex align-items-center mb-3"><i
+                                    class="bi bi-question-square me-2"></i><span>문의</span>
+                            </h3>
+                            <!--문의 하기(로그인 X)-->
+                            <th:block th:if="${user == null}">
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <div>
+                                            <a th:href="@{/login.do}"
+                                                class="form-control-plaintext text-center nav-link"
+                                                style="cursor: pointer;">문의하기</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <!--문의 작성 및 목록 영역-->
+                            <th:block th:if="${user != null}">
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <!-- Comment form-->
+                                        <div class="mb-3">
+                                            <input id="inquiry_title" class="form-control w-50 mb-2"
+                                                placeholder="제목을 입력하세요.">
+                                            <textarea id="inquiry_content" class="form-control mb-2" rows="5"
+                                                placeholder="문의 내용을 입력하세요."></textarea>
+                                            <div class="d-flex justify-content-end">
+                                                <button type="button" class="btn btn-outline-success"
+                                                    onclick="insertInquiry()">문의 등록</button>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <!-- Comment with nested comments-->
+                                        <div id="inquiry_box">
+                                            <div class="d-flex mb-4">
+                                                <!-- Parent comment-->
+                                                <div class="flex-shrink-0"><img class="rounded-circle"
+                                                        src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                                                        alt="..." />
+                                                </div>
+                                                <div class="ms-3">
+                                                    <div class="fw-bold">Commenter Name</div>
+                                                    If you're going to lead a space frontier, it has to be government;
+                                                    it'll
+                                                    never
+                                                    be private enterprise. Because the space frontier is dangerous, and
+                                                    it's
+                                                    expensive, and it has unquantified risks.
+                                                    <!-- Child comment 1-->
+                                                    <div class="d-flex mt-4">
+                                                        <div class="flex-shrink-0"><img class="rounded-circle"
+                                                                src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                                                                alt="..." />
+                                                        </div>
+                                                        <div class="ms-3">
+                                                            <div class="fw-bold">Commenter Name</div>
+                                                            And under those conditions, you cannot establish a
+                                                            capital-market
+                                                            evaluation of that enterprise. You can't get investors.
+                                                        </div>
+                                                    </div>
+                                                    <!-- Child comment 2-->
+                                                    <div class="d-flex mt-4">
+                                                        <div class="flex-shrink-0"><img class="rounded-circle"
+                                                                src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                                                                alt="..." />
+                                                        </div>
+                                                        <div class="ms-3">
+                                                            <div class="fw-bold">Commenter Name</div>
+                                                            When you put money directly to a problem, it makes a good
+                                                            headline.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Single comment-->
+
+                                        </div>
+                                    </div>
+                                </div>
+                                </th:if>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="position-sticky" style="top: 2.5rem;">
+                        <div class="p-1 mb-3 bg-body-tertiary rounded">
+                            <h4 class="d-flex align-items-center mb-3 justify-content-center"><i
+                                    class="bi bi-calendar-event me-2"></i><span>클래스 일정</span></h4>
+
+                            <div id='calendar' class="mb-2"></div>
+
+                            <div id="unitbox" class="border mb-2"
+                                style="width: 100%; height: 150px; overflow-y: auto; display: none;">
+                                <table id="utable" class="table table-hover">
+                                    <thead class="table-success">
+                                        <tr>
+                                            <th>날짜</th>
+                                            <th>시작</th>
+                                            <th>종료</th>
+                                            <th>할인율</th>
+                                            <th>추가금액</th>
+                                            <th>난이도</th>
+                                            <th>최대인원</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="unittable" class="table-group-divider">
+
+                                        <!-- 동적 생성 -->
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                            <div id="applybox" class="border mb-2" style="height: 180px; display: none;">
+
+                                <!-- 동적 생성 -->
+
+                            </div>
+
+                            <div class="d-flex">
+                                <button class="classbtn w-50 me-2" style="height: 50px; background-color: #FDC708;"
+                                    th:onclick="basketAction()" type="button">
+                                    장바구니</button>
+                                <button class="classbtn w-50" style="height: 50px; background-color: #9AD98A;"
+                                    type="button" th:onclick="applyAction()">
+                                    신청하기</button>
+                            </div>
+
+                        </div>
+
                     </div>
-
-                    <hr>
-
-                    <h3 class="d-flex align-items-center mb-3"><i class="bi bi-question-square me-2"></i><span>문의</span>
-                    </h3>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum unde porro aliquid eaque
-                        asperiores recusandae, molestiae id architecto commodi ex ad pariatur facilis itaque fugit. Odit
-                        iste nesciunt nulla. Consequatur tempore, facere velit eaque facilis, est voluptate temporibus
-                        corrupti laudantium enim repudiandae nam repellat culpa, et sint possimus beatae laborum.</p>
-                </article>
-            </div>
-
-            <div class="col-md-5">
-                <div class="position-sticky" style="top: 1rem;">
-                    <div class="p-1 mb-3 bg-body-tertiary rounded">
-                        <h3 class="d-flex align-items-center mb-3 justify-content-center"><i
-                                class="bi bi-calendar-event me-2"></i><span>클래스 일정</span></h3>
-
-                        <div id='calendar' class="mb-2"></div>
-
-                        <div id="unitbox" class="border mb-2" style="width: 100%; height: 150px; overflow-y: auto; display: none;">
-                            <table id="utable" class="table table-hover">
-                                <thead class="table-success">
-                                    <tr>
-                                        <th>날짜</th>
-                                        <th>시작</th>
-                                        <th>종료</th>
-                                        <th>할인율</th>
-                                        <th>추가금액</th>
-                                        <th>난이도</th>
-                                        <th>최대인원</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="unittable" class="table-group-divider">
-        
-                                    <!-- 동적 생성 -->
-                                    
-                                </tbody>
-                                
-                            </table>
-                        </div>
-
-                        <div id="applybox" class="border mb-2" style="height: 230px; display: none;">
-
-                            <!-- 동적 생성 -->
-
-                        </div>
-
-                        <div class="d-flex">
-                            <button class="classbtn w-50 me-2" style="height: 50px; background-color: #FDC708;" th:onclick="basketAction()" type="button">
-                                장바구니</button>
-                            <button class="classbtn w-50" style="height: 50px; background-color: #9AD98A;" type="button" th:onclick="applyAction()">
-                                신청하기</button>
-                        </div>
-                        
-                    </div>
-
-                    <!-- <div class="p-4">
-                        <h4 class="fst-italic">Archives</h4>
-                        <ol class="list-unstyled mb-0">
-                            <li><a href="#">March 2021</a></li>
-                            <li><a href="#">February 2021</a></li>
-                            <li><a href="#">January 2021</a></li>
-                            <li><a href="#">December 2020</a></li>
-                            <li><a href="#">November 2020</a></li>
-                            <li><a href="#">October 2020</a></li>
-                            <li><a href="#">September 2020</a></li>
-                            <li><a href="#">August 2020</a></li>
-                            <li><a href="#">July 2020</a></li>
-                            <li><a href="#">June 2020</a></li>
-                            <li><a href="#">May 2020</a></li>
-                            <li><a href="#">April 2020</a></li>
-                        </ol>
-                    </div> -->
-
-                    
                 </div>
             </div>
-        </div>
 
-    </main>
+        </main>
 
-    <!--form 태그 (post->get)-->
-    <!--unitno, person -->
-    <form id="form-apply" th:action="@{/apply/insert.do}" method="get" style="display: none;">
-        <input id="unitno" name="unitno" type="number">
-        <input id="person" name="person" type="number">
-    </form>
+        <!--form 태그 (post->get)-->
+        <!--unitno, person -->
+        <form id="form-apply" th:action="@{/apply/insert.do}" method="get" style="display: none;">
+            <input id="unitno" name="unitno" type="number">
+            <input id="person" name="person" type="number">
+        </form>
 
-    <form id="form-basket" th:action="@{basket.do}" method="post" style="display: none;">
-        <input id="basket_unitno" name="unitno" type="number">
-        <input id="basket_cnt" name="cnt" type="number">
-    </form>
+        <form id="form-basket" th:action="@{basket.do}" method="post" style="display: none;">
+            <input id="basket_unitno" name="unitno" type="number">
+            <input id="basket_cnt" name="cnt" type="number">
+        </form>
+    </div>
+
 
 
     <!--footer 영역-->
@@ -418,13 +505,13 @@
     <!--Bootstrap 용 js -->
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <!--Main js-->
-    <script th:src="@{/js/main.js}"></script>s
+    <script th:src="@{/js/main.js}"></script>
     <!--bxslider-->
     <script th:src="@{/js/jquery.bxslider.min.js}"></script>
     <!--fullcalendar-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.0.0-alpha.4/plugins/gcal.js"></script>
     <script th:src="@{/js/index.global.js}"></script>
-    <script th:src="@{/js/gcal.js}"></script>
+    <!-- <script th:src="@{/js/gcal.js}"></script> -->
     <!-- kakao map library -->
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script type="text/javascript"
@@ -439,11 +526,31 @@
 
         var totalprice = 0;
 
+        $(function () {
+            $(".inner_anchor").on('click', function () {
+                // 헤더 높이 구하기. outerHeight()를 쓰는 것이 중요!
+                var headerHeight = $("header").outerHeight();
+                // 버튼의 링크 구하기
+                var href = $(this).attr("href");
+                // 링크대상 DOM 구하기
+                var target = $(href == "#" || href == "" ? "body" : href);
+                // 링크대상 DOM의 height위치 구하기
+                var position = target.offset().top - headerHeight - 75;
+                // 에니메이션 효과를 넣어서 그 DOM으로 이동시키기
+                $("html, body").animate({ scrollTop: position }, 250);
+
+            });
+
+        });
+
+
         $(document).ready(function () {
             $('.slider').bxSlider({
                 mode: 'fade',
                 height: 200
             });
+
+            selectInquiry(1);
         });
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -463,7 +570,7 @@
                 //         , color: "#80ff00"
                 //         , textColor: "#FFFFFF"
                 //     }],
-                height: 500,
+                height: 400,
                 expandRows: true,
 
                 titleFormat: function (date) { // title 설정
@@ -484,34 +591,34 @@
 
                     const table = $("#unittable")[0];
 
-                    table.innerHTML="";
+                    table.innerHTML = "";
 
-                    if(data.ret === 1) {
+                    if (data.ret === 1) {
 
-                        for(let obj of data.list) {
+                        for (let obj of data.list) {
 
                             var classlevel = '';
 
-                            if(obj.classlevel === 1) {
+                            if (obj.classlevel === 1) {
                                 classlevel = '입문자';
                             }
-                            else if(obj.classlevel === 2) {
+                            else if (obj.classlevel === 2) {
                                 classlevel = '경험자';
                             }
-                            else if(obj.classlevel === 3) {
+                            else if (obj.classlevel === 3) {
                                 classlevel = '숙련자';
                             }
 
-                            table.innerHTML+= 
-                                '<tr onclick="unitSelect(' + obj.no + ')">' + 
-                                    '<td>' + obj.classdate + '</td>' +
-                                    '<td>' + obj.classstart + '</td>' +
-                                    '<td>' + obj.classend + '</td>' +
-                                    '<td>' + obj.discount + '%' + '</td>' +
-                                    '<td>' + obj.addprice + '원' + '</td>' +
-                                    '<td>' + classlevel + '</td>' +
-                                    '<td>' + obj.maximum + '명' + '</td>' +
-                                '</tr>' 
+                            table.innerHTML +=
+                                '<tr onclick="unitSelect(' + obj.no + ')">' +
+                                '<td>' + obj.classdate + '</td>' +
+                                '<td>' + obj.classstart + '</td>' +
+                                '<td>' + obj.classend + '</td>' +
+                                '<td>' + obj.discount + '%' + '</td>' +
+                                '<td>' + obj.addprice + '원' + '</td>' +
+                                '<td>' + classlevel + '</td>' +
+                                '<td>' + obj.maximum + '명' + '</td>' +
+                                '</tr>'
 
                             $("#unitbox").css("display", "block");
                         }
@@ -546,40 +653,40 @@
 
             const box = document.querySelector("#applybox");
 
-            box.innerHTML="";
+            box.innerHTML = "";
 
-            if(data.ret === 1) {
+            if (data.ret === 1) {
 
                 var remain = data.obj.maximum - data.obj.cnt;
-                totalprice = (price + data.obj.addprice) * (100-data.obj.discount) / 100;
+                totalprice = (price + data.obj.addprice) * (100 - data.obj.discount) / 100;
 
-                box.innerHTML += 
+                box.innerHTML +=
                     '<div class="container mt-3"> ' +
-                        '<div class="d-flex justify-content-between">' +
-                            '<span>신청 가능 인원 : ' + remain + '명' + '</span>' +
-                            '신청 인원수 선택 : ' + '<select id="select-remain" onchange="selectperson(this.value)"></select>' + '</span>' +
-                        '</div>' +
-                        '<div class="my-3">' +
-                            '<span>가격(1인) : ' + totalprice + '원' + '</span>' +
-                        '</div>' +
-                        '<div>' +
-                            '<div>총 결제 금액 : ' + '<span id="payment"></span>' + '</div>'
-                    '</div>';
-                       
-                var text="";
-                
-                text+= '<option>인원수를 선택하세요.</option>';
-                
-                for(let i=1; i<=remain; i++) {
-                    
-                    text+= '<option value="' + i + '">' + i + '</option>'
+                    '<div class="d-flex justify-content-between">' +
+                    '<span>신청 가능 인원 : ' + remain + '명' + '</span>' +
+                    '신청 인원수 선택 : ' + '<select id="select-remain" onchange="selectperson(this.value)"></select>' + '</span>' +
+                    '</div>' +
+                    '<div class="my-3">' +
+                    '<span>가격(1인) : ' + totalprice + '원' + '</span>' +
+                    '</div>' +
+                    '<div>' +
+                    '<div>총 결제 금액 : ' + '<span id="payment"></span>' + '</div>'
+                '</div>';
+
+                var text = "";
+
+                text += '<option>인원수를 선택하세요.</option>';
+
+                for (let i = 1; i <= remain; i++) {
+
+                    text += '<option value="' + i + '">' + i + '</option>'
 
                 }
 
                 $("#select-remain")[0].innerHTML = text;
-                
+
                 $("#applybox").css("display", "block");
-                
+
             }
 
         }
@@ -591,9 +698,9 @@
             $("#basket_cnt").attr("value", person);
 
             const payment = document.querySelector("#payment");
-            payment.innerHTML="";
-            
-            payment.innerHTML+= totalprice * person + '원';
+            payment.innerHTML = "";
+
+            payment.innerHTML += totalprice * person + '원';
         }
 
         const lat = /*[[${obj.latitude}]]*/"";
@@ -644,6 +751,103 @@
         function basketAction() {
             $("#form-basket").submit();
         }
+
+        async function insertInquiry() {
+
+            const title = document.querySelector("#inquiry_title");
+            const content = document.querySelector("#inquiry_content");
+
+            const url = contextPath + '/api/inquiry/insertinquiry.json';
+            const headers = { "Content-Type": "application/json" };
+            const body = { title: title.value, content: content.value, classproduct: { classcode: classcode } };
+
+            const { data } = await axios.post(url, body, { headers });
+
+            console.log(data);
+
+            if (data.ret === 1) {
+
+                title.value = "";
+                content.value = "";
+
+                selectInquiry(1);
+            }
+
+
+        }
+
+        async function selectInquiry(page) {
+
+            const url = contextPath + "/api/inquiry/selectinquiry.json?classcode=" + classcode + "&page=" + page;
+            const headers = { "Content-Type": "application/json" };
+
+            const { data } = await axios.get(url, { headers });
+
+            console.log(data);
+
+            $("#inquiry_box").empty();
+
+            for (let obj of data.list) {
+
+                var inquiry_box = document.querySelector("#inquiry_box");
+
+                var div1 = document.createElement('div');
+                div1.className = "d-flex mb-4";
+
+                var div2 = document.createElement('div');
+                div2.className = "flex-shrink-0"
+
+                var img1 = new Image();
+                img1.className = "rounded-circle"
+                img1.src = contextPath + "/image/profile_default.svg";
+                img1.setAttribute('width', '50');
+                img1.setAttribute('height', '50');
+
+                div2.appendChild(img1);
+                div1.appendChild(div2);
+
+                var div3 = document.createElement('div');
+                div3.className = "ms-3";
+
+                var div4 = document.createElement('div');
+                div4.className = "fw-bold";
+
+                var div4text = document.createTextNode(obj.memberid);
+
+                div4.appendChild(div4text);
+
+                var div5 = document.createElement('div');
+
+                var div5text = document.createTextNode(obj.content);
+
+                div5.appendChild(div5text);
+
+                div3.appendChild(div4);
+                div3.appendChild(div5);
+
+                div1.appendChild(div3);
+
+                inquiry_box.appendChild(div1);
+            }
+
+
+
+            /*
+            <div class="d-flex">
+                                            <div class="flex-shrink-0"><img class="rounded-circle"
+                                                    src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                            <div class="ms-3">
+                                                <div class="fw-bold">Commenter Name</div>
+                                                When I look at the universe and all the ways the universe wants to kill us, I
+                                                find it hard to reconcile that with statements of beneficence.
+                                            </div>
+                                        </div>
+            */
+
+        }
+
+
+
 
         /*]]>*/
     </script>

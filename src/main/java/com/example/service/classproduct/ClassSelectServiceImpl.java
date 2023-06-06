@@ -15,12 +15,14 @@ import com.example.dto.ClassUnitView;
 import com.example.dto.LocalCate;
 import com.example.mapper.ClassManageMapper;
 import com.example.mapper.ClassSelectMapper;
+import com.example.repository.ClassProductRepository;
 
 @Service
 public class ClassSelectServiceImpl implements ClassSelectService {
 
     @Autowired ClassSelectMapper cMapper;
     @Autowired ClassManageMapper manageMapper;
+    @Autowired ClassProductRepository cRepository;
 
     @Override
     public List<CityCate> selectCityCateList() {
@@ -72,7 +74,7 @@ public class ClassSelectServiceImpl implements ClassSelectService {
 
             List<ClassUnitView> list = cMapper.selectClassUnitViewList(map);
 
-            if(list != null) {
+            if(!list.isEmpty()) {
 
                 for(ClassUnitView obj : list) {
 
@@ -119,7 +121,7 @@ public class ClassSelectServiceImpl implements ClassSelectService {
 
             List<ClassProduct> list = cMapper.selectClassProductViewList(map);
 
-            if(list != null) {
+            if(!list.isEmpty()) {
 
                 for(ClassProduct obj : list) {
 
@@ -171,6 +173,76 @@ public class ClassSelectServiceImpl implements ClassSelectService {
         }
     }
 
-   
+    @Override
+    public int updateClassProductHit(com.example.entity.ClassProduct obj) {
+        
+        try {
+            
+            com.example.entity.ClassProduct result = cRepository.findById(obj.getClasscode()).orElse(null);
+
+            result.setHit(result.getHit()+1);
+            
+            cRepository.save(result);
+
+            return 1;
+        }
+
+        catch(Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+
+    }
+
+    @Override
+    public List<ClassUnitView> selectClassUnitViewList2(Map<String, Object> map) {
+        try {
+
+            List<ClassUnitView> list = cMapper.selectClassUnitViewList2(map);
+
+            if(!list.isEmpty()) {
+
+                for(ClassUnitView obj : list) {
+
+                    long mainImgNo = manageMapper.selectClassMainImageNo(obj.getClasscode());
+                    obj.setMainImg(mainImgNo);
+    
+                }
+
+            }
+            
+            return list;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<ClassProduct> selectClassProductViewList2(Map<String, Object> map) {
+        try {
+
+            List<ClassProduct> list = cMapper.selectClassProductViewList2(map);
+
+            if(!list.isEmpty()) {
+
+                for(ClassProduct obj : list) {
+
+                    long mainImgNo = manageMapper.selectClassMainImageNo(obj.getClasscode());
+                    obj.setMainImg(mainImgNo);
+                    
+                }
+
+            }
+
+            return list;
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     
 }

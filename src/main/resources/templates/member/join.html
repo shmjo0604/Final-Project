@@ -116,12 +116,13 @@
                                 </div>
                                 <div class="form-floating mb-4">
                                     <input class="form-control" id="phone" type="tel" name="phone"
-                                        placeholder="Enter your phone" value="010-1111-2222" />
+                                        placeholder="Enter your phone" value="010-1111-2222" oninput="autoHyphen(this)"
+                                        maxlength="13" />
                                     <label for="phone">전화번호</label>
                                 </div>
                                 <div class="form-floating mb-4">
                                     <input class="form-control" id="birth" type="text" name="birth"
-                                        placeholder="Enter your birth" value="991111" />
+                                        placeholder="Enter your birth" value="991111" maxlength="6"/>
                                     <label for="birth">생년월일(앞 6자리를 입력해주세요)</label>
                                 </div>
                                 <div class="row mb-3">
@@ -138,7 +139,8 @@
                                     </div>
                                 </div>
                                 <div class="mt-4 mb-0 d-flex justify-content-center">
-                                    <button class="btn btn-primary me-2" type="button" onclick="joinAction()">회원가입</button>
+                                    <button class="btn btn-primary me-2" type="button"
+                                        onclick="joinAction()">회원가입</button>
                                     <a th:href="@{/home.do}" class="btn btn-outline-success float-right">홈으로</a>
                                 </div>
 
@@ -169,6 +171,12 @@
 
         var idcheck = 0;
 
+        function autoHyphen(target) {
+            target.value = target.value
+                .replace(/[^0-9]/g, '')
+                .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+        }
+
         function joinAction() {
             const id = document.getElementById("id");
             const pw = document.getElementById("password");
@@ -179,6 +187,9 @@
             const gender = document.getElementsByName("gender");
             const birth = document.getElementById("birth");
             //console.log(gender);
+
+            var emailregex = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+
 
             if (id.value.length <= 0) {
                 alert('아이디를 입력하세요');
@@ -210,8 +221,23 @@
                 email.focus();
                 return false;
             }
+            if (!emailregex.test(email.value)) {
+                alert('올바른 형식의 이메일이 아닙니다.');
+                email.focus();
+                return false;
+            }
+            if (phone.value.length <= 0) {
+                alert('연락처를 입력하세요');
+                phone.focus();
+                return false;
+            }
             if (birth.value.length <= 0) {
                 alert('생년월일을 입력하세요');
+                birth.focus();
+                return false;
+            }
+            if (birth.value.length < 6) {
+                alert('생년월일 6자리를 입력하세요');
                 birth.focus();
                 return false;
             }

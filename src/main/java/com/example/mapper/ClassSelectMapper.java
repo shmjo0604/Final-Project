@@ -16,11 +16,17 @@ import com.example.dto.LocalCate;
 @Mapper
 public interface ClassSelectMapper {
 
-    // 1-1. 클래스 조회 -> 날짜 있는 경우(pagination)
+    // 1-1. 클래스 조회(최신순) -> 날짜 있는 경우(pagination)
 	public List<ClassUnitView> selectClassUnitViewList(Map<String, Object> map);
 
-	// 1-2. 클래스 조회 -> 날짜 없는 경우(pagination)
+	// 1-2. 클래스 조회(최신순) -> 날짜 없는 경우(pagination)
 	public List<ClassProduct> selectClassProductViewList(Map<String, Object> map);
+
+	// 1-3. 클래스 조회(조회순) -> 날짜 있는 경우
+	public List<ClassUnitView> selectClassUnitViewList2(Map<String, Object> map);
+
+	// 1-4. 클래스 조회(조회순) -> 날짜 없는 경우
+	public List<ClassProduct> selectClassProductViewList2(Map<String, Object> map);
 
 	// 2-1. 클래스 조회 (총 개수 1-1)
 	public long selectClassCountTotal(Map<String, Object> map);

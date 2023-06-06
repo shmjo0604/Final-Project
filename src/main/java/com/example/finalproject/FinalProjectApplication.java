@@ -22,6 +22,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 	"com.example.service.review",
 	"com.example.service.community",
 	"com.example.service.basket",
+	"com.example.service.notification",
 	"com.example.restcontroller",
 	"com.example.config",
 	"com.example.filter"
