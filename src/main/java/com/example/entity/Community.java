@@ -17,8 +17,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 import lombok.ToString;
@@ -45,8 +48,7 @@ public class Community {
   private String content;
 
   // 글 조회수
-  @Column(columnDefinition = "long default 1")
-  private int hit;
+  private int hit =1;
 
   // 등록 일자
   @UpdateTimestamp
@@ -64,6 +66,7 @@ public class Community {
   // 댓글
   @ToString.Exclude
   @OneToMany(mappedBy = "community", fetch = FetchType.LAZY)
+  @JsonIgnoreProperties({"board"})
   private List<Reply> replyList = new ArrayList<>();
 
 }

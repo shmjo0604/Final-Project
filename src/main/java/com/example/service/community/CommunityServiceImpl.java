@@ -13,21 +13,20 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class CommunityServiceImpl implements CommunityService {
-    
+
     @Autowired
-    CommunityRepository cRepository;
+    public CommunityRepository cRepository;
 
     // 게시글 작성
     // @Override
-    // public int insertcommnuityOne(Community obj) {
+    // public int insertcommnuityOne() {
     // try {
     // return cRepository.save();
     // } catch (Exception e) {
+    // return -1;
+    // }
+    // }
 
-    // throw new UnsupportedOperationException("Unimplemented method
-    // 'insertcommnuityOne'");
-    // }
-    // }
     // 게시글 전체 조회
     @Override
     public List<Community> selectCommunityList() {
@@ -50,5 +49,7 @@ public class CommunityServiceImpl implements CommunityService {
             return null;
         }
     }
+
+
 
 }
