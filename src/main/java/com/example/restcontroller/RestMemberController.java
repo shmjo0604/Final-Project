@@ -1,12 +1,16 @@
 package com.example.restcontroller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.dto.ApplyView;
 import com.example.dto.Authnum;
 import com.example.dto.Member;
 import com.example.service.MailService;
 import com.example.service.RedisUtil;
+import com.example.service.apply.ApplyService;
 import com.example.service.member.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +40,7 @@ public class RestMemberController {
     @Autowired MemberService mService;
     @Autowired MailService mailService;
     @Autowired RedisUtil redisUtil;
+    @Autowired ApplyService aService;
     BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 
     final String format = "RestMemberController => {}";
@@ -236,5 +243,30 @@ public class RestMemberController {
 
     }
     
+    @GetMapping(value="/selectlist.json")
+    public Map<String,Object> selectlistGET( 
+        @RequestParam(name = "menu", defaultValue = "0") int menu,
+        @RequestParam(name = "page", defaultValue = "0") int page,
+        @AuthenticationPrincipal User user ){
+
+        Map<String, Object> map = new HashMap<>();
+        String id = user.getUsername();
+        int first = page*5-4;
+        int last = page*5;
+        long cnt = aService.countApplyList(id);
+        List<ApplyView> list = new ArrayList<>();
+        
+            map.put("id",id);
+            map.put("first",first);
+            map.put("last",last);
+
+            list = aService.selectApplyListById(map);
+
+            map.put("list",list);
+            map.put("pages", (cnt-1) / 5 + 1);
+            map.put("status", 200);
+                
+        return map;
+    }
     
 }
