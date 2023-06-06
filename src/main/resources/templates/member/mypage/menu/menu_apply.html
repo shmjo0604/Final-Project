@@ -385,19 +385,39 @@
                 }
 
                 const chk = tmp.chk;
+                const level = tmp.classlevel;
                 let str = "";
+                let str1 = "";
 
-                if (chk == 1) {
-                  str = "신청완료!!";
-                  // addclassname()
+                function chkchk() {
+                  if (chk == 1) {
+                    str = "신청완료!!";
+                    // addclassname()
+                  }
+                  else if (chk == 2) {
+                    str = "신청취소";
+                  }
+                  else if (chk == 2) {
+                    str = "참여완료";
+                  }
+                  return str;
                 }
-                else if (chk == 2) {
-                  str = "신청취소";
+
+                function levelchk() {
+                  if (level == 1) {
+                    str1 = "입문자";
+
+                  }
+                  else if (level == 2) {
+                    str1 = "중수";
+                  }
+                  else if (level == 3) {
+                    str1 = "고수";
+                  }
+                  return str1;
                 }
-                else if (chk == 2) {
-                  str = "참여완료";
-                }
-                console.log(str);
+
+
 
                 tbody.innerHTML +=
                   `<tr>` +
@@ -424,13 +444,13 @@
 
             <div id="classdate1">` + "날짜:" + tmp.classdate + `</div>
             <div >` + "시간:" + tmp.classstart + "~" + tmp.classend + `</div>
-            <div >` + "난이도:" + tmp.classlevel + `</div>
+            <div >` + "난이도:" + levelchk() + `</div>
             <div >` + "금액(1인):" + tmp.price + "원" + `</div>
             <div >` + "신청인원:" + tmp.person + "명" + `</div>
         </td>
         <td style="font-weight: bold" class="center">` + tmp.totalprice + "원" + `</td>
         <td class="center">
-          <p style="text-align: center">`+ str + `</p>
+          <p style="text-align: center">`+ chkchk() + `</p>
           <button
             class="btn btn-sm btn-secondary" 
             id ="button"
