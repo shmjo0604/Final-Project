@@ -29,13 +29,17 @@ public class ClassUnitController {
         Model model) {
         
         if(menu == 0){
-            log.info(format, classcode);
+            // log.info(format, classcode);
             return "redirect:/classunit/myunit.do?menu=1";
         }
 
         if(menu == 1){
             log.info(format, classcode);
+            long defaultPrice = cuService.selectPriceOne(classcode);
+            
             model.addAttribute("classcode", classcode);
+            model.addAttribute("defaultPrice", defaultPrice);
+            
             return "/classunit/unit";
         }
 

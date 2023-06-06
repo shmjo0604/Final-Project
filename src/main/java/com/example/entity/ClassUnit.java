@@ -85,13 +85,13 @@ public class ClassUnit {
   
   // 신청 테이블
   @ToString.Exclude
-  @JsonIgnore
   @OneToMany(mappedBy = "classunit", fetch = FetchType.LAZY)
+  @JsonIgnore
   private List<Apply> applyList = new ArrayList<>();
   
   // 장바구니 테이블
   @ToString.Exclude
-  @JsonIgnore
   @OneToMany(mappedBy = "classunit", fetch = FetchType.LAZY)
+  @JsonIgnore
   private List<Basket> basketList = new ArrayList<>();
 }

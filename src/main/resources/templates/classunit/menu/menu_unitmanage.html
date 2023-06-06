@@ -76,7 +76,7 @@
             <hr />
             <div class="sidevar-body">
                 <div style="display: inline-block; width: 100%;">
-                    <div class="checkbox" style="float: left; margin-top: 8px;"><input type="checkbox" name="all_chk" id="all_chk"><label for="all_chk" style="margin-left: 3px;">전체선택</label></div>
+                    <div class="checkbox" style="float: left; margin-top: 8px;"><input type="checkbox" name="all_chk" id="all_chk"><label for="all_chk" style="margin-left: 3px;">선택</label></div>
                     <div style="float: right;"><input type="button" value="일정 전체 삭제" class="btn btn-sm btn-secondary" id="addCalendar"></div><br />
                 </div>
                 <div class="unit-list" style="margin-top: 20px;">
@@ -90,20 +90,20 @@
 
 
 
-    <!-- 일정 추가 modal -->
-    <div class="modal fade" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- 일정 등록 modal -->
+    <div class="modal fade" id="unitInsertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">클래스 일정을 입력하세요.</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="border: none; background-color: white; font-size: xx-large;">
+                    <button type="button" class="close" onclick="cancel()" style="border: none; background-color: white; font-size: xx-large;">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 
                 <div class="modal-body">
-                    <input type="hidden" id="classcode" th:value="${classcode}">
+                    <input type="number" id="classcode" th:value="${classcode}">
                     <div class="form-group" style="display: inline-block;">
                         <div class="row">
                             <div class="col-sm-3" style="width: 50%;">
@@ -160,8 +160,8 @@
 
                         <div class="row">
                             <div class="col-sm-3" style="width: 50%;">
-                                <label for="default_price" class="col-form-label">입문자 수강금액</label>
-                                <input type="number" class="form-control" id="default_price" name="default_price" value="15000" disabled readonly>
+                                <label for="defaultPrice" class="col-form-label">입문자 수강금액</label>
+                                <input type="number" class="form-control" id="defaultPrice" name="defaultPrice" th:value="${defaultPrice}" disabled readonly>
                             </div>
                             <div class="col-sm-3" style="width: 50%;">
                                 <label for="addprice" class="col-form-label">추가 금액</label>
@@ -182,16 +182,127 @@
                         </div>
                     </div>
                 </div>
-                
-                
                 <div class="modal-footer">
-                    <input type="button" value="추가" class="btn btn-warning" id="addCalendar" onclick="add()">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancel()">취소</button>
-                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button> -->
+                    <div class="d-flex justify-content-between" style="width: 100%;">
+                        <div style="width: 49%;">
+                            <button type="button" style="border: 1px solid gray; width: 100%;" class="btn btn-sm" data-dismiss="modal" onclick="cancel()">닫기</button>
+                        </div>
+                        <div style="width: 49%;">
+                            <input type="button" value="추가" style="border: 1px solid gray; width: 100%;" class="btn btn-sm" id="addCalendar" onclick="add()">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+     <!-- 일정 수정 modal 아직 완료x -->
+     <div class="modal fade" id="unitUpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+     <div class="modal-dialog" role="document">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLabel">클래스 일정을 입력하세요.</h5>
+                 <button type="button" class="close" onclick="cancel()" style="border: none; background-color: white; font-size: xx-large;">
+                     <span aria-hidden="true">&times;</span>
+                 </button>
+             </div>
+             
+             <div class="modal-body">
+                 <input type="number" id="classcode" th:value="${classcode}">
+                 <div class="form-group" style="display: inline-block;">
+                     <div class="row">
+                         <div class="col-sm-3" style="width: 50%;">
+                             <label for="minimum" class="col-form-label">최소인원</label>
+                             <input type="number" class="form-control" id="minimum2" name="minimum">
+                         </div>
+                         <div class="col-sm-3" style="width: 50%;">
+                             <label for="maximum" class="col-form-label">최대인원</label>
+                             <input type="number" class="form-control" id="maximum2" name="maximum">
+                         </div>   
+                     </div>
+
+                     <div class="row">
+                         <div class="col-sm-3" style="width: 50%;">
+                             <label for="classdate" class="col-form-label">날짜</label>
+                             <input class="form-control datepicker date" id="classdate2" name="classdate">
+                         </div>
+
+                         <input type="hidden" name="classday" id="classday2">
+
+                         <!-- <div class="col-sm-3" style="width: 50%;">
+                             <label for="calendar_end_date" class="col-form-label">종료 날짜</label>
+                             <input class="form-control datepicker date" id="calendar_end_date" name="calendar_end_date">
+                         </div>    -->
+                     </div>
+
+                     <div class="row">
+                         <div class="col-sm-3" style="width: 50%;">
+                             <label for="classstart" class="col-form-label">시작 시각</label>
+                             <input type="time" class="form-control" id="classstart2" name="classstart">
+                         </div>
+                         <div class="col-sm-3" style="width: 50%;">
+                             <label for="classend" class="col-form-label">종료 시각</label>
+                             <input type="time" class="form-control" id="classend2" name="classend">
+                         </div>   
+                     </div>
+
+                     
+                     <div class="col">
+                         <label style="font-size: small; margin-top: 20px;">* 클래스 난이도와 수강금액에 변동이있을 시 작성해주세요.</label><br />
+                         <div class="form-check form-check-inline" style="margin-top: 10px;">
+                             <input type="radio" class="form-check-input radio-value level-value-detail" id="classlevel1" name="classlevel"  value="1" checked>
+                             <label class="form-check-label" for="classlevel1">입문자</label>
+                         </div>
+                         <div class="form-check form-check-inline">
+                             <input type="radio" class="form-check-input radio-value level-value-detail" id="classlevel2" name="classlevel"  value="2">
+                             <label class="form-check-label" for="classlevel2">경험자</label>
+                         </div>
+                         <div class="form-check form-check-inline">
+                             <input type="radio" class="form-check-input radio-value level-value-detail" id="classlevel3" name="classlevel"  value="3">
+                             <label class="form-check-label" for="classlevel3">숙련자</label>
+                         </div>                    
+                     </div>
+
+                     <div class="row">
+                         <div class="col-sm-3" style="width: 50%;">
+                             <label for="defaultPrice" class="col-form-label">입문자 수강금액</label>
+                             <input type="number" class="form-control" id="defaultPrice2" name="defaultPrice" th:value="${defaultPrice}" disabled readonly>
+                         </div>
+                         <div class="col-sm-3" style="width: 50%;">
+                             <label for="addprice" class="col-form-label">추가 금액</label>
+                             <input type="number" class="form-control" id="addprice2" name="addprice" value="" disabled>
+                         </div>   
+                     </div>
+
+                     <div class="row">
+                         <div class="col-sm-3" style="width: 50%;">
+                             <input type="checkbox" class="form-check-input" id="discount-chk2" name="discount-chk" onchange="toggleDiscountInput()" style="margin-top: 10px;">
+                             <label for="discount" class="col-form-label" style="margin-left: 5px;">할인 비율 설정(%)</label>
+                             <input type="number" class="form-control" id="discount2" name="discount" value="" disabled>
+                         </div>
+                         <div class="col-sm-3" style="width: 50%;">
+                             <label for="discount_price" class="col-form-label">할인된 금액</label>
+                         <input type="number" class="form-control" id="discount_price2" name="discount_price" value="" readonly>
+                         </div>   
+                     </div>
+                 </div>
+             </div>
+             <div class="modal-footer">
+                 <div class="d-flex justify-content-between" style="width: 100%;">
+                     <div style="width: 49%;">
+                         <button type="button" style="border: 1px solid gray; width: 100%;" class="btn btn-sm" data-dismiss="modal" onclick="cancel2()">닫기</button>
+                     </div>
+                     <div style="width: 49%;">
+                         <input type="button" value="완료" style="border: 1px solid gray; width: 100%;" class="btn btn-sm" id="addCalendar" onclick="add()">
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+
+    
 
     <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
     <script th:src="@{/js/jquery-ui.min.js}"></script>
@@ -199,7 +310,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.5/axios.min.js"></script>
     <script type="text/javascript" th:inline="javascript">
         
-
+        // 달력
         document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -213,7 +324,7 @@
                     addEventButton: { 
                         text : "일정 추가",  
                         click : function(){ 
-                            $("#calendarModal").modal("show"); 
+                            $("#unitInsertModal").modal("show"); 
 
                             $("#addCalendar").on("click",function(){  // modal의 추가 버튼 클릭 시
                                 var content = $("#calendar_content").val();
@@ -269,14 +380,15 @@
             calendar.render();
         });
         
-        // 일정등록 취소 - 모달창 닫기 
+        // 일정등록 모달창 닫기 
         function cancel() {
-            $("#calendarModal").modal("hide"); 
+            $("#unitInsertModal").modal("hide"); 
         }
         
         // 일정등록 
         async function add(){
             const classcode = document.getElementById("classcode").value;
+            console.log(classcode);
             const min = document.getElementById("minimum").value;
             const max = document.getElementById("maximum").value;
             const date = document.getElementById("classdate").value;
@@ -290,15 +402,56 @@
             // POST호출
             const url = /*[[@{/api/classunit/insert.json}]]*/"";
             const headers = {"Content-Type":"application/json"};
-            const body = { classproduct:{classcode:classcode}, minimum : min, maximum : max, classdate : date, classday : day, classstart : start, classend : end, classlevel : level, discount : discount, addprice : addprice };
+            const body = {  classproduct:{classcode:classcode}, 
+                            minimum : min, 
+                            maximum : max, 
+                            classdate : date, 
+                            classday : day, 
+                            classstart : start, 
+                            classend : end, 
+                            classlevel : level, 
+                            discount : discount, 
+                            addprice : addprice };
+
             const { data } = await axios.post(url, body, { headers:headers });
             console.log('반환되는 결과', data);
+
+            if(data.status === 200){
+                alert("일정 등록이 완료되었습니다.")
+                $('#unitInsertModal').modal('hide'); // 모달 창 닫기
+                // resetModalInputs(); // 입력 필드 초기화
+            }
+            else {
+                alert("일정 등록에 실패하였습니다.");
+            }
         }
 
+        //모달 창 열릴 때 초기화 함수 호출
+        $('#unitInsertModal').on('shown.bs.modal', function() {
+            resetModalInputs();
+        });
+
+        function resetModalInputs() {
+            document.getElementById("classcode").value = "";
+            document.getElementById("minimum").value = "";
+            document.getElementById("maximum").value = "";
+            document.getElementById("classdate").value = "";
+            document.getElementById("classday").value = "";
+            document.getElementById("classstart").value = "";
+            document.getElementById("classend").value = "";
+            document.getElementById("discount").value = "";
+            document.getElementById("addprice").value = "";
+
+            // 라디오 버튼은 입문자로 check
+            // const levelRadios = document.querySelectorAll('input[name="classlevel"]');
+            // levelRadios.forEach(radio => {
+            //     radio.checked = true; // 기존에 체크된 라디오 버튼 모두 선택 해제
+            // });
+        }
         
         // 할인 금액 계산
         function calculateDiscount() {
-            var defaultPrice = 15000; 
+            var defaultPrice = document.getElementById("defaultPrice").value; 
             var discount = document.getElementById("discount").value;
             var addprice = document.getElementById("addprice").value;
             var discountPrice = Math.round(defaultPrice + parseInt(addprice)) * (100 - parseInt(discount)) / 100;
@@ -327,7 +480,6 @@
 
         // 클래스 난이도별 추가 금액 입력란 활성화
         var radioBtns = document.querySelectorAll('.radio-value');
-
         function handleRadioClick() {
             var addpriceInput = document.getElementById('addprice');
             var level = document.querySelector('input[name="classlevel"]:checked').value;
@@ -338,7 +490,7 @@
             radioBtn.addEventListener('click', handleRadioClick);
         });
 
-        // ********************************************************************************************************************************************
+        // *********************************************************************** 오른쪽 슬라이드 **********************************************************************************
 
         // 오른쪽 사이드바 열기
         function showRightSideBar() {
@@ -363,6 +515,43 @@
         // document.getElementById('right-side-bar-bg').addEventListener('click', hideRightSideBar);
 
 
+        /******************************** 수정, 삭제 ***************************************/
+        function cancel2() {
+            $('#unitUpdateModal').modal('hide');
+        }
+
+        async function updateUnit(classcode, no){
+            let url = /*[[@{/api/classunit/selectunitone.json}]]*/"";
+            url += `?classcode=${classcode}&no=${no}`;
+            const headers = {"Content-Type":"application/json"};
+            const { data } = await axios.get(url, { headers:headers });
+            console.log(url);
+            console.log("classcode:", classcode, "no:", no);
+
+            document.getElementById('classcode').value = classcode;
+            document.getElementById('minimum2').value = data.obj.minimum;
+            document.getElementById('maximum2').value = data.obj.maximum;
+            document.getElementById('classdate2').value = data.obj.classdate;
+            document.getElementById('classday2').value = data.obj.classday;
+            document.getElementById('classstart2').value = data.obj.classstart;
+            document.getElementById('classend2').value = data.obj.classend;
+            document.getElementById('defaultPrice2').value = data.obj.defaultPrice;
+            document.getElementById('addprice2').value = data.obj.addprice;
+            document.getElementById('discount2').value = data.obj.discount;
+            document.getElementById('discount_price2').value = data.obj.discount_price;
+
+            $('#unitUpdateModal').modal('show');
+        };
+
+        // 삭제 버튼 클릭 시 이벤트 핸들러
+        async function deleteUnit(classcode, no){
+            // const url = 
+            // const headers = {"Content-Type":"application/json"};
+            // const { data } = await axios.get(url, { headers:headers });
+            console.log("classcode:", classcode, "no:", no);
+        };
+        /*************************************************************************************/
+        
         //일정 조회
         const ccode = /*[[${classcode}]]*/""; // ClassUnitController에서 받은 classcode
 
@@ -378,8 +567,11 @@
             const { data } = await axios.get(url, { headers:headers });
             // console.log('반환 결과', data);
 
+            // 기존 내용 초기화
             const unitList = document.querySelector(".unit-list");
-            unitList.innerHTML = ""; // 기존 내용 초기화
+            unitList.innerHTML = ""; 
+
+            /********************************** 조회 *******************************/
 
             // 데이터 출력
             data.list.forEach(item => {
@@ -391,8 +583,9 @@
                 div.style.height = "120px";
                 div.style.padding = "10px";
                 div.style.marginTop = "10px";
-
+                console.log(item);
                 const [year, month, day] = item.classdate.split('-');
+                
 
                 // classstart와 classend 시간 변환
                 const startTime = new Date(`2000-01-01T${item.classstart}`);
@@ -440,12 +633,18 @@
                                     </div>
                                 </div>
                                 <div style="display: flex; justify-content: space-between;">
-                                    <button style="width: 49%; border: 1px solid gray" class="btn btn-sm btn-update">수정</button>
-                                    <button style="width: 49%; border: 1px solid gray" class="btn btn-sm btn-delete">삭제</button>
+                                    <button style="width: 49%; border: 1px solid gray" class="btn btn-sm btn-update" onclick="updateUnit('${classcode}', ${item.no})">수정</button>
+                                    <button style="width: 49%; border: 1px solid gray" class="btn btn-sm btn-delete" onclick="deleteUnit('${classcode}', ${item.no})">삭제</button>
                                 </div>`;
 
                 unitList.appendChild(div);
             });
+
+            // 스크롤
+            unitList.style.overflow = "auto";
+            unitList.style.maxHeight = "700px";
+
+            /***********************************************************************/
         }   
         
         
