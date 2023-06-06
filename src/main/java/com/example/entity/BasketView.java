@@ -1,7 +1,5 @@
 package com.example.entity;
 
-import java.math.BigDecimal;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,7 +11,7 @@ import org.springframework.data.annotation.Immutable;
 import lombok.Data;
 
 @Data
-@Immutable   //뷰일경우 추가 => 조회만 가능한 엔티티...
+@Immutable
 @Entity
 @Table(name = "BASKETVIEW")
 public class BasketView {

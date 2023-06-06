@@ -233,6 +233,7 @@
                 <button>클래스 조회 화면으로 가는 버튼</button> -->
     </tbody>
   </table>
+
   <div class="row justify-content-center">
     <div class="col-4">
       <ul id="pagination-demo" class="pagination-sm "></ul>
@@ -391,7 +392,7 @@
 
                 function chkchk() {
                   if (chk == 1) {
-                    str = "신청완료!!";
+                    str = "신청완료";
                     // addclassname()
                   }
                   else if (chk == 2) {
@@ -404,15 +405,14 @@
                 }
 
                 function levelchk() {
-                  if (level == 1) {
+                  if (level === 1) {
                     str1 = "입문자";
-
                   }
-                  else if (level == 2) {
-                    str1 = "중수";
+                  else if (level === 2) {
+                    str1 = "경험자";
                   }
-                  else if (level == 3) {
-                    str1 = "고수";
+                  else if (level === 3) {
+                    str1 = "숙련자";
                   }
                   return str1;
                 }
@@ -435,7 +435,7 @@
           </div>
         </td>
         <td class="center"> 
-          <img src="http://192.168.219.103:8080/specialday/member/image.do?classcode=` + tmp.classcode + `" style="width: 100px; height: 100px"/>
+          <img src="/specialday/class/image.do?no=` + tmp.classcode + `" style="width: 100px; height: 100px"/>
         </td> 
         <td style="font-size: small">
          <div class="mb-2">

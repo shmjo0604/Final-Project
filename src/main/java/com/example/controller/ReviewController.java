@@ -114,6 +114,7 @@ public class ReviewController {
             @RequestParam(name = "menu", defaultValue = "0") int menu,
             @AuthenticationPrincipal User user,
             Model model) {
+                
         String id = user.getUsername();
 
         if (menu == 0) {
