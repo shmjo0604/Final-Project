@@ -18,7 +18,14 @@ public class ReviewImageServiceImpl implements ReviewImageService {
     @Override
     public int insertReviewImage(List<ReviewImage> obj) {
 
-    reviewImageRepository.saveAll(obj);
-        return 1;
+        try {
+            reviewImageRepository.saveAll(obj);
+            return 1;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+
+        }
     }
 }

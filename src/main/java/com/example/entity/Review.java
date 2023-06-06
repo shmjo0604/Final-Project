@@ -47,7 +47,7 @@ public class Review {
   // 추천수
   private int hit;
 
-  //신청 테이블
+  // 신청 테이블
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "no", referencedColumnName = "NO")
   @MapsId
@@ -57,6 +57,4 @@ public class Review {
   @ToString.Exclude
   @OneToMany(mappedBy = "review", fetch = FetchType.LAZY)
   private List<ReviewImage> reviewimageList = new ArrayList<>();
-
 }
-

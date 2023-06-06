@@ -11,7 +11,7 @@ import com.example.dto.ApplyView;
 
 @Service
 public interface ApplyService {
-    
+
     // 1. 클래스 신청 (chk -> (default) 1)
     public int insertApplyBatch(List<Apply> list);
 
@@ -32,5 +32,8 @@ public interface ApplyService {
 
     // 7. 클래스 신청 내역 조회
     public List<ApplyView> selectApplyListById(Map<String, Object> map);
+
+    // 8. 신청 전체 개수 조회
+    public Long countApplyList(String id);
 
 }
