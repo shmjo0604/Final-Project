@@ -79,7 +79,7 @@
                                     <th:block>
                                         <tr>
                                             <td>문의내용</td>
-                                            <td><input th:value="${content}" type="text" id="content" class="form-control" readonly></td>
+                                            <td><input th:value="${content}" type="text" name="content" id="content" class="form-control" readonly></td>
                                         </tr>
                                     </th:block>
 
@@ -117,7 +117,28 @@
         </nav>
     </div>
 
+    <!--axios library-->
+    <script th:src="@{/js/axios.min.js}"></script>
     <script>
+        async function insertClass() {
+            const content = document.getElementById("content");
+            const answer = document.getElementById("answer");
+            
+            if (answer.value.length <= 0) {
+                alert('답변을 작성하세요');
+                answer.focus();
+                return false;
+            }
+
+            const url = contextPath + '/api/member/inquiry.json';
+            const headers = { "Content-Type": "application/json" };
+            const {data} = await axios.get( url,
+            { params: { content: content.value, answer: answer.value } },
+            { headers });
+
+            console.log(data.ret);
+        }
+
         // let totalCount = 23; //글의 총수
         // let pageSize =10;
         // let pageNumber = 1; // 현재 페이지
@@ -150,21 +171,21 @@
         //             }
         //      })
 
-        var action = 0;
-        var url = '';
-        var type = '';
-        var bno = '';
+        // var action = 0;
+        // var url = '';
+        // var type = '';
+        // var bno = '';
 
-        $(document).ready(function () {
+        // $(document).ready(function () {
 
-            // 답변하기 버튼 클릭
-            $("#createBtn").click(function () {
-                action = 'create';
-                type = 'POST'
-                $("#modal-title").text("답변작성");
-                $("#myModal").modal();
-            })
-        })
+        //     // 답변하기 버튼 클릭
+        //     $("#createBtn").click(function () {
+        //         action = 'create';
+        //         type = 'POST'
+        //         $("#modal-title").text("답변작성");
+        //         $("#myModal").modal();
+        //     })
+        // })
 
         // 20글자 이상시 글자수 자동조절
         function textLengthOverCut(txt, len, lastTxt) {

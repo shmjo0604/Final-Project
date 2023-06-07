@@ -174,10 +174,9 @@
                                                 <h6 style="display:inline; padding-right:50px; color: #FF8E8E">(필수)</h6>
                                             </h6>
 
-                                            <br>
                                             <input id="nickname" class="form-control w-50 my-3" type="text"
                                                 th:value="${obj.nickname}" maxlength="50" placeholder="ex)나무이야기"
-                                                autofocus required>
+                                                autofocus required />
                                         </div>
 
                                         <div>
@@ -375,7 +374,7 @@
                                             <h6 style="display:inline; font-weight:bold;">가격
                                                 <h6 style="display:inline; padding-right:50px; color: #FF8E8E">(필수)</h6>
                                             </h6>
-                                            <div class="tool">addCommas
+                                            <div class="tool">
                                                 <span> <img id="insert-img" th:src="@{/image/물음표.png}"
                                                         style="width: 20px; height: 20px; cursor: pointer;"> 도움말
                                                 </span>
@@ -1213,7 +1212,7 @@
                 return false;
             }
 
-            /* if( content_length2 < 30) {
+            if( content_length2 < 30) {
                 alert("클래스 소개를 작성하세요.");
                 pageintro();
                 return false;
@@ -1223,7 +1222,7 @@
                 alert("커리큘럼 내용을 작성하세요.");
                 pagecorri();
                 return false;
-            } */
+            }
 
             if (price.value.length <= 0) {
                 alert("금액을 입력하세요.");
