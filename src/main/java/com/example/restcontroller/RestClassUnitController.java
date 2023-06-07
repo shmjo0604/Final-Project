@@ -1,5 +1,6 @@
 package com.example.restcontroller;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,7 +37,7 @@ public class RestClassUnitController {
     @PostMapping(value = "/insert.json")
     public Map<String, Object> insertPOST(
         @RequestBody ClassUnit classunit){
-        
+        log.info(format,"ddd");
         log.info(format, classunit.toString());
         Map<String, Object> retMap = new HashMap<>();
     
@@ -83,10 +85,27 @@ public class RestClassUnitController {
         return retmap;
     }   
 
-    //일정 삭제(update로 처리)
-    // @PutMapping(value = "/deleteunit.json")
-    // public Map<String, Integer> deleteunitDELETE() {
+    // 선택한 일정 삭제(update로 처리)
+    @PutMapping(value = "/deleteone.json")
+    public Map<String, Integer> deleteonePUT(
+        @RequestParam(name = "classcode", defaultValue = "0") long classcode,
+        @RequestParam(name = "no", defaultValue = "0") long no) {
+        Map<String, Integer> retMap = new HashMap<>();
+
+        log.info(format, classcode);
+        log.info(format, no);
+        
+        cuRepository.updateChkByClasscodeAndNo(classcode, no);
+        retMap.put("status", 200);
+        
+        return retMap;
+    }
+
+    // 일정 전체 삭제(update로 처리)
+    // @PutMapping(value = "/deleteall.json")
+    // public Map<String, Integer> deleteallPUT() {
     //     Map<String, Integer> retMap = new HashMap<>();
+
     //     // retMap.put("result", ret);
     //     return retMap;
     // }

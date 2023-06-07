@@ -69,19 +69,15 @@
     
     <div id="right-side-bar">
         <div style="margin: 20px;">
-            <div class="sidevar-header">
+            <div class="sidevar-header" style="display: inline-block; width: 100%;">
                 <div id="closeButton"><i class="fa-solid fa-x" style="float: left; margin-top: 5px;"></i></div>
-                <div style="font-weight: bold; font-size: large; margin-left: 10px; float: left;">전체 일정</div><br/>
+                <div style="font-weight: bold; font-size: large; margin-left: 10px; float: left;">전체 일정</div>
+                <div style="float: right;"><input type="button" value="일정 전체 삭제" class="btn btn-sm btn-secondary" id="addCalendar"></div><br/>
             </div>
             <hr />
             <div class="sidevar-body">
-                <div style="display: inline-block; width: 100%;">
-                    <div class="checkbox" style="float: left; margin-top: 8px;"><input type="checkbox" name="all_chk" id="all_chk"><label for="all_chk" style="margin-left: 3px;">선택</label></div>
-                    <div style="float: right;"><input type="button" value="일정 전체 삭제" class="btn btn-sm btn-secondary" id="addCalendar"></div><br />
-                </div>
-                <div class="unit-list" style="margin-top: 20px;"></div>
+                <div class="unit-list" style="margin-top: 5px;"></div>
             </div>
-            
         </div>        
     </div>
     <div id="right-side-bar-bg"></div>
@@ -101,8 +97,8 @@
                 </div>
                 
                 <div class="modal-body">
-                    <input type="text" id="classcode" th:value="${classcode}">
                     <div class="form-group" style="display: inline-block;">
+                        <input type="number" class="form-control" id="classcode" th:value="${classcode}" name="classcode">
                         <div class="row">
                             <div class="col-sm-3" style="width: 50%;">
                                 <label for="minimum" class="col-form-label">최소인원</label>
@@ -207,26 +203,26 @@
              </div>
              
              <div class="modal-body">
-                 <input type="number" id="classcode" th:value="${classcode}">
+                 <input type="number" id="classcode2" th:value="${classcode}">
                  <div class="form-group" style="display: inline-block;">
                      <div class="row">
                          <div class="col-sm-3" style="width: 50%;">
-                             <label for="minimum" class="col-form-label">최소인원</label>
-                             <input type="number" class="form-control" id="minimum2" name="minimum">
+                             <label for="minimum2" class="col-form-label">최소인원</label>
+                             <input type="number" class="form-control" id="minimum2" name="minimum2">
                          </div>
                          <div class="col-sm-3" style="width: 50%;">
-                             <label for="maximum" class="col-form-label">최대인원</label>
-                             <input type="number" class="form-control" id="maximum2" name="maximum">
+                             <label for="maximum2" class="col-form-label">최대인원</label>
+                             <input type="number" class="form-control" id="maximum2" name="maximum2">
                          </div>   
                      </div>
 
                      <div class="row">
                          <div class="col-sm-3" style="width: 50%;">
-                             <label for="classdate" class="col-form-label">날짜</label>
-                             <input class="form-control datepicker date" id="classdate2" name="classdate">
+                             <label for="classdate2" class="col-form-label">날짜</label>
+                             <input class="form-control datepicker date" id="classdate2" name="classdate2">
                          </div>
 
-                         <input type="hidden" name="classday" id="classday2">
+                         <input type="hidden" name="classda2y" id="classday2">
 
                          <!-- <div class="col-sm-3" style="width: 50%;">
                              <label for="calendar_end_date" class="col-form-label">종료 날짜</label>
@@ -236,12 +232,12 @@
 
                      <div class="row">
                          <div class="col-sm-3" style="width: 50%;">
-                             <label for="classstart" class="col-form-label">시작 시각</label>
-                             <input type="time" class="form-control" id="classstart2" name="classstart">
+                             <label for="classstart2" class="col-form-label">시작 시각</label>
+                             <input type="time" class="form-control" id="classstart2" name="classstart2">
                          </div>
                          <div class="col-sm-3" style="width: 50%;">
-                             <label for="classend" class="col-form-label">종료 시각</label>
-                             <input type="time" class="form-control" id="classend2" name="classend">
+                             <label for="classend2" class="col-form-label">종료 시각</label>
+                             <input type="time" class="form-control" id="classend2" name="classend2">
                          </div>   
                      </div>
 
@@ -264,24 +260,24 @@
 
                      <div class="row">
                          <div class="col-sm-3" style="width: 50%;">
-                             <label for="defaultPrice" class="col-form-label">입문자 수강금액</label>
-                             <input type="number" class="form-control" id="defaultPrice2" name="defaultPrice" th:value="${defaultPrice}" disabled readonly>
+                             <label for="defaultPrice2" class="col-form-label">입문자 수강금액</label>
+                             <input type="number" class="form-control" id="defaultPrice2" name="defaultPrice2" th:value="${defaultPrice}" disabled readonly>
                          </div>
                          <div class="col-sm-3" style="width: 50%;">
-                             <label for="addprice" class="col-form-label">추가 금액</label>
-                             <input type="number" class="form-control" id="addprice2" name="addprice" value="" disabled>
+                             <label for="addprice2" class="col-form-label">추가 금액</label>
+                             <input type="number" class="form-control" id="addprice2" name="addprice2" value="" disabled>
                          </div>   
                      </div>
 
                      <div class="row">
                          <div class="col-sm-3" style="width: 50%;">
                              <input type="checkbox" class="form-check-input" id="discount-chk2" name="discount-chk" onchange="toggleDiscountInput()" style="margin-top: 10px;">
-                             <label for="discount" class="col-form-label" style="margin-left: 5px;">할인 비율 설정(%)</label>
-                             <input type="number" class="form-control" id="discount2" name="discount" value="" disabled>
+                             <label for="discount2" class="col-form-label" style="margin-left: 5px;">할인 비율 설정(%)</label>
+                             <input type="number" class="form-control" id="discount2" name="discount2" value="" disabled>
                          </div>
                          <div class="col-sm-3" style="width: 50%;">
-                             <label for="discount_price" class="col-form-label">할인된 금액</label>
-                         <input type="number" class="form-control" id="discount_price2" name="discount_price" value="" readonly>
+                             <label for="discount_price2" class="col-form-label">할인된 금액</label>
+                         <input type="number" class="form-control" id="discount_price2" name="discount_price2" value="" readonly>
                          </div>   
                      </div>
                  </div>
@@ -301,11 +297,11 @@
  </div>
 
     
-
     <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
     <script th:src="@{/js/jquery-ui.min.js}"></script>
     <script th:src="@{/js/classunit/menu_unitmanage.js}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.5/axios.min.js"></script>
+    <!-- <script th:src="@{/js/axios.min.js}"></script> -->
     <script type="text/javascript" th:inline="javascript">
         
         // 달력
@@ -383,6 +379,7 @@
             $("#unitInsertModal").modal("hide"); 
         }
         
+        console.log(document.getElementById("classcode").value);
         // 일정등록 
         async function add(){
             const classcode = document.getElementById("classcode").value;
@@ -410,7 +407,8 @@
                             classlevel : level, 
                             discount : discount, 
                             addprice : addprice };
-
+            
+            console.log(body);
             const { data } = await axios.post(url, body, { headers:headers });
             console.log('반환되는 결과', data);
 
@@ -430,7 +428,7 @@
         });
 
         function resetModalInputs() {
-            document.getElementById("classcode").value = "";
+            // document.getElementById("classcode").value = "";
             document.getElementById("minimum").value = "";
             document.getElementById("maximum").value = "";
             document.getElementById("classdate").value = "";
@@ -439,20 +437,22 @@
             document.getElementById("classend").value = "";
             document.getElementById("discount").value = "";
             document.getElementById("addprice").value = "";
-
-            // 라디오 버튼은 입문자로 check
-            // const levelRadios = document.querySelectorAll('input[name="classlevel"]');
-            // levelRadios.forEach(radio => {
-            //     radio.checked = true; // 기존에 체크된 라디오 버튼 모두 선택 해제
-            // });
+            document.getElementById("discount_price").value = "";
+            document.getElementById("classlevel1").checked = true;
+            document.getElementById("addprice").disabled = true;
         }
         
         // 할인 금액 계산
         function calculateDiscount() {
-            var defaultPrice = document.getElementById("defaultPrice").value; 
-            var discount = document.getElementById("discount").value;
-            var addprice = document.getElementById("addprice").value;
-            var discountPrice = Math.round(defaultPrice + parseInt(addprice)) * (100 - parseInt(discount)) / 100;
+            var defaultPrice = parseInt(document.getElementById("defaultPrice").value);
+            var discount = parseInt(document.getElementById("discount").value);
+            var addprice = parseInt(document.getElementById("addprice").value);
+            console.log(defaultPrice);
+            console.log(discount);
+            console.log(addprice);
+
+            var discountAmount = (defaultPrice + addprice) * discount / 100;
+            var discountPrice = (defaultPrice + addprice) - discountAmount;
 
             // 할인된 금액을 discount_price input 요소에 업데이트
             document.getElementById("discount_price").value = discountPrice;
@@ -492,18 +492,18 @@
 
         // 오른쪽 사이드바 열기
         function showRightSideBar() {
-        var rightSideBar = document.getElementById('right-side-bar');
-        var rightSideBarBg = document.getElementById('right-side-bar-bg');
-        rightSideBar.classList.add('active');
-        rightSideBarBg.style.display = 'block';
+            var rightSideBar = document.getElementById('right-side-bar');
+            var rightSideBarBg = document.getElementById('right-side-bar-bg');
+            rightSideBar.classList.add('active');
+            rightSideBarBg.style.display = 'block';
         }
 
         // 오른쪽 사이드바 닫기
         function hideRightSideBar() {
-        var rightSideBar = document.getElementById('right-side-bar');
-        var rightSideBarBg = document.getElementById('right-side-bar-bg');
-        rightSideBar.classList.remove('active');
-        rightSideBarBg.style.display = 'none';
+            var rightSideBar = document.getElementById('right-side-bar');
+            var rightSideBarBg = document.getElementById('right-side-bar-bg');
+            rightSideBar.classList.remove('active');
+            rightSideBarBg.style.display = 'none';
         }
 
         // 닫기 버튼 클릭 이벤트 처리
@@ -526,7 +526,7 @@
             console.log(url);
             console.log("classcode:", classcode, "no:", no);
 
-            document.getElementById('classcode').value = classcode;
+            document.getElementById('classcode2').value = classcode;
             document.getElementById('minimum2').value = data.obj.minimum;
             document.getElementById('maximum2').value = data.obj.maximum;
             document.getElementById('classdate2').value = data.obj.classdate;
@@ -541,12 +541,21 @@
             $('#unitUpdateModal').modal('show');
         };
 
-        // 삭제 버튼 클릭 시 이벤트 핸들러
         async function deleteUnit(classcode, no){
-            // const url = 
-            // const headers = {"Content-Type":"application/json"};
-            // const { data } = await axios.get(url, { headers:headers });
+            let url = /*[[@{/api/classunit/deleteone.json}]]*/"";
+            url += `?classcode=${classcode}&no=${no}`;
+            const body = {  classproduct:{classcode:classcode}, 
+                            no : no };
+            const headers = {"Content-Type":"application/json"};
+            const { data } = await axios.put(url, body, { headers:headers });
             console.log("classcode:", classcode, "no:", no);
+
+            if(data.status === 200){
+                alert("삭제가 완료되었습니다.")
+            }
+            else {
+                alert("삭제에 실패하였습니다.");
+            }
         };
         /*************************************************************************************/
         
@@ -578,13 +587,12 @@
                 div.style.border = "1px solid rgb(201, 197, 197)";
                 div.style.backgroundColor = "white";
                 div.style.borderRadius = "5px";
-                div.style.height = "120px";
+                div.style.height = "125px";
                 div.style.padding = "10px";
                 div.style.marginTop = "10px";
                 console.log(item);
                 const [year, month, day] = item.classdate.split('-');
                 
-
                 // classstart와 classend 시간 변환
                 const startTime = new Date(`2000-01-01T${item.classstart}`);
                 const endTime = new Date(`2000-01-01T${item.classend}`);
@@ -621,18 +629,18 @@
                 };
 
                 div.innerHTML = `<div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div>
-                                        <span style="font-weight: bold; font-size: large; color:green">${year}년 ${month}월 ${day}일 (${item.classday.charAt(0)})</span><br>
+                                    <div style="width:100%;">
+                                        <span style="font-weight: bold; font-size: medium; color: green;">${year}년 ${month}월 ${day}일 (${item.classday.charAt(0)})</span><br />
                                         <span style="font-size: small; color:gray; font-weight: bold;">${formatTime(startHour, startMinute)} ~ ${formatTime(endHour, endMinute)}</span><br>
-                                        <span style="font-size: small; color:gray; font-weight: bold;">난이도: ${getClassLevel(item.classlevel)}</span>
-                                    </div>
-                                    <div style="text-align: right; margin-top:50px;">
-                                        <span style="font-size: small; color:gray; font-weight: bold;">신청인원: ${item.cnt} / ${item.maximum}</span>
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <span style="font-size: small; color: gray; font-weight: bold;">난이도: ${getClassLevel(item.classlevel)}</span>
+                                            <span style="font-size: small; color: gray; font-weight: bold; margin-left: auto;">신청인원: ${item.cnt} / ${item.maximum}</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div style="display: flex; justify-content: space-between;">
-                                    <button style="width: 49%; border: 1px solid gray" class="btn btn-sm btn-update" onclick="updateUnit('${classcode}', ${item.no})">수정</button>
-                                    <button style="width: 49%; border: 1px solid gray" class="btn btn-sm btn-delete" onclick="deleteUnit('${classcode}', ${item.no})">삭제</button>
+                                <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                                    <button style="width: 49%; border: 1px solid gray" class="btn btn-sm btn-update" onclick="updateUnit(${classcode}, ${item.no})">수정</button>
+                                    <button style="width: 49%; border: 1px solid gray" class="btn btn-sm btn-delete" onclick="deleteUnit(${classcode}, ${item.no})">삭제</button>
                                 </div>`;
 
                 unitList.appendChild(div);
@@ -657,8 +665,10 @@
             
             // 창 크기 변경 시 스크롤 영역 높이 재설정
             window.addEventListener('resize', setScrollMaxHeight);
-
         }   
+
+
+        
         
         
        
