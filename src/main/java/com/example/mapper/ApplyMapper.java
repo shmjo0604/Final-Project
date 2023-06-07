@@ -38,4 +38,13 @@ public interface ApplyMapper {
 
     // 9. 클래스 신청 번호 조회
     public List<Long> selectInsertedApplyNoList(Map<String, Object> map);
+
+     // 9. 신청 전체 개수 조회(chk=1)
+     public long countApplyListOne(String id);
+
+     // 10. 신청 전체 개수 조회(chk=2)
+     public long countApplyListTwo(String id);
+ 
+     // 11. 신청 전체 개수 조회(chk=3)
+     public long countApplyListThree(String id);
 }

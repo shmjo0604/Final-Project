@@ -152,7 +152,7 @@ function getEditorContent() {
 
 // 신청번호 받아서 프로덕트유닛 내용 불러오기
 
-function modalAction(no,classcode, price, title, classdate, classlevel, classstart ,classend) {
+function modalAction(no, classcode, price, title, classdate, classlevel, classstart, classend) {
   const modal = new bootstrap.Modal(
     document.getElementById("exampleModal"),
     {}
@@ -166,13 +166,62 @@ function modalAction(no,classcode, price, title, classdate, classlevel, classsta
   const classlevel1 = document.getElementById("classlevel");
   const price1 = document.getElementById("price");
 
-  img.src = 'http://192.168.219.103:8080/specialday/member/image.do?classcode='+ classcode;
-  no1.value= no;
+  img.src = "http://127.0.0.1:8080/specialday/member/image?classcode=" + classcode;
+  no1.value = no;
   title1.value = "이름 :" + title;
   classdate1.value = classdate;
-  classstart1.value = classstart +"~"+ classend;
+  classstart1.value = classstart + "~" + classend;
   classlevel1.value = classlevel;
   price1.value = price;
-  
+
+  modal.show();
+}
+
+function modalAction1(chk, person, totalprice, no, classcode, price, title, classdate, classlevel, classstart, classend, applyregdate) {
+  const modal = new bootstrap.Modal(
+    document.getElementById("exampleModal1"),
+    {}
+  );
+  var result = applyregdate.substring(0, 10)
+  var result1 = result.replace("-","/");
+  var result2 = result1.replace("-","/");
+
+  let chkname = "처리중76786";;
+   
+  if(chk === 1){
+    chkname="처리중";
+  }
+
+
+  const img2 = document.getElementById("mainimage2");
+  const no2 = document.getElementById("no1");
+  const title2 = document.getElementById("title1");
+  const classdate2 = document.getElementById("classdate2");
+  const classstart2 = document.getElementById("classstart1");
+  const classlevel2 = document.getElementById("classlevel1");
+  const price2 = document.getElementById("price1");
+  const price3 = document.getElementById("price2");
+  const person2 = document.getElementById("person1");
+  const chk2 = document.getElementById("chk1");
+  const totalprice2 = document.getElementById("totalprice1");
+  const applyregdate2 = document.getElementById("applyregdate1");
+
+  img2.src = "http://127.0.0.1:8080/specialday/member/image?classcode=" + classcode;
+  no2.value= no;
+  title2.value = "이름: " + title;
+  classdate2.value = classdate;
+  classstart2.value = classstart +"~"+ classend;
+  classlevel2.value = classlevel;
+  chk2.value = "처리상태: " + chkname;
+  person2.value = person +"명";
+  price2.value = price +"원";
+  price3.value = price +"원";
+  totalprice2.value = totalprice +"원";
+  applyregdate2.value = result2;
+
+ 
+
+
+
   modal.show();
 }

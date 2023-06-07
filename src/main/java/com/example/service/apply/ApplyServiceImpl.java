@@ -146,4 +146,43 @@ public class ApplyServiceImpl implements ApplyService {
         return -1;
        }
     }
+
+    @Override
+    public long countApplyListOne(String id) {
+        try {
+            return aMapper.countApplyListOne(id);
+        } catch (Exception e) {
+            return 0;
+        }
+       
+    }
+
+    @Override
+    public long countApplyListThree(String id) {
+        try {
+            return aMapper.countApplyListTwo(id);
+        } catch (Exception e) {
+            return 0;
+        }
+        
+    }
+
+    @Override
+    public long countApplyListTwo(String id) {
+        try {
+            return aMapper.countApplyListThree(id);
+        } catch (Exception e) {
+            return 0;
+        }
+        
+    }
+
+    @Override
+    public long updateChk(String id) {
+        try {
+            return aMapper.
+        } catch (Exception e) {
+            return 0;
+        }
+}
 }

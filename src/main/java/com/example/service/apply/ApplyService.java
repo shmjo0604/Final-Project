@@ -36,4 +36,16 @@ public interface ApplyService {
     // 8. 신청 전체 개수 조회
     public long countApplyList(String id);
 
+    // 9. 신청 전체 개수 조회(chk=1)
+    public long countApplyListOne(String id);
+
+    // 10. 신청 전체 개수 조회(chk=2)
+    public long countApplyListTwo(String id);
+
+    // 11. 신청 전체 개수 조회(chk=3)
+    public long countApplyListThree(String id);
+
+     // 12. 신청 취소(chk: 1 => 2)
+     public long updateChk(String id);
+
 }

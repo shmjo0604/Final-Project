@@ -84,4 +84,25 @@
         ) a WHERE a.rnum <![CDATA[ >= ]]> ${first} AND a.rnum <![CDATA[ <= ]]> ${last} ORDER BY a.no DESC
 </select>
 
+<!-- 10. 신청상태 개수 조회 (chk=1) -->
+<select id="countApplyListOne" parameterType="String" resultType="long">
+    SELECT COUNT(*) FROM APPLY WHERE memberid = #{id} AND chk = 1
+</select>
+
+<!-- 11. 신청상태 개수 조회 (chk=2) -->
+<select id="countApplyListTwo" parameterType="String" resultType="long">
+    SELECT COUNT(*) FROM APPLY WHERE memberid = AND chk = 2
+</select>
+
+<!-- 12. 신청상태 개수 조회 (chk=3) -->
+<select id="countApplyListThree" parameterType="String" resultType="long">
+    SELECT COUNT(*) FROM APPLY WHERE memberid = AND chk = 3
+</select>
+
+<!-- 13. 업데이트 체크 -->
+<update id="updateChk" parameterType="">
+    UPDATE classunit SET cnt = cnt - #{person} WHERE no = #{unitno}
+</update>
+
+
 </mapper>

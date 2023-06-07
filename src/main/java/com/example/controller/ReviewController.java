@@ -53,11 +53,11 @@ public class ReviewController {
             @RequestParam(name = "files", required = false) List<MultipartFile> files)
             throws IOException {
 
-        long no = review.getApply().getNo();
+        long no = review.getNo();
         log.info(format, "applyno=" + no);
 
-        review.setNo(no);
-        log.info(format, "review=" + review.toString());
+        // review.setNo(no);
+        // log.info(format, "review=" + review.toString());
         List<ReviewImage> list = new ArrayList<>();
 
         int result = reviewService.insertReview(review);

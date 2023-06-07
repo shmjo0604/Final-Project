@@ -114,6 +114,10 @@ public class MemberController {
         int last = page*5;
         String id =user.getUsername();
 
+        long chk1 =0;
+        long chk2 =0;
+        long chk3 =0;
+
         long cnt = aService.countApplyList(id);
         log.info(format,"id=" + id);
 
@@ -126,6 +130,14 @@ public class MemberController {
             map.put("first",first);
             map.put("last",last);
             list = aService.selectApplyListById(map);
+
+             chk1 = aService.countApplyListOne(id);
+             chk2 = aService.countApplyListTwo(id);
+             chk3 = aService.countApplyListThree(id);
+
+             log.info(format,"chk1=" + chk1);
+             log.info(format,"chk2=" + chk2);
+             log.info(format,"chk3=" + chk3);
          }
 
         else if(menu == 2) {
@@ -144,6 +156,11 @@ public class MemberController {
         model.addAttribute("list", list);
         model.addAttribute("user", user);
         model.addAttribute("pages", (cnt-1) / 5 + 1);
+
+        model.addAttribute("chk1", chk1);
+        model.addAttribute("chk2", chk2);
+        model.addAttribute("chk3", chk3);
+
         return "/member/mypage/mypage";
     }
 
@@ -237,8 +254,6 @@ public class MemberController {
     public ResponseEntity<byte[]> image(
         @RequestParam(name = "classcode", defaultValue = "0") long classcode)
     throws IOException {
-       
-        log.info(format, classcode);
 
         long classMainNo = manageService.selectClassMainImageNo(classcode);
         ClassImage obj = manageService.selectClassImageOne(classMainNo);
