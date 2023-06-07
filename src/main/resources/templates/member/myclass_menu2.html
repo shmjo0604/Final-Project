@@ -29,84 +29,154 @@
                 </tr>
             </table>
 
-            <table class="table table-lg table-hover m-3">
+            <table class="table table-lg table-hover m-3" style="white-space:nowrap;">
                 <thead>
                     <tr class="table-success">
                         <th scope="col">NO</th>
                         <th scope="col">클래스명</th>
                         <th scope="col">문의제목</th>
                         <th scope="col">문의내용</th>
-                        <th scope="col">날짜</th>
-                        <th scope="col">처리상태</th>
+                        <th scope="col">문의날짜</th>
                         <th scope="col">작성자</th>
                         <th scope="col">작성</th>
+                        <th scope="col">처리상태</th>
                     </tr>
                 </thead>
 
-                <tbody>
-                    <tr th:each="obj : ${list}">
-                        <td th:text="${obj.no}"></td>
-                        <td th:text="${obj.classtitle}"></td>
-                        <td th:text="${obj.title}"></td>
-                        <td class="txt" th:text="${obj.content}"></td>
-                        <td th:text="${#dates.format(obj.regdate, 'yyyy.MM.dd HH:mm:ss')}"></td>
-                        <td th:text="${obj.chk}"></td>
-                        <td th:text="${obj.memberid}"></td>
-                        <td><button type="button" id="createBtn" class="btn btn-outline-success" data-bs-toggle="modal"
-                                data-bs-target="#myModal">
-                                답변하기</button></td>
-                    </tr>
-                </tbody>
+                <tbody id="emp_rows">
+                    <!-- 처리상태(0) : 답변대기 -->
+                    <th:block th:each="obj : ${list}" th:if="${obj.chk == 0}">
+                        <tr onclick="PopupEmpInfo(this)">
+                            <td th:text="${obj.no}" id="no"></td>
+                            <td th:text="${obj.classtitle}"></td>
+                            <td th:text="${obj.title}"></td>
+                            <td class="txt" th:text="${obj.content}"><label id="modal"></label></td>
+                            <td th:text="${#dates.format(obj.regdate, 'yyyy.MM.dd')}"></td>
+                            <td th:text="${obj.memberid}"></td>
+                            <td><button type="button" id="createBtn" class="createBtn btn btn-danger"
+                                    data-bs-toggle="modal" data-bs-target="#myModal">
+                                    작성</button></td>
+                            <td style="color: red">답변대기</td>
+                        </tr>
+                    </th:block>
 
+                    <!-- 처리상태(1) : 답변완료 -->
+                    <th:block th:each="obj : ${list}" th:if="${obj.chk == 1}">
+                        <tr onclick="PopupEmpInfo(this)">
+                            <td th:text="${obj.no}"></td>
+                            <td th:text="${obj.classtitle}"></td>
+                            <td th:text="${obj.title}"></td>
+                            <td class="txt" th:text="${obj.content}" th:parameterName="${obj.content}"
+                                th:onclick="event.cancelBubble = true;"></td>
+                            <td th:text="${#dates.format(obj.regdate, 'yyyy.MM.dd')}"></td>
+                            <td th:text="${obj.memberid}"></td>
+                            <td><button type="button" id="createBtn" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#myModal" data-bs-notifyid="${obj.content}">
+                                    수정</button></td>
+                            <td style="color: blue">답변완료</td>
+                        </tr>
+                    </th:block>
+
+                </tbody>
 
             </table>
 
-            <!-- Modal -->
-            <form th:action="@{insert.do(no=${no})}" method="post" id="form_insert">
-                <div class="modal modal-center fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">답변하기</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+            <!-- 상세보기 모달 창 -->
+            <div class="modal modal-center fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: ghostwhite">
+                            <label class="modal-title" id="modal-title">서비스 문의</label>
+                        </div>
+                        <div class="modal-body">
+                            <div style="margin-bottom: 10px; font-weight: bold;">| 질문</div>
+                            <div style="display: inline-block; margin-top: 10px; margin-left: 5px;">
+                                <div style="float: left; ">제목 :</div>
+                                <div style="float: left; margin-left: 10px;">환불 언제까지 가능하나요?</div>
                             </div>
-                            <div class="modal-question">
+
+                            <div style="border: 1px solid gainsboro; padding : 20px;">
+                                <div style="display: inline-block;">
+                                    <div>지난 5월 20일 신청한 클래스를 환불하게될 수도 있는데 환불 100% 데드라인을 알고싶습니다.</div>
+                                </div>
                             </div>
-                            <div class="modal-body">
+
+                            <div style="margin-bottom: 10px; font-weight: bold; margin-top: 30px;">| 답변</div>
+                            <div style="display: inline-block; margin-top: 10px; margin-left: 5px;">
+                                <div style="float: left; ">제목 :</div>
+                                <div style="float: left; margin-left: 10px;">문의하신 환불처리 절차 답변드립니다.</div>
+                            </div>
+
+                            <div style="border: 1px solid gainsboro; padding : 20px;">
+                                <div>안녕하십니까. 환불절차 도와드리겠습니다. 먼저 아래 메뉴얼을 보시면 ... 그렇습니다.</div>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                onclick="closeModal()"
+                                style="margin-bottom: 20px; margin-top: 10px; height: 35px; width: 100px; display: inline-block;">닫기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 답변작성 Modal -->
+            <!-- <form th:action="@{insert.do(no=${no})}" method="post" id="form_insert"> -->
+            <div class="modal modal-center fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">답변하기</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="modal-question">
+                        </div>
+                        <div class="modal-body">
+                            <form th:action="@{/post/save}" method="post">
                                 <table class="table table-bordered">
-                                    <th:block>
+                                    <thead>
                                         <tr>
                                             <td>문의내용</td>
-                                            <td><input th:value="${content}" type="text" id="content" class="form-control" readonly></td>
+                                            <th:block th:each="obj : ${list}" th:if="${obj.no == 11}">
+                                                <td><input th:value="${obj.content}" type="text" name="content"
+                                                        id="content" class="form-control" readonly></td>
+                                            </th:block>
                                         </tr>
-                                    </th:block>
+                                    </thead>
 
-                                    <tr>
-                                        <td>답변</td>
-                                        <td>
-                                            <textarea name="answer" id="answer" style="width:100%;"
-                                                rows="10"></textarea>
-                                        </td>
-                                    </tr>
+                                    <tbody>
+                                        <tr>
+                                            <td>답변</td>
+                                            <td>
+                                                <textarea name="answer" id="answer" placeholder="답변을 작성하세요"
+                                                    class="form-control" style="width:100%;" rows="10"></textarea>
+                                            </td>
+                                        </tr>
+                                    </tbody>
                                 </table>
-                            </div>
+                            </form>
+
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 
                                 <!-- <form method="post" id="insertForm"
-                                th:action="@{/member/inquiry/insert.do(classcode=${obj.classcode} )}">
-                                <button type="button" class="btn btn-primary" onclick="insertPost()"
-                                    style="border: 0;">등록</button>
-                            </form> -->
+                                        th:action="@{/member/inquiry/insert.do(classcode=${obj.classcode} )}">
+                                        <button type="button" class="btn btn-primary" onclick="insertPost()"
+                                        style="border: 0;">등록</button>
+                                    </form> -->
 
-                                <input type="button" class="btn btn-primary" onclick="insertClass()" value="등록">
+                                <input type="button" class="btn btn-primary" id="btn-write" onclick="insertClass()"
+                                    value="등록">
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
+            <!-- </form> -->
 
         </div>
     </div>
@@ -117,7 +187,83 @@
         </nav>
     </div>
 
-    <script>
+
+    <script src="/js/lib/jquery.min.js"></script>
+    <!--jQuery-->
+    <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
+    <!--axios library-->
+    <script th:src="@{/js/axios.min.js}"></script>
+    <script language="javascript" type="text/javascript">
+
+
+        const board = {
+            init: function () {
+                $("#btn-write").on("click", () => {
+                    this.clickWriteBtn();
+                });
+            },
+            csrf: {
+                token: $("meta[name='_csrf']").attr("content"),
+                header: $("meta[name='_csrf_header']").attr("content"),
+            },
+            clickWriteBtn: function () {
+                const data = {
+                    answer: $("#answer").val(),
+                    content: $("#content").val(),
+                };
+
+                const { token, header } = this.csrf;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/post/save",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(data),
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader(header, token);
+                    },
+                })
+                    .done(function (result) {
+                        if (result.msg === "save") {
+                            alert("답변이 등록되었습니다.");
+                            location.reload();
+                        } else {
+                            alert("답변 등록에 실패했습니다. 다시 작성해주세요");
+                            location.reload();
+                        }
+                    })
+                    .fail(function (error) {
+                        alert("error");
+                        console.log(error);
+                    });
+            },
+        };
+
+        board.init();
+        //   -----------------------------------------------------------------------
+
+        const contextPath = $('#contextPathHolder').attr('data-contextPath');
+
+        async function insertClass() {
+            const content = document.getElementById("content");
+            const answer = document.getElementById("answer");
+
+            if (answer.value.length <= 0) {
+                alert('답변을 작성하세요');
+                answer.focus();
+                return false;
+            }
+
+            const url = contextPath + '/api/member/inquiry.json';
+            const headers = { "Content-Type": "application/json" };
+            const { data } = await axios.get(url,
+                { params: { content: content.value, answer: answer.value } },
+                { headers });
+
+            console.log(data.ret);
+        }
+
         // let totalCount = 23; //글의 총수
         // let pageSize =10;
         // let pageNumber = 1; // 현재 페이지
@@ -150,10 +296,10 @@
         //             }
         //      })
 
-        var action = 0;
-        var url = '';
-        var type = '';
-        var bno = '';
+        // var action = 0;
+        // var url = '';
+        // var type = '';
+        // var bno = '';
 
         $(document).ready(function () {
 
