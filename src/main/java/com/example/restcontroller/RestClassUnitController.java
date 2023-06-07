@@ -61,6 +61,7 @@ public class RestClassUnitController {
             Map<String,Object> retmap = new HashMap<>();
 
             List<ClassUnit> list = cuRepository.findByClassproduct_classcode(classcode);
+            // log.info(format, list.toString());
         
             retmap.put("list", list);
             return retmap;

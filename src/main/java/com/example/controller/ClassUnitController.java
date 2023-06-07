@@ -35,8 +35,9 @@ public class ClassUnitController {
 
         if(menu == 1) {
 
-            log.info(format, classcode);
             long defaultPrice = cuService.selectPriceOne(classcode);
+            log.info(format, classcode);
+            log.info(format, defaultPrice);
             
             model.addAttribute("classcode", classcode);
             model.addAttribute("defaultPrice", defaultPrice);

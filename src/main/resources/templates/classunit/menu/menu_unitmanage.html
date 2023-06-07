@@ -40,7 +40,7 @@
             height: 100%;
             background-color: rgb(204, 228, 119);
             transition: right 0.5s, background-color 0.5s;
-            z-index: 2;
+            z-index: 9999;
         }
 
         #right-side-bar.active {
@@ -79,9 +79,7 @@
                     <div class="checkbox" style="float: left; margin-top: 8px;"><input type="checkbox" name="all_chk" id="all_chk"><label for="all_chk" style="margin-left: 3px;">선택</label></div>
                     <div style="float: right;"><input type="button" value="일정 전체 삭제" class="btn btn-sm btn-secondary" id="addCalendar"></div><br />
                 </div>
-                <div class="unit-list" style="margin-top: 20px;">
-                    <!-- <div class="unit" style="border: 1px solid rgb(201, 197, 197); background-color: white; border-radius: 5px; height: 100px; padding: 10px; margin-top: 10px;"></div> -->
-                </div>
+                <div class="unit-list" style="margin-top: 20px;"></div>
             </div>
             
         </div>        
@@ -103,7 +101,7 @@
                 </div>
                 
                 <div class="modal-body">
-                    <input type="number" id="classcode" th:value="${classcode}">
+                    <input type="text" id="classcode" th:value="${classcode}">
                     <div class="form-group" style="display: inline-block;">
                         <div class="row">
                             <div class="col-sm-3" style="width: 50%;">
@@ -512,7 +510,7 @@
         document.getElementById('closeButton').addEventListener('click', hideRightSideBar);
 
         // 오른쪽 사이드바 배경 클릭 시 닫기
-        // document.getElementById('right-side-bar-bg').addEventListener('click', hideRightSideBar);
+        document.getElementById('right-side-bar-bg').addEventListener('click', hideRightSideBar);
 
 
         /******************************** 수정, 삭제 ***************************************/
@@ -640,11 +638,26 @@
                 unitList.appendChild(div);
             });
 
-            // 스크롤
-            unitList.style.overflow = "auto";
-            unitList.style.maxHeight = "700px";
-
             /***********************************************************************/
+
+            unitList.style.overflow = "auto";
+            //unitList.style.maxHeight = "700px";
+
+            // 스크롤 영역의 최대 높이 동적 설정
+            function setScrollMaxHeight() {
+                const windowHeight = window.innerHeight;
+                const topOffset = unitList.getBoundingClientRect().top;
+                const marginBottom = 30; // 하단과의 간격을 조정하기 위한 값
+                const scrollMaxHeight = windowHeight - topOffset - marginBottom;
+                unitList.style.maxHeight = `${scrollMaxHeight}px`;
+            }
+            
+            // 초기 로드 시 스크롤 영역 높이 설정
+            setScrollMaxHeight();
+            
+            // 창 크기 변경 시 스크롤 영역 높이 재설정
+            window.addEventListener('resize', setScrollMaxHeight);
+
         }   
         
         
