@@ -115,13 +115,22 @@
                     </div>
                 </div>
 
-                <div class="row mb-3 ">
+                <div class="row">
                     <div class="text-center">
                         <button class="btn btn-outline-success" onclick="resetSearchOption()"><i
                                 class="bi bi-arrow-clockwise me-2"></i>검색 조건 초기화</button>
                         <button class="btn btn-outline-primary" type="button" onclick="searchClassAction(1)"><i
                                 class="bi bi-search me-2"></i>검색</button>
                     </div>
+                </div>
+                
+                <div class="d-flex justify-content-end">
+                    <select class="form-select" style="width: 100px;" onchange="selectoption(this.value)">
+
+                        <option value="1">최신순</option>
+                        <option value="2">조회순</option>
+
+                    </select>
                 </div>
 
                 <hr class="divider">
@@ -161,6 +170,8 @@
             var maxprice = 0;
             var classdate = "";
             var keyword = "";
+
+            var option = 1;
 
             async function getLocalcate(code) {
                 console.log(code);
@@ -304,6 +315,8 @@
 
             async function searchClassAction(page) {
 
+                // console.log(option);
+
                 currentPage = page;
 
                 if ($('#classdate').val().length !== 0) {
@@ -345,7 +358,8 @@
                             citycode: citycode, activitycode: activitycode,
                             localcode: localcode, actcode: actcode,
                             classlevel: classlevel, classdate: classdate,
-                            minprice: minprice, maxprice: maxprice, keyword: keyword, page: page
+                            minprice: minprice, maxprice: maxprice, keyword: keyword, 
+                            page: page, option: option
                         }
                     },
                     { headers }).then(function (response) {
@@ -369,12 +383,12 @@
                                 classlist.innerHTML +=
 
                                     '<div class="col">' +
-                                    '<a href="product.do?classcode=' + obj.classcode + '" class="nav-link">' +
+                                    '<a href="#" class="nav-link" onclick=updatehit(' + obj.classcode + ')>' +
                                     '<div class="card shadow-sm">' +
                                     '<div class="card-header text-center">' + obj.title + '</div>' +
                                     '<img class="card-img-top" src="' + contextPath + '/class/image?no=' + obj.mainImg + '">' +
                                     '<div class="card-body">' +
-                                    '<p class="card-text"> 가격(1인) : ' + obj.price + '원' + '</p>' +
+                                    '<p class="card-text"> 가격(1인) : ' + priceToString(obj.price) + '원' + '</p>' +
                                     '<p class="card-text"> 주소 : ' + obj.address1 + " " + obj.address2 + " " + obj.address3 + '</p>' +
                                     /* '<div class="d-flex justify-content-between align-items-center">' + 
                                         '<div>' +
@@ -401,13 +415,13 @@
                                 classlist.innerHTML +=
 
                                     '<div class="col">' +
-                                    '<a href="product.do?classcode=' + obj.classcode + '" class="nav-link">' +
+                                    '<a href="#" class="nav-link" onclick=updatehit(' + obj.classcode + ')>' +
                                     '<div class="card shadow-sm">' +
                                     '<div class="card-header text-center">' + obj.title + '</div>' +
                                     '<img class="card-img-top" src="' + contextPath + '/class/image?no=' + obj.mainImg + '">' +
                                     '<div class="card-body">' +
                                     '<p class="card-text"> 날짜 : ' + obj.classdate + '</p>' +
-                                    '<p class="card-text"> 가격(1인) : ' + obj.price + '원' + '</p>' +
+                                    '<p class="card-text"> 가격(1인) : ' + priceToString(obj.price) + '원' + '</p>' +
                                     '<p class="card-text"> 주소 : ' + obj.address1 + " " + obj.address2 + " " + obj.address3 + '</p>' +
                                     /* '<div class="d-flex justify-content-between align-items-center">' + 
                                         '<div>' +
@@ -466,6 +480,37 @@
                 keyword = "";
 
             };
+
+            async function updatehit(code) {
+
+                //console.log(code);
+
+                const url = contextPath + '/api/class/updatehit.json';
+                const headers = { "Content-Type": "application/json" };
+                const body = { classcode: code };
+
+                const { data } = await axios.put(url, body, { headers });
+
+                //console.log(data);
+
+                if (data.ret === 1) {
+                    window.location.href = contextPath + '/class/product.do?classcode=' + code;
+                }
+            }
+
+            function priceToString(price) {
+                return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            }
+
+            function selectoption(value) {
+
+                // console.log("option", option);
+
+                option = value;
+
+                searchClassAction(1);
+
+            }
         </script>
 
     </main>

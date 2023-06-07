@@ -1,10 +1,21 @@
 package com.example.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,10 +27,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.dto.ApplyView;
+import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
 import com.example.dto.Member;
 import com.example.entity.ClassInquiryView;
 import com.example.repository.ClassInquiryViewRepository;
+import com.example.service.apply.ApplyService;
 import com.example.service.classproduct.ClassManageService;
 import com.example.service.classproduct.ClassSelectService;
 import com.example.service.member.MemberService;
@@ -36,12 +50,15 @@ public class MemberController {
     final String format = "MemberController => {}";
     final ClassInquiryViewRepository civRepository;
 
-    @Autowired
-    MemberService mService;
-    @Autowired
-    ClassManageService cService;
-    @Autowired
-    ClassSelectService c1Service;
+    @Autowired MemberService mService;
+    @Autowired ClassManageService cService; 
+    @Autowired ClassSelectService c1Service;
+    @Autowired ApplyService aService;
+    @Autowired ClassManageService manageService;
+
+    @Autowired ResourceLoader resourceLoader;
+    @Value("${default.image}") String defaultImg;
+
 
     BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 
@@ -49,7 +66,7 @@ public class MemberController {
     public String joinGET(@AuthenticationPrincipal User user, Model model) {
 
         model.addAttribute("user", user);
-
+        
         return "/member/join";
 
     }
@@ -65,11 +82,12 @@ public class MemberController {
 
         log.info(format, ret);
 
-        if (ret == 1) {
+        if(ret == 1) {
             // httpSession.setAttribute("alertMessage", "회원 가입 완료했습니다.");
             // httpSession.setAttribute("alertUrl", "/home.do");
             return "redirect:joinsuccess.do";
-        } else {
+        }
+        else {
             return "redirect:/member/join.do";
         }
 
@@ -83,48 +101,61 @@ public class MemberController {
 
     @GetMapping(value = "/mypage.do")
     public String mypageGET(
-            @RequestParam(name = "menu", defaultValue = "0") int menu,
-            @AuthenticationPrincipal User user,
-            Model model) {
+        @RequestParam(name = "menu", defaultValue = "0") int menu,
+        @RequestParam(name = "page", defaultValue = "0") int page,
+        @AuthenticationPrincipal User user,
+        Model model) {
 
-        String id = user.getUsername();
+        // String id = user.getUsername();
+        Map<String,Object> map = new HashMap<String,Object>();
+        List<ApplyView> list = new ArrayList<>();
+       
+        int first = page*5-4;
+        int last = page*5;
+        String id =user.getUsername();
 
-        if (menu == 0) {
-            return "redirect:/member/mypage.do?menu=1";
+        long cnt = aService.countApplyList(id);
+        log.info(format,"id=" + id);
+
+        if(menu == 0) {
+            return "redirect:/member/mypage.do?menu=1&page=1";
         }
 
-        if (menu == 1) {
-            List<ClassProduct> list = cService.selectMyClassList(id);
-            // log.info(format, list.toString());
-        }
+        if(menu == 1 ) {
+            map.put("id",user.getUsername());
+            map.put("first",first);
+            map.put("last",last);
+            list = aService.selectApplyListById(map);
+         }
 
-        else if (menu == 2) {
-
-        }
-
-        else if (menu == 3) {
+        else if(menu == 2) {
 
         }
 
-        else if (menu == 4) {
+        else if(menu == 3) {
+
+        }
+
+        else if(menu == 4) {
             Member obj = mService.selectMemberOne(id);
-            // slog.info(format, obj.toString());
+            //slog.info(format, obj.toString());
             model.addAttribute("obj", obj);
         }
-
+        model.addAttribute("list", list);
         model.addAttribute("user", user);
-
+        model.addAttribute("pages", (cnt-1) / 5 + 1);
         return "/member/mypage/mypage";
-
     }
 
     @PostMapping(value = "/mypage.do")
     public String mypagePOST(
-            @RequestParam(name = "menu", defaultValue = "0", required = false) int menu) {
+        @RequestParam(name = "menu", defaultValue = "0", required = false) int menu
+    ) {
 
-        return "redirect:/mypage.do?menu=" + menu;
-
+        return "redirect:/mypage.do?menu="+menu;
+        
     }
+
 
     @GetMapping(value = "/myclass.do")
     public String myclassGET(
@@ -201,13 +232,38 @@ public class MemberController {
         return "redirect:/myclass.do?menu=" + menu;
     }
 
-    // @PostMapping(value = "/myclass/inquiry.do")
-    // public String myClassInquiryPOST(
-    // @ModelAttribute ClassInquiryView obj,
-    // Model model
-    // ){
+    //이미지 뛰우기 
+    @GetMapping(value = "/image")
+    public ResponseEntity<byte[]> image(
+        @RequestParam(name = "classcode", defaultValue = "0") long classcode)
+    throws IOException {
+       
+        log.info(format, classcode);
 
-    // return "/member/myclass";
-    // }
+        long classMainNo = manageService.selectClassMainImageNo(classcode);
+        ClassImage obj = manageService.selectClassImageOne(classMainNo);
+  
+        HttpHeaders headers = new HttpHeaders(); //import org.springframework....
+    
+        if (obj != null) { // 이미지가 존재하는지 확인
+            if (obj.getFilesize() > 0) {
+                headers.setContentType(MediaType.parseMediaType(obj.getFiletype()));
+                return new ResponseEntity<>(obj.getFiledata(), headers, HttpStatus.OK);
+            }
+        }
+        // 이미지가 없을경우
+        InputStream is = resourceLoader.getResource(defaultImg).getInputStream(); // exception발생됨
+        headers.setContentType(MediaType.IMAGE_PNG);
+        return new ResponseEntity<>(is.readAllBytes(),headers,HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/myclass/inquiry.do")
+    public String myClassInquiryPOST(
+        @ModelAttribute ClassInquiryView obj,
+        Model model
+    ){
+
+        return "/member/myclass";
+    }
 
 }

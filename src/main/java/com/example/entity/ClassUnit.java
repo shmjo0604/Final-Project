@@ -19,6 +19,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.ToString;
 
@@ -77,16 +79,19 @@ public class ClassUnit {
   
   // 클래스 상품 테이블
   @ManyToOne(fetch = FetchType.LAZY)
+  @JsonIgnore
   @JoinColumn(name = "classcode", referencedColumnName = "CLASSCODE")
   private ClassProduct classproduct;
   
   // 신청 테이블
   @ToString.Exclude
   @OneToMany(mappedBy = "classunit", fetch = FetchType.LAZY)
+  @JsonIgnore
   private List<Apply> applyList = new ArrayList<>();
   
   // 장바구니 테이블
   @ToString.Exclude
   @OneToMany(mappedBy = "classunit", fetch = FetchType.LAZY)
+  @JsonIgnore
   private List<Basket> basketList = new ArrayList<>();
 }

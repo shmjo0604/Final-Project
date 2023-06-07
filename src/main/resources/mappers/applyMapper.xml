@@ -59,16 +59,29 @@
 </update>
 
 <!-- 7. 클래스 신청 상태(chk = 1)인 것만 조회 -->
-<select id="selectApplyListById" parameterType="map" resultType="ApplyView">
+<select id="selectApplyListById" parameterType="map" resultType="com.example.dto.ApplyView">
     SELECT a.* FROM(
         SELECT ROW_NUMBER() OVER(ORDER BY a.applyregdate DESC) AS rnum, 
         a.* FROM applyview a WHERE memberid = #{id}
-        ) a WHERE a.rnum <![CDATA[ >= ]]> ${first} AND a.rnum <![CDATA[ <= ]]> ${last} ORDER BY a.no DESC
+        ) a WHERE a.rnum <![CDATA[ >= ]]> ${first} AND a.rnum <![CDATA[ <= ]]> ${last} ORDER BY a.unitno DESC
 </select>
 
-<!--8. 클래스 신청 번호 조회 (등록한 개수만큼)-->
+<!-- 8. 신청 전체 개수 조회 -->
+<select id="countApplyList" parameterType="String" resultType="long">
+    SELECT COUNT(*) FROM APPLY WHERE memberid = #{id}
+</select>
+
+<!--9. 클래스 신청 번호 조회 (등록한 개수만큼)-->
 <select id="selectInsertedApplyNoList" parameterType="map" resultType="long">
     SELECT a.NO FROM (SELECT ROW_NUMBER() OVER(ORDER BY NO desc) rnum, * FROM apply a WHERE memberid = #{id} ORDER BY NO DESC) a WHERE rnum <![CDATA[ >= ]]> 1 AND rnum <![CDATA[ <= ]]> #{count};
+</select>
+
+<!-- 9. 클래스 신청 상태(chk = 1)인 것만 조회 -->
+<select id="selectBasketListById" parameterType="map" resultType="BasketView">
+    SELECT a.* FROM(
+        SELECT ROW_NUMBER() OVER(ORDER BY a.no DESC) AS rnum, 
+        a.* FROM basketview a WHERE memberid = #{id}
+        ) a WHERE a.rnum <![CDATA[ >= ]]> ${first} AND a.rnum <![CDATA[ <= ]]> ${last} ORDER BY a.no DESC
 </select>
 
 </mapper>

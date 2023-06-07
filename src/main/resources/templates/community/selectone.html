@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>게시글 상세화면</title>
     <!--웹 페이지 아이콘 변경-->
     <link rel="icon" th:href="@{/image/logo.ico}">
     <!-- Google Font -->
@@ -18,77 +18,154 @@
     <!--CSS-->
     <link rel="stylesheet" th:href="@{/css/main.css}">
     <!--Bootstrap 용 Icon CDN-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">s
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <!--font awesome 용-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />s
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!--thymeleaf contextpath-->
+    <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}" />
     <style>
         .container {
-            padding-top: 80px;
-            font-size: 20px;
+            padding-top: 150px;
         }
 
-        .container.title {
-            font-size: 30px;
+        .container>.h4 {
+            padding-bottom: 40px;
         }
 
-        .btnSave .btnList {
-            padding-left: 400px;
+        .container>.title {
+            font-weight: 700;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .container>.content {
+            margin-top: 40px;
+          
+            font-size: 18px;
+        }
+
+        .card {
+            padding-top: 10px;
         }
     </style>
 </head>
 
 <body>
-    <div class="logo-wrap" style="text-align: center; margin-top: 8%; margin-bottom: 5%;">
-        <img class="p-4" th:src="@{/images/logo.svg}" alt="로고 이미지" />
-    </div>
-    <div class="container">
-        제목 <label class=title th:text="${board1.title}"></label><br />
-        작성자 - <label th:text="${board1.writer}"></label>
-        작성일 - <label th:text="${board1.regdate}"></label>
-        조회수 - <label th:text="${board1.hit}"></label><br />
-        <hr />
-        내용 : <label th:text="${board1.content}"></label><br />
+    <!--header 영역-->
+    <header th:replace="~{header :: headerFragment}"></header>
+
+    <article>
+
+
+        <div class="container" role="main">
 
 
 
-        <hr />
+            <form id="form" method="post" th:action="@{/community/update.do}">
+                <label class="title" th:text="${community.title}" style="font-size: 28px;"></label><br />
+                <label class="no" th:text="${community.no}"></label>
+                | <label class="writer" th:text="${community.member.id}"></label>
+                | <label class="date" th:text="${community.regdate}"></label><br />
+                <hr />
+                <label class="content" th:utext="${community.content}" style="padding-bottom:80px;font-size: 18px;"></label><br />
 
-        <h3>댓글</h3>
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label"></label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                placeholder="내용을 입력해주세요"></textarea>
-            <button type="submit" class="btn btn-lg btn-primary" id="btnSave">입력</button>
-            <button type="button" class="btn btn-lg btn-outline-primary" id="btnList">목록</button>
+
+                <div class="buttons">
+                    <button class="btn btn-sm btn-primary" th:onclick="formAction1(1)">수정</button>
+                    <input type="hidden" name="no" th:value="${community.no}" />
+                    <input type="hidden" name="id" th:value="${community.member.id}" />
+                    <button class="btn btn-sm btn-primary" th:onclick="formAction1(2)">삭제</button>
+                </div>
+
+
+
+            </form>
+            <br />
+            <!--댓글-->
+
+            <div class="card">
+                <form th:action="@{/reply/insert.do}" method="post">
+                    <input type="hidden" name="community.no" th:value="${community.no}" readonly />
+
+                    <!-- <input type="text" id="memberid" th:value="${member.id}" name="member.id"/> -->
+
+                    <div class="card-body">
+                        <textarea id="content" class="form-control" rows="3"
+                            placeholder="지나친 폭언과 비방은 형사처벌의 대상이 될 수 있습니다"></textarea>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" id="btn-reply-save" class="btn btn-primary">등록</button>
+                    </div>
+                </form>
+            </div>
+            <br />
+            <div class="card">
+                <div class="card-header">등록</div>
+                <ul id="comment-box" class="list-group">
+                    <c:forEach var="reply" items="${community.replyList}">
+                        <li id="reply--1" class="list-group-item d-flex justify-content-between">
+                            <div>${reply.content}</div>
+                            <div class="d-flex">
+                                <div class="font-italic" style="padding-left: 10px;">작성자: ${reply.member.id}&nbsp;</div>
+                                <button class="btn btn-sm btn-outline-primary">삭제</button>
+                            </div>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+
+            <!--댓글 목록-->
+            <!-- <table>
+                        <thead>
+                            <tr th:each ="tmp:${community.list}">
+                                <td th:text ="${tmp.no}"></td>
+                                <td th:text ="${tmp.content}"></td>
+                                <td th:text ="${reply.member.id}"></td>
+                                <td th:text ="${tmp.regdate}"></td>
+                            </tr>
+                        </thead>
+                    </table> -->
+
+            <!--댓글 form 형식-->
+            <!-- <form name="form" id="form" th:action="@{reply/insert.do}" method="post">
+                        <label class="writer" th:text="${reply.member.id}"></label>
+                        <div class="mb-3">
+                        <textarea class="form-control" id="content" rows="3" name="content" placeholder="지나친 욕설과 비방은 형사처벌의 대상이 될 수 있습니다"></textarea>
+                        </div>
+                        <input type="submit" class="btn btn-sm btn-primary" value="답글 작성" />
+                    </form> -->
+
+
         </div>
-        <div>
-
-
-        </div>
-
-
-        <!--댓글목록-->
-        <table>
-            <thead>
-                <tr th:each="tmp : ${board1.list}">
-                    <td th:text="${tmp.no}"></td>
-                    <td th:text="${tmp.content}"></td>
-                    <td th:text="${tmp.writer}"></td>
-                    <td th:text="${tmp.regdate}"></td>
-                </tr>
-            </thead>
-        </table>
-        <hr />
-
-    </div>
-
-    <!--footer 영역-->
-    <footer th:replace="~{footer :: footerFragment}"></footer>
-
+    </article>
     <!--jQuery-->
     <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
+    <!--axios library-->
+    <script th:src="@{/js/axios.min.js}"></script>
     <!--Bootstrap 용 js -->
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:inline="javascript" type="text/javascript">
+
+        const contextPath = $('#contextPathHolder').attr('data-contextPath');
+
+        function formAction1(code) {
+            const form = document.getElementById('form');
+            if (code === 1) {
+
+                form.action = /*[[@{/community/update.do}]]*/ '';
+            } else if (code === 2) {
+
+                alert("삭제할까요?");
+
+                form.action = /*[[@{/community/delete.do}]]*/ '';
+            } else if (code === 3) {
+
+                form.action = /*[[@{/community/selectlist.do}]]*/ '';
+            }
+            form.submit();
+        }
+
+    </script>
     <!--Main js-->
     <script th:src="@{/js/main.js}"></script>
 </body>

@@ -249,6 +249,7 @@ public class ClassController {
         @ModelAttribute com.example.dto.ClassImage obj2,
         @RequestParam(name = "classcode", defaultValue = "0") long classcode,
         Model model) {
+            
             // 1.Rest API 호출 -> 주소 기반 위도, 경도 값 반환(Map)
             Map<String, String> map = KakaoLocalAPI.getCoordinate(obj.getAddress1());
 

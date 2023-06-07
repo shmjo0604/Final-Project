@@ -137,4 +137,13 @@ public class ApplyServiceImpl implements ApplyService {
         }
     }
 
+    @Override
+    public long countApplyList(String id) {
+       try {
+        return aMapper.countApplyList(id);
+       } catch (Exception e) {
+        e.printStackTrace();
+        return -1;
+       }
+    }
 }

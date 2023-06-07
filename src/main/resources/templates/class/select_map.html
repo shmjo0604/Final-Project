@@ -108,6 +108,8 @@
             var maxprice_map = 0;
             var keyword_map = "";
 
+            var option = 1;
+
             var positions = [];
 
             var currentPage = 1;
@@ -181,7 +183,7 @@
                             localcode: localcode_map, actcode: actcode_map,
                             classlevel: classlevel_map, classdate: classdate_map,
                             minprice: minprice_map, maxprice: maxprice_map, keyword: keyword_map,
-                            page: page
+                            page: page, option: option
                         }
                     },
                     { headers });
@@ -210,7 +212,7 @@
                             '<div class="card-header text-center">' + obj.title + '</div>' +
                             '<img class="card-img-top" src="' + contextPath + '/class/image?no=' + obj.mainImg + '">' +
                             '<div class="card-body">' +
-                            '<p class="card-text"> 가격(1인) : ' + obj.price + '원' + '</p>' +
+                            '<p class="card-text"> 가격(1인) : ' + priceToString(obj.price) + '원' + '</p>' +
                             '<p class="card-text"> 주소 : ' + obj.address1 + " " + obj.address2 + " " + obj.address3 + '</p>' +
                             /* '<div class="d-flex justify-content-between align-items-center">' + 
                                 '<div>' +
@@ -243,7 +245,7 @@
                             '<img class="card-img-top" src="' + contextPath + '/class/image?no=' + obj.mainImg + '">' +
                             '<div class="card-body">' +
                             '<p class="card-text"> 날짜 : ' + obj.classdate + '</p>' +
-                            '<p class="card-text"> 가격(1인) : ' + obj.price + '원' + '</p>' +
+                            '<p class="card-text"> 가격(1인) : ' + priceToString(obj.price) + '원' + '</p>' +
                             '<p class="card-text"> 주소 : ' + obj.address1 + " " + obj.address2 + " " + obj.address3 + '</p>' +
                             /* '<div class="d-flex justify-content-between align-items-center">' + 
                                 '<div>' +
@@ -258,6 +260,8 @@
                     }
 
                 }
+
+                positions.splice(0, positions.length);
 
                 for (let obj of data.list) {
                     /* var jsonObj = new Object();
@@ -284,7 +288,7 @@
 
                 }
 
-                console.log(positions);
+                console.log("위치", positions);
 
                 onloadMap();
             }
@@ -466,6 +470,9 @@
 
             }
 
+            function priceToString(price) {
+                return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            }
 
         </script>
     </main>
