@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
+import com.example.entity.ClassInquiry;
 import com.example.entity.ClassInquiryView;
 
 @Service
@@ -54,5 +55,8 @@ public interface ClassManageService {
 
     // 10. 클래스 문의 1개 조회
     public ClassInquiryView selectClassInquiryOne(long no);
+
+    // 11. 클래스 문의 답변완료(chk=1)
+    //public int updateClassAnswer(ClassInquiry obj);
     
 }

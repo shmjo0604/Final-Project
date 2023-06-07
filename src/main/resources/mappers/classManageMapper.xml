@@ -65,5 +65,8 @@
         DELETE FROM classimage WHERE no = #{no}
     </delete>
 
-
+    <!-- 9. 클래스 활성화 -->
+    <update id="updateClassAnswer" parameterType="ClassInquiry">
+        UPDATE classinquiry SET chk = 1 WHERE no=#{no}
+    </update>
 </mapper>
