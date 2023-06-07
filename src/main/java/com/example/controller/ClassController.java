@@ -62,6 +62,7 @@ public class ClassController {
     @GetMapping(value = "/select.do")
     public String selectGET(
         @RequestParam(name = "search", defaultValue = "", required = false) String search,
+        @RequestParam(name = "selection", defaultValue = "0", required = false) int selection,
         @AuthenticationPrincipal User user,
         Model model) {
 
@@ -71,9 +72,15 @@ public class ClassController {
 
         List<ActivityCate> list1 = cService.selectActivityCateList();
         List<CityCate> list2 = cService.selectCityCateList();
+
+        if(search.equals("list") && (selection == 1 || selection > list1.size())) {
+            return "redirect:/class/select.do";
+        }
+
         model.addAttribute("user", user);
         model.addAttribute("list1", list1);
         model.addAttribute("list2", list2);
+        model.addAttribute("selection", selection);
 
         return "/class/select";
     }

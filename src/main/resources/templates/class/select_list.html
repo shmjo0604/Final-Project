@@ -158,8 +158,13 @@
         <script th:src="@{/js/axios.min.js}"></script>
         <!--twbsPagination js-->
         <script th:src="@{/js/jquery.twbsPagination.min.js}"></script>
-        <script>
+        <script th:inline="javascript">
+
             const contextPath = $('#contextPathHolder').attr('data-contextPath');
+
+            const selection = /*[[${selection}]]*/'';
+
+            // console.log("selection", selection);
 
             var citycode = 0;
             var localcode = 0;
@@ -173,8 +178,13 @@
 
             var option = 1;
 
+            if(selection !== 0) {
+                $("#activityselect").val(selection).prop("selected", true);
+                activitycode = selection;
+            }
+
             async function getLocalcate(code) {
-                console.log(code);
+                //console.log(code);
 
                 //const localselect = $('#localselect')[0];
 
@@ -199,7 +209,7 @@
                     //const body = {refcode : code};
 
                     const { data } = await axios.get(url, { headers });
-                    console.log(data);
+                    //console.log(data);
 
                     $('#localselect').children('option').remove();
                     //localselect.options.length = 0;
@@ -221,7 +231,7 @@
             }
 
             async function getClasscate(code) {
-                console.log(code);
+                //console.log(code);
 
                 if (code == 1) {
 
@@ -240,7 +250,7 @@
                     //const body = {refcode = code, chk = 'classcate'};
 
                     const { data } = await axios.get(url, { headers });
-                    console.log(data);
+                    //console.log(data);
 
                     $('#actdetailselect').children('option').remove();
 
@@ -260,7 +270,7 @@
             }
 
             function setLocalcate(code) {
-                console.log(code);
+                //console.log(code);
 
                 if (code % 100 == 1) {
                     localcode = 0;
@@ -271,7 +281,7 @@
             }
 
             function setActcate(code) {
-                console.log(code);
+                //console.log(code);
 
                 if (code % 100 == 1) {
                     actcode = 0;

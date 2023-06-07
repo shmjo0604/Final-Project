@@ -138,7 +138,7 @@ public class CommunityController {
 
     @PostMapping(value = "/update.do")
     public String updatePOST(@AuthenticationPrincipal User user, @ModelAttribute Community community,
-                            @RequestParam(name = "no",defaultValue = "0",required = false) long no )
+                            @RequestParam(name = "no", defaultValue = "0", required = false) long no )
                             throws IOException {
 
         try {
@@ -146,9 +146,11 @@ public class CommunityController {
             log.info("nocheck => {}",no);
 
             if(no != 0 ) {
-                
                 return "redirect:/community/update.do?no="+no;    
             }
+
+            
+            
             return "redirect:/community/update.do";
 
         } catch (Exception e) {

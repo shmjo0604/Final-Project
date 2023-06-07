@@ -67,7 +67,7 @@
             <div class="icon row">
                 <ul class="icon-list">
                     <li>
-                        <a href="#" class="cate-a">
+                        <a th:href="@{/class/select.do(search=list, selection=2)}" class="cate-a">
                             <div class="cate">
                                 <img th:src="@{/image/공예.png}" id="cate-icon" alt="도자기">
                                 <span>
@@ -77,7 +77,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="cate-a">
+                        <a th:href="@{/class/select.do(search=list, selection=3)}" class="cate-a">
                             <div class="cate">
                                 <img th:src="@{/image/스포츠.png}" id="cate-icon" alt="스포츠/건강">
                                 <span>
@@ -87,7 +87,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="cate-a">
+                        <a th:href="@{/class/select.do(search=list, selection=4)}" class="cate-a">
                             <div class="cate">
                                 <img th:src="@{/image/미술1.png}" id="cate-icon" alt="미술">
                                 <span>
@@ -102,7 +102,7 @@
             <div class="icon row">
                 <ul class="icon-list">
                     <li>
-                        <a href="#" class="cate-a">
+                        <a th:href="@{/class/select.do(search=list, selection=5)}" class="cate-a">
                             <div class="cate">
                                 <img th:src="@{/image/쿠킹.png}" id="cate-icon" alt="도자기">
                                 <span>
@@ -112,7 +112,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="cate-a">
+                        <a th:href="@{/class/select.do(search=list, selection=6)}" class="cate-a">
                             <div class="cate">
                                 <img th:src="@{/image/음악.png}" id="cate-icon" alt="스포츠/건강">
                                 <span>
@@ -122,7 +122,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="cate-a">
+                        <a th:href="@{/class/select.do(search=list, selection=7)}" class="cate-a">
                             <div class="cate">
                                 <img th:src="@{/image/뷰티.png}" id="cate-icon" alt="미술">
                                 <span>
@@ -136,7 +136,7 @@
 
             <!-- 소개 영역 -->
             <div class="main-service">
-                <h3 class="seb-title"> 스폐설 데이 안내 영역 </h2>
+                <h3 class="seb-title"> SPECIAL DAY 안내 영역 </h2>
                     <div id="tabMenu">
                         <input type="radio" id="tab1" name="tabs" checked>
                         <label for="tab1">공지사항</label>
@@ -175,18 +175,20 @@
                             <th:block th:each="obj : ${list}" th:if="${obj.chk == 1}">
                                 <div class="col">
                                     <div class="class">
-                                        <a th:href="@{/class/product.do( classcode=${ obj.classcode } )}" class="new-c1">
+                                        <a th:href="@{/class/product.do( classcode=${ obj.classcode } )}"
+                                            class="new-c1">
                                             <div class="new-c2">
                                                 <div class="class-image">
                                                     <img th:src="@{/class/image(no=${obj.mainImg})}" alt="클래스 메인 이미지"
-                                                    width="300" />
+                                                        width="300" />
                                                 </div>
                                                 <span>
                                                     <p class="class-name" th:text="${obj.title}"></p>
                                                     <p class="local" th:text="${obj.address1}"></p>
                                                     <div class="row">
                                                         <p class="price col-10" th:text="${obj.price}"></p>
-                                                        <span class="col-2" style="font-size: 15px; color: rgb(31, 40, 61); padding: 0%;">원</span>
+                                                        <span class="col-2"
+                                                            style="font-size: 15px; color: rgb(31, 40, 61); padding: 0%;">원</span>
                                                     </div>
                                                 </span>
                                             </div>
@@ -223,80 +225,81 @@
 
         const contextPath = $('#contextPathHolder').attr('data-contextPath');
 
-        $(document).ready(function(){
+        $(document).ready(function () {
             var nowNum = 0;
             var bannerObj = $('.slide li');
             var maxLength = bannerObj.length;
             var timer = 3000; // 자동 롤링되는 타임 설정
-            var autoRun = setInterval(function(){rollingFn('right');},timer);
+            var autoRun = setInterval(function () { rollingFn('right'); }, timer);
             var stopBtn = $('.stopBtn');
             var playBtn = $('.playBtn');
             bannerObj.eq(nowNum).fadeIn();
-            $('.nextBtn').bind('click',function(){
+            $('.nextBtn').bind('click', function () {
                 rollingFn('right');
             });
-            $('.prevBtn').bind('click',function(){
+            $('.prevBtn').bind('click', function () {
                 rollingFn('left');
             });
-            stopBtn.bind('click',function(){
+            stopBtn.bind('click', function () {
                 stopAndGoFn(true);
             });
-            playBtn.bind('click',function(){
+            playBtn.bind('click', function () {
                 stopAndGoFn(false);
             });
-            function rollingFn(direction){
-                if(direction=='right'){
-                    nowNum = nowNum+1;
-                    if(nowNum>maxLength-1){
+            function rollingFn(direction) {
+                if (direction == 'right') {
+                    nowNum = nowNum + 1;
+                    if (nowNum > maxLength - 1) {
                         nowNum = 0;
                     }
-                }else{
-                    nowNum = nowNum-1;
-                    if(nowNum<0){
-                        nowNum = maxLength-1;
+                } else {
+                    nowNum = nowNum - 1;
+                    if (nowNum < 0) {
+                        nowNum = maxLength - 1;
                     }
                 }
                 bannerObj.hide().eq(nowNum).fadeIn();
             }
-            function stopAndGoFn(bool){
-                if(bool==true){
+            function stopAndGoFn(bool) {
+                if (bool == true) {
                     clearInterval(autoRun);
-                }else if(bool==false){
-                    clearInterval(autoRun);			
-                    autoRun = setInterval(function(){rollingFn('right');},timer);
+                } else if (bool == false) {
+                    clearInterval(autoRun);
+                    autoRun = setInterval(function () { rollingFn('right'); }, timer);
                 }
             }
         });
 
 
-    // 페이지 좌우로 넘기기
-        $(document).ready(function(){
-	var nowNum = 0;
-	var maxLength = $('.slide li').length;
-	$('.slide li').eq(nowNum).show();
-	$('.next').bind('click',function(){
-		nowNum = nowNum+1;
-		if(nowNum>maxLength-1){
-			nowNum = 0;
-		}
-		console.log(nowNum);
-		$('.slide li').hide();
-		$('.slide li').eq(nowNum).show();
-	    });
+        // 페이지 좌우로 넘기기
+        $(document).ready(function () {
+            
+            var nowNum = 0;
+            var maxLength = $('.slide li').length;
+            $('.slide li').eq(nowNum).show();
+            $('.next').bind('click', function () {
+                nowNum = nowNum + 1;
+                if (nowNum > maxLength - 1) {
+                    nowNum = 0;
+                }
+                console.log(nowNum);
+                $('.slide li').hide();
+                $('.slide li').eq(nowNum).show();
+            });
 
-    $('.prev').bind('click',function(){
-		nowNum = nowNum-1;
-		if(nowNum>maxLength+1){
-			nowNum = 0;
-		}
-		console.log(nowNum);
-		$('.slide li').hide();
-		$('.slide li').eq(nowNum).show();
-	    });
-    });
+            $('.prev').bind('click', function () {
+                nowNum = nowNum - 1;
+                if (nowNum > maxLength + 1) {
+                    nowNum = 0;
+                }
+                console.log(nowNum);
+                $('.slide li').hide();
+                $('.slide li').eq(nowNum).show();
+            });
+        });
     </script>
-    
-    
+
+
     <!--Main js-->
     <script th:src="@{/js/main.js}"></script>
 </body>
