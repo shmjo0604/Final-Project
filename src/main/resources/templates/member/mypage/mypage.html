@@ -92,8 +92,12 @@
                 <li><a th:href="@{mypage.do(menu=3)}">문의 내역</a></li>
                 <hr />
                 <li>
-                  <a class="opener" data-toggle="collapse">계정 설정</a>
-                  <ul>
+                  <a class="opener" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                    aria-expanded="false" aria-controls="collapseExample">계정 설정 <span
+                      style="margin-left: 130px; font-size: 1rem; font-weight: bold; color: rgba(0,0,0,0.4);">
+                      ∨</span>
+                  </a>
+                  <ul class="collapse" id="collapseExample">
                     <li><a th:href="@{mypage.do(menu=4)}">나의 정보</a></li>
                     <li>
                       <a th:href="@{mypage.do(menu=5)}">비밀번호 변경</a>

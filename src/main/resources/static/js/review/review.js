@@ -183,15 +183,8 @@ function modalAction1(chk, person, totalprice, no, classcode, price, title, clas
     {}
   );
   var result = applyregdate.substring(0, 10)
-  var result1 = result.replace("-","/");
-  var result2 = result1.replace("-","/");
-
-  let chkname = "처리중76786";;
-   
-  if(chk === 1){
-    chkname="처리중";
-  }
-
+  var result1 = result.replace("-", "/");
+  var result2 = result1.replace("-", "/");
 
   const img2 = document.getElementById("mainimage2");
   const no2 = document.getElementById("no1");
@@ -201,27 +194,77 @@ function modalAction1(chk, person, totalprice, no, classcode, price, title, clas
   const classlevel2 = document.getElementById("classlevel1");
   const price2 = document.getElementById("price1");
   const price3 = document.getElementById("price2");
+  const price4 = document.getElementById("price3");
   const person2 = document.getElementById("person1");
-  const chk2 = document.getElementById("chk1");
+  const person3 = document.getElementById("person2");
+  let chk2 = document.getElementById("chk1");
   const totalprice2 = document.getElementById("totalprice1");
+  const totalprice4 = document.getElementById("totalprice3");
   const applyregdate2 = document.getElementById("applyregdate1");
 
+  let chkname = "처리중";
+
+  // 결제완료 color
+  if (chk === 1) {
+    cancle.style.display = 'none';
+    chkname = "결제완료";
+    chk2.style.color = "#0067a3";
+  }
+  else if (chk === 2) {
+    cancle.style.display = 'block';
+    chkname = "결제취소";
+    chk2.style.color = "#ff0000";
+  }
+  else if (chk === 3) {
+    cancle.style.display = 'none';
+    chkname = "참여완료";
+    chk2.style.color = "#0067a3";
+  }
+
+
+  let levelname = "입문자";
+  if (classlevel === 2) {
+    levelname = "경험자";
+  }
+  if (classlevel === 3) {
+    levelname = "숙련자";
+  }
+
+
   img2.src = "http://127.0.0.1:8080/specialday/member/image?classcode=" + classcode;
-  no2.value= no;
+  no2.value = no;
   title2.value = "이름: " + title;
   classdate2.value = classdate;
-  classstart2.value = classstart +"~"+ classend;
-  classlevel2.value = classlevel;
-  chk2.value = "처리상태: " + chkname;
-  person2.value = person +"명";
-  price2.value = price +"원";
-  price3.value = price +"원";
-  totalprice2.value = totalprice +"원";
+  classstart2.value = classstart + "~" + classend;
+  classlevel2.value = levelname;
+  chk2.value = chkname;
+  person2.value = person + "명";
+  person3.value = person + "명";
+  price2.value = price + "원";
+  price3.value = price + "원";
+  price4.value = price + "원";
+  totalprice2.value = totalprice + "원";
+  totalprice4.value = "- " + totalprice + "원";
   applyregdate2.value = result2;
 
- 
-
-
-
   modal.show();
+}
+
+
+function formaction(no) {
+  const form = document.getElementById("form1")
+
+
+  form.action = "http://192.168.219.103:8080/specialday/member/updatechk1.do";
+  form.style.display = "none";
+  form.method = "get";
+
+  const input = document.createElement("input");
+  input.type = "hidden";
+  input.name = "no";
+  input.value = no;
+
+  form.appendChild(input);
+
+  form.submit();
 }

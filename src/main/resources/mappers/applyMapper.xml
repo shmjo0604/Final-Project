@@ -91,18 +91,22 @@
 
 <!-- 11. 신청상태 개수 조회 (chk=2) -->
 <select id="countApplyListTwo" parameterType="String" resultType="long">
-    SELECT COUNT(*) FROM APPLY WHERE memberid = AND chk = 2
+    SELECT COUNT(*) FROM APPLY WHERE memberid =#{id} AND chk = 2
 </select>
 
 <!-- 12. 신청상태 개수 조회 (chk=3) -->
 <select id="countApplyListThree" parameterType="String" resultType="long">
-    SELECT COUNT(*) FROM APPLY WHERE memberid = AND chk = 3
+    SELECT COUNT(*) FROM APPLY WHERE memberid =#{id} AND chk = 3
 </select>
 
-<!-- 13. 업데이트 체크 -->
-<update id="updateChk" parameterType="">
-    UPDATE classunit SET cnt = cnt - #{person} WHERE no = #{unitno}
+<!-- 13. 업데이트 체크 (신청취소 변경 1->2 )-->
+<update id="updateChk2" parameterType="map">
+   UPDATE APPLY SET chk = 2 WHERE memberid = #{id} AND NO = #{applyno};
 </update>
 
+<!-- 14. 업데이트 체크 (참여완료 변경 1->3 )-->
+<update id="updateChk3" parameterType="map">
+   UPDATE APPLY SET chk = 3 WHERE memberid = #{id} AND NO = #{applyno};
+</update>
 
 </mapper>

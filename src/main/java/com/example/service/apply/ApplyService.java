@@ -45,7 +45,10 @@ public interface ApplyService {
     // 11. 신청 전체 개수 조회(chk=3)
     public long countApplyListThree(String id);
 
-     // 12. 신청 취소(chk: 1 => 2)
-     public long updateChk(String id);
+    // 12. 신청 취소(chk: 1 => 2)
+    public long updateChk2(Map<String, Object> map);
+
+    // 12. 참여 완료(chk: 1 => 3)
+    public long updateChk3(Map<String, Object> map);
 
 }

@@ -62,23 +62,24 @@ public class ReviewController {
 
         int result = reviewService.insertReview(review);
 
-        log.info(format, "result=" + result);
+        for (MultipartFile multipartfile : files) {
 
-        if (files != null) {
-            for (MultipartFile multipartfile : files) {
+            ReviewImage obj = new ReviewImage();
 
-                ReviewImage obj = new ReviewImage();
-                obj.setReview(review);
-                obj.setFilesize(multipartfile.getSize());
-                obj.setFiledata(multipartfile.getInputStream().readAllBytes());
-                obj.setFiletype(multipartfile.getContentType());
-                obj.setFilename(multipartfile.getOriginalFilename());
+            obj.setReview(review);
+            obj.setFilesize(multipartfile.getSize());
+            obj.setFiledata(multipartfile.getInputStream().readAllBytes());
+            obj.setFiletype(multipartfile.getContentType());
+            obj.setFilename(multipartfile.getOriginalFilename());
 
+            if (obj.getFilesize() != 0) {
                 list.add(obj);
+                System.out.println(obj.getFilename());
+                System.out.println(obj.getFilesize());
             }
-            log.info(format, list.toString());
-            reviewImageService.insertReviewImage(list);
         }
+        // log.info(format, list.toString());
+        reviewImageService.insertReviewImage(list);
 
         return "redirect:/member/mypage.do?menu=";
     }
@@ -114,7 +115,7 @@ public class ReviewController {
             @RequestParam(name = "menu", defaultValue = "0") int menu,
             @AuthenticationPrincipal User user,
             Model model) {
-                
+
         String id = user.getUsername();
 
         if (menu == 0) {

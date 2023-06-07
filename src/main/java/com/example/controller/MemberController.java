@@ -50,15 +50,21 @@ public class MemberController {
     final String format = "MemberController => {}";
     final ClassInquiryViewRepository civRepository;
 
-    @Autowired MemberService mService;
-    @Autowired ClassManageService cService; 
-    @Autowired ClassSelectService c1Service;
-    @Autowired ApplyService aService;
-    @Autowired ClassManageService manageService;
+    @Autowired
+    MemberService mService;
+    @Autowired
+    ClassManageService cService;
+    @Autowired
+    ClassSelectService c1Service;
+    @Autowired
+    ApplyService aService;
+    @Autowired
+    ClassManageService manageService;
 
-    @Autowired ResourceLoader resourceLoader;
-    @Value("${default.image}") String defaultImg;
-
+    @Autowired
+    ResourceLoader resourceLoader;
+    @Value("${default.image}")
+    String defaultImg;
 
     BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 
@@ -66,7 +72,7 @@ public class MemberController {
     public String joinGET(@AuthenticationPrincipal User user, Model model) {
 
         model.addAttribute("user", user);
-        
+
         return "/member/join";
 
     }
@@ -82,12 +88,11 @@ public class MemberController {
 
         log.info(format, ret);
 
-        if(ret == 1) {
+        if (ret == 1) {
             // httpSession.setAttribute("alertMessage", "회원 가입 완료했습니다.");
             // httpSession.setAttribute("alertUrl", "/home.do");
             return "redirect:joinsuccess.do";
-        }
-        else {
+        } else {
             return "redirect:/member/join.do";
         }
 
@@ -101,61 +106,56 @@ public class MemberController {
 
     @GetMapping(value = "/mypage.do")
     public String mypageGET(
-        @RequestParam(name = "menu", defaultValue = "0") int menu,
-        @RequestParam(name = "page", defaultValue = "0") int page,
-        @AuthenticationPrincipal User user,
-        Model model) {
+            @RequestParam(name = "menu", defaultValue = "0") int menu,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @AuthenticationPrincipal User user,
+            Model model) {
 
         // String id = user.getUsername();
-        Map<String,Object> map = new HashMap<String,Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
         List<ApplyView> list = new ArrayList<>();
-       
-        int first = page*5-4;
-        int last = page*5;
-        String id =user.getUsername();
 
-        long chk1 =0;
-        long chk2 =0;
-        long chk3 =0;
+        int first = page * 5 - 4;
+        int last = page * 5;
+        String id = user.getUsername();
+
+        long chk1 = 0;
+        long chk2 = 0;
+        long chk3 = 0;
 
         long cnt = aService.countApplyList(id);
-        log.info(format,"id=" + id);
 
-        if(menu == 0) {
+        if (menu == 0) {
             return "redirect:/member/mypage.do?menu=1&page=1";
         }
 
-        if(menu == 1 ) {
-            map.put("id",user.getUsername());
-            map.put("first",first);
-            map.put("last",last);
+        if (menu == 1) {
+            map.put("id", user.getUsername());
+            map.put("first", first);
+            map.put("last", last);
             list = aService.selectApplyListById(map);
 
-             chk1 = aService.countApplyListOne(id);
-             chk2 = aService.countApplyListTwo(id);
-             chk3 = aService.countApplyListThree(id);
+            chk1 = aService.countApplyListOne(id);
+            chk2 = aService.countApplyListTwo(id);
+            chk3 = aService.countApplyListThree(id);
+        }
 
-             log.info(format,"chk1=" + chk1);
-             log.info(format,"chk2=" + chk2);
-             log.info(format,"chk3=" + chk3);
-         }
-
-        else if(menu == 2) {
+        else if (menu == 2) {
 
         }
 
-        else if(menu == 3) {
+        else if (menu == 3) {
 
         }
 
-        else if(menu == 4) {
+        else if (menu == 4) {
             Member obj = mService.selectMemberOne(id);
-            //slog.info(format, obj.toString());
+            // slog.info(format, obj.toString());
             model.addAttribute("obj", obj);
         }
         model.addAttribute("list", list);
         model.addAttribute("user", user);
-        model.addAttribute("pages", (cnt-1) / 5 + 1);
+        model.addAttribute("pages", (cnt - 1) / 5 + 1);
 
         model.addAttribute("chk1", chk1);
         model.addAttribute("chk2", chk2);
@@ -166,13 +166,39 @@ public class MemberController {
 
     @PostMapping(value = "/mypage.do")
     public String mypagePOST(
-        @RequestParam(name = "menu", defaultValue = "0", required = false) int menu
-    ) {
+            @RequestParam(name = "menu", defaultValue = "0", required = false) int menu) {
 
-        return "redirect:/mypage.do?menu="+menu;
-        
+        return "redirect:/mypage.do?menu=" + menu;
+
     }
 
+    @GetMapping(value = "/updatechk.do")
+    public String updatechkGET(
+            @RequestParam(name = "no", defaultValue = "0", required = false) int applyno,
+            @AuthenticationPrincipal User user) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("applyno", applyno);
+        map.put("id", user.getUsername());
+
+        long result = aService.updateChk2(map);
+
+        return "redirect:/member/mypage.do?menu=1&page=1";
+    }
+
+    @GetMapping(value = "/updatechk1.do")
+    public String updatechkPOST(
+            @RequestParam(name = "no", defaultValue = "0", required = false) int applyno,
+            @AuthenticationPrincipal User user) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("applyno", applyno);
+        map.put("id", user.getUsername());
+        log.info(format, "applyno=" + applyno);
+
+        long result = aService.updateChk3(map);
+        log.info(format, "result123=" + result);
+
+        return "redirect:/member/mypage.do?menu=1&page=1";
+    }
 
     @GetMapping(value = "/myclass.do")
     public String myclassGET(
@@ -236,8 +262,8 @@ public class MemberController {
                 }
 
             } else if (chk == 3) {
-                int ret =  cService.updateClassActive(obj);
-                
+                int ret = cService.updateClassActive(obj);
+
                 log.info(" active => {}", obj.toString());
                 if (ret == 1) {
                     return "redirect:/member/myclass.do?menu=1";
@@ -249,17 +275,17 @@ public class MemberController {
         return "redirect:/myclass.do?menu=" + menu;
     }
 
-    //이미지 뛰우기 
+    // 이미지 뛰우기
     @GetMapping(value = "/image")
     public ResponseEntity<byte[]> image(
-        @RequestParam(name = "classcode", defaultValue = "0") long classcode)
-    throws IOException {
+            @RequestParam(name = "classcode", defaultValue = "0") long classcode)
+            throws IOException {
 
         long classMainNo = manageService.selectClassMainImageNo(classcode);
         ClassImage obj = manageService.selectClassImageOne(classMainNo);
-  
-        HttpHeaders headers = new HttpHeaders(); //import org.springframework....
-    
+
+        HttpHeaders headers = new HttpHeaders(); // import org.springframework....
+
         if (obj != null) { // 이미지가 존재하는지 확인
             if (obj.getFilesize() > 0) {
                 headers.setContentType(MediaType.parseMediaType(obj.getFiletype()));
@@ -269,14 +295,13 @@ public class MemberController {
         // 이미지가 없을경우
         InputStream is = resourceLoader.getResource(defaultImg).getInputStream(); // exception발생됨
         headers.setContentType(MediaType.IMAGE_PNG);
-        return new ResponseEntity<>(is.readAllBytes(),headers,HttpStatus.OK);
+        return new ResponseEntity<>(is.readAllBytes(), headers, HttpStatus.OK);
     }
 
     @PostMapping(value = "/myclass/inquiry.do")
     public String myClassInquiryPOST(
-        @ModelAttribute ClassInquiryView obj,
-        Model model
-    ){
+            @ModelAttribute ClassInquiryView obj,
+            Model model) {
 
         return "/member/myclass";
     }

@@ -59,7 +59,7 @@ public class ApplyServiceImpl implements ApplyService {
 
                 int result = aMapper.insertApplyStatusBatch(list2);
 
-                if(result == list2.size()) {
+                if (result == list2.size()) {
 
                     return 1;
                 }
@@ -139,12 +139,12 @@ public class ApplyServiceImpl implements ApplyService {
 
     @Override
     public long countApplyList(String id) {
-       try {
-        return aMapper.countApplyList(id);
-       } catch (Exception e) {
-        e.printStackTrace();
-        return -1;
-       }
+        try {
+            return aMapper.countApplyList(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
     @Override
@@ -154,7 +154,7 @@ public class ApplyServiceImpl implements ApplyService {
         } catch (Exception e) {
             return 0;
         }
-       
+
     }
 
     @Override
@@ -164,7 +164,7 @@ public class ApplyServiceImpl implements ApplyService {
         } catch (Exception e) {
             return 0;
         }
-        
+
     }
 
     @Override
@@ -174,15 +174,24 @@ public class ApplyServiceImpl implements ApplyService {
         } catch (Exception e) {
             return 0;
         }
-        
+
     }
 
     @Override
-    public long updateChk(String id) {
+    public long updateChk2(Map<String, Object> map) {
         try {
-            return aMapper.
+            return aMapper.updateChk2(map);
         } catch (Exception e) {
             return 0;
         }
-}
+    }
+
+    @Override
+    public long updateChk3(Map<String, Object> map) {
+        try {
+            return aMapper.updateChk3(map);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
 }
