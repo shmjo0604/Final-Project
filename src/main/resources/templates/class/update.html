@@ -375,7 +375,7 @@
                                             <h6 style="display:inline; font-weight:bold;">가격
                                                 <h6 style="display:inline; padding-right:50px; color: #FF8E8E">(필수)</h6>
                                             </h6>
-                                            <div class="tool">addCommas
+                                            <div class="tool">
                                                 <span> <img id="insert-img" th:src="@{/image/물음표.png}"
                                                         style="width: 20px; height: 20px; cursor: pointer;"> 도움말
                                                 </span>
@@ -1008,10 +1008,10 @@
             console.log(content_length);
             console.log(content);
 
-            // if (file.value === "") {
-            //     alert("이미지 파일을 첨부하세요.");
-            //     return false;
-            // }
+            if (file.value === "") {
+                alert("이미지 파일을 첨부하세요.");
+                return false;
+            }
             if (nickname.value === "") {
                 alert("상호명을 작성하세요.");
                 nickname.focus();

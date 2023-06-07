@@ -55,6 +55,7 @@ public class MemberController {
     @Autowired ClassSelectService c1Service;
     @Autowired ApplyService aService;
     @Autowired ClassManageService manageService;
+    @Autowired ClassInquiryViewRepository inquiryViewRepository;
 
     @Autowired ResourceLoader resourceLoader;
     @Value("${default.image}") String defaultImg;
@@ -186,12 +187,13 @@ public class MemberController {
             List<ClassInquiryView> list = cService.selectClassInquiryList(owner);
             // System.out.println("test용=>", list.toString());
 
-            ClassInquiryView obj2 = cService.selectClassInquiryOne(no);
+            //ClassInquiryView obj2 = cService.selectClassInquiryOne(no);
 
             model.addAttribute("list", list);
-            // model.addAttribute("obj2", obj2 );
+            //model.addAttribute("obj2", obj2 );
 
             log.info("myclass inquiry selectlist => {}", list.toString());
+            //log.info("myclass inquiry selectOne list => {}", obj2.toString());
         }
 
         model.addAttribute("user", user);

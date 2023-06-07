@@ -247,9 +247,16 @@ public class ClassController {
     public String myclassUpdatePOST(@AuthenticationPrincipal User user,
         @ModelAttribute ClassProduct obj,
         @ModelAttribute com.example.dto.ClassImage obj2,
+        @RequestParam(name = "profile", required = false) MultipartFile profileImg,
+        @RequestParam(name = "classSub", required = false) List<MultipartFile> classSubImg,
+        @RequestParam(name = "classMain", required = false) MultipartFile classMainImg,
         @RequestParam(name = "classcode", defaultValue = "0") long classcode,
-        Model model) {
-            
+        Model model) throws IOException {
+
+        log.info(format, profileImg);
+        log.info(format, classSubImg);
+        log.info(format, classMainImg);
+
             // 1.Rest API 호출 -> 주소 기반 위도, 경도 값 반환(Map)
             Map<String, String> map = KakaoLocalAPI.getCoordinate(obj.getAddress1());
 
@@ -257,11 +264,51 @@ public class ClassController {
             obj.setLatitude(map.get("y"));
             obj.setLongitude(map.get("x"));
             obj.setMemberid(user.getUsername()); // security session에 저장된 ID 정보를 호출
+
+            // 4. ClassImage 리스트 객체 생성
+
+        List<ClassImage> list = new ArrayList<>();
+
+        ClassImage profile = new ClassImage();
+
+        profile.setFilename(profileImg.getOriginalFilename());
+        profile.setFilesize(profileImg.getSize());
+        profile.setFiletype(profileImg.getContentType());
+        profile.setFiledata(profileImg.getBytes());
+        profile.setTypechk(1);
+        list.add(profile);
+
+        if (classSubImg != null) {
+
+            for (MultipartFile file : classSubImg) {
+
+                ClassImage classSub = new ClassImage();
+                classSub.setFilename(file.getOriginalFilename());
+                classSub.setFilesize(file.getSize());
+                classSub.setFiletype(file.getContentType());
+                classSub.setFiledata(file.getBytes());
+                classSub.setTypechk(3);
+                list.add(classSub);
+
+            }
+        }
+
+        if (classMainImg != null) {
+            
+            ClassImage classMain = new ClassImage();
+
+            classMain.setFilename(classMainImg.getOriginalFilename());
+            classMain.setFilesize(classMainImg.getSize());
+            classMain.setFiletype(classMainImg.getContentType());
+            classMain.setFiledata(classMainImg.getBytes());
+            classMain.setTypechk(2);
+            list.add(classMain);
+        }
     
         int ret = manageService.updateClassOne(obj);
-        int ret2 = manageService.updateClassImageOne(obj2);
+        int ret2 = manageService.updateClassImageOne(list);
         log.info("update class --- => {}", obj.toString());
-        log.info("update image --- => {}", obj2.toString());
+        log.info("update image --- => {}", obj.toString());
         if ( ret == 1 || ret2 == 1) {
             log.info("update success class ---- =>{}", ret);
             log.info("update success image ---- =>{}", ret2);

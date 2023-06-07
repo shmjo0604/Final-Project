@@ -45,7 +45,7 @@ public interface ClassManageService {
     public ClassImage selectClassImageOne(long no);
 
     // 7. 클래스 이미지 수정
-    public int updateClassImageOne(ClassImage obj);
+    public int updateClassImageOne(List<com.example.entity.ClassImage> list);
 
     // 8. 클래스 이미지 삭제
     public int deleteClassImageOne(long no);
@@ -56,7 +56,10 @@ public interface ClassManageService {
     // 10. 클래스 문의 1개 조회
     public ClassInquiryView selectClassInquiryOne(long no);
 
-    // 11. 클래스 문의 답변완료(chk=1)
-    //public int updateClassAnswer(ClassInquiry obj);
+    // 11. 클래스 문의 답변 등록
+    public int insertClassInquiryAnswerOne(ClassInquiryView obj);
+
+    // 12. 클래스 문의 답변완료(chk=1)
+    public int updateClassAnswer(ClassInquiry obj);
     
 }

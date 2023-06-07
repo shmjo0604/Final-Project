@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
+import com.example.entity.ClassInquiry;
 import com.example.entity.ClassInquiryView;
 import com.example.mapper.ClassManageMapper;
 import com.example.repository.ClassInquiryViewRepository;
@@ -63,8 +64,7 @@ public class ClassManageServiceImpl implements ClassManageService {
     @Override
     public int updateClassOne(ClassProduct obj) {
         try {
-
-            
+        
             return cMapper.updateClassOne(obj);
         }
         catch (Exception e) {
@@ -180,6 +180,18 @@ public class ClassManageServiceImpl implements ClassManageService {
             e.printStackTrace();
             return -1;
         }
+    }
+
+    @Override
+    public int insertClassInquiryAnswerOne(ClassInquiryView obj) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'insertClassInquiryAnswerOne'");
+    }
+
+    @Override
+    public int updateClassAnswer(ClassInquiry obj) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateClassAnswer'");
     }
     
 }
