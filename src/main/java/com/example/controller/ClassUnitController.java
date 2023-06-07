@@ -33,14 +33,14 @@ public class ClassUnitController {
             return "redirect:/classunit/myunit.do?menu=1";
         }
 
-        if(menu == 1){
+        if(menu == 1) {
+
             log.info(format, classcode);
             long defaultPrice = cuService.selectPriceOne(classcode);
             
             model.addAttribute("classcode", classcode);
             model.addAttribute("defaultPrice", defaultPrice);
             
-            return "/classunit/unit";
         }
 
         else if(menu == 2){

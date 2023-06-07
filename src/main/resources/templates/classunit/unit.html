@@ -51,8 +51,7 @@
 <body>
      <!--Bootstrap 용 js -->
      <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-     <!--Main js-->
-     <script th:src="@{/js/main.js}"></script>
+
      
 
     <!--header 영역-->
@@ -95,5 +94,10 @@
     
     <!--footer 영역-->
     <footer th:replace="~{footer :: footerFragment}"></footer>
+    <script>
+        const contextPath = $("#contextPathHolder").attr("data-contextPath");
+    </script>
+    <!--Main js-->
+    <script th:src="@{/js/main.js}"></script>
 </body>
 </html>

@@ -3,7 +3,6 @@ package com.example.controller;
 import java.io.IOException;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -126,12 +125,11 @@ public class CommunityController {
                             Model model) {
 
         Community com = communityRepository.findById(no).orElse(null);
-        log.info(format, com.toString());
-   
+        // log.info(format, com.toString());
 
         if (user != null) {
             model.addAttribute("user", user);
-            System.out.println(user.toString());
+            // System.out.println(user.toString());
         }
 
         model.addAttribute("community", com);
@@ -148,16 +146,7 @@ public class CommunityController {
             log.info("nocheck => {}",no);
 
             if(no != 0 ) {
-                Optional<Community> updateCom = communityRepository.findById(no);
-               
-                if(updateCom.isPresent()){
-                    Community obj = updateCom.get();
-                    obj.setCate(community.getCate());
-                    obj.setTitle(community.getTitle());
-                    obj.setContent(community.getContent());
-
-                    communityRepository.save(obj);
-                }
+                
                 return "redirect:/community/update.do?no="+no;    
             }
             return "redirect:/community/update.do";

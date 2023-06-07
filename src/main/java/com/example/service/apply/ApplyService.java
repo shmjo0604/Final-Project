@@ -34,6 +34,6 @@ public interface ApplyService {
     public List<ApplyView> selectApplyListById(Map<String, Object> map);
 
     // 8. 신청 전체 개수 조회
-    public Long countApplyList(String id);
+    public long countApplyList(String id);
 
 }

@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.entity.Basket;
 import com.example.entity.BasketView;
@@ -50,8 +49,7 @@ public class BasketController {
     //classimage no로는 어떻게 띄워야 할지 모르겠습니다...
     @GetMapping(value = "/basket.do")
     public String  BasketGET(Model model,
-    @AuthenticationPrincipal User user,
-    @RequestParam(name = "no", defaultValue = "0")long no ) {
+    @AuthenticationPrincipal User user) {
 
         log.info(format,user.getUsername());
         
@@ -60,19 +58,22 @@ public class BasketController {
         log.info(format, member.getId());  //오류발생시점 stackoverflow
         
         List<BasketView> list = bRepository.findByMemberidOrderByNoDesc(member.getId());
-        long mainImg = classManageService.selectClassMainImageNo(no);
+        
 
         for(BasketView  obj: list ){    //반복문을 이용한다
             
             log.info(format, obj.getNo());
+
+            long mainImg = classManageService.selectClassMainImageNo(obj.getClasscode());
+
+            obj.setMainImg(mainImg);
         }
 
             
         model.addAttribute("list", list);
         model.addAttribute("user", user);
-        model.addAttribute("mainImg", mainImg);
 
-        log.info(format, list.toString());
+        // log.info(format, list.toString());
 
         return "/member/basket";
         
