@@ -23,7 +23,6 @@ public interface CommunityService {
     public Community findByNo(long no);
     
 
-
  
 
 }

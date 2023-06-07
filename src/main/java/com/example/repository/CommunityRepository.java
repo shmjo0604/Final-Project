@@ -17,6 +17,12 @@ public interface CommunityRepository extends JpaRepository<Community, Long> {
 
     public Community findByMember_id(String id);
 
+    // public Community updateCommuone(Community community);
+
+    
+
+
+
 
 
 

@@ -52,16 +52,11 @@
     <div class="container" role="main">
         <form name="form" id="form" th:action="@{/community/update.do}" method="post">
             <h3>커뮤니티 게시글 수정</h3>
-          
-                <!--아이디 정보-->
-                <!-- <input type="text" class="form-control" id="memberid" th:value="${user.username}" name="member.id"
-                    style="display: none;" > -->
-
-                <!--분류(cate)-->
+                <input type="number" name="no" th:value="${community.no}" />   
                 <div class="mb-3">
                     <label for="reg-id">글분류</label>
-                    <select class="form-select" aria-label="Default select example" name="cate" id="cate">
-                        <option selected ></option>
+                    <select class="form-select" aria-label="Default select example" th:value="${community.cate}" name="cate" id="cate">
+                        <option selected th:text="${community.cate}" ></option>
                         <option value="궁금해요">궁금해요</option>
                         <option value="함께해요">함께해요</option>
                         <option value="추천해요">추천해요</option>
@@ -72,7 +67,7 @@
                 <!--제목-->
                 <div class="mb-3">
                     <label for="title" class="form-label" >제목</label>
-                    <input type="text" class="form-control" id="title" name="title" th:value="${community.title}" placeholder="제목을 입력하세요">
+                    <input type="text" class="form-control" id="title" name="title" th:value="${community.title}">
                 </div>
 
                 <!--내용-->
@@ -89,8 +84,7 @@
                 <div class="mt-4 mb-0">
                     <input type="button" class="btn btn-sm btn-primary" onclick="updateAction()" value="업로드"></input>
                     <a th:href="@{./selectlist.do}" class="btn btn-sm btn-outline-primary float-right">목록으로</a>
-                </div>
-            
+                </div>   
         </form>
     </div>
 
@@ -192,7 +186,7 @@
             }
             if (content.value <= 5) {
                 alert('내용을 입력하세요');
-
+                // content.focus();
                 return false;
             }
 

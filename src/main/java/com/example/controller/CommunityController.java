@@ -1,7 +1,6 @@
 package com.example.controller;
 
 import java.io.IOException;
-
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,11 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.entity.Community;
 import com.example.repository.CommunityRepository;
+import com.example.service.community.CommunityService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,9 +29,10 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class CommunityController {
 
-    //dddd
-    final String format = "CommunityController => {}";
+    // dddd
+    final String format = "커뮤니티컨트롤러 => {}";
     final CommunityRepository communityRepository;
+    final CommunityService communityService;
     final HttpSession hSession;
 
     // 커뮤니티 글작성
@@ -91,8 +92,6 @@ public class CommunityController {
     public String selectoneGET(Model model, @RequestParam(name = "no") long no, @AuthenticationPrincipal User user) {
         Community community = communityRepository.findByNo(no);
 
-
-
         if (user != null) {
             model.addAttribute("user", user);
             System.out.println(user.toString());
@@ -103,59 +102,64 @@ public class CommunityController {
 
     }
 
-    @PostMapping(value = "/delete.do")
-    public String deletePOST(@AuthenticationPrincipal User user, @ModelAttribute Community obj,
+    @RequestMapping(value = "/delete.do", method = {RequestMethod.POST})
+    public String deleteGET(@AuthenticationPrincipal User user, @ModelAttribute Community obj,
             Model model) {
         try {
             log.info(format, obj.toString());
-
             communityRepository.deleteById(obj.getNo());
 
             return "redirect:/community/selectlist.do";
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/home.do";
+            // return "redirect:/home.do";
+            return "redirect:/community/selectlist.do";
         }
     }
-    
+
     @GetMapping(value = "/update.do")
     public String updateGET(@AuthenticationPrincipal User user,
-                            @ModelAttribute Community community,
-                            @RequestParam(name = "no") long no,
-                            Model model) {
-
+            @RequestParam(name = "no") long no,
+            Model model) {
+        log.info(format, no);
         Community com = communityRepository.findById(no).orElse(null);
-        // log.info(format, com.toString());
+
+        log.info(format, com.toString());
 
         if (user != null) {
             model.addAttribute("user", user);
-            // System.out.println(user.toString());
+            model.addAttribute("community", com);
         }
-
-        model.addAttribute("community", com);
+        
         return "community/update";
     }
 
     @PostMapping(value = "/update.do")
     public String updatePOST(@AuthenticationPrincipal User user, @ModelAttribute Community community,
-                            @RequestParam(name = "no",defaultValue = "0",required = false) long no )
-                            throws IOException {
+            @RequestParam(name = "no", defaultValue = "0", required = false) long no)
+            throws IOException {
+
+        log.info("nocheck => {}", community.getNo());
 
         try {
+            Community com = communityRepository.findById(no).orElse(null);
 
-            log.info("nocheck => {}",no);
+            if (no != 0) {
+                com.setCate(community.getCate());
+                com.setTitle(community.getTitle());
+                com.setContent(community.getContent());
 
-            if(no != 0 ) {
-                
-                return "redirect:/community/update.do?no="+no;    
+                return "redirect:/community/selectone.do?no=" + no;
             }
-            return "redirect:/community/update.do";
+            else {   
+                return "redirect:/community/selectlist.do" ;
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
             return "redirect:/community/selectlist.do";
         }
-       
-    } 
+
+    }
 
 }

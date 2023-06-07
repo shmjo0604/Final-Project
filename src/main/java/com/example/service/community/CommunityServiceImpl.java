@@ -3,6 +3,7 @@ package com.example.service.community;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Community;
@@ -16,7 +17,7 @@ public class CommunityServiceImpl implements CommunityService {
 
     @Autowired
     public CommunityRepository cRepository;
-
+    public CommunityService cService;
     // 게시글 작성
     // @Override
     // public int insertcommnuityOne() {
@@ -43,7 +44,7 @@ public class CommunityServiceImpl implements CommunityService {
     @Override
     public Community findByNo(long no) {
         try {
-            return cRepository.findByNo(no);
+            return cRepository.findById(no).orElse(null);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -51,5 +52,8 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
 
+
+
+    
 
 }
