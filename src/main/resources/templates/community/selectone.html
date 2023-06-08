@@ -50,6 +50,8 @@
             padding-top: 10px;
             border: 1px solid;
         }
+
+        
     </style>
 </head>
 
@@ -64,82 +66,49 @@
 
 
 
-            <form id="form" method="get" th:action="@{/community/update.do}">
-                <label class="title" name="title" th:text="${community.title}" style="font-size: 28px;"></label><br />
-                <label class="no" name="no" th:text="${community.no}"></label>
-                | <label class="cate" name="cate" th:text="${community.cate}"></label>
-                | <label class="writer" th:text="${community.member.id}"></label>
-                | <label class="date" th:text="${community.regdate}"></label><br />
-                <hr />
-                <label class="content" name="content" th:utext="${community.content}"
-                    style="padding-bottom:80px;font-size: 18px;"></label><br />
-                <div class="buttons">
-                    <button class="btn btn-sm btn-primary" th:onclick="formAction1(1)">수정</button>
+            <!-- <form id="form" method="get" th:action="@{/community/update.do}"  style="display: inline-block;"> -->
+            <label class="title" name="title" th:text="${community.title}" style="font-size: 28px;"></label><br />
+            <label class="no" name="no" th:text="${community.no}"></label>
+            | <label class="cate" name="cate" th:text="${community.cate}"></label>
+            | <label class="writer" th:text="${community.member.id}"></label>
+            | <label class="date" th:text="${community.regdate}"></label><br />
+            <hr />
+            <label class="content" name="content" th:utext="${community.content}"
+                style="padding-bottom:80px;font-size: 18px;"></label><br />
+            <div class="buttons">
+                <button class="btn btn-sm btn-primary"> <a class="nav-link"
+                        th:href="@{update.do(no=${community.no})}">수정</a></button>
+                <input type="hidden" name="no" th:value="${community.no}" />
+                <button class="btn btn-sm btn-primary">
+                    <a class="nav-link" th:href="@{selectlist.do}">목록</a>
+                </button>
+                <form method="post" class="community_delete" id="form-delete" th:action="@{/community/delete.do}"
+                    style="display: inline-block;">
                     <input type="hidden" name="no" th:value="${community.no}" />
-                    <button class="btn btn-sm btn-primary">
-                        <a class="nav-link" th:href="@{selectlist.do}">목록</a>
-                    </button>
-                    
-                </div>
-            </form>
-            
-            <form  method="post" class="community_delete" id="form-delete" th:action ="@{/community/delete.do(no =${obj.no})}" >
-                <button class="btn btn-sm btn-primary" th:onclick="formAction1(2)">삭제</button>
-            </form>
-       
-            <br />
+                    <button type="button" class="btn btn-sm btn-primary" th:onclick="formAction1(2)">삭제</button>
+                </form>
+             
+            </div>
+           
             <!--댓글-->
-             <th:block th:if="${user != null}">
-                <div class="card">
-                    <div class="card-body">
-                        <!--comment form-->
-                        작성자 - <label id="writer" class="writer" th:text="${community.member.id}"
-                            style="padding-bottom: 10px;"></label><br />
-                        <div class="mb-3">
-                            <textarea id="content" class="form-control mb-2" rows="4"
-                                placeholder="욕설과 지나친 비방은 형사처벌의 대상이 될 수 있습니다"></textarea>
-                            <div class="d-flex justify-content-end">
-                                <div type="d-flex justify-content-end">
-                                    <button type="button" class="btn btn-outline-primary" onclick="insertreply()">댓글
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div id="reply_list">
-                            <div class="d-flex mb-4">
-                                <div class="ms-3">
-                                    <label class="writer" th:text="${reply.member.id}"></label><br>
-                                    <label class="content" name="content" th:utext="${reply.content}"></label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </th:block>
-                        
+            <form class="mb-3" name ="replybox" style="padding-top: 100px;" id ="reply_form" th:action="@{/community/replyinsert.do}"method="post">
+                <input type="hidden" name="community.no" th:value="${community.no}" />
+                <input type="text" class="form-control" id="memberid" th:value="${user.username}" name="member.id" readonly />
+                <textarea id="reply_content" class="form-control mb-2" rows="4" name="content" placeholder="욕설과 비방은 형사처벌의 대상이 될 수 있습니다"></textarea>
+                <button type="submit" class="btn btn-outline btn-primary" onclick="insertreply()">댓글</button>
+            </form>
 
 
             <!--댓글 목록-->
-            <!-- <table>
-                        <thead>
-                            <tr th:each ="tmp:${community.list}">
-                                <td th:text ="${tmp.no}"></td>
-                                <td th:text ="${tmp.content}"></td>
-                                <td th:text ="${reply.member.id}"></td>
-                                <td th:text ="${tmp.regdate}"></td>
-                            </tr>
-                        </thead>
-                    </table> -->
-
-            <!--댓글 form 형식-->
-            <!-- <form name="form" id="form" th:action="@{reply/insert.do}" method="post">
-                        <label class="writer" th:text="${reply.member.id}"></label>
-                        <div class="mb-3">
-                        <textarea class="form-control" id="content" rows="3" name="content" placeholder="지나친 욕설과 비방은 형사처벌의 대상이 될 수 있습니다"></textarea>
-                        </div>
-                        <input type="submit" class="btn btn-sm btn-primary" value="답글 작성" />
-                    </form> -->
+            <hr />
+            <table>
+                <thead>
+                    <tr th:each ="tmp : ${list}">
+                        <td class ="fw-bold"th:text ="${tmp.member.id}"></td>
+                        <td th:text ="${tmp.content}"></td>
+                    </tr>
+                </thead>
+            </table>
 
 
         </div>
@@ -155,22 +124,45 @@
         const contextPath = $('#contextPathHolder').attr('data-contextPath');
 
         function formAction1(code) {
+
             const form = document.getElementById('form');
+
             if (code === 1) {
+
                 form.action = /*[[@{/community/update.do}]]*/ '';
-            } else if (code === 2) {
 
-                
-                form.action = /*[[@{/community/delete.do}]]*/ '';
-
-            } else if (code === 3) {
-
-                form.action = /*[[@{/community/selectlist.do}]]*/ '';
+                form.submit();
             }
-            form.submit();
+            else if (code === 2) {
+                const delete1 = document.getElementById('form-delete');
+
+                if (!confirm('삭제하시겠습니까?')) {
+                    alert("취소하였습니다");
+                    return false;
+
+                } else {
+                    alert("삭제되었습니다.")
+                    delete1.submit();
+                }
+
+            }
+
+        }
+        function insertreply() {
+            const reply_content =document.getElementById("reply_content");
+                      
+ 
+
+            if(reply_content.value <=0){
+                alert ('댓글을 입력해주세요')
+                reply_content.focus();
+                return false;
+            }
+            document.getElementById(reply_content).submit();
         }
 
     </script>
+
     <!--Main js-->
     <script th:src="@{/js/main.js}"></script>
 </body>

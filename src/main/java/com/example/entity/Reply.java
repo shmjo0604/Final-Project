@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -25,6 +27,7 @@ public class Reply {
 
   // 댓글 번호(시퀀스)
   @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_REPLY_NO")
   private long no;
 
   // 댓글 내용
@@ -33,12 +36,22 @@ public class Reply {
 
   // 답글깊이
   private int repdepth;
+  //0으로 들어가야함 => 일반 댓글인경우
+  //1로 들어가야 함 => 대댓글
+
 
   // 답글순서
+   //기본값이 0
   private int reporder;
+ 
 
   // 부모답글번호
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_REPLY_NO")
   private int parentno;
+
+  //id 값이랑 부모 답글번호가 같은지 확인
+
+
 
   // 등록 일자
   @CreationTimestamp

@@ -47,7 +47,7 @@ public class BasketView {
     @Column(name = "CLASSEND")
     private String classend = null;
 
-    @Column(name = "CLASSLAVEL") //level이라 해야하는 데 실수로 lavel로 씀 나중에 고쳐야 함
+    @Column(name = "CLASSLEVEL") //level이라 해야하는 데 실수로 lavel로 씀 나중에 고쳐야 함
     private int classlavel;
 
     @Column(name = "TOTALPRICE")

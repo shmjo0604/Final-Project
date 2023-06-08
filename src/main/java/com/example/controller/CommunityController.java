@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -17,8 +18,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.entity.Community;
+import com.example.entity.Reply;
 import com.example.repository.CommunityRepository;
+import com.example.repository.ReplyRepository;
 import com.example.service.community.CommunityService;
+import com.example.service.reply.ReplyService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,10 +33,11 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class CommunityController {
 
-    // dddd
     final String format = "커뮤니티컨트롤러 => {}";
     final CommunityRepository communityRepository;
+    final ReplyRepository rRepository;
     final CommunityService communityService;
+    final ReplyService rService;
     final HttpSession hSession;
 
     // 커뮤니티 글작성
@@ -69,7 +74,8 @@ public class CommunityController {
 
     // 커뮤니티 게시판 보기
     @GetMapping(value = "/selectlist.do")
-    public String selectlistGET(Model model, @AuthenticationPrincipal User user) {
+    public String selectlistGET(Model model, @AuthenticationPrincipal User user,  @RequestParam(name = "type", defaultValue = "title") String type,
+    @RequestParam(name = "page", defaultValue = "0") int page,  @RequestParam(name = "text", defaultValue = "") String text) {
 
         List<Community> list = communityRepository.findAllByOrderByNoDesc();
 
@@ -77,32 +83,37 @@ public class CommunityController {
             model.addAttribute("user", user);
             System.out.println(user.toString());
         }
-
         for (Community obj : list) {
             log.info(format, obj.toString());
         }
-
         model.addAttribute("list", list);
 
         return "/community/selectlist";
+         
     }
 
     // 커뮤니티 게시판글 보기
     @GetMapping(value = "/selectone.do")
     public String selectoneGET(Model model, @RequestParam(name = "no") long no, @AuthenticationPrincipal User user) {
+       
         Community community = communityRepository.findByNo(no);
-
+       List<Reply> list =  rRepository.findByCommunity_noOrderByNoDesc(no);
+       
         if (user != null) {
             model.addAttribute("user", user);
             System.out.println(user.toString());
         }
-
+        log.info(format, list);
+        model.addAttribute("list", list);
         model.addAttribute("community", community);
+
         return "/community/selectone";
+
+
 
     }
 
-    @RequestMapping(value = "/delete.do", method = {RequestMethod.POST})
+    @RequestMapping(value = "/delete.do", method = { RequestMethod.POST })
     public String deleteGET(@AuthenticationPrincipal User user, @ModelAttribute Community obj,
             Model model) {
         try {
@@ -130,7 +141,7 @@ public class CommunityController {
             model.addAttribute("user", user);
             model.addAttribute("community", com);
         }
-        
+
         return "community/update";
     }
 
@@ -150,9 +161,8 @@ public class CommunityController {
                 com.setContent(community.getContent());
 
                 return "redirect:/community/selectone.do?no=" + no;
-            }
-            else {   
-                return "redirect:/community/selectlist.do" ;
+            } else {
+                return "redirect:/community/selectlist.do";
             }
 
         } catch (Exception e) {
@@ -161,5 +171,36 @@ public class CommunityController {
         }
 
     }
+
+    @GetMapping(value = "/replyinsert.do")
+    public String replyinsertGET(@RequestParam(name = "no", defaultValue = "0", required = false) long no,
+            @AuthenticationPrincipal User user, Model model) {
+
+        Community community = communityRepository.findById(no).orElse(null);
+
+        if (user != null) {
+            model.addAttribute("user", user);
+            System.out.println(user.toString());
+        }
+        model.addAttribute("community", community);
+        return "/community/replyinsert";
+    }
+
+    @PostMapping(value = "/replyinsert.do")
+    public String replyinsertPOST( 
+        @ModelAttribute Reply reply , @AuthenticationPrincipal User user , Model model) throws IOException{
+            log.info(format , reply.toString());
+
+            if(reply != null) {
+                reply.getContent();
+
+                Reply ret = rRepository.save(reply);
+                System.out.println(ret);
+
+            }
+            return "redirect:/community/selectone.do?no="+reply.getCommunity().getNo();
+    }
+
+
 
 }
