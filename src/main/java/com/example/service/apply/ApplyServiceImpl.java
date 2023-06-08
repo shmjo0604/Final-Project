@@ -146,4 +146,15 @@ public class ApplyServiceImpl implements ApplyService {
         return -1;
        }
     }
+
+    @Override
+    public List<ApplyView> selectApplyViewListByClasscode(Map<String, Object> map) {
+        try {
+            return aMapper.selectApplyViewListByClasscode(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 }

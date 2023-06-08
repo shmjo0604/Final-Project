@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
@@ -85,11 +86,13 @@ public class ClassUnit {
   
   // 신청 테이블
   @ToString.Exclude
+  @JsonIgnore
   @OneToMany(mappedBy = "classunit", fetch = FetchType.LAZY)
   private List<Apply> applyList = new ArrayList<>();
   
   // 장바구니 테이블
   @ToString.Exclude
+  @JsonIgnore
   @OneToMany(mappedBy = "classunit", fetch = FetchType.LAZY)
   private List<Basket> basketList = new ArrayList<>();
 

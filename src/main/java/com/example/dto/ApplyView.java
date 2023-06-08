@@ -47,4 +47,14 @@ public class ApplyView {
     private Date applyregdate;
     // 신청번호
     private long no;
+    
+    /*** 추가 ***/
+    // 현재 신청 인원
+    private int cnt;
+    // 클래스 개설자 id 
+    private String ownerid;
+    // 신청자 전화번호
+    private String phone;
+
+
 }

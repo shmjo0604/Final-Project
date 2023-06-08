@@ -32,6 +32,7 @@ public class RestClassUnitController {
 
     @Autowired ClassUnitService cuService;
 
+    // ************************************ 일정 관리 ********************************************
     
     // 일정 등록
     @PostMapping(value = "/insert.json")
@@ -114,7 +115,7 @@ public class RestClassUnitController {
     @PutMapping(value = "/deleteall.json")
     public Map<String, Integer> deleteallPUT(@RequestParam(name = "classcode", defaultValue = "0") long classcode) {
         Map<String, Integer> retMap = new HashMap<>();
-        log.info(format, classcode);
+        // log.info(format, classcode);
 
         List<ClassUnit> list = cuRepository.findByClassproduct_classcodeOrderByClassdate(classcode);
         List<ClassUnit> list1 = new ArrayList<>();
@@ -129,5 +130,33 @@ public class RestClassUnitController {
 
         return retMap;
     }
-    
+
+    // 선택한 일정 수정 - 미완
+    @PutMapping(value = "/updateone.json")
+    public Map<String, Integer> updateonePUT(
+        @RequestParam(name = "classcode", defaultValue = "0") long classcode,
+        @RequestParam(name = "no", defaultValue = "0") long no) {
+        Map<String, Integer> retMap = new HashMap<>();
+
+        // log.info(format, classcode);
+        // log.info(format, no);
+        
+        retMap.put("status", 200);
+        
+        return retMap;
+    }
+
+    // ************************************ 신청 관리 ********************************************
+
+    // 신청 상태 수정
+    @PutMapping(value = "/updatechk.json")
+    public Map<String, Integer> updatechkPUT(@RequestParam(name = "classcode", defaultValue = "0") long classcode){
+        Map<String, Integer> retMap = new HashMap<>();
+        log.info(format, classcode);
+        
+
+        retMap.put("status", 200);
+        
+        return retMap;
+    }
 }

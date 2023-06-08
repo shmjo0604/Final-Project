@@ -38,4 +38,16 @@ public interface ApplyMapper {
 
     // 9. 클래스 신청 번호 조회
     public List<Long> selectInsertedApplyNoList(Map<String, Object> map);
+
+    // ************************************* 신청관리  ***********************************
+    // 10. 클래스별 신청내역 조회 
+    public List<ApplyView> selectApplyViewListByClasscode(Map<String, Object> map);
+
+    // 11. 신청상태(chk) 리스트 조회
+    public List<Long> selectApplyChkListByClasscode(long classcode);
+
+    // 12. 신청상태 수정(결제완료 : 1 => 참여완료 : 3)
+    
+
+    
 }

@@ -36,4 +36,7 @@ public interface ApplyService {
     // 8. 신청 전체 개수 조회
     public long countApplyList(String id);
 
+    // 10. 클래스별 신청내역 조회 --> 내가 추가
+    public List<ApplyView> selectApplyViewListByClasscode(Map<String, Object> map);
+
 }
