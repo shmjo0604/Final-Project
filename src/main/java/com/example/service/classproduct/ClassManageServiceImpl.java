@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
@@ -17,16 +18,20 @@ import com.example.repository.MainRepository;
 @Service
 public class ClassManageServiceImpl implements ClassManageService {
 
-    @Autowired ClassManageMapper cMapper;
-    @Autowired ClassInquiryViewRepository cRepository;
-    @Autowired MainRepository mRepository;
-    @Autowired ClassImageRepository classimageRepository;
+    @Autowired
+    ClassManageMapper cMapper;
+    @Autowired
+    ClassInquiryViewRepository cRepository;
+    @Autowired
+    MainRepository mRepository;
+    @Autowired
+    ClassImageRepository classimageRepository;
 
     @Override
     public List<ClassProduct> selectMyClassList(String id) {
         try {
             List<ClassProduct> list = cMapper.selectMyClassList(id);
-            if(list != null ){
+            if (list != null) {
                 for (ClassProduct classProduct : list) {
                     long classcode = classProduct.getClasscode();
                     long mainImg = cMapper.selectClassMainImageNo(classcode);
@@ -34,8 +39,7 @@ public class ClassManageServiceImpl implements ClassManageService {
                 }
             }
             return list;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -45,8 +49,7 @@ public class ClassManageServiceImpl implements ClassManageService {
     public ClassProduct selectClassOne(long classcode) {
         try {
             return cMapper.selectClassOne(classcode);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -56,8 +59,7 @@ public class ClassManageServiceImpl implements ClassManageService {
     public int updateClassInactive(ClassProduct obj) {
         try {
             return cMapper.updateClassInactive(obj);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }
@@ -66,10 +68,9 @@ public class ClassManageServiceImpl implements ClassManageService {
     @Override
     public int updateClassOne(ClassProduct obj) {
         try {
-        
+
             return cMapper.updateClassOne(obj);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }
@@ -79,8 +80,7 @@ public class ClassManageServiceImpl implements ClassManageService {
     public long selectClassProfileImageNo(long classcode) {
         try {
             return cMapper.selectClassProfileImageNo(classcode);
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }
@@ -90,8 +90,7 @@ public class ClassManageServiceImpl implements ClassManageService {
     public long selectClassMainImageNo(long classcode) {
         try {
             return cMapper.selectClassMainImageNo(classcode);
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }
@@ -101,8 +100,7 @@ public class ClassManageServiceImpl implements ClassManageService {
     public List<Long> selectClassSubImageNoList(long classcode) {
         try {
             return cMapper.selectClassSubImageNoList(classcode);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -112,16 +110,15 @@ public class ClassManageServiceImpl implements ClassManageService {
     public ClassImage selectClassImageOne(long no) {
         try {
             return cMapper.selectClassImageOne(no);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
     @Override
-    public int updateClassImageOne(List<com.example.entity.ClassImage> subImg, com.example.entity.ClassImage profileImg, 
-        com.example.entity.ClassImage mainImg, long classcode) {
+    public int updateClassImageOne(List<com.example.entity.ClassImage> subImg, com.example.entity.ClassImage profileImg,
+            com.example.entity.ClassImage mainImg, long classcode) {
         try {
             long mainImg1 = cMapper.selectClassMainImageNo(classcode);
             long profileImg1 = cMapper.selectClassProfileImageNo(classcode);
@@ -129,34 +126,47 @@ public class ClassManageServiceImpl implements ClassManageService {
 
             com.example.entity.ClassImage classimage1 = classimageRepository.findById(mainImg1).orElse(null);
             com.example.entity.ClassImage classimage2 = classimageRepository.findById(profileImg1).orElse(null);
-            List<com.example.entity.ClassImage> classimage3 = classimageRepository.findAllById(subImg1);
+            // List<com.example.entity.ClassImage> classimage3 = classimageRepository.findAllById(subImg1);
 
-            System.out.println(mainImg);
-            if( mainImg.getFilesize() > 0){
+
+
+            //System.out.println(classimage3);
+
+            if (mainImg.getFilesize() > 0) {
                 classimage1.setFiledata(mainImg.getFiledata());
                 classimage1.setFilename(mainImg.getFilename());
                 classimage1.setFilesize(mainImg.getFilesize());
                 classimage1.setFiletype(mainImg.getFiletype());
-                
+
                 classimageRepository.save(classimage1);
             }
 
-            if( profileImg.getFilesize() > 0){
+            if (profileImg.getFilesize() > 0) {
                 classimage2.setFiledata(profileImg.getFiledata());
                 classimage2.setFilename(profileImg.getFilename());
                 classimage2.setFilesize(profileImg.getFilesize());
                 classimage2.setFiletype(profileImg.getFiletype());
-                
+
                 classimageRepository.save(classimage2);
             }
 
-            if( classimage3.isEmpty() == false){
-                 
-            }
-            
+            // if (subImg.isEmpty() == false) {
+            //     for ( int i=0; i) {
+            //         // ClassImage classSub = new ClassImage();
+            //         com.example.entity.ClassImage classImage = classimageRepository.findById(image).orElse(null);
+            //         classImage
+            //         // for (com.example.entity.ClassImage image2 : subImg) {
+            //         //     image.setFiledata(image2.getFiledata());
+            //         //     image.setFilename(image2.getFilename());
+            //         //     image.setFiletype(image2.getFiletype());
+            //         //     image.setFilesize(image2.getFilesize());
+            //         // }
+            //     }
+            //     classimageRepository.saveAll(classimage3);
+            // }
+
             return 1;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }
@@ -166,30 +176,27 @@ public class ClassManageServiceImpl implements ClassManageService {
     public int deleteClassImageOne(long no) {
         try {
             return cMapper.deleteClassImageOne(no);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }
     }
 
     @Override
-    public List<ClassInquiryView> selectClassInquiryList( String owner ) {
+    public List<ClassInquiryView> selectClassInquiryList(String owner) {
         try {
             return cRepository.findByOwnerOrderByNoDesc(owner);
-         }
-         catch (Exception e) {
-             e.printStackTrace();
-             return null;
-         }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public int updateClassNonactive(ClassProduct obj) {
         try {
             return cMapper.updateClassNonactive(obj);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }
@@ -197,20 +204,19 @@ public class ClassManageServiceImpl implements ClassManageService {
 
     @Override
     public ClassInquiryView selectClassInquiryOne(long no) {
-       try {
+        try {
             return cRepository.findByNo(no);
-       } catch (Exception e) {
-        e.printStackTrace();
-        return null;
-    }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public int updateClassActive(ClassProduct obj) {
         try {
             return cMapper.updateClassActive(obj);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }
@@ -227,6 +233,5 @@ public class ClassManageServiceImpl implements ClassManageService {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateClassAnswer'");
     }
-
 
 }
