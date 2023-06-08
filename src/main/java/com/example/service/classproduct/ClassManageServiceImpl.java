@@ -10,6 +10,7 @@ import com.example.dto.ClassProduct;
 import com.example.entity.ClassInquiry;
 import com.example.entity.ClassInquiryView;
 import com.example.mapper.ClassManageMapper;
+import com.example.repository.ClassImageRepository;
 import com.example.repository.ClassInquiryViewRepository;
 import com.example.repository.MainRepository;
 
@@ -19,6 +20,7 @@ public class ClassManageServiceImpl implements ClassManageService {
     @Autowired ClassManageMapper cMapper;
     @Autowired ClassInquiryViewRepository cRepository;
     @Autowired MainRepository mRepository;
+    @Autowired ClassImageRepository classimageRepository;
 
     @Override
     public List<ClassProduct> selectMyClassList(String id) {
@@ -118,9 +120,41 @@ public class ClassManageServiceImpl implements ClassManageService {
     }
 
     @Override
-    public int updateClassImageOne(ClassImage obj) {
+    public int updateClassImageOne(List<com.example.entity.ClassImage> subImg, com.example.entity.ClassImage profileImg, 
+        com.example.entity.ClassImage mainImg, long classcode) {
         try {
-            return cMapper.updateClassImageOne(obj);
+            long mainImg1 = cMapper.selectClassMainImageNo(classcode);
+            long profileImg1 = cMapper.selectClassProfileImageNo(classcode);
+            List<Long> subImg1 = cMapper.selectClassSubImageNoList(classcode);
+
+            com.example.entity.ClassImage classimage1 = classimageRepository.findById(mainImg1).orElse(null);
+            com.example.entity.ClassImage classimage2 = classimageRepository.findById(profileImg1).orElse(null);
+            List<com.example.entity.ClassImage> classimage3 = classimageRepository.findAllById(subImg1);
+
+            System.out.println(mainImg);
+            if( mainImg.getFilesize() > 0){
+                classimage1.setFiledata(mainImg.getFiledata());
+                classimage1.setFilename(mainImg.getFilename());
+                classimage1.setFilesize(mainImg.getFilesize());
+                classimage1.setFiletype(mainImg.getFiletype());
+                
+                classimageRepository.save(classimage1);
+            }
+
+            if( profileImg.getFilesize() > 0){
+                classimage2.setFiledata(profileImg.getFiledata());
+                classimage2.setFilename(profileImg.getFilename());
+                classimage2.setFilesize(profileImg.getFilesize());
+                classimage2.setFiletype(profileImg.getFiletype());
+                
+                classimageRepository.save(classimage2);
+            }
+
+            if( classimage3.isEmpty() == false){
+                 
+            }
+            
+            return 1;
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -193,5 +227,6 @@ public class ClassManageServiceImpl implements ClassManageService {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateClassAnswer'");
     }
-    
+
+
 }

@@ -56,7 +56,7 @@
     </select>
 
     <!-- 7. 클래스 이미지 수정 -->
-    <update id="updateClassImage" parameterType="java.util.List">
+    <update id="updateClassImage" parameterType="ClassImage">
         UPDATE classimage SET filename = #{filename}, filetype = #{filetype}, filesize = #{filesize}, filedata = #{filedata}, filetype = #{filetype}, typechk = #{typechk} WHERE no = #{no}
     </update>
 

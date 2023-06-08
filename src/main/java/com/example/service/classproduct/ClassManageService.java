@@ -45,7 +45,8 @@ public interface ClassManageService {
     public ClassImage selectClassImageOne(long no);
 
     // 7. 클래스 이미지 수정
-    public int updateClassImageOne(List<com.example.entity.ClassImage> list);
+    public int updateClassImageOne(List<com.example.entity.ClassImage> subImg, com.example.entity.ClassImage profileImg, 
+        com.example.entity.ClassImage mainImg, long classcode);
 
     // 8. 클래스 이미지 삭제
     public int deleteClassImageOne(long no);
