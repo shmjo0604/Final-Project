@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
@@ -125,7 +126,7 @@ public class MemberController {
 
         int first = page * 5 - 4;
         int last = page * 5;
-        int total = 0;
+
         String id = user.getUsername();
 
         long chk1 = 0;
@@ -150,17 +151,22 @@ public class MemberController {
         }
 
         else if (menu == 2) {
-            log.info(format,"no="+no);
-            int page1 = 1;
             // 페이지 네이션은 => 페이지 번호가 0부터
-            PageRequest pageRequest = PageRequest.of(page1 -1, 3);
-          
-            list1 = r1Service.selectListReview(id, pageRequest);
-            total = r1Service.countReview(id);
-          
-            log.info(format,"pageRequest="+pageRequest);
-            log.info(format,"list1="+list1);
-            log.info(format,"total="+total);
+            // PageRequest pageRequest = PageRequest.of((page - 1), 1);
+            // Pageable pageable = PageRequest.of(pageIndex, 10, Sort.by(Direction.DESC,
+            // "testValue"));
+            // list1 = r1Service.selectListReview(id, pageRequest);
+            // list1 = r1Service.selectlistReviewview(id);
+            int total = r1Service.countReview(id);
+            list1 = r1Service.selectReviewByIdPagenation(id, (page * 5) - 4, page * 5);
+            // log.info(format, "page=" + page);
+            // log.info(format, "pageRequest=" + pageRequest);
+            log.info(format, "list1=" + list1);
+            log.info(format, "total=" + total);
+
+            model.addAttribute("list1", list1);
+            model.addAttribute("pages1", (total - 1) / 5 + 1); // 페이지 수
+            // model.addAttribute("pages1", (total - 1) / 3 + 1);
 
         }
 
@@ -173,11 +179,11 @@ public class MemberController {
             // slog.info(format, obj.toString());
             model.addAttribute("obj", obj);
         }
-        model.addAttribute("list", list);
-        // model.addAttribute("list1", list);
+
         model.addAttribute("user", user);
+        model.addAttribute("list", list);
+
         model.addAttribute("pages", (cnt - 1) / 5 + 1);
-        // model.addAttribute("pages1", (total - 1) + 1 / 10);
 
         model.addAttribute("chk1", chk1);
         model.addAttribute("chk2", chk2);
@@ -193,7 +199,6 @@ public class MemberController {
         return "redirect:/mypage.do?menu=" + menu;
 
     }
-
 
     @GetMapping(value = "/myclass.do")
     public String myclassGET(

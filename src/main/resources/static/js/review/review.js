@@ -183,45 +183,50 @@ async function modalAction1(chk, person, totalprice, no, classcode, price, title
     {}
   );
 
-  const url = '/specialday/api/member/selectstatuslist.json?no='+ no;
+  const url = '/specialday/api/member/selectstatuslist.json?no=' + no;
   const headers = { "Content-Type": "application/json" };
   const { data } = await axios.get(url, { headers });
 
   console.log(data);
-  let nono= new Array();//배열선언
-  let confirmdate1 ="";
-  let confirmdate2 ="";
-  let regdate1 ="";
+  console.log();
+
+  let nono = new Array();//배열선언
+  let confirmdate1 = "";
+  let confirmdate2 = "";
+  let regdate1 = "";
 
   for (let tmp of data.list) {
-       if(tmp.statuschk == 1){ // 결제완료
-        confirmdate1 = tmp.confirmdate;
-       }
-       if(tmp.statuschk == 2){ // 결제취소
-        confirmdate2 = tmp.confirmdate;
-       }
-       regdate1 =tmp.regdate;
+    if (tmp.statuschk == 1) { // 결제완료
+      confirmdate1 = tmp.confirmdate;
     }
+    if (tmp.statuschk == 2) { // 결제취소
+      confirmdate2 = tmp.confirmdate;
+    }
+    if (tmp.statuschk == 3) { // 참여완료
+      confirmdate1 = tmp.confirmdate;
+    }
+    regdate1 = tmp.regdate;
+  }
 
-    let confirmdate11 ="";
-    let confirmdate22 ="";
-    let regdate11 ="";
+  let confirmdate11 = "";
+  let confirmdate22 = "";
+  let regdate11 = "";
 
-    confirmdate11 = confirmdate1.substring(0, 10);
-    confirmdate22 = confirmdate2.substring(0, 10);
-    regdate11 = regdate1.substring(0, 10);
+  confirmdate11 = confirmdate1.substring(0, 10);
+  confirmdate22 = confirmdate2.substring(0, 10);
+  regdate11 = regdate1.substring(0, 10);
 
-    console.log(confirmdate11);
-    console.log(confirmdate22);
-    console.log(regdate11);
-  
+  console.log(confirmdate11);
+  console.log(confirmdate22);
+  console.log(regdate11);
+
   var result = applyregdate.substring(0, 10)
   var result1 = result.replace("-", "/");
   var result2 = result1.replace("-", "/");
 
   var result = cancledate.substring(0, 10)
   var result11 = result.replace("-", "/");
-  var result22= result11.replace("-", "/");
+  var result22 = result11.replace("-", "/");
 
   const img2 = document.getElementById("mainimage2");
   const no2 = document.getElementById("no1");
@@ -285,8 +290,8 @@ async function modalAction1(chk, person, totalprice, no, classcode, price, title
   totalprice2.value = totalprice + "원";
   totalprice4.value = "- " + totalprice + "원";
   applyregdate2.value = regdate11;
-  cancledate1.value= confirmdate22;
-  applyregdate3.value= confirmdate11;
+  cancledate1.value = confirmdate22;
+  applyregdate3.value = confirmdate11;
 
   modal.show();
 }

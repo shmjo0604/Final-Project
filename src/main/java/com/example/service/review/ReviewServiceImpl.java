@@ -31,9 +31,9 @@ public class ReviewServiceImpl implements ReviewService {
             obj.setApply(ret);
 
             r1Repository.save(obj);
-            
+
             return 1;
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
@@ -43,8 +43,8 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public int countReview(String id) {
         try {
-            return (int) r1Repository.countByNoContaining(id);
-            
+            return (int) r1Repository.countByIdContaining(id);
+
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
@@ -52,14 +52,34 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<Reviewview> selectListReview(String id,Pageable pageable) {
+    public List<Reviewview> selectListReview(String id, Pageable pageable) {
         try {
-           return r1Repository.findByIdIgnoreCaseContainingOrderByNoDesc(id,pageable);
-            
+            return r1Repository.findByIdIgnoreCaseOrderByRegdateDesc(id, pageable);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Reviewview> selectlistReviewview(String id) {
+        try {
+            return r1Repository.findById(id);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Reviewview> selectReviewByIdPagenation(String id, int start, int end) {
+        try {
+            return r1Repository.selectReviewByIdPagenation(id, start, end);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 }
-

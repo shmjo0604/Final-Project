@@ -381,7 +381,7 @@
               for (let tmp of data.list) {
                 function getyear() {
                   var regdate = tmp.regdate;
-                  var result =  regdate.substring(0, 10)
+                  var result = regdate.substring(0, 10)
                   return result;
                 }
 
@@ -472,23 +472,21 @@
               }
             };
             ajaxBoardList(1)
-
             //<!-- 페이지네이션 -->     
             function initPagination(pages) {
-              $('#pagination-demo').twbsPagination('destroy');
-              var totalpages = $("input[name=pages]").val();
-              let query = window.location.search;
-              let param = new URLSearchParams(query);
-              let startpage = param.get("page");
+              // var totalpages = $("input[name=pages]").val();
+              // let query = window.location.search;
+              // let param = new URLSearchParams(query);
+              // let startpage = pages;
+              // $('#pagination-demo').twbsPagination('destroy');
               $("#pagination-demo").twbsPagination({
-                totalPages: totalpages,
+                totalPages: pages,
                 visiblePages: 5,
-                startPage: startpage,
+                startPage: 1,
                 first: "≪",
                 last: "≫",
                 prev: "<",
                 next: ">",
-
                 initiateStartPageClick: false,
                 nextClass: "page-item next",	// 이전 페이지 CSS class
                 prevClass: "page-item prev",	// 다음 페이지 CSS class
@@ -525,13 +523,13 @@
           <div class="container">
             <div class="row d-flex " style="height: auto;">
               <form th:action="@{/member/updatechk.do}" id="form1" method="POST">
-                <input class="date mt-1" id="applyregdate1" />
+                <input class="date mt-1" id="applyregdate1" disabled />
                 <div class="hr1"></div>
                 <img class="mainimage1 mt-3 mx-3" name="mainimage" id="mainimage2" />
                 <div class="reviewcontent1 col-9 mt-3 "
                   style="height: 90px; position: relative; left: 110px; top: -110px;">
-                  <div class="summary1 mx-1" style="width: 400px;">
-                    <input id="title1" type="text" disabled style="width: 300px;" />
+                  <div class="summary1 mx-1" style="width: 300px;">
+                    <input id="title1" type="text" disabled style="width: 280px;" />
                   </div>
                   <div class="summary1 mx-2 mt-1">
                     날짜: <input id="classdate2" disabled type="text" />
@@ -583,7 +581,7 @@
 
                 <button class="chkbtn btn btn-sm btn-danger float-end" type="submit"
                   style="height: 30px; width: 90px;">신청취소</button>
-                
+
                 <input type="hidden" id="no1" name="no">
               </form>
             </div>

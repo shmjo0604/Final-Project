@@ -38,5 +38,11 @@ public class Reviewview {
     // 임의 추가
     @Column(name = "ID")
     private String id;
-    
+
+    @Column(name = "CLASSCODE")
+    private long classcode;
+
+    @Column(name = "TITLE")
+    private String title;
+
 }
