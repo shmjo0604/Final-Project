@@ -279,17 +279,18 @@
                                 </th:block>
                                 <div class="d-flex justify-content-center">
                                     <p>신청 인원 : </p>
-                                    <input type="text" class="form-control-plaintext w-25" th:value="|${person}명|">
+                                    <input type="text" class="form-control-plaintext w-25" th:value="${person}">
                                     <input type="hidden" class="form-control-plaintext w-25" name="person[]"
                                         th:value="${person}">
                                 </div>
                             </td>
 
                             <td>
-                                <input type="text" class="form-control-plaintext w-25" th:value="|${obj.totalprice}원|">
-                                <input type="hidden" class="form-control-plaintext w-25" name="payment[]"
-                                    th:value="${obj.totalprice}">
-
+                                <div class="d-flex justify-content-center">
+                                    <input type="text" class="form-control-plaintext w-50" th:value="|${obj.totalprice * person}원|">
+                                    <input type="hidden" class="form-control-plaintext w-25" name="payment[]"
+                                        th:value="${obj.totalprice * person}">
+                                </div>
                             </td>
                             <!-- <td>무료</td> -->
 

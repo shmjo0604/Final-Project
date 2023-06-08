@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -77,6 +79,12 @@ public class ApplyController {
     public String applyPOST() {
 
         return "redirect:/home.do";
+    }
+
+    @GetMapping(value = "/insertbatch.do")
+    public String applybatchGET(@RequestParam(name = "unitno[]", required = false) List<Long> unitnoList, @RequestParam(name = "person[]", required = false) List<Long> personList) {
+
+        return "/apply/insert";
     }
     
 }
