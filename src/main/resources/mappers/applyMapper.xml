@@ -60,10 +60,8 @@
 
 <!-- 7. 클래스 신청 상태(chk = 1)인 것만 조회 -->
 <select id="selectApplyListById" parameterType="map" resultType="com.example.dto.ApplyView">
-    SELECT a.* FROM(
-        SELECT ROW_NUMBER() OVER(ORDER BY a.applyregdate DESC) AS rnum, 
-        a.* FROM applyview a WHERE memberid = #{id}
-        ) a WHERE a.rnum <![CDATA[ >= ]]> ${first} AND a.rnum <![CDATA[ <= ]]> ${last} ORDER BY a.unitno DESC
+          SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY a.regdate DESC) AS rnum, * FROM applyview a WHERE a.memberid = #{id})
+         a WHERE a.rnum <![CDATA[ >= ]]> ${first} AND a.rnum <![CDATA[ <= ]]> ${last} ORDER BY a.REGDATE DESC
 </select>
 
 <!-- 8. 신청 전체 개수 조회 -->
@@ -91,22 +89,19 @@
 
 <!-- 11. 신청상태 개수 조회 (chk=2) -->
 <select id="countApplyListTwo" parameterType="String" resultType="long">
-    SELECT COUNT(*) FROM APPLY WHERE memberid =#{id} AND chk = 2
+    SELECT COUNT(*) FROM APPLY WHERE memberid = #{id} AND chk = 2
 </select>
 
 <!-- 12. 신청상태 개수 조회 (chk=3) -->
 <select id="countApplyListThree" parameterType="String" resultType="long">
-    SELECT COUNT(*) FROM APPLY WHERE memberid =#{id} AND chk = 3
+    SELECT COUNT(*) FROM APPLY WHERE memberid = #{id} AND chk = 3
 </select>
 
-<!-- 13. 업데이트 체크 (신청취소 변경 1->2 )-->
-<update id="updateChk2" parameterType="map">
-   UPDATE APPLY SET chk = 2 WHERE memberid = #{id} AND NO = #{applyno};
-</update>
+<!-- 13. 신청상태에 따른 날짜 조회  -->
+<select id="selectApplyStatusListById" parameterType="map" resultType="com.example.dto.ApplyStatusView">
+         SELECT * FROM APPLYSTATUSVIEW a WHERE NO=#{no} AND MEMBERID =#{id}; 
+</select>
 
-<!-- 14. 업데이트 체크 (참여완료 변경 1->3 )-->
-<update id="updateChk3" parameterType="map">
-   UPDATE APPLY SET chk = 3 WHERE memberid = #{id} AND NO = #{applyno};
-</update>
+
 
 </mapper>

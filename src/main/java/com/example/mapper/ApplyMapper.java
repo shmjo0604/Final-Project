@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.example.dto.Apply;
 import com.example.dto.ApplyStatus;
+import com.example.dto.ApplyStatusView;
 import com.example.dto.ApplyView;
 
 @Mapper
@@ -53,4 +54,7 @@ public interface ApplyMapper {
 
     // 13. 참여 완료(chk: 1 => 3)
     public long updateChk3(Map<String, Object> map);
+
+    // 13. 클래스 신청 내역 조회(no,id)
+    public List<ApplyStatusView> selectApplyStatusListById(Map<String, Object> map);
 }

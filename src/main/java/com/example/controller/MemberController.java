@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,11 +33,13 @@ import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
 import com.example.dto.Member;
 import com.example.entity.ClassInquiryView;
+import com.example.entity.Reviewview;
 import com.example.repository.ClassInquiryViewRepository;
 import com.example.service.apply.ApplyService;
 import com.example.service.classproduct.ClassManageService;
 import com.example.service.classproduct.ClassSelectService;
 import com.example.service.member.MemberService;
+import com.example.service.review.ReviewService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -60,6 +63,9 @@ public class MemberController {
     ApplyService aService;
     @Autowired
     ClassManageService manageService;
+
+    @Autowired
+    ReviewService r1Service;
 
     @Autowired
     ResourceLoader resourceLoader;
@@ -108,15 +114,18 @@ public class MemberController {
     public String mypageGET(
             @RequestParam(name = "menu", defaultValue = "0") int menu,
             @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "no", defaultValue = "0") int no,
             @AuthenticationPrincipal User user,
             Model model) {
 
         // String id = user.getUsername();
         Map<String, Object> map = new HashMap<String, Object>();
         List<ApplyView> list = new ArrayList<>();
+        List<Reviewview> list1 = new ArrayList<>();
 
         int first = page * 5 - 4;
         int last = page * 5;
+        int total = 0;
         String id = user.getUsername();
 
         long chk1 = 0;
@@ -141,6 +150,17 @@ public class MemberController {
         }
 
         else if (menu == 2) {
+            log.info(format,"no="+no);
+            int page1 = 1;
+            // 페이지 네이션은 => 페이지 번호가 0부터
+            PageRequest pageRequest = PageRequest.of(page1 -1, 3);
+          
+            list1 = r1Service.selectListReview(id, pageRequest);
+            total = r1Service.countReview(id);
+          
+            log.info(format,"pageRequest="+pageRequest);
+            log.info(format,"list1="+list1);
+            log.info(format,"total="+total);
 
         }
 
@@ -154,8 +174,10 @@ public class MemberController {
             model.addAttribute("obj", obj);
         }
         model.addAttribute("list", list);
+        // model.addAttribute("list1", list);
         model.addAttribute("user", user);
         model.addAttribute("pages", (cnt - 1) / 5 + 1);
+        // model.addAttribute("pages1", (total - 1) + 1 / 10);
 
         model.addAttribute("chk1", chk1);
         model.addAttribute("chk2", chk2);
@@ -172,33 +194,6 @@ public class MemberController {
 
     }
 
-    @GetMapping(value = "/updatechk.do")
-    public String updatechkGET(
-            @RequestParam(name = "no", defaultValue = "0", required = false) int applyno,
-            @AuthenticationPrincipal User user) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("applyno", applyno);
-        map.put("id", user.getUsername());
-
-        long result = aService.updateChk2(map);
-
-        return "redirect:/member/mypage.do?menu=1&page=1";
-    }
-
-    @GetMapping(value = "/updatechk1.do")
-    public String updatechkPOST(
-            @RequestParam(name = "no", defaultValue = "0", required = false) int applyno,
-            @AuthenticationPrincipal User user) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("applyno", applyno);
-        map.put("id", user.getUsername());
-        log.info(format, "applyno=" + applyno);
-
-        long result = aService.updateChk3(map);
-        log.info(format, "result123=" + result);
-
-        return "redirect:/member/mypage.do?menu=1&page=1";
-    }
 
     @GetMapping(value = "/myclass.do")
     public String myclassGET(

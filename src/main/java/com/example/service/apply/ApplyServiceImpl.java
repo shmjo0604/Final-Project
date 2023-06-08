@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dto.Apply;
 import com.example.dto.ApplyStatus;
+import com.example.dto.ApplyStatusView;
 import com.example.dto.ApplyView;
 import com.example.mapper.ApplyMapper;
 
@@ -174,24 +175,15 @@ public class ApplyServiceImpl implements ApplyService {
         } catch (Exception e) {
             return 0;
         }
-
     }
 
     @Override
-    public long updateChk2(Map<String, Object> map) {
+    public List<ApplyStatusView> selectApplyStatusListById(Map<String, Object> map) {
         try {
-            return aMapper.updateChk2(map);
+            return aMapper.selectApplyStatusListById(map);
         } catch (Exception e) {
-            return 0;
-        }
-    }
-
-    @Override
-    public long updateChk3(Map<String, Object> map) {
-        try {
-            return aMapper.updateChk3(map);
-        } catch (Exception e) {
-            return 0;
+            e.printStackTrace();
+            return null;
         }
     }
 }

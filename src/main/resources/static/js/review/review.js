@@ -177,18 +177,56 @@ function modalAction(no, classcode, price, title, classdate, classlevel, classst
   modal.show();
 }
 
-function modalAction1(chk, person, totalprice, no, classcode, price, title, classdate, classlevel, classstart, classend, applyregdate) {
+async function modalAction1(chk, person, totalprice, no, classcode, price, title, classdate, classlevel, classstart, classend, applyregdate, cancledate) {
   const modal = new bootstrap.Modal(
     document.getElementById("exampleModal1"),
     {}
   );
+
+  const url = '/specialday/api/member/selectstatuslist.json?no='+ no;
+  const headers = { "Content-Type": "application/json" };
+  const { data } = await axios.get(url, { headers });
+
+  console.log(data);
+  let nono= new Array();//배열선언
+  let confirmdate1 ="";
+  let confirmdate2 ="";
+  let regdate1 ="";
+
+  for (let tmp of data.list) {
+       if(tmp.statuschk == 1){ // 결제완료
+        confirmdate1 = tmp.confirmdate;
+       }
+       if(tmp.statuschk == 2){ // 결제취소
+        confirmdate2 = tmp.confirmdate;
+       }
+       regdate1 =tmp.regdate;
+    }
+
+    let confirmdate11 ="";
+    let confirmdate22 ="";
+    let regdate11 ="";
+
+    confirmdate11 = confirmdate1.substring(0, 10);
+    confirmdate22 = confirmdate2.substring(0, 10);
+    regdate11 = regdate1.substring(0, 10);
+
+    console.log(confirmdate11);
+    console.log(confirmdate22);
+    console.log(regdate11);
+  
   var result = applyregdate.substring(0, 10)
   var result1 = result.replace("-", "/");
   var result2 = result1.replace("-", "/");
 
+  var result = cancledate.substring(0, 10)
+  var result11 = result.replace("-", "/");
+  var result22= result11.replace("-", "/");
+
   const img2 = document.getElementById("mainimage2");
   const no2 = document.getElementById("no1");
   const title2 = document.getElementById("title1");
+  const cancledate1 = document.getElementById("cancledate");
   const classdate2 = document.getElementById("classdate2");
   const classstart2 = document.getElementById("classstart1");
   const classlevel2 = document.getElementById("classlevel1");
@@ -201,6 +239,7 @@ function modalAction1(chk, person, totalprice, no, classcode, price, title, clas
   const totalprice2 = document.getElementById("totalprice1");
   const totalprice4 = document.getElementById("totalprice3");
   const applyregdate2 = document.getElementById("applyregdate1");
+  const applyregdate3 = document.getElementById("applyregdate2");
 
   let chkname = "처리중";
 
@@ -245,7 +284,9 @@ function modalAction1(chk, person, totalprice, no, classcode, price, title, clas
   price4.value = price + "원";
   totalprice2.value = totalprice + "원";
   totalprice4.value = "- " + totalprice + "원";
-  applyregdate2.value = result2;
+  applyregdate2.value = regdate11;
+  cancledate1.value= confirmdate22;
+  applyregdate3.value= confirmdate11;
 
   modal.show();
 }

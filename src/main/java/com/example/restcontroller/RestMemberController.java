@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.dto.ApplyStatusView;
 import com.example.dto.ApplyView;
 import com.example.dto.Authnum;
 import com.example.dto.Member;
@@ -249,6 +250,9 @@ public class RestMemberController {
         @RequestParam(name = "page", defaultValue = "0") int page,
         @AuthenticationPrincipal User user ){
 
+
+            log.info(format,"menu=",menu);
+            log.info(format,"page=",page);
         Map<String, Object> map = new HashMap<>();
         String id = user.getUsername();
         int first = page*5-4;
@@ -260,13 +264,41 @@ public class RestMemberController {
             map.put("first",first);
             map.put("last",last);
 
+            log.info(format,"map=",map);
+
             list = aService.selectApplyListById(map);
+            log.info(format,"list=",list);
 
             map.put("list",list);
             map.put("pages", (cnt-1) / 5 + 1);
             map.put("status", 200);
                 
+            
         return map;
+    }
+
+    @GetMapping(value="/selectstatuslist.json")
+    public Map<String,Object> selectstatuslistGET(
+        @RequestParam(name = "no", defaultValue = "0") int no,
+        @AuthenticationPrincipal User user ){
+
+            Map<String, Object> map = new HashMap<>();
+            List<ApplyStatusView> list = new ArrayList<>();
+            String id = user.getUsername();
+
+            map.put("id",id);
+            map.put("no",no);
+
+           list= aService.selectApplyStatusListById(map);
+           map.put("list",list);
+           map.put("okok","okokok");
+
+           log.info(format,"id=",id);
+           log.info(format,"no=",no);
+           log.info(format,"list=",list);
+
+            return map;
+
     }
     
 }

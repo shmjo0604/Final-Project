@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -78,7 +79,7 @@ public class ReviewController {
                 System.out.println(obj.getFilesize());
             }
         }
-        // log.info(format, list.toString());
+        log.info(format, list.toString());
         reviewImageService.insertReviewImage(list);
 
         return "redirect:/member/mypage.do?menu=";
@@ -133,5 +134,7 @@ public class ReviewController {
 
         return "/review/customercenter";
     }
+
+
 
 }
