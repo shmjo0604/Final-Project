@@ -157,4 +157,14 @@ public class ApplyServiceImpl implements ApplyService {
         }
 
     }
+
+    @Override
+    public Apply selectApplyByUnitno(long unitno) {
+        try {
+            return aMapper.selectApplyByUnitno(unitno);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

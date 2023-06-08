@@ -43,11 +43,10 @@ public interface ApplyMapper {
     // 10. 클래스별 신청내역 조회 
     public List<ApplyView> selectApplyViewListByClasscode(Map<String, Object> map);
 
-    // 11. 신청상태(chk) 리스트 조회
-    public List<Long> selectApplyChkListByClasscode(long classcode);
+    // 11. 일정별 신청내역 조회
+    public Apply selectApplyByUnitno(long unitno);
 
     // 12. 신청상태 수정(결제완료 : 1 => 참여완료 : 3)
-    
-
-    
+    public int updateApplyChk(Apply obj);
+     
 }

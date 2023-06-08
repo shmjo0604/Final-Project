@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.dto.Apply;
 import com.example.entity.ClassUnit;
 import com.example.repository.ClassUnitRepository;
+import com.example.service.apply.ApplyService;
 import com.example.service.classproduct.ClassUnitService;
 
 import lombok.RequiredArgsConstructor;
@@ -31,6 +33,7 @@ public class RestClassUnitController {
     final ClassUnitRepository cuRepository;
 
     @Autowired ClassUnitService cuService;
+    @Autowired ApplyService aService;
 
     // ************************************ 일정 관리 ********************************************
     
@@ -150,10 +153,21 @@ public class RestClassUnitController {
 
     // 신청 상태 수정
     @PutMapping(value = "/updatechk.json")
-    public Map<String, Integer> updatechkPUT(@RequestParam(name = "classcode", defaultValue = "0") long classcode){
+    public Map<String, Integer> updatechkPUT(
+        @RequestParam(name = "classcode", defaultValue = "0") long classcode,
+        @RequestParam(name = "unitno", defaultValue = "0") long unitno){
         Map<String, Integer> retMap = new HashMap<>();
         log.info(format, classcode);
+        log.info(format, unitno);
         
+        // 1. 신청 내역 조회
+        // unitno말고 다른 파라미터 하나 더 필요!!
+        Apply obj = aService.selectApplyByUnitno(unitno);
+        log.info(format, obj);
+
+        // 2. 신청 내역의 chk를 3으로 update
+
+        // 3. 신청 상태 테이블에 기록 추가
 
         retMap.put("status", 200);
         

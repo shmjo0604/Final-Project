@@ -51,13 +51,9 @@ public class ClassUnitController {
         }
 
         else if(menu == 2){
-            // int first = page*5-4;
-            // int last = page*5;
 
-            map.put("ownerid", user.getUsername());
-            // map.put("fist", first);
-            // map.put("last", last);
-            
+            map.put("classcode", classcode);
+                        
             List<ApplyView> list = aService.selectApplyViewListByClasscode(map);
             // log.info(format, list);
 

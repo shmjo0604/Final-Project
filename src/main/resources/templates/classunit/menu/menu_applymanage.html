@@ -12,21 +12,23 @@
     <table class="table table-borderd center">
         <thead>
             <tr>
-                <th>클래스 일자</th>
-                <th>클래스 시간</th>
+                <th>일정 번호</th>
+                <th>날짜</th>
+                <th>시간</th>
                 <th>회원 정보</th>
                 <th>결제 정보</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="obj : ${list}">
+                <td th:text="${obj.unitno}"></td>
                 <td th:text="${obj.classdate}"></td>
                 <td th:text="${obj.classstart}"></td>
                 <td th:text="${obj.memberid}"></td>
                 <td>
                     <div th:if="${obj.chk == 1}">
                         <span>결제완료</span>
-                        <button type="button" class="btn btn-sm"  style="border: 1px solid gray;" th:onclick="update()">승인</button>
+                        <button type="button" class="btn btn-sm" style="border: 1px solid gray; background-color: ghostwhite;" th:onclick="'update(' + ${obj.unitno} + ')'" >승인</button>
                     </div>
                     <div th:if="${obj.chk == 3}">
                         <span>참여완료</span>
@@ -43,13 +45,15 @@
 
     <script type="text/javascript" th:inline="javascript">
         const ccode = /*[[${classcode}]]*/"";
-        async function update(){
+        async function update(unitno){
             let url = /*[[@{/api/classunit/updatechk.json}]]*/"";
-            url += `?classcode=`+ccode;
-            const body = {classproduct:{classcode:ccode}};
+            url += `?classcode=${ccode}&unitno=${unitno}`;
+            // url += `?classcode=${code+`&unitno=`+unitno;
+            const body = {classcode : ccode, unitno : unitno};
             const headers = {"Content-Type":"application/json"};
             const { data } = await axios.put(url, { headers:headers });
             console.log(body);
+            
             
 
         }
