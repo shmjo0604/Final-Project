@@ -37,4 +37,7 @@ public interface ClassUnitMapper {
 	/* (5) ClassUnitView 하나 조회 */
 	public ClassUnitView selectClassUnitViewOne(long unitno);
 
+	/* (6) ClassUnitView 목록 조회 */
+	public List<ClassUnitView> selectClassUnitViewList(List<Long> unitnoList);
+
 }

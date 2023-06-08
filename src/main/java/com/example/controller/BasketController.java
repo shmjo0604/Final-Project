@@ -2,7 +2,6 @@ package com.example.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.entity.Basket;
 import com.example.entity.BasketView;
-import com.example.entity.Member;
-import com.example.repository.BasketRepository;
-import com.example.repository.MemberRepository;
 import com.example.service.basket.BasketService;
 import com.example.service.classproduct.ClassManageService;
 import com.example.service.classproduct.ClassUnitService;

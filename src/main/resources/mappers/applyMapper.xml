@@ -47,7 +47,7 @@
             </foreach>
         END)
         WHERE no IN(
-            <foreach item="obj" collection="list" separator=" ">
+            <foreach item="obj" collection="list" separator=" , ">
                 #{obj.unitno}
             </foreach>
         )

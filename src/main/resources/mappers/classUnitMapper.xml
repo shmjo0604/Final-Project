@@ -48,4 +48,13 @@
     SELECT u.* FROM classunitview u WHERE no = #{unitno}
 </select>
 
+<!--(6) ClassUnitView 목록 조회-->
+<select id="selectClassUnitViewList" parameterType="list" resultType="ClassUnitView">
+    SELECT u.* FROM classunitview u WHERE no IN (
+        <foreach collection="unitnoList" item="tmp" separator=" , ">
+                #{tmp}
+        </foreach>
+    )
+</select>
+
 </mapper>

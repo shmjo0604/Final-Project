@@ -53,6 +53,8 @@ public class RestApplyController {
             list.add(obj);
         }
 
+        log.info(format, list.toString());
+
         int ret = aService.insertApplyBatch(list);        
 
         log.info(format, ret);

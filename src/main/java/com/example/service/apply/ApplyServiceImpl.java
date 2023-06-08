@@ -33,37 +33,37 @@ public class ApplyServiceImpl implements ApplyService {
 
                 int ret2 = aMapper.updateClassUnitApplySuccess(list);
 
-                System.out.println(ret2);
+                if( ret2 == list.size()) {
+                    Apply apply1 = list.get(0);
 
-                Apply apply1 = list.get(0);
-
-                Map<String, Object> map = new HashMap<>();
-                map.put("id", apply1.getMemberid());
-                map.put("count", list.size());
-
-                List<Long> list1 = aMapper.selectInsertedApplyNoList(map);
-
-                log.info(format, list1.toString());
-
-                List<ApplyStatus> list2 = new ArrayList<>();
-
-                for (long a : list1) {
-
-                    ApplyStatus applyStatus = new ApplyStatus();
-                    applyStatus.setApplyno(a);
-                    applyStatus.setChk(1);
-
-                    list2.add(applyStatus);
-
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("id", apply1.getMemberid());
+                    map.put("count", list.size());
+    
+                    List<Long> list1 = aMapper.selectInsertedApplyNoList(map);
+    
+                    log.info(format, list1.toString());
+    
+                    List<ApplyStatus> list2 = new ArrayList<>();
+    
+                    for (long a : list1) {
+    
+                        ApplyStatus applyStatus = new ApplyStatus();
+                        applyStatus.setApplyno(a);
+                        applyStatus.setChk(1);
+    
+                        list2.add(applyStatus);
+    
+                    }
+    
+                    int result = aMapper.insertApplyStatusBatch(list2);
+    
+                    if(result == list2.size()) {
+    
+                        return 1;
+                    }
                 }
-
-                int result = aMapper.insertApplyStatusBatch(list2);
-
-                if(result == list2.size()) {
-
-                    return 1;
-                }
-
+                
                 return 0;
             }
 

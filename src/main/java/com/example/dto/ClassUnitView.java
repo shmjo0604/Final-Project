@@ -84,4 +84,6 @@ public class ClassUnitView {
 	private long mainImg;
 	// 신청할 인원수
 	private int person;
+	// 각 유닛별 결제 금액
+	private int payment;
 }
