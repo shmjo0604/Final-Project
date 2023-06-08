@@ -14,13 +14,10 @@ import com.example.entity.ClassUnit;
 public interface ClassUnitRepository extends JpaRepository<ClassUnit, Long> {
 
     // classcode(ClassUnit의 외래키)에 해당하는 ClassUnit 전체 조회
-    List<ClassUnit> findByClassproduct_classcode(long classcode);
+    List<ClassUnit> findByClassproduct_classcodeOrderByClassdate(long classcode);
 
     ClassUnit findByClassproduct_classcodeAndNo(long classcode, long no);
 
-    @Modifying
-    @Query("UPDATE ClassUnit cu SET cu.chk = 1 WHERE cu.classproduct.classcode = :classcode AND cu.no = :no")
-    void updateChkByClasscodeAndNo(@Param("classcode") long classcode, @Param("no") long no);
 
     
     

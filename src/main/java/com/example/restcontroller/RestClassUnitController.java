@@ -1,6 +1,6 @@
 package com.example.restcontroller;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,8 +37,7 @@ public class RestClassUnitController {
     @PostMapping(value = "/insert.json")
     public Map<String, Object> insertPOST(
         @RequestBody ClassUnit classunit){
-        log.info(format,"ddd");
-        log.info(format, classunit.toString());
+        // log.info(format, classunit.toString());
         Map<String, Object> retMap = new HashMap<>();
     
         try {
@@ -62,10 +61,17 @@ public class RestClassUnitController {
             // log.info(format, classcode);
             Map<String,Object> retmap = new HashMap<>();
 
-            List<ClassUnit> list = cuRepository.findByClassproduct_classcode(classcode);
+            List<ClassUnit> list = cuRepository.findByClassproduct_classcodeOrderByClassdate(classcode);
+            List<ClassUnit> list1 = new ArrayList<>();
             // log.info(format, list.toString());
-        
-            retmap.put("list", list);
+            for (ClassUnit classUnit : list){
+                if(classUnit.getChk() == 0){
+                    list1.add(classUnit);
+                }
+            }
+            
+            retmap.put("list", list1);
+            
             return retmap;
     }
 
@@ -78,7 +84,7 @@ public class RestClassUnitController {
         // log.info(format, no);
 
         ClassUnit obj = cuRepository.findByClassproduct_classcodeAndNo(classcode, no);
-        log.info(format, obj);
+        // log.info(format, obj);
 
         Map<String, Object> retmap = new HashMap<>();
         retmap.put("obj", obj);
@@ -92,22 +98,36 @@ public class RestClassUnitController {
         @RequestParam(name = "no", defaultValue = "0") long no) {
         Map<String, Integer> retMap = new HashMap<>();
 
-        log.info(format, classcode);
-        log.info(format, no);
+        // log.info(format, classcode);
+        // log.info(format, no);
         
-        cuRepository.updateChkByClasscodeAndNo(classcode, no);
+        ClassUnit obj = cuRepository.findByClassproduct_classcodeAndNo(classcode, no);
+        obj.setChk(1);
+        cuRepository.save(obj);
+        
         retMap.put("status", 200);
         
         return retMap;
     }
 
     // 일정 전체 삭제(update로 처리)
-    // @PutMapping(value = "/deleteall.json")
-    // public Map<String, Integer> deleteallPUT() {
-    //     Map<String, Integer> retMap = new HashMap<>();
+    @PutMapping(value = "/deleteall.json")
+    public Map<String, Integer> deleteallPUT(@RequestParam(name = "classcode", defaultValue = "0") long classcode) {
+        Map<String, Integer> retMap = new HashMap<>();
+        log.info(format, classcode);
 
-    //     // retMap.put("result", ret);
-    //     return retMap;
-    // }
+        List<ClassUnit> list = cuRepository.findByClassproduct_classcodeOrderByClassdate(classcode);
+        List<ClassUnit> list1 = new ArrayList<>();
+
+        for (ClassUnit classUnit : list){
+            if(classUnit.getChk() == 0){
+                classUnit.setChk(1);
+                cuRepository.save(classUnit);
+            }
+        }
+        retMap.put("status", 200);
+
+        return retMap;
+    }
     
 }
