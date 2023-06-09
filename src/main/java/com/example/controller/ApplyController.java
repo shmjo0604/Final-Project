@@ -33,9 +33,6 @@ public class ApplyController {
     @Autowired ClassManageService manageService;
     @Autowired MemberService mService;
 
-    @Autowired ClassUnitMapper unitMapper;
-    // 나중에 병합 후에 unitservice에 새로운 mapper 추가하고 삭제
-
     @GetMapping(value = "/insert.do")
     public String applyGET(
         Model model, 
@@ -90,12 +87,6 @@ public class ApplyController {
     public String applyPOST() {
 
         return "redirect:/home.do";
-    }
-
-    @GetMapping(value = "/insertbatch.do")
-    public String applybatchGET(@RequestParam(name = "unitno[]", required = false) List<Long> unitnoList, @RequestParam(name = "person[]", required = false) List<Long> personList) {
-
-        return "/apply/insert";
     }
     
 }

@@ -11,7 +11,10 @@ import org.springframework.stereotype.Service;
 import com.example.dto.Apply;
 import com.example.dto.ApplyStatus;
 import com.example.dto.ApplyView;
+import com.example.entity.Member;
+import com.example.entity.Notification;
 import com.example.mapper.ApplyMapper;
+import com.example.repository.NotificationRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,8 +22,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ApplyServiceImpl implements ApplyService {
 
-    @Autowired
-    ApplyMapper aMapper;
+    @Autowired ApplyMapper aMapper;
+    @Autowired NotificationRepository nRepository;
 
     final String format = "ApplyServiceImpl => {}";
 
@@ -60,6 +63,26 @@ public class ApplyServiceImpl implements ApplyService {
     
                     if(result == list2.size()) {
     
+                        List<Notification> notifications = new ArrayList<>();
+
+                        for(Apply apply2 : list) {
+
+                            Notification notification = new Notification();
+                            
+                            Member member = new Member();
+                            member.setId(apply2.getOwnerid());
+
+                            notification.setMember(member);
+                            notification.setUrl("/classunit/myunit.do?menu=2&classcode=" + apply2.getClasscode());
+                            notification.setContent(apply2.getMemberid() + "님이 클래스 신청하였습니다.");
+                            notification.setType("신청");
+
+                            notifications.add(notification);
+
+                        }
+
+                        nRepository.saveAll(notifications);
+                        
                         return 1;
                     }
                 }
