@@ -10,7 +10,7 @@ async function getNotification() {
     const headers = { "Content-Type": "application/json" };
     const { data } = await axios.get(url, { headers });
 
-    //console.log("notification", data);
+    console.log("notification", data);
 
     if(data.status === 200) {
 

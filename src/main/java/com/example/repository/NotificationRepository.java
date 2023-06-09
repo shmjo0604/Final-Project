@@ -8,7 +8,7 @@ import com.example.entity.Notification;
 
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
     
-    List<Notification> findByMember_idOrderByNoDesc(String id);
+    List<Notification> findTop10ByMember_idOrderByNoDesc(String id);
 
     int countByMember_idAndChk(String id, int chk);
 

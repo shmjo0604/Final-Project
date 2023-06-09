@@ -3,6 +3,8 @@ package com.example.service.notification;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Notification;
@@ -18,7 +20,7 @@ public class NotificationServiceImpl implements NotificationService {
     
         try {
 
-            return nRepository.findByMember_idOrderByNoDesc(id);
+            return nRepository.findTop2ByMember_idOrderByNoDesc(id);
 
         }
         catch(Exception e) {
