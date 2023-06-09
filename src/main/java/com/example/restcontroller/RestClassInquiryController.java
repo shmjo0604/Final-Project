@@ -10,7 +10,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -102,34 +101,17 @@ public class RestClassInquiryController {
         @RequestParam(name = "no") long no
         ) {
             
-            //inquiryViewRepository.findOne();
-            log.info("ClassInquiry no ===================> {}", no);
-
-            return null;
-            
-
-    }
-
-    @PutMapping(value = "/selectoneinquiry.json")
-    public Map<String, Object> selectoneinquiryPUT(@RequestBody ClassInquiryView obj,
-    @RequestBody ClassInquiry obj2) {
-
         Map<String, Object> retMap = new HashMap<>();
+            
+        ClassInquiryView obj = inquiryService.selectClassInquiryViewOne(no);
 
-        log.info(format, obj.getNo());
+        log.info(format, obj.toString());
 
-        try {
-            ClassInquiryView inquiry = inquiryViewRepository.findByNo(obj.getNo());
+        retMap.put("status", -1);
 
-            log.info("테스트----------->{}", inquiry.toString());
-
-            int ret = manageService.updateClassAnswer(obj2);
-
-            retMap.put("ret", ret);
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-            retMap.put("ret", -1);
+        if(obj != null) {
+            retMap.put("status", 200);
+            retMap.put("obj", obj);
         }
 
         return retMap;

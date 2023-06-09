@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.ClassInquiry;
+import com.example.entity.ClassInquiryView;
 
 @Service
 public interface ClassInquiryService {
@@ -17,6 +18,9 @@ public interface ClassInquiryService {
 
     // 3. 클래스 문의 조회 총 개수
     public long selectCountClassInquiryList(long classcode);
+
+    // 4. 클래스 문의 하나 조회
+    public ClassInquiryView selectClassInquiryViewOne(long no);
 
 
 }

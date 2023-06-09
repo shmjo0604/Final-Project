@@ -45,40 +45,37 @@
 
                 <tbody id="emp_rows">
                     <!-- 처리상태(0) : 답변대기 -->
-                    <th:block th:each="obj : ${list}" th:if="${obj.chk == 0}">
+                    <th:block th:each="obj, objStat : ${list}">
                         <tr>
-                            <td th:text="${obj.no}" id="no"></td>
+                            <td th:text="${obj.no}"></td>
                             <td th:text="${obj.classtitle}"></td>
                             <td th:text="${obj.title}"></td>
                             <!-- <td class="txt" th:text="${obj.content}"><label id="modal"></label></td> -->
                             <td th:text="${#dates.format(obj.regdate, 'yyyy.MM.dd')}"></td>
                             <td th:text="${obj.memberid}"></td>
-                            <td><button type="button" id="myModal" class="createBtn btn btn-danger"
-                                data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="answer()" >
-                                    작성</button></td>
-                            <td style="color: red">답변대기</td>
+                            <td>
+                                <th:block th:if="${obj.chk == 0}">
+                                    <button type="button" id="myModal" class="createBtn btn btn-danger"
+                                        th:onclick="answerModal([[${obj.no}]])">
+                                        작성</button>
+                                </th:block>
+                                <th:block th:if="${obj.chk == 1}">
+                                    <button type="button" id="myModal" class="btn btn-success"
+                                        th:onclick="answerModal([[${obj.no}]])">
+                                        수정</button>
+                                </th:block>
+                            </td>
+                            <td>
+                                <th:block th:if="${obj.chk == 0}">
+                                    <div style="color: red;">답변대기</div>
+                                </th:block>
+                                <th:block th:if="${obj.chk == 1}">
+                                    <div style="color: blue;">답변완료</div>
+                                </th:block>
+                            </td>
                         </tr>
                     </th:block>
-
-                    <!-- 처리상태(1) : 답변완료 -->
-                    <th:block th:each="obj : ${list}" th:if="${obj.chk == 1}">
-                        <tr onclick="PopupEmpInfo(this)">
-                            <td th:text="${obj.no}"></td>
-                            <td th:text="${obj.classtitle}"></td>
-                            <td th:text="${obj.title}"></td>
-                            <td class="txt" th:text="${obj.content}" th:parameterName="${obj.content}"
-                                th:onclick="event.cancelBubble = true;"></td>
-                            <td th:text="${#dates.format(obj.regdate, 'yyyy.MM.dd')}"></td>
-                            <td th:text="${obj.memberid}"></td>
-                            <td><button type="button" id="myModal" class="btn btn-success" 
-                                data-bs-toggle="modal" data-bs-target="#exampleModal"onclick="answer()">
-                                    수정</button></td>
-                            <td style="color: blue">답변완료</td>
-                        </tr>
-                    </th:block>
-
                 </tbody>
-
             </table>
 
             <div class="row justify-content-center">
@@ -87,390 +84,191 @@
                 </div>
             </div>
 
-            <!-- 상세보기 모달 창 -->
-            <!-- <div class="modal modal-center fade" id="modal" tabindex="-1" aria-labelledby="exampleModal2Label"
-                aria-hidden="true">
+            <!-- 모달 창 -->
+            <div class="modal modal-center fade" id="classAnswerModal" data-bs-backdrop="static" tabindex="-1"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header" style="background-color: ghostwhite">
                             <label class="modal-title" id="modal-title">서비스 문의</label>
                         </div>
                         <div class="modal-body">
-                            <div style="margin-bottom: 10px; font-weight: bold;">| 질문</div>
-                            <div style="display: inline-block; margin-top: 10px; margin-left: 5px;">
-                                <div style="float: left; ">제목 :</div>
-                                <div style="float: left; margin-left: 10px;">환불 언제까지 가능하나요?</div>
-                            </div>
-
-                            <div style="border: 1px solid gainsboro; padding : 20px;">
-                                <div style="display: inline-block;">
-                                    <div>지난 5월 20일 신청한 클래스를 환불하게될 수도 있는데 환불 100% 데드라인을 알고싶습니다.</div>
+                            <form id="answer_form" th:action="@{/member/myclass.do?menu=2}" method="post">
+                                <div style="margin-bottom: 10px; font-weight: bold;">| 질문</div>
+                                <div style="margin-top: 10px; margin-left: 5px;">
+                                    <div class="mb-2 row">
+                                        <label for="inquiry_title" class="col-sm-2 col-form-label">제목 : </label>
+                                        <div class="col-sm-6">
+                                            <input id="inquiry_title" type="text" class="form-control-plaintext"
+                                                readonly>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="inquiry_writer" class="col-sm-2 col-form-label">작성자 : </label>
+                                        <div class="col-sm-6">
+                                            <input id="inquiry_writer" type="text" class="form-control-plaintext"
+                                                readonly>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div style="margin-bottom: 10px; font-weight: bold; margin-top: 30px;">| 답변</div>
-                            <div style="display: inline-block; margin-top: 10px; margin-left: 5px;">
-                                <div style="float: left; ">제목 :</div>
-                                <div style="float: left; margin-left: 10px;">문의하신 환불처리 절차 답변드립니다.</div>
-                            </div>
+                                <textarea id="inquiry_content" class="form-control" placeholder="Leave a comment here"
+                                    style="height: 250px" readonly></textarea>
 
-                            <div style="border: 1px solid gainsboro; padding : 20px;">
-                                <div>안녕하십니까. 환불절차 도와드리겠습니다. 먼저 아래 메뉴얼을 보시면 ... 그렇습니다.</div>
-                            </div>
+                                <div style="margin-bottom: 10px; font-weight: bold; margin-top: 30px;">| 답변</div>
+                                <div style="margin-top: 10px; margin-left: 5px;">
+                                    <div class="mb-3 row">
+                                        <label for="answer_title" class="col-sm-2 col-form-label">제목 : </label>
+                                        <div class="col-sm-6">
+                                            <input id="answer_title" type="text" class="form-control" name="title">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <textarea class="form-control" placeholder="답변을 입력하세요" id="answer_content"
+                                    style="height: 250px" name="content"></textarea>
+
+
+
+                                <input id="inquiryno" type="hidden" name="classinquiry.no">
+                            </form>
                         </div>
 
+                        <!-- 버튼영역 -->
                         <div style="text-align: center;">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                onclick="closeModal()"
+                            <button type="button" class="btn btn-success" onclick="answerinsertAction()"
+                                style="margin-bottom: 20px; margin-top: 10px; height: 35px; width: 100px; display: inline-block;">등록</button>
+                            <button type="button" class="btn btn-secondary" onclick="closeModal()"
                                 style="margin-bottom: 20px; margin-top: 10px; height: 35px; width: 100px; display: inline-block;">닫기</button>
                         </div>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- 답변작성 Modal -->
-            <form th:action="@{insert.do(no=${no})}" method="post" id="form_insert">
-            <div class="modal modal-center fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">답변하기</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                            </button>
-                        </div>
-                        <div class="modal-question">
-                        </div>
-                        <form th:action="@{/answer/insert.do}" id="myform" method="post">
-                            <div class="modal-body">
-                                <table class="table table-bordered">
-                                    <!-- <thead>
-                                        <tr>
-                                            <td>문의내용</td>
-                                            <th:block th:each="obj : ${list}" th:if="${obj.no == 11}">
-                                                <td><input th:value="${obj.content}" type="text" name="content"
-                                                        id="content" class="form-control" readonly></td>
-                                            </th:block>
-                                        </tr>
-                                    </thead> -->
-                                    <thead>
-                                        <tr>
-                                            <td>문의내용</td>
-                                            <td><input type="text" id="content" style="width:100%;" readonly></td>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        <tr>
-                                            <td>답변</td>
-                                            <td>
-                                                <textarea name="answer" id="answer" placeholder="답변을 작성하세요"
-                                                    class="form-control" style="width:100%;" rows="10"></textarea>
-                                            </td>
-                                        </tr>
-                                        <input id="no" name="inquiry.no" type="hidden" />
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-
-                                <!-- <form method="post" id="insertForm"
-                                    th:action="@{/member/inquiry/insert.do(classcode=${obj.classcode} )}">
-                                    <button type="button" class="btn btn-primary" onclick="insertPost()"
-                                    style="border: 0;">등록</button>
-                                </form> -->
-
-                                <input type="button" class="btn btn-primary" id="btn-write" onclick="insertClass()"
-                                    value="등록">
-                            </div>
-
-                            <input type="hidden" name="pages" th:value="${pages}" />
-                        </form>
-
-
-
-
-                        <script src="/js/lib/jquery.min.js"></script>
-                        <!--jQuery-->
-                        <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
-                        <!--axios library-->
-                        <script th:src="@{/js/axios.min.js}"></script>
-
-                        <script>
-
-                            function answer(no, classtitle, title, content, regdate, memberid, chk) {
-                                const modal = new bootstrap.Modal(
-                                    document.getElementById("exampleModal"),
-                                    {}
-                                );
-
-                                const no1 = document.getElementById("no");
-                                const classtitle1 = document.getElementById("classtitle");
-                                const title1 = document.getElementById("title");
-                                const content1 = document.getElementById("content");
-                                const regdate1 = document.getElementById("regdate");
-                                const memberid1 = document.getElementById("memberid");
-                                const chk1 = document.getElementById("chk");
-
-                                no1.value = no;
-                                classtitle1.value = classtitle;
-                                title1.value = title;
-                                content1.value = content;
-                                regdate1.value = regdate;
-                                memberid1.value = memberid;
-                                chk1.value = chk;
-
-                                modal.show();
-                            }
-                        </script>
-
-
-                        <!-- 문의 조회 페이지 -->
-                        <!-- <script th:inline="javascript">
-                            $(function () {
-                                async function ajaxBoardList(page) {
-                                    const url = '/specialday/api/member/selectlist.json?page=' + page;
-                                    const headers = { "Content-Type": "application/json" };
-                                    const { data } = await axios.get(url, { headers });
-
-                                    console.log(data);
-
-                                    //2.함수를 pages정보를 넘겨서 생성시킴
-                                    initPagination(data.pages);
-
-                                    const tbody = document.getElementById('tbody');
-                                    tbody.innerHTML = '';
-
-                                    for (let tmp of data.list) {
-                                        function getyear() {
-                                            var applyregdate = tmp.applyregdate;
-                                            var result = applyregdate.substring(0, 10)
-                                            return result;
-                                        }
-
-                                        const chk = tmp.chk;
-                                        const level = tmp.classlevel;
-                                        let str = "";
-                                        let str1 = "";
-
-                                        function chkchk() {
-                                            if (chk == 1) {
-                                                str = "신청완료";
-                                                // addclassname()
-                                            }
-                                            else if (chk == 2) {
-                                                str = "신청취소";
-                                            }
-                                            else if (chk == 2) {
-                                                str = "참여완료";
-                                            }
-                                            return str;
-                                        }
-
-                                        function levelchk() {
-                                            if (level === 1) {
-                                                str1 = "입문자";
-                                            }
-                                            else if (level === 2) {
-                                                str1 = "경험자";
-                                            }
-                                            else if (level === 3) {
-                                                str1 = "숙련자";
-                                            }
-                                            return str1;
-                                        }
-
-
-
-                                        tbody.innerHTML +=
-                                            `<tr>` +
-                                            `<td class="center">` +
-                                            `<p>` + getyear() + `</p>` +
-                                            ` <div
-            style="display: flex; flex-direction: column; align-items: center"
-          >
-            <button
-              class="btn btn-sm btn-outline-success"
-              style="height: 30px; width: 90px"
-            >
-              상세보기 >
-            </button>
-          </div>
-        </td>
-        <td class="center"> 
-          <img src="/specialday/member/image?classcode=` + tmp.classcode + `" style="width: 100px; height: 100px"/>
-        </td> 
-        <td style="font-size: small">
-         <div class="mb-2">
-          <a class="a_underline" href="#">` + "<" + tmp.title + ">" + `</a>
-            </div>
-
-            <div id="classdate1">` + "날짜:" + tmp.classdate + `</div>
-            <div >` + "시간:" + tmp.classstart + "~" + tmp.classend + `</div>
-            <div >` + "난이도:" + levelchk() + `</div>
-            <div >` + "금액(1인):" + tmp.price + "원" + `</div>
-            <div >` + "신청인원:" + tmp.person + "명" + `</div>
-        </td>
-        <td style="font-weight: bold" class="center">` + tmp.totalprice + "원" + `</td>
-        <td class="center">
-          <p style="text-align: center">`+ chkchk() + `</p>
-          <button
-            class="btn btn-sm btn-secondary" 
-            id ="button"
-            type="button"
-            style="height: 30px; width: 90px"
-            onclick="modalAction(`+ tmp.no + "," + tmp.classcode + "," + tmp.price + ",\'" + tmp.title + "\'" + ",\'" + tmp.classdate
-                                            + "\'" + ",\'" + tmp.classlevel + "\'" + ",\'" + tmp.classstart + "\'" + ",\'" + tmp.classend + "\'" + `)"> 리뷰작성
-          </button >
-        </td >
-                    </tr >`;
-                                    }
-                                };
-                                ajaxBoardList(1)
-
-                                // 페이지네이션     
-                                function initPagination(pages) {
-                                    $('#pagination-demo').twbsPagination('destroy');
-                                    var totalpages = $("input[name=pages]").val();
-                                    let query = window.location.search;
-                                    let param = new URLSearchParams(query);
-                                    let startpage = param.get("page");
-                                    $("#pagination-demo").twbsPagination({
-                                        totalPages: totalpages,
-                                        visiblePages: 5,
-                                        startPage: startpage,
-                                        first: "≪",
-                                        last: "≫",
-                                        prev: "<",
-                                        next: ">",
-
-                                        initiateStartPageClick: false,
-                                        nextClass: "page-item next",	// 이전 페이지 CSS class
-                                        prevClass: "page-item prev",	// 다음 페이지 CSS class
-                                        lastClass: "page-item last",	// 마지막 페이지 CSS calss
-                                        firstClass: "page-item first",	// 첫 페이지 CSS class
-                                        pageClass: "page-item",	// 페이지 버튼의 CSS class
-                                        activeClass: "active",	// 클릭된 페이지 버튼의 CSS class
-                                        disabledClass: "disabled",	// 클릭 안된 페이지 버튼의 CSS class
-                                        anchorClass: "page-link",	//버튼 안의 앵커에 대한 CSS class
-                                        onPageClick: function (event, page) {
-                                            ajaxBoardList(page);
-                                        },
-                                    });
-                                }
-                            }); 
-                        </script> -->
-
-                        
-                        <script>
-
-                            // const board = {
-                            //     init: function () {
-                            //         $("#btn-write").on("click", () => {
-                            //             this.clickWriteBtn();
-                            //         });
-                            //     },
-                            //     csrf: {
-                            //         token: $("meta[name='_csrf']").attr("content"),
-                            //         header: $("meta[name='_csrf_header']").attr("content"),
-                            //     },
-                            //     clickWriteBtn: function () {
-                            //         const data = {
-                            //             answer: $("#answer").val(),
-                            //             content: $("#content").val(),
-                            //         };
-
-                            //         const { token, header } = this.csrf;
-
-                            //         $.ajax({
-                            //             type: "POST",
-                            //             url: "/post/save",
-                            //             dataType: "json",
-                            //             contentType: "application/json; charset=utf-8",
-                            //             data: JSON.stringify(data),
-                            //             beforeSend: function (xhr) {
-                            //                 xhr.setRequestHeader(header, token);
-                            //             },
-                            //         })
-                            //             .done(function (result) {
-                            //                 if (result.msg === "save") {
-                            //                     alert("답변이 등록되었습니다.");
-                            //                     location.reload();
-                            //                 } else {
-                            //                     alert("답변 등록에 실패했습니다. 다시 작성해주세요");
-                            //                     location.reload();
-                            //                 }
-                            //             })
-                            //             .fail(function (error) {
-                            //                 alert("error");
-                            //                 console.log(error);
-                            //             });
-                            //     },
-                            // };
-
-                            // board.init();
-                            //   -----------------------------------------------------------------------
-
-                            const contextPath = $('#contextPathHolder').attr('data-contextPath');
-
-                            function insertClass() {
-                                const content = document.getElementById("content");
-                                const answer = document.getElementById("answer");
-
-                                input.type = "text";
-                                input.name = "answer";
-                                input.id = "answer";
-                                input.value = content;
-                                form.appendChild(input);
-
-                                if (answer.value.length <= 0) {
-                                    alert('답변을 작성하세요');
-                                    answer.focus();
-                                    return false;
-                                }
-
-                                form.submit();
-
-                                // const url = contextPath + '/api/member/inquiry.json';
-                                // const headers = { "Content-Type": "application/json" };
-                                // const { data } = await axios.get(url,
-                                //     { params: { content: content.value, answer: answer.value } },
-                                //     { headers });
-
-                                // console.log(data.ret);
-                            }
-
-
-                            $(document).ready(function () {
-
-                                // 답변하기 버튼 클릭
-                                $("#createBtn").click(function () {
-                                    action = 'create';
-                                    type = 'POST'
-                                    $("#modal-title").text("답변작성");
-                                    $("#myModal").modal();
-                                })
-                            })
-
-                            // 20글자 이상시 글자수 자동조절
-                            function textLengthOverCut(txt, len, lastTxt) {
-                                if (len == "" || len == null) { // 기본값
-                                    len = 20;
-                                }
-                                if (lastTxt == "" || lastTxt == null) { // 기본값
-                                    lastTxt = "...";
-                                }
-                                if (txt.length > len) {
-                                    txt = txt.substr(0, len) + lastTxt;
-                                }
-                                return txt;
-                            }
-
-                        </script>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!--jQuery-->
+    <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
+    <!--twbsPagination js-->
+    <script th:src="@{/js/jquery.twbsPagination.min.js}"></script>
+    <!--axios library-->
+    <script th:src="@{/js/axios.min.js}"></script>
+    <!--Bootstrap 용 js -->
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:inline="javascript">
+
+        const contextPath = $('#contextPathHolder').attr('data-contextPath');
+
+        var pages = /*[[${pages}]]*/'';
+
+        $(document).ready(function() {
+			$('#pagination-demo').twbsPagination({
+				totalPages : Number(pages),
+				visiblePages : 10,
+				first : '처음',
+				last : '마지막',
+				prev : '이전',
+				next : '다음',
+				initiateStartPageClick : false,
+				startPage : Number(/*[[${param.page}]]*/),
+				// 주소창에서 page 값을 받아옴 -> 그 값에 해당하는 목록 버튼이 활성
+				onPageClick : function(event, page) {
+					//$('#page-content').text('Page ' + page);
+					window.location.href="myclass.do?menu=2&page="+page;
+					// 
+				}
+			});
+		});
+
+        async function answerModal(no) {
+
+            // console.log(no);
+
+            const url = contextPath + '/api/inquiry/selectoneinquiry.json?no=' + no;
+            const headers = { "Content-Type": "application/json" };
+            const { data } = await axios.get(url, { headers });
+
+            // console.log(data);
+
+            document.querySelector("#inquiryno").value = no;
+
+            if (data.status === 200) {
+
+                const title = document.querySelector("#inquiry_title");
+                const content = document.querySelector("#inquiry_content");
+                const writer = document.querySelector("#inquiry_writer");
+
+                title.value = data.obj.title;
+                content.textContent = data.obj.content;
+                writer.value = data.obj.memberid;
+
+            }
+
+            const modal = new bootstrap.Modal(document.getElementById("classAnswerModal"), {});
+            modal.show();
+        }
+
+        function closeModal() {
+
+            $("#classAnswerModal").modal('hide');
+
+            document.querySelector("#answer_title").value = null;
+            document.querySelector("#answer_content").value = null;
+
+        }
+
+        function answerinsertAction() {
+
+            const title = document.querySelector("#answer_title");
+            const content = document.querySelector("#answer_content");
+
+            if (title.value.length < 1) {
+                alert("제목을 입력해주세요.");
+                return false;
+            }
+            if (content.value.length < 1) {
+                alert("답변 내용을 입력해주세요.");
+                return false;
+            }
+
+            $("#answer_form").submit();
+        }
+
+       
+
+        function insertClass() {
+            const content = document.getElementById("content");
+            const answer = document.getElementById("answer");
+
+            input.type = "text";
+            input.name = "answer";
+            input.id = "answer";
+            input.value = content;
+            form.appendChild(input);
+
+            if (answer.value.length <= 0) {
+                alert('답변을 작성하세요');
+                answer.focus();
+                return false;
+            }
+
+            form.submit();
+
+        }
+
+        // 20글자 이상시 글자수 자동조절
+        function textLengthOverCut(txt, len, lastTxt) {
+            if (len == "" || len == null) { // 기본값
+                len = 20;
+            }
+            if (lastTxt == "" || lastTxt == null) { // 기본값
+                lastTxt = "...";
+            }
+            if (txt.length > len) {
+                txt = txt.substr(0, len) + lastTxt;
+            }
+            return txt;
+        }
+
+    </script>
+</div>

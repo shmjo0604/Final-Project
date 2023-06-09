@@ -3,8 +3,8 @@ package com.example.service.classproduct;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
@@ -183,9 +183,9 @@ public class ClassManageServiceImpl implements ClassManageService {
     }
 
     @Override
-    public List<ClassInquiryView> selectClassInquiryList(String owner) {
+    public List<ClassInquiryView> selectClassInquiryList(String owner, Pageable pagealbe) {
         try {
-            return cRepository.findByOwnerOrderByNoDesc(owner);
+            return cRepository.findByOwnerOrderByNoDesc(owner, pagealbe);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -232,6 +232,17 @@ public class ClassManageServiceImpl implements ClassManageService {
     public int updateClassAnswer(ClassInquiry obj) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateClassAnswer'");
+    }
+
+    @Override
+    public long selectClassInquiryListCount(String owner) {
+        try {
+            return cRepository.countByOwner(owner);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
 }
