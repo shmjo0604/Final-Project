@@ -159,12 +159,25 @@ public class ApplyServiceImpl implements ApplyService {
     }
 
     @Override
-    public Apply selectApplyByUnitno(long unitno) {
+    public int updateApplyChk(long no) {
         try {
-            return aMapper.selectApplyByUnitno(unitno);
+            return aMapper.updateApplyChk(no);
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return -1;
         }
     }
+
+    @Override
+    public int insertApplyStatusOne(long applyno, int chk) {
+        try {
+            return aMapper.insertApplyStatusOne(applyno, chk);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    
+   
 }

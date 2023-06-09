@@ -102,5 +102,16 @@ public class ClassUnitServiceImpl implements ClassUnitService {
             return null;
         }
     }
+
+    @Override
+    public List<ClassUnit> selectUnitListToCal(long classcode) {
+        try {
+            return cMapper.selectUnitListToCal(classcode);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     
 }

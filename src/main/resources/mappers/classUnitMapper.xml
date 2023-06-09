@@ -48,4 +48,9 @@
     SELECT u.* FROM classunitview u WHERE no = #{unitno}
 </select>
 
+<!--(6) ClassUnit 개설 일정 조회-->
+<select id="selectUnitListToCal" parameterType="long" resultType="ClassUnit">
+    SELECT * FROM CLASSUNIT WHERE CLASSCODE = #{classcode} AND CHK = 0
+</select>
+
 </mapper>

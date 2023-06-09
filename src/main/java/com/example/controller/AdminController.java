@@ -10,15 +10,11 @@ public class AdminController {
     
     @GetMapping(value = "/home.do")
     public String homeGET() {
-
         return "/admin/home";
     }
 
     @GetMapping(value = "/login.do")
     public String loginGET() {
-
         return "/admin/login";
     }
-
-
 }

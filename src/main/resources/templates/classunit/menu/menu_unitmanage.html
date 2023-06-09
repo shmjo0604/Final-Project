@@ -62,6 +62,36 @@
             cursor: pointer;
         }
 
+        /* 날짜 색 변경 */
+        .fc-day-sun a {
+            color: red;
+            text-decoration: none;
+        }
+        .fc-day-mon a {
+            color: black;
+            text-decoration: none;
+        }
+        .fc-day-tue a {
+            color: black;
+            text-decoration: none;
+        }
+        .fc-day-wed a {
+            color: black;
+            text-decoration: none;
+        }
+        .fc-day-thu a {
+            color: black;
+            text-decoration: none;
+        }
+        .fc-day-fri a {
+            color: black;
+            text-decoration: none;
+        }
+        .fc-day-sat a {
+            color: blue;
+            text-decoration: none;
+        }
+
     </style>
     
     <div id='calendar'></div>
@@ -304,6 +334,9 @@
     <!-- <script th:src="@{/js/axios.min.js}"></script> -->
     <script type="text/javascript" th:inline="javascript">
         
+        // 달력에 입력할 데이터
+        const list = /*[[${list}]]*/ [];
+
         // 달력
         document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
@@ -316,7 +349,7 @@
             },
             customButtons: {
                     addEventButton: { 
-                        text : "일정 추가",  
+                        text : "일정 등록",  
                         click : function(){ 
                             $("#unitInsertModal").modal("show"); 
 
@@ -363,17 +396,40 @@
             displayEventTime: false, // 시간 표시 x
             nowIndicator: true, // 현재 시간 마크
             locale: 'ko', // 한국어 설정
-            events:[ // 일정 데이터 추가 , DB의 event를 가져오려면 JSON 형식으로 변환해 events에 넣어줘야함.
-                    {
-                        title:'일정',
-                        start:'2023-06-01 00:00:00',
-                        end:'2023-06-03 24:00:00'
-                    }
-                ]
-            });
+            events: createEventObjects()
+        });
             calendar.render();
         });
+
+        function createEventObjects() {
+            return list.map(function(obj) {
+                var level;
+                if (obj.classlevel === 1) {
+                    level = "입문자";
+                } else if (obj.classlevel === 2) {
+                    level = "경험자";
+                } else if (obj.classlevel === 3) {
+                    level = "숙련자";
+                }
+                return {
+                    title: obj.classstart + " ~ " + obj.classend + " " + level,
+                    start: obj.classdate,
+                    backgroundColor: getBackgroundColor(obj.classlevel)
+                };
+            });
+        }
+        function getBackgroundColor(classlevel) {
+            switch (classlevel) {
+                case 1:
+                    return "#00C783";
+                case 2:
+                    return "#23946C";
+                case 3:
+                    return "#006F4A";
+            }
+        }
         
+
         // 일정등록 모달창 닫기 
         function cancel() {
             $("#unitInsertModal").modal("hide"); 

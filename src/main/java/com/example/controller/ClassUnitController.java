@@ -9,11 +9,12 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.dto.ApplyView;
+import com.example.dto.ClassUnit;
+import com.example.mapper.ClassUnitMapper;
 import com.example.service.apply.ApplyService;
 import com.example.service.classproduct.ClassUnitService;
 
@@ -25,8 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(value = "/classunit")
 public class ClassUnitController {
 
-    final String format = "ClassUnitController => {}";
-    
+    final String format = "ClassUnitController => {}";    
     
     @Autowired ClassUnitService cuService;
     @Autowired ApplyService aService;
@@ -46,8 +46,12 @@ public class ClassUnitController {
 
         if(menu == 1) {
             long defaultPrice = cuService.selectPriceOne(classcode);
+            List<ClassUnit> list = cuService.selectUnitListToCal(classcode);
+            log.info(format, list.toString());
+
             model.addAttribute("classcode", classcode);
             model.addAttribute("defaultPrice", defaultPrice);
+            model.addAttribute("list", list);
         }
 
         else if(menu == 2){
