@@ -148,6 +148,13 @@ public class MemberController {
             chk1 = aService.countApplyListOne(id);
             chk2 = aService.countApplyListTwo(id);
             chk3 = aService.countApplyListThree(id);
+
+            model.addAttribute("list", list);
+            model.addAttribute("pages", (cnt - 1) / 5 + 1);
+    
+            model.addAttribute("chk1", chk1);
+            model.addAttribute("chk2", chk2);
+            model.addAttribute("chk3", chk3);
         }
 
         else if (menu == 2) {
@@ -166,7 +173,6 @@ public class MemberController {
 
             model.addAttribute("list1", list1);
             model.addAttribute("pages1", (total - 1) / 5 + 1); // 페이지 수
-            // model.addAttribute("pages1", (total - 1) / 3 + 1);
 
         }
 
@@ -181,13 +187,7 @@ public class MemberController {
         }
 
         model.addAttribute("user", user);
-        model.addAttribute("list", list);
-
-        model.addAttribute("pages", (cnt - 1) / 5 + 1);
-
-        model.addAttribute("chk1", chk1);
-        model.addAttribute("chk2", chk2);
-        model.addAttribute("chk3", chk3);
+       
 
         return "/member/mypage/mypage";
     }

@@ -23,7 +23,7 @@ public interface ReviewRepository extends JpaRepository<Reviewview, Long> {
     void save(Review obj);
 
     // nativequery사용하기
-    @Query(value = "SELECT * FROM ( SELECT r.*, ROW_NUMBER() OVER (ORDER BY regdate DESC) rown FROM REVIEWVIEW r WHERE r.id =:id) WHERE rown BETWEEN :start AND :end", nativeQuery = true)
+    @Query(value = "SELECT * FROM ( SELECT r.*, ROW_NUMBER() OVER (ORDER BY regdate DESC) rown FROM REVIEWVIEW r WHERE r.id =:id) WHERE rown BETWEEN :start AND :end ORDER BY regdate DESC", nativeQuery = true)
     public List<Reviewview> selectReviewByIdPagenation(@Param("id") String id, @Param("start") int start,
             @Param("end") int end);
 }
