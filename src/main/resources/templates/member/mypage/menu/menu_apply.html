@@ -273,7 +273,7 @@
                     height: 70px;
                     font-size: larger;
                     font-weight: bold;
-                    color: white;" onclick="getEditorContent(); reviewNone();" />
+                    color: white;" onclick="getEditorContent();" />
               </div>
             </div>
           </div>
@@ -361,7 +361,7 @@
           >
             <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px"
             onclick="modalAction1(`+ tmp.chk + "," + tmp.person + "," + tmp.totalprice + "," + tmp.no + "," + tmp.classcode + "," + tmp.price + ",\'" + tmp.title + "\'" + ",\'" + tmp.classdate + "\'" + ",\'"
-                  + tmp.classlevel + "\'" + ",\'" + tmp.classstart + "\'" + ",\'" + tmp.classend + "\'" + ",\'" + tmp.applyregdate + "\'" + ",\'" + tmp.cancledate + "\'" + `)">
+                  + tmp.classlevel + "\'" + ",\'" + tmp.classstart + "\'" + ",\'" + tmp.classend + "\'" + ",\'" + tmp.regdate + "\'" + ",\'" + tmp.confirmdate + "\'" + `)">
               상세보기
             </button>
           </div>
@@ -467,10 +467,6 @@
               }
             });
 
-            $('#ulul2 li > a').on('click', function () {
-              $('#ulul1').text($(this).text());
-              httpMethod = $(this).attr('value');
-            });
           });
 
         </script>

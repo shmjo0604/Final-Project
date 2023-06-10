@@ -180,7 +180,7 @@ function modalAction(no, classcode, price, title, classdate, classlevel, classst
   const classlevel1 = document.getElementById("classlevel");
   const price1 = document.getElementById("price");
 
-  img.src = "http://127.0.0.1:8080/specialday/member/image?classcode=" + classcode;
+  img.src = "/specialday/member/image?classcode=" + classcode;
   no1.value = no;
   title1.value = "이름 :" + title;
   classdate1.value = classdate;
@@ -286,7 +286,7 @@ async function modalAction1(chk, person, totalprice, no, classcode, price, title
   }
 
 
-  img2.src = "http://127.0.0.1:8080/specialday/member/image?classcode=" + classcode;
+  img2.src = "/specialday/member/image?classcode=" + classcode;
   no2.value = no;
   title2.value = "이름: " + title;
   classdate2.value = classdate;

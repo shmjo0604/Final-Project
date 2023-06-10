@@ -98,7 +98,7 @@
 </select>
 
 <!-- 13. 신청상태에 따른 날짜 조회  -->
-<select id="selectApplyStatusListById" parameterType="map" resultType="com.example.dto.ApplyView">
+<select id="selectApplyStatusListById" parameterType="map" resultType="com.example.dto.ApplyStatusView">
          SELECT a.* FROM APPLYSTATUSVIEW a WHERE NO=#{no} AND MEMBERID =#{id}
 </select>
 

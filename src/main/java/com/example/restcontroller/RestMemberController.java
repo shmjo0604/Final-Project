@@ -255,6 +255,18 @@ public class RestMemberController {
         long cnt = aService.countApplyList(id);
         List<ApplyView> list = new ArrayList<>();
 
+        long chk1 = 0;
+        long chk2 = 0;
+        long chk3 = 0;
+
+        chk1 = aService.countApplyListOne(id);
+        chk2 = aService.countApplyListTwo(id);
+        chk3 = aService.countApplyListThree(id);
+
+        map.put("chk1", chk1);
+        map.put("chk2", chk2);
+        map.put("chk3", chk3);
+
         map.put("id", id);
         map.put("first", first);
         map.put("last", last);
