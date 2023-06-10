@@ -59,7 +59,7 @@ public class ClassUnitController {
             map.put("classcode", classcode);
                         
             List<ApplyView> list = aService.selectApplyViewListByClasscode(map);
-            // log.info(format, list);
+            log.info(format, list);
 
             model.addAttribute("classcode", classcode);
             model.addAttribute("list", list);

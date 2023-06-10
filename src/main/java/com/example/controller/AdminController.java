@@ -17,4 +17,5 @@ public class AdminController {
     public String loginGET() {
         return "/admin/login";
     }
+
 }

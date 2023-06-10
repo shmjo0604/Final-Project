@@ -36,4 +36,10 @@ public class TestController {
         return "/test/productdetail";
     }
 
+    // 임시 admin화면 연결용
+    @GetMapping(value = "/home.do")
+    public String home1GET(){
+        return "/admin/home";
+    }
+
 }
