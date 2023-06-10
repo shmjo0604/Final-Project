@@ -142,8 +142,8 @@
         </td>
         <td class="center">
           <p style="text-align: center">신청완료</p>
-          <button class="btn btn-sm btn-secondary" type="button" style="height: 30px; width: 90px"
-            onclick="modalAction('2','도자기 슥','6월1일','15:00','입문자','10000원','2명')">
+          <button class="btn btn-sm btn-secondary" type="button" style="height: 30px; width: 90px" th:onclick="modalAction([[${obj.no}]],[[${obj.classcode}]],[[${obj.title}]],[[${obj.classdate}]],[[${obj.classstart}]],
+            [[${obj.classlevel}]],[[${obj.price}]],[[${obj.person}]])">
             리뷰작성>
           </button>
         </td>
@@ -371,7 +371,7 @@
         </td> 
         <td style="font-size: small">
          <div class="mb-2">
-          <a class="a_underline" target="_blank" href="http://127.0.0.1:8080/specialday/class/product.do?classcode=`+ tmp.classcode + `">` + "<" + tmp.title + ">" + `</a>
+          <a class="a_underline" target="_blank" th:href="/class/product.do?classcode=`+ tmp.classcode + `">` + "<" + tmp.title + ">" + `</a>
             </div>
 
             <div id="classdate1">` + "날짜:" + tmp.classdate + `</div>
