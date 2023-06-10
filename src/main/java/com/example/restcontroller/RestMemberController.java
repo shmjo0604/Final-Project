@@ -32,16 +32,19 @@ import com.example.service.member.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
-
 @RestController
 @Slf4j
 @RequestMapping(value = "/api/member")
 public class RestMemberController {
 
-    @Autowired MemberService mService;
-    @Autowired MailService mailService;
-    @Autowired RedisUtil redisUtil;
-    @Autowired ApplyService aService;
+    @Autowired
+    MemberService mService;
+    @Autowired
+    MailService mailService;
+    @Autowired
+    RedisUtil redisUtil;
+    @Autowired
+    ApplyService aService;
     BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 
     final String format = "RestMemberController => {}";
@@ -49,12 +52,12 @@ public class RestMemberController {
     @GetMapping(value = "/idcheck.json")
     public Map<String, Integer> idcheckGET(@RequestParam(name = "id") String id) {
 
-        //System.out.println(id);
+        // System.out.println(id);
 
         Map<String, Integer> retMap = new HashMap<>();
 
         int ret = mService.selectMemberIDCheck(id);
-        
+
         retMap.put("ret", ret);
 
         return retMap;
@@ -63,18 +66,17 @@ public class RestMemberController {
     @GetMapping(value = "/findid.json")
     public Map<String, String> findIdGET(@ModelAttribute Member obj) {
 
-        //System.out.println(obj.toString());
+        // System.out.println(obj.toString());
 
         Map<String, String> retMap = new HashMap<>();
 
         Member ret = mService.selectFindMemberId(obj);
 
-        //System.out.println(ret.getId());
+        // System.out.println(ret.getId());
 
-        if(ret != null) {
+        if (ret != null) {
             retMap.put("ret", ret.getId());
-        }
-        else {
+        } else {
             retMap.put("ret", "not");
         }
 
@@ -82,7 +84,8 @@ public class RestMemberController {
     }
 
     @PostMapping(value = "/findpw.json")
-    public Map<String, Object> findPwPOST(@RequestBody Member obj) throws MessagingException, UnsupportedEncodingException {
+    public Map<String, Object> findPwPOST(@RequestBody Member obj)
+            throws MessagingException, UnsupportedEncodingException {
 
         log.info(format, obj.getEmail());
 
@@ -98,22 +101,22 @@ public class RestMemberController {
 
     @PostMapping(value = "/verifyauthnum.json")
     public Map<String, Integer> verifyauthnumPOST(@RequestBody Authnum obj) {
-    
-        //log.info(format, obj.toString());
-        //log.info(format, obj.getAuthnum());
+
+        // log.info(format, obj.toString());
+        // log.info(format, obj.getAuthnum());
 
         Map<String, Integer> retMap = new HashMap<>();
 
         String authnum = redisUtil.getData(obj.getEmail());
-        //log.info(format, authnum);
+        // log.info(format, authnum);
 
-        if(authnum == null) {
+        if (authnum == null) {
             retMap.put("status", -1);
         }
-        if(obj.getAuthnum().equals(authnum)) {
+        if (obj.getAuthnum().equals(authnum)) {
             retMap.put("status", 200);
         }
-        if(!obj.getAuthnum().equals(authnum)) {
+        if (!obj.getAuthnum().equals(authnum)) {
             retMap.put("status", 0);
         }
 
@@ -137,8 +140,7 @@ public class RestMemberController {
             int ret = mService.updateMemberPassword(member);
 
             retMap.put("ret", ret);
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             retMap.put("ret", -1);
         }
@@ -150,14 +152,14 @@ public class RestMemberController {
     public Map<String, Object> verifyPwPOST(@RequestBody Member obj) {
 
         Map<String, Object> retMap = new HashMap<>();
-        
+
         log.info(format, obj.getPassword());
 
         Member ret = mService.selectMemberOne(obj.getId());
 
         retMap.put("ret", 0);
 
-        if(bcpe.matches(obj.getPassword(), ret.getPassword())) {
+        if (bcpe.matches(obj.getPassword(), ret.getPassword())) {
             retMap.put("ret", 1);
         }
 
@@ -169,14 +171,14 @@ public class RestMemberController {
     public Map<String, Object> updateinfoPUT(@RequestBody Member obj) {
 
         Map<String, Object> retMap = new HashMap<>();
-        
+
         log.info(format, obj.toString());
 
         int ret = mService.updateMemberOne(obj);
 
         retMap.put("ret", ret);
 
-        if(ret == 1) {
+        if (ret == 1) {
             Member member = mService.selectMemberOne(obj.getId());
             retMap.put("member", member);
         }
@@ -191,25 +193,22 @@ public class RestMemberController {
 
         Member member = mService.selectMemberOne(obj.getId());
 
-        
-        if(bcpe.matches(obj.getPassword(), member.getPassword())) {
+        if (bcpe.matches(obj.getPassword(), member.getPassword())) {
 
             obj.setPassword(bcpe.encode(obj.getNewpassword()));
             int ret = mService.updateMemberPassword(obj);
 
-            if(ret == 1) {
+            if (ret == 1) {
 
                 retMap.put("status", 200);
 
-            }
-            else {
+            } else {
                 retMap.put("status", 0);
             }
 
-        }
-        else {
+        } else {
             retMap.put("status", -1);
-        }   
+        }
 
         return retMap;
     }
@@ -221,84 +220,79 @@ public class RestMemberController {
 
         Member member = mService.selectMemberOne(obj.getId());
 
-        if(bcpe.matches(obj.getPassword(), member.getPassword())) {
+        if (bcpe.matches(obj.getPassword(), member.getPassword())) {
 
             int ret = mService.deleteMemberOne(obj);
 
-            if(ret == 1) {
+            if (ret == 1) {
 
                 retMap.put("status", 200);
 
             }
-            
+
             else {
                 retMap.put("status", 0);
             }
 
-        }
-        else {
+        } else {
             retMap.put("status", -1);
-        }   
+        }
 
         return retMap;
 
     }
-    
-    @GetMapping(value="/selectlist.json")
-    public Map<String,Object> selectlistGET( 
-        @RequestParam(name = "menu", defaultValue = "0") int menu,
-        @RequestParam(name = "page", defaultValue = "0") int page,
-        @AuthenticationPrincipal User user ){
 
+    @GetMapping(value = "/selectlist.json")
+    public Map<String, Object> selectlistGET(
+            @RequestParam(name = "menu", defaultValue = "0") int menu,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @AuthenticationPrincipal User user) {
 
-            log.info(format,"menu=",menu);
-            log.info(format,"page=",page);
         Map<String, Object> map = new HashMap<>();
         String id = user.getUsername();
-        int first = page*5-4;
-        int last = page*5;
+        int first = page * 5 - 4;
+        int last = page * 5;
         long cnt = aService.countApplyList(id);
         List<ApplyView> list = new ArrayList<>();
-        
-            map.put("id",id);
-            map.put("first",first);
-            map.put("last",last);
 
-            log.info(format,"map=",map);
+        map.put("id", id);
+        map.put("first", first);
+        map.put("last", last);
 
-            list = aService.selectApplyListById(map);
-            log.info(format,"list=",list);
+        log.info(format, "map=", map);
 
-            map.put("list",list);
-            map.put("pages", (cnt-1) / 5 + 1);
-            map.put("status", 200);
-                
-            
+        list = aService.selectApplyListById(map);
+        log.info(format, "list=", list);
+
+        map.put("list", list);
+        map.put("pages", (cnt - 1) / 5 + 1);
+        map.put("status", 200);
+
         return map;
     }
 
-    @GetMapping(value="/selectstatuslist.json")
-    public Map<String,Object> selectstatuslistGET(
-        @RequestParam(name = "no", defaultValue = "0") int no,
-        @AuthenticationPrincipal User user ){
+    @GetMapping(value = "/selectstatuslist.json")
+    public Map<String, Object> selectstatuslistGET(
+            @RequestParam(name = "no", defaultValue = "0") int no,
+            @AuthenticationPrincipal User user) {
 
-            Map<String, Object> map = new HashMap<>();
-            List<ApplyStatusView> list = new ArrayList<>();
-            String id = user.getUsername();
+        Map<String, Object> map = new HashMap<>();
+        List<ApplyStatusView> list = new ArrayList<>();
+        String id = user.getUsername();
 
-            map.put("id",id);
-            map.put("no",no);
+        map.put("id", id);
+        map.put("no", no);
 
-           list= aService.selectApplyStatusListById(map);
-           map.put("list",list);
-           map.put("okok","okokok");
+        list = aService.selectApplyStatusListById(map);
+        map.put("list", list);
+        map.put("okok", "okokok");
 
-           log.info(format,"id=",id);
-           log.info(format,"no=",no);
-           log.info(format,"list=",list);
+        log.info(format, "id=", id);
+        log.info(format, "no=", no);
+        log.info(format, "list=", list);
 
-            return map;
+        return map;
 
     }
-    
+
 }

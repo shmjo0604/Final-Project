@@ -159,17 +159,16 @@ public class ApplyServiceImpl implements ApplyService {
     }
 
     @Override
-    public long countApplyListThree(String id) {
+    public long countApplyListTwo(String id) {
         try {
             return aMapper.countApplyListTwo(id);
         } catch (Exception e) {
             return 0;
         }
-
     }
 
     @Override
-    public long countApplyListTwo(String id) {
+    public long countApplyListThree(String id) {
         try {
             return aMapper.countApplyListThree(id);
         } catch (Exception e) {
@@ -186,4 +185,35 @@ public class ApplyServiceImpl implements ApplyService {
             return null;
         }
     }
+
+    @Override
+    public List<ApplyView> selectApplyListByIdOne(Map<String, Object> map) {
+        try {
+            return aMapper.selectApplyListByIdOne(map);
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<ApplyView> selectApplyListByIdTwo(Map<String, Object> map) {
+        try {
+            return aMapper.selectApplyListByIdTwo(map);
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<ApplyView> selectApplyListByIdThree(Map<String, Object> map) {
+        try {
+            return aMapper.selectApplyListByIdThree(map);
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 }

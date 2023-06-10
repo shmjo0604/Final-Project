@@ -49,5 +49,13 @@ public interface ApplyService {
     // 12. 클래스 신청 내역 조회(no,id)
     public List<ApplyStatusView> selectApplyStatusListById(Map<String, Object> map);
 
+    // 13. 클래스 신청 내역 조회(chk=1 결제완료만)
+    public List<ApplyView> selectApplyListByIdOne(Map<String, Object> map);
+
+    // 14. 클래스 신청 내역 조회(chk=2 결제취소만)
+    public List<ApplyView> selectApplyListByIdTwo(Map<String, Object> map);
+
+    // 15. 클래스 신청 내역 조회(chk=3 참여완료만)
+    public List<ApplyView> selectApplyListByIdThree(Map<String, Object> map);
 
 }

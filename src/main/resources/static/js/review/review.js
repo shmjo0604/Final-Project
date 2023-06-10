@@ -140,6 +140,7 @@ function getEditorContent() {
   const content = quill.root.innerHTML; //위쪽의 editor객체를 통해서 가져오기
   const form = document.getElementById("myform");
 
+
   var input = document.createElement("input");
   input.type = "text";
   input.name = "content";
@@ -149,6 +150,19 @@ function getEditorContent() {
 
   form.submit();
 }
+
+function reviewNone() {
+  const button1 = document.getElementById("button1");
+  if (button1.style.display !== 'none') {
+    button1.style.display = 'none';
+    console.log('ok');
+  }
+  else {
+    button1.style.display = 'block';
+  }
+}
+
+
 
 // 신청번호 받아서 프로덕트유닛 내용 불러오기
 
@@ -188,37 +202,34 @@ async function modalAction1(chk, person, totalprice, no, classcode, price, title
   const { data } = await axios.get(url, { headers });
 
   console.log(data);
-  console.log();
 
   let nono = new Array();//배열선언
   let confirmdate1 = "";
   let confirmdate2 = "";
-  let regdate1 = "";
+  let regdate = "";
 
   for (let tmp of data.list) {
-    if (tmp.statuschk == 1) { // 결제완료
+    if (tmp.statuschk == 1 || tmp.statuschk == 3) { // 결제완료
       confirmdate1 = tmp.confirmdate;
     }
-    if (tmp.statuschk == 2) { // 결제취소
+    else if (tmp.statuschk == 2) { // 결제취소
       confirmdate2 = tmp.confirmdate;
     }
-    if (tmp.statuschk == 3) { // 참여완료
-      confirmdate1 = tmp.confirmdate;
-    }
-    regdate1 = tmp.regdate;
+    regdate = tmp.regdate;
   }
 
-  let confirmdate11 = "";
-  let confirmdate22 = "";
-  let regdate11 = "";
+  // let confirmdate11 = "";
+  // let confirmdate22 = "";
+  // let regdate11 = "";
 
-  confirmdate11 = confirmdate1.substring(0, 10);
-  confirmdate22 = confirmdate2.substring(0, 10);
-  regdate11 = regdate1.substring(0, 10);
+  confirmdate1 = confirmdate1.substring(0, 10);
+  confirmdate2 = confirmdate2.substring(0, 10);
+  confirmdate3 = confirmdate2.substring(0, 10);
+  regdate = regdate.substring(0, 10);
 
-  console.log(confirmdate11);
-  console.log(confirmdate22);
-  console.log(regdate11);
+  console.log(confirmdate1);
+  console.log(confirmdate2);
+  console.log(regdate);
 
   var result = applyregdate.substring(0, 10)
   var result1 = result.replace("-", "/");
@@ -289,9 +300,9 @@ async function modalAction1(chk, person, totalprice, no, classcode, price, title
   price4.value = price + "원";
   totalprice2.value = totalprice + "원";
   totalprice4.value = "- " + totalprice + "원";
-  applyregdate2.value = regdate11;
-  cancledate1.value = confirmdate22;
-  applyregdate3.value = confirmdate11;
+  applyregdate2.value = regdate;
+  cancledate1.value = confirmdate2;
+  applyregdate3.value = confirmdate1;
 
   modal.show();
 }

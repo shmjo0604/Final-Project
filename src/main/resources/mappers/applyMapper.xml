@@ -60,8 +60,8 @@
 
 <!-- 7. 클래스 신청 상태(chk = 1)인 것만 조회 -->
 <select id="selectApplyListById" parameterType="map" resultType="com.example.dto.ApplyView">
-          SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY a.regdate DESC) AS rnum, * FROM applyview a WHERE a.memberid = #{id})
-         a WHERE a.rnum <![CDATA[ >= ]]> ${first} AND a.rnum <![CDATA[ <= ]]> ${last} ORDER BY a.REGDATE DESC
+          SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY a.no DESC) AS rnum, * FROM applyview a WHERE a.memberid = #{id})
+         a WHERE a.rnum <![CDATA[ >= ]]> ${first} AND a.rnum <![CDATA[ <= ]]> ${last} ORDER BY a.no DESC
 </select>
 
 <!-- 8. 신청 전체 개수 조회 -->
@@ -98,9 +98,28 @@
 </select>
 
 <!-- 13. 신청상태에 따른 날짜 조회  -->
-<select id="selectApplyStatusListById" parameterType="map" resultType="com.example.dto.ApplyStatusView">
-         SELECT * FROM APPLYSTATUSVIEW a WHERE NO=#{no} AND MEMBERID =#{id}; 
+<select id="selectApplyStatusListById" parameterType="map" resultType="com.example.dto.ApplyView">
+         SELECT a.* FROM APPLYSTATUSVIEW a WHERE NO=#{no} AND MEMBERID =#{id}
 </select>
+
+<!-- 14. 클래스 신청 상태(chk = 1)인 것만 조회(목록별) -->
+<select id="selectApplyListByIdOne" parameterType="map" resultType="com.example.dto.ApplyView">
+         SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY a.no DESC ) AS rnum, * FROM ApplyView a WHERE chk=1 and a.memberid = #{id})
+         a WHERE a.rnum<![CDATA[ >= ]]> ${first} AND a.rnum <![CDATA[ <= ]]>${last}  AND a.chk = 1 ORDER BY a.no DESC;
+</select>
+
+<!-- 15. 클래스 신청 상태(chk = 2)인 것만 조회(목록별 ) -->
+<select id="selectApplyListByIdTwo" parameterType="map" resultType="com.example.dto.ApplyView">
+          SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY a.no DESC) AS rnum, * FROM applyview a WHERE chk=2 and a.memberid = #{id})
+         a WHERE a.rnum <![CDATA[ >= ]]> ${first} AND a.rnum <![CDATA[ <= ]]> ${last} AND a.chk = 2 ORDER BY a.no DESC
+</select>
+
+<!-- 16. 클래스 신청 상태(chk = 3)인 것만 조회(목록별 ) -->
+<select id="selectApplyListByIdThree" parameterType="map" resultType="com.example.dto.ApplyView">
+          SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY a.no DESC) AS rnum, * FROM applyview a WHERE chk=3 and a.memberid = #{id})
+         a WHERE a.rnum <![CDATA[ >= ]]> ${first} AND a.rnum <![CDATA[ <= ]]> ${last} AND a.chk = 3 ORDER BY a.no DESC
+</select>
+
 
 
 

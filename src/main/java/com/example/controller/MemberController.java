@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.dto.ApplyStatusView;
 import com.example.dto.ApplyView;
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
@@ -116,13 +118,17 @@ public class MemberController {
             @RequestParam(name = "menu", defaultValue = "0") int menu,
             @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "no", defaultValue = "0") int no,
+            @RequestParam(name = "chk", defaultValue = "0") int chk,
             @AuthenticationPrincipal User user,
             Model model) {
+
+        log.info(format, "chk=" + chk);
 
         // String id = user.getUsername();
         Map<String, Object> map = new HashMap<String, Object>();
         List<ApplyView> list = new ArrayList<>();
         List<Reviewview> list1 = new ArrayList<>();
+        // List<ApplyStatusView> listOne = new ArrayList<>();
 
         int first = page * 5 - 4;
         int last = page * 5;
@@ -133,31 +139,112 @@ public class MemberController {
         long chk2 = 0;
         long chk3 = 0;
 
+        long pages = 0;
         long cnt = aService.countApplyList(id);
+        // long cntOne =
 
         if (menu == 0) {
+            // map.put("id", user.getUsername());
+            // map.put("first", first);
+            // map.put("last", last);
+            // list = aService.selectApplyListById(map);
+
+            // chk1 = aService.countApplyListOne(id);
+            // chk2 = aService.countApplyListTwo(id);
+            // chk3 = aService.countApplyListThree(id);
+
+            // model.addAttribute("list", list);
+            // model.addAttribute("pages", (cnt - 1) / 5 + 1);
+
+            // model.addAttribute("chk1", chk1);
+            // model.addAttribute("chk2", chk2);
+            // model.addAttribute("chk3", chk3);
+
             return "redirect:/member/mypage.do?menu=1&page=1";
         }
 
         if (menu == 1) {
-            map.put("id", user.getUsername());
-            map.put("first", first);
-            map.put("last", last);
-            list = aService.selectApplyListById(map);
+            if (chk == 1) {
 
-            chk1 = aService.countApplyListOne(id);
-            chk2 = aService.countApplyListTwo(id);
-            chk3 = aService.countApplyListThree(id);
+                map.put("id", user.getUsername());
+                map.put("first", first);
+                map.put("last", last);
+                list = aService.selectApplyListByIdOne(map);
 
-            model.addAttribute("list", list);
-            model.addAttribute("pages", (cnt - 1) / 5 + 1);
-    
-            model.addAttribute("chk1", chk1);
-            model.addAttribute("chk2", chk2);
-            model.addAttribute("chk3", chk3);
+                pages = aService.countApplyListOne(id);
+
+                chk1 = aService.countApplyListOne(id);
+                chk2 = aService.countApplyListTwo(id);
+                chk3 = aService.countApplyListThree(id);
+
+                model.addAttribute("list", list);
+                model.addAttribute("pages", (cnt - 1) / 5 + 1);
+
+                model.addAttribute("chk1", chk1);
+                model.addAttribute("chk2", chk2);
+                model.addAttribute("chk3", chk3);
+
+                // log.info(format, "cntOne=" + cntOne);
+                log.info(format, "list=" + list);
+                model.addAttribute("pages", (pages - 1) / 5 + 1); // 페이지 수
+
+            }
+            if (chk == 2) {
+
+                map.put("id", user.getUsername());
+                map.put("first", first);
+                map.put("last", last);
+                list = aService.selectApplyListByIdTwo(map);
+
+                pages = aService.countApplyListTwo(id);
+
+                chk1 = aService.countApplyListOne(id);
+                chk2 = aService.countApplyListTwo(id);
+                chk3 = aService.countApplyListThree(id);
+
+                model.addAttribute("list", list);
+                model.addAttribute("pages", (cnt - 1) / 5 + 1);
+
+                model.addAttribute("chk1", chk1);
+                model.addAttribute("chk2", chk2);
+                model.addAttribute("chk3", chk3);
+
+                // log.info(format, "cntOne=" + cntOne);
+                log.info(format, "list=" + list);
+                model.addAttribute("pages", (pages - 1) / 5 + 1); // 페이지 수
+
+            }
+            if (chk == 3) {
+
+                map.put("id", user.getUsername());
+                map.put("first", first);
+                map.put("last", last);
+                list = aService.selectApplyListByIdThree(map);
+
+                pages = aService.countApplyListThree(id);
+
+                chk1 = aService.countApplyListOne(id);
+                chk2 = aService.countApplyListTwo(id);
+                chk3 = aService.countApplyListThree(id);
+
+                model.addAttribute("list", list);
+                model.addAttribute("pages", (cnt - 1) / 5 + 1);
+
+                model.addAttribute("chk1", chk1);
+                model.addAttribute("chk2", chk2);
+                model.addAttribute("chk3", chk3);
+
+                // log.info(format, "cntOne=" + cntOne);
+                log.info(format, "list=" + list);
+                model.addAttribute("pages", (pages - 1) / 5 + 1); // 페이지 수
+
+            }
+
         }
 
-        else if (menu == 2) {
+        else if (menu == 2)
+
+        {
             // 페이지 네이션은 => 페이지 번호가 0부터
             // PageRequest pageRequest = PageRequest.of((page - 1), 1);
             // Pageable pageable = PageRequest.of(pageIndex, 10, Sort.by(Direction.DESC,
@@ -187,10 +274,11 @@ public class MemberController {
         }
 
         model.addAttribute("user", user);
-       
 
         return "/member/mypage/mypage";
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @PostMapping(value = "/mypage.do")
     public String mypagePOST(
