@@ -856,3 +856,4 @@ function insertClass() {
 //     e.addEventListener("click", handleClick);
 // });
 
+const contextPath = $('#contextPathHolder').attr('data-contextPath');

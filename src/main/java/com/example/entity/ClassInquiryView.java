@@ -21,7 +21,7 @@ public class ClassInquiryView {
     
     @Id
     @Column(name = "NO")
-    private Long no;
+    private long no;
 
     @Column(name = "TITLE")
     private String title;
@@ -41,7 +41,7 @@ public class ClassInquiryView {
     private String classtitle;
 
     @Column(name = "CLASSCODE")
-    private Long classcode;
+    private long classcode;
 
     @Column(name = "MEMBERID")
     private String memberid;

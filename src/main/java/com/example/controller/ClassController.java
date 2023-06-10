@@ -183,7 +183,7 @@ public class ClassController {
         profile.setTypechk(1);
         list.add(profile);
 
-        if (classSubImg != null) {
+        if (classSubImg != null ) {
 
             for (MultipartFile file : classSubImg) {
 
@@ -198,7 +198,7 @@ public class ClassController {
             }
         }
 
-        if (classMainImg != null) {
+        if (classMainImg.getSize() > 0) {
             
             ClassImage classMain = new ClassImage();
 
@@ -247,21 +247,65 @@ public class ClassController {
     public String myclassUpdatePOST(@AuthenticationPrincipal User user,
         @ModelAttribute ClassProduct obj,
         @ModelAttribute com.example.dto.ClassImage obj2,
+        @RequestParam(name = "profile", required = false) MultipartFile profileImg,
+        @RequestParam(name = "classSub", required = false) List<MultipartFile> classSubImg,
+        @RequestParam(name = "classMain", required = false) MultipartFile mainImg,
         @RequestParam(name = "classcode", defaultValue = "0") long classcode,
-        Model model) {
-            
-            // 1.Rest API 호출 -> 주소 기반 위도, 경도 값 반환(Map)
+        @RequestParam(name = "no", defaultValue = "0") long no,
+
+        Model model) throws IOException {
+    
+            log.info("image profile===========>{}", profileImg);
+
             Map<String, String> map = KakaoLocalAPI.getCoordinate(obj.getAddress1());
 
             // 2. ClassProduct 객체 obj에 위도, 경도, 사용자 ID SET
             obj.setLatitude(map.get("y"));
             obj.setLongitude(map.get("x"));
-            obj.setMemberid(user.getUsername()); // security session에 저장된 ID 정보를 호출
-    
+            obj.setMemberid(user.getUsername());
+
+        // ClassImage 리스트 객체 생성
+
+        List<ClassImage> list = new ArrayList<>();
+
+        ClassImage profile = new ClassImage();
+        if( profileImg.getSize() > 0) {
+            profile.setFilename(profileImg.getOriginalFilename());
+            profile.setFilesize(profileImg.getSize());
+            profile.setFiletype(profileImg.getContentType());
+            profile.setFiledata(profileImg.getBytes());
+            profile.setTypechk(1);
+        }
+        
+        ClassImage classMain = new ClassImage();
+        if( mainImg.getSize() > 0 ){
+            classMain.setFilename(mainImg.getOriginalFilename());
+            classMain.setFilesize(mainImg.getSize());
+            classMain.setFiletype(mainImg.getContentType());
+            classMain.setFiledata(mainImg.getBytes());
+            classMain.setTypechk(2);
+        }
+
+        if (classSubImg != null) {
+            for (MultipartFile file : classSubImg) {
+
+                ClassImage classSub = new ClassImage();
+                classSub.setFilename(file.getOriginalFilename());
+                classSub.setFilesize(file.getSize());
+                classSub.setFiletype(file.getContentType());
+                classSub.setFiledata(file.getBytes());
+                classSub.setTypechk(3);
+                list.add(classSub);
+            }
+            
+        }
+
         int ret = manageService.updateClassOne(obj);
-        int ret2 = manageService.updateClassImageOne(obj2);
+        int ret2 = manageService.updateClassImageOne(list, profile, classMain, classcode);
         log.info("update class --- => {}", obj.toString());
-        log.info("update image --- => {}", obj2.toString());
+        log.info("update sub image --- => {}", list.toString());
+        log.info("update profile image --- => {}", profile.toString());
+        log.info("update main image --- => {}", classMain.toString());
         if ( ret == 1 || ret2 == 1) {
             log.info("update success class ---- =>{}", ret);
             log.info("update success image ---- =>{}", ret2);
