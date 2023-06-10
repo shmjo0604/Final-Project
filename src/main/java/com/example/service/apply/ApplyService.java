@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dto.Apply;
 import com.example.dto.ApplyStatus;
+import com.example.dto.ApplyStatusView;
 import com.example.dto.ApplyView;
 
 @Service
@@ -35,5 +36,26 @@ public interface ApplyService {
 
     // 8. 신청 전체 개수 조회
     public long countApplyList(String id);
+
+    // 9. 신청 전체 개수 조회(chk=1)
+    public long countApplyListOne(String id);
+
+    // 10. 신청 전체 개수 조회(chk=2)
+    public long countApplyListTwo(String id);
+
+    // 11. 신청 전체 개수 조회(chk=3)
+    public long countApplyListThree(String id);
+
+    // 12. 클래스 신청 내역 조회(no,id)
+    public List<ApplyStatusView> selectApplyStatusListById(Map<String, Object> map);
+
+    // 13. 클래스 신청 내역 조회(chk=1 결제완료만)
+    public List<ApplyView> selectApplyListByIdOne(Map<String, Object> map);
+
+    // 14. 클래스 신청 내역 조회(chk=2 결제취소만)
+    public List<ApplyView> selectApplyListByIdTwo(Map<String, Object> map);
+
+    // 15. 클래스 신청 내역 조회(chk=3 참여완료만)
+    public List<ApplyView> selectApplyListByIdThree(Map<String, Object> map);
 
 }

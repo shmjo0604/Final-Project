@@ -140,6 +140,7 @@ function getEditorContent() {
   const content = quill.root.innerHTML; //위쪽의 editor객체를 통해서 가져오기
   const form = document.getElementById("myform");
 
+
   var input = document.createElement("input");
   input.type = "text";
   input.name = "content";
@@ -150,9 +151,22 @@ function getEditorContent() {
   form.submit();
 }
 
+function reviewNone() {
+  const button1 = document.getElementById("button1");
+  if (button1.style.display !== 'none') {
+    button1.style.display = 'none';
+    console.log('ok');
+  }
+  else {
+    button1.style.display = 'block';
+  }
+}
+
+
+
 // 신청번호 받아서 프로덕트유닛 내용 불러오기
 
-function modalAction(no,classcode, price, title, classdate, classlevel, classstart ,classend) {
+function modalAction(no, classcode, price, title, classdate, classlevel, classstart, classend) {
   const modal = new bootstrap.Modal(
     document.getElementById("exampleModal"),
     {}
@@ -166,13 +180,148 @@ function modalAction(no,classcode, price, title, classdate, classlevel, classsta
   const classlevel1 = document.getElementById("classlevel");
   const price1 = document.getElementById("price");
 
-  img.src = 'http://192.168.219.103:8080/specialday/member/image.do?classcode='+ classcode;
-  no1.value= no;
+  img.src = "/specialday/member/image?classcode=" + classcode;
+  no1.value = no;
   title1.value = "이름 :" + title;
   classdate1.value = classdate;
-  classstart1.value = classstart +"~"+ classend;
+  classstart1.value = classstart + "~" + classend;
   classlevel1.value = classlevel;
   price1.value = price;
-  
+
   modal.show();
+}
+
+async function modalAction1(chk, person, totalprice, no, classcode, price, title, classdate, classlevel, classstart, classend, applyregdate, cancledate) {
+  const modal = new bootstrap.Modal(
+    document.getElementById("exampleModal1"),
+    {}
+  );
+
+  const url = '/specialday/api/member/selectstatuslist.json?no=' + no;
+  const headers = { "Content-Type": "application/json" };
+  const { data } = await axios.get(url, { headers });
+
+  console.log(data);
+
+  let nono = new Array();//배열선언
+  let confirmdate1 = "";
+  let confirmdate2 = "";
+  let regdate = "";
+
+  for (let tmp of data.list) {
+    if (tmp.statuschk == 1 || tmp.statuschk == 3) { // 결제완료
+      confirmdate1 = tmp.confirmdate;
+    }
+    else if (tmp.statuschk == 2) { // 결제취소
+      confirmdate2 = tmp.confirmdate;
+    }
+    regdate = tmp.regdate;
+  }
+
+  // let confirmdate11 = "";
+  // let confirmdate22 = "";
+  // let regdate11 = "";
+
+  confirmdate1 = confirmdate1.substring(0, 10);
+  confirmdate2 = confirmdate2.substring(0, 10);
+  confirmdate3 = confirmdate2.substring(0, 10);
+  regdate = regdate.substring(0, 10);
+
+  console.log(confirmdate1);
+  console.log(confirmdate2);
+  console.log(regdate);
+
+  var result = applyregdate.substring(0, 10)
+  var result1 = result.replace("-", "/");
+  var result2 = result1.replace("-", "/");
+
+  var result = cancledate.substring(0, 10)
+  var result11 = result.replace("-", "/");
+  var result22 = result11.replace("-", "/");
+
+  const img2 = document.getElementById("mainimage2");
+  const no2 = document.getElementById("no1");
+  const title2 = document.getElementById("title1");
+  const cancledate1 = document.getElementById("cancledate");
+  const classdate2 = document.getElementById("classdate2");
+  const classstart2 = document.getElementById("classstart1");
+  const classlevel2 = document.getElementById("classlevel1");
+  const price2 = document.getElementById("price1");
+  const price3 = document.getElementById("price2");
+  const price4 = document.getElementById("price3");
+  const person2 = document.getElementById("person1");
+  const person3 = document.getElementById("person2");
+  let chk2 = document.getElementById("chk1");
+  const totalprice2 = document.getElementById("totalprice1");
+  const totalprice4 = document.getElementById("totalprice3");
+  const applyregdate2 = document.getElementById("applyregdate1");
+  const applyregdate3 = document.getElementById("applyregdate2");
+
+  let chkname = "처리중";
+
+  // 결제완료 color
+  if (chk === 1) {
+    cancle.style.display = 'none';
+    chkname = "결제완료";
+    chk2.style.color = "#0067a3";
+  }
+  else if (chk === 2) {
+    cancle.style.display = 'block';
+    chkname = "결제취소";
+    chk2.style.color = "#ff0000";
+  }
+  else if (chk === 3) {
+    cancle.style.display = 'none';
+    chkname = "참여완료";
+    chk2.style.color = "#0067a3";
+  }
+
+
+  let levelname = "입문자";
+  if (classlevel === 2) {
+    levelname = "경험자";
+  }
+  if (classlevel === 3) {
+    levelname = "숙련자";
+  }
+
+
+  img2.src = "/specialday/member/image?classcode=" + classcode;
+  no2.value = no;
+  title2.value = "이름: " + title;
+  classdate2.value = classdate;
+  classstart2.value = classstart + "~" + classend;
+  classlevel2.value = levelname;
+  chk2.value = chkname;
+  person2.value = person + "명";
+  person3.value = person + "명";
+  price2.value = price + "원";
+  price3.value = price + "원";
+  price4.value = price + "원";
+  totalprice2.value = totalprice + "원";
+  totalprice4.value = "- " + totalprice + "원";
+  applyregdate2.value = regdate;
+  cancledate1.value = confirmdate2;
+  applyregdate3.value = confirmdate1;
+
+  modal.show();
+}
+
+
+function formaction(no) {
+  const form = document.getElementById("form1")
+
+
+  form.action = "http://192.168.219.103:8080/specialday/member/updatechk1.do";
+  form.style.display = "none";
+  form.method = "get";
+
+  const input = document.createElement("input");
+  input.type = "hidden";
+  input.name = "no";
+  input.value = no;
+
+  form.appendChild(input);
+
+  form.submit();
 }

@@ -87,13 +87,17 @@
                   <a th:href="@{mypage.do(menu=1,page=1)}">신청 내역</a>
                 </li>
                 <hr />
-                <li><a th:href="@{mypage.do(menu=2)}">리뷰 내역</a></li>
+                <li><a th:href="@{mypage.do(menu=2,page=1)}">리뷰 내역</a></li>
                 <hr />
                 <li><a th:href="@{mypage.do(menu=3)}">문의 내역</a></li>
                 <hr />
                 <li>
-                  <a class="opener" data-toggle="collapse">계정 설정</a>
-                  <ul>
+                  <a class="opener" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                    aria-expanded="false" aria-controls="collapseExample">계정 설정 <span
+                      style="margin-left: 130px; font-size: 1rem; font-weight: bold; color: rgba(0,0,0,0.4);">
+                      ∨</span>
+                  </a>
+                  <ul class="collapse" id="collapseExample">
                     <li><a th:href="@{mypage.do(menu=4)}">나의 정보</a></li>
                     <li>
                       <a th:href="@{mypage.do(menu=5)}">비밀번호 변경</a>
@@ -156,6 +160,9 @@
   <script th:src="@{/js/sweetalert2@11.js}"></script>
   <!-- font awesome용 스크립트 CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <!--리뷰리스트 js-->
+  <script th:src="@{/js/review/reviewlist.js}"></script>
+
   <script th:inline="javascript">
     /*<![CDATA[*/
 
@@ -340,6 +347,7 @@
     }
 
     /*]]>*/
+
   </script>
   <!--Main js-->
   <script th:src="@{/js/main.js}"></script>

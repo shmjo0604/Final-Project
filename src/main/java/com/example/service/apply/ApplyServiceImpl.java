@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dto.Apply;
 import com.example.dto.ApplyStatus;
+import com.example.dto.ApplyStatusView;
 import com.example.dto.ApplyView;
 import com.example.mapper.ApplyMapper;
 
@@ -59,7 +60,7 @@ public class ApplyServiceImpl implements ApplyService {
 
                 int result = aMapper.insertApplyStatusBatch(list2);
 
-                if(result == list2.size()) {
+                if (result == list2.size()) {
 
                     return 1;
                 }
@@ -139,11 +140,80 @@ public class ApplyServiceImpl implements ApplyService {
 
     @Override
     public long countApplyList(String id) {
-       try {
-        return aMapper.countApplyList(id);
-       } catch (Exception e) {
-        e.printStackTrace();
-        return -1;
-       }
+        try {
+            return aMapper.countApplyList(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
+
+    @Override
+    public long countApplyListOne(String id) {
+        try {
+            return aMapper.countApplyListOne(id);
+        } catch (Exception e) {
+            return 0;
+        }
+
+    }
+
+    @Override
+    public long countApplyListTwo(String id) {
+        try {
+            return aMapper.countApplyListTwo(id);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    @Override
+    public long countApplyListThree(String id) {
+        try {
+            return aMapper.countApplyListThree(id);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    @Override
+    public List<ApplyStatusView> selectApplyStatusListById(Map<String, Object> map) {
+        try {
+            return aMapper.selectApplyStatusListById(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<ApplyView> selectApplyListByIdOne(Map<String, Object> map) {
+        try {
+            return aMapper.selectApplyListByIdOne(map);
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<ApplyView> selectApplyListByIdTwo(Map<String, Object> map) {
+        try {
+            return aMapper.selectApplyListByIdTwo(map);
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<ApplyView> selectApplyListByIdThree(Map<String, Object> map) {
+        try {
+            return aMapper.selectApplyListByIdThree(map);
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 }

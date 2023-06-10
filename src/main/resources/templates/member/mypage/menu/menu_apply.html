@@ -2,6 +2,7 @@
 
   <head>
     <link rel="stylesheet" th:href="@{/css/review/review.css}" />
+    <link rel="stylesheet" th:href="@{/css/review/detailview.css}" />
     <link rel="stylesheet" th:href="@{/css/quill.snow.css}" />
   </head>
   <!--********************************************************************************************************************************************************************-->
@@ -43,20 +44,20 @@
     <div class="row" style="background-color: honeydew; border-radius: 15px">
       <div class="col-sm-4">
         <div class="box effect">
-          <h3>신청완료</h3>
-          <h1>1</h1>
+          <h3>결제완료</h3>
+          <h1 th:text="${chk1}"></h1>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="box effect">
+          <h3>결제취소</h3>
+          <h1 th:text="${chk2}"></h1>
         </div>
       </div>
       <div class="col-sm-4">
         <div class="box effect">
           <h3>참여완료</h3>
-          <h1>0</h1>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="box effect">
-          <h3>신청취소</h3>
-          <h1>0</h1>
+          <h1 th:text="${chk3}"></h1>
         </div>
       </div>
     </div>
@@ -67,14 +68,17 @@
       <div style="float: left; font-weight: bold">| 신청 클래스 정보</div>
       <div style="float: right">
         <div class="btn-group" role="group">
-          <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown"
-            aria-expanded="false">
+          <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" id="ulul1"
+            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             전체상태
           </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">신청완료</a></li>
-            <li><a class="dropdown-item" href="#">참여완료</a></li>
-            <li><a class="dropdown-item" href="#">신청취소</a></li>
+          <ul class="dropdown-menu" id="ulul2" role="menu" aria-labelledby="searchType">
+            <li><a class="dropdown-item" role="presentation"
+                th:href="@{/member/mypage.do(menu=1,page=1,chk=1)}">결제완료</a></li>
+            <li><a class="dropdown-item" role="presentation"
+                th:href="@{/member/mypage.do(menu=1,page=1,chk=2)}">결제취소</a></li>
+            <li><a class="dropdown-item" role="presentation"
+                th:href="@{/member/mypage.do(menu=1,page=1,chk=3)}">참여완료</a></li>
           </ul>
         </div>
         <div class="btn-group" role="group">
@@ -111,132 +115,50 @@
       </tr>
     </thead>
     <tbody style="vertical-align: middle" id="tbody">
-      <!-- <tr th:each="obj : ${list}">
+      <tr th:each="obj : ${list}">
         <td class="center">
-          <p th:text="${#dates.format(obj.applyregdate,'yyyy.MM.dd')}"></p>
-          <div
-            style="display: flex; flex-direction: column; align-items: center"
-          >
-            <button
-              class="btn btn-sm btn-outline-success"
-              style="height: 30px; width: 90px"
-            >
+          <p th:text="${#dates.format(obj.regdate,'yyyy.MM.dd')}"></p>
+          <div style="display: flex; flex-direction: column; align-items: center">
+            <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px"
+              th:onclick="modalAction1([[${obj.no}]])">
               상세보기 >
             </button>
-            <button class="btn btn-sm btn-danger"
-                            style="height: 30px; width: 90px; margin-top: 5px;">신청취소</button>
           </div>
         </td>
-        <td class="center">
-          <img
-            th:src="@{/member/image.do(classcode=${obj.classcode})}"
-            style="width: 100px; height: 100px"
-          />
+        <td class=" center">
+          <img th:src="@{/member/image(classcode=${obj.classcode})}" style="width: 100px; height: 100px" />
         </td>
         <td style="font-size: small">
-         <div class="mb-2"><a th:text=" '<'+${obj.title}+'>'" class="a_underline" href="#"></div>
+          <div class="mb-2"><a th:text=" '<'+${obj.title}+'>'" class="a_underline" href="#"></div>
           </a>
           <div id="classdate1" th:text=" '날짜: ' + ${obj.classdate}"></div>
-          <div
-            th:text=" '시간: ' + ${obj.classstart} + '~' + ${obj.classend}"
-          ></div>
+          <div th:text=" '시간: ' + ${obj.classstart} + '~' + ${obj.classend}"></div>
           <div th:text=" '난이도: ' + ${obj.classlevel}"></div>
           <div th:text=" '금액(1인): ' + ${obj.price}+'원'"></div>
           <div th:text=" '신청인원: ' + ${obj.person}+'명'"></div>
         </td>
-        <td
-          th:text="${obj.price}+'원'"
-          style="font-weight: bold"
-          class="center"
-        >
+        <td th:text="${obj.price}+'원'" style="font-weight: bold" class="center">
           25,000원
         </td>
         <td class="center">
           <p style="text-align: center">신청완료</p>
-          <button
-            class="btn btn-sm btn-secondary"
-            type="button"
-            style="height: 30px; width: 90px"
-            onclick="modalAction('2','도자기 슥','6월1일','15:00','입문자','10000원','2명')"
-          >
+          <button class="btn btn-sm btn-secondary" type="button" style="height: 30px; width: 90px" th:onclick="modalAction([[${obj.no}]],[[${obj.classcode}]],[[${obj.title}]],[[${obj.classdate}]],[[${obj.classstart}]],
+            [[${obj.classlevel}]],[[${obj.price}]],[[${obj.person}]])">
             리뷰작성>
           </button>
         </td>
-      </tr> -->
-
-      <!-- 처리상태별 예시 -->
-      <!-- <tr>
-                <td class="center">
-                    <p>2023-05-22</p>
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                        <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px;">상세보기
-                            ></button>
-                        <button class="btn btn-sm btn-danger"
-                            style="height: 30px; width: 90px; margin-top: 5px;">신청취소</button>
-                    </div>
-                </td>
-                <td class="center">
-                    <img src="https://cdnimage.ebn.co.kr/news/202003/news_1583367095_1024915_main1.jpg"
-                        style="width: 100px; height: 100px;">
-
-                </td>
-                <td style="font-size: small;">
-                    <a href="#">
-                        <p style="margin-top: 10px;">서핑 여름 특강</p>
-                    </a> 
-                    <div>일자 : 2023-06-01</div>
-                    <div>시간 : 15:00 ~ 21:00</div>
-                    <div>난이도 : 입문자</div>
-                    <div >1인기준 금액 : 25000</div>
-                    <div >신청인원 : 1명</div>
-                </td>
-                <td style="font-weight: bold;" class="center">55,000원</td>
-                <td class="center">
-                    <p style="text-align: center;">참여완료</p>
-                    <button class="btn btn-sm btn-secondary" type="button" style="height: 30px; width: 90px;"
-                     onclick="modalAction('2','도자기 슥','6월1일','15:00','입문자','10000원','2명')">리뷰작성></button>
-                </td>
-            </tr>
-            <tr>
-                <td class="center">
-                    <p>2023-05-20</p>
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                        <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px;">상세보기
-                            ></button>
-                        <button class="btn btn-sm btn-danger disabled"
-                            style="height: 30px; width: 90px; margin-top: 5px;">신청취소</button>
-                    </div>
-                </td>
-                <td class="center">
-                    <img src="https://cdnimage.ebn.co.kr/news/202003/news_1583367095_1024915_main1.jpg"
-                        style="width: 100px; height: 100px;">
-                </td>
-                <td style="font-size: small;">
-                    <a href="#">
-                        <p style="margin-top: 10px;">유화 원데이클래스</p>
-                    </a>
-                    <div>일자 : 2023-06-01</div>
-                    <div>시간 : 15:00 ~ 21:00</div>
-                    <div>난이도 : 입문자</div>
-                    <div>1인기준 금액 : 25000</div>
-                    <div>신청인원 : 1명</div>
-                </td>
-                <td style="font-weight: bold;" class="center">155,000원</td>
-                <td class="center">
-                    <p style="text-align: center;">신청취소</p>
-                    <button class="btn btn-sm btn-secondary disabled" style="height: 30px; width: 90px;">리뷰작성 ></button>
-                </td>
-            </tr> -->
-
-      <!-- 클래스 신청내역이 없을 경우-->
-      <!-- <h7>클래스 신청내역이 존재하지 않습니다.</h7>
-                <button>클래스 조회 화면으로 가는 버튼</button> -->
+      </tr>
     </tbody>
   </table>
-
   <div class="row justify-content-center">
     <div class="col-4">
       <ul id="pagination-demo" class="pagination-sm "></ul>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <ul id="pagination-demo1" class="pagination-sm "></ul>
     </div>
   </div>
 
@@ -252,7 +174,7 @@
             <div class="container-fluid">
               <div class="row d-flex flex-nowrap" style="height: 110px">
                 <div class="row col-md-6 mx-3" style="border: 1px solid #d3d3d3">
-                  <img class="mt-2" name="mainimage" id="mainimage1" th:src="@{/member/image(classcode=0)}" style="
+                  <img class="mt-2" name="mainimage" id="mainimage1" th:src="@{/member/image(classcode=156)}" style="
                       width: 110px;
                       height: 90px;
                       position: relative;
@@ -277,7 +199,7 @@
                       가격: <input id="price" type="text" />
                     </div>
                     <!-- <div class="summary">인원: <input  id="cnt" type="text"></div> -->
-                    <input class="summary" id="no" name="apply.no" type="hidden" />
+                    <input class="summary" id="no" name="no" type="hidden" />
                   </div>
                 </div>
 
@@ -337,7 +259,7 @@
                     <img for="file1" id="insert_reviewimage4" class="d-sm-inline-flex mx-2 mt-2" style="
                         border: 1px dashed gray;
                         width: 160px;
-                        height: 150px;
+                        height: 150px; 
                       " src="" onclick="preview4()" />
                   </div>
                 </div>
@@ -351,8 +273,7 @@
                     height: 70px;
                     font-size: larger;
                     font-weight: bold;
-                    color: white;
-                  " onclick="getEditorContent()" />
+                    color: white;" onclick="getEditorContent();" />
               </div>
             </div>
           </div>
@@ -366,23 +287,25 @@
         <!-- 신청페이지 조회 -->
         <script th:inline="javascript">
           $(function () {
+
             async function ajaxBoardList(page) {
               const url = '/specialday/api/member/selectlist.json?page=' + page;
               const headers = { "Content-Type": "application/json" };
               const { data } = await axios.get(url, { headers });
 
-              console.log(data);
-
               //2.함수를 pages정보를 넘겨서 생성시킴
               initPagination(data.pages);
 
+              const pagenation1 = document.getElementById('pagination-demo1')
               const tbody = document.getElementById('tbody');
+
+              pagenation1.style.display = 'none';
               tbody.innerHTML = '';
 
               for (let tmp of data.list) {
                 function getyear() {
-                  var applyregdate = tmp.applyregdate;
-                  var result = applyregdate.substring(0, 10)
+                  var regdate = tmp.regdate;
+                  var result = regdate.substring(0, 10)
                   return result;
                 }
 
@@ -393,14 +316,13 @@
 
                 function chkchk() {
                   if (chk == 1) {
-                    str = "신청완료";
-                    // addclassname()
+                    str = "&nbsp; 결제완료 &nbsp;";
                   }
                   else if (chk == 2) {
-                    str = "신청취소";
+                    str = "&nbsp; 결제취소 &nbsp;";
                   }
-                  else if (chk == 2) {
-                    str = "참여완료";
+                  else if (chk == 3) {
+                    str = "&nbsp; 참여완료 &nbsp;";
                   }
                   return str;
                 }
@@ -417,8 +339,18 @@
                   }
                   return str1;
                 }
-
-
+                function reviewChk() {
+                  if (chk == 1) {
+                    str2 = "d-none";
+                  }
+                  else if (chk == 2) {
+                    str2 = "d-none";
+                  }
+                  else if (chk == 3) {
+                    str2 = "";
+                  }
+                  return str2;
+                }
 
                 tbody.innerHTML +=
                   `<tr>` +
@@ -427,11 +359,10 @@
                   ` <div
             style="display: flex; flex-direction: column; align-items: center"
           >
-            <button
-              class="btn btn-sm btn-outline-success"
-              style="height: 30px; width: 90px"
-            >
-              상세보기 >
+            <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px"
+            onclick="modalAction1(`+ tmp.chk + "," + tmp.person + "," + tmp.totalprice + "," + tmp.no + "," + tmp.classcode + "," + tmp.price + ",\'" + tmp.title + "\'" + ",\'" + tmp.classdate + "\'" + ",\'"
+                  + tmp.classlevel + "\'" + ",\'" + tmp.classstart + "\'" + ",\'" + tmp.classend + "\'" + ",\'" + tmp.regdate + "\'" + ",\'" + tmp.confirmdate + "\'" + `)">
+              상세보기
             </button>
           </div>
         </td>
@@ -440,7 +371,7 @@
         </td> 
         <td style="font-size: small">
          <div class="mb-2">
-          <a class="a_underline" href="#">` + "<" + tmp.title + ">" + `</a>
+          <a class="a_underline" target="_blank" th:href="/class/product.do?classcode=`+ tmp.classcode + `">` + "<" + tmp.title + ">" + `</a>
             </div>
 
             <div id="classdate1">` + "날짜:" + tmp.classdate + `</div>
@@ -449,12 +380,12 @@
             <div >` + "금액(1인):" + tmp.price + "원" + `</div>
             <div >` + "신청인원:" + tmp.person + "명" + `</div>
         </td>
-        <td style="font-weight: bold" class="center">` + tmp.totalprice + "원" + `</td>
+        <td style="font-weight: bold" class="center">` + tmp.payment + "원" + `</td>
         <td class="center">
-          <p style="text-align: center">`+ chkchk() + `</p>
+          <p style="text-align: center;">`+ chkchk() + `</p>
           <button
-            class="btn btn-sm btn-secondary" 
-            id ="button"
+            class="btn btn-sm btn-secondary ` + reviewChk() + `" 
+            id ="button1"
             type="button"
             style="height: 30px; width: 90px"
             onclick="modalAction(`+ tmp.no + "," + tmp.classcode + "," + tmp.price + ",\'" + tmp.title + "\'" + ",\'" + tmp.classdate
@@ -464,24 +395,31 @@
                     </tr >`;
               }
             };
-            ajaxBoardList(1)
 
+            let query = window.location.search;
+            let param = new URLSearchParams(query);
+            let chk = param.get('chk');
+            console.log(param);
+            console.log(chk);
+
+            if (chk == null) {
+              ajaxBoardList(1)
+            }
             //<!-- 페이지네이션 -->     
             function initPagination(pages) {
-              $('#pagination-demo').twbsPagination('destroy');
-              var totalpages = $("input[name=pages]").val();
-              let query = window.location.search;
-              let param = new URLSearchParams(query);
-              let startpage = param.get("page");
+              // var totalpages = $("input[name=pages]").val();
+              // let query = window.location.search;
+              // let param = new URLSearchParams(query);
+              // let startpage = pages;
+              // $('#pagination-demo').twbsPagination('destroy');
               $("#pagination-demo").twbsPagination({
-                totalPages: totalpages,
+                totalPages: pages,
                 visiblePages: 5,
-                startPage: startpage,
+                startPage: 1,
                 first: "≪",
                 last: "≫",
                 prev: "<",
                 next: ">",
-
                 initiateStartPageClick: false,
                 nextClass: "page-item next",	// 이전 페이지 CSS class
                 prevClass: "page-item prev",	// 다음 페이지 CSS class
@@ -496,9 +434,127 @@
                 },
               });
             }
-          }); 
+
+
+            var totalpages = $("input[name=pages]").val();
+            let query1 = window.location.search;
+            let param1 = new URLSearchParams(query);
+            let startpage = param1.get("page");
+            let chking = param1.get("chk");
+
+            console.log(totalpages);
+
+            $('#pagination-demo1').twbsPagination({
+
+              totalPages: totalpages,
+              visiblePages: 5,
+              first: '≪',
+              last: '≫',
+              prev: '<',
+              next: '>',
+              initiateStartPageClick: false,
+              startPage: startpage,
+              nextClass: "page-item next",	// 이전 페이지 CSS class
+              prevClass: "page-item prev",	// 다음 페이지 CSS class
+              lastClass: "page-item last",	// 마지막 페이지 CSS calss
+              firstClass: "page-item first",	// 첫 페이지 CSS class
+              pageClass: "page-item",	// 페이지 버튼의 CSS class
+              activeClass: "active",	// 클릭된 페이지 버튼의 CSS class
+              disabledClass: "disabled",	// 클릭 안된 페이지 버튼의 CSS class
+              anchorClass: "page-link",	//버튼 안의 앵커에 대한 CSS class	
+              onPageClick: function (event, page, chk) {
+                window.location.href = "mypage.do?menu=1&page=" + page + "&chk=" + chking;
+              }
+            });
+
+          });
+
         </script>
       </div>
     </div>
   </div>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class=" col d-inline">
+            <img class="logo1" th:src="@{/image/logo.svg}" />
+          </div>
+          <h1 class="title mt-4" id="exampleModalLabel">주문상세</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row d-flex " style="height: auto;">
+              <form th:action="@{/member/updatechk.do}" id="form1" method="POST">
+                <input class="date mt-1" id="applyregdate1" disabled />
+                <div class="hr1"></div>
+                <img class="mainimage1 mt-3 mx-3" name="mainimage" id="mainimage2" />
+                <div class="reviewcontent1 col-9 mt-3 "
+                  style="height: 90px; position: relative; left: 110px; top: -110px;">
+                  <div class="summary1 mx-1" style="width: 300px;">
+                    <input id="title1" type="text" disabled style="width: 280px;" />
+                  </div>
+                  <div class="summary1 mx-2 mt-1">
+                    날짜: <input id="classdate2" disabled type="text" />
+                  </div>
+                  <div class="summary1 mx-2 mt-1">
+                    시간: <input id="classstart1" disabled type="text" />
+                  </div>
+                  <div class="summary1 mx-2 mt-1">
+                    난이도: <input id="classlevel1" disabled type="text" />
+                  </div>
+                  <div class="summary1 mx-2 mt-1">
+                    가격: <input id="price1" disabled type="text" />
+                  </div>
+                </div>
+                <div class="hr2 mt-4"></div>
+                <div class="detail">결제정보</div>
+                <div class="detail-1 mx-2 mt-1">
+                  결제날짜 : <input class="detail-3" id="applyregdate2" disabled type="text" />
+                </div>
+                <div class="detail-1 mx-2 mt-2">
+                  클래스금액(1인) : <input class="detail-3" id="price2" disabled type="text" />
+                </div>
+                <div class="detail-1 mx-2 mt-2">
+                  신청인원 : <input class="detail-3" id="person1" disabled type="text" />
+                </div>
+                <div class="detail-1 mx-2 mt-2">
+                  총결제 : <input class="detail-3" id="totalprice1" disabled type="text" />
+                </div>
+                <div class="detail-1 mx-2 mt-2">
+                  처리상태 : <input class="chk detail-3" disabled id="chk1" /></div>
+                <div class="hr3 mt-2 mb-2"></div>
+
+                <div id="cancle">
+                  <div class="detail mt-4">결제취소정보</div>
+                  <div class="detail-1 mx-2 mt-1">
+                    취소일자 : <input class="detail-3" id="cancledate" disabled type="text" />
+                  </div>
+                  <div class="detail-1 mx-2 mt-1">
+                    클래스금액(1인) : <input class="detail-3" id="price3" disabled type="text" />
+                  </div>
+                  <div class="detail-1 mx-2 mt-2">
+                    신청인원 : <input class="detail-3" id="person2" disabled type="text" />
+                  </div>
+                  <div class="detail-1 mx-2 mt-2">
+                    환불금액 : <input class="detail-3" id="totalprice3" disabled type="text" style="color: red;" />
+                  </div>
+                  <div class="hr3"></div>
+                </div>
+
+                <button class="chkbtn btn btn-sm btn-danger float-end" type="submit"
+                  style="height: 30px; width: 90px;">신청취소</button>
+
+                <input type="hidden" id="no1" name="no">
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 </div>
