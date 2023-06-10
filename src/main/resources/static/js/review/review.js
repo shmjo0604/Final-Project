@@ -191,7 +191,7 @@ function modalAction(no, classcode, price, title, classdate, classlevel, classst
   modal.show();
 }
 
-async function modalAction1(chk, person, totalprice, no, classcode, price, title, classdate, classlevel, classstart, classend, applyregdate, cancledate) {
+async function modalAction1(no) {
   const modal = new bootstrap.Modal(
     document.getElementById("exampleModal1"),
     {}
@@ -203,81 +203,112 @@ async function modalAction1(chk, person, totalprice, no, classcode, price, title
 
   console.log(data);
 
-  let nono = new Array();//배열선언
+  let chk = 0;
+  let classlevel = 0;
+  let classcode = 0;
+  let classstart = "";
+  let classend = "";
+  let classdate = "";
+  let person = 0;
+  let price = 0;
+  let title = "";
+  let payment = "";
+  // let no = 0;
+
+  let cancle = document.getElementById('cancle');
   let confirmdate1 = "";
   let confirmdate2 = "";
-  let regdate = "";
+  let confirmdate3 = "";
+  let regdate = ""
+
+  let levelname = "입문자";
+  let paymentchk = "";
+
+
 
   for (let tmp of data.list) {
-    if (tmp.statuschk == 1 || tmp.statuschk == 3) { // 결제완료
-      confirmdate1 = tmp.confirmdate;
+
+    console.log(tmp.statuschk)
+
+    if (tmp.statuschk == 1) { // 결제완료
+      confirmdate1 = tmp.confirmdate + "";
     }
-    else if (tmp.statuschk == 2) { // 결제취소
-      confirmdate2 = tmp.confirmdate;
+    else if (tmp.statuschk == 2) {// 결제취소
+      confirmdate2 = tmp.confirmdate + "";
     }
-    regdate = tmp.regdate;
+    else if (tmp.statuschk = 3) { // 참여완료
+      confirmdate3 = tmp.confirmdate + "";
+    }
+
+    chk = tmp.chk;
+    classlevel = tmp.classlevel
+    classcode = tmp.classcode
+    // classcode = tmp.classcode;
+    classstart = tmp.classstart;
+    classend = tmp.classend;
+    classdate = tmp.classdate;
+    payment = tmp.payment;
+    person = tmp.person;
+    price = tmp.price;
+    title = tmp.title;
+    // no = tmp.no;
+    regdate = tmp.regdate + "";
   }
 
-  // let confirmdate11 = "";
-  // let confirmdate22 = "";
-  // let regdate11 = "";
+
+
 
   confirmdate1 = confirmdate1.substring(0, 10);
   confirmdate2 = confirmdate2.substring(0, 10);
-  confirmdate3 = confirmdate2.substring(0, 10);
+  confirmdate3 = confirmdate3.substring(0, 10);
   regdate = regdate.substring(0, 10);
 
   console.log(confirmdate1);
   console.log(confirmdate2);
-  console.log(regdate);
+  console.log(confirmdate3);
 
-  var result = applyregdate.substring(0, 10)
-  var result1 = result.replace("-", "/");
-  var result2 = result1.replace("-", "/");
-
-  var result = cancledate.substring(0, 10)
-  var result11 = result.replace("-", "/");
-  var result22 = result11.replace("-", "/");
-
-  const img2 = document.getElementById("mainimage2");
-  const no2 = document.getElementById("no1");
+  const applyregdate2 = document.getElementById("applyregdate1");
+  const mainimage3 = document.getElementById("mainimage2");
   const title2 = document.getElementById("title1");
-  const cancledate1 = document.getElementById("cancledate");
-  const classdate2 = document.getElementById("classdate2");
+  const classdate3 = document.getElementById("classdate2");
   const classstart2 = document.getElementById("classstart1");
   const classlevel2 = document.getElementById("classlevel1");
   const price2 = document.getElementById("price1");
-  const price3 = document.getElementById("price2");
-  const price4 = document.getElementById("price3");
-  const person2 = document.getElementById("person1");
-  const person3 = document.getElementById("person2");
-  let chk2 = document.getElementById("chk1");
-  const totalprice2 = document.getElementById("totalprice1");
-  const totalprice4 = document.getElementById("totalprice3");
-  const applyregdate2 = document.getElementById("applyregdate1");
   const applyregdate3 = document.getElementById("applyregdate2");
+  const price3 = document.getElementById("price2");
+  const person2 = document.getElementById("person1");
+  const payment2 = document.getElementById("payment1");
+  let chk2 = document.getElementById("chk1");
 
-  let chkname = "처리중";
+  // 취소일자
+  const cancledate2 = document.getElementById("cancledate1");
+  const price4 = document.getElementById("price3");
+  const person3 = document.getElementById("person2");
+  const payment3 = document.getElementById("payment2");
+
+  // 신청번호
+  const no2 = document.getElementById("no1");
 
   // 결제완료 color
-  if (chk === 1) {
+  if (chk == 1) {
     cancle.style.display = 'none';
-    chkname = "결제완료";
+    paymentchk = "결제완료";
     chk2.style.color = "#0067a3";
   }
-  else if (chk === 2) {
+  else if (chk == 2) {
     cancle.style.display = 'block';
-    chkname = "결제취소";
+    paymentchk = "결제취소";
     chk2.style.color = "#ff0000";
   }
-  else if (chk === 3) {
+  else if (chk == 3) {
     cancle.style.display = 'none';
-    chkname = "참여완료";
+    paymentchk = "참여완료";
     chk2.style.color = "#0067a3";
   }
 
-
-  let levelname = "입문자";
+  if (classlevel === 1) {
+    levelname = "입문자";
+  }
   if (classlevel === 2) {
     levelname = "경험자";
   }
@@ -285,23 +316,25 @@ async function modalAction1(chk, person, totalprice, no, classcode, price, title
     levelname = "숙련자";
   }
 
+  console.log(levelname)
 
-  img2.src = "/specialday/member/image?classcode=" + classcode;
-  no2.value = no;
+
+  mainimage3.src = "/specialday/member/image?classcode=" + classcode;
+  // no2.value = no;
   title2.value = "이름: " + title;
-  classdate2.value = classdate;
+  classdate3.value = classdate;
   classstart2.value = classstart + "~" + classend;
   classlevel2.value = levelname;
-  chk2.value = chkname;
+  chk2.value = paymentchk;
   person2.value = person + "명";
   person3.value = person + "명";
   price2.value = price + "원";
   price3.value = price + "원";
   price4.value = price + "원";
-  totalprice2.value = totalprice + "원";
-  totalprice4.value = "- " + totalprice + "원";
+  payment2.value = payment + "원";
+  payment3.value = "-" + payment + "원";
   applyregdate2.value = regdate;
-  cancledate1.value = confirmdate2;
+  cancledate2.value = confirmdate2;
   applyregdate3.value = confirmdate1;
 
   modal.show();

@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -12,9 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,7 +27,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.dto.ApplyStatusView;
 import com.example.dto.ApplyView;
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
@@ -144,26 +140,26 @@ public class MemberController {
         // long cntOne =
 
         if (menu == 0) {
-            // map.put("id", user.getUsername());
-            // map.put("first", first);
-            // map.put("last", last);
-            // list = aService.selectApplyListById(map);
-
-            // chk1 = aService.countApplyListOne(id);
-            // chk2 = aService.countApplyListTwo(id);
-            // chk3 = aService.countApplyListThree(id);
-
-            // model.addAttribute("list", list);
-            // model.addAttribute("pages", (cnt - 1) / 5 + 1);
-
-            // model.addAttribute("chk1", chk1);
-            // model.addAttribute("chk2", chk2);
-            // model.addAttribute("chk3", chk3);
 
             return "redirect:/member/mypage.do?menu=1&page=1";
         }
 
         if (menu == 1) {
+            map.put("id", user.getUsername());
+            map.put("first", first);
+            map.put("last", last);
+            list = aService.selectApplyListById(map);
+
+            chk1 = aService.countApplyListOne(id);
+            chk2 = aService.countApplyListTwo(id);
+            chk3 = aService.countApplyListThree(id);
+
+            model.addAttribute("list", list);
+            model.addAttribute("pages", (cnt - 1) / 5 + 1);
+
+            model.addAttribute("chk1", chk1);
+            model.addAttribute("chk2", chk2);
+            model.addAttribute("chk3", chk3);
             if (chk == 1) {
 
                 map.put("id", user.getUsername());
@@ -242,6 +238,13 @@ public class MemberController {
                 model.addAttribute("pages", (pages - 1) / 5 + 1); // 페이지 수
 
             }
+            // chk1 = aService.countApplyListOne(id);
+            // chk2 = aService.countApplyListTwo(id);
+            // chk3 = aService.countApplyListThree(id);
+
+            // chk1 = aService.countApplyListOne(id);
+            // chk2 = aService.countApplyListTwo(id);
+            // chk3 = aService.countApplyListThree(id);
 
         }
 
