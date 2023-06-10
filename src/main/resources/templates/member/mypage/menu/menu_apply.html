@@ -68,14 +68,17 @@
       <div style="float: left; font-weight: bold">| 신청 클래스 정보</div>
       <div style="float: right">
         <div class="btn-group" role="group">
-          <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown"
-            aria-expanded="false">
+          <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" id="ulul1"
+            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             전체상태
           </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" th:href="@{/member/mypage.do(menu=1,page=1,chk=1)}">결제완료</a></li>
-            <li><a class="dropdown-item" th:href="@{/member/mypage.do(menu=1,page=1,chk=2)}">결제취소</a></li>
-            <li><a class="dropdown-item" th:href="@{/member/mypage.do(menu=1,page=1,chk=3)}">참여완료</a></li>
+          <ul class="dropdown-menu" id="ulul2" role="menu" aria-labelledby="searchType">
+            <li><a class="dropdown-item" role="presentation"
+                th:href="@{/member/mypage.do(menu=1,page=1,chk=1)}">결제완료</a></li>
+            <li><a class="dropdown-item" role="presentation"
+                th:href="@{/member/mypage.do(menu=1,page=1,chk=2)}">결제취소</a></li>
+            <li><a class="dropdown-item" role="presentation"
+                th:href="@{/member/mypage.do(menu=1,page=1,chk=3)}">참여완료</a></li>
           </ul>
         </div>
         <div class="btn-group" role="group">
@@ -464,13 +467,11 @@
               }
             });
 
-
-
-
+            $('#ulul2 li > a').on('click', function () {
+              $('#ulul1').text($(this).text());
+              httpMethod = $(this).attr('value');
+            });
           });
-
-
-
 
         </script>
       </div>
