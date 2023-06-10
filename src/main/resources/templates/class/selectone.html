@@ -147,6 +147,10 @@
         .bx-wrapper .bx-controls-direction a {
             z-index: 1010;
         }
+
+        .utable>td {
+            font-size: 12px;
+        }
     </style>
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
@@ -360,68 +364,72 @@
                             <th:block th:if="${user != null}">
                                 <div class="card bg-light mb-3">
                                     <div class="card-body">
-                                        <!-- Comment form-->
-                                        <div class="mb-3">
-                                            <input id="inquiry_title" class="form-control w-50 mb-2"
-                                                placeholder="제목을 입력하세요.">
-                                            <textarea id="inquiry_content" class="form-control mb-2" rows="5"
-                                                placeholder="문의 내용을 입력하세요."></textarea>
-                                            <div class="d-flex justify-content-end">
-                                                <button type="button" class="btn btn-outline-success"
-                                                    onclick="insertInquiry()">문의 등록</button>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <!-- Comment with nested comments-->
-                                        <div id="inquiry_box">
-                                            <div class="d-flex mb-4">
-                                                <!-- Parent comment-->
-                                                <div class="flex-shrink-0"><img class="rounded-circle"
-                                                        src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                                        alt="..." />
-                                                </div>
-                                                <div class="ms-3">
-                                                    <div class="fw-bold">Commenter Name</div>
-                                                    If you're going to lead a space frontier, it has to be government;
-                                                    it'll
-                                                    never
-                                                    be private enterprise. Because the space frontier is dangerous, and
-                                                    it's
-                                                    expensive, and it has unquantified risks.
-                                                    <!-- Child comment 1-->
-                                                    <div class="d-flex mt-4">
-                                                        <div class="flex-shrink-0"><img class="rounded-circle"
-                                                                src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                                                alt="..." />
-                                                        </div>
-                                                        <div class="ms-3">
-                                                            <div class="fw-bold">Commenter Name</div>
-                                                            And under those conditions, you cannot establish a
-                                                            capital-market
-                                                            evaluation of that enterprise. You can't get investors.
-                                                        </div>
-                                                    </div>
-                                                    <!-- Child comment 2-->
-                                                    <div class="d-flex mt-4">
-                                                        <div class="flex-shrink-0"><img class="rounded-circle"
-                                                                src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                                                alt="..." />
-                                                        </div>
-                                                        <div class="ms-3">
-                                                            <div class="fw-bold">Commenter Name</div>
-                                                            When you put money directly to a problem, it makes a good
-                                                            headline.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Single comment-->
-
+                                        <div>
+                                            <button class="form-control-plaintext text-center nav-link" type="button"
+                                                onclick="insertInquiryModal()">문의하기</button>
                                         </div>
                                     </div>
                                 </div>
                             </th:if>
                         </div>
+
+                        <!--문의 작성 Modal-->
+                        <div class="modal modal-center fade" id="inquiryModal" tabindex="-1" data-bs-backdrop="static"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-success">
+                                        <div class="me-auto"></div>
+                                        <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">문의하기</h1>
+                                        <button type="button" class="btn-close" onclick="dismissModal()"
+                                            aria-label="Close">
+                                        </button>
+                                    </div>
+                                    <div class="modal-question">
+                                    </div>
+                                    <form th:action="@{/classinquiry/insert.do}" id="form_inquiry" method="post">
+                                        <div class="modal-body">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <td class="text-center align-middle">문의 제목</td>
+                                                        <td>
+                                                            <input id="inquiry_title" class="form-control" name="title" type="text"
+                                                                placeholder="문의 제목을 작성하세요" style="width:100%;">
+                                                        </td>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-center align-middle">문의 내용</td>
+                                                        <td>
+                                                            <textarea name="content" id="inquiry_content"
+                                                                placeholder="문의 내용을 작성하세요" class="form-control"
+                                                                style="width:100%;" rows="10"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                onclick="dismissModal()">취소</button>
+
+                                            <input type="button" class="btn btn-success" id="btn-write"
+                                                onclick="insertClassInquiry()" value="등록">
+                                        </div>
+
+                                        <input name="member.id" type="hidden" th:value="${user.username}"/>
+                                        <input name="classproduct.classcode" type="hidden" th:value="${obj.classcode}"/>
+                                        <input name="classproduct.member.id" type="hidden" th:value="${obj.memberid}"/>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                     </article>
                 </div>
 
@@ -435,8 +443,8 @@
 
                             <div id="unitbox" class="border mb-2"
                                 style="width: 100%; height: 150px; overflow-y: auto; display: none;">
-                                <table id="utable" class="table table-hover">
-                                    <thead class="table-success">
+                                <table id="utable" class="table table-hover table-sm">
+                                    <thead class="table-success text-center">
                                         <tr>
                                             <th>날짜</th>
                                             <th>시작</th>
@@ -447,7 +455,7 @@
                                             <th>최대인원</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="unittable" class="table-group-divider">
+                                    <tbody id="unittable" class="table-group-divider text-center">
 
                                         <!-- 동적 생성 -->
 
@@ -482,8 +490,8 @@
         <!--form 태그 (post->get)-->
         <!--unitno, person -->
         <form id="form-apply" th:action="@{/apply/insert.do}" method="get" style="display: none;">
-            <input id="unitno" name="unitno" type="number">
-            <input id="person" name="person" type="number">
+            <input id="unitno" name="unitno[]" type="number">
+            <input id="person" name="person[]" type="number">
         </form>
 
         <form id="form-basket" th:action="@{basket.do}" method="post" style="display: none;">
@@ -579,19 +587,22 @@
                 },
 
                 dateClick: async function (info) {
+
                     //console.log(info.dateStr);
 
                     const url = contextPath + '/api/class/selectunit.json?classdate=' + info.dateStr + '&classcode=' + classcode;
                     const headers = { "Content-Type": "application/json" };
                     const { data } = await axios.get(url, { headers });
 
-                    console.log(data);
+                    // console.log(data);
 
                     const table = $("#unittable")[0];
 
                     table.innerHTML = "";
 
                     if (data.ret === 1) {
+
+                        $("#applybox").css("display", "none");
 
                         for (let obj of data.list) {
 
@@ -622,6 +633,13 @@
                         }
                     }
 
+                    else if (data.ret === 0) {
+
+                        $("#unitbox").css("display", "none");
+                        $("#applybox").css("display", "none");
+
+                    }
+
                     //alert('Date: ' + info.dateStr);
                     //alert('Resource ID: ' + info.resource.id);
                 },
@@ -641,7 +659,8 @@
 
         async function unitSelect(no) {
 
-            console.log(no);
+            // console.log(no);
+
             $("#unitno").attr("value", no);
             $("#basket_unitno").attr("value", no);
 
@@ -750,100 +769,38 @@
             $("#form-basket").submit();
         }
 
-        async function insertInquiry() {
+        function insertInquiryModal() {
+            const modal = new bootstrap.Modal(document.getElementById("inquiryModal"), {});
+            modal.show();
+        }
 
-            const title = document.querySelector("#inquiry_title");
-            const content = document.querySelector("#inquiry_content");
+        function dismissModal() {
 
-            const url = contextPath + '/api/inquiry/insertinquiry.json';
-            const headers = { "Content-Type": "application/json" };
-            const body = { title: title.value, content: content.value, classproduct: { classcode: classcode } };
+            $("#inquiryModal").modal('hide');
 
-            const { data } = await axios.post(url, body, { headers });
-
-            console.log(data);
-
-            if (data.ret === 1) {
-
-                title.value = "";
-                content.value = "";
-
-                selectInquiry(1);
-            }
-
+            document.getElementById("inquiry_title").value = null;
+            document.getElementById("inquiry_content").value = null;
 
         }
 
-        async function selectInquiry(page) {
+        function insertClassInquiry() {
 
-            const url = contextPath + "/api/inquiry/selectinquiry.json?classcode=" + classcode + "&page=" + page;
-            const headers = { "Content-Type": "application/json" };
+            const title = document.getElementById("inquiry_title");
+            const content = document.getElementById("inquiry_content");
 
-            const { data } = await axios.get(url, { headers });
-
-            console.log(data);
-
-            $("#inquiry_box").empty();
-
-            for (let obj of data.list) {
-
-                var inquiry_box = document.querySelector("#inquiry_box");
-
-                var div1 = document.createElement('div');
-                div1.className = "d-flex mb-4";
-
-                var div2 = document.createElement('div');
-                div2.className = "flex-shrink-0"
-
-                var img1 = new Image();
-                img1.className = "rounded-circle"
-                img1.src = contextPath + "/image/profile_default.svg";
-                img1.setAttribute('width', '50');
-                img1.setAttribute('height', '50');
-
-                div2.appendChild(img1);
-                div1.appendChild(div2);
-
-                var div3 = document.createElement('div');
-                div3.className = "ms-3";
-
-                var div4 = document.createElement('div');
-                div4.className = "fw-bold";
-
-                var div4text = document.createTextNode(obj.memberid);
-
-                div4.appendChild(div4text);
-
-                var div5 = document.createElement('div');
-
-                var div5text = document.createTextNode(obj.content);
-
-                div5.appendChild(div5text);
-
-                div3.appendChild(div4);
-                div3.appendChild(div5);
-
-                div1.appendChild(div3);
-
-                inquiry_box.appendChild(div1);
+            if(title.value.length < 1) {
+                alert("문의 제목을 입력해주세요");
+                return false;
             }
 
+            if(content.value.length < 1) {
+                alert("문의 내용을 입력해주세요");
+                return false;
+            }
 
-
-            /*
-            <div class="d-flex">
-                                            <div class="flex-shrink-0"><img class="rounded-circle"
-                                                    src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                            <div class="ms-3">
-                                                <div class="fw-bold">Commenter Name</div>
-                                                When I look at the universe and all the ways the universe wants to kill us, I
-                                                find it hard to reconcile that with statements of beneficence.
-                                            </div>
-                                        </div>
-            */
+            document.getElementById("form_inquiry").submit();
 
         }
-
 
 
 

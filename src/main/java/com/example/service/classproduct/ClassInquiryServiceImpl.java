@@ -6,20 +6,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.ClassInquiry;
-import com.example.entity.ClassInquiryView;
+import com.example.entity.Notification;
 import com.example.repository.ClassInquiryRepository;
-import com.example.repository.ClassInquiryViewRepository;
+import com.example.repository.NotificationRepository;
 
 @Service
 public class ClassInquiryServiceImpl implements ClassInquiryService {
 
     @Autowired ClassInquiryRepository cInquiryRepository;
-    @Autowired ClassInquiryViewRepository cInquiryViewRepository;
+    @Autowired NotificationRepository notificationRepository;
 
     @Override
     public int insertClassInquiryOne(ClassInquiry obj) {
         try {
+
             cInquiryRepository.save(obj);
+
+            Notification notification = new Notification();
+
+            notification.setType("문의");
+            notification.setContent("문의가 접수되었습니다.");
+            notification.setUrl("/member/myclass.do?menu=2");
+            notification.setMember(obj.getClassproduct().getMember());
+
+            notificationRepository.save(notification);
+
             return 1;
         }
         catch(Exception e) {
@@ -49,18 +60,5 @@ public class ClassInquiryServiceImpl implements ClassInquiryService {
             return -1;
         }
     }
-
-    @Override
-    public ClassInquiryView selectClassInquiryViewOne(long no) {
-        try {
-            return cInquiryViewRepository.findByNo(no);
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    
     
 }

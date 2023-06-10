@@ -11,22 +11,19 @@ import com.example.entity.BasketView;
 @Service
 public interface BasketService {
 
-    //1. 값 넣기
+    // 1. 장바구니 추가
     public int insertBasketOne(Basket obj);
 
-    // 2. 상품 정보 수정
-    public int updateBasketOne(Basket obj);
-
-    // 3. 선택 상품 삭제
-    public int deleteBasketOne(int obj);
-
-    // 4. 카트 목록
+    // 2. 장바구니 조회
     public List<BasketView> basketList(String memberid);
 
-    // 5. 장바구니 데이터 체크
-    public Basket checBasket(Basket obj);
+    // 3. 상품 하나 삭제
+    public int deleteBasketOne(Basket obj);
 
-    // 4. 카트 목록
-    // public List<BasketView> basketList(Map<String, Object> map);
+    // 4. 선택 상품 삭제
+    public int deleteBakset(List<Long> list);
+
+    
+
     
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -24,12 +25,12 @@
     <!--thymeleaf contextpath-->
     <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}" />
 </head>
+
 <body>
 
     <!--header 영역-->
     <header th:replace="~{header :: headerFragment}"></header>
 
-    <h3>장바구니</h3>
     <section class="cart">
         <div class="cart__information">
             <input type="hidden" value="${login.userid}" id="login_userid">
@@ -39,111 +40,122 @@
             </ul>
         </div>
         <table class="cart__list">
-            <form>
-                <thead style="background-color: gainsboro;">
-                    <tr>
+
+            <thead style="background-color: gainsboro;">
+                <tr>
+                    <td>
+                        <input id="selectAll" type="checkbox" checked="checked" onclick="selectAll(this)">
+                        <span>전체선택</span>
+                    </td>
+                    <td>번호</td>
+                    <td>클래스 이미지</td>
+                    <td>클래스 신청 정보</td>
+                    <td>신청인원</td>
+                    <td>결제 금액</td>
+                </tr>
+            </thead>
+            <tbody>
+                <form th:action="@{/member/basket.do}" method="post" id="form" name="frm">
+                    <tr class="cart__list__detail" th:each="obj, objStat : ${list}" id="practice-3">
                         <td>
-                            <div class="all_check_input_div">
-                                <input type="checkbox" class="all_check_input input_size_20" checked="checked">
-                                <span class="all_chcek_span">전체선택</span>
-                            </div>
-                        </td>
-                        <td>번호</td>
-                        <td>인원수</td>
-                        <td>클래스 이미지</td>
-                        <td>클래스 신청 정보</td>
-                        <td>결제 금액</td>
-                    </tr>
-                </thead>
-                <tbody>
-                  <form th:action="@{/member/basket.do}" method="post" id="form" name="frm">
-                    <tr class="cart__list__detail" th:each="obj : ${list}">
-                       <td><input type="checkbox" name="chk[]" th:value="${obj.no.longValue()}" checked="checked"></td>
-                        <td >
-                            <th:block th:each="no : ${#numbers.sequence(1,1)}" >
-	                            <div th:text="${obj.no.longValue()}" class="unit_no" id="unit_no" name="unit_no" ></div>
+                            <th:block th:if="${(obj.maximum-obj.cnt) > 0}">
+                                <input type="checkbox" name="unitno[]" th:value="${obj.unitno}" checked="checked">
+                            </th:block>
+                            <th:block th:if="${(obj.maximum-obj.cnt) le 0}">
+                                <input type="checkbox" name="unitno[]" th:value="${obj.unitno}" disabled>
                             </th:block>
                         </td>
-                        <td th:text="${obj.cnt}" class="cnt" id="cnt"></td>
                         <td>
-                            <img th:src="@{/class/image(no=${obj.mainImg})}">
-                        </td> 
-                        <!-- classcode를 이용 해서 클래스 image를 띄우는 법-->
-                        <td >
-                            <a th:text="${obj.title}" href="#" >수영 클래스</a>
+                            <th:block>
+                                <div th:text="${objStat.index}+1"></div>
+                                <input type="hidden" th:value="${obj.no}">
+                            </th:block>
+                        </td>
+                        <td>
+                            <img th:src="@{/class/image(no=${obj.mainImg})}" style="width: 200px; height: 150px;">
+                        </td>
+                        <td>
+                            <a th:text="${obj.title}" href="#"></a>
                             <p th:text="${obj.classdate}" class="date"></p>
                             <p th:text="${obj.classstart}" class="starttime"></p>
                             <p th:text="${obj.classend}" class="endtime"></p>
-                            <p th:text="${obj.classlavel}"  class="level"></p>
-                            <h7 th:text="${obj.totalprice}" id="num1" value="num1" class="addprice"></h7><br /> 
-                            <button type="submit" >옵션 수정</button>
-                        </td>
-                        <td >
-                            <p  th:text="${obj.totalprice}" name="totalprice"></input><br>
-                        </td>
-                    </tr>
-                    </form>
-                    
-                    <tr class="cart__list__detail3">
-                        <td>총합금액</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <span class="totalprice">30,000원</span><br>
-                        </td>
-                    </tr>
-                    
+                            <th:block th:if="${obj.classlevel eq 1}">
+                                <p class="level">입문자</p>
+                            </th:block>
+                            <th:block th:if="${obj.classlevel eq 2}">
+                                <p class="level">경험자</p>
+                            </th:block>
+                            <th:block th:if="${obj.classlevel eq 3}">
+                                <p class="level">숙련자</p>
+                            </th:block>
+                            <p th:text="|${#numbers.formatInteger(obj.totalprice, 3, 'COMMA')}원|" class="addprice"></p>
 
-                    <td colspan="6">
-                        <!-- <form method="post" class="dropdown-item" id="deleteForm"
-                        th:action="@{/member/basket.do(no=${obj.no} )}"> -->
-                        <button  th:onclick="formAction1(1)" class="cart__list__optionbtn" type="button" id="delBtn">선택상품 삭제</button>
-                        <button th:onclick="formAction1(2)" class="openBtn" type="button">옵션수정</button>
-                        <div class="modal hidden">
-                            <div class="bg"></div>
-                            <div class="modalBox">
-                                    <p>수영 클래스</p>
-                                    <p>일자: 2023-05-05</p>
-                                    <p>시간: 18:00 ~ 20:00</p>
-                                    <p>난이도 : 입문자</p>
-                                    <p>신청 인원: 1명</p><hr />
-                                    <p>가격: 15000</p>
-                                <button class="closeBtn">수정</button>
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-center">
+                                <th:block th:if="${(obj.maximum-obj.cnt) > 0}">
+                                    <select class="form-select w-50">
+                                        <option th:each="number : ${#numbers.sequence(1, obj.maximum-obj.cnt)}"
+                                            th:text="${number}" th:selected="${number} == ${obj.cnt}"></option>
+                                    </select>
+                                </th:block>
+
+                                <th:block th:if="${(obj.maximum-obj.cnt) le 0}">
+                                    <p>신청인원이 초과되었습니다.</p>
+                                </th:block>
                             </div>
-                        </div>
-                    <!-- </form> -->
-                    </td>
-                    
-                    <td></td>
+                        </td>
+                        <td>
+                            <th:block th:if="${(obj.maximum-obj.cnt) > 0}">
+                                <div th:text="|${#numbers.formatInteger(obj.totalprice * obj.cnt, 3, 'COMMA')}원|"
+                                    name="totalprice"></div>
+                                <input th:value="${obj.totalprice * obj.cnt}" type="hidden">
+                            </th:block>
+                            <th:block th:if="${(obj.maximum-obj.cnt) le 0}">
+                                <button class="btn btn-outline-danger" type="button"
+                                    th:onclick="basketdeleteone([[${obj.no}]])">삭제</button>
+                                <input value="0" type="hidden">
+                            </th:block>
+                            <br>
+                        </td>
                     </tr>
-                    </tfoot>
-            </form>
+                </form>
+
+                <tr class="cart__list__detail3">
+                    <td>총합금액</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="text-center">
+                        <span id="payment"></span><br>
+
+                    </td>
+                </tr>
+
+            </tbody>
+
         </table>
+        <button class="cart__list__optionbtn mt-2" type="button" onclick="basketdelete()">선택 상품 삭제</button>
         <div class="cart__mainbtns">
-            <button class="cart__bigorderbtn left" type="submit">쇼핑 계속하기</button>
-            <input type="button" class="cart__bigorderbtn right" onclick="location.href='*/apply/insert.do';" value="결제화면으로" />
+            <button class="cart__bigorderbtn left"><a class="nav-link" th:href="@{/class/select.do}">클래스 검색
+                    화면으로</a></button>
+            <input type="button" id="order-list" class="cart__bigorderbtn right" value="결제 화면으로" onclick="applyAction()"/>
         </div>
 
-        <!-- <script>
-
-            /* 체크박스 전체 선택 */
-        $(".all_check_input").on("click", function(){
-
-            /* 체크박스 체크/해제 */
-	    if($(".all_check_input").prop("checked")){
-            $(".individual_cart_checkbox").attr("checked", true);
-	    } else{
-		$(".individual_cart_checkbox").attr("checked", false);
-	    }
-            });
-
-        </script> -->
-
-        
-        
     </section>
+
+    <form id="form_delete" th:action="@{/member/basket/delete.do}" method="post" style="display: none;">
+
+    </form>
+
+    <form id="form_deleteone" th:action="@{/member/basket/deleteone.do}" method="post" style="display: none;">
+        <input id="deleteone_no" type="text" name="no">
+    </form>
+
+    <form id="form_apply" th:action="@{/apply/insert.do}" method="get" style="display: none;">
+
+    </form>
 
     <!--footer 영역-->
     <footer th:replace="~{footer :: footerFragment}"></footer>
@@ -161,15 +173,140 @@
 
         function formAction1(code) {
             const form = document.getElementById('form');
-            if(code === 1) {
+            if (code === 1) {
                 form.action = /*[[@{/board2/updatebatch.pknu}]]*/'';
             }
-            else if(code === 2) {
+            else if (code === 2) {
                 form.action = /*[[@{/board2/deletebatch.pknu}]]*/'';
             }
             form.submit();
         }
+
+        function selectAll(e) {
+
+            const checkboxes = document.getElementsByName('unitno[]');
+
+            checkboxes.forEach((checkbox) => {
+                checkbox.checked = e.checked;
+            })
+
+        }
+
+        $("input:checkbox[name='unitno[]']").change(function () {
+
+            var pricecheck = $("input:checkbox[name='unitno[]']:checked");
+
+            var payment = 0;
+
+            $("input:checkbox[name='unitno[]']:checked").each(function (i) {
+                var tr = pricecheck.parent().parent().eq(i);
+
+                var td = tr.children();
+
+                var price = td.eq(5).find("input").val();
+
+                // console.log("가격", price);
+
+                payment += Number(price);
+            })
+
+            $("#payment").text(payment.toLocaleString() + '원');
+
+        })
+
+        function paymentCalc() {
+
+            var pricecheck = $("input:checkbox[name='unitno[]']:checked");
+
+            var payment = 0;
+
+            $("input:checkbox[name='unitno[]']:checked").each(function (i) {
+
+                var tr = pricecheck.parent().parent().eq(i);
+
+                var td = tr.children();
+
+                var price = td.eq(5).find("input").val();
+
+                // console.log("가격", price);
+
+                payment += Number(price);
+            })
+
+            $("#payment").text(payment.toLocaleString() + '원');
+        }
+
+        paymentCalc();
+
+        function basketdelete() {
+
+            if (confirm("삭제하시겠습니까?")) {
+
+                $("input:checkbox[name='unitno[]']:checked").each(function (idx) {
+
+                    var tr = $("input:checkbox[name='unitno[]']:checked").parent().parent().eq(idx);
+
+                    var basketno = tr.children().eq(1).find("input").val();
+
+                    // console.log("장바구니 번호", basketno);
+
+                    var input = document.createElement('input');
+
+                    input.setAttribute("value", basketno);
+                    input.setAttribute("name", "no[]");
+
+                    document.querySelector("#form_delete").appendChild(input);
+                    
+                })
+
+                document.querySelector("#form_delete").submit();
+
+            }
+
+        }
+
+        function basketdeleteone(no) {
+
+            // console.log(no);
+
+            $("#deleteone_no").attr("value", no);
+
+            $("#form_deleteone").submit();
+
+        }
+
+        function applyAction() {
+
+            $("input:checkbox[name='unitno[]']:checked").each(function (idx) {
+
+                //console.log(this.value);
+
+                var input1 = document.createElement('input');
+
+                input1.setAttribute("value", this.value);
+                input1.setAttribute("name", "unitno[]");
+
+                document.querySelector("#form_apply").appendChild(input1);
+
+                var tr = $("input:checkbox[name='unitno[]']:checked").parent().parent().eq(idx);
+                var person = tr.children().eq(4).find("select").val();
+
+                var input2 = document.createElement('input');
+
+                input2.setAttribute("value", person);
+                input2.setAttribute("name", "person[]");
+
+                document.querySelector("#form_apply").appendChild(input2);
+
+            });
+
+            document.querySelector("#form_apply").submit();
+
+        }
+
+
     </script>
+
     <!--Main js-->
     <script th:src="@{/js/main.js}"></script>
 </body>

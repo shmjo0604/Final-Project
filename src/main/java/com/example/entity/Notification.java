@@ -4,9 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -19,10 +22,12 @@ import lombok.Data;
 @Data
 @Table(name = "NOTIFICATION")
 @Entity
+@SequenceGenerator(name = "SEQ_NOTIFICATION_NO", sequenceName = "SEQ_NOTIFICATION_NO", initialValue = 1, allocationSize = 1)
 public class Notification {
 
   // 알림번호(시퀀스)
   @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_NOTIFICATION_NO")
   private long no;
 
   // 알림내용
