@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entity.ClassInquiry;
+import com.example.entity.ClassInquiryView;
 import com.example.entity.Member;
+import com.example.repository.ClassInquiryViewRepository;
 import com.example.service.classproduct.ClassInquiryService;
+import com.example.service.classproduct.ClassManageService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,6 +30,8 @@ import lombok.extern.slf4j.Slf4j;
 public class RestClassInquiryController {
 
     @Autowired ClassInquiryService inquiryService;
+    @Autowired ClassManageService manageService;
+    @Autowired ClassInquiryViewRepository inquiryViewRepository;
 
     final String format = "RestClassInquiryController => {}";
 
@@ -90,4 +95,26 @@ public class RestClassInquiryController {
 
         return retMap;
     }
+
+    @GetMapping(value = "/selectoneinquiry.json")
+    public Map<String, Object> selectoneinquiryGET(
+        @RequestParam(name = "no") long no
+        ) {
+            
+        Map<String, Object> retMap = new HashMap<>();
+            
+        ClassInquiryView obj = inquiryService.selectClassInquiryViewOne(no);
+
+        log.info(format, obj.toString());
+
+        retMap.put("status", -1);
+
+        if(obj != null) {
+            retMap.put("status", 200);
+            retMap.put("obj", obj);
+        }
+
+        return retMap;
+    }
+
 }

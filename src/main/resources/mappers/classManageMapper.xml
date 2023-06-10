@@ -57,7 +57,7 @@
 
     <!-- 7. 클래스 이미지 수정 -->
     <update id="updateClassImage" parameterType="ClassImage">
-        UPDATE classimage SET filename = #{filename}, filetype = #{filetype}, filesize = #{filesize}, filedata = #{filedata}, typechk = #{typechk} WHERE no = #{no}
+        UPDATE classimage SET filename = #{filename}, filetype = #{filetype}, filesize = #{filesize}, filedata = #{filedata}, filetype = #{filetype}, typechk = #{typechk} WHERE no = #{no}
     </update>
 
     <!-- 8. 클래스 이미지 삭제 -->
@@ -65,5 +65,8 @@
         DELETE FROM classimage WHERE no = #{no}
     </delete>
 
-
+    <!-- 9. 클래스 답변완료 -->
+    <update id="updateClassAnswer" parameterType="ClassInquiry">
+        UPDATE classinquiry SET chk = 1 WHERE no=#{no}
+    </update>
 </mapper>

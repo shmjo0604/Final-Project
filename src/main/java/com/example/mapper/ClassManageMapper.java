@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
+import com.example.entity.ClassInquiry;
 
 @Mapper
 public interface ClassManageMapper {
@@ -48,5 +49,7 @@ public interface ClassManageMapper {
     // 8. 클래스 이미지 삭제
     public int deleteClassImageOne(long no);
     
+    // 11. 클래스 문의 답변완료(chk=1)
+    public int updateClassAnswer(com.example.entity.ClassInquiry obj);
 
 }

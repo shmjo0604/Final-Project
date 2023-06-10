@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,6 +32,7 @@ import com.example.dto.ApplyView;
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
 import com.example.dto.Member;
+import com.example.entity.ClassAnswer;
 import com.example.entity.ClassInquiryView;
 import com.example.repository.ClassInquiryViewRepository;
 import com.example.service.apply.ApplyService;
@@ -48,17 +50,17 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 
     final String format = "MemberController => {}";
-    final ClassInquiryViewRepository civRepository;
 
     @Autowired MemberService mService;
     @Autowired ClassManageService cService; 
     @Autowired ClassSelectService c1Service;
     @Autowired ApplyService aService;
     @Autowired ClassManageService manageService;
+    @Autowired ClassInquiryViewRepository inquiryViewRepository;
 
     @Autowired ResourceLoader resourceLoader;
     @Value("${default.image}") String defaultImg;
-
+    @Value("${myclassinquiry.page}") int pagetotal;
 
     BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 
@@ -161,10 +163,10 @@ public class MemberController {
     public String myclassGET(
             @RequestParam(name = "menu", defaultValue = "0") int menu,
             @RequestParam(name = "no", defaultValue = "0", required = false) long no,
-            @RequestParam(name = "page", required = false) Integer page,
-            @RequestParam(name = "size", required = false) Integer size,
+            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @AuthenticationPrincipal User user,
             Model model) {
+
         String owner = user.getUsername();
         String id = user.getUsername();
 
@@ -173,25 +175,35 @@ public class MemberController {
             return "redirect:/member/myclass.do?menu=1";
         }
 
+        if (menu == 2 && page == 0) {
+            return "redirect:/member/myclass.do?menu=2&page=1";
+        }
+
         if (menu == 1) {
+
             List<ClassProduct> list = cService.selectMyClassList(id);
             model.addAttribute("list", list);
 
-            log.info("myclass selectlist => {}", list.toString());
+            // log.info("myclass selectlist => {}", list.toString());
         }
 
         else if (menu == 2) {
-            // PageRequest pageRequest = PageRequest.of(page, size);
 
-            List<ClassInquiryView> list = cService.selectClassInquiryList(owner);
-            // System.out.println("test용=>", list.toString());
+            long total = cService.selectClassInquiryListCount(owner);
 
-            ClassInquiryView obj2 = cService.selectClassInquiryOne(no);
+            log.info(format, total);
+
+            PageRequest pageRequest = PageRequest.of((page-1), pagetotal);
+
+            List<ClassInquiryView> list = cService.selectClassInquiryList(owner, pageRequest);
+
+            log.info(format, list);
 
             model.addAttribute("list", list);
-            // model.addAttribute("obj2", obj2 );
+            model.addAttribute("pages", ((total-1)/pagetotal)+1);
 
             log.info("myclass inquiry selectlist => {}", list.toString());
+
         }
 
         model.addAttribute("user", user);
@@ -203,6 +215,7 @@ public class MemberController {
             @RequestParam(name = "classcode", defaultValue = "0", required = false) long classcode,
             @RequestParam(name = "menu", defaultValue = "0", required = false) int menu,
             @ModelAttribute ClassProduct obj,
+            @ModelAttribute ClassAnswer classAnswer,
             Model model) {
 
         int chk = obj.getChk();
@@ -227,6 +240,12 @@ public class MemberController {
                 }
             }
 
+        }
+
+        else if(menu == 2) {
+
+            log.info(format, classAnswer.toString());
+            // 여기서 Service 호출해서 답변 등록하세요.
         }
 
         return "redirect:/myclass.do?menu=" + menu;
