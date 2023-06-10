@@ -44,12 +44,12 @@ public class ApplyView {
     // 신청할 인원수
     private int person;
     // 신청날짜
-    private Date regdate;
+    private Date applyregdate;
     // 신청번호
     private long no;
     
     /*** 추가 ***/
-    // 현재신청인원
+    // 현재 신청 인원
     private int cnt;
     // 클래스 개설자 id 
     private String ownerid;

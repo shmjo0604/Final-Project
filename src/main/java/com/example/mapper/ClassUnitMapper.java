@@ -37,4 +37,7 @@ public interface ClassUnitMapper {
 	/* (5) ClassUnitView 하나 조회 */
 	public ClassUnitView selectClassUnitViewOne(long unitno);
 
+	// (6) ClassUnit 개설 일정 조회
+	public List<ClassUnit> selectUnitListToCal(long classcode);
+
 }

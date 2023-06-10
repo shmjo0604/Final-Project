@@ -1,5 +1,6 @@
 package com.example.restcontroller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entity.ClassUnit;
 import com.example.repository.ClassUnitRepository;
+import com.example.service.apply.ApplyService;
 import com.example.service.classproduct.ClassUnitService;
 
 import lombok.RequiredArgsConstructor;
@@ -29,14 +32,17 @@ public class RestClassUnitController {
     final ClassUnitRepository cuRepository;
 
     @Autowired ClassUnitService cuService;
+    @Autowired ApplyService aService;
 
+    // ************************************ 일정 관리 ********************************************
+    
+    
     
     // 일정 등록
     @PostMapping(value = "/insert.json")
     public Map<String, Object> insertPOST(
         @RequestBody ClassUnit classunit){
-        
-        log.info(format, classunit.toString());
+        // log.info(format, classunit.toString());
         Map<String, Object> retMap = new HashMap<>();
     
         try {
@@ -60,9 +66,17 @@ public class RestClassUnitController {
             // log.info(format, classcode);
             Map<String,Object> retmap = new HashMap<>();
 
-            List<ClassUnit> list = cuRepository.findByClassproduct_classcode(classcode);
-        
-            retmap.put("list", list);
+            List<ClassUnit> list = cuRepository.findByClassproduct_classcodeOrderByClassdate(classcode);
+            List<ClassUnit> list1 = new ArrayList<>();
+            // log.info(format, list.toString());
+            for (ClassUnit classUnit : list){
+                if(classUnit.getChk() == 0){
+                    list1.add(classUnit);
+                }
+            }
+            
+            retmap.put("list", list1);
+            
             return retmap;
     }
 
@@ -75,19 +89,89 @@ public class RestClassUnitController {
         // log.info(format, no);
 
         ClassUnit obj = cuRepository.findByClassproduct_classcodeAndNo(classcode, no);
-        log.info(format, obj);
+        // log.info(format, obj);
 
         Map<String, Object> retmap = new HashMap<>();
         retmap.put("obj", obj);
         return retmap;
     }   
 
-    //일정 삭제(update로 처리)
-    // @PutMapping(value = "/deleteunit.json")
-    // public Map<String, Integer> deleteunitDELETE() {
-    //     Map<String, Integer> retMap = new HashMap<>();
-    //     // retMap.put("result", ret);
-    //     return retMap;
-    // }
-    
+    // 선택한 일정 삭제(update로 처리)
+    @PutMapping(value = "/deleteone.json")
+    public Map<String, Integer> deleteonePUT(
+        @RequestParam(name = "classcode", defaultValue = "0") long classcode,
+        @RequestParam(name = "no", defaultValue = "0") long no) {
+        Map<String, Integer> retMap = new HashMap<>();
+
+        // log.info(format, classcode);
+        // log.info(format, no);
+        
+        ClassUnit obj = cuRepository.findByClassproduct_classcodeAndNo(classcode, no);
+        obj.setChk(1);
+        cuRepository.save(obj);
+        
+        retMap.put("status", 200);
+        
+        return retMap;
+    }
+
+    // 일정 전체 삭제(update로 처리)
+    @PutMapping(value = "/deleteall.json")
+    public Map<String, Integer> deleteallPUT(@RequestParam(name = "classcode", defaultValue = "0") long classcode) {
+        Map<String, Integer> retMap = new HashMap<>();
+        // log.info(format, classcode);
+
+        List<ClassUnit> list = cuRepository.findByClassproduct_classcodeOrderByClassdate(classcode);
+        List<ClassUnit> list1 = new ArrayList<>();
+
+        for (ClassUnit classUnit : list){
+            if(classUnit.getChk() == 0){
+                classUnit.setChk(1);
+                cuRepository.save(classUnit);
+            }
+        }
+        retMap.put("status", 200);
+
+        return retMap;
+    }
+
+    // 선택한 일정 수정 
+    @PutMapping(value = "/updateone.json")
+    public Map<String, Integer> updateonePUT(
+        @RequestBody ClassUnit classunit) {
+        Map<String, Integer> retMap = new HashMap<>();
+        
+        log.info(format, classunit);
+
+        log.info(format, "dddddddddddddddddd");
+        log.info(format, classunit.getClassproduct().getClasscode());
+        log.info(format, classunit.getNo());
+
+        ClassUnit obj = cuRepository.findByClassproduct_classcodeAndNo(classunit.getClassproduct().getClasscode(), classunit.getNo());
+        log.info(format,obj.toString());
+
+        // retMap.put("status", 200);
+        
+        return retMap;
+    }
+
+    // ************************************ 신청 관리 ********************************************
+
+    // 신청 상태 수정
+    @PutMapping(value = "/updatechk.json")
+    public Map<String, Integer> updatechkPUT(
+        @RequestParam(name = "no", defaultValue = "0") long no){
+        Map<String, Integer> retMap = new HashMap<>();
+        // log.info(format, no);
+
+        // 1. 신청 내역의 chk를 3으로 update
+        // 2. 신청 상태 테이블에 기록 추가
+        int ret = aService.updateApplyChk(no);
+
+        if(ret == 1){
+            aService.insertApplyStatusOne(no, 3);
+        }
+        retMap.put("status", 200);
+        return retMap;
+    }
 }
