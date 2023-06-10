@@ -128,7 +128,7 @@
                 
                 <div class="modal-body">
                     <div class="form-group" style="display: inline-block;">
-                        <input type="number" class="form-control" id="classcode" th:value="${classcode}" name="classcode">
+                        <input type="hidden" class="form-control" id="classcode" th:value="${classcode}" name="classcode">
                         <div class="row">
                             <div class="col-sm-3" style="width: 50%;">
                                 <label for="minimum" class="col-form-label">최소인원</label>
@@ -220,13 +220,13 @@
         </div>
     </div>
 
-     <!-- 일정 수정 modal 아직 완료x -->
+     <!-- 일정 수정 modal -->
      <div class="modal fade" id="unitUpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
      <div class="modal-dialog" role="document">
          <div class="modal-content">
              <div class="modal-header">
-                 <h5 class="modal-title" id="exampleModalLabel">클래스 일정을 입력하세요.</h5>
+                 <h5 class="modal-title" id="exampleModalLabel">변경할 내용을 입력하세요.</h5>
                  <button type="button" class="close" onclick="cancel()" style="border: none; background-color: white; font-size: xx-large;">
                      <span aria-hidden="true">&times;</span>
                  </button>
@@ -275,15 +275,15 @@
                      <div class="col">
                          <label style="font-size: small; margin-top: 20px;">* 클래스 난이도와 수강금액에 변동이있을 시 작성해주세요.</label><br />
                          <div class="form-check form-check-inline" style="margin-top: 10px;">
-                             <input type="radio" class="form-check-input radio-value level-value-detail" id="classlevel1" name="classlevel"  value="1" checked>
+                             <input type="radio" class="form-check-input radio-value level-value-detail" id="classlevel4" name="classlevel"  value="1">
                              <label class="form-check-label" for="classlevel1">입문자</label>
                          </div>
                          <div class="form-check form-check-inline">
-                             <input type="radio" class="form-check-input radio-value level-value-detail" id="classlevel2" name="classlevel"  value="2">
+                             <input type="radio" class="form-check-input radio-value level-value-detail" id="classlevel5" name="classlevel"  value="2">
                              <label class="form-check-label" for="classlevel2">경험자</label>
                          </div>
                          <div class="form-check form-check-inline">
-                             <input type="radio" class="form-check-input radio-value level-value-detail" id="classlevel3" name="classlevel"  value="3">
+                             <input type="radio" class="form-check-input radio-value level-value-detail" id="classlevel6" name="classlevel"  value="3">
                              <label class="form-check-label" for="classlevel3">숙련자</label>
                          </div>                    
                      </div>
@@ -318,7 +318,7 @@
                          <button type="button" style="border: 1px solid gray; width: 100%;" class="btn btn-sm" data-dismiss="modal" onclick="cancel2()">닫기</button>
                      </div>
                      <div style="width: 49%;">
-                         <input type="button" value="완료" style="border: 1px solid gray; width: 100%;" class="btn btn-sm" onclick="add()">
+                         <input type="button" value="완료" style="border: 1px solid gray; width: 100%;" class="btn btn-sm" onclick="update()">
                      </div>
                  </div>
              </div>
@@ -430,9 +430,10 @@
         }
         
 
-        // 일정등록 모달창 닫기 
+        // 모달창 닫기 
         function cancel() {
             $("#unitInsertModal").modal("hide"); 
+            $("#unitUpdateModal").modal("hide"); 
         }
         
         console.log(document.getElementById("classcode").value);
@@ -574,15 +575,16 @@
             $('#unitUpdateModal').modal('hide');
         }
 
+        // 1. 수정을 위해 먼저 기존 내역 불러오기 위한 GET호출
         async function updateUnit(classcode, no){
             let url = /*[[@{/api/classunit/selectunitone.json}]]*/"";
             url += `?classcode=${classcode}&no=${no}`;
             const body = {  classproduct:{classcode:classcode}, no : no };
             const headers = {"Content-Type":"application/json"};
-            const { data } = await axios.put(url, body, { headers:headers });
-            console.log(url);
-            console.log("classcode:", classcode, "no:", no);
-
+            
+            const { data } = await axios.get(url, body, { headers:headers });
+            
+            // 데이터 불러오기
             document.getElementById('classcode2').value = classcode;
             document.getElementById('minimum2').value = data.obj.minimum;
             document.getElementById('maximum2').value = data.obj.maximum;
@@ -594,10 +596,113 @@
             document.getElementById('addprice2').value = data.obj.addprice;
             document.getElementById('discount2').value = data.obj.discount;
             document.getElementById('discount_price2').value = data.obj.discount_price;
-
+            var classLevel = parseInt(data.obj.classlevel);
+            if (classLevel === 1) {
+                document.getElementById('classlevel4').checked = true;
+            } else if (classLevel === 2) {
+                document.getElementById('classlevel5').checked = true;
+            } else if (classLevel === 3) {
+                document.getElementById('classlevel6').checked = true;
+            }
             $('#unitUpdateModal').modal('show');
         };
 
+        // 2. 수정 내용을 변경하기위한 PUT호출
+        async function update(classcode, no){
+            //const classcode = document.getElementById("classcode2").value;
+            const min = document.getElementById("minimum2").value;
+            const max = document.getElementById("maximum2").value;
+            const date = document.getElementById("classdate2").value;
+            const day = document.getElementById("classday2").value;
+            const start = document.getElementById("classstart2").value;
+            const end = document.getElementById("classend2").value;
+            var level = document.querySelector('input[name="classlevel"]:checked').value;
+            const discount = document.getElementById("discount2").value;
+            const addprice = document.getElementById("addprice2").value;            
+            
+            // PUT호출
+            const url = /*[[@{/api/classunit/updateone.json}]]*/"";
+            const headers = {"Content-Type":"application/json"};
+            const body = {  classproduct:{classcode:classcode},
+                            no : no, 
+                            minimum : min, 
+                            maximum : max, 
+                            classdate : date, 
+                            classday : day, 
+                            classstart : start, 
+                            classend : end, 
+                            classlevel : level, 
+                            discount : discount, 
+                            addprice : addprice };
+            
+            console.log(body);
+            const { data } = await axios.put(url, body, { headers:headers });
+            console.log('반환되는 결과', data);
+
+            /*
+            if(data.status === 200){
+                alert("일정 변경이 완료되었습니다.")
+                $('#unitInsertModal').modal('hide'); // 모달 창 닫기
+                // resetModalInputs(); // 입력 필드 초기화
+            }
+            else {
+                alert("일정 변경에 실패하였습니다.");
+            }
+            */
+            
+        }
+        
+
+        
+       
+
+
+        // 할인 금액 계산
+        function calculateDiscount() {
+            var defaultPrice = parseInt(document.getElementById("defaultPrice2").value);
+            var discount = parseInt(document.getElementById("discount2").value);
+            var addprice = parseInt(document.getElementById("addprice2").value);
+            var discountAmount = (defaultPrice + addprice) * discount / 100;
+            var discountPrice = (defaultPrice + addprice) - discountAmount;
+
+            // 할인된 금액을 discount_price input 요소에 업데이트
+            document.getElementById("discount_price2").value = discountPrice;
+        }
+        document.getElementById("discount2").addEventListener("change", calculateDiscount);
+
+        // 할일 비율 설정시 체크 후 입력란 활성화
+        function toggleDiscountInput() {
+            var discountCheckbox = document.getElementById("discount-chk2");
+            var discountInput = document.getElementById("discount2");
+            var discountPriceInput = document.getElementById("discount_price2");
+
+            if (discountCheckbox.checked) {
+                discountInput.disabled = false;
+                discountInput.value = "";
+                discountPriceInput.value = "";
+            } 
+            else {
+                discountInput.disabled = true;
+                discountInput.value = "";
+                discountPriceInput.value = "";
+            }
+        }
+
+        // 클래스 난이도별 추가 금액 입력란 활성화
+        var radioBtns = document.querySelectorAll('.radio-value');
+        function handleRadioClick() {
+            var addpriceInput = document.getElementById('addprice2');
+            var level = document.querySelector('input[name="classlevel"]:checked').value;
+            addpriceInput.disabled = !(level === '2' || level === '3');
+        }
+
+        radioBtns.forEach(function(radioBtn) {
+            radioBtn.addEventListener('click', handleRadioClick);
+        });
+
+
+
+        // 일정 하나 삭제
         async function deleteUnit(classcode, no){
             let url = /*[[@{/api/classunit/deleteone.json}]]*/"";
             url += `?classcode=${classcode}&no=${no}`;

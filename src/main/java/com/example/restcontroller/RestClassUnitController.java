@@ -135,17 +135,22 @@ public class RestClassUnitController {
         return retMap;
     }
 
-    // 선택한 일정 수정 - 미완
+    // 선택한 일정 수정 
     @PutMapping(value = "/updateone.json")
     public Map<String, Integer> updateonePUT(
-        @RequestParam(name = "classcode", defaultValue = "0") long classcode,
-        @RequestParam(name = "no", defaultValue = "0") long no) {
+        @RequestBody ClassUnit classunit) {
         Map<String, Integer> retMap = new HashMap<>();
-
-        // log.info(format, classcode);
-        // log.info(format, no);
         
-        retMap.put("status", 200);
+        log.info(format, classunit);
+
+        log.info(format, "dddddddddddddddddd");
+        log.info(format, classunit.getClassproduct().getClasscode());
+        log.info(format, classunit.getNo());
+
+        ClassUnit obj = cuRepository.findByClassproduct_classcodeAndNo(classunit.getClassproduct().getClasscode(), classunit.getNo());
+        log.info(format,obj.toString());
+
+        // retMap.put("status", 200);
         
         return retMap;
     }
@@ -157,7 +162,7 @@ public class RestClassUnitController {
     public Map<String, Integer> updatechkPUT(
         @RequestParam(name = "no", defaultValue = "0") long no){
         Map<String, Integer> retMap = new HashMap<>();
-        log.info(format, no);
+        // log.info(format, no);
 
         // 1. 신청 내역의 chk를 3으로 update
         // 2. 신청 상태 테이블에 기록 추가
