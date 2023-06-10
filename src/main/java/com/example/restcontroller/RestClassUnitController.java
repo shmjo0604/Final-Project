@@ -1,6 +1,5 @@
 package com.example.restcontroller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,12 +30,11 @@ public class RestClassUnitController {
     final String format = "RestClassUnit => {}";
     final ClassUnitRepository cuRepository;
 
+
     @Autowired ClassUnitService cuService;
     @Autowired ApplyService aService;
 
     // ************************************ 일정 관리 ********************************************
-    
-    
     
     // 일정 등록
     @PostMapping(value = "/insert.json")
@@ -45,15 +43,16 @@ public class RestClassUnitController {
         // log.info(format, classunit.toString());
         Map<String, Object> retMap = new HashMap<>();
     
-        try {
-            cuRepository.save(classunit);
+        int ret = cuService.insertUnitOne(classunit);
+        
+        if(ret == 1) {
             retMap.put("status", 200);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            retMap.put("status",-1);
-            retMap.put("error",e.getMessage());
         }
+
+        else {
+            retMap.put("status",-1);
+        }
+        
         return retMap;
     }
     
@@ -63,21 +62,14 @@ public class RestClassUnitController {
     public Map<String,Object> selectunitlistGET(
         @RequestParam(name = "classcode", defaultValue = "0") long classcode){
     
-            // log.info(format, classcode);
-            Map<String,Object> retmap = new HashMap<>();
+        // log.info(format, classcode);
+        Map<String,Object> retmap = new HashMap<>();
 
-            List<ClassUnit> list = cuRepository.findByClassproduct_classcodeOrderByClassdate(classcode);
-            List<ClassUnit> list1 = new ArrayList<>();
-            // log.info(format, list.toString());
-            for (ClassUnit classUnit : list){
-                if(classUnit.getChk() == 0){
-                    list1.add(classUnit);
-                }
-            }
-            
-            retmap.put("list", list1);
-            
-            return retmap;
+        List<ClassUnit> list = cuService.selectUnitList(classcode);
+        
+        retmap.put("list", list);
+        
+        return retmap;
     }
 
     // 한개의 일정 조회
@@ -85,10 +77,12 @@ public class RestClassUnitController {
     public Map<String,Object> selectunitoneGET(
         @RequestParam(name = "classcode", defaultValue = "0") long classcode,
         @RequestParam(name = "no", defaultValue = "0") long no){
+
         // log.info(format, classcode);
         // log.info(format, no);
 
-        ClassUnit obj = cuRepository.findByClassproduct_classcodeAndNo(classcode, no);
+        ClassUnit obj = cuService.selectUnitOne(classcode, no);
+
         // log.info(format, obj);
 
         Map<String, Object> retmap = new HashMap<>();
@@ -105,13 +99,15 @@ public class RestClassUnitController {
 
         // log.info(format, classcode);
         // log.info(format, no);
+
+        retMap.put("status", -1);
         
-        ClassUnit obj = cuRepository.findByClassproduct_classcodeAndNo(classcode, no);
-        obj.setChk(1);
-        cuRepository.save(obj);
-        
-        retMap.put("status", 200);
-        
+        int ret = cuService.updateUnitOne(classcode, no);
+
+        if(ret == 1) {
+            retMap.put("status", 200);
+        }
+
         return retMap;
     }
 
@@ -121,16 +117,13 @@ public class RestClassUnitController {
         Map<String, Integer> retMap = new HashMap<>();
         // log.info(format, classcode);
 
-        List<ClassUnit> list = cuRepository.findByClassproduct_classcodeOrderByClassdate(classcode);
-        List<ClassUnit> list1 = new ArrayList<>();
+        retMap.put("status", -1);
 
-        for (ClassUnit classUnit : list){
-            if(classUnit.getChk() == 0){
-                classUnit.setChk(1);
-                cuRepository.save(classUnit);
-            }
+        int ret = cuService.updateUnitAllInactive(classcode);
+
+        if(ret == 1) {
+            retMap.put("status", 200);
         }
-        retMap.put("status", 200);
 
         return retMap;
     }
@@ -164,14 +157,25 @@ public class RestClassUnitController {
         Map<String, Integer> retMap = new HashMap<>();
         // log.info(format, no);
 
+        retMap.put("status", -1);
+
         // 1. 신청 내역의 chk를 3으로 update
-        // 2. 신청 상태 테이블에 기록 추가
+
         int ret = aService.updateApplyChk(no);
 
         if(ret == 1){
-            aService.insertApplyStatusOne(no, 3);
+
+            // 2. 신청 상태 테이블에 기록 추가
+
+            int result = aService.insertApplyStatusOne(no, 3);
+
+            if(result == 1) {
+                
+                retMap.put("status", 200);
+
+            }
         }
-        retMap.put("status", 200);
+
         return retMap;
     }
 }

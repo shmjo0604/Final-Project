@@ -50,7 +50,21 @@
 
 <!--(6) ClassUnit 개설 일정 조회-->
 <select id="selectUnitListToCal" parameterType="long" resultType="ClassUnit">
-    SELECT * FROM CLASSUNIT WHERE CLASSCODE = #{classcode} AND CHK = 0
+    SELECT * FROM CLASSUNIT WHERE CLASSCODE = #{classcode} AND CHK = 1
+</select>
+
+<!--(7) ClassUnit 페이징 조회 (by classcode)-->
+<select id="selectUnitListByClasscode" parameterType="map" resultType="ClassUnit">
+    SELECT u.* FROM 
+    (SELECT ROW_NUMBER() OVER(ORDER BY classdate DESC) AS rnum, 
+    * FROM CLASSUNIT WHERE CLASSCODE = #{classcode} AND CHK = 1 ORDER BY no DESC) u 
+    WHERE u.rnum <![CDATA[ >= ]]> ${first} AND u.rnum <![CDATA[ <= ]]> ${last} ORDER BY u.rnum ASC
+</select>
+
+<!--(8) ClassUnit 전체 개수 (by classcode)-->
+
+<select id="selectUnitListCountByClasscode" parameterType="long" resultType="long">
+    SELECT COUNT(*) FROM CLASSUNIT WHERE CLASSCODE = #{classcode} AND CHK = 1
 </select>
 
 </mapper>

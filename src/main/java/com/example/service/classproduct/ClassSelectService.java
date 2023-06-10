@@ -58,4 +58,7 @@ public interface ClassSelectService {
     // 10. 클래스 조회수 증가
     public int updateClassProductHit(com.example.entity.ClassProduct obj);
 
+    // 11. 홈 신규 클래스 조회
+    public List<com.example.entity.ClassProduct> selectMainHomeClassList();
+
 }

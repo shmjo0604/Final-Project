@@ -13,7 +13,6 @@ import com.example.entity.ClassInquiryView;
 import com.example.mapper.ClassManageMapper;
 import com.example.repository.ClassImageRepository;
 import com.example.repository.ClassInquiryViewRepository;
-import com.example.repository.MainRepository;
 
 @Service
 public class ClassManageServiceImpl implements ClassManageService {
@@ -22,8 +21,6 @@ public class ClassManageServiceImpl implements ClassManageService {
     ClassManageMapper cMapper;
     @Autowired
     ClassInquiryViewRepository cRepository;
-    @Autowired
-    MainRepository mRepository;
     @Autowired
     ClassImageRepository classimageRepository;
 

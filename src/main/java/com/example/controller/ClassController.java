@@ -105,7 +105,7 @@ public class ClassController {
         List<Long> subImg = manageService.selectClassSubImageNoList(classcode);
         long profile = manageService.selectClassProfileImageNo(classcode);
 
-        log.info(format, obj.toString());
+        //log.info(format, obj.toString());
 
         model.addAttribute("obj", obj);
         model.addAttribute("mainImg", mainImg);
@@ -144,8 +144,9 @@ public class ClassController {
     public String insertGET(@AuthenticationPrincipal User user, Model model) {
 
         if(user != null) {
-        model.addAttribute("user", user);
+            model.addAttribute("user", user);
         }
+
         model.addAttribute("actlist", cService.selectActivityCateList());
         model.addAttribute("citylist", cService.selectCityCateList());
 
@@ -235,7 +236,7 @@ public class ClassController {
         Model model) {
 
         ClassProduct obj = manageService.selectClassOne(classcode);
-        log.info(format, obj.toString());
+        //log.info(format, obj.toString());
         
         long profileImg = manageService.selectClassProfileImageNo(classcode);
         long mainImg = manageService.selectClassMainImageNo(classcode);
@@ -327,7 +328,7 @@ public class ClassController {
         @ModelAttribute ClassProduct obj, 
         Model model
     ) {
-        log.info(format, obj.toString());
+        //log.info(format, obj.toString());
         int ret = manageService.updateClassInactive(obj);
         if(ret ==1 ){
             return "redirect:/home.do";
@@ -358,7 +359,10 @@ public class ClassController {
 
         int ret = basketService.insertBasketOne(obj);
         
-        log.info(format, ret);
+        if(ret == 1) {
+            
+        }
+        //log.info(format, ret);
 
         return "redirect:alert.do";
     }
@@ -369,11 +373,11 @@ public class ClassController {
         @RequestParam(name = "no", defaultValue = "0", required = false) long no
         ) throws IOException {
 
-            log.info(format, no);
+            //log.info(format, no);
 
             com.example.dto.ClassImage obj = manageService.selectClassImageOne(no);
 
-            log.info(format, obj.toString());
+            //log.info(format, obj.toString());
 
             HttpHeaders headers = new HttpHeaders();
 

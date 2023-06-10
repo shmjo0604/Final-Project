@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -54,10 +53,8 @@ public class ReviewController {
             @RequestParam(name = "files", required = false) List<MultipartFile> files)
             throws IOException {
 
-        long no = review.getNo();
-        log.info(format, "applyno=" + no);
+        // long no = review.getNo();
 
-        // review.setNo(no);
         // log.info(format, "review=" + review.toString());
         List<ReviewImage> list = new ArrayList<>();
 
@@ -79,6 +76,7 @@ public class ReviewController {
                 System.out.println(obj.getFilesize());
             }
         }
+
         log.info(format, list.toString());
         reviewImageService.insertReviewImage(list);
 

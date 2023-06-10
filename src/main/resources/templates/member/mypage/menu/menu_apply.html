@@ -121,7 +121,9 @@
           <div style="display: flex; flex-direction: column; align-items: center">
             <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px"
               th:onclick="modalAction1([[${obj.no}]])">
-              상세보기 >
+              상세보기
+              <!-- [[${obj.chk}]],[[${obj.person}]],[[${obj.totalprice}]],[[${obj.no}]],[[${obj.classcode}]],[[${obj.price}]]
+            ,[[${obj.title}]],[[${obj.classdate}]],[[${obj.classlevel}]],[[${obj.classstart}]],[[${obj.classend}]],[[${obj.regdate}]] -->
             </button>
           </div>
         </td>
@@ -141,8 +143,13 @@
           25,000원
         </td>
         <td class="center">
-          <p style="text-align: center">신청완료</p>
-          <button class="btn btn-sm btn-secondary" type="button" style="height: 30px; width: 90px" th:onclick="modalAction([[${obj.no}]],[[${obj.classcode}]],[[${obj.title}]],[[${obj.classdate}]],[[${obj.classstart}]],
+
+          <p th:if="${obj.chk} == 1" style="text-align: center">결제완료 </p>
+          <p th:if="${obj.chk}  == 2" style="text-align: center">결제취소 </p>
+          <p th:if="${obj.chk}  == 3" style="text-align: center">참여완료 </p>
+
+          <button th:if="${obj.chk}  == 3" class="btn btn-sm btn-secondary" type="button"
+            style="height: 30px; width: 90px" th:onclick="modalAction([[${obj.no}]],[[${obj.classcode}]],[[${obj.title}]],[[${obj.classdate}]],[[${obj.classstart}]],
             [[${obj.classlevel}]],[[${obj.price}]],[[${obj.person}]])">
             리뷰작성>
           </button>
@@ -156,11 +163,11 @@
     </div>
   </div>
 
-  <div class="row justify-content-center">
+  <!-- <div class="row justify-content-center">
     <div class="col-4">
       <ul id="pagination-demo1" class="pagination-sm "></ul>
     </div>
-  </div>
+  </div> -->
 
   <!-- 리뷰 모달 -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -288,163 +295,161 @@
         <script th:inline="javascript">
           $(function () {
 
-            async function ajaxBoardList(page) {
-              const url = '/specialday/api/member/selectlist.json?page=' + page;
-              const headers = { "Content-Type": "application/json" };
-              const { data } = await axios.get(url, { headers });
+            //     async function ajaxBoardList(page) {
+            //       const url = '/specialday/api/member/selectlist.json?page=' + page;
+            //       const headers = { "Content-Type": "application/json" };
+            //       const { data } = await axios.get(url, { headers });
 
-              //2.함수를 pages정보를 넘겨서 생성시킴
-              initPagination(data.pages);
+            //       //2.함수를 pages정보를 넘겨서 생성시킴
+            //       initPagination(data.pages);
 
-              const pagenation1 = document.getElementById('pagination-demo1')
-              const tbody = document.getElementById('tbody');
+            //       const pagenation1 = document.getElementById('pagination-demo1')
+            //       const tbody = document.getElementById('tbody');
 
-              pagenation1.style.display = 'none';
-              tbody.innerHTML = '';
+            //       pagenation1.style.display = 'none';
+            //       tbody.innerHTML = '';
 
-              for (let tmp of data.list) {
-                function getyear() {
-                  var regdate = tmp.regdate;
-                  var result = regdate.substring(0, 10)
-                  return result;
-                }
+            //       for (let tmp of data.list) {
+            //         function getyear() {
+            //           var regdate = tmp.regdate;
+            //           var result = regdate.substring(0, 10)
+            //           return result;
+            //         }
 
-                const chk = tmp.chk;
-                const level = tmp.classlevel;
-                let str = "";
-                let str1 = "";
+            //         const chk = tmp.chk;
+            //         const level = tmp.classlevel;
+            //         let str = "";
+            //         let str1 = "";
 
-                function chkchk() {
-                  if (chk == 1) {
-                    str = "&nbsp; 결제완료 &nbsp;";
-                  }
-                  else if (chk == 2) {
-                    str = "&nbsp; 결제취소 &nbsp;";
-                  }
-                  else if (chk == 3) {
-                    str = "&nbsp; 참여완료 &nbsp;";
-                  }
-                  return str;
-                }
+            //         function chkchk() {
+            //           if (chk == 1) {
+            //             str = "&nbsp; 결제완료 &nbsp;";
+            //           }
+            //           else if (chk == 2) {
+            //             str = "&nbsp; 결제취소 &nbsp;";
+            //           }
+            //           else if (chk == 3) {
+            //             str = "&nbsp; 참여완료 &nbsp;";
+            //           }
+            //           return str;
+            //         }
 
-                function levelchk() {
-                  if (level === 1) {
-                    str1 = "입문자";
-                  }
-                  else if (level === 2) {
-                    str1 = "경험자";
-                  }
-                  else if (level === 3) {
-                    str1 = "숙련자";
-                  }
-                  return str1;
-                }
-                function reviewChk() {
-                  if (chk == 1) {
-                    str2 = "d-none";
-                  }
-                  else if (chk == 2) {
-                    str2 = "d-none";
-                  }
-                  else if (chk == 3) {
-                    str2 = "";
-                  }
-                  return str2;
-                }
+            //         function levelchk() {
+            //           if (level === 1) {
+            //             str1 = "입문자";
+            //           }
+            //           else if (level === 2) {
+            //             str1 = "경험자";
+            //           }
+            //           else if (level === 3) {
+            //             str1 = "숙련자";
+            //           }
+            //           return str1;
+            //         }
+            //         function reviewChk() {
+            //           if (chk == 1) {
+            //             str2 = "d-none";
+            //           }
+            //           else if (chk == 2) {
+            //             str2 = "d-none";
+            //           }
+            //           else if (chk == 3) {
+            //             str2 = "";
+            //           }
+            //           return str2;
+            //         }
 
-                tbody.innerHTML +=
-                  `<tr>` +
-                  `<td class="center">` +
-                  `<p>` + getyear() + `</p>` +
-                  ` <div
-            style="display: flex; flex-direction: column; align-items: center"
-          >
-            <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px"
-            onclick="modalAction1(`+ tmp.chk + "," + tmp.person + "," + tmp.totalprice + "," + tmp.no + "," + tmp.classcode + "," + tmp.price + ",\'" + tmp.title + "\'" + ",\'" + tmp.classdate + "\'" + ",\'"
-                  + tmp.classlevel + "\'" + ",\'" + tmp.classstart + "\'" + ",\'" + tmp.classend + "\'" + ",\'" + tmp.regdate + "\'" + ",\'" + tmp.confirmdate + "\'" + `)">
-              상세보기
-            </button>
-          </div>
-        </td>
-        <td class="center"> 
-          <img src="/specialday/member/image?classcode=` + tmp.classcode + `" style="width: 100px; height: 100px"/>
-        </td> 
-        <td style="font-size: small">
-         <div class="mb-2">
-          <a class="a_underline" target="_blank" th:href="/class/product.do?classcode=`+ tmp.classcode + `">` + "<" + tmp.title + ">" + `</a>
-            </div>
+            //         tbody.innerHTML +=
+            //           `<tr>` +
+            //           `<td class="center">` +
+            //           `<p>` + getyear() + `</p>` +
+            //           ` <div
+            //     style="display: flex; flex-direction: column; align-items: center"
+            //   >
+            //     <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px"
+            //     onclick="modalAction1(`+ tmp.chk + "," + tmp.person + "," + tmp.totalprice + "," + tmp.no + "," + tmp.classcode + "," + tmp.price + ",\'" + tmp.title + "\'" + ",\'" + tmp.classdate + "\'" + ",\'"
+            //           + tmp.classlevel + "\'" + ",\'" + tmp.classstart + "\'" + ",\'" + tmp.classend + "\'" + ",\'" + tmp.regdate + "\'" + ",\'" + tmp.confirmdate + "\'" + `)">
+            //       상세보기
+            //     </button>
+            //   </div>
+            // </td>
+            // <td class="center"> 
+            //   <img src="/specialday/member/image?classcode=` + tmp.classcode + `" style="width: 100px; height: 100px"/>
+            // </td> 
+            // <td style="font-size: small">
+            //  <div class="mb-2">
+            //   <a class="a1_underline" target="_blank" th:href="/class/product.do?classcode=`+ tmp.classcode + `">` + "<" + tmp.title + ">" + `</a>
+            //     </div>
 
-            <div id="classdate1">` + "날짜:" + tmp.classdate + `</div>
-            <div >` + "시간:" + tmp.classstart + "~" + tmp.classend + `</div>
-            <div >` + "난이도:" + levelchk() + `</div>
-            <div >` + "금액(1인):" + tmp.price + "원" + `</div>
-            <div >` + "신청인원:" + tmp.person + "명" + `</div>
-        </td>
-        <td style="font-weight: bold" class="center">` + tmp.payment + "원" + `</td>
-        <td class="center">
-          <p style="text-align: center;">`+ chkchk() + `</p>
-          <button
-            class="btn btn-sm btn-secondary ` + reviewChk() + `" 
-            id ="button1"
-            type="button"
-            style="height: 30px; width: 90px"
-            onclick="modalAction(`+ tmp.no + "," + tmp.classcode + "," + tmp.price + ",\'" + tmp.title + "\'" + ",\'" + tmp.classdate
-                  + "\'" + ",\'" + tmp.classlevel + "\'" + ",\'" + tmp.classstart + "\'" + ",\'" + tmp.classend + "\'" + `)"> 리뷰작성
-          </button >
-        </td >
-                    </tr >`;
-              }
-            };
+            //     <div id="classdate1">` + "날짜:" + tmp.classdate + `</div>
+            //     <div >` + "시간:" + tmp.classstart + "~" + tmp.classend + `</div>
+            //     <div >` + "난이도:" + levelchk() + `</div>
+            //     <div >` + "금액(1인):" + tmp.price + "원" + `</div>
+            //     <div >` + "신청인원:" + tmp.person + "명" + `</div>
+            // </td>
+            // <td style="font-weight: bold" class="center">` + tmp.payment + "원" + `</td>
+            // <td class="center">
+            //   <p style="text-align: center;">`+ chkchk() + `</p>
+            //   <button
+            //     class="btn btn-sm btn-secondary ` + reviewChk() + `" 
+            //     id ="button1"
+            //     type="button"
+            //     style="height: 30px; width: 90px"
+            //     onclick="modalAction(`+ tmp.no + "," + tmp.classcode + "," + tmp.price + ",\'" + tmp.title + "\'" + ",\'" + tmp.classdate
+            //           + "\'" + ",\'" + tmp.classlevel + "\'" + ",\'" + tmp.classstart + "\'" + ",\'" + tmp.classend + "\'" + `)"> 리뷰작성
+            //   </button >
+            // </td >
+            //             </tr >`;
+            //       }
+            //     };
 
-            let query = window.location.search;
-            let param = new URLSearchParams(query);
-            let chk = param.get('chk');
-            console.log(param);
-            console.log(chk);
+            //     let query = window.location.search;
+            //     let param = new URLSearchParams(query);
+            //     let chk = param.get('chk');
+            //     console.log(param);
+            //     console.log(chk);
 
-            if (chk == null) {
-              ajaxBoardList(1)
-            }
+            //     if (chk == null) {
+            //       ajaxBoardList(1)
+            //     }
             //<!-- 페이지네이션 -->     
-            function initPagination(pages) {
-              // var totalpages = $("input[name=pages]").val();
-              // let query = window.location.search;
-              // let param = new URLSearchParams(query);
-              // let startpage = pages;
-              // $('#pagination-demo').twbsPagination('destroy');
-              $("#pagination-demo").twbsPagination({
-                totalPages: pages,
-                visiblePages: 5,
-                startPage: 1,
-                first: "≪",
-                last: "≫",
-                prev: "<",
-                next: ">",
-                initiateStartPageClick: false,
-                nextClass: "page-item next",	// 이전 페이지 CSS class
-                prevClass: "page-item prev",	// 다음 페이지 CSS class
-                lastClass: "page-item last",	// 마지막 페이지 CSS calss
-                firstClass: "page-item first",	// 첫 페이지 CSS class
-                pageClass: "page-item",	// 페이지 버튼의 CSS class
-                activeClass: "active",	// 클릭된 페이지 버튼의 CSS class
-                disabledClass: "disabled",	// 클릭 안된 페이지 버튼의 CSS class
-                anchorClass: "page-link",	//버튼 안의 앵커에 대한 CSS class
-                onPageClick: function (event, page) {
-                  ajaxBoardList(page);
-                },
-              });
-            }
+            // function initPagination(pages) {
+            // var totalpages = $("input[name=pages]").val();
+            // let query = window.location.search;
+            // let param = new URLSearchParams(query);
+            // let startpage = pages;
+            // $('#pagination-demo').twbsPagination('destroy');
+            // $("#pagination-demo").twbsPagination({
+            //   totalPages: pages,
+            //   visiblePages: 5,
+            //   startPage: 1,
+            //   first: "≪",
+            //   last: "≫",
+            //   prev: "<",
+            //   next: ">",
+            //   initiateStartPageClick: false,
+            //   nextClass: "page-item next",	// 이전 페이지 CSS class
+            //   prevClass: "page-item prev",	// 다음 페이지 CSS class
+            //   lastClass: "page-item last",	// 마지막 페이지 CSS calss
+            //   firstClass: "page-item first",	// 첫 페이지 CSS class
+            //   pageClass: "page-item",	// 페이지 버튼의 CSS class
+            //   activeClass: "active",	// 클릭된 페이지 버튼의 CSS class
+            //   disabledClass: "disabled",	// 클릭 안된 페이지 버튼의 CSS class
+            //   anchorClass: "page-link",	//버튼 안의 앵커에 대한 CSS class
+            //   onPageClick: function (event, page) {
+            //     ajaxBoardList(page);
+            //   },
+            // });
+
 
 
             var totalpages = $("input[name=pages]").val();
-            let query1 = window.location.search;
-            let param1 = new URLSearchParams(query);
-            let startpage = param1.get("page");
-            let chking = param1.get("chk");
+            let query = window.location.search;
+            let param = new URLSearchParams(query);
+            let currentPage = param.get("page");
+            let chking = param.get("chk");
 
-            console.log(totalpages);
-
-            $('#pagination-demo1').twbsPagination({
+            $('#pagination-demo').twbsPagination({
 
               totalPages: totalpages,
               visiblePages: 5,
@@ -453,7 +458,7 @@
               prev: '<',
               next: '>',
               initiateStartPageClick: false,
-              startPage: startpage,
+              startPage: currentPage,
               nextClass: "page-item next",	// 이전 페이지 CSS class
               prevClass: "page-item prev",	// 다음 페이지 CSS class
               lastClass: "page-item last",	// 마지막 페이지 CSS calss
@@ -463,7 +468,13 @@
               disabledClass: "disabled",	// 클릭 안된 페이지 버튼의 CSS class
               anchorClass: "page-link",	//버튼 안의 앵커에 대한 CSS class	
               onPageClick: function (event, page, chk) {
-                window.location.href = "mypage.do?menu=1&page=" + page + "&chk=" + chking;
+                if (chking != null) {
+                  window.location.href = "mypage.do?menu=1&page=" + page + "&chk=" + chking;
+                }
+                else if (chking == null) {
+                  window.location.href = "mypage.do?menu=1&page=" + page;
+                }
+
               }
             });
 
@@ -521,7 +532,7 @@
                   신청인원 : <input class="detail-3" id="person1" disabled type="text" />
                 </div>
                 <div class="detail-1 mx-2 mt-2">
-                  총결제 : <input class="detail-3" id="totalprice1" disabled type="text" />
+                  총결제 : <input class="detail-3" id="payment1" disabled type="text" />
                 </div>
                 <div class="detail-1 mx-2 mt-2">
                   처리상태 : <input class="chk detail-3" disabled id="chk1" /></div>
@@ -530,7 +541,7 @@
                 <div id="cancle">
                   <div class="detail mt-4">결제취소정보</div>
                   <div class="detail-1 mx-2 mt-1">
-                    취소일자 : <input class="detail-3" id="cancledate" disabled type="text" />
+                    취소일자 : <input class="detail-3" id="cancledate1" disabled type="text" />
                   </div>
                   <div class="detail-1 mx-2 mt-1">
                     클래스금액(1인) : <input class="detail-3" id="price3" disabled type="text" />
@@ -539,7 +550,7 @@
                     신청인원 : <input class="detail-3" id="person2" disabled type="text" />
                   </div>
                   <div class="detail-1 mx-2 mt-2">
-                    환불금액 : <input class="detail-3" id="totalprice3" disabled type="text" style="color: red;" />
+                    환불금액 : <input class="detail-3" id="payment2" disabled type="text" style="color: red;" />
                   </div>
                   <div class="hr3"></div>
                 </div>

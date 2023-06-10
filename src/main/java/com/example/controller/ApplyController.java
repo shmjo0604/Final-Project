@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.dto.ClassUnitView;
 import com.example.dto.Member;
-import com.example.mapper.ClassUnitMapper;
 import com.example.service.classproduct.ClassManageService;
 import com.example.service.classproduct.ClassUnitService;
 import com.example.service.member.MemberService;

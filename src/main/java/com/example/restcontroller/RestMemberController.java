@@ -128,12 +128,12 @@ public class RestMemberController {
 
         Map<String, Object> retMap = new HashMap<>();
 
-        log.info(format, obj.getPassword());
+        //log.info(format, obj.getPassword());
 
         try {
             Member member = mService.selectMemberOne(obj.getId());
 
-            log.info(format, member.toString());
+            //log.info(format, member.toString());
 
             member.setPassword(bcpe.encode(obj.getPassword()));
 
@@ -153,7 +153,7 @@ public class RestMemberController {
 
         Map<String, Object> retMap = new HashMap<>();
 
-        log.info(format, obj.getPassword());
+        //log.info(format, obj.getPassword());
 
         Member ret = mService.selectMemberOne(obj.getId());
 
@@ -172,7 +172,7 @@ public class RestMemberController {
 
         Map<String, Object> retMap = new HashMap<>();
 
-        log.info(format, obj.toString());
+        //log.info(format, obj.toString());
 
         int ret = mService.updateMemberOne(obj);
 
@@ -271,10 +271,10 @@ public class RestMemberController {
         map.put("first", first);
         map.put("last", last);
 
-        log.info(format, "map=", map);
+        log.info(format, "map=", map.toString());
 
         list = aService.selectApplyListById(map);
-        log.info(format, "list=", list);
+        log.info(format, "list=", list.toString());
 
         map.put("list", list);
         map.put("pages", (cnt - 1) / 5 + 1);

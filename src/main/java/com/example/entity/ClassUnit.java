@@ -70,7 +70,7 @@ public class ClassUnit {
   private int addprice;
   
   // 유닛 상태(운영 / 삭제)
-  private int chk;
+  private int chk=1;
   
   // 등록일자
   @CreationTimestamp

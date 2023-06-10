@@ -244,5 +244,17 @@ public class ClassSelectServiceImpl implements ClassSelectService {
         }
     }
 
+    @Override
+    public List<com.example.entity.ClassProduct> selectMainHomeClassList() {
+        try {
+            List<com.example.entity.ClassProduct> list = cRepository.findAllTopSixByOrderByClasscodeDesc();
+            return list;
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     
 }

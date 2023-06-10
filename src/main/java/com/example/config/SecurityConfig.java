@@ -30,6 +30,7 @@ public class SecurityConfig {
             .antMatchers("/class/update.do").authenticated()
             .antMatchers("/apply", "/apply/*").authenticated()
             .antMatchers("/member/join.do").permitAll()
+            .antMatchers("/member/joinsuccess.do").permitAll()
             .antMatchers("/member", "/member/*").authenticated()
             .antMatchers("/classunit", "/classunit/*").authenticated()
             .antMatchers("/admin", "/admin/*").hasAnyAuthority("ROLE_ADMIN")

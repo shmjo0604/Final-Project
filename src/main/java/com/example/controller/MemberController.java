@@ -34,11 +34,13 @@ import com.example.dto.ClassProduct;
 import com.example.dto.Member;
 import com.example.entity.ClassAnswer;
 import com.example.entity.ClassInquiryView;
+import com.example.entity.Reviewview;
 import com.example.repository.ClassInquiryViewRepository;
 import com.example.service.apply.ApplyService;
 import com.example.service.classproduct.ClassManageService;
 import com.example.service.classproduct.ClassSelectService;
 import com.example.service.member.MemberService;
+import com.example.service.review.ReviewService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -57,6 +59,7 @@ public class MemberController {
     @Autowired ApplyService aService;
     @Autowired ClassManageService manageService;
     @Autowired ClassInquiryViewRepository inquiryViewRepository;
+    @Autowired ReviewService r1Service;
 
     @Autowired ResourceLoader resourceLoader;
     @Value("${default.image}") String defaultImg;
@@ -76,17 +79,15 @@ public class MemberController {
     @PostMapping(value = "/join.do")
     public String joinPOST(@ModelAttribute Member obj, HttpSession httpSession) {
 
-        log.info(format, obj.getPassword());
+        //log.info(format, obj.getPassword());
 
         obj.setPassword(bcpe.encode(obj.getPassword()));
 
         int ret = mService.insertMemberOne(obj);
 
-        log.info(format, ret);
+        //log.info(format, ret);
 
         if(ret == 1) {
-            // httpSession.setAttribute("alertMessage", "회원 가입 완료했습니다.");
-            // httpSession.setAttribute("alertUrl", "/home.do");
             return "redirect:joinsuccess.do";
         }
         else {
@@ -103,49 +104,176 @@ public class MemberController {
 
     @GetMapping(value = "/mypage.do")
     public String mypageGET(
-        @RequestParam(name = "menu", defaultValue = "0") int menu,
-        @RequestParam(name = "page", defaultValue = "0") int page,
-        @AuthenticationPrincipal User user,
-        Model model) {
+            @RequestParam(name = "menu", defaultValue = "0") int menu,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "no", defaultValue = "0") int no,
+            @RequestParam(name = "chk", defaultValue = "0") int chk,
+            @AuthenticationPrincipal User user,
+            Model model) {
+
+        log.info(format, "chk=" + chk);
 
         // String id = user.getUsername();
-        Map<String,Object> map = new HashMap<String,Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
         List<ApplyView> list = new ArrayList<>();
-       
-        int first = page*5-4;
-        int last = page*5;
-        String id =user.getUsername();
+        List<Reviewview> list1 = new ArrayList<>();
+        // List<ApplyStatusView> listOne = new ArrayList<>();
 
+        int first = page * 5 - 4;
+        int last = page * 5;
+
+        String id = user.getUsername();
+
+        long chk1 = 0;
+        long chk2 = 0;
+        long chk3 = 0;
+
+        long pages = 0;
         long cnt = aService.countApplyList(id);
-        log.info(format,"id=" + id);
+        // long cntOne =
 
-        if(menu == 0) {
+        if (menu == 0) {
+
             return "redirect:/member/mypage.do?menu=1&page=1";
         }
 
-        if(menu == 1 ) {
-            map.put("id",user.getUsername());
-            map.put("first",first);
-            map.put("last",last);
+        if (menu == 1) {
+            map.put("id", user.getUsername());
+            map.put("first", first);
+            map.put("last", last);
             list = aService.selectApplyListById(map);
-         }
 
-        else if(menu == 2) {
+            chk1 = aService.countApplyListOne(id);
+            chk2 = aService.countApplyListTwo(id);
+            chk3 = aService.countApplyListThree(id);
+
+            model.addAttribute("list", list);
+            model.addAttribute("pages", (cnt - 1) / 5 + 1);
+
+            model.addAttribute("chk1", chk1);
+            model.addAttribute("chk2", chk2);
+            model.addAttribute("chk3", chk3);
+            if (chk == 1) {
+
+                map.put("id", user.getUsername());
+                map.put("first", first);
+                map.put("last", last);
+                list = aService.selectApplyListByIdOne(map);
+
+                pages = aService.countApplyListOne(id);
+
+                chk1 = aService.countApplyListOne(id);
+                chk2 = aService.countApplyListTwo(id);
+                chk3 = aService.countApplyListThree(id);
+
+                model.addAttribute("list", list);
+                model.addAttribute("pages", (cnt - 1) / 5 + 1);
+
+                model.addAttribute("chk1", chk1);
+                model.addAttribute("chk2", chk2);
+                model.addAttribute("chk3", chk3);
+
+                // log.info(format, "cntOne=" + cntOne);
+                log.info(format, "list=" + list);
+                log.info(format, "chk1=" + chk1);
+                log.info(format, "chk2=" + chk2);
+                log.info(format, "chk3=" + chk3);
+                model.addAttribute("pages", (pages - 1) / 5 + 1); // 페이지 수
+
+            }
+            if (chk == 2) {
+
+                map.put("id", user.getUsername());
+                map.put("first", first);
+                map.put("last", last);
+                list = aService.selectApplyListByIdTwo(map);
+
+                pages = aService.countApplyListTwo(id);
+
+                chk1 = aService.countApplyListOne(id);
+                chk2 = aService.countApplyListTwo(id);
+                chk3 = aService.countApplyListThree(id);
+
+                model.addAttribute("list", list);
+                model.addAttribute("pages", (cnt - 1) / 5 + 1);
+
+                model.addAttribute("chk1", chk1);
+                model.addAttribute("chk2", chk2);
+                model.addAttribute("chk3", chk3);
+
+                // log.info(format, "cntOne=" + cntOne);
+                log.info(format, "list=" + list);
+                model.addAttribute("pages", (pages - 1) / 5 + 1); // 페이지 수
+
+            }
+            if (chk == 3) {
+
+                map.put("id", user.getUsername());
+                map.put("first", first);
+                map.put("last", last);
+                list = aService.selectApplyListByIdThree(map);
+
+                pages = aService.countApplyListThree(id);
+
+                chk1 = aService.countApplyListOne(id);
+                chk2 = aService.countApplyListTwo(id);
+                chk3 = aService.countApplyListThree(id);
+
+                model.addAttribute("list", list);
+                model.addAttribute("pages", (cnt - 1) / 5 + 1);
+
+                model.addAttribute("chk1", chk1);
+                model.addAttribute("chk2", chk2);
+                model.addAttribute("chk3", chk3);
+
+                // log.info(format, "cntOne=" + cntOne);
+                log.info(format, "list=" + list);
+                model.addAttribute("pages", (pages - 1) / 5 + 1); // 페이지 수
+
+            }
+            // chk1 = aService.countApplyListOne(id);
+            // chk2 = aService.countApplyListTwo(id);
+            // chk3 = aService.countApplyListThree(id);
+
+            // chk1 = aService.countApplyListOne(id);
+            // chk2 = aService.countApplyListTwo(id);
+            // chk3 = aService.countApplyListThree(id);
 
         }
 
-        else if(menu == 3) {
+        else if (menu == 2)
+
+        {
+            // 페이지 네이션은 => 페이지 번호가 0부터
+            // PageRequest pageRequest = PageRequest.of((page - 1), 1);
+            // Pageable pageable = PageRequest.of(pageIndex, 10, Sort.by(Direction.DESC,
+            // "testValue"));
+            // list1 = r1Service.selectListReview(id, pageRequest);
+            // list1 = r1Service.selectlistReviewview(id);
+            int total = r1Service.countReview(id);
+            list1 = r1Service.selectReviewByIdPagenation(id, (page * 5) - 4, page * 5);
+            // log.info(format, "page=" + page);
+            // log.info(format, "pageRequest=" + pageRequest);
+            log.info(format, "list1=" + list1);
+            log.info(format, "total=" + total);
+
+            model.addAttribute("list1", list1);
+            model.addAttribute("pages1", (total - 1) / 5 + 1); // 페이지 수
 
         }
 
-        else if(menu == 4) {
+        else if (menu == 3) {
+
+        }
+
+        else if (menu == 4) {
             Member obj = mService.selectMemberOne(id);
-            //slog.info(format, obj.toString());
+            // slog.info(format, obj.toString());
             model.addAttribute("obj", obj);
         }
-        model.addAttribute("list", list);
+
         model.addAttribute("user", user);
-        model.addAttribute("pages", (cnt-1) / 5 + 1);
+
         return "/member/mypage/mypage";
     }
 
@@ -274,15 +402,6 @@ public class MemberController {
         InputStream is = resourceLoader.getResource(defaultImg).getInputStream(); // exception발생됨
         headers.setContentType(MediaType.IMAGE_PNG);
         return new ResponseEntity<>(is.readAllBytes(),headers,HttpStatus.OK);
-    }
-
-    @PostMapping(value = "/myclass/inquiry.do")
-    public String myClassInquiryPOST(
-        @ModelAttribute ClassInquiryView obj,
-        Model model
-    ){
-
-        return "/member/myclass";
     }
 
 }

@@ -3,7 +3,6 @@ package com.example.service.community;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Community;
@@ -18,15 +17,6 @@ public class CommunityServiceImpl implements CommunityService {
     @Autowired
     public CommunityRepository cRepository;
     public CommunityService cService;
-    // 게시글 작성
-    // @Override
-    // public int insertcommnuityOne() {
-    // try {
-    // return cRepository.save();
-    // } catch (Exception e) {
-    // return -1;
-    // }
-    // }
 
     // 게시글 전체 조회
     @Override
