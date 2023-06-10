@@ -186,6 +186,9 @@ public class MemberController {
 
                 // log.info(format, "cntOne=" + cntOne);
                 log.info(format, "list=" + list);
+                log.info(format, "chk1=" + chk1);
+                log.info(format, "chk2=" + chk2);
+                log.info(format, "chk3=" + chk3);
                 model.addAttribute("pages", (pages - 1) / 5 + 1); // 페이지 수
 
             }
