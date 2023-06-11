@@ -90,9 +90,12 @@ public class RestClassUnitController {
 
         ClassUnit obj = cuRepository.findByClassproduct_classcodeAndNo(classcode, no);
         // log.info(format, obj);
+        long defaultPrice = cuService.selectPriceOne(classcode);
+        log.info(format, defaultPrice);
 
         Map<String, Object> retmap = new HashMap<>();
         retmap.put("obj", obj);
+        retmap.put("defaultPrice2",defaultPrice);
         return retmap;
     }   
 
@@ -122,7 +125,6 @@ public class RestClassUnitController {
         // log.info(format, classcode);
 
         List<ClassUnit> list = cuRepository.findByClassproduct_classcodeOrderByClassdate(classcode);
-        List<ClassUnit> list1 = new ArrayList<>();
 
         for (ClassUnit classUnit : list){
             if(classUnit.getChk() == 0){
@@ -148,9 +150,21 @@ public class RestClassUnitController {
         log.info(format, classunit.getNo());
 
         ClassUnit obj = cuRepository.findByClassproduct_classcodeAndNo(classunit.getClassproduct().getClasscode(), classunit.getNo());
+        obj.setMinimum(classunit.getMinimum());
+        obj.setMaximum(classunit.getMaximum());
+        obj.setRegdate(classunit.getRegdate());
+        obj.setClassdate(classunit.getClassdate());
+        obj.setClassstart(classunit.getClassstart());
+        obj.setClassend(classunit.getClassend());
+        obj.setClasslevel(classunit.getClasslevel());
+        obj.setAddprice(classunit.getAddprice());
+        obj.setDiscount(classunit.getDiscount());
+        
         log.info(format,obj.toString());
 
-        // retMap.put("status", 200);
+        cuRepository.save(obj);
+
+        retMap.put("status", 200);
         
         return retMap;
     }

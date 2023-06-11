@@ -16,7 +16,16 @@ public interface ClassUnitRepository extends JpaRepository<ClassUnit, Long> {
     // classcode(ClassUnit의 외래키)에 해당하는 ClassUnit 전체 조회
     List<ClassUnit> findByClassproduct_classcodeOrderByClassdate(long classcode);
 
+    // 한개의 일정 조회
     ClassUnit findByClassproduct_classcodeAndNo(long classcode, long no);
+
+
+
+    
+
+
+
+
 
 
     

@@ -233,7 +233,8 @@
              </div>
              
              <div class="modal-body">
-                 <input type="number" id="classcode2" th:value="${classcode}">
+                 <input type="hidden" id="classcode2" th:value="${classcode}">
+                 <input type="hidden" id="unitno2" th:value="${no}">
                  <div class="form-group" style="display: inline-block;">
                      <div class="row">
                          <div class="col-sm-3" style="width: 50%;">
@@ -291,7 +292,7 @@
                      <div class="row">
                          <div class="col-sm-3" style="width: 50%;">
                              <label for="defaultPrice2" class="col-form-label">입문자 수강금액</label>
-                             <input type="number" class="form-control" id="defaultPrice2" name="defaultPrice2" th:value="${defaultPrice}" disabled readonly>
+                             <input type="number" class="form-control" id="defaultPrice2" name="defaultPrice2" disabled readonly>
                          </div>
                          <div class="col-sm-3" style="width: 50%;">
                              <label for="addprice2" class="col-form-label">추가 금액</label>
@@ -586,13 +587,14 @@
             
             // 데이터 불러오기
             document.getElementById('classcode2').value = classcode;
+            document.getElementById('unitno2').value = no;
             document.getElementById('minimum2').value = data.obj.minimum;
             document.getElementById('maximum2').value = data.obj.maximum;
             document.getElementById('classdate2').value = data.obj.classdate;
             document.getElementById('classday2').value = data.obj.classday;
             document.getElementById('classstart2').value = data.obj.classstart;
             document.getElementById('classend2').value = data.obj.classend;
-            document.getElementById('defaultPrice2').value = data.obj.defaultPrice;
+            document.getElementById('defaultPrice2').value = data.defaultPrice2;
             document.getElementById('addprice2').value = data.obj.addprice;
             document.getElementById('discount2').value = data.obj.discount;
             document.getElementById('discount_price2').value = data.obj.discount_price;
@@ -608,8 +610,9 @@
         };
 
         // 2. 수정 내용을 변경하기위한 PUT호출
-        async function update(classcode, no){
-            //const classcode = document.getElementById("classcode2").value;
+        async function update(){
+            const classcode = document.getElementById("classcode2").value;
+            const no = document.getElementById("unitno2").value;
             const min = document.getElementById("minimum2").value;
             const max = document.getElementById("maximum2").value;
             const date = document.getElementById("classdate2").value;
@@ -639,7 +642,6 @@
             const { data } = await axios.put(url, body, { headers:headers });
             console.log('반환되는 결과', data);
 
-            /*
             if(data.status === 200){
                 alert("일정 변경이 완료되었습니다.")
                 $('#unitInsertModal').modal('hide'); // 모달 창 닫기
@@ -648,15 +650,13 @@
             else {
                 alert("일정 변경에 실패하였습니다.");
             }
-            */
-            
         }
         
 
         
        
 
-
+        /*
         // 할인 금액 계산
         function calculateDiscount() {
             var defaultPrice = parseInt(document.getElementById("defaultPrice2").value);
@@ -699,6 +699,7 @@
         radioBtns.forEach(function(radioBtn) {
             radioBtn.addEventListener('click', handleRadioClick);
         });
+        */
 
 
 

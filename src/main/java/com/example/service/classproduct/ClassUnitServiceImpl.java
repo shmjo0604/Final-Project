@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.dto.ClassUnit;
 import com.example.dto.ClassUnitView;
 import com.example.mapper.ClassUnitMapper;
+import com.example.repository.ClassUnitRepository;
 
 @Service
 public class ClassUnitServiceImpl implements ClassUnitService {
