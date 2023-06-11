@@ -87,8 +87,8 @@
             신청순
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">최신순</a></li>
-            <li><a class="dropdown-item" href="#">오래된순</a></li>
+            <li><a class="dropdown-item" th:href="@{/member/mypage.do(menu=1,page=1,chk=4)}">최신순</a></li>
+            <li><a class=" dropdown-item" th:href="@{/member/mypage.do(menu=1,page=1,chk=5)}">오래된순</a></li>
           </ul>
         </div>
       </div>
@@ -131,7 +131,8 @@
           <img th:src="@{/member/image(classcode=${obj.classcode})}" style="width: 100px; height: 100px" />
         </td>
         <td style="font-size: small">
-          <div class="mb-2"><a th:text=" '<'+${obj.title}+'>'" class="a_underline" href="#"></div>
+          <div class="mb-2"><a th:text=" '<'+${obj.title}+'>'" class="a_underline"
+              th:href="@{/class/product.do(classcode=${obj.classcode})}"></div>
           </a>
           <div id="classdate1" th:text=" '날짜: ' + ${obj.classdate}"></div>
           <div th:text=" '시간: ' + ${obj.classstart} + '~' + ${obj.classend}"></div>
@@ -150,7 +151,7 @@
 
           <button th:if="${obj.chk}  == 3" class="btn btn-sm btn-secondary" type="button"
             style="height: 30px; width: 90px" th:onclick="modalAction([[${obj.no}]],[[${obj.classcode}]],[[${obj.title}]],[[${obj.classdate}]],[[${obj.classstart}]],
-            [[${obj.classlevel}]],[[${obj.price}]],[[${obj.person}]])">
+            [[${obj.classlevel}]],[[${obj.price}]],[[${obj.person}]],[[${obj.classend}]])">
             리뷰작성>
           </button>
         </td>
@@ -484,7 +485,7 @@
       </div>
     </div>
   </div>
-  <!-- Modal -->
+  <!-- 상세보기 모달 Modal -->
   <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">

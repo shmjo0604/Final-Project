@@ -82,4 +82,35 @@ public class ReviewServiceImpl implements ReviewService {
             return null;
         }
     }
+
+    // 리뷰 하나만 조회
+    @Override
+    public Reviewview selectReviewOne(String id, long no) {
+        try {
+            return r1Repository.findByIdAndNo(id, no);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public int avgReview(String id) {
+        try {
+            return r1Repository.avgReview(id);
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    @Override
+    public List<Reviewview> selectReviewByIdPagenationAsc(String id, int start, int end) {
+        try {
+            return r1Repository.selectReviewByIdPagenationAsc(id, start, end);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

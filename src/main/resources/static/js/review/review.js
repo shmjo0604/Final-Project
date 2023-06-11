@@ -140,12 +140,15 @@ function getEditorContent() {
   const content = quill.root.innerHTML; //위쪽의 editor객체를 통해서 가져오기
   const form = document.getElementById("myform");
 
+  // let content1 = content.substring(4, 10);
+
 
   var input = document.createElement("input");
   input.type = "text";
   input.name = "content";
   input.id = "contentstyle";
   input.value = content;
+
   form.appendChild(input);
 
   form.submit();
@@ -166,7 +169,7 @@ function reviewNone() {
 
 // 신청번호 받아서 프로덕트유닛 내용 불러오기
 
-function modalAction(no, classcode, price, title, classdate, classlevel, classstart, classend) {
+function modalAction(no, classcode, title, classdate, classstart, classlevel, price, person, classend) {
   const modal = new bootstrap.Modal(
     document.getElementById("exampleModal"),
     {}
@@ -182,7 +185,7 @@ function modalAction(no, classcode, price, title, classdate, classlevel, classst
 
   img.src = "/specialday/member/image?classcode=" + classcode;
   no1.value = no;
-  title1.value = "이름 :" + title;
+  title1.value = "이름 : " + title;
   classdate1.value = classdate;
   classstart1.value = classstart + "~" + classend;
   classlevel1.value = classlevel;
@@ -267,6 +270,7 @@ async function modalAction1(no) {
   console.log(confirmdate2);
   console.log(confirmdate3);
 
+  // 결제정보, 클래스정보
   const applyregdate2 = document.getElementById("applyregdate1");
   const mainimage3 = document.getElementById("mainimage2");
   const title2 = document.getElementById("title1");

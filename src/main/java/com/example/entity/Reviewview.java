@@ -45,4 +45,20 @@ public class Reviewview {
     @Column(name = "TITLE")
     private String title;
 
+    // 리뷰모달 창에 들어갈 값 추가
+    @Column(name = "CLASSDATE")
+    private String classdate;
+
+    @Column(name = "CLASSSTART")
+    private String classstart;
+
+    @Column(name = "CLASSEND")
+    private String classend;
+
+    @Column(name = "CLASSLEVEL")
+    private int classlevel;
+
+    @Column(name = "PRICE")
+    private int price;
+
 }

@@ -115,6 +115,7 @@ public class MemberController {
             @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "no", defaultValue = "0") int no,
             @RequestParam(name = "chk", defaultValue = "0") int chk,
+            @RequestParam(name = "date", defaultValue = "0") int date,
             @AuthenticationPrincipal User user,
             Model model) {
 
@@ -251,19 +252,22 @@ public class MemberController {
         else if (menu == 2)
 
         {
-            // 페이지 네이션은 => 페이지 번호가 0부터
-            // PageRequest pageRequest = PageRequest.of((page - 1), 1);
-            // Pageable pageable = PageRequest.of(pageIndex, 10, Sort.by(Direction.DESC,
-            // "testValue"));
-            // list1 = r1Service.selectListReview(id, pageRequest);
-            // list1 = r1Service.selectlistReviewview(id);
-            int total = r1Service.countReview(id);
             list1 = r1Service.selectReviewByIdPagenation(id, (page * 5) - 4, page * 5);
-            // log.info(format, "page=" + page);
-            // log.info(format, "pageRequest=" + pageRequest);
-            log.info(format, "list1=" + list1);
-            log.info(format, "total=" + total);
+            if (date == 1) {
+                list1 = r1Service.selectReviewByIdPagenation(id, (page * 5) - 4, page * 5);
+            }
 
+            if (date == 2) {
+                list1 = r1Service.selectReviewByIdPagenationAsc(id, (page * 5) - 4, page * 5);
+
+            }
+            int total = r1Service.countReview(id);
+            float avg = r1Service.avgReview(id);
+
+            log.info(format, avg);
+
+            model.addAttribute("total", total);
+            model.addAttribute("avg", avg);
             model.addAttribute("list1", list1);
             model.addAttribute("pages1", (total - 1) / 5 + 1); // 페이지 수
 

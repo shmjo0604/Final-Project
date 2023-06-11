@@ -28,4 +28,25 @@ public class ReviewImageServiceImpl implements ReviewImageService {
 
         }
     }
+
+    @Override
+    public ReviewImage selectReviewImage(long no) {
+        try {
+            return reviewImageRepository.findByNo(no);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Long> reviewImagelistNo(long no) {
+        try {
+            return reviewImageRepository.reviewImagelistNo(no);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }
