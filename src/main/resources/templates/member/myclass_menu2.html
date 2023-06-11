@@ -47,7 +47,7 @@
                     <!-- 처리상태(0) : 답변대기 -->
                     <th:block th:each="obj, objStat : ${list}">
                         <tr>
-                            <td th:text="${obj.no}"></td>
+                            <td th:text="${obj.rnum}"></td>
                             <td th:text="${obj.classtitle}"></td>
                             <td th:text="${obj.title}"></td>
                             <!-- <td class="txt" th:text="${obj.content}"><label id="modal"></label></td> -->
@@ -90,7 +90,10 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header" style="background-color: ghostwhite">
-                            <label class="modal-title" id="modal-title">서비스 문의</label>
+                            <div class="me-auto"></div>
+                            <label class="modal-title" id="modal-title">클래스 문의</label>
+                            <button type="button" class="btn-close" onclick="closeModal()" aria-label="Close">
+                            </button>
                         </div>
                         <div class="modal-body">
                             <form id="answer_form" th:action="@{/member/myclass.do?menu=2}" method="post">
@@ -131,7 +134,7 @@
 
 
 
-                                <input id="inquiryno" type="hidden" name="classinquiry.no">
+                                <input id="inquiryno" type="hidden" name="no">
                             </form>
                         </div>
 
@@ -188,7 +191,7 @@
             const headers = { "Content-Type": "application/json" };
             const { data } = await axios.get(url, { headers });
 
-            // console.log(data);
+            console.log(data);
 
             document.querySelector("#inquiryno").value = no;
 
@@ -201,6 +204,17 @@
                 title.value = data.obj.title;
                 content.textContent = data.obj.content;
                 writer.value = data.obj.memberid;
+
+                if(data.answer !== null) {
+
+                    const title = document.querySelector("#answer_title");
+                    const content = document.querySelector("#answer_content");
+
+                    title.value = data.answer.title;
+                    content.textContent = data.answer.content;
+
+                }
+
 
             }
 

@@ -370,8 +370,6 @@
 
                     if (rsp.paid_amount === result.data.response.amount) {
 
-                        alert("결제가 완료되었습니다.");
-
                         const url = contextPath + '/api/apply/success.json';
                         const headers = { "Content-Type": "application/json" };
                         const body = { unitnoArray: unitnoArray, personArray: personArray, paymentArray: paymentArray };
@@ -380,7 +378,11 @@
                         //console.log(data);
 
                         if (data.ret === 1) {
-                            window.location.href = contextPath + '/member/mypage.do?menu=1';
+                            window.location.href = contextPath + '/apply/success.do';
+                        }
+
+                        else {
+                            window.location.href = contextPath + '/apply/fail.do';
                         }
 
                     }

@@ -9,6 +9,7 @@ import com.example.dto.ActDetailCate;
 import com.example.dto.ActivityCate;
 import com.example.dto.CityCate;
 import com.example.dto.ClassProduct;
+import com.example.dto.ClassProductView;
 import com.example.dto.ClassUnit;
 import com.example.dto.ClassUnitView;
 import com.example.dto.LocalCate;
@@ -47,7 +48,7 @@ public interface ClassSelectMapper {
 	public List<ActDetailCate> selectActDetailCateList(int actcode);
 
 	// 7. 클래스 하나 정보 조회
-	public ClassProduct selectClassProductOne(long classcode);
+	public ClassProductView selectClassProductOne(long classcode);
 
 	// 8. 클래스 유닛 목록 조회
 	public List<ClassUnit> selectClassUnitList(ClassUnit obj);

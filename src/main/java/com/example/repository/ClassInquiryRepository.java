@@ -15,6 +15,12 @@ public interface ClassInquiryRepository extends JpaRepository<ClassInquiry, Long
 
     // 2. 문의 목록 총 개수 조회 by classcode
     long countByClassproduct_classcode(long classcode);
+    
+    // 3. 문의 개수 조회 by memberid
+    long countByMember_id(String id);
+
+    // 4. 문의 개수 조회 by memberid + chk = 0 or 1
+    long countByMember_idAndChk(String id, int chk);
 
    
 }

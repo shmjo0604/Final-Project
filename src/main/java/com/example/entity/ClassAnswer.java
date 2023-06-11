@@ -2,6 +2,7 @@ package com.example.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +15,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
@@ -39,7 +42,8 @@ public class ClassAnswer {
   private Date regdate;
 
   // 클래스 문의
-  @OneToOne(fetch = FetchType.LAZY)
+  @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   @JoinColumn(name = "no", referencedColumnName = "NO")
   @MapsId
   private ClassInquiry classinquiry;

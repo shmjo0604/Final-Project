@@ -10,6 +10,7 @@ import com.example.dto.ActDetailCate;
 import com.example.dto.ActivityCate;
 import com.example.dto.CityCate;
 import com.example.dto.ClassProduct;
+import com.example.dto.ClassProductView;
 import com.example.dto.ClassUnit;
 import com.example.dto.ClassUnitView;
 import com.example.dto.LocalCate;
@@ -105,7 +106,7 @@ public class ClassSelectServiceImpl implements ClassSelectService {
     }
 
     @Override
-    public ClassProduct selectClassProductOne(long classcode) {
+    public ClassProductView selectClassProductOne(long classcode) {
         try {
             return cMapper.selectClassProductOne(classcode);
         }

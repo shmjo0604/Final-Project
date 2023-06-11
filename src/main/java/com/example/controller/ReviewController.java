@@ -1,12 +1,17 @@
 package com.example.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -20,7 +25,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.entity.Review;
 import com.example.entity.ReviewImage;
-import com.example.service.review.ReviewImageService;
 import com.example.service.review.ReviewService;
 
 import lombok.RequiredArgsConstructor;
@@ -38,7 +42,6 @@ public class ReviewController {
     String defaultImg;
 
     final ReviewService reviewService;
-    final ReviewImageService reviewImageService;
     final String format = "reviewController => {}";
 
     // 리뷰보기 모달
@@ -78,35 +81,41 @@ public class ReviewController {
         }
 
         log.info(format, list.toString());
-        reviewImageService.insertReviewImage(list);
-
+        reviewService.insertReviewImage(list);
+        
         return "redirect:/member/mypage.do?menu=";
     }
 
     // 이미지 뛰우기
-    // @GetMapping(value = "/image")
-    // public ResponseEntity<byte[]> image(@RequestParam(name = "no", defaultValue =
-    // "0") long no)
-    // throws IOException {
-    // System.out.println(no);
-    // ClassImage obj = manageService.selectClassImageOne(no);
-    // System.out.println(obj);
+    @GetMapping(value = "/image")
+    public ResponseEntity<byte[]> classImage(
+        @RequestParam(name = "no", defaultValue = "0", required = false) long no
+        ) throws IOException {
 
-    // HttpHeaders headers = new HttpHeaders(); //import org.springframework....
+            //log.info(format, no);
 
-    // if (obj != null) { // 이미지가 존재하는지 확인
-    // if (obj.getFilesize() > 0) {
-    // headers.setContentType(MediaType.parseMediaType(obj.getFiletype()));
-    // return new ResponseEntity<>(obj.getFiledata(), headers, HttpStatus.OK);
-    // }
-    // }
+            ReviewImage obj = reviewService.selectReivewImageOne(no);
 
-    // // 이미지가 없을경우
-    // InputStream is = resourceLoader.getResource(defaultImg).getInputStream(); //
-    // exception발생됨
-    // headers.setContentType(MediaType.IMAGE_PNG);
-    // return new ResponseEntity<>(is.readAllBytes(),headers,HttpStatus.OK);
-    // }
+            //log.info(format, obj.toString());
+
+            HttpHeaders headers = new HttpHeaders();
+
+            if(obj != null) {
+
+                if(obj.getFilesize() > 0) {
+
+                    headers.setContentType(MediaType.parseMediaType(obj.getFiletype()));
+
+                    ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(obj.getFiledata(), headers, HttpStatus.OK);
+                    
+                    return response;
+                }
+            }
+
+            InputStream is = resourceLoader.getResource(defaultImg).getInputStream();
+            headers.setContentType(MediaType.IMAGE_PNG);
+            return new ResponseEntity<>(is.readAllBytes(), headers, HttpStatus.OK);
+        }
 
     // 고객센터 페이지
     @GetMapping(value = "/customercenter.do")

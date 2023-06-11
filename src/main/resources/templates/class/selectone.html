@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.111.3">
-    <title>클래스 제목</title>
+    <title th:text="${obj.title}"></title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/blog/">
     <!--웹 페이지 아이콘 변경-->
     <link rel="icon" th:href="@{/image/logo.ico}">
@@ -144,6 +144,31 @@
             text-decoration: none;
         }
 
+        .fc-day-mon a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .fc-day-tue a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .fc-day-wed a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .fc-day-thu a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .fc-day-fri a {
+            color: black;
+            text-decoration: none;
+        }
+
         .bx-wrapper .bx-controls-direction a {
             z-index: 1010;
         }
@@ -178,56 +203,10 @@
 
         <main class="container productbody">
 
-            <!-- <div class="row mb-2">
-                <div class="col-md-6">
-                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                        <div class="col p-4 d-flex flex-column position-static">
-                            <strong class="d-inline-block mb-2 text-primary">World</strong>
-                            <h3 class="mb-0">Featured post</h3>
-                            <div class="mb-1 text-body-secondary">Nov 12</div>
-                            <p class="card-text mb-auto">This is a wider card with supporting text below as a natural
-                                lead-in to additional content.</p>
-                            <a href="#" class="stretched-link">Continue reading</a>
-                        </div>
-                        <div class="col-auto d-none d-lg-block">
-                            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
-                                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
-                                focusable="false">
-                                <title>Placeholder</title>
-                                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                                    dy=".3em">Thumbnail</text>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div
-                        class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                        <div class="col p-4 d-flex flex-column position-static">
-                            <strong class="d-inline-block mb-2 text-success">Design</strong>
-                            <h3 class="mb-0">Post title</h3>
-                            <div class="mb-1 text-body-secondary">Nov 11</div>
-                            <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to
-                                additional content.</p>
-                            <a href="#" class="stretched-link">Continue reading</a>
-                        </div>
-                        <div class="col-auto d-none d-lg-block">
-                            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
-                                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
-                                focusable="false">
-                                <title>Placeholder</title>
-                                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                                    dy=".3em">Thumbnail</text>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
             <div class="row g-5">
                 <div class="col-md-7">
 
-                    <p>카테고리1 > 카테고리2</p>
+                    <p th:text="|${obj.activitycate} > ${obj.actdetailcate}|"></p>
                     <div class="p-2 p-md-3 mb-4 rounded bg-dark">
 
                         <div class="slider">
@@ -236,12 +215,7 @@
                                 <img th:src="@{/class/image(no=${tmp})}">
                             </th:block>
                         </div>
-                        <!-- <div class="col-md-6 px-0">
-                            <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
-                            <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and
-                                efficiently about what’s most interesting in this post’s contents.</p>
-                            <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
-                        </div> -->
+                
                     </div>
 
                     <div class="border-bottom">
@@ -262,7 +236,6 @@
                         </div>
 
                     </div>
-
 
                     <article class="blog-post">
                         <div id="intro">
@@ -322,10 +295,13 @@
                             <h3 class="d-flex align-items-center mb-3"><i class="bi bi-stars me-2"></i><span>리뷰</span>
                             </h3>
 
-                            <div class="card mb-3">
+                            <div id="review_box">
+                                <!--동적 생성-->
+                            </div>
+                            <!-- <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-3">
-                                        <img th:src="@{/image/리뷰사람.png}" class="img-fluid rounded-start" alt="...">
+                                        
                                     </div>
                                     <div class="col-md-9">
                                         <div class="card-body">
@@ -339,7 +315,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                         <hr>
@@ -422,7 +398,9 @@
                                                 onclick="insertClassInquiry()" value="등록">
                                         </div>
 
-                                        <input name="member.id" type="hidden" th:value="${user.username}"/>
+                                        <th:block th:if="${user != null}">
+                                            <input name="member.id" type="hidden" th:value="${user.username}"/>
+                                        </th:block>
                                         <input name="classproduct.classcode" type="hidden" th:value="${obj.classcode}"/>
                                         <input name="classproduct.member.id" type="hidden" th:value="${obj.memberid}"/>
                                     </form>
@@ -501,10 +479,8 @@
     </div>
 
 
-
     <!--footer 영역-->
     <footer th:replace="~{footer :: footerFragment}"></footer>
-
 
     <!--jQuery-->
     <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
@@ -529,6 +505,7 @@
         const contextPath = $('#contextPathHolder').attr('data-contextPath');
         const classcode = /*[[${obj.classcode}]]*/'';
         const price = /*[[${obj.price}]]*/'';
+        const list = /*[[${list}]]*/'';
 
         var totalprice = 0;
 
@@ -556,13 +533,11 @@
                 height: 200
             });
 
-            selectInquiry(1);
         });
 
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                googleCalendarApiKey: 'AIzaSyDL8tig_8-Hvx4DdJ0j4KTGPz39oUGVVFk',
                 initialView: 'dayGridMonth',
                 // headerToolbar: {
                 //     left: 'prev,next today',
@@ -585,6 +560,8 @@
                 , columnHeaderText: function (date) {
                     return weekList[date.getDay()]; // 헤더 var weekList = ['일','월','화','수','목','금','토']; 
                 },
+                selectable: true, // 달력 일자 드래그 설정가능
+                events: createEventObjects(),
 
                 dateClick: async function (info) {
 
@@ -656,6 +633,28 @@
             calendar.render();
 
         });
+
+        function createEventObjects() {
+            return list.map(function (obj) {
+                
+                return {
+                    title: obj.classstart,
+                    start: obj.classdate,
+                    backgroundColor: getBackgroundColor(obj.classlevel)
+                };
+            });
+        }
+
+        function getBackgroundColor(classlevel) {
+            switch (classlevel) {
+                case 1:
+                    return "#00C783";
+                case 2:
+                    return "#23946C";
+                case 3:
+                    return "#006F4A";
+            }
+        }
 
         async function unitSelect(no) {
 
@@ -802,7 +801,159 @@
 
         }
 
+        async function selectReviewList(page) {
 
+            const url = contextPath + '/api/review/selectlist.json?classcode=' + classcode + '&page=' + page;
+            const headers = { "Content-Type": "application/json" };
+            const { data } = await axios.get(url, { headers });
+
+            console.log(data);
+
+            const box = document.querySelector("#review_box");
+
+            // box.innerHTML = "";
+
+            if(data.status === 200) {
+                
+                for(let obj of data.list) {
+
+                    var card = document.createElement('div');
+                    card.className = "card mb-3";
+
+                    var row = document.createElement('div');
+                    row.className = "row g-0";
+
+                    var col1 = document.createElement('div');
+                    col1.className = "col-md-4";
+
+                    if(obj.imglist.length > 0) {
+
+                        var carousel = document.createElement('div');
+                        carousel.id = "carouselExample";
+                        carousel.className = "carousel slide";
+
+                        var carousel_inner = document.createElement('div');
+                        carousel_inner.className = "carousel-inner";
+
+                        obj.imglist.forEach((tmp, index) => {
+
+                            if(index === 0) {
+                                var carousel_item = document.createElement('div');
+                                carousel_item.className = "carousel-item active";
+
+                                var img = document.createElement('img');
+                                img.src = `${contextPath}/review/image?no=${tmp.no}`;
+                                img.className = "d-block img-thumbnail w-100";
+                                img.style.width = "232px";
+                                img.style.height = "174px";
+
+                                carousel_item.appendChild(img);
+
+                                carousel_inner.appendChild(carousel_item);
+                            }
+
+                            else {
+
+                                var carousel_item = document.createElement('div');
+                                carousel_item.className = "carousel-item";
+
+                                var img = document.createElement('img');
+                                img.src = `${contextPath}/review/image?no=${tmp.no}`;
+                                img.className = "d-block img-thumbnail w-100";
+                                img.style.width = "232px";
+                                img.style.height = "174px";
+
+                                carousel_item.appendChild(img);
+
+                                carousel_inner.appendChild(carousel_item);
+
+                            }
+
+                        })
+
+                        carousel.appendChild(carousel_inner);
+                        carousel.innerHTML += `<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                              <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                              <span class="visually-hidden">Next</span>
+                                            </button>`;
+
+                        // `<div id="carouselExample" class="carousel slide">
+                        //                     <div class="carousel-inner">
+                        //                       <div class="carousel-item active">
+                        //                         <img th:src="@{/review/image(no=92)}" class="d-block img-thumbnail" alt="..." style="width: 220px; height: 165px;">
+                        //                       </div>
+                        //                       <div class="carousel-item">
+                        //                         <img th:src="@{/review/image(no=93)}" class="d-block img-thumbnail" alt="..." style="width: 220px; height: 165px;">
+                        //                       </div>
+                        //                     </div>
+                        //                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        //                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        //                       <span class="visually-hidden">Previous</span>
+                        //                     </button>
+                        //                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        //                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        //                       <span class="visually-hidden">Next</span>
+                        //                     </button>
+                        //                   </div>`
+
+                        col1.appendChild(carousel);
+                    }
+
+                    else {
+
+                        var img = document.createElement('img');
+
+                        img.src = `${contextPath}/image/logo.svg`;
+                        img.className = "d-block img-thumbnail w-100";
+                        img.style.width = "232px";
+                        img.style.height = "174px";
+
+                        col1.appendChild(img);
+                    }
+
+                    var col2 = document.createElement('div');
+                    col2.className = "col-md-8";
+
+                    var card_body = document.createElement('div');
+                    card_body.className = "card-body";
+
+                    var card_title = document.createElement('h6');
+                    card_title.className = "card-title";
+                    card_title.textContent = obj.id;
+
+                    var card_text1 = document.createElement('div');
+                    card_text1.className = "card-text";
+                    card_text1.innerHTML = obj.content;
+
+                    var card_text2 = document.createElement('p');
+                    card_text2.className = "card-text";
+                    card_text2.textContent = obj.regdate;
+
+                    card_body.appendChild(card_title);
+                    card_body.appendChild(card_text1);
+                    card_body.appendChild(card_text2);
+
+                    col2.appendChild(card_body);
+
+                    row.appendChild(col1);
+                    row.appendChild(col2);
+
+                    card.appendChild(row);
+
+                    box.appendChild(card);
+                    
+                }
+            }
+
+            
+
+        }
+
+        selectReviewList(1);
 
         /*]]>*/
     </script>

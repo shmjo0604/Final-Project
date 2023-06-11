@@ -44,7 +44,7 @@ public class ApplyView {
     // 신청할 인원수
     private int person;
     // 신청날짜
-    private Date applyregdate;
+    private Date regdate;
     // 신청번호
     private long no;
     

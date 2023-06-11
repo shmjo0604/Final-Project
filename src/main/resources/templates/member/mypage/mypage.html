@@ -4,8 +4,10 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page Title</title>
+  <title>마이페이지</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!--웹 페이지 아이콘 변경-->
+  <link rel="icon" th:href="@{/image/logo.ico}">
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -21,7 +23,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <!--thymeleaf contextpath-->
   <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}" />
-
+  <!-- quill CSS -->
+  <link rel="stylesheet" th:href="@{/css/quill.snow.css}" />
   <style>
     html,
     body {

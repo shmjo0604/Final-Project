@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -33,10 +32,11 @@ import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
 import com.example.dto.Member;
 import com.example.entity.ClassAnswer;
-import com.example.entity.ClassInquiryView;
-import com.example.entity.Reviewview;
-import com.example.repository.ClassInquiryViewRepository;
+import com.example.entity.ReviewView;
+import com.example.repository.ClassInquiryViewRepository.ClassInquiryViewVo;
 import com.example.service.apply.ApplyService;
+import com.example.service.classproduct.ClassAnswerService;
+import com.example.service.classproduct.ClassInquiryService;
 import com.example.service.classproduct.ClassManageService;
 import com.example.service.classproduct.ClassSelectService;
 import com.example.service.member.MemberService;
@@ -58,12 +58,15 @@ public class MemberController {
     @Autowired ClassSelectService c1Service;
     @Autowired ApplyService aService;
     @Autowired ClassManageService manageService;
-    @Autowired ClassInquiryViewRepository inquiryViewRepository;
     @Autowired ReviewService r1Service;
+    @Autowired ClassAnswerService answerService;
+    @Autowired ClassInquiryService inquiryService;
 
     @Autowired ResourceLoader resourceLoader;
     @Value("${default.image}") String defaultImg;
-    @Value("${myclassinquiry.page}") int pagetotal;
+    @Value("${myclassinquiry.page}") int inquirypagetotal;
+    @Value("${mypageapply.page}") int applypagetotal;
+    @Value("${mypageinquiry.page}") int myinquirypagetotal;
 
     BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 
@@ -111,16 +114,9 @@ public class MemberController {
             @AuthenticationPrincipal User user,
             Model model) {
 
-        log.info(format, "chk=" + chk);
+        // log.info(format, "chk=" + chk);
 
-        // String id = user.getUsername();
         Map<String, Object> map = new HashMap<String, Object>();
-        List<ApplyView> list = new ArrayList<>();
-        List<Reviewview> list1 = new ArrayList<>();
-        // List<ApplyStatusView> listOne = new ArrayList<>();
-
-        int first = page * 5 - 4;
-        int last = page * 5;
 
         String id = user.getUsername();
 
@@ -128,122 +124,90 @@ public class MemberController {
         long chk2 = 0;
         long chk3 = 0;
 
-        long pages = 0;
-        long cnt = aService.countApplyList(id);
-        // long cntOne =
-
         if (menu == 0) {
 
             return "redirect:/member/mypage.do?menu=1&page=1";
         }
 
         if (menu == 1) {
+
+            List<ApplyView> list = new ArrayList<>();
+
+            long cnt = aService.countApplyList(id);
+
+            long pages = ((cnt-1)/applypagetotal)+1;
+
+            int first = page * applypagetotal - (applypagetotal-1);
+            int last = page * applypagetotal;
+
             map.put("id", user.getUsername());
             map.put("first", first);
             map.put("last", last);
+
             list = aService.selectApplyListById(map);
+
+            // log.info(format, list.toString());
 
             chk1 = aService.countApplyListOne(id);
             chk2 = aService.countApplyListTwo(id);
             chk3 = aService.countApplyListThree(id);
 
             model.addAttribute("list", list);
-            model.addAttribute("pages", (cnt - 1) / 5 + 1);
+            model.addAttribute("pages", pages);
 
             model.addAttribute("chk1", chk1);
             model.addAttribute("chk2", chk2);
             model.addAttribute("chk3", chk3);
-            if (chk == 1) {
 
-                map.put("id", user.getUsername());
-                map.put("first", first);
-                map.put("last", last);
+            if (chk >= 3) {
+                return "redirect:mypage.do?menu=1&page=1";
+            }
+            if (chk == 1) {
+                
                 list = aService.selectApplyListByIdOne(map);
 
-                pages = aService.countApplyListOne(id);
-
-                chk1 = aService.countApplyListOne(id);
-                chk2 = aService.countApplyListTwo(id);
-                chk3 = aService.countApplyListThree(id);
+                cnt = aService.countApplyListOne(id);
+                pages = ((cnt-1)/applypagetotal)+1;
 
                 model.addAttribute("list", list);
-                model.addAttribute("pages", (cnt - 1) / 5 + 1);
+                model.addAttribute("pages", pages);
 
-                model.addAttribute("chk1", chk1);
-                model.addAttribute("chk2", chk2);
-                model.addAttribute("chk3", chk3);
-
-                // log.info(format, "cntOne=" + cntOne);
-                log.info(format, "list=" + list);
-                log.info(format, "chk1=" + chk1);
-                log.info(format, "chk2=" + chk2);
-                log.info(format, "chk3=" + chk3);
-                model.addAttribute("pages", (pages - 1) / 5 + 1); // 페이지 수
+                // log.info(format, "list=" + list);
 
             }
             if (chk == 2) {
 
-                map.put("id", user.getUsername());
-                map.put("first", first);
-                map.put("last", last);
                 list = aService.selectApplyListByIdTwo(map);
 
-                pages = aService.countApplyListTwo(id);
-
-                chk1 = aService.countApplyListOne(id);
-                chk2 = aService.countApplyListTwo(id);
-                chk3 = aService.countApplyListThree(id);
+                cnt = aService.countApplyListTwo(id);
+                pages = ((cnt-1)/applypagetotal)+1;
 
                 model.addAttribute("list", list);
-                model.addAttribute("pages", (cnt - 1) / 5 + 1);
+                model.addAttribute("pages", pages);
 
-                model.addAttribute("chk1", chk1);
-                model.addAttribute("chk2", chk2);
-                model.addAttribute("chk3", chk3);
-
-                // log.info(format, "cntOne=" + cntOne);
-                log.info(format, "list=" + list);
-                model.addAttribute("pages", (pages - 1) / 5 + 1); // 페이지 수
+                // log.info(format, "list=" + list);
 
             }
             if (chk == 3) {
 
-                map.put("id", user.getUsername());
-                map.put("first", first);
-                map.put("last", last);
                 list = aService.selectApplyListByIdThree(map);
 
-                pages = aService.countApplyListThree(id);
-
-                chk1 = aService.countApplyListOne(id);
-                chk2 = aService.countApplyListTwo(id);
-                chk3 = aService.countApplyListThree(id);
+                cnt = aService.countApplyListThree(id);
+                pages = ((cnt-1)/applypagetotal)+1;
 
                 model.addAttribute("list", list);
-                model.addAttribute("pages", (cnt - 1) / 5 + 1);
+                model.addAttribute("pages", pages);
 
-                model.addAttribute("chk1", chk1);
-                model.addAttribute("chk2", chk2);
-                model.addAttribute("chk3", chk3);
-
-                // log.info(format, "cntOne=" + cntOne);
-                log.info(format, "list=" + list);
-                model.addAttribute("pages", (pages - 1) / 5 + 1); // 페이지 수
+                // log.info(format, "list=" + list);
 
             }
-            // chk1 = aService.countApplyListOne(id);
-            // chk2 = aService.countApplyListTwo(id);
-            // chk3 = aService.countApplyListThree(id);
-
-            // chk1 = aService.countApplyListOne(id);
-            // chk2 = aService.countApplyListTwo(id);
-            // chk3 = aService.countApplyListThree(id);
-
+           
         }
 
-        else if (menu == 2)
+        else if (menu == 2) {
 
-        {
+            List<ReviewView> list1 = new ArrayList<>();
+
             // 페이지 네이션은 => 페이지 번호가 0부터
             // PageRequest pageRequest = PageRequest.of((page - 1), 1);
             // Pageable pageable = PageRequest.of(pageIndex, 10, Sort.by(Direction.DESC,
@@ -263,6 +227,47 @@ public class MemberController {
         }
 
         else if (menu == 3) {
+
+            if(page == 0) {
+                return "redirect:/member/mypage.do?menu=3&page=1";
+            }
+
+            long count = inquiryService.selectClassInquiryCountByMemberid(id);
+
+            long count_chk0 = inquiryService.selectClassInquiryCountByidAndChk(id, 0);
+            long count_chk1 = inquiryService.selectClassInquiryCountByidAndChk(id, 1);
+
+            long pages = ((count-1)/myinquirypagetotal) + 1;
+
+            int first = page * myinquirypagetotal - (myinquirypagetotal-1);
+            int last = page * myinquirypagetotal;
+
+            List<ClassInquiryViewVo> list = inquiryService.selectClassInquiryListByMemberid(id, first, last);
+
+            if(chk == 1) {
+
+                pages = ((count_chk0)/myinquirypagetotal) + 1;
+
+                list = inquiryService.selectByMemberidAndChk(id, 0, first, last);
+
+            }
+
+            else if(chk == 2) {
+
+                pages = ((count_chk1)/myinquirypagetotal) + 1;
+
+                list = inquiryService.selectByMemberidAndChk(id, 1, first, last);
+            }
+            // log.info(format, count);
+            // log.info(format, count_chk0);
+            // log.info(format, count_chk1);
+            log.info(format, list.toString());
+
+            model.addAttribute("pages", pages);
+            model.addAttribute("list", list);
+            model.addAttribute("count", count);
+            model.addAttribute("count0", count_chk0);
+            model.addAttribute("count1", count_chk1);
 
         }
 
@@ -319,18 +324,19 @@ public class MemberController {
 
             long total = cService.selectClassInquiryListCount(owner);
 
-            log.info(format, total);
+            // log.info(format, total);
 
-            PageRequest pageRequest = PageRequest.of((page-1), pagetotal);
+            long pages = ((total-1)/inquirypagetotal)+1;
 
-            List<ClassInquiryView> list = cService.selectClassInquiryList(owner, pageRequest);
+            int first = (page*inquirypagetotal)-(inquirypagetotal-1);
+            int last = page*inquirypagetotal; 
 
-            log.info(format, list);
+            List<ClassInquiryViewVo> list = cService.selectClassInquiryList(owner, first, last);
 
             model.addAttribute("list", list);
-            model.addAttribute("pages", ((total-1)/pagetotal)+1);
+            model.addAttribute("pages", pages);
 
-            log.info("myclass inquiry selectlist => {}", list.toString());
+            // log.info("myclass inquiry selectlist => {}", list.get(0).getRnum());
 
         }
 
@@ -344,17 +350,19 @@ public class MemberController {
             @RequestParam(name = "menu", defaultValue = "0", required = false) int menu,
             @ModelAttribute ClassProduct obj,
             @ModelAttribute ClassAnswer classAnswer,
+            HttpSession httpSession,
             Model model) {
 
         int chk = obj.getChk();
 
-        log.info(format, menu);
-        log.info(format, classcode);
+        //log.info(format, menu);
+        //log.info(format, classcode);
+
         if (menu == 1) {
             if (chk == 0 || chk == 1) {
                 int ret = cService.updateClassNonactive(obj);
 
-                log.info(" nonactive => {}", obj.toString());
+                //log.info(" nonactive => {}", obj.toString());
                 if (ret == 1) {
                     return "redirect:/member/myclass.do?menu=1";
                 }
@@ -362,7 +370,7 @@ public class MemberController {
             } else if (chk == 3) {
                 int ret =  cService.updateClassActive(obj);
                 
-                log.info(" active => {}", obj.toString());
+                //log.info(" active => {}", obj.toString());
                 if (ret == 1) {
                     return "redirect:/member/myclass.do?menu=1";
                 }
@@ -372,11 +380,51 @@ public class MemberController {
 
         else if(menu == 2) {
 
-            log.info(format, classAnswer.toString());
-            // 여기서 Service 호출해서 답변 등록하세요.
+            // log.info(format, classAnswer.toString());
+
+            // 1. 문의 번호로 답변 존재 유무 확인
+
+            int count = answerService.selectClassAnswerCount(classAnswer.getNo());
+
+            log.info(format, count);
+
+            // 2. 서비스 호출 -> 답변 등록 or 답변 수정
+
+            if(count == 0) {
+                
+                int ret = answerService.insertClassAnswerOne(classAnswer);
+
+                // 3. 결과(ret)에 따라 페이지 이동 -> ret = 1 일 경우, /alert.do (alerturl, alertmessage session 저장)
+
+                if(ret == 1) {
+
+                    httpSession.setAttribute("alertMessage", "답변이 정상적으로 등록됐습니다.");
+                    httpSession.setAttribute("alertUrl", "/member/myclass.do?menu="+menu);
+
+                    return "redirect:/alert.do";
+                }
+            }
+
+            else {
+
+                int ret = answerService.updateClassAnswerOne(classAnswer);
+
+                // 3. 결과(ret)에 따라 페이지 이동 -> ret = 1 일 경우, /alert.do (alerturl, alertmessage session 저장)
+
+                if(ret == 1) {
+
+                    httpSession.setAttribute("alertMessage", "답변이 정상적으로 수정됐습니다.");
+                    httpSession.setAttribute("alertUrl", "/member/myclass.do?menu="+menu);
+
+                    return "redirect:/alert.do";
+
+                }
+
+            }
+
         }
 
-        return "redirect:/myclass.do?menu=" + menu;
+        return "redirect:/member/myclass.do?menu=" + menu;
     }
 
     //이미지 뛰우기 
@@ -385,7 +433,7 @@ public class MemberController {
         @RequestParam(name = "classcode", defaultValue = "0") long classcode)
     throws IOException {
        
-        log.info(format, classcode);
+        // log.info(format, classcode);
 
         long classMainNo = manageService.selectClassMainImageNo(classcode);
         ClassImage obj = manageService.selectClassImageOne(classMainNo);

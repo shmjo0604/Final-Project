@@ -30,6 +30,7 @@ import com.example.dto.ActivityCate;
 import com.example.dto.Apply;
 import com.example.dto.CityCate;
 import com.example.dto.ClassProduct;
+import com.example.dto.ClassProductView;
 import com.example.dto.ClassUnit;
 import com.example.entity.Basket;
 import com.example.entity.ClassImage;
@@ -100,10 +101,11 @@ public class ClassController {
             model.addAttribute("user", user);
         }
 
-        ClassProduct obj = cService.selectClassProductOne(classcode);
+        ClassProductView obj = cService.selectClassProductOne(classcode);
         long mainImg = manageService.selectClassMainImageNo(classcode);
         List<Long> subImg = manageService.selectClassSubImageNoList(classcode);
         long profile = manageService.selectClassProfileImageNo(classcode);
+        List<ClassUnit> list = unitService.selectUnitListToCal(classcode);
 
         //log.info(format, obj.toString());
 
@@ -111,8 +113,8 @@ public class ClassController {
         model.addAttribute("mainImg", mainImg);
         model.addAttribute("subImg", subImg);
         model.addAttribute("profile", profile);
+        model.addAttribute("list", list);
         
-
         return "class/selectone";
     }
 
@@ -396,7 +398,7 @@ public class ClassController {
             InputStream is = resourceLoader.getResource(defaultImg).getInputStream();
             headers.setContentType(MediaType.IMAGE_PNG);
             return new ResponseEntity<>(is.readAllBytes(), headers, HttpStatus.OK);
-    }
+        }
     
 
 }

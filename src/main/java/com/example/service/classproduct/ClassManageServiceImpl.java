@@ -3,7 +3,6 @@ package com.example.service.classproduct;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.dto.ClassImage;
@@ -13,6 +12,7 @@ import com.example.entity.ClassInquiryView;
 import com.example.mapper.ClassManageMapper;
 import com.example.repository.ClassImageRepository;
 import com.example.repository.ClassInquiryViewRepository;
+import com.example.repository.ClassInquiryViewRepository.ClassInquiryViewVo;
 
 @Service
 public class ClassManageServiceImpl implements ClassManageService {
@@ -180,9 +180,9 @@ public class ClassManageServiceImpl implements ClassManageService {
     }
 
     @Override
-    public List<ClassInquiryView> selectClassInquiryList(String owner, Pageable pagealbe) {
+    public List<ClassInquiryViewVo> selectClassInquiryList(String owner, int first, int last) {
         try {
-            return cRepository.findByOwnerOrderByNoDesc(owner, pagealbe);
+            return cRepository.selectByOwnerOrderByNoDescPaging(owner, first, last);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

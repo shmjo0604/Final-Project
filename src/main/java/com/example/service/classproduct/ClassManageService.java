@@ -2,13 +2,13 @@ package com.example.service.classproduct;
 
 import java.util.List;
 
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
 import com.example.entity.ClassInquiry;
 import com.example.entity.ClassInquiryView;
+import com.example.repository.ClassInquiryViewRepository.ClassInquiryViewVo;
 
 @Service
 public interface ClassManageService {
@@ -53,7 +53,7 @@ public interface ClassManageService {
     public int deleteClassImageOne(long no);
 
     // 9. 클래스 문의 전체 조회 (pagination)
-    public List<ClassInquiryView> selectClassInquiryList(String owner, Pageable pagealbe);
+    public List<ClassInquiryViewVo> selectClassInquiryList(String owner, int first, int last);
 
     // 10. 클래스 문의 1개 조회
     public ClassInquiryView selectClassInquiryOne(long no);

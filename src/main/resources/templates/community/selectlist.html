@@ -68,24 +68,13 @@
                 </tr>
             </tbody>
         </table>
-        <ul class="pagination justify-content-center">
-            <li><a href="#" style="margin-right: 10px;text-decoration: none;font-size: 20px;font-weight: bold;"
-                    class="text-secondary">◀</a></li>
-            <li><a href="#" style="margin-right: 10px;text-decoration: none;font-size: 20px;font-weight: bold"
-                    class="text-secondary">1</a></li>
-            <li><a href="#" style="margin-right: 10px;text-decoration: none;font-size: 20px;font-weight: bold"
-                    class="text-secondary">2</a></li>
-            <li><a href="#" style="margin-right: 10px;text-decoration: none;font-size: 20px;font-weight: bold"
-                    class="text-secondary">3</a></li>
-            <li><a href="#" style="margin-right: 10px;text-decoration: none;font-size: 20px;font-weight: bold"
-                    class="text-secondary">4</a></li>
-            <li><a href="#" style="margin-right: 10px;text-decoration: none;font-size: 20px;font-weight: bold"
-                    class="text-secondary">5</a></li>
-            <li><a href="#" style="margin-right: 10px;text-decoration: none;font-size: 20px;font-weight: bold"
-                    class="text-secondary">6</a></li>
-            <li><a href="#" style="margin-right: 10px;text-decoration: none;font-size: 20px;font-weight: bold"
-                    class="text-secondary">▶</a></li>
-        </ul>
+        
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <ul id="pagination-demo" class="pagination-sm "></ul>
+            </div>
+        </div>
+
         <a th:href="@{insert.do}" class="btn btn-outline-info float-right">글쓰기</a>
 
 
@@ -94,13 +83,36 @@
     
     <!--jQuery-->
     <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
+    <!--twbsPagination js-->
+    <script th:src="@{/js/jquery.twbsPagination.min.js}"></script>
     <!--axios library-->
     <script th:src="@{/js/axios.min.js}"></script>
     <!--Bootstrap 용 js -->
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-    <script>
+    <script th:inline="javascript">
 
         const contextPath = $('#contextPathHolder').attr('data-contextPath');
+
+        var pages = /*[[${pages}]]*/'';
+
+        $(document).ready(function() {
+			$('#pagination-demo').twbsPagination({
+				totalPages : Number(pages),
+				visiblePages : 10,
+				first : '처음',
+				last : '마지막',
+				prev : '이전',
+				next : '다음',
+				initiateStartPageClick : false,
+				startPage : Number(/*[[${param.page}]]*/),
+				// 주소창에서 page 값을 받아옴 -> 그 값에 해당하는 목록 버튼이 활성
+				onPageClick : function(event, page) {
+					
+					window.location.href="selectlist.do?page="+page;
+					
+				}
+			});
+		});
 
     </script>
     <!--Main js-->

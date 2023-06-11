@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -82,10 +81,20 @@ public class ApplyController {
         
     }
 
-    @PostMapping(value = "/insert.do")
-    public String applyPOST() {
+    @GetMapping(value = "/success.do")
+    public String successGET(@AuthenticationPrincipal User user, Model model) {
 
-        return "redirect:/home.do";
+        model.addAttribute("user", user);
+
+        return "/apply/success";
+    }
+
+    @GetMapping(value = "/fail.do")
+    public String failGET(@AuthenticationPrincipal User user, Model model) {
+
+        model.addAttribute("user", user);
+
+        return "/apply/fail";
     }
     
 }

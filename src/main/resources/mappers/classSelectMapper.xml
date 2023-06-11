@@ -229,8 +229,8 @@
     </select>
 
     <!-- 7. 클래스 상세페이지 조회 -->
-    <select id="selectClassProductOne" parameterType="long" resultType="ClassProduct">
-        SELECT c.* FROM classproduct c WHERE classcode = #{classcode}
+    <select id="selectClassProductOne" parameterType="long" resultType="ClassProductView">
+        SELECT c.* FROM classproductview c WHERE classcode = #{classcode}
     </select>
 
     <!-- 8. 클래스 유닛 목록 조회 -->

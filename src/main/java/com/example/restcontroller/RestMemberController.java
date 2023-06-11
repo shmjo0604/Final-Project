@@ -289,7 +289,9 @@ public class RestMemberController {
             @AuthenticationPrincipal User user) {
 
         Map<String, Object> map = new HashMap<>();
+
         List<ApplyStatusView> list = new ArrayList<>();
+        
         String id = user.getUsername();
 
         map.put("id", id);

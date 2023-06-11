@@ -10,6 +10,7 @@ import com.example.entity.ClassInquiryView;
 import com.example.entity.Notification;
 import com.example.repository.ClassInquiryRepository;
 import com.example.repository.ClassInquiryViewRepository;
+import com.example.repository.ClassInquiryViewRepository.ClassInquiryViewVo;
 import com.example.repository.NotificationRepository;
 
 @Service
@@ -74,5 +75,52 @@ public class ClassInquiryServiceImpl implements ClassInquiryService {
             return null;
         }
     }
+
+    @Override
+    public List<ClassInquiryViewVo> selectClassInquiryListByMemberid(String id, int first, int last) {
+        try {
+            return cInquiryViewRepository.selectClassInquiryListByMemberid(id, first, last);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public long selectClassInquiryCountByMemberid(String id) {
+        try {
+            return cInquiryRepository.countByMember_id(id);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    @Override
+    public long selectClassInquiryCountByidAndChk(String id, int chk) {
+        try {
+            return cInquiryRepository.countByMember_idAndChk(id, chk);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    @Override
+    public List<ClassInquiryViewVo> selectByMemberidAndChk(String id, int chk, int first, int last) {
+        try {
+            List<ClassInquiryViewVo> list = cInquiryViewRepository.selectByMemberidAndChk(id, chk, first, last);
+            return list;
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    
     
 }
