@@ -80,24 +80,6 @@ public class RestClassUnitController {
             return retmap;
     }
 
-    // 한개의 일정 조회
-    @GetMapping(value = "/selectunitone.json")
-    public Map<String,Object> selectunitoneGET(
-        @RequestParam(name = "classcode", defaultValue = "0") long classcode,
-        @RequestParam(name = "no", defaultValue = "0") long no){
-        // log.info(format, classcode);
-        // log.info(format, no);
-
-        ClassUnit obj = cuRepository.findByClassproduct_classcodeAndNo(classcode, no);
-        // log.info(format, obj);
-        long defaultPrice = cuService.selectPriceOne(classcode);
-        log.info(format, defaultPrice);
-
-        Map<String, Object> retmap = new HashMap<>();
-        retmap.put("obj", obj);
-        retmap.put("defaultPrice2",defaultPrice);
-        return retmap;
-    }   
 
     // 선택한 일정 삭제(update로 처리)
     @PutMapping(value = "/deleteone.json")
@@ -137,6 +119,25 @@ public class RestClassUnitController {
         return retMap;
     }
 
+    // 한개의 일정 조회
+    @GetMapping(value = "/selectunitone.json")
+    public Map<String,Object> selectunitoneGET(
+        @RequestParam(name = "classcode", defaultValue = "0") long classcode,
+        @RequestParam(name = "no", defaultValue = "0") long no){
+        // log.info(format, classcode);
+        // log.info(format, no);
+
+        ClassUnit obj = cuRepository.findByClassproduct_classcodeAndNo(classcode, no);
+        // log.info(format, obj);
+        long defaultPrice = cuService.selectPriceOne(classcode);
+        log.info(format, defaultPrice);
+
+        Map<String, Object> retmap = new HashMap<>();
+        retmap.put("obj", obj);
+        retmap.put("defaultPrice2",defaultPrice);
+        return retmap;
+    }   
+
     // 선택한 일정 수정 
     @PutMapping(value = "/updateone.json")
     public Map<String, Integer> updateonePUT(
@@ -154,6 +155,7 @@ public class RestClassUnitController {
         obj.setMaximum(classunit.getMaximum());
         obj.setRegdate(classunit.getRegdate());
         obj.setClassdate(classunit.getClassdate());
+        obj.setClassday(classunit.getClassday());
         obj.setClassstart(classunit.getClassstart());
         obj.setClassend(classunit.getClassend());
         obj.setClasslevel(classunit.getClasslevel());
