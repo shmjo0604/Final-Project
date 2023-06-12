@@ -301,9 +301,9 @@ public class RestMemberController {
         map.put("list", list);
         map.put("okok", "okokok");
 
-        log.info(format, "id=", id);
-        log.info(format, "no=", no);
-        log.info(format, "list=", list);
+        // log.info(format, id);
+        // log.info(format, no);
+        // log.info(format, list);
 
         return map;
 

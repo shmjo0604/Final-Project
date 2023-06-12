@@ -101,14 +101,26 @@
 
             <!--댓글 목록-->
             <hr />
-            <table>
-                <thead>
-                    <tr th:each ="tmp : ${list}">
-                        <td class ="fw-bold"th:text ="${tmp.member.id}"></td>
-                        <td th:text ="${tmp.content}"></td>
-                    </tr>
-                </thead>
-            </table>
+            <h5>댓글</h5>
+            <div style="background-color: rgb(234, 234, 234);">
+                <tr th:each="tmp : ${list}">
+                    <div style="padding: 10px; margin-left: 20px; margin-right: 20px;">
+                        <div style="font-weight: bold;">
+                            <td th:text="${tmp.member.id}">&nbsp;</td>
+                        </div>
+
+                        <div>
+                            <td th:text="${tmp.content}"></td>
+                        </div>
+                        <div style="font-size:small; margin-top: 10px;">
+                            <td th:text="${tmp.regdate}"></td>
+                        </div>
+                        <hr />
+                    </div>
+                </tr>
+            </div>
+
+
 
 
         </div>

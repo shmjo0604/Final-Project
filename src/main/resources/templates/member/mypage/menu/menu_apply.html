@@ -132,7 +132,7 @@
 
           <p th:if="${obj.chk} == 1" style="text-align: center">결제완료 </p>
           <p th:if="${obj.chk} == 2" style="text-align: center">결제취소 </p>
-          <p th:if="${obj.chk} == 3" style="text-align: center">참여완료 </p>
+          <p th:if="${obj.chk} == 3 or ${obj.chk} == 4" style="text-align: center">참여완료 </p>
 
           <button th:if="${obj.chk} == 3" class="btn btn-sm btn-secondary" type="button"
             style="height: 30px; width: 90px" th:onclick="modalAction([[${obj.no}]],[[${obj.classcode}]],[[${obj.price}]], [[${obj.title}]],  [[${obj.classdate}]],[[${obj.classlevel}]], [[${obj.classstart}]], [[${obj.classend}]])">
@@ -144,7 +144,7 @@
   </table>
 
   <div class="row justify-content-center">
-    <div class="col-4">
+    <div class="col-6">
       <ul id="pagination-demo" class="pagination-sm "></ul>
     </div>
   </div>
@@ -188,7 +188,7 @@
                     <div class="summary">
                       가격: <span id="price"></span>
                     </div>
-                    <input class="summary" id="no" name="no" type="hidden" />
+                    <input class="summary" id="no" name="no" type="block" />
                   </div>
                 </div>
 
@@ -271,7 +271,7 @@
     </div>
   </div>
 
-  <!-- Modal -->
+  <!-- 신청 내역 상세 보기 Modal -->
   <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -285,7 +285,7 @@
         <div class="modal-body">
           <div class="container">
             <div class="row d-flex " style="height: auto;">
-              <form th:action="@{/member/updatechk.do}" id="form1" method="POST">
+              <form th:action="@{/apply/cancel.do}" id="form1" method="POST">
                 <input class="date mt-1" id="applyregdate1" disabled />
                 <div class="hr1"></div>
                 <img class="mainimage1 mt-3 mx-3" name="mainimage" id="mainimage2" />
@@ -316,7 +316,7 @@
                   클래스금액(1인) : <input class="detail-3" id="price2" disabled type="text" />
                 </div>
                 <div class="detail-1 mx-2 mt-2">
-                  신청인원 : <input class="detail-3" id="person1" disabled type="text" />
+                  신청인원 : <input class="detail-3" id="person1" name="person" disabled type="text" />
                 </div>
                 <div class="detail-1 mx-2 mt-2">
                   총결제 : <input class="detail-3" id="payment1" disabled type="text" />
@@ -343,9 +343,12 @@
                 </div>
 
                 <button class="chkbtn btn btn-sm btn-danger float-end" type="button"
-                  style="height: 30px; width: 90px;" onclick="">신청취소</button>
+                  style="height: 30px; width: 90px;" onclick="cancelAction()">신청취소</button>
 
                 <input type="hidden" id="no1" name="no">
+                <input type="hidden" id="classcode1" name="classcode">
+                <input type="hidden" id="unitno1" name="unitno">
+                <input type="hidden" id="person3" name="person">
               </form>
             </div>
           </div>
@@ -394,7 +397,13 @@
 
         onPageClick: function (event, page) {
           
-          window.location.href = `mypage.do?menu=1&page=${page}&chk=${chk}`;
+          if(chk === null) {
+            window.location.href = `mypage.do?menu=1&page=${page}`;
+          }
+          else {
+            window.location.href = `mypage.do?menu=1&page=${page}&chk=${chk}`;
+          }
+          
           
         }
       });

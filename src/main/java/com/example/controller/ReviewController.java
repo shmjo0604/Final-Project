@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
@@ -44,16 +46,11 @@ public class ReviewController {
     final ReviewService reviewService;
     final String format = "reviewController => {}";
 
-    // 리뷰보기 모달
-    @GetMapping(value = "select.do")
-    public String selectPOST() {
-        return "/review/reviewselect";
-    }
-
     // 리뷰 내용, 리뷰 이미지 데이터 추가
     @PostMapping(value = "insert.do")
     public String insertPOST(@ModelAttribute Review review,
-            @RequestParam(name = "files", required = false) List<MultipartFile> files)
+            @RequestParam(name = "files", required = false) List<MultipartFile> files,
+            HttpSession httpSession)
             throws IOException {
 
         // long no = review.getNo();
@@ -61,29 +58,51 @@ public class ReviewController {
         // log.info(format, "review=" + review.toString());
         List<ReviewImage> list = new ArrayList<>();
 
-        int result = reviewService.insertReview(review);
-
         for (MultipartFile multipartfile : files) {
 
-            ReviewImage obj = new ReviewImage();
+            if (multipartfile.getSize() > 0) {
 
-            obj.setReview(review);
-            obj.setFilesize(multipartfile.getSize());
-            obj.setFiledata(multipartfile.getInputStream().readAllBytes());
-            obj.setFiletype(multipartfile.getContentType());
-            obj.setFilename(multipartfile.getOriginalFilename());
+                ReviewImage obj = new ReviewImage();
 
-            if (obj.getFilesize() != 0) {
+                obj.setReview(review);
+                obj.setFilesize(multipartfile.getSize());
+                obj.setFiledata(multipartfile.getInputStream().readAllBytes());
+                obj.setFiletype(multipartfile.getContentType());
+                obj.setFilename(multipartfile.getOriginalFilename());
+
                 list.add(obj);
-                System.out.println(obj.getFilename());
-                System.out.println(obj.getFilesize());
+
+                // System.out.println(obj.getFilename());
+                // System.out.println(obj.getFilesize());
             }
         }
 
-        log.info(format, list.toString());
-        reviewService.insertReviewImage(list);
+        int result1 = reviewService.insertReview(review);
+
+        // log.info(format, list.toString());
+
+        if(result1 == 1) {
+
+            int result2 = reviewService.insertReviewImage(list);
+
+            if(result2 > 0) {
+
+                httpSession.setAttribute("alertMessage", "리뷰가 정상적으로 등록됐습니다. 리뷰 내역으로 이동합니다.");
+                httpSession.setAttribute("alertUrl", "/member/mypage.do?menu=2&page=1");
+                
+
+            }
+
+            else {
+
+                httpSession.setAttribute("alertMessage", "리뷰 이미지 등록에 실패했습니다.");
+                httpSession.setAttribute("alertUrl", "/member/mypage.do?menu=1&page=1");
+                
+            }
+
+        }
         
-        return "redirect:/member/mypage.do?menu=";
+        return "redirect:/alert.do";
     }
 
     // 이미지 뛰우기

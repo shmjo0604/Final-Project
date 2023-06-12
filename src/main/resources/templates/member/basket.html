@@ -94,7 +94,7 @@
                         <td>
                             <div class="d-flex justify-content-center">
                                 <th:block th:if="${(obj.maximum-obj.cnt) > 0}">
-                                    <select class="form-select w-50">
+                                    <select class="form-select w-50" th:onchange="changeperson(this.value, [[${obj.totalprice}]], [[${objStat.index}]])">
                                         <option th:each="number : ${#numbers.sequence(1, obj.maximum-obj.cnt)}"
                                             th:text="${number}" th:selected="${number} == ${obj.cnt}"></option>
                                     </select>
@@ -302,6 +302,36 @@
 
             document.querySelector("#form_apply").submit();
 
+        }
+
+        function changeperson(person, totalprice, idx) {
+
+            var tr = $(".cart__list__detail").eq(idx);
+
+            var payment = person * totalprice;
+
+            tr.children().eq(5).find('div').text(payment.toLocaleString() + '원');
+            tr.children().eq(5).find('input').attr("value", payment);
+        
+            var pricecheck = $("input:checkbox[name='unitno[]']:checked");
+
+            var payment = 0;
+
+            $("input:checkbox[name='unitno[]']:checked").each(function (i) {
+                var tr = pricecheck.parent().parent().eq(i);
+
+                var td = tr.children();
+
+                var price = td.eq(5).find("input").val();
+
+                // console.log("가격", price);
+
+                payment += Number(price);
+            })
+
+            console.log(payment);
+
+            $("#payment").text(payment.toLocaleString() + '원');
         }
 
 

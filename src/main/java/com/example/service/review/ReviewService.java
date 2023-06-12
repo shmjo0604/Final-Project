@@ -21,10 +21,10 @@ public interface ReviewService {
     // 3. 리뷰 개수 카운트
     public int countReview(String id);
 
-    // 4. 네이티브쿼리 리뷰목록 조회
+    // 4. 네이티브쿼리 리뷰 목록 조회(by memberid, 최신순)
     public List<ReviewView> selectReviewByIdPagenation(String id, int start, int end);
 
-    // 5. 리뷰이미지등록 
+    // 5. 리뷰 이미지 등록 
     public int insertReviewImage(List<ReviewImage> obj);
 
     // 6. 리뷰 목록 조회(by classcode)
@@ -38,4 +38,19 @@ public interface ReviewService {
 
     // 9. 리뷰 이미지 데이터 조회(by no)
     public ReviewImage selectReivewImageOne(long no);
+
+    // 10. 리뷰 하나만 조회
+    public ReviewView selectReviewOne(String id, long no);
+
+    // 11. 리뷰 전체 평균값
+    public int avgReview(String id);
+
+    // 12. 네이티브쿼리 리뷰목록 조회(오래된순)
+    public List<ReviewView> selectReviewByIdPagenationAsc(String id, int start, int end);
+
+    // 13. 리뷰 이미지 조회
+    public ReviewImage selectReviewImage(long no);
+
+    // 14. 리뷰이미지 번호 조회
+    public List<Long> reviewImagelistNo(long no);
 }

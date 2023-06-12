@@ -3,17 +3,23 @@ package com.example.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.dto.Apply;
 import com.example.dto.ClassUnitView;
 import com.example.dto.Member;
+import com.example.service.apply.ApplyService;
 import com.example.service.classproduct.ClassManageService;
 import com.example.service.classproduct.ClassUnitService;
 import com.example.service.member.MemberService;
@@ -30,6 +36,7 @@ public class ApplyController {
     @Autowired ClassUnitService unitService;
     @Autowired ClassManageService manageService;
     @Autowired MemberService mService;
+    @Autowired ApplyService aService;
 
     @GetMapping(value = "/insert.do")
     public String applyGET(
@@ -79,6 +86,31 @@ public class ApplyController {
         
         return "/apply/insert";
         
+    }
+
+    @PostMapping(value = "/cancel.do")
+    public String cancelPOST(
+        @AuthenticationPrincipal User user,
+        @ModelAttribute Apply apply,
+        HttpSession httpSession) {
+
+        log.info(format, apply.toString());
+
+        int ret = aService.updateApplyCancel(apply);
+
+        // log.info(format, ret);
+
+        if(ret == 1) {
+            httpSession.setAttribute("alertMessage", "결제가 정상적으로 취소되었습니다.");
+            httpSession.setAttribute("alertUrl", "/member/mypage.do?menu="+1+"&page="+1);
+        }
+
+        else {
+            httpSession.setAttribute("alertMessage", "결제 취소에 실패했습니다. 재시도 바랍니다.");
+            httpSession.setAttribute("alertUrl", "/member/mypage.do?menu="+1+"&page="+1);
+        }
+        
+        return "redirect:/alert.do";
     }
 
     @GetMapping(value = "/success.do")

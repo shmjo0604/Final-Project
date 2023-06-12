@@ -35,6 +35,10 @@ public class ReviewServiceImpl implements ReviewService {
 
             r1Repository.save(obj);
 
+            ret.setChk(4);
+
+            applyRepository.save(ret);
+
             return 1;
 
         } catch (Exception e) {
@@ -135,4 +139,57 @@ public class ReviewServiceImpl implements ReviewService {
         }
     }
 
+    // 리뷰 하나만 조회
+    @Override
+    public ReviewView selectReviewOne(String id, long no) {
+        try {
+            return r1Repository.findByIdAndNo(id, no);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public int avgReview(String id) {
+        try {
+            return r1Repository.avgReview(id);
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    @Override
+    public List<ReviewView> selectReviewByIdPagenationAsc(String id, int start, int end) {
+        try {
+            return r1Repository.selectReviewByIdPagenationAsc(id, start, end);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ReviewImage selectReviewImage(long no) {
+        try {
+            return reviewImageRepository.findByNo(no);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Long> reviewImagelistNo(long no) {
+        try {
+            return reviewImageRepository.reviewImagelistNo(no);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }
+
+

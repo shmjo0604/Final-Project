@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -13,6 +14,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.example.handler.LoginSuccessHandler;
 import com.example.handler.LogoutHandler;
+import com.example.service.SecurityAdminServiceImpl;
 import com.example.service.SecurityServiceImpl;
 
 @Configuration
@@ -20,8 +22,33 @@ import com.example.service.SecurityServiceImpl;
 public class SecurityConfig {
 
     @Autowired SecurityServiceImpl userLoginService;
+    @Autowired SecurityAdminServiceImpl adminLoginService;
 
     @Bean
+    @Order(value = 1)
+    public SecurityFilterChain filterChain1(HttpSecurity http) throws Exception {
+
+        // 아래 두 주소만 필터 => 이 두 주소에 한해서만 여기서 filter -> 나머지 주소는 아래 filterchain에서 filter
+        http.antMatcher("/admin/login.do")
+            .antMatcher("/admin/loginaction.do")
+            .authorizeRequests().anyRequest().authenticated().and();
+
+        // 로그인 처리
+        http.formLogin()
+            .loginPage("/admin/login.do")
+            .loginProcessingUrl("/admin/loginaction.do")
+            .usernameParameter("id")
+            .passwordParameter("password")
+            .defaultSuccessUrl("/admin/home.do")
+            .permitAll();
+
+        http.userDetailsService(adminLoginService);
+
+        return http.build();
+    } 
+
+    @Bean
+    @Order(value = 2)
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         /* 권한 설정 */
@@ -33,6 +60,8 @@ public class SecurityConfig {
             .antMatchers("/member/joinsuccess.do").permitAll()
             .antMatchers("/member", "/member/*").authenticated()
             .antMatchers("/classunit", "/classunit/*").authenticated()
+            .antMatchers("/admin/login.do").permitAll()
+            // .antMatchers("/admin/insert.do").permitAll()
             .antMatchers("/admin", "/admin/*").hasAnyAuthority("ROLE_ADMIN")
             .anyRequest().permitAll();
 

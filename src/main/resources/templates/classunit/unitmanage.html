@@ -95,6 +95,7 @@
                 <div class="col-sm-8" style="margin-top: 30px; margin-left: 50px;">
                     <div style="border: 1px solid rgb(187, 184, 184); height:700px; padding:20px;">
                         <h3 style="font-weight: bold;" class="text-center">신청내역</h3><br />
+                        <a href="javascript:window.history.go(-1);" class="btn btn-success text-white">뒤로가기</a>
                         <th:block th:if="${#lists.isEmpty(list)}">
                             <h3 class="text-center">신청 인원이 없습니다.</h3>
                         </th:block>
@@ -106,6 +107,7 @@
                                         <th>신청일자</th>
                                         <th>아이디</th>
                                         <th>전화번호</th>
+                                        <th>신청인원</th>
                                         <th>승인내역</th>
                                     </tr>
                                 </thead>
@@ -114,6 +116,7 @@
                                         <td th:text="${#dates.format(obj.regdate, 'yyyy-MM-dd')}"></td>
                                         <td th:text="${obj.memberid}"></td>
                                         <td th:text="${obj.phone}"></td>
+                                        <td th:text="|${obj.person}명|"></td>
                                         <td>
                                             <div th:if="${obj.chk == 1}">
                                                 <span th:classappend="${obj.chk == 3} ? 'completed' : ''">결제완료</span>

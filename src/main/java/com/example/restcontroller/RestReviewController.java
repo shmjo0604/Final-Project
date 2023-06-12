@@ -6,6 +6,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -75,5 +78,25 @@ public class RestReviewController {
 
         return retMap;
     }
+
+    @GetMapping(value = "/selectreviewOne.json")
+    public Map<String, Object> selectreviewOneGET(
+            @RequestParam(name = "no", defaultValue = "0") long no,
+            @AuthenticationPrincipal User user,
+            Model model) {
+
+        Map<String, Object> map = new HashMap<>();
+        String id = user.getUsername();
+        ReviewView review = rService.selectReviewOne(id, no);
+
+        List<Long> reviewNolist = rService.reviewImagelistNo(no);
+
+        map.put("review", review);
+        map.put("reviewNolist", reviewNolist);
+
+        return map;
+
+    }
+
 
 }

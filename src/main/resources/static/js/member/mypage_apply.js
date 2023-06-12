@@ -164,6 +164,8 @@ function modalAction(no, classcode, price, title, classdate, classlevel, classst
     {}
   );
 
+  console.log(no);
+
   const img = document.getElementById("mainimage1");
   const no1 = document.getElementById("no");
   const title1 = document.getElementById("title");
@@ -213,7 +215,7 @@ async function modalAction1(no) {
   const headers = { "Content-Type": "application/json" };
   const { data } = await axios.get(url, { headers });
 
-  // console.log(data);
+  console.log(data);
 
   let chk = 0;
   let classlevel = 0;
@@ -226,6 +228,7 @@ async function modalAction1(no) {
   let title = "";
   let payment = "";
   // let no = 0;
+  let unitno = 0;
 
   let cancle = document.getElementById('cancle');
   let confirmdate1 = "";
@@ -238,7 +241,7 @@ async function modalAction1(no) {
 
   for (let tmp of data.list) {
 
-    console.log(tmp.statuschk)
+    // console.log(tmp.statuschk)
 
     if (tmp.statuschk == 1) { // 결제완료
       confirmdate1 = tmp.confirmdate + "";
@@ -253,7 +256,7 @@ async function modalAction1(no) {
     chk = tmp.chk;
     classlevel = tmp.classlevel
     classcode = tmp.classcode
-    // classcode = tmp.classcode;
+    classcode = tmp.classcode;
     classstart = tmp.classstart;
     classend = tmp.classend;
     classdate = tmp.classdate;
@@ -263,6 +266,7 @@ async function modalAction1(no) {
     title = tmp.title;
     // no = tmp.no;
     regdate = tmp.regdate + "";
+    unitno = tmp.unitno;
   }
 
   confirmdate1 = confirmdate1.substring(0, 10);
@@ -286,6 +290,10 @@ async function modalAction1(no) {
   const person2 = document.getElementById("person1");
   const payment2 = document.getElementById("payment1");
   let chk2 = document.getElementById("chk1");
+
+  const classcode1 = document.getElementById("classcode1");
+  const unitno1 = document.getElementById("unitno1");
+  const person4 = document.getElementById("person3");
 
   // 취소일자
   const cancledate2 = document.getElementById("cancledate1");
@@ -323,11 +331,11 @@ async function modalAction1(no) {
     levelname = "숙련자";
   }
 
-  console.log(levelname)
+  //console.log(levelname)
 
 
   mainimage3.src = "/specialday/member/image?classcode=" + classcode;
-  // no2.value = no;
+  no2.value = no;
   title2.value = "이름: " + title;
   classdate3.value = classdate;
   classstart2.value = classstart + "~" + classend;
@@ -344,23 +352,22 @@ async function modalAction1(no) {
   cancledate2.value = confirmdate2;
   applyregdate3.value = confirmdate1;
 
+  classcode1.value = classcode;
+  unitno1.value = unitno;
+  person4.value = person;
+
   modal.show();
 }
 
 
-function formaction(no) {
-  const form = document.getElementById("form1")
+function cancelAction() {
 
-  form.action = "http://192.168.219.103:8080/specialday/member/updatechk1.do";
-  form.style.display = "none";
-  form.method = "get";
+  if(confirm("정말 신청취소하시겠습니까?")) {
 
-  const input = document.createElement("input");
-  input.type = "hidden";
-  input.name = "no";
-  input.value = no;
+    const form = document.getElementById("form1");
 
-  form.appendChild(input);
+    form.submit();
 
-  form.submit();
+  }
+
 }

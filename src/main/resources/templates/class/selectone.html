@@ -475,6 +475,7 @@
         <form id="form-basket" th:action="@{basket.do}" method="post" style="display: none;">
             <input id="basket_unitno" name="unitno" type="number">
             <input id="basket_cnt" name="cnt" type="number">
+            <input name="classcode" type="number" th:value="${obj.classcode}">
         </form>
     </div>
 

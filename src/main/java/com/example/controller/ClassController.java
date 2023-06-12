@@ -342,7 +342,9 @@ public class ClassController {
     public String basketPOST(
         @RequestParam(name = "unitno") long unitno,
         @RequestParam(name = "cnt") int cnt,
-        @AuthenticationPrincipal User user
+        @RequestParam(name = "classcode") long classcode,
+        @AuthenticationPrincipal User user,
+        HttpSession httpSession
         ) {
 
         String id = user.getUsername();
@@ -361,12 +363,19 @@ public class ClassController {
 
         int ret = basketService.insertBasketOne(obj);
         
-        if(ret == 1) {
-            
-        }
         //log.info(format, ret);
 
-        return "redirect:alert.do";
+        if(ret == 1) {
+            httpSession.setAttribute("alertMessage", "장바구니에 추가되었습니다. 장바구니로 이동합니다.");
+            httpSession.setAttribute("alertUrl", "/member/basket.do");
+        }
+
+        else {
+            httpSession.setAttribute("alertMessage", "장바구니 추가에 실패했습니다. 재시도 바랍니다.");
+            httpSession.setAttribute("alertUrl", "/class/product.do?classcode=" + classcode);
+        }
+
+        return "redirect:/alert.do";
     }
 
 

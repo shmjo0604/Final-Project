@@ -15,6 +15,7 @@ import com.example.dto.ApplyView;
 import com.example.entity.Member;
 import com.example.entity.Notification;
 import com.example.mapper.ApplyMapper;
+import com.example.mapper.ClassUnitMapper;
 import com.example.repository.NotificationRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ApplyServiceImpl implements ApplyService {
 
     @Autowired ApplyMapper aMapper;
+    @Autowired ClassUnitMapper unitMapper;
     @Autowired NotificationRepository nRepository;
 
     final String format = "ApplyServiceImpl => {}";
@@ -114,7 +116,53 @@ public class ApplyServiceImpl implements ApplyService {
     @Override
     public int updateApplyCancel(Apply obj) {
         try {
-            return aMapper.updateApplyCancel(obj);
+
+            obj.setOwnerid(unitMapper.selectClassUnitViewOne(obj.getUnitno()).getMemberid());
+            
+            // 1. 신청 취소 (Apply table chk update 1 -> 2)
+
+            int ret1 = aMapper.updateApplyCancel(obj);
+
+            if(ret1 == 1) {
+
+                // 2. 신청 취소 상태 기록 (ApplyStatus Table에 insert)
+
+                int ret2 = aMapper.insertApplyStatusOne(obj.getNo(), 2);
+
+                if(ret2 == 1) {
+
+                    // 3. 신청 취소한 클래스 유닛 인원수 변경(취소 인원만큼 cnt -)
+
+                    int ret3 = aMapper.updateClassUnitApplyCancel(obj);
+
+                    if(ret3 == 1) {
+
+                        // 4. 신청 취소 알림 전송(ownerid 필요)
+
+                        Notification notification = new Notification();
+
+                        Member member = new Member();
+
+                        member.setId(obj.getOwnerid());
+
+                        notification.setMember(member);
+                        notification.setType("신청");
+                        notification.setContent(obj.getOwnerid() + "님이 클래스 신청 취소하였습니다.");
+                        notification.setUrl("/classunit/applymanage.do?classcode="+obj.getClasscode()+"&unitno="+obj.getUnitno());
+
+                        nRepository.save(notification);
+
+                        return 1;
+
+                    }
+
+                }
+
+            }
+
+            return 0;
+
+            
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
