@@ -304,6 +304,7 @@ public class MemberController {
             @RequestParam(name = "menu", defaultValue = "0") int menu,
             @RequestParam(name = "no", defaultValue = "0", required = false) long no,
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
+            @RequestParam(name = "chk", defaultValue = "0", required = false) int chk,
             @AuthenticationPrincipal User user,
             Model model) {
 

@@ -245,4 +245,22 @@ public class ClassManageServiceImpl implements ClassManageService {
         }
     }
 
+    @Override
+    public long countInquiryList(long no) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'countInquiryList'");
+    }
+
+    @Override
+    public long countInquiryListZero(long no) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'countInquiryListZero'");
+    }
+
+    @Override
+    public long countInquiryListOne(long no) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'countInquiryListOne'");
+    }
+
 }
