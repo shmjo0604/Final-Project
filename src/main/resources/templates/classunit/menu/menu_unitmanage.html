@@ -244,7 +244,7 @@
                                     <label for="discount" class="col-form-label" style="margin-left: 5px;">할인 비율
                                         설정(%)</label>
                                     <input type="number" class="form-control" id="discount" name="discount" value=""
-                                        disabled oninput="calculateDiscount()">
+                                        disabled oninput="calculateDiscount(); discountedPrice();">
                                 </div>
                                 <div style="width: 50%;">
                                     <label for="discount_price" class="col-form-label">계산된 금액</label>
@@ -617,7 +617,7 @@
             document.getElementById("discount").disabled = true;
         }
 
-        // 할인 금액 계산
+        // 추가금액이 합산되 총액에 할인가를 적용한 계산
         function calculateDiscount() {
             var defaultPrice = parseInt(document.getElementById("defaultPrice").value);
             var discount = parseInt(document.getElementById("discount").value);
@@ -630,10 +630,18 @@
             var discountAmount = totalAmount * discount / 100;
             var discountPrice = totalAmount - discountAmount;
 
-            // 할인된 금액을 discount_price input 요소에 업데이트
             document.getElementById("discount_price").value = discountPrice || totalAmount;
         }
         document.getElementById("discount").addEventListener("change", calculateDiscount);
+
+
+        // 할인가만 적용한 계산
+        function discountedPrice() {
+            var defaultPrice = parseInt(document.getElementById("defaultPrice").value);
+            var discount = parseInt(document.getElementById("discount").value);
+            var discountedPrice = defaultPrice - (defaultPrice * discount / 100);
+            document.getElementById("discount_price").value = discountedPrice;
+        }
 
         // 할일 비율 설정시 체크 후 입력란 활성화
         function toggleDiscountInput() {
