@@ -67,7 +67,13 @@
       overflow: hidden;
       text-overflow: ellipsis;
       font-size: smaller;
+    }
 
+    #content2{
+      width: 720px;
+      height: 260px;
+      border: 0;
+      background-color: white;
     }
   </style>
   <div class="row-md-3">
@@ -231,25 +237,25 @@
                       <div class="carousel-inner">
                         <div class="carousel-item active">
                           <div>
-                            <img th:src="@{/image/서핑.jpg}" class="d-block mt-1" id="rimage0"
+                            <img class="d-block mt-1" id="rimage0"
                               style="height: 290px; width: 500px" />
                           </div>
                         </div>
                         <div class="carousel-item">
                           <div>
-                            <img th:src="@{/image/가정.png}" class="d-block mt-1" id="rimage1"
+                            <img  class="d-block mt-1" id="rimage1"
                               style="height: 290px; width: 500px" />
                           </div>
                         </div>
                         <div class="carousel-item">
                           <div>
-                            <img th:src="@{/image/미술1.png}" class="d-block mt-1" id="rimage2"
+                            <img  class="d-block mt-1" id="rimage2"
                               style="height: 290px; width: 500px" />
                           </div>
                         </div>
                         <div class="carousel-item">
                           <div>
-                            <img th:src="@{/image/미술1.png}" class="d-block mt-1" id="rimage3"
+                            <img  class="d-block mt-1" id="rimage3"
                               style="height: 290px; width: 500px" />
                           </div>
                         </div>
@@ -389,10 +395,27 @@
 
       // 리뷰 이미지 조회
       mainimage1.src = "/specialday/member/image?classcode=" + data.review.classcode;
-      rimage0.src = "/specialday/review/image?no=" + reviewNolist[0];
-      rimage1.src = "/specialday/review/image?no=" + reviewNolist[1];
-      rimage2.src = "/specialday/review/image?no=" + reviewNolist[2];
-      rimage3.src = "/specialday/review/image?no=" + reviewNolist[3];
+      
+      if(typeof reviewNolist[0] != "undefined"){
+        rimage0.src = "/specialday/review/image?no=" + reviewNolist[0];}
+        else{
+          rimage0.src = "/specialday/review/image?no=0";
+        }
+        if(typeof reviewNolist[1] != "undefined"){
+        rimage1.src = "/specialday/review/image?no=" + reviewNolist[1];}
+        else{
+          rimage1.src = "/specialday/review/image?no=0";
+        }
+        if(typeof reviewNolist[2] != "undefined"){
+        rimage2.src = "/specialday/review/image?no=" + reviewNolist[2];}
+        else{
+          rimage2.src = "/specialday/review/image?no=0";
+        }
+        if(typeof reviewNolist[3] != "undefined"){
+        rimage3.src = "/specialday/review/image?no=" + reviewNolist[3];}
+        else{
+          rimage3.src = "/specialday/review/image?no=0";
+        }
 
       title.value = "이름: " + data.review.title;
       classlevel.value = "난이도: " + levelname;
