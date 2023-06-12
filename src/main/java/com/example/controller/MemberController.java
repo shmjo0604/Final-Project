@@ -160,7 +160,7 @@ public class MemberController {
             model.addAttribute("chk2", chk2);
             model.addAttribute("chk3", chk3);
 
-            if (chk >= 3) {
+            if (chk > 3) {
                 return "redirect:mypage.do?menu=1&page=1";
             }
             if (chk == 1) {
