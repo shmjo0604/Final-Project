@@ -855,5 +855,3 @@ function insertClass() {
 // nonClick.forEach((e) => {
 //     e.addEventListener("click", handleClick);
 // });
-
-const contextPath = $('#contextPathHolder').attr('data-contextPath');
