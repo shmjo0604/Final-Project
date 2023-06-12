@@ -175,18 +175,20 @@
                             <th:block th:each="obj : ${list}" th:if="${obj.chk == 1}">
                                 <div class="col">
                                     <div class="class">
-                                        <a th:href="@{/class/product.do( classcode=${ obj.classcode } )}" class="new-c1">
+                                        <a th:href="@{/class/product.do( classcode=${ obj.classcode } )}"
+                                            class="new-c1">
                                             <div class="new-c2">
                                                 <div class="class-image">
                                                     <img th:src="@{/class/image(no=${obj.mainImg})}" alt="클래스 메인 이미지"
-                                                    width="300" />
+                                                        width="300" />
                                                 </div>
                                                 <span>
                                                     <p class="class-name" th:text="${obj.title}"></p>
                                                     <p class="local" th:text="${obj.address1}"></p>
                                                     <div class="row">
                                                         <p class="price col-10" th:text="${obj.price}"></p>
-                                                        <span class="col-2" style="font-size: 15px; color: rgb(31, 40, 61); padding: 0%;">원</span>
+                                                        <span class="col-2"
+                                                            style="font-size: 15px; color: rgb(31, 40, 61); padding: 0%;">원</span>
                                                     </div>
                                                 </span>
                                             </div>
@@ -202,10 +204,31 @@
             <!-- 커뮤니티 영역 -->
             <div class="main-cumu">
                 <h3 class="seb-title"> 커뮤니티 영역 </h2>
-                    <div id="tabMenu">
-
-
-                    </div>
+                    <table class="table teble-hover text-striped" style="border: 1px rgb(184, 181, 181) ;">
+                        <br />
+                        <thead>
+                            <tr>
+                                <th scope="content">글내용</th>
+                                <th scope="id">작성자ID</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <td style="margin: 100%;">  <li><a href="./community/selectone.do?no=68"style="text-decoration:none;color: black ;">제주도에 가족들이 다같이 할만한 클래스 있을까요?</a></li>
+                          <td style="margin: 100%;">  <li><a>test8</a></li>
+                          </td>
+                        </tbody>
+                        <tbody>
+                            <td style="margin: 100%;">  <li><a href="./community/selectone.do?no=69"style="text-decoration:none;color: black ;">서울 뚜벅이 여행자입니다</a></li>
+                            <td style="margin: 100%;">  <li><a>test8</a></li>
+                            </td>
+                          </tbody>
+                          <tbody>
+                            <td style="margin: 100%;">  <li><a href="./community/selectone.do?no=70"style="text-decoration:none;color: black ;">부산 패들보트 클래스 추천해요!</a></li>
+                            <td style="margin: 100%;">  <li><a>test8</a></li>
+                            </td>
+                          </tbody>
+                    </table>
             </div>
         </div>
     </div>
@@ -223,80 +246,80 @@
 
         const contextPath = $('#contextPathHolder').attr('data-contextPath');
 
-        $(document).ready(function(){
+        $(document).ready(function () {
             var nowNum = 0;
             var bannerObj = $('.slide li');
             var maxLength = bannerObj.length;
             var timer = 3000; // 자동 롤링되는 타임 설정
-            var autoRun = setInterval(function(){rollingFn('right');},timer);
+            var autoRun = setInterval(function () { rollingFn('right'); }, timer);
             var stopBtn = $('.stopBtn');
             var playBtn = $('.playBtn');
             bannerObj.eq(nowNum).fadeIn();
-            $('.nextBtn').bind('click',function(){
+            $('.nextBtn').bind('click', function () {
                 rollingFn('right');
             });
-            $('.prevBtn').bind('click',function(){
+            $('.prevBtn').bind('click', function () {
                 rollingFn('left');
             });
-            stopBtn.bind('click',function(){
+            stopBtn.bind('click', function () {
                 stopAndGoFn(true);
             });
-            playBtn.bind('click',function(){
+            playBtn.bind('click', function () {
                 stopAndGoFn(false);
             });
-            function rollingFn(direction){
-                if(direction=='right'){
-                    nowNum = nowNum+1;
-                    if(nowNum>maxLength-1){
+            function rollingFn(direction) {
+                if (direction == 'right') {
+                    nowNum = nowNum + 1;
+                    if (nowNum > maxLength - 1) {
                         nowNum = 0;
                     }
-                }else{
-                    nowNum = nowNum-1;
-                    if(nowNum<0){
-                        nowNum = maxLength-1;
+                } else {
+                    nowNum = nowNum - 1;
+                    if (nowNum < 0) {
+                        nowNum = maxLength - 1;
                     }
                 }
                 bannerObj.hide().eq(nowNum).fadeIn();
             }
-            function stopAndGoFn(bool){
-                if(bool==true){
+            function stopAndGoFn(bool) {
+                if (bool == true) {
                     clearInterval(autoRun);
-                }else if(bool==false){
-                    clearInterval(autoRun);			
-                    autoRun = setInterval(function(){rollingFn('right');},timer);
+                } else if (bool == false) {
+                    clearInterval(autoRun);
+                    autoRun = setInterval(function () { rollingFn('right'); }, timer);
                 }
             }
         });
 
 
-    // 페이지 좌우로 넘기기
-        $(document).ready(function(){
-	var nowNum = 0;
-	var maxLength = $('.slide li').length;
-	$('.slide li').eq(nowNum).show();
-	$('.next').bind('click',function(){
-		nowNum = nowNum+1;
-		if(nowNum>maxLength-1){
-			nowNum = 0;
-		}
-		console.log(nowNum);
-		$('.slide li').hide();
-		$('.slide li').eq(nowNum).show();
-	    });
+        // 페이지 좌우로 넘기기
+        $(document).ready(function () {
+            var nowNum = 0;
+            var maxLength = $('.slide li').length;
+            $('.slide li').eq(nowNum).show();
+            $('.next').bind('click', function () {
+                nowNum = nowNum + 1;
+                if (nowNum > maxLength - 1) {
+                    nowNum = 0;
+                }
+                console.log(nowNum);
+                $('.slide li').hide();
+                $('.slide li').eq(nowNum).show();
+            });
 
-    $('.prev').bind('click',function(){
-		nowNum = nowNum-1;
-		if(nowNum>maxLength+1){
-			nowNum = 0;
-		}
-		console.log(nowNum);
-		$('.slide li').hide();
-		$('.slide li').eq(nowNum).show();
-	    });
-    });
+            $('.prev').bind('click', function () {
+                nowNum = nowNum - 1;
+                if (nowNum > maxLength + 1) {
+                    nowNum = 0;
+                }
+                console.log(nowNum);
+                $('.slide li').hide();
+                $('.slide li').eq(nowNum).show();
+            });
+        });
     </script>
-    
-    
+
+
     <!--Main js-->
     <script th:src="@{/js/main.js}"></script>
 </body>

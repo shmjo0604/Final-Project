@@ -51,7 +51,9 @@
             border: 1px solid;
         }
 
-        
+        .replytable {
+            padding-bottom: 50px;
+        }
     </style>
 </head>
 
@@ -76,9 +78,11 @@
             <label class="content" name="content" th:utext="${community.content}"
                 style="padding-bottom:80px;font-size: 18px;"></label><br />
             <div class="buttons">
-                <button class="btn btn-sm btn-primary"> <a class="nav-link"
-                        th:href="@{update.do(no=${community.no})}">수정</a></button>
-                <input type="hidden" name="no" th:value="${community.no}" />
+                <div th:with ="username =${community.member}">
+                    <button class="btn btn-sm btn-primary" th:if="${member != null and member.id == username}">
+                        <a type="button" class="nav-link" th:href="@{update.do(no=${community.no})}">수정</a></button>
+                    <input type="hidden" name="no" th:value="${community.no}" />
+                </div>
                 <button class="btn btn-sm btn-primary">
                     <a class="nav-link" th:href="@{selectlist.do}">목록</a>
                 </button>
@@ -86,33 +90,65 @@
                     style="display: inline-block;">
                     <input type="hidden" name="no" th:value="${community.no}" />
                     <button type="button" class="btn btn-sm btn-primary" th:onclick="formAction1(2)">삭제</button>
+                    </th:block>
                 </form>
-             
+
             </div>
-           
+
             <!--댓글-->
-            <form class="mb-3" name ="replybox" style="padding-top: 100px;" id ="reply_form" th:action="@{/community/replyinsert.do}"method="post">
-                <input type="hidden" name="community.no" th:value="${community.no}" />
-                <input type="text" class="form-control" id="memberid" th:value="${user.username}" name="member.id" readonly />
-                <textarea id="reply_content" class="form-control mb-2" rows="4" name="content" placeholder="욕설과 비방은 형사처벌의 대상이 될 수 있습니다"></textarea>
-                <button type="submit" class="btn btn-outline btn-primary" onclick="insertreply()">댓글</button>
+            <form class="mb-3" name="replybox" style="padding-top: 100px;" id="reply_form"
+                th:action="@{/community/replyinsert.do}" method="post">
+                <div>
+                    <input type="hidden" name="community.no" th:value="${community.no}" />
+                    <div style="display: inline-block; width: 100%;">
+                        <input type="text" class="form-control" id="memberid" th:value="${user.username}"
+                            name="member.id" readonly />
+                        <textarea id="reply_content" class="form-control mb-2" rows="4" name="content"
+                            placeholder="욕설과 비방은 형사처벌의 대상이 될 수 있습니다"></textarea>
+                        <button style="float: right;" type="submit" class="btn btn-outline btn-primary"
+                            onclick="insertreply()">등록</button>
+                    </div>
+                </div>
             </form>
 
 
             <!--댓글 목록-->
-            <hr />
-            <table>
-                <thead>
-                    <tr th:each ="tmp : ${list}">
-                        <td class ="fw-bold"th:text ="${tmp.member.id}"></td>
-                        <td th:text ="${tmp.content}"></td>
-                    </tr>
-                </thead>
-            </table>
+            <h5>댓글</h5>
+            <div style="background-color: rgb(234, 234, 234);">
+                <tr th:each="tmp : ${list}">
+                    <div style="padding: 10px; margin-left: 20px; margin-right: 20px;">
+                        <div style="font-weight: bold;">
+                            <td th:text="${tmp.member.id}">&nbsp;</td>
+                        </div>
+
+                        <div>
+                            <td th:text="${tmp.content}"></td>
+                        </div>
+                        <div style="font-size:small; margin-top: 10px;">
+                            <td th:text="${tmp.regdate}"></td>
+                        </div>
+                        <hr />
+                    </div>
+                </tr>
+            </div>
+
+
+
+
+
+
+
 
 
         </div>
     </article>
+    <br />
+    <!--footer 영역-->
+
+    <footer th:replace="~{footer :: footerFragment}"></footer>
+
+
+
     <!--jQuery-->
     <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
     <!--axios library-->
@@ -149,12 +185,12 @@
 
         }
         function insertreply() {
-            const reply_content =document.getElementById("reply_content");
-                      
- 
+            const reply_content = document.getElementById("reply_content");
 
-            if(reply_content.value <=0){
-                alert ('댓글을 입력해주세요')
+
+
+            if (reply_content.value <= 0) {
+                alert('댓글을 입력해주세요')
                 reply_content.focus();
                 return false;
             }
