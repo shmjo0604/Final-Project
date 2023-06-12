@@ -222,6 +222,8 @@ public class MemberController {
             float avg = r1Service.avgReview(id);
 
             log.info(format, avg);
+            log.info(format, total);
+            log.info(format, list1);
 
             model.addAttribute("total", total);
             model.addAttribute("avg", avg);

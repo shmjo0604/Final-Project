@@ -119,7 +119,7 @@
           <img th:src="@{/member/image(classcode=${obj.classcode})}" style="width: 100px; height: 100px" />
         </td>
         <td style="font-size: small">
-          <div class="mb-2"><a th:text="|<${obj.title}>|" class="a_underline" href="#"></div>
+          <div class="mb-2"><a th:text="|<${obj.title}>|" class="a_underline" th:href="@{/class/product.do(classcode=${obj.classcode})}"></div>
           </a>
           <div id="classdate1" th:text=" '날짜: ' + ${obj.classdate}"></div>
           <div th:text=" '시간: ' + ${obj.classstart} + '~' + ${obj.classend}"></div>
@@ -188,7 +188,7 @@
                     <div class="summary">
                       가격: <span id="price"></span>
                     </div>
-                    <input class="summary" id="no" name="no" type="block" />
+                    <input class="summary d-none" id="no" name="no" type="block" />
                   </div>
                 </div>
 

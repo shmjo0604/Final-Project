@@ -95,7 +95,22 @@
         <div class="container border-top">
             <div class="maincontent row">
                 <!-- left 영역 -->
-                <div class="sidebar col-3">
+                <div class="col-sm-3" style="width: 250px; left: 0; height: 800px; border: 1px solid rgba(199, 196, 196, 0.466);">
+                    <div class="sidevar">
+                        <div class="sidevar-menu">
+                            <ul style="padding-left : 5px; padding-right: 5px; padding-top: 20px;">
+                                <span>※ 클래스 및 문의관리</span>
+                                <hr style="border: 0.5px solid rgb(0, 0, 0); margin-top: 10px;"/>
+                                <li style="list-style: none;"><a th:href="@{myclass.do(menu=1)}" style="text-decoration: none; color: black; font-weight: bold; font-size: medium;">클래스 조회</a></li>
+                                <hr/>
+                                <li style="list-style: none;"><a th:href="@{myclass.do(menu=2)}" style="text-decoration: none; color: black; font-weight: bold; font-size: medium;">문의내역 조회</a></li>
+                                <hr/>
+                                
+                              </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="sidebar col-3">
                     <div class="left2 mt-5">
                         <nav id="sidenav">
                             <ul id='sidebarul'>
@@ -116,7 +131,7 @@
                             </ul>
                         </nav>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- right 영역 -->
                 
