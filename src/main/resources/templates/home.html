@@ -151,6 +151,8 @@
                                                 </div>
                                                 <span>
                                                     <p class="class-name" th:text="${obj.title}"></p>
+                                                    <img th:src="@{/class/image(no=${obj.profileImg} )}" style="width: 25px; height: 25px; object-fit:cover; float: right; border-radius: 10px; margin-right: 15px;" />
+                                                    <p class="price col-8" th:text="${obj.nickname}"></p>
                                                     <p class="local" th:text="${obj.address1}"></p>
                                                     <div class="row">
                                                         <p class="price col-10" th:text="${obj.price}"></p>

@@ -39,7 +39,9 @@ public class MainController {
                 // System.out.println(obj.getClasscode());
 
                 long mainImg = cService.selectClassMainImageNo(obj.getClasscode());
+                long profileImg = cService.selectClassProfileImageNo(obj.getClasscode());
                 obj.setMainImg(mainImg);
+                obj.setProfileImg(profileImg);
             }
         }
 

@@ -133,4 +133,7 @@ public class ClassProduct {
   @Transient
   private long mainImg;
 
+  @Transient
+  private long profileImg;
+
 }
