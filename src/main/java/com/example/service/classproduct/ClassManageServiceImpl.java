@@ -32,7 +32,10 @@ public class ClassManageServiceImpl implements ClassManageService {
                 for (ClassProduct classProduct : list) {
                     long classcode = classProduct.getClasscode();
                     long mainImg = cMapper.selectClassMainImageNo(classcode);
+                    long profileImg = cMapper.selectClassProfileImageNo(classcode);
+
                     classProduct.setMainImg(mainImg);
+                    classProduct.setProfileImg(profileImg);
                 }
             }
             return list;

@@ -173,7 +173,9 @@
                                 <div class="card-body">
                                     <p class="card-title" style="font-weight: bold; font-size: large;"
                                         th:text="${obj.title}"></p>
-                                    상호명 : <p class="card-nickname"
+                                    상호명 : 
+                                    <img th:src="@{/class/image(no=${obj.profileImg} )}" style="width: 25px; height: 25px; object-fit:cover; float: right; border-radius: 10px;" />
+                                    <p class="card-nickname"
                                         style="font-weight: normal; font-size: medium; float: right;"
                                         th:text="${obj.nickname}"></p>
                                     <!-- 소개글: <p class="card-text" style="font-weight: normal; font-size: medium;" th:utext="${obj.intro}"></p> -->
