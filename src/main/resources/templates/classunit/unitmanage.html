@@ -51,6 +51,24 @@
         .completed {
             background-color: unset;
         }
+
+        .table.table-borderd.center,
+        .table.table-borderd.center thead tr th,
+        .table.table-borderd.center tbody tr td {
+            text-align: center;
+        }
+
+        /* 사이드바 메뉴 hover */
+        .menu {
+            display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 7px;
+        }
+
+        .menu:hover { background-color: rgb(245, 241, 241);}
+
+        .btn:hover{background-color: rgb(245, 241, 241);}
     </style>
 </head>
 
@@ -66,26 +84,19 @@
         <div id="body-content" class="container">
             <div class="row">
                 <!-- left -->
-                <div class="col-sm-3"
-                    style="width: 250px; left: 0; height: 800px; border: 1px solid rgba(199, 196, 196, 0.466);">
+                <div class="col-sm-3" style="width: 250px; left: 0; height: 800px; border: 1px solid rgba(199, 196, 196, 0.466);">
                     <div class="sidevar">
                         <div class="sidevar-menu">
                             <ul style="padding-left : 5px; padding-right: 5px; padding-top: 20px;">
-                                <span>※ 일정 관리 및 신청 관리</span>
-                                <hr style="border: 0.5px solid rgb(0, 0, 0); margin-top: 10px;" />
-                                <li style="list-style: none;"><a th:href="@{myunit.do(classcode=${classcode}, menu=1)}"
-                                        style="text-decoration: none; color: black; font-weight: bold; font-size: medium;">일정
-                                        관리</a></li>
-                                <hr />
-                                <li style="list-style: none;"><a th:href="@{myunit.do(classcode=${classcode}, menu=2, page=1)}"
-                                        style="text-decoration: none; color: black; font-weight: bold; font-size: medium;">신청
-                                        관리</a></li>
-                                <hr />
-
+                                <label style="font-size: small;"><i class="fa-solid fa-list" style="color: black;"></i> 일정 관리 및 신청 관리</label>
+                                <hr style="border: 0.5px solid rgb(0, 0, 0); margin-top: 5px;"/>
+                                <li style="list-style: none;"><a th:href="@{myunit.do(classcode=${classcode}, menu=1)}" style="text-decoration: none; color: black; font-weight: bold; font-size: medium;" class="menu">일정 관리</a></li>
+                                <hr style="margin-top: 5px; margin-bottom: 5px;" />
+                                <li style="list-style: none;"><a th:href="@{myunit.do(classcode=${classcode}, menu=2)}" style="text-decoration: none; color: black; font-weight: bold; font-size: medium;" class="menu">신청 관리</a></li>
+                                <hr style="margin-top: 5px; margin-bottom: 5px;" />
                             </ul>
-                            <button class="btn btn-sm"
-                                style="width: 215px; border: 1px solid rgba(199, 196, 196, 0.466); height: 30px; margin-top: 560px; color: gray;"><a
-                                    class="nav-link" th:href="@{/member/myclass.do?menu=1}">클래스 관리</a></button>
+                            <button class="btn btn-sm" style="width: 215px; border: 1px solid rgba(224, 221, 221, 0.466); height: 40px; margin-top: 560px; color: gray;"><a class="nav-link" th:href="@{/member/myclass.do?menu=1}">클래스 관리</a></button>
+                            
                         </div>
                     </div>
                 </div>
@@ -94,10 +105,10 @@
                 <!-- right -->
                 <div class="col-sm-8" style="margin-top: 30px; margin-left: 50px;">
                     <div style="border: 1px solid rgb(187, 184, 184); height:700px; padding:20px;">
-                        <h3 style="font-weight: bold;" class="text-center">신청내역</h3><br />
-                        <a href="javascript:window.history.go(-1);" class="btn btn-success text-white">뒤로가기</a>
+                        <a href="javascript:window.history.go(-1);"><i class="fa-solid fa-circle-chevron-left" style="color: rgb(23, 99, 59); font-size: x-large;"></i></a>
+                        <h3 style="font-weight: bold;" class="text-center">신청 내역</h3><br />
                         <th:block th:if="${#lists.isEmpty(list)}">
-                            <h3 class="text-center">신청 인원이 없습니다.</h3>
+                            <h3 class="text-center" style="font-size: larger; color: gray; margin-top: 250px; margin-bottom: 300px;">신청 인원이 없습니다.</h3>
                         </th:block>
 
                         <th:block th:if="${!#lists.isEmpty(list)}">
@@ -109,6 +120,7 @@
                                         <th>전화번호</th>
                                         <th>신청인원</th>
                                         <th>승인내역</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -117,16 +129,16 @@
                                         <td th:text="${obj.memberid}"></td>
                                         <td th:text="${obj.phone}"></td>
                                         <td th:text="|${obj.person}명|"></td>
-                                        <td>
-                                            <div th:if="${obj.chk == 1}">
-                                                <span th:classappend="${obj.chk == 3} ? 'completed' : ''">결제완료</span>
-                                                <button type="button" class="btn btn-sm" style="border: 1px solid gray; background-color: ghostwhite;" th:onclick="'update(' + ${obj.no} + ',' + ${obj.unitno} + ', this)'">승인</button>
-                                            </div>
-                                            <div th:if="${obj.chk == 3}">
-                                                <span>참여완료</span>
-                                                <button type="button" class="btn btn-sm" style="border: 1px solid gray;" disabled>승인</button>
-                                            </div>
-                                        </td>
+
+                                        <div th:if="${obj.chk == 1}">
+                                            <td><span th:classappend="${obj.chk == 3} ? 'completed' : ''">결제완료</span></td>
+                                            <td><button type="button" class="btn btn-sm" style="border: 1px solid gray; background-color: ghostwhite;" th:onclick="'update(' + ${obj.no} + ',' + ${obj.unitno} + ', this)'">승인</button></td>
+                                        </div>
+                                        <div th:if="${obj.chk == 3}">
+                                            <td><span>참여완료</span></td>
+                                            <td><button type="button" class="btn btn-sm" style="border: 1px solid gray; width: 70px;" disabled>승인</button></td>
+                                        </div>
+                  
                                     </tr>
                                 </tbody>
                             </table>

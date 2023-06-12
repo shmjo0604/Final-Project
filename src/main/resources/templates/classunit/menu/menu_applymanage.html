@@ -6,45 +6,75 @@
         .completed {
             background-color: unset;
         }
-    </style>
-    <table class="table table-borderd center">
-        <thead>
-            <tr>
-                <th>번호</th>
-                <th>날짜</th>
-                <th>시간</th>
-                <th>난이도</th>
-                <th>신청인원</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="obj : ${list}">
-                <td>
-                    <input type="hidden" th:value="${obj.no}" th:text="${obj.rnum}" disabled>
-                </td>
-                <td th:text="${obj.classdate}"></td>
-                <td>
-                    <span th:text="${obj.classstart}"></span> ~ <span th:text="${obj.classend}"></span>
-                </td>
-                <td>
-                    <span th:if="${obj.classlevel == 1}">입문자</span>
-                    <span th:if="${obj.classlevel == 2}">경험자</span>
-                    <span th:if="${obj.classlevel == 3}">숙련자</span>
-                </td>
-                <td>
-                    <span th:text="|${obj.cnt}명|"></span>
-                </td>
-                <td>
-                    <button class="btn btn-sm" style="width: 100px; border:1px solid gray">
-                        <a class="nav-link" th:href="@{/classunit/applymanage.do(classcode=${obj.classcode}, unitno=${obj.no})}">보러가기</a>
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 
-    <div class="row justify-content-center">
+        .table.table-borderd.center,
+        .table.table-borderd.center thead tr th,
+        .table.table-borderd.center tbody tr td {
+            text-align: center;
+        }
+        
+        /* 페이지네이션 스타일 */
+        .pagination-sm .page-item:not(.disabled) .page-link {
+            background-color: #ffffff; /* 활성화된 페이지의 배경색 */
+            color: #000000; /* 활성화된 페이지의 텍스트 색상 */
+            border-color: #c5c6c5; /* 페이지 링크의 테두리 색상 */
+            transition: background-color 0.3s, color 0.3s; /* 효과의 속도 및 속성 지정 */
+        }
+        
+        .pagination-sm .page-item:not(.disabled) .page-link:hover {
+            background-color: #c5c6c5; /* 마우스 호버 시 배경색 변경 */
+            color: #ffffff; /* 마우스 호버 시 텍스트 색상 변경 */
+        }
+        
+        .pagination-sm .page-item.disabled .page-link {
+            color: #6c757d; /* 비활성화된 페이지의 텍스트 색상 */
+            border-color: #c5c6c5;
+        }
+
+    </style>
+
+    <span style="font-weight: bold; font-size: small;"><i class="fa-solid fa-gear" style="color: #000000;"></i> 들어온 신청내역을 관리하세요.</span>
+    <div style="border: 1px solid white; height: 540px; margin-bottom: 15px; margin-top: 15px;">
+        <table class="table table-borderd center" >
+            <thead class="table-borderd" style="border-bottom: 2px solid #ccc;">
+                <tr>
+                    <th>번호</th>
+                    <th>일자</th>
+                    <th>시간</th>
+                    <th>난이도</th>
+                    <th>신청인원</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="">
+                <tr th:each="obj : ${list}">
+                    <td style="font-weight: bold;">
+                        <input type="hidden" th:value="${obj.no}" th:text="${obj.rnum}" disabled >
+                    </td>
+                    <td th:text="${obj.classdate}"></td>
+                    <td>
+                        <span th:text="${obj.classstart}"></span> ~ <span th:text="${obj.classend}"></span>
+                    </td>
+                    <td>
+                        <span th:if="${obj.classlevel == 1}">입문자</span>
+                        <span th:if="${obj.classlevel == 2}">경험자</span>
+                        <span th:if="${obj.classlevel == 3}">숙련자</span>
+                    </td>
+                    <td>
+                        <span th:text="|${obj.cnt}명|"></span>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm" style="width: 100px; border:1px solid rgb(195, 191, 191)">
+                            <a class="nav-link" th:href="@{/classunit/applymanage.do(classcode=${obj.classcode}, unitno=${obj.no})}">보기</a>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    
+    </div>
+    
+    <div class="row justify-content-center pagination-container">
         <div class="col-4">
             <ul id="pagination-demo" class="pagination-sm "></ul>
         </div>
@@ -85,10 +115,10 @@
 			$('#pagination-demo').twbsPagination({
 				totalPages : Number(pages),
 				visiblePages : 10,
-				first : '처음',
-				last : '마지막',
-				prev : '이전',
-				next : '다음',
+				first : '≪',
+				last : '≫',
+				prev : '<',
+				next : '>',
 				initiateStartPageClick : false,
 				startPage : Number(/*[[${param.page}]]*/),
 				// 주소창에서 page 값을 받아옴 -> 그 값에 해당하는 목록 버튼이 활성

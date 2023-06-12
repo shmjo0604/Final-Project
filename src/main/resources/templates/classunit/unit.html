@@ -46,6 +46,18 @@
             position: relative;
             height: 150px;
         }
+
+         /* 사이드바 메뉴 hover */
+        .menu {
+            display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 7px;
+        }
+
+        .menu:hover { background-color: rgb(245, 241, 241);}
+
+        .btn:hover{background-color: rgb(245, 241, 241);}
     
     </style>
 </head>
@@ -65,15 +77,15 @@
                     <div class="sidevar">
                         <div class="sidevar-menu">
                             <ul style="padding-left : 5px; padding-right: 5px; padding-top: 20px;">
-                                <span>※ 일정 관리 및 신청 관리</span>
-                                <hr style="border: 0.5px solid rgb(0, 0, 0); margin-top: 10px;"/>
-                                <li style="list-style: none;"><a th:href="@{myunit.do(classcode=${classcode}, menu=1)}" style="text-decoration: none; color: black; font-weight: bold; font-size: medium;">일정 관리</a></li>
-                                <hr/>
-                                <li style="list-style: none;"><a th:href="@{myunit.do(classcode=${classcode}, menu=2)}" style="text-decoration: none; color: black; font-weight: bold; font-size: medium;">신청 관리</a></li>
-                                <hr/>
-                                
+                                <label style="font-size: small;"><i class="fa-solid fa-list" style="color: black;"></i> 일정 관리 및 신청 관리</label>
+                                <hr style="border: 0.5px solid rgb(0, 0, 0); margin-top: 5px;"/>
+                                <li style="list-style: none;"><a th:href="@{myunit.do(classcode=${classcode}, menu=1)}" style="text-decoration: none; color: black; font-weight: bold; font-size: medium;" class="menu">일정 관리</a></li>
+                                <hr style="margin-top: 5px; margin-bottom: 5px;" />
+                                <li style="list-style: none;"><a th:href="@{myunit.do(classcode=${classcode}, menu=2)}" style="text-decoration: none; color: black; font-weight: bold; font-size: medium;" class="menu">신청 관리</a></li>
+                                <hr style="margin-top: 5px; margin-bottom: 5px;" />
                             </ul>
-                            <button class="btn btn-sm" style="width: 215px; border: 1px solid rgba(199, 196, 196, 0.466); height: 30px; margin-top: 560px; color: gray;"><a class="nav-link" th:href="@{/member/myclass.do?menu=1}">클래스 관리</a></button>
+                            <button class="btn btn-sm" style="width: 215px; border: 1px solid rgba(199, 196, 196, 0.466); height: 40px; margin-top: 560px; color: gray;"><a class="nav-link" th:href="@{/member/myclass.do?menu=1}">클래스 관리</a></button>
+                            
                         </div>
                     </div>
                 </div>
