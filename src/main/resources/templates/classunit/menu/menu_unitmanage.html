@@ -148,8 +148,14 @@
             border-left: 1px solid #ccc;
             /* 세로선 스타일 및 색상 설정 */
         }
-    </style>
 
+        input::placeholder {
+            font-size: small;
+            font-weight: lighter;
+        }
+
+        .btn:hover { background-color: rgb(245, 245, 245);}
+    </style>
 
     <!-- 일정 등록 modal -->
     <div class="modal fade" id="unitInsertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -157,7 +163,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">클래스 일정을 입력하세요.</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">클래스 일정을 등록하세요.</h5>
                     <button type="button" class="close" onclick="cancel()"
                         style="border: none; background-color: white; font-size: xx-large;">
                         <span aria-hidden="true">&times;</span>
@@ -167,45 +173,44 @@
                     <div class="form-group flex-container" style="display: inline-block;">
                         <div class="row vertical-line">
                             <div class="col-md-6">
-                                <label
-                                    style="font-size: small; margin-top: 10px; margin-bottom: 20px; font-weight: bold;">*
-                                    필수 입력사항입니다.</label><br />
+                                <label style="font-size: small; margin-top: 10px; margin-bottom: 20px; font-weight: bold;">( * )은 필수 입력사항입니다.</label><br />
                                 <input type="hidden" class="form-control" id="classcode" th:value="${classcode}"
                                     name="classcode">
-                                <div class="row" style=" margin-bottom: 10px;">
-                                    <div class="col-sm-3" style="width: 50%;">
-                                        <label for="minimum" class="col-form-label">최소인원</label>
-                                        <input type="number" class="form-control" id="minimum" name="minimum">
-                                    </div>
-                                    <div class="col-sm-3" style="width: 50%;">
-                                        <label for="maximum" class="col-form-label">최대인원</label>
-                                        <input type="number" class="form-control" id="maximum" name="maximum">
-                                    </div>
-                                </div>
 
                                 <div class="row" style=" margin-bottom: 10px;">
                                     <div class="col-sm-3" style="width: 100%;">
-                                        <label for="classdate" class="col-form-label">날짜</label>
-                                        <input class="form-control datepicker date" id="classdate" name="classdate">
+                                        <label for="classdate" class="col-form-label">* 날짜</label>
+                                        <input class="form-control datepicker date" id="classdate" name="classdate" placeholder="클래스를 진행할 날짜를 입력하세요">
                                     </div>
                                     <input type="hidden" name="classday" id="classday">
                                 </div>
 
-                                <div class="row">
+                                <div class="row" style="margin-top: 20px;">
                                     <div class="col-sm-3" style="width: 50%;">
-                                        <label for="classstart" class="col-form-label">시작 시각</label>
+                                        <label for="classstart" class="col-form-label">* 시작 시각</label>
                                         <input type="time" class="form-control" id="classstart" name="classstart">
                                     </div>
                                     <div class="col-sm-3" style="width: 50%;">
-                                        <label for="classend" class="col-form-label">종료 시각</label>
+                                        <label for="classend" class="col-form-label">* 종료 시각</label>
                                         <input type="time" class="form-control" id="classend" name="classend">
                                     </div>
                                 </div>
+
+                                <div class="row" style="margin-top: 20px;">
+                                    <div class="col-sm-3" style="width: 50%;">
+                                        <label for="minimum" class="col-form-label">* 최소인원</label>
+                                        <input type="number" class="form-control" id="minimum" name="minimum" placeholder="최소인원을 입력하세요">
+                                    </div>
+                                    <div class="col-sm-3" style="width: 50%;">
+                                        <label for="maximum" class="col-form-label">* 최대인원</label>
+                                        <input type="number" class="form-control" id="maximum" name="maximum" placeholder="최대인원을 입력하세요">
+                                    </div>
+                                </div>        
                             </div>
                             <div class="col-md-6">
                                 <div class="col">
                                     <label
-                                        style="font-size: small; margin-top: 10px; margin-bottom: 10px; font-weight: bold;">*
+                                        style="font-size: small; margin-top: 10px; margin-bottom: 10px; font-weight: bold; color: rgb(221, 52, 52);">
                                         클래스 난이도와 수강금액에 변동이있을 시 작성해주세요.</label><br />
                                     <div class="form-check form-check-inline" style="margin-top: 10px;">
                                         <input type="radio" class="form-check-input radio-value level-value-detail"
@@ -228,10 +233,10 @@
                                     <input type="number" class="form-control" id="defaultPrice" name="defaultPrice"
                                         th:value="${defaultPrice}" disabled readonly>
                                 </div>
-                                <div style="width: 50%;">
+                                <div style="width: 100%;">
                                     <label for="addprice" class="col-form-label">추가 금액</label>
                                     <input type="number" class="form-control" id="addprice" name="addprice" value=""
-                                        disabled oninput="calculateDiscount()">
+                                        disabled oninput="calculateDiscount()" style="width: 50%;" placeholder="난이도 변경시 입력 가능">
                                 </div>
                                 <div style="width: 50%;">
                                     <input type="checkbox" class="form-check-input" id="discount-chk"
@@ -243,7 +248,7 @@
                                 </div>
                                 <div style="width: 50%;">
                                     <label for="discount_price" class="col-form-label">계산된 금액</label>
-                                    <input type="number" class="form-control" id="discount_price" name="discount_price"
+                                    <input type="number" class="form-control" id="discount_price" name="discount_price" placeholder="금액을 확인하세요"
                                         value="" readonly>
                                 </div>
                             </div>
@@ -253,11 +258,11 @@
                 <div class="modal-footer">
                     <div class="d-flex justify-content-between" style="width: 100%;">
                         <div style="width: 49%;">
-                            <button type="button" style="border: 1px solid gray; width: 100%;" class="btn btn-sm"
+                            <button type="button" style="border: 1px solid rgb(207, 206, 206); width: 100%;" class="btn btn-sm"
                                 data-dismiss="modal" onclick="cancel()">닫기</button>
                         </div>
                         <div style="width: 49%;">
-                            <input type="button" value="추가" style="border: 1px solid gray; width: 100%;"
+                            <input type="button" value="추가" style="border: 1px solid rgb(207, 206, 206); width: 100%;"
                                 class="btn btn-sm" onclick="addInspection()">
                         </div>
                     </div>
@@ -283,45 +288,45 @@
                         <div class="row vertical-line">
                             <div class="col-md-6">
                                 <label
-                                    style="font-size: small; margin-top: 10px; margin-bottom: 20px; font-weight: bold;">*
-                                    필수 입력사항입니다.</label><br />
+                                    style="font-size: small; margin-top: 10px; margin-bottom: 20px; font-weight: bold;">
+                                    ( * )은 필수 입력사항입니다.</label><br />
                                 <input type="hidden" id="classcode2" th:value="${classcode}">
                                 <input type="hidden" id="unitno2" th:value="${no}">
-                                <div class="row">
-                                    <div class="col-sm-3" style="width: 50%;">
-                                        <label for="minimum2" class="col-form-label">최소인원</label>
-                                        <input type="number" class="form-control" id="minimum2" name="minimum2">
-                                    </div>
-                                    <div class="col-sm-3" style="width: 50%;">
-                                        <label for="maximum2" class="col-form-label">최대인원</label>
-                                        <input type="number" class="form-control" id="maximum2" name="maximum2">
-                                    </div>
-                                </div>
-                                <div class="row">
+
+                                <div class="row" style="margin-bottom: 10px;">
                                     <div class="col-sm-3" style="width: 100%;">
-                                        <label for="classdate2" class="col-form-label">날짜</label>
-                                        <input class="form-control datepicker date" id="classdate2" name="classdate2">
+                                        <label for="classdate2" class="col-form-label">* 날짜</label>
+                                        <input class="form-control datepicker date" id="classdate2" name="classdate2" placeholder="클래스를 진행할 날짜를 입력하세요">
                                     </div>
                                     <input type="hidden" name="classda2y" id="classday2">
                                 </div>
 
-                                <div class="row">
+                                <div class="row" style="margin-top: 20px;">
                                     <div class="col-sm-3" style="width: 50%;">
-                                        <label for="classstart2" class="col-form-label">시작 시각</label>
+                                        <label for="classstart2" class="col-form-label">* 시작 시각</label>
                                         <input type="time" class="form-control" id="classstart2" name="classstart2">
                                     </div>
                                     <div class="col-sm-3" style="width: 50%;">
-                                        <label for="classend2" class="col-form-label">종료 시각</label>
+                                        <label for="classend2" class="col-form-label">* 종료 시각</label>
                                         <input type="time" class="form-control" id="classend2" name="classend2">
                                     </div>
                                 </div>
-
-
+                                
+                                <div class="row" style="margin-top: 20px;">
+                                    <div class="col-sm-3" style="width: 50%;">
+                                        <label for="minimum2" class="col-form-label">* 최소인원</label>
+                                        <input type="number" class="form-control" id="minimum2" name="minimum2" placeholder="최소인원을 입력하세요">
+                                    </div>
+                                    <div class="col-sm-3" style="width: 50%;">
+                                        <label for="maximum2" class="col-form-label">* 최대인원</label>
+                                        <input type="number" class="form-control" id="maximum2" name="maximum2" placeholder="최대인원을 입력하세요">
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="col">
                                     <label
-                                        style="font-size: small; margin-top: 10px; margin-bottom: 20px; font-weight: bold;">*
+                                        style="font-size: small; margin-top: 10px; margin-bottom: 10px; font-weight: bold; color: rgb(221, 52, 52);">
                                         클래스 난이도와 수강금액에 변동이있을 시 작성해주세요.</label><br />
                                     <div class="form-check form-check-inline" style="margin-top: 10px;">
                                         <input type="radio" class="form-check-input radio-value level-value-detail"
@@ -346,7 +351,7 @@
                                 </div>
                                 <div style="width: 50%;">
                                     <label for="addprice2" class="col-form-label">추가 금액</label>
-                                    <input type="number" class="form-control" id="addprice2" name="addprice2" value=""
+                                    <input type="number" class="form-control" id="addprice2" name="addprice2" value="" placeholder="난이도 변경시 입력 가능"
                                         disabled oninput="calculateDiscount2()">
                                 </div>
                                 <div style="width: 50%;">
@@ -369,11 +374,11 @@
                 <div class="modal-footer">
                     <div class="d-flex justify-content-between" style="width: 100%;">
                         <div style="width: 49%;">
-                            <button type="button" style="border: 1px solid gray; width: 100%;" class="btn btn-sm"
+                            <button type="button" style="border: 1px solid rgb(207, 206, 206);; width: 100%;" class="btn btn-sm"
                                 data-dismiss="modal" onclick="cancel2()">닫기</button>
                         </div>
                         <div style="width: 49%;">
-                            <input type="button" value="완료" style="border: 1px solid gray; width: 100%;"
+                            <input type="button" value="완료" style="border: 1px solid rgb(207, 206, 206);; width: 100%;"
                                 class="btn btn-sm" onclick="updateInspection()">
                         </div>
                     </div>
@@ -450,9 +455,8 @@
                 const headers = { "Content-Type": "application/json" };
                 const response = await axios.get(url, { headers: headers });
                 const data = response.data;
-                console.log("Ssss")
                 console.log(data);
-                console.log("Ssss")
+
 
                 // 가져온 데이터를 이용하여 일정 객체 배열 생성
                 const eventObjects = data.list.map(function (obj) {
@@ -513,6 +517,14 @@
                 return;
             }
 
+            // 시작시각 및 종료시각 검사
+            const startDate = new Date(classdate + " " + classstart);
+            const endDate = new Date(classdate + " " + classend);
+            if (endDate <= startDate) {
+                alert("종료 시각을 시작 시각보다 늦게 설정해주세요.");
+                return;
+            }
+
             // 최소인원 검사
             if (parseInt(minimum) <= 0) {
                 alert("최소인원은 0 이상이어야 합니다.");
@@ -523,15 +535,7 @@
             if (parseInt(maximum) < parseInt(minimum)) {
                 alert("최대인원은 최소인원 이상이어야 합니다.");
                 return;
-            }
-
-            // 시작시각 및 종료시각 검사
-            const startDate = new Date(classdate + " " + classstart);
-            const endDate = new Date(classdate + " " + classend);
-            if (endDate <= startDate) {
-                alert("종료 시각을 시작 시각보다 늦게 설정해주세요.");
-                return;
-            }
+            } 
 
             // 유효성 검사 통과 시 일정 등록 처리
             add();
@@ -576,12 +580,14 @@
                 alert("일정 등록이 완료되었습니다.")
                 $('#unitInsertModal').modal('hide'); // 모달 창 닫기
 
-                // 달력의 이벤트 다시 불러오기 제발....왜 안돼!!!! 이게 몇번째야!
-                const calendarEl = document.getElementById('calendar');
-                const calendarApi = calendarEl.calendar;
-                const eventObjects = await createEventObjects();
-                calendarApi.removeAllEvents();
-                calendarApi.addEventSource(eventObjects);
+                // 달력 이벤트 추가?
+                // const calendarEl = document.getElementById('calendar');
+                // const calendarApi = calendarEl.calendar;
+                // const eventObjects = await createEventObjects();
+                // calendarApi.removeAllEvents();
+                // calendarApi.addEventSource(eventObjects);
+
+                location.reload();
 
             }
             else {
@@ -652,6 +658,7 @@
             var addpriceInput = document.getElementById('addprice');
             var level = document.querySelector('input[name="classlevel"]:checked').value;
             addpriceInput.disabled = !(level === '2' || level === '3');
+            addpriceInput.value = '';
         }
 
         radioBtns.forEach(function (radioBtn) {
@@ -945,6 +952,7 @@
             if (data.status === 200) {
                 alert("일정 변경이 완료되었습니다.")
                 $('#unitUpdateModal').modal('hide');
+                // location.reload();
             }
             else {
                 alert("일정 변경에 실패하였습니다.");
@@ -1048,10 +1056,10 @@
                             parentDiv.style.height = "0";
                             parentDiv.style.padding = "0";
                             parentDiv.style.marginTop = "0";
-
                         }
                         deletedUnit.remove();
                     }
+                    location.reload();
                 }
                 else {
                     alert("삭제에 실패하였습니다.");
