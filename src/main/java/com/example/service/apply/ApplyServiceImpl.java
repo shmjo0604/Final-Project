@@ -10,8 +10,12 @@ import org.springframework.stereotype.Service;
 
 import com.example.dto.Apply;
 import com.example.dto.ApplyStatus;
+import com.example.dto.ApplyStatusView;
 import com.example.dto.ApplyView;
+import com.example.entity.Member;
+import com.example.entity.Notification;
 import com.example.mapper.ApplyMapper;
+import com.example.repository.NotificationRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,8 +23,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ApplyServiceImpl implements ApplyService {
 
-    @Autowired
-    ApplyMapper aMapper;
+    @Autowired ApplyMapper aMapper;
+    @Autowired NotificationRepository nRepository;
 
     final String format = "ApplyServiceImpl => {}";
 
@@ -33,37 +37,57 @@ public class ApplyServiceImpl implements ApplyService {
 
                 int ret2 = aMapper.updateClassUnitApplySuccess(list);
 
-                System.out.println(ret2);
+                if( ret2 == list.size()) {
+                    Apply apply1 = list.get(0);
 
-                Apply apply1 = list.get(0);
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("id", apply1.getMemberid());
+                    map.put("count", list.size());
+    
+                    List<Long> list1 = aMapper.selectInsertedApplyNoList(map);
+    
+                    log.info(format, list1.toString());
+    
+                    List<ApplyStatus> list2 = new ArrayList<>();
+    
+                    for (long a : list1) {
+    
+                        ApplyStatus applyStatus = new ApplyStatus();
+                        applyStatus.setApplyno(a);
+                        applyStatus.setChk(1);
+    
+                        list2.add(applyStatus);
+    
+                    }
+    
+                    int result = aMapper.insertApplyStatusBatch(list2);
+    
+                    if(result == list2.size()) {
+    
+                        List<Notification> notifications = new ArrayList<>();
 
-                Map<String, Object> map = new HashMap<>();
-                map.put("id", apply1.getMemberid());
-                map.put("count", list.size());
+                        for(Apply apply2 : list) {
 
-                List<Long> list1 = aMapper.selectInsertedApplyNoList(map);
+                            Notification notification = new Notification();
+                            
+                            Member member = new Member();
+                            // member.setId(apply2.getOwnerid());
 
-                log.info(format, list1.toString());
+                            notification.setMember(member);
+                            // notification.setUrl("/classunit/myunit.do?menu=2&classcode=" + apply2.getClasscode());
+                            notification.setContent(apply2.getMemberid() + "님이 클래스 신청하였습니다.");
+                            notification.setType("신청");
 
-                List<ApplyStatus> list2 = new ArrayList<>();
+                            notifications.add(notification);
 
-                for (long a : list1) {
+                        }
 
-                    ApplyStatus applyStatus = new ApplyStatus();
-                    applyStatus.setApplyno(a);
-                    applyStatus.setChk(1);
-
-                    list2.add(applyStatus);
-
+                        nRepository.saveAll(notifications);
+                        
+                        return 1;
+                    }
                 }
-
-                int result = aMapper.insertApplyStatusBatch(list2);
-
-                if(result == list2.size()) {
-
-                    return 1;
-                }
-
+                
                 return 0;
             }
 
@@ -139,18 +163,86 @@ public class ApplyServiceImpl implements ApplyService {
 
     @Override
     public long countApplyList(String id) {
-       try {
-        return aMapper.countApplyList(id);
-       } catch (Exception e) {
-        e.printStackTrace();
-        return -1;
-       }
+        try {
+            return aMapper.countApplyList(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
     @Override
-    public List<ApplyView> selectApplyViewListByClasscode(Map<String, Object> map) {
+    public long countApplyListOne(String id) {
         try {
-            return aMapper.selectApplyViewListByClasscode(map);
+            return aMapper.countApplyListOne(id);
+        } catch (Exception e) {
+            return 0;
+        }
+
+    }
+
+    @Override
+    public long countApplyListTwo(String id) {
+        try {
+            return aMapper.countApplyListTwo(id);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    @Override
+    public long countApplyListThree(String id) {
+        try {
+            return aMapper.countApplyListThree(id);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    @Override
+    public List<ApplyStatusView> selectApplyStatusListById(Map<String, Object> map) {
+        try {
+            return aMapper.selectApplyStatusListById(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<ApplyView> selectApplyListByIdOne(Map<String, Object> map) {
+        try {
+            return aMapper.selectApplyListByIdOne(map);
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<ApplyView> selectApplyListByIdTwo(Map<String, Object> map) {
+        try {
+            return aMapper.selectApplyListByIdTwo(map);
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<ApplyView> selectApplyListByIdThree(Map<String, Object> map) {
+        try {
+            return aMapper.selectApplyListByIdThree(map);
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<ApplyView> selectApplyViewListByUnitno(long unitno) {
+        try {
+            return aMapper.selectApplyViewListByUnitno(unitno);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -178,6 +270,4 @@ public class ApplyServiceImpl implements ApplyService {
         }
     }
 
-    
-   
 }

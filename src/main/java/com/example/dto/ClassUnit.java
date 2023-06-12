@@ -34,4 +34,7 @@ public class ClassUnit {
   private int chk;
   // 클래스 코드 (FK)
   private long classcode;
+
+  // row number
+  private long rnum;
 }

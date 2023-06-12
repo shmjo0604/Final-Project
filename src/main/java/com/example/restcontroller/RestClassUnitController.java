@@ -130,7 +130,7 @@ public class RestClassUnitController {
         ClassUnit obj = cuRepository.findByClassproduct_classcodeAndNo(classcode, no);
         // log.info(format, obj);
         long defaultPrice = cuService.selectPriceOne(classcode);
-        log.info(format, defaultPrice);
+        // log.info(format, defaultPrice);
 
         Map<String, Object> retmap = new HashMap<>();
         retmap.put("obj", obj);
@@ -145,10 +145,6 @@ public class RestClassUnitController {
         Map<String, Integer> retMap = new HashMap<>();
         
         log.info(format, classunit);
-
-        log.info(format, "dddddddddddddddddd");
-        log.info(format, classunit.getClassproduct().getClasscode());
-        log.info(format, classunit.getNo());
 
         ClassUnit obj = cuRepository.findByClassproduct_classcodeAndNo(classunit.getClassproduct().getClasscode(), classunit.getNo());
         obj.setMinimum(classunit.getMinimum());

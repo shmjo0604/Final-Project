@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.dto.Administrator;
+
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
@@ -17,5 +19,7 @@ public class AdminController {
     public String loginGET() {
         return "/admin/login";
     }
+   
+    
 
 }

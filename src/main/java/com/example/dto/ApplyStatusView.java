@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class ApplyView {
+public class ApplyStatusView {
 
     // 클래스 코드 (sequence)
     private long classcode;
@@ -47,14 +47,18 @@ public class ApplyView {
     private Date regdate;
     // 신청번호
     private long no;
-    
+
     /*** 추가 ***/
-    // 현재 신청 인원
+    // 현재신청인원
     private int cnt;
-    // 클래스 개설자 id 
+    // 클래스 개설자 id
     private String ownerid;
     // 신청자 전화번호
     private String phone;
+    // 상태변화에 따른 날짜
+    private String confirmdate;
+    // 신청상태 여부 (0, 1)
+    private int statuschk;
 
 
 }

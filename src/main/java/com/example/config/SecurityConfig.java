@@ -45,6 +45,7 @@ public class SecurityConfig {
             .passwordParameter("password")
             .successHandler(new LoginSuccessHandler())
             .permitAll();
+        
 
         /* 로그아웃 처리 */
         http.logout()
