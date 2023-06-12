@@ -293,7 +293,7 @@ ul,ol,li {
     border-radius: 8%;
 }
 .class img:hover{
-    transform: scale(1.02);
+    transform: scale(1.01);
     transition: 0.4s;
 }
 .new-c1 {
