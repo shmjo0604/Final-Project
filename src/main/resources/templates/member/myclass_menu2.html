@@ -48,7 +48,8 @@
                     <th:block th:each="obj, objStat : ${list}">
                         <tr>
                             <td th:text="${obj.rnum}"></td>
-                            <td th:text="${obj.classtitle}"></td>
+                            <td><a th:text="${obj.classtitle}" th:href="@{/class/product.do(classcode=${obj.classcode} )}"
+                                style="text-decoration: none;" id="classtitle"></a></td>
                             <td th:text="${obj.title}"></td>
                             <!-- <td class="txt" th:text="${obj.content}"><label id="modal"></label></td> -->
                             <td th:text="${#dates.format(obj.regdate, 'yyyy.MM.dd')}"></td>
