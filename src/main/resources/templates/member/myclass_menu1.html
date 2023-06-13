@@ -221,13 +221,13 @@
                 </div>
             </th:block>
             <form method="post" id="noactiveForm"
-                th:action="@{/member/myclass.do(menu=1)}">
+                th:action="@{/member/myclass.do(menu=1)}" style="display:none;">
                 <input type="text" name="classcode" id="nonclasscode">
                 <input type="text" name="chk" id="nonchk">
             </form>
 
             <form method="post" id="activeForm"
-                th:action="@{/member/myclass.do(menu=1)}">
+                th:action="@{/member/myclass.do(menu=1)}" style="display:none;">
                 <input type="text" name="classcode" id="aclasscode">
                  <input type="text" name="chk" id="achk">
             </form>
