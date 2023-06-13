@@ -154,6 +154,20 @@
         const contextPath = $('#contextPathHolder').attr('data-contextPath');
 
         var pages = /*[[${pages}]]*/'';
+        var chk = /*[[${param.chk}]]*/'';
+
+        function selectoption(chk) {
+      
+        console.log(chk);
+
+        if(chk === 0) {
+            window.location.href = "myclass.do?menu=2&page=1";
+        }
+        else {
+            window.location.href = `myclass.do?menu=2&page=1&chk=${chk}`;
+        }
+        
+        }
 
         $(document).ready(function() {
 			$('#pagination-demo').twbsPagination({
