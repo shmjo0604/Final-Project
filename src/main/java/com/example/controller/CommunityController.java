@@ -131,16 +131,20 @@ public class CommunityController {
 
     @RequestMapping(value = "/delete.do", method = { RequestMethod.POST })
     public String deleteGET(@AuthenticationPrincipal User user, @ModelAttribute Community obj,
-            Model model) {
+            Model model, HttpSession httpSession) {
         try {
-            log.info(format, obj.toString());
+
+            // log.info(format, obj.toString());
             communityRepository.deleteById(obj.getNo());
 
-            return "redirect:/community/selectlist.do";
+            httpSession.setAttribute("alertMessage", "삭제되었습니다.");
+            httpSession.setAttribute("alertUrl", "/community/selectlist.do");
+
+            return "redirect:/alert.do";
         } catch (Exception e) {
             e.printStackTrace();
             // return "redirect:/home.do";
-            return "redirect:/community/selectlist.do";
+            return "redirect:/community/selectone.do?no="+obj.getNo();
         }
     }
 
