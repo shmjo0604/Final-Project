@@ -94,7 +94,8 @@
       <div class="col-sm-4">
         <div class="box effect">
           <h3>평균별점</h3>
-          <h1 th:text="${avg}"></h1>
+          <h1  th:if="${avg > 0} " th:text="${avg}"></h1>
+          <h1  th:if="${avg == -1 }">0</h1>
 
           <a th:if="${avg} >= 1 and ${avg} < 2" style="color: darkgreen; margin-left: 65px;">★☆☆☆☆</a>
           <a th:if="${avg} >=2  and ${avg} < 3 " style="color: darkgreen; margin-left: 65px;">★★☆☆☆</a>
