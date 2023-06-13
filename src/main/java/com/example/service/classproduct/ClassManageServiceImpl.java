@@ -9,10 +9,10 @@ import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
 import com.example.entity.ClassInquiry;
 import com.example.entity.ClassInquiryView;
+import com.example.entity.ClassInquiryViewVo;
 import com.example.mapper.ClassManageMapper;
 import com.example.repository.ClassImageRepository;
 import com.example.repository.ClassInquiryViewRepository;
-import com.example.repository.ClassInquiryViewRepository.ClassInquiryViewVo;
 
 @Service
 public class ClassManageServiceImpl implements ClassManageService {

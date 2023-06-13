@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.entity.ClassInquiry;
 import com.example.entity.ClassInquiryView;
-import com.example.repository.ClassInquiryViewRepository.ClassInquiryViewVo;
+import com.example.entity.ClassInquiryViewVo;
 
 @Service
 public interface ClassInquiryService {

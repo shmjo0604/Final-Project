@@ -8,7 +8,7 @@ import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
 import com.example.entity.ClassInquiry;
 import com.example.entity.ClassInquiryView;
-import com.example.repository.ClassInquiryViewRepository.ClassInquiryViewVo;
+import com.example.entity.ClassInquiryViewVo;
 
 @Service
 public interface ClassManageService {

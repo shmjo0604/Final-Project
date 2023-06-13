@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.entity.ClassInquiry;
 import com.example.entity.ClassInquiryView;
+import com.example.entity.ClassInquiryViewVo;
 import com.example.entity.Notification;
 import com.example.repository.ClassInquiryRepository;
 import com.example.repository.ClassInquiryViewRepository;
-import com.example.repository.ClassInquiryViewRepository.ClassInquiryViewVo;
 import com.example.repository.NotificationRepository;
 
 @Service
