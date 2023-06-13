@@ -1,6 +1,5 @@
 package com.example.repository;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
@@ -10,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.entity.ClassInquiryView;
+import com.example.entity.ClassInquiryViewVo;
 
 @Repository
 public interface ClassInquiryViewRepository extends JpaRepository<ClassInquiryView, Long>{
@@ -41,21 +41,6 @@ public interface ClassInquiryViewRepository extends JpaRepository<ClassInquiryVi
         value="SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY c.no DESC) rnum, c.* FROM CLASSINQUIRYVIEW c WHERE c.memberid = :id AND c.chk = :chk) c WHERE rnum BETWEEN :first AND :last ORDER BY c.rnum ASC ", 
         nativeQuery = true)
     List<ClassInquiryViewVo> selectByMemberidAndChk(@Param("id") String id, @Param("chk") int chk, @Param("first") int first, @Param("last") int last);
-
-    interface ClassInquiryViewVo {
-
-        long getNo();
-        String getTitle();
-        String getContent();
-        int getChk();
-        Date getRegdate();
-        String getClasstitle();
-        long getClasscode();
-        String getMemberid();
-        String getOwner();
-        long getRnum();
-
-    }
 
     // 5. 문의 총 개수 (by 클래스 판매자 아이디)
 
