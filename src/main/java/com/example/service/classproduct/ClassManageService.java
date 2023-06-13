@@ -67,15 +67,8 @@ public interface ClassManageService {
     // 13. 클래스 문의 전체 개수
     public long selectClassInquiryListCount(String owner);
 
-    // 14. 신청 전체 개수 조회(chk=2)
-    public long countInquiryList(long no);
+    public long countByOwnerAndChk(String owner, int chk);
 
-    // 15. 신청 전체 개수 조회(chk=0)
-    public long countInquiryListZero(long no);
-
-    // 15. 신청 전체 개수 조회(chk=1)
-    public long countInquiryListOne(long no);
-
-
+    public List<ClassInquiryViewVo> selectByOwnerANDChkOrderByNoDescPaging(String owner, int first, int last, int chk);
     
 }

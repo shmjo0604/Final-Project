@@ -198,25 +198,20 @@
 
                                     <!-- 활성화 상태 -->
                                     <th:block th:if="${obj.chk == 0 || obj.chk== 1 }">
-                                        <form method="post" id="noactiveForm"
-                                            th:action="@{/member/myclass.do(menu=1)}">
-                                            <input type="hidden" th:value="${obj.classcode}" name="classcode" >
-                                            <input type="hidden" th:value="${obj.chk}" name="chk" >
-                                            <button type="button" class="btn btn-sm" onclick="nonactive()"
-                                                style="margin-top: 10px; text-decoration: underline; background-color: transparent; float: right;">비활성화
-                                                하기</button>
-                                        </form>
+                                        <input type="hidden" th:value="${obj.classcode}" name="classcode" >
+                                        <input type="hidden" th:value="${obj.chk}" name="chk" >
+                                        <button type="button" class="btn btn-sm" th:onclick="nonactive([[${obj.classcode}]], [[${obj.chk}]])"
+                                            style="margin-top: 10px; text-decoration: underline; background-color: transparent; float: right;">비활성화 하기</button>
+
                                     </th:block>
 
                                     <!-- 비활성화 상태 -->
                                     <th:block th:if="${obj.chk == 3}">
-                                        <form method="post" id="activeForm"
-                                            th:action="@{/member/myclass.do(menu=1)}">
-                                            <input type="hidden" th:value="${obj.classcode}" name="classcode" >
-                                            <input type="hidden" th:value="${obj.chk}" name="chk" >
-                                            <button type="button" class="btn btn-sm" onclick="active()"
-                                                style="margin-top: 10px; text-decoration: underline; background-color: transparent; float: right;">활성화 하기</button>
-                                        </form>
+                                        <input type="hidden" th:value="${obj.classcode}" name="classcode" >
+                                        <input type="hidden" th:value="${obj.chk}" name="chk" >
+                                        <button type="button" class="btn btn-sm" onclick="active()"
+                                        style="margin-top: 10px; text-decoration: underline; background-color: transparent; float: right;">활성화 하기</button>
+                                        
                                     </th:block>
 
                                 </div>
@@ -225,6 +220,17 @@
                     </div>
                 </div>
             </th:block>
+            <form method="post" id="noactiveForm"
+                th:action="@{/member/myclass.do(menu=1)}">
+                <input type="text" name="classcode" id="nonclasscode">
+                <input type="text" name="chk" id="nonchk">
+            </form>
+
+            <form method="post" id="activeForm"
+                th:action="@{/member/myclass.do(menu=1)}">
+                <input type="text" name="classcode" id="aclasscode">
+                 <input type="text" name="chk" id="achk">
+            </form>
         </div>
     </div>
 
@@ -242,11 +248,15 @@
         }
 
         /* 비활성화 버튼 */
-        function nonactive() {
+        function nonactive(classcode, chk) {
+
+            console.log(classcode);
+            console.log(chk);
             
             if ( confirm('비활성화 하시겠습니까?') == true ) {
+                document.getElementById('nonclasscode').value=classcode;
+                document.getElementById('nonchk').value=chk;
                 document.getElementById('noactiveForm').submit();
-                alert('비활성화 되었습니다.');
             }
             else {
                 alert('활성화 상태입니다.');
@@ -254,11 +264,13 @@
         }
 
         /* 활성화 버튼 */
-        function active() {
+        function active(classcode, chk) {
 
             if ( confirm('활성화 하시겠습니까?') == true ) {
-                alert('활성화 되었습니다.');
+                document.getElementById('nonclasscode').value=classcode;
+                document.getElementById('nonchk').value=chk;
                 document.getElementById('activeForm').submit();
+                alert('활성화 되었습니다.');
             }
             else {
                 alert('비활성화 상태입니다.');

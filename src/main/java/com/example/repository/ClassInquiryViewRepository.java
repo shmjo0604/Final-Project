@@ -56,4 +56,15 @@ public interface ClassInquiryViewRepository extends JpaRepository<ClassInquiryVi
         long getRnum();
 
     }
+
+    // 5. 문의 총 개수 (by 클래스 판매자 아이디)
+
+    long countByOwnerAndChk(String owner, int chk);
+
+    // 6. 문의 목록 (by 클래스 판매자 아이디 + pagination)
+
+    @Query(
+        value="SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY c.no DESC) rnum, c.* FROM CLASSINQUIRYVIEW c WHERE c.owner = :id AND c.chk = :chk) c WHERE rnum BETWEEN :first AND :last ORDER BY c.rnum ASC ", 
+        nativeQuery = true) // :name (nativequery) = #{name} (mybatis)
+    List<ClassInquiryViewVo> selectByOwnerANDChkOrderByNoDescPaging(@Param("id") String owner, @Param("first") int first, @Param("last") int last, @Param("chk")int chk);
 }

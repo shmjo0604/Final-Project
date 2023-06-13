@@ -246,21 +246,25 @@ public class ClassManageServiceImpl implements ClassManageService {
     }
 
     @Override
-    public long countInquiryList(long no) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'countInquiryList'");
+    public long countByOwnerAndChk(String owner, int chk) {
+        try {
+            return cRepository.countByOwnerAndChk(owner, chk);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
     @Override
-    public long countInquiryListZero(long no) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'countInquiryListZero'");
-    }
-
-    @Override
-    public long countInquiryListOne(long no) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'countInquiryListOne'");
+    public List<ClassInquiryViewVo> selectByOwnerANDChkOrderByNoDescPaging(String owner, int first, int last, int chk) {
+        try {
+            return cRepository.selectByOwnerANDChkOrderByNoDescPaging(owner, first, last, chk);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

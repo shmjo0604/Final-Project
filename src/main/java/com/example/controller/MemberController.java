@@ -304,9 +304,11 @@ public class MemberController {
             @RequestParam(name = "menu", defaultValue = "0") int menu,
             @RequestParam(name = "no", defaultValue = "0", required = false) long no,
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
-            @RequestParam(name = "chk", defaultValue = "0", required = false) int chk,
+            @RequestParam(name = "chk", defaultValue = "-1", required = false) int chk,
             @AuthenticationPrincipal User user,
             Model model) {
+
+        log.info(format, "chk=" + chk);
 
         String owner = user.getUsername();
         String id = user.getUsername();
@@ -330,6 +332,11 @@ public class MemberController {
 
         else if (menu == 2) {
 
+            if(chk == -1){
+
+                return "redirect:myclass.do?menu=2&page=1&chk=2";
+            }
+
             long total = cService.selectClassInquiryListCount(owner);
 
             // log.info(format, total);
@@ -340,6 +347,12 @@ public class MemberController {
             int last = page*inquirypagetotal; 
 
             List<ClassInquiryViewVo> list = cService.selectClassInquiryList(owner, first, last);
+            if( chk != 2 ){
+                total = cService.countByOwnerAndChk(owner, chk);
+                pages = ((total-1)/inquirypagetotal)+1;
+                list = cService.selectByOwnerANDChkOrderByNoDescPaging(owner, first, last, chk);
+                log.info(format, list);
+            }
 
             model.addAttribute("list", list);
             model.addAttribute("pages", pages);
