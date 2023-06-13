@@ -728,7 +728,7 @@ function insertClass() {
         return false;
     }
 
-    /* if( content_length2 < 30) {
+    if( content_length2 < 30) {
         alert("클래스 소개를 작성하세요.");
         pageintro();
         return false;
@@ -738,7 +738,7 @@ function insertClass() {
         alert("커리큘럼 내용을 작성하세요.");
         pagecorri();
         return false;
-    } */
+    }
 
     if (price.value.length <= 0) {
         alert("금액을 입력하세요.");
