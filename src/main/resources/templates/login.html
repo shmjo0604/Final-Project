@@ -175,13 +175,12 @@
                         <div class="card-body">
                             <form id="form" th:action="@{/loginaction.do}" method="post">
                                 <div class="form-floating mb-4">
-                                    <input id="id" class="form-control" type="text" placeholder="ID" name="id"
-                                        value="test8">
+                                    <input id="id" class="form-control" type="text" placeholder="ID" name="id">
                                     <label>아이디</label>
                                 </div>
                                 <div class="form-floating mb-4">
                                     <input id="pw" class="form-control" type="password" placeholder="Password"
-                                        name="password" value="pw2">
+                                        name="password" >
                                     <label>패스워드</label>
                                 </div>
                                 <div class="find-wrap d-flex justify-content-center" id="find-wrap">
@@ -227,17 +226,15 @@
                 <div class="modal-body" style="height: 500px;">
                     <div class="container">
                         <div class="form-floating mb-4">
-                            <input type="text" name="modal_name" id="modal_name" class="form-control" value="test8" />
+                            <input type="text" name="modal_name" id="modal_name" class="form-control" />
                             <label for="name" class="form-label">등록하신 이름을 입력해주세요</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <input type="text" name="modal_email" id="modal_email" class="form-control"
-                                value="test8@email.com" />
+                            <input type="text" name="modal_email" id="modal_email" class="form-control"/>
                             <label for="email" class="form-label">등록하신 이메일을 입력해주세요</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <input type="text" name="modal_phone" id="modal_phone" class="form-control"
-                                value="010-8888-0888" />
+                            <input type="text" name="modal_phone" id="modal_phone" class="form-control"/>
                             <label for="phone" class="form-label">등록하신 전화번호를 입력해주세요</label>
                         </div>
 
@@ -290,7 +287,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-floating mt-4">
-                                    <input type="text" name="modal_id" id="modal1_id" class="form-control" value="test8" />
+                                    <input type="text" name="modal_id" id="modal1_id" class="form-control" />
                                     <label for="name" class="form-label">아이디를 입력해주세요</label>
                                 </div>
                             </div>
@@ -339,7 +336,7 @@
                                 <div class="input-group input-group mt-5 mb-4">
                                     <div class="form-floating" aria-describedby="modal2_sendbtn">
                                         <input class="form-control" type="email" id="modal2_email" 
-                                        placeholder="email@example.com" value="shmjo0604@gmail.com" />
+                                        placeholder="email@example.com"/>
                                         <label for="modal2_email" class="form-label">인증번호를 전송할 이메일을 입력해주세요</label>
                                     </div>
                                     <button id="modal2_sendbtn" type="button" class="btn btn-success"
