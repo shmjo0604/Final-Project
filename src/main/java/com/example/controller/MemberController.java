@@ -368,16 +368,15 @@ public class MemberController {
     @PostMapping(value = "/myclass.do")
     public String myclassPOST(@AuthenticationPrincipal User user,
             @RequestParam(name = "classcode", defaultValue = "0", required = false) long classcode,
+            @RequestParam(name = "chk", defaultValue = "-1", required = false) int chk,
             @RequestParam(name = "menu", defaultValue = "0", required = false) int menu,
             @ModelAttribute ClassProduct obj,
             @ModelAttribute ClassAnswer classAnswer,
             HttpSession httpSession,
             Model model) {
 
-        int chk = obj.getChk();
-
-        //log.info(format, menu);
-        //log.info(format, classcode);
+        log.info(format, chk);
+        log.info(format, classcode);
 
         if (menu == 1) {
             if (chk == 0 || chk == 1) {
@@ -392,6 +391,7 @@ public class MemberController {
                 int ret =  cService.updateClassActive(obj);
                 
                 //log.info(" active => {}", obj.toString());
+                log.info(format, ret);
                 if (ret == 1) {
                     return "redirect:/member/myclass.do?menu=1";
                 }
