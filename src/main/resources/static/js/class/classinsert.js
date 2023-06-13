@@ -535,8 +535,11 @@ function nextMenu2() {
         nickname.focus();
         return false;
     }
-    if (content_length.value < 30) {
-        alert("강사소개를 작성하세요.");
+    if (content_length === 0) {
+        alert("강사소개를 작성하세요.")
+    }
+    if (content_length < 30) {
+        alert("강사소개를 30자 이상 작성하세요.");
         return false;
     }
 
@@ -574,8 +577,13 @@ function nextMenu3() {
         title.focus();
         return false;
     }
-    if (content_length2 < 30) {
+    if (content_length2 === 0) {
         alert("클래스 소개를 작성하세요.");
+        content.focus();
+        return false;
+    }
+    if (content_length2 < 30) {
+        alert("클래스 소개를 30자 이상 작성하세요.");
         content.focus();
         return false;
     }
@@ -603,8 +611,13 @@ function nextMenu4() {
     const content = quill3.root.innerHTML;
     const content_length3 = quill3.getLength();
 
-    if (content_length3 < 20) {
+    if (content_length3 === 0) {
         alert("커리큘럼 내용을 작성하세요.");
+        content.focus();
+        return false;
+    }
+    if (content_length3 < 20) {
+        alert("커리큘럼 내용을 20자 이상 작성하세요.");
         content.focus();
         return false;
     }
@@ -637,10 +650,9 @@ function insertClass() {
     const cate4 = $('#actdetailselect');
     const file = document.getElementById("file");
     const nickname = document.getElementById("nickname");
-    const content = quill1.root.innerHTML;
     const content_length = quill1.getLength();
-    /* const content_length2 = quill2.getLength();
-    const content_length3 = quill3.getLength(); */
+    const content_length2 = quill2.getLength();
+    const content_length3 = quill3.getLength();
     const title = document.getElementById("title");
     const postcode = document.getElementById("sample6_postcode");
     const address1 = document.getElementById("sample6_address");
@@ -716,30 +728,41 @@ function insertClass() {
         pageinstructor()
         return false;
     }
-    if (content_length.value < 30) {
+    if (content_length.value === 0) {
         alert("강사소개를 작성하세요.");
         pageinstructor()
         return false;
     }
-
+    if (content_length.value < 30) {
+        alert("강사소개를 30자 이상 작성하세요.");
+        pageinstructor()
+        return false;
+    }
     if (title.value === "") {
         alert("클래스 제목을 작성하세요.");
         pageintro();
         return false;
     }
-
-    if( content_length2 < 30) {
+    if( content_length2 === 0) {
         alert("클래스 소개를 작성하세요.");
         pageintro();
         return false;
     } 
-	
-    if( content_length3 < 20) {
+    if( content_length2 < 30) {
+        alert("클래스 소개를 30자 이상 작성하세요.");
+        pageintro();
+        return false;
+    }
+    if( content_length3 === 0) {
         alert("커리큘럼 내용을 작성하세요.");
         pagecorri();
         return false;
     }
-
+    if( content_length3 < 20) {
+        alert("커리큘럼 내용을 20자 이상 작성하세요.");
+        pagecorri();
+        return false;
+    }
     if (price.value.length <= 0) {
         alert("금액을 입력하세요.");
         price.focus();
@@ -839,19 +862,3 @@ function insertClass() {
 
     form.submit();
 }
-
-// /* button click 색상유지 함수 */
-// const nonClick = document.querySelectorAll(".non-click");
-
-// function handleClick(event) {
-//     // div에서 모든 "click" 클래스 제거
-//     nonClick.forEach((e) => {
-//         e.classList.remove("click");
-//     });
-//     // 클릭한 div만 "click"클래스 추가
-//     event.target.classList.add("click");
-// }
-
-// nonClick.forEach((e) => {
-//     e.addEventListener("click", handleClick);
-// });

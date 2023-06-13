@@ -94,60 +94,68 @@
     }
   </style>
 
-  <table class="table table-bordered">
-    <thead>
-      <tr style="background-color: rgb(219, 217, 217); text-align: center">
-        <th>결제일자</th>
-        <th>이미지</th>
-        <th>신청 정보</th>
-        <th>결제금액</th>
-        <th>처리상태</th>
-      </tr>
-    </thead>
-    <tbody style="vertical-align: middle" id="tbody">
-      <tr th:each="obj : ${list}">
-        <td class="center">
-          <p th:text="${#dates.format(obj.regdate,'yyyy-MM-dd')}"></p>
-          <div style="display: flex; flex-direction: column; align-items: center">
-            <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px"
-              th:onclick="modalAction1([[${obj.no}]])">
-              상세보기
+  <th:block th:if="${#lists.isEmpty(list)}">
+
+    <h3 class="mt-5 text-center">클래스 신청 내역이 없습니다.</h3>
+
+  </th:block>
+
+  <th:block th:if="${!#lists.isEmpty(list)}">
+    <table class="table table-bordered">
+      <thead>
+        <tr style="background-color: rgb(219, 217, 217); text-align: center">
+          <th>결제일자</th>
+          <th>이미지</th>
+          <th>신청 정보</th>
+          <th>결제금액</th>
+          <th>처리상태</th>
+        </tr>
+      </thead>
+      <tbody style="vertical-align: middle" id="tbody">
+        <tr th:each="obj : ${list}">
+          <td class="center">
+            <p th:text="${#dates.format(obj.regdate,'yyyy-MM-dd')}"></p>
+            <div style="display: flex; flex-direction: column; align-items: center">
+              <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px"
+                th:onclick="modalAction1([[${obj.no}]], [[${obj.chk}]])">
+                상세보기
+              </button>
+            </div>
+          </td>
+          <td class=" center">
+            <img th:src="@{/member/image(classcode=${obj.classcode})}" style="width: 100px; height: 100px" />
+          </td>
+          <td style="font-size: small">
+            <div class="mb-2"><a th:text="|<${obj.title}>|" class="a_underline" th:href="@{/class/product.do(classcode=${obj.classcode})}"></div>
+            </a>
+            <div id="classdate1" th:text=" '날짜: ' + ${obj.classdate}"></div>
+            <div th:text=" '시간: ' + ${obj.classstart} + '~' + ${obj.classend}"></div>
+            <div th:text=" '난이도: ' + ${obj.classlevel}"></div>
+            <div th:text=" '금액(1인): ' + ${obj.price}+'원'"></div>
+            <div th:text=" '신청인원: ' + ${obj.person}+'명'"></div>
+          </td>
+          <td th:text="${obj.price}+'원'" style="font-weight: bold" class="center"></td>
+          <td class="center">
+
+            <p th:if="${obj.chk} == 1" style="text-align: center">결제완료 </p>
+            <p th:if="${obj.chk} == 2" style="text-align: center">결제취소 </p>
+            <p th:if="${obj.chk} == 3 or ${obj.chk} == 4" style="text-align: center">참여완료 </p>
+
+            <button th:if="${obj.chk} == 3 or ${obj.chk} == 4" class="btn btn-sm btn-secondary" type="button"
+              style="height: 30px; width: 90px" th:onclick="modalAction([[${obj.no}]],[[${obj.classcode}]],[[${obj.price}]], [[${obj.title}]],  [[${obj.classdate}]],[[${obj.classlevel}]], [[${obj.classstart}]], [[${obj.classend}]])">
+              리뷰작성
             </button>
-          </div>
-        </td>
-        <td class=" center">
-          <img th:src="@{/member/image(classcode=${obj.classcode})}" style="width: 100px; height: 100px" />
-        </td>
-        <td style="font-size: small">
-          <div class="mb-2"><a th:text="|<${obj.title}>|" class="a_underline" th:href="@{/class/product.do(classcode=${obj.classcode})}"></div>
-          </a>
-          <div id="classdate1" th:text=" '날짜: ' + ${obj.classdate}"></div>
-          <div th:text=" '시간: ' + ${obj.classstart} + '~' + ${obj.classend}"></div>
-          <div th:text=" '난이도: ' + ${obj.classlevel}"></div>
-          <div th:text=" '금액(1인): ' + ${obj.price}+'원'"></div>
-          <div th:text=" '신청인원: ' + ${obj.person}+'명'"></div>
-        </td>
-        <td th:text="${obj.price}+'원'" style="font-weight: bold" class="center"></td>
-        <td class="center">
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-          <p th:if="${obj.chk} == 1" style="text-align: center">결제완료 </p>
-          <p th:if="${obj.chk} == 2" style="text-align: center">결제취소 </p>
-          <p th:if="${obj.chk} == 3 or ${obj.chk} == 4" style="text-align: center">참여완료 </p>
-
-          <button th:if="${obj.chk} == 3 or ${obj.chk} == 4" class="btn btn-sm btn-secondary" type="button"
-            style="height: 30px; width: 90px" th:onclick="modalAction([[${obj.no}]],[[${obj.classcode}]],[[${obj.price}]], [[${obj.title}]],  [[${obj.classdate}]],[[${obj.classlevel}]], [[${obj.classstart}]], [[${obj.classend}]])">
-            리뷰작성
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="row justify-content-center">
-    <div class="col-6">
-      <ul id="pagination-demo" class="pagination-sm "></ul>
+    <div class="row justify-content-center">
+      <div class="col-6 d-flex justify-content-center">
+        <ul id="pagination-demo" class="pagination-sm"></ul>
+      </div>
     </div>
-  </div>
+  </th:block>
 
   <!-- 리뷰 모달 -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
@@ -342,8 +350,8 @@
                   <div class="hr3"></div>
                 </div>
 
-                <button class="chkbtn btn btn-sm btn-danger float-end" type="button"
-                  style="height: 30px; width: 90px;" onclick="cancelAction()">신청취소</button>
+                <button id="applycancelbtn" class="chkbtn btn btn-sm btn-danger float-end" type="button"
+                  style="height: 30px; width: 90px; display:none;" onclick="cancelAction()">신청취소</button>
 
                 <input type="hidden" id="no1" name="no">
                 <input type="hidden" id="classcode1" name="classcode">
