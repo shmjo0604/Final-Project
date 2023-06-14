@@ -221,7 +221,7 @@
                     <div class="border-bottom">
                         <div class="d-flex">
                             <div class="d-flex align-items-center mb-4">
-                                <h3><i class="bi bi-snow2 me-2"></i></h3>
+                                <h3><i class="bi bi-balloon-fill me-2"></i></h3>
                                 <h3 th:text="${obj.title}"></h3>
                             </div>
 
@@ -466,12 +466,13 @@
         </main>
 
         <!--form 태그 (post->get)-->
-        <!--unitno, person -->
+        <!--결제 신청(unitno, person) -->
         <form id="form-apply" th:action="@{/apply/insert.do}" method="get" style="display: none;">
             <input id="unitno" name="unitno[]" type="number">
             <input id="person" name="person[]" type="number">
         </form>
 
+        <!--장바구니 추가-->
         <form id="form-basket" th:action="@{basket.do}" method="post" style="display: none;">
             <input id="basket_unitno" name="unitno" type="number">
             <input id="basket_cnt" name="cnt" type="number">
@@ -762,10 +763,32 @@
         }
 
         function applyAction() {
+
+            if($("#unitno").val() === '') {
+                alert("클래스 날짜를 선택해주세요.");
+                return false;
+            }
+
+            if($("#person").val() === '') {
+                alert("신청 인원을 선택해주세요.");
+                return false;
+            }
+
             $("#form-apply").submit();
         }
 
         function basketAction() {
+
+            if($("#basket_unitno").val() === '') {
+                alert("클래스 날짜를 선택해주세요.");
+                return false;
+            }
+
+            if($("#basket_cnt").val() === '') {
+                alert("신청 인원을 선택해주세요.");
+                return false;
+            }
+ 
             $("#form-basket").submit();
         }
 
@@ -816,7 +839,7 @@
 
             if(data.status === 200) {
                 
-                for(let obj of data.list) {
+                data.list.forEach((obj, index) => {
 
                     var card = document.createElement('div');
                     card.className = "card mb-3";
@@ -830,7 +853,7 @@
                     if(obj.imglist.length > 0) {
 
                         var carousel = document.createElement('div');
-                        carousel.id = "carouselExample";
+                        carousel.id = "carouselExample" + index;
                         carousel.className = "carousel slide";
 
                         var carousel_inner = document.createElement('div');
@@ -877,30 +900,40 @@
                         var button_prev = document.createElement('button');
                         button_prev.className = "carousel-control-prev";
 
-                        var span_icon_prev = document.createElement("carousel-control-prev-icon");
-                        var span_hidden_prev = document.createElement("visually-hidden");
-                        span_hidden.textContent = "Previous";
+                        var span_icon_prev = document.createElement("span");
+                        span_icon_prev.className = "carousel-control-prev-icon";
+                        var span_hidden_prev = document.createElement("span");
+                        span_hidden_prev.className = "visually-hidden";
+                        span_hidden_prev.textContent = "Previous";
 
                         button_prev.appendChild(span_icon_prev);
                         button_prev.appendChild(span_hidden_prev);
 
-                        button_prev.addEventListener('slide.bs.carousel', event => {
-                            left;
+                        button_prev.addEventListener('click', event => {
+                            console.log(-1);
+                            new bootstrap.Carousel("#carouselExample"+index, {}).prev();
                         })
+
+                        carousel.appendChild(button_prev);
 
                         var button_next = document.createElement('button');
                         button_next.className = "carousel-control-next";
 
-                        var span_icon_next = document.createElement("carousel-control-next-icon");
-                        var span_hidden_next = document.createElement("visually-hidden");
-                        span_hidden.textContent = "Next";
+                        var span_icon_next = document.createElement("span");
+                        span_icon_next.className = "carousel-control-next-icon";
+                        var span_hidden_next = document.createElement("span");
+                        span_hidden_next.className = "visually-hidden";
+                        span_hidden_next.textContent = "Next";
 
                         button_next.appendChild(span_icon_next);
                         button_next.appendChild(span_hidden_next);
 
-                        button_next.addEventListener('slide.bs.carousel', event => {
-                            right;
+                        button_next.addEventListener('click', event => {
+                            console.log(1);
+                            new bootstrap.Carousel(carousel, {}).next();
                         })
+
+                        carousel.appendChild(button_next);
 
                         // carousel.innerHTML += `<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                         //                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -976,7 +1009,18 @@
 
                     box.appendChild(card);
                     
-                }
+                })
+            }
+
+            else {
+
+                var h5 = document.createElement('h5');
+
+                h5.className = "text-center";
+                h5.textContent = "작성된 리뷰가 없습니다.";
+
+                box.appendChild(h5);
+
             }
 
             
