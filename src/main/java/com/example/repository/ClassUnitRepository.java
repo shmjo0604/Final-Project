@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.example.entity.ClassUnit;
+import com.example.entity.ClassUnitProjectionChk;
 
 @Repository
 public interface ClassUnitRepository extends JpaRepository<ClassUnit, Long> {
@@ -14,6 +15,8 @@ public interface ClassUnitRepository extends JpaRepository<ClassUnit, Long> {
     List<ClassUnit> findByClassproduct_classcodeOrderByClassdate(long classcode);
 
     ClassUnit findByClassproduct_classcodeAndNo(long classcode, long no);
+
+    ClassUnitProjectionChk findByNo(long no);
 
 
     

@@ -55,6 +55,7 @@ public class SecurityConfig {
         http.authorizeRequests()
             .antMatchers("/class/insert.do").authenticated()
             .antMatchers("/class/update.do").authenticated()
+            .antMatchers("/class/basket.do").authenticated()
             .antMatchers("/apply", "/apply/*").authenticated()
             .antMatchers("/member/join.do").permitAll()
             .antMatchers("/member/joinsuccess.do").permitAll()

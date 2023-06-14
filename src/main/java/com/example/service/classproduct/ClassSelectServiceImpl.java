@@ -81,7 +81,8 @@ public class ClassSelectServiceImpl implements ClassSelectService {
 
                     long mainImgNo = manageMapper.selectClassMainImageNo(obj.getClasscode());
                     obj.setMainImg(mainImgNo);
-    
+                    
+                    obj.setProfileImg(manageMapper.selectClassProfileImageNo(obj.getClasscode()));
                 }
 
             }
@@ -129,6 +130,7 @@ public class ClassSelectServiceImpl implements ClassSelectService {
                     long mainImgNo = manageMapper.selectClassMainImageNo(obj.getClasscode());
                     obj.setMainImg(mainImgNo);
                     
+                    obj.setProfileImg(manageMapper.selectClassProfileImageNo(obj.getClasscode()));
                 }
 
             }
@@ -208,6 +210,8 @@ public class ClassSelectServiceImpl implements ClassSelectService {
                     long mainImgNo = manageMapper.selectClassMainImageNo(obj.getClasscode());
                     obj.setMainImg(mainImgNo);
     
+                    obj.setProfileImg(manageMapper.selectClassProfileImageNo(obj.getClasscode()));
+
                 }
 
             }
@@ -232,6 +236,8 @@ public class ClassSelectServiceImpl implements ClassSelectService {
 
                     long mainImgNo = manageMapper.selectClassMainImageNo(obj.getClasscode());
                     obj.setMainImg(mainImgNo);
+
+                    obj.setProfileImg(manageMapper.selectClassProfileImageNo(obj.getClasscode())); 
                     
                 }
 
