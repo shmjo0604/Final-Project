@@ -213,10 +213,10 @@
                                             </div>
                                         </div>
 
-                                        <input placeholder="https://instagram.com/sample" type="text"
+                                        <input placeholder="https://instagram.com/sample" type="text" id="sns" th:value="${obj.sns}"
                                             class="form-control w-50" style="width: 350px; height: 35px;"><br>
-                                        <input placeholder="https://blog.com/sample" type="text"
-                                            class="form-control w-50" style="width: 350px; height: 35px;">
+                                        <!-- <input placeholder="https://blog.com/sample" type="text"
+                                            class="form-control w-50" style="width: 350px; height: 35px;"> -->
 
                                         <div class="changepage">
                                             <div class="btn_1">
@@ -425,6 +425,7 @@
                             <input id="form_intro" name="intro">
                             <input id="form_curriculum" name="curriculum">
                             <input id="form_nickname" type="text" name="nickname">
+                            <input id="form_sns" type="text" name="sns">
                         </div>
                     </div>
                 </div>
@@ -1074,10 +1075,10 @@
             console.log(content_length);
             console.log(content);
 
-            if (file.value === "") {
-                alert("이미지 파일을 첨부하세요.");
-                return false;
-            }
+            // if (file.value === "") {
+            //     alert("이미지 파일을 첨부하세요.");
+            //     return false;
+            // }
             if (nickname.value === "") {
                 alert("상호명을 작성하세요.");
                 nickname.focus();
@@ -1185,6 +1186,7 @@
             const cate4 = $('#actdetailselect');
             const file = document.getElementById("file");
             const nickname = document.getElementById("nickname");
+            const sns = document.getElementById("sns");
             const content = quill1.root.innerHTML;
             const content_length = quill1.getLength();
             const content_length2 = quill2.getLength();
@@ -1313,6 +1315,7 @@
             document.getElementById("form_intro").value = intro;
             document.getElementById("form_curriculum").value = curriculum;
             document.getElementById("form_nickname").value = nickname.value;
+            document.getElementById("form_sns").value = sns.value;
 
             console.log($("#form_nickname").val());
             // 5. 전송

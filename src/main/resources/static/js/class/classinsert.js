@@ -786,6 +786,7 @@ function insertClass() {
     document.getElementById("form_intro").value = intro;
     document.getElementById("form_curriculum").value = curriculum;
     document.getElementById("form_nickname").value = nickname.value;
+    document.getElementById("form_sns").value = sns.value;
 
     // var input1 = document.createElement("input");
     // input1.type = "text";
