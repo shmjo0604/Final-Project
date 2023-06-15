@@ -44,7 +44,7 @@
 
     <!-- 1-2. 클래스 조회 -->
     <select id="selectClassProductViewList" parameterType="map" resultType="ClassProduct">
-    SELECT s.classcode, s.title, s.price, s.address1, s.address2, s.address3, s.latitude, s.longitude, s.hit, s.rnum FROM ( 
+    SELECT s.classcode, s.title, s.price, s.address1, s.address2, s.address3, s.latitude, s.longitude, s.hit, s.nickname, s.rnum FROM ( 
             SELECT  ROW_NUMBER() OVER(ORDER BY s.regdate DESC) AS rnum, s.* FROM classproductview s
             <trim prefix='WHERE' prefixOverrides='AND || OR '>
                 <if test = 'citycode != 0'>
@@ -114,7 +114,7 @@
 
     <!-- 1-4. 클래스 조회(조회순) -->
     <select id="selectClassProductViewList2" parameterType="map" resultType="ClassProduct">
-    SELECT s.classcode, s.title, s.price, s.address1, s.address2, s.address3, s.latitude, s.longitude, s.hit, s.rnum FROM ( 
+    SELECT s.classcode, s.title, s.price, s.address1, s.address2, s.address3, s.latitude, s.longitude, s.hit, s.rnum, s.nickname FROM ( 
             SELECT  ROW_NUMBER() OVER(ORDER BY s.hit DESC) AS rnum, s.* FROM classproductview s
             <trim prefix='WHERE' prefixOverrides='AND || OR '>
                 <if test = 'citycode != 0'>

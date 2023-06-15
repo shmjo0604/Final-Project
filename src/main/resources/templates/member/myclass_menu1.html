@@ -73,21 +73,6 @@
             display: block;
         }
 
-        /* .noact {
-            float: right;
-            font-size: 13px;
-            color: dimgray;
-            margin-top: 5px;
-        }
-
-        .noact:hover {
-            color: black;
-        } */
-
-        /* .btn{
-            background-color: rgb(242, 250, 249);
-            color: black;
-        } */
     </style>
 
     <div class="container">
@@ -171,7 +156,7 @@
                                 </div>
                                 <!-- card 내용 -->
                                 <div class="card-body">
-                                    <p class="card-title" style="font-weight: bold; font-size: large;"
+                                    <p class="card-title" style="font-weight: bold; font-size: '15px';"
                                         th:text="${obj.title}"></p>
                                     상호명 : 
                                     <img th:src="@{/class/image(no=${obj.profileImg} )}" style="width: 25px; height: 25px; object-fit:cover; float: right; border-radius: 10px;" />

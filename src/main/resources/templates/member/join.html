@@ -24,10 +24,10 @@
     <!--thymeleaf contextpath-->
     <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}" />
     <style>
-        .form-floating>.form-control {
+        /* .form-floating>.form-control {
 
             height: 100%;
-        }
+        } */
 
         :root {
             --font-color: #4e4e4e;
@@ -118,7 +118,7 @@
                                     <input class="form-control" id="phone" type="tel" name="phone"
                                         placeholder="Enter your phone" oninput="autoHyphen(this)"
                                         maxlength="13" />
-                                    <label for="phone">전화번호</label>
+                                    <label for="phone">전화번호(하이픈('-')은 자동 입력됩니다)</label>
                                 </div>
                                 <div class="form-floating mb-4">
                                     <input class="form-control" id="birth" type="text" name="birth"

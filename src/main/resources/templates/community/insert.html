@@ -25,7 +25,23 @@
     <!--thymeleaf contextpath-->
     <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}" />
     <style>
-        .container {
+        html,
+        body {
+            height: 100%;
+        }
+
+        #wrapper {
+            min-height: 100%;
+            position: relative;
+            /* padding-bottom: 60px; */
+        }
+
+        footer {
+            position: relative;
+            /* transform: translateY(-30%); */
+        }
+
+        .communityinsert {
             padding-top: 100px;
         }
 
@@ -48,9 +64,9 @@
     <!--header 영역-->
     <header th:replace="~{header :: headerFragment}"></header>
 
-    <article>
+    <article id="wrapper">
 
-        <div class="container" role="main">
+        <div class="container communityinsert" role="main">
             <header>
                 <h2>SPECIAL DAY 커뮤니티</h2>
             </header>
@@ -114,7 +130,8 @@
     </article>
 
 
-
+    <!--footer 영역-->
+    <footer th:replace="~{footer :: footerFragment}"></footer>
 
 
     <!--jQuery-->
@@ -212,7 +229,7 @@
             }
             if (content.value <= 5) {
                 alert('내용을 입력하세요');
-                
+
                 return false;
             }
             const divContent = quill.root.innerHTML;
@@ -220,7 +237,7 @@
 
             document.getElementById("form").submit();
         }
-        
+
 
     </script>
     <!--Main js-->

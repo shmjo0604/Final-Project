@@ -9,8 +9,10 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
+@EnableScheduling // scheduler
 @PropertySource(value = {"classpath:global.properties"})
 @EntityScan(basePackages = {"com.example.entity"})
 @EnableJpaRepositories(basePackages = {"com.example.repository"})
@@ -27,7 +29,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 	"com.example.service.notification",
 	"com.example.restcontroller",
 	"com.example.config",
-	"com.example.filter"
+	"com.example.filter",
+	"com.example.scheduler"
 })
 public class FinalProjectApplication extends SpringBootServletInitializer{
 

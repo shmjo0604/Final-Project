@@ -193,7 +193,7 @@ function getclasslevelName(level) {
   if(level === 1) {
     return "입문자";
   }
-  else if(level === 2) {
+  else if(level === 2) {modalAction1
     return "경험자";
   }
   else if(level === 3) {
@@ -204,7 +204,9 @@ function getclasslevelName(level) {
 
 // 상세보기 모달
 
-async function modalAction1(no) {
+async function modalAction1(no, applychk) {
+
+  console.log(applychk);
 
   const modal = new bootstrap.Modal(
     document.getElementById("exampleModal1"),
@@ -355,6 +357,13 @@ async function modalAction1(no) {
   classcode1.value = classcode;
   unitno1.value = unitno;
   person4.value = person;
+
+  if(applychk === 1) {
+    $("#applycancelbtn").css("display", "block");
+  }
+  else {
+    $("#applycancelbtn").css("display", "none");
+  }
 
   modal.show();
 }

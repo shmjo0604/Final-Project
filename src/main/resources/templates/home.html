@@ -145,7 +145,7 @@
                             <th:block th:each="obj : ${list}" th:if="${obj.chk == 1}">
                                 <div class="col">
                                     <div class="class">
-                                        <a th:href="@{/class/product.do( classcode=${ obj.classcode } )}"
+                                        <a href="#" th:onclick="updatehit([[${obj.classcode}]])"
                                             class="new-c1">
                                             <div class="new-c2">
                                                 <div class="class-image">
@@ -154,7 +154,8 @@
                                                 </div>
                                                 <span>
                                                     <p class="class-name" th:text="${obj.title}"></p>
-                                                    <img th:src="@{/class/image(no=${obj.profileImg} )}" style="width: 25px; height: 25px; object-fit:cover; float: right; border-radius: 10px; margin-right: 15px;" />
+                                                    <img th:src="@{/class/image(no=${obj.profileImg} )}"
+                                                        style="width: 25px; height: 25px; object-fit:cover; float: right; border-radius: 10px; margin-right: 15px;" />
                                                     <p class="price col-8" th:text="${obj.nickname}"></p>
                                                     <p class="local" th:text="${obj.address1}"></p>
                                                     <div class="row">
@@ -174,34 +175,43 @@
             </div>
 
             <!-- 커뮤니티 영역 -->
-                <div class="main-cumu">
-                    <h3 class="seb-title"> 커뮤니티 영역 </h2>
-                        <table class="table teble-hover text-striped" style="border: 1px rgb(184, 181, 181) ;">
-                            <br />
-                            <thead>
-                                <tr>
-                                    <th scope="content">글내용</th>
-                                    <th scope="id">작성자ID</th>
-                                   
-                                </tr>
-                            </thead>
-                            <tbody>
-                              <td style="margin: 100%;">  <li><a href="./community/selectone.do?no=68"style="text-decoration:none;color: black ;">제주도에 가족들이 다같이 할만한 클래스 있을까요?</a></li>
-                              <td style="margin: 100%;">  <li><a>test8</a></li>
-                              </td>
-                            </tbody>
-                            <tbody>
-                                <td style="margin: 100%;">  <li><a href="./community/selectone.do?no=69"style="text-decoration:none;color: black ;">서울 뚜벅이 여행자입니다</a></li>
-                                <td style="margin: 100%;">  <li><a>test8</a></li>
-                                </td>
-                              </tbody>
-                              <tbody>
-                                <td style="margin: 100%;">  <li><a href="./community/selectone.do?no=70"style="text-decoration:none;color: black ;">부산 패들보트 클래스 추천해요!</a></li>
-                                <td style="margin: 100%;">  <li><a>test8</a></li>
-                                </td>
-                              </tbody>
-                        </table>
-                </div>
+            <div class="main-cumu">
+                <h3 class="seb-title"> 커뮤니티 영역 </h2>
+                    <table class="table teble-hover text-striped" style="border: 1px rgb(184, 181, 181) ;">
+                        <br />
+                        <thead>
+                            <tr>
+                                <th scope="content">글내용</th>
+                                <th scope="id">작성자ID</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <td style="margin: 100%;">
+                                <li><a href="./community/selectone.do?no=68"
+                                        style="text-decoration:none;color: black ;">제주도에 가족들이 다같이 할만한 클래스 있을까요?</a></li>
+                            <td style="margin: 100%;">
+                                <li><a>test8</a></li>
+                            </td>
+                        </tbody>
+                        <tbody>
+                            <td style="margin: 100%;">
+                                <li><a href="./community/selectone.do?no=69"
+                                        style="text-decoration:none;color: black ;">서울 뚜벅이 여행자입니다</a></li>
+                            <td style="margin: 100%;">
+                                <li><a>test8</a></li>
+                            </td>
+                        </tbody>
+                        <tbody>
+                            <td style="margin: 100%;">
+                                <li><a href="./community/selectone.do?no=70"
+                                        style="text-decoration:none;color: black ;">부산 패들보트 클래스 추천해요!</a></li>
+                            <td style="margin: 100%;">
+                                <li><a>test8</a></li>
+                            </td>
+                        </tbody>
+                    </table>
+            </div>
 
 
             <!-- 안내 영역 -->
@@ -226,20 +236,15 @@
                         <div id="gallery" class="tabContent">
                             <h2>갤러리 내용입니다.</h2>
                             <ul>
-                                <li><img src="images/img-1.jpg"></li>
-                                <li><img src="images/img-2.jpg"></li>
-                                <li><img src="images/img-3.jpg"></li>
-                                <li><img src="images/img-1.jpg"></li>
-                                <li><img src="images/img-2.jpg"></li>
-                                <li><img src="images/img-3.jpg"></li>
+
                             </ul>
                         </div>
                     </div>
-                </div>
-
             </div>
+
         </div>
-        </div>
+    </div>
+    </div>
     </div>
 
     <!--footer 영역-->
@@ -303,7 +308,7 @@
 
         // 페이지 좌우로 넘기기
         $(document).ready(function () {
-            
+
             var nowNum = 0;
             var maxLength = $('.slide li').length;
             $('.slide li').eq(nowNum).show();
@@ -327,6 +332,24 @@
                 $('.slide li').eq(nowNum).show();
             });
         });
+
+        async function updatehit(code) {
+
+            //console.log(code);
+
+            const url = contextPath + '/api/class/updatehit.json';
+            const headers = { "Content-Type": "application/json" };
+            const body = { classcode: code };
+
+            const { data } = await axios.put(url, body, { headers });
+
+            //console.log(data);
+
+            if (data.ret === 1) {
+                window.location.href = contextPath + '/class/product.do?classcode=' + code;
+            }
+        }
+
     </script>
 
 

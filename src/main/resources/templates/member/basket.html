@@ -182,6 +182,8 @@
             form.submit();
         }
 
+        // 전체 선택 버튼 클릭 시, 모든 장바구니 항목 선택 해제 -> 최종 결제 금액 변경
+
         function selectAll(e) {
 
             const checkboxes = document.getElementsByName('unitno[]');
@@ -190,29 +192,37 @@
                 checkbox.checked = e.checked;
             })
 
+            paymentCalc();
+
         }
+
+        // 장바구니 항목 선택 및 해제 시, 최종 결제 금액 변경
 
         $("input:checkbox[name='unitno[]']").change(function () {
 
-            var pricecheck = $("input:checkbox[name='unitno[]']:checked");
+            paymentCalc();
 
-            var payment = 0;
+            // var pricecheck = $("input:checkbox[name='unitno[]']:checked");
 
-            $("input:checkbox[name='unitno[]']:checked").each(function (i) {
-                var tr = pricecheck.parent().parent().eq(i);
+            // var payment = 0;
 
-                var td = tr.children();
+            // $("input:checkbox[name='unitno[]']:checked").each(function (i) {
+            //     var tr = pricecheck.parent().parent().eq(i);
 
-                var price = td.eq(5).find("input").val();
+            //     var td = tr.children();
 
-                // console.log("가격", price);
+            //     var price = td.eq(5).find("input").val();
 
-                payment += Number(price);
-            })
+            //     // console.log("가격", price);
 
-            $("#payment").text(payment.toLocaleString() + '원');
+            //     payment += Number(price);
+            // })
+
+            // $("#payment").text(payment.toLocaleString() + '원');
 
         })
+
+        // 최종 결제 금액 산출
 
         function paymentCalc() {
 
@@ -237,6 +247,8 @@
         }
 
         paymentCalc();
+
+        // 선택된 장바구니 항목 삭제
 
         function basketdelete() {
 
@@ -265,6 +277,8 @@
 
         }
 
+        // 장바구니 항목 하나 삭제 ( 잔여 신청인원이 없어 신청이 불가능할 때 )
+
         function basketdeleteone(no) {
 
             // console.log(no);
@@ -274,6 +288,8 @@
             $("#form_deleteone").submit();
 
         }
+
+        // 결제 신청 시, 선택된 항목 정보만 전송
 
         function applyAction() {
 
@@ -303,6 +319,8 @@
             document.querySelector("#form_apply").submit();
 
         }
+
+        // 인원수 변경 시, 가격 변동
 
         function changeperson(person, totalprice, idx) {
 
