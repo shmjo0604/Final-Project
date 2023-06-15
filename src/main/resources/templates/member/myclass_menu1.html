@@ -115,7 +115,7 @@
                                             <li>
                                                 <form method="post" class="dropdown-item" id="deleteForm"
                                                     th:action="@{/class/delete.do(classcode=${obj.classcode} )}">
-                                                    <button onclick="deletePost()"
+                                                    <button onclick="deletePost()" type="button"
                                                         style="border: 0; background-color: transparent;">삭제</button>
                                                 </form>
                                             </li>
@@ -140,7 +140,7 @@
                                             <li>
                                                 <form method="post" class="dropdown-item" id="deleteForm"
                                                     th:action="@{/class/delete.do(classcode=${obj.classcode} )}">
-                                                    <button onclick="deletePost()"
+                                                    <button onclick="deletePost()" type="button"
                                                         style="border: 0; background-color: transparent;">삭제</button>
                                                 </form>
                                             </li>
@@ -223,7 +223,7 @@
 
         /* 삭제 버튼 */
         function deletePost() {
-            if (confirm('삭제하시겠습니까?') == true) {
+            if (confirm('삭제하시겠습니까?')) {
                 document.getElementById('deleteForm').submit();
                 alert("삭제되었습니다. 홈화면으로 이동합니다.");
             } else {
@@ -235,8 +235,8 @@
         /* 비활성화 버튼 */
         function nonactive(classcode, chk) {
 
-            console.log(classcode);
-            console.log(chk);
+            // console.log(classcode);
+            // console.log(chk);
             
             if ( confirm('비활성화 하시겠습니까?') == true ) {
                 document.getElementById('nonclasscode').value=classcode;

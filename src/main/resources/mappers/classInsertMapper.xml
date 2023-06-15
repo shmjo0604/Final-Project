@@ -6,7 +6,7 @@
     <!-- 1. 클래스 등록 -->
     <insert id="insertClassOne" parameterType="ClassProduct">
         INSERT INTO classproduct( title, postcode, address1, address2, address3, price, instructor, intro, curriculum, 
-        localcode, actdetailcode, nickname, memberid, latitude, longitude )
+        localcode, actdetailcode, nickname, memberid, latitude, longitude, sns )
         VALUES ( #{title}, #{postcode}, #{address1}, #{address2}, #{address3}, #{price}, #{instructor}, #{intro}, #{curriculum}, 
         #{localcode}, #{actdetailcode}, #{nickname}, #{memberid}, #{latitude}, #{longitude}, #{sns} )
     </insert>

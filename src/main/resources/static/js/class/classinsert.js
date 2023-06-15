@@ -650,6 +650,7 @@ function insertClass() {
     const cate4 = $('#actdetailselect');
     const file = document.getElementById("file");
     const nickname = document.getElementById("nickname");
+    const sns = document.getElementById("sns");
     const content_length = quill1.getLength();
     const content_length2 = quill2.getLength();
     const content_length3 = quill3.getLength();
