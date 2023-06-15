@@ -223,11 +223,14 @@
 
         /* 삭제 버튼 */
         function deletePost() {
+            var result = confirm('삭제하시겠습니까?');
+            
             if (confirm('삭제하시겠습니까?') == true) {
                 document.getElementById('deleteForm').submit();
                 alert("삭제되었습니다. 홈화면으로 이동합니다.");
             } else {
                 alert("취소하였습니다.");
+                return false;
             }
         }
 

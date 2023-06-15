@@ -375,7 +375,7 @@ public class MemberController {
             HttpSession httpSession,
             Model model) {
 
-        log.info(format, chk);
+        //log.info(format, chk);
         log.info(format, classcode);
 
         if (menu == 1) {
