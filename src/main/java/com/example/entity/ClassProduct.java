@@ -73,6 +73,9 @@ public class ClassProduct {
   @Lob
   private String instructor;
 
+  // SNS링크(선택)
+  private String sns;
+
   // 커리큘럼
   @Lob
   private String curriculum;
