@@ -45,6 +45,8 @@ public class ClassProduct {
 	private int actdetailcode;
 	// 회원 아이디 (FK)
 	private String memberid;
+	// SNS
+	private String sns;
     
 	//클래스 프로필 이미지 번호
 	private long profileImg;

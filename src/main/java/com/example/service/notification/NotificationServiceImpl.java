@@ -18,7 +18,9 @@ public class NotificationServiceImpl implements NotificationService {
     
         try {
 
-            return nRepository.findByMember_idOrderByNoDesc(id);
+            List<Notification> list = nRepository.selectByMemberidOrderByNoDescLimit10(id);
+
+            return list;
 
         }
         catch(Exception e) {

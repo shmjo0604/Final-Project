@@ -48,5 +48,4 @@ public interface ClassManageMapper {
     // 8. 클래스 이미지 삭제
     public int deleteClassImageOne(long no);
     
-
 }

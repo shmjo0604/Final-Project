@@ -40,7 +40,7 @@ public class UrlFilter extends OncePerRequestFilter {
 
             }
 
-            log.info("UrlFilter => {}", httpSession.getAttribute("url"));
+            //log.info("UrlFilter => {}", httpSession.getAttribute("url"));
             filterChain.doFilter(request, response);
 
         } catch (Exception e) {

@@ -6,7 +6,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name="author" content="eunee">
     <meta name="description" content="웹솔루션 관리자화면으로 가장 많이 사용되는 웹템플릿입니다">
-    <title>SB Admin web</title>
+    <title>관리자</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <!-- Bootstrap용 css CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -86,7 +86,7 @@
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="#!">로그아웃</a></li>
+                    <li><a class="dropdown-item" th:href="@{/logout.do}">로그아웃</a></li>
                 </ul>
             </li>
         </ul>

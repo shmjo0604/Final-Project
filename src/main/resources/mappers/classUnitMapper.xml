@@ -32,7 +32,7 @@
 
 <!--(4) ClassUnit 삭제-->
 <update id="updateUnitOneInactive" parameterType="long">
-    UPDATE CLASSUNIT SET chk = 0 WHERE no = #{no};
+    UPDATE CLASSUNIT SET chk = 0 WHERE no = #{no}
 </update>
 
 <!--(4-1) ClassUnit 일괄 삭제-->
@@ -66,5 +66,17 @@
 <select id="selectUnitListCountByClasscode" parameterType="long" resultType="long">
     SELECT COUNT(*) FROM CLASSUNIT WHERE CLASSCODE = #{classcode} AND CHK = 1
 </select>
+
+<!--(9) ClassUnit 전체 조회 (chk = 1)-->
+
+<select id="selectClassUnitAll" resultType="ClassUnit">
+    SELECT c.* FROM CLASSUNIT c WHERE c.chk = 1
+</select>
+
+<!--(10) ClassUnit 완료 상태 변경(Scheduler에서 사용)-->
+
+<update id="updateClassUnitComplete" parameterType="long">
+    UPDATE CLASSUNIT SET chk = 2 WHERE no = #{no}
+</update>
 
 </mapper>

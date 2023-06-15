@@ -8,6 +8,6 @@ import com.example.entity.ClassAnswer;
 @Repository
 public interface ClassAnswerRepository extends JpaRepository<ClassAnswer, Long> {
 
-
+    int countByNo(long no);
     
 }

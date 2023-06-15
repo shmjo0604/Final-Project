@@ -32,7 +32,7 @@ public class RestNotificationController {
 
         Map<String, Object> retMap = new HashMap<>();
 
-        log.info(format, user.getUsername());
+        // log.info(format, user.getUsername());
 
         retMap.put("status", -1);
 
@@ -41,7 +41,7 @@ public class RestNotificationController {
             List<Notification> list = nService.selectNotificationList(user.getUsername());
             int count = nService.selectNotificationCountNotRead(user.getUsername());
 
-            log.info(format, list);
+            // log.info(format, list);
 
             if(!list.isEmpty()) {
 

@@ -46,4 +46,10 @@ public interface ClassUnitMapper {
 	/* (8) ClassUnit 전체 개수 (by classcode) */
 	public long selectUnitListCountByClasscode(long classcode);
 
+	/* (9) ClassUnit 전체 조회 */
+	public List<ClassUnit> selectClassUnitAll();
+
+	/* (10) ClassUnit 완료 상태 변경(chk -> 2) */
+	public int updateClassUnitComplete(long no);
+
 }

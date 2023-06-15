@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.111.3">
-    <title>클래스 제목</title>
+    <title th:text="${obj.title}"></title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/blog/">
     <!--웹 페이지 아이콘 변경-->
     <link rel="icon" th:href="@{/image/logo.ico}">
@@ -144,8 +144,37 @@
             text-decoration: none;
         }
 
+        .fc-day-mon a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .fc-day-tue a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .fc-day-wed a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .fc-day-thu a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .fc-day-fri a {
+            color: black;
+            text-decoration: none;
+        }
+
         .bx-wrapper .bx-controls-direction a {
             z-index: 1010;
+        }
+
+        .utable>td {
+            font-size: 12px;
         }
     </style>
     <!-- Custom styles for this template -->
@@ -174,56 +203,10 @@
 
         <main class="container productbody">
 
-            <!-- <div class="row mb-2">
-                <div class="col-md-6">
-                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                        <div class="col p-4 d-flex flex-column position-static">
-                            <strong class="d-inline-block mb-2 text-primary">World</strong>
-                            <h3 class="mb-0">Featured post</h3>
-                            <div class="mb-1 text-body-secondary">Nov 12</div>
-                            <p class="card-text mb-auto">This is a wider card with supporting text below as a natural
-                                lead-in to additional content.</p>
-                            <a href="#" class="stretched-link">Continue reading</a>
-                        </div>
-                        <div class="col-auto d-none d-lg-block">
-                            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
-                                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
-                                focusable="false">
-                                <title>Placeholder</title>
-                                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                                    dy=".3em">Thumbnail</text>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div
-                        class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                        <div class="col p-4 d-flex flex-column position-static">
-                            <strong class="d-inline-block mb-2 text-success">Design</strong>
-                            <h3 class="mb-0">Post title</h3>
-                            <div class="mb-1 text-body-secondary">Nov 11</div>
-                            <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to
-                                additional content.</p>
-                            <a href="#" class="stretched-link">Continue reading</a>
-                        </div>
-                        <div class="col-auto d-none d-lg-block">
-                            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
-                                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
-                                focusable="false">
-                                <title>Placeholder</title>
-                                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                                    dy=".3em">Thumbnail</text>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
             <div class="row g-5">
                 <div class="col-md-7">
 
-                    <p>카테고리1 > 카테고리2</p>
+                    <p th:text="|${obj.activitycate} > ${obj.actdetailcate}|"></p>
                     <div class="p-2 p-md-3 mb-4 rounded bg-dark">
 
                         <div class="slider">
@@ -232,18 +215,13 @@
                                 <img th:src="@{/class/image(no=${tmp})}">
                             </th:block>
                         </div>
-                        <!-- <div class="col-md-6 px-0">
-                            <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
-                            <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and
-                                efficiently about what’s most interesting in this post’s contents.</p>
-                            <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
-                        </div> -->
+                
                     </div>
 
                     <div class="border-bottom">
                         <div class="d-flex">
                             <div class="d-flex align-items-center mb-4">
-                                <h3><i class="bi bi-snow2 me-2"></i></h3>
+                                <h3><i class="bi bi-balloon-fill me-2"></i></h3>
                                 <h3 th:text="${obj.title}"></h3>
                             </div>
 
@@ -258,7 +236,6 @@
                         </div>
 
                     </div>
-
 
                     <article class="blog-post">
                         <div id="intro">
@@ -318,10 +295,13 @@
                             <h3 class="d-flex align-items-center mb-3"><i class="bi bi-stars me-2"></i><span>리뷰</span>
                             </h3>
 
-                            <div class="card mb-3">
+                            <div id="review_box">
+                                <!--동적 생성-->
+                            </div>
+                            <!-- <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-3">
-                                        <img th:src="@{/image/리뷰사람.png}" class="img-fluid rounded-start" alt="...">
+                                        
                                     </div>
                                     <div class="col-md-9">
                                         <div class="card-body">
@@ -335,7 +315,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                         <hr>
@@ -360,68 +340,74 @@
                             <th:block th:if="${user != null}">
                                 <div class="card bg-light mb-3">
                                     <div class="card-body">
-                                        <!-- Comment form-->
-                                        <div class="mb-3">
-                                            <input id="inquiry_title" class="form-control w-50 mb-2"
-                                                placeholder="제목을 입력하세요.">
-                                            <textarea id="inquiry_content" class="form-control mb-2" rows="5"
-                                                placeholder="문의 내용을 입력하세요."></textarea>
-                                            <div class="d-flex justify-content-end">
-                                                <button type="button" class="btn btn-outline-success"
-                                                    onclick="insertInquiry()">문의 등록</button>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <!-- Comment with nested comments-->
-                                        <div id="inquiry_box">
-                                            <div class="d-flex mb-4">
-                                                <!-- Parent comment-->
-                                                <div class="flex-shrink-0"><img class="rounded-circle"
-                                                        src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                                        alt="..." />
-                                                </div>
-                                                <div class="ms-3">
-                                                    <div class="fw-bold">Commenter Name</div>
-                                                    If you're going to lead a space frontier, it has to be government;
-                                                    it'll
-                                                    never
-                                                    be private enterprise. Because the space frontier is dangerous, and
-                                                    it's
-                                                    expensive, and it has unquantified risks.
-                                                    <!-- Child comment 1-->
-                                                    <div class="d-flex mt-4">
-                                                        <div class="flex-shrink-0"><img class="rounded-circle"
-                                                                src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                                                alt="..." />
-                                                        </div>
-                                                        <div class="ms-3">
-                                                            <div class="fw-bold">Commenter Name</div>
-                                                            And under those conditions, you cannot establish a
-                                                            capital-market
-                                                            evaluation of that enterprise. You can't get investors.
-                                                        </div>
-                                                    </div>
-                                                    <!-- Child comment 2-->
-                                                    <div class="d-flex mt-4">
-                                                        <div class="flex-shrink-0"><img class="rounded-circle"
-                                                                src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                                                alt="..." />
-                                                        </div>
-                                                        <div class="ms-3">
-                                                            <div class="fw-bold">Commenter Name</div>
-                                                            When you put money directly to a problem, it makes a good
-                                                            headline.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Single comment-->
-
+                                        <div>
+                                            <button class="form-control-plaintext text-center nav-link" type="button"
+                                                onclick="insertInquiryModal()">문의하기</button>
                                         </div>
                                     </div>
                                 </div>
-                                </th:if>
+                            </th:if>
                         </div>
+
+                        <!--문의 작성 Modal-->
+                        <div class="modal modal-center fade" id="inquiryModal" tabindex="-1" data-bs-backdrop="static"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-success">
+                                        <div class="me-auto"></div>
+                                        <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">문의하기</h1>
+                                        <button type="button" class="btn-close" onclick="dismissModal()"
+                                            aria-label="Close">
+                                        </button>
+                                    </div>
+                                    <div class="modal-question">
+                                    </div>
+                                    <form th:action="@{/classinquiry/insert.do}" id="form_inquiry" method="post">
+                                        <div class="modal-body">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <td class="text-center align-middle">문의 제목</td>
+                                                        <td>
+                                                            <input id="inquiry_title" class="form-control" name="title" type="text"
+                                                                placeholder="문의 제목을 작성하세요" style="width:100%;">
+                                                        </td>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-center align-middle">문의 내용</td>
+                                                        <td>
+                                                            <textarea name="content" id="inquiry_content"
+                                                                placeholder="문의 내용을 작성하세요" class="form-control"
+                                                                style="width:100%;" rows="10"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                onclick="dismissModal()">취소</button>
+
+                                            <input type="button" class="btn btn-success" id="btn-write"
+                                                onclick="insertClassInquiry()" value="등록">
+                                        </div>
+
+                                        <th:block th:if="${user != null}">
+                                            <input name="member.id" type="hidden" th:value="${user.username}"/>
+                                        </th:block>
+                                        <input name="classproduct.classcode" type="hidden" th:value="${obj.classcode}"/>
+                                        <input name="classproduct.member.id" type="hidden" th:value="${obj.memberid}"/>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                     </article>
                 </div>
 
@@ -435,8 +421,8 @@
 
                             <div id="unitbox" class="border mb-2"
                                 style="width: 100%; height: 150px; overflow-y: auto; display: none;">
-                                <table id="utable" class="table table-hover">
-                                    <thead class="table-success">
+                                <table id="utable" class="table table-hover table-sm">
+                                    <thead class="table-success text-center">
                                         <tr>
                                             <th>날짜</th>
                                             <th>시작</th>
@@ -447,7 +433,7 @@
                                             <th>최대인원</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="unittable" class="table-group-divider">
+                                    <tbody id="unittable" class="table-group-divider text-center">
 
                                         <!-- 동적 생성 -->
 
@@ -480,23 +466,23 @@
         </main>
 
         <!--form 태그 (post->get)-->
-        <!--unitno, person -->
+        <!--결제 신청(unitno, person) -->
         <form id="form-apply" th:action="@{/apply/insert.do}" method="get" style="display: none;">
-            <input id="unitno" name="unitno" type="number">
-            <input id="person" name="person" type="number">
+            <input id="unitno" name="unitno[]" type="number">
+            <input id="person" name="person[]" type="number">
         </form>
 
+        <!--장바구니 추가-->
         <form id="form-basket" th:action="@{basket.do}" method="post" style="display: none;">
             <input id="basket_unitno" name="unitno" type="number">
             <input id="basket_cnt" name="cnt" type="number">
+            <input name="classcode" type="number" th:value="${obj.classcode}">
         </form>
     </div>
 
 
-
     <!--footer 영역-->
     <footer th:replace="~{footer :: footerFragment}"></footer>
-
 
     <!--jQuery-->
     <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
@@ -521,6 +507,7 @@
         const contextPath = $('#contextPathHolder').attr('data-contextPath');
         const classcode = /*[[${obj.classcode}]]*/'';
         const price = /*[[${obj.price}]]*/'';
+        const list = /*[[${list}]]*/'';
 
         var totalprice = 0;
 
@@ -548,13 +535,11 @@
                 height: 200
             });
 
-            selectInquiry(1);
         });
 
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                googleCalendarApiKey: 'AIzaSyDL8tig_8-Hvx4DdJ0j4KTGPz39oUGVVFk',
                 initialView: 'dayGridMonth',
                 // headerToolbar: {
                 //     left: 'prev,next today',
@@ -577,21 +562,26 @@
                 , columnHeaderText: function (date) {
                     return weekList[date.getDay()]; // 헤더 var weekList = ['일','월','화','수','목','금','토']; 
                 },
+                selectable: true, // 달력 일자 드래그 설정가능
+                events: createEventObjects(),
 
                 dateClick: async function (info) {
+
                     //console.log(info.dateStr);
 
                     const url = contextPath + '/api/class/selectunit.json?classdate=' + info.dateStr + '&classcode=' + classcode;
                     const headers = { "Content-Type": "application/json" };
                     const { data } = await axios.get(url, { headers });
 
-                    console.log(data);
+                    // console.log(data);
 
                     const table = $("#unittable")[0];
 
                     table.innerHTML = "";
 
                     if (data.ret === 1) {
+
+                        $("#applybox").css("display", "none");
 
                         for (let obj of data.list) {
 
@@ -622,6 +612,13 @@
                         }
                     }
 
+                    else if (data.ret === 0) {
+
+                        $("#unitbox").css("display", "none");
+                        $("#applybox").css("display", "none");
+
+                    }
+
                     //alert('Date: ' + info.dateStr);
                     //alert('Resource ID: ' + info.resource.id);
                 },
@@ -639,9 +636,32 @@
 
         });
 
+        function createEventObjects() {
+            return list.map(function (obj) {
+                
+                return {
+                    title: obj.classstart,
+                    start: obj.classdate,
+                    backgroundColor: getBackgroundColor(obj.classlevel)
+                };
+            });
+        }
+
+        function getBackgroundColor(classlevel) {
+            switch (classlevel) {
+                case 1:
+                    return "#00C783";
+                case 2:
+                    return "#23946C";
+                case 3:
+                    return "#006F4A";
+            }
+        }
+
         async function unitSelect(no) {
 
-            console.log(no);
+            // console.log(no);
+
             $("#unitno").attr("value", no);
             $("#basket_unitno").attr("value", no);
 
@@ -743,109 +763,271 @@
         }
 
         function applyAction() {
+
+            if($("#unitno").val() === '') {
+                alert("클래스 날짜를 선택해주세요.");
+                return false;
+            }
+
+            if($("#person").val() === '') {
+                alert("신청 인원을 선택해주세요.");
+                return false;
+            }
+
             $("#form-apply").submit();
         }
 
         function basketAction() {
+
+            if($("#basket_unitno").val() === '') {
+                alert("클래스 날짜를 선택해주세요.");
+                return false;
+            }
+
+            if($("#basket_cnt").val() === '') {
+                alert("신청 인원을 선택해주세요.");
+                return false;
+            }
+ 
             $("#form-basket").submit();
         }
 
-        async function insertInquiry() {
+        function insertInquiryModal() {
+            const modal = new bootstrap.Modal(document.getElementById("inquiryModal"), {});
+            modal.show();
+        }
 
-            const title = document.querySelector("#inquiry_title");
-            const content = document.querySelector("#inquiry_content");
+        function dismissModal() {
 
-            const url = contextPath + '/api/inquiry/insertinquiry.json';
-            const headers = { "Content-Type": "application/json" };
-            const body = { title: title.value, content: content.value, classproduct: { classcode: classcode } };
+            $("#inquiryModal").modal('hide');
 
-            const { data } = await axios.post(url, body, { headers });
-
-            console.log(data);
-
-            if (data.ret === 1) {
-
-                title.value = "";
-                content.value = "";
-
-                selectInquiry(1);
-            }
-
+            document.getElementById("inquiry_title").value = null;
+            document.getElementById("inquiry_content").value = null;
 
         }
 
-        async function selectInquiry(page) {
+        function insertClassInquiry() {
 
-            const url = contextPath + "/api/inquiry/selectinquiry.json?classcode=" + classcode + "&page=" + page;
+            const title = document.getElementById("inquiry_title");
+            const content = document.getElementById("inquiry_content");
+
+            if(title.value.length < 1) {
+                alert("문의 제목을 입력해주세요");
+                return false;
+            }
+
+            if(content.value.length < 1) {
+                alert("문의 내용을 입력해주세요");
+                return false;
+            }
+
+            document.getElementById("form_inquiry").submit();
+
+        }
+
+        async function selectReviewList(page) {
+
+            const url = contextPath + '/api/review/selectlist.json?classcode=' + classcode + '&page=' + page;
             const headers = { "Content-Type": "application/json" };
-
             const { data } = await axios.get(url, { headers });
 
             console.log(data);
 
-            $("#inquiry_box").empty();
+            const box = document.querySelector("#review_box");
 
-            for (let obj of data.list) {
+            // box.innerHTML = "";
 
-                var inquiry_box = document.querySelector("#inquiry_box");
+            if(data.status === 200) {
+                
+                data.list.forEach((obj, index) => {
 
-                var div1 = document.createElement('div');
-                div1.className = "d-flex mb-4";
+                    var card = document.createElement('div');
+                    card.className = "card mb-3";
 
-                var div2 = document.createElement('div');
-                div2.className = "flex-shrink-0"
+                    var row = document.createElement('div');
+                    row.className = "row g-0";
 
-                var img1 = new Image();
-                img1.className = "rounded-circle"
-                img1.src = contextPath + "/image/profile_default.svg";
-                img1.setAttribute('width', '50');
-                img1.setAttribute('height', '50');
+                    var col1 = document.createElement('div');
+                    col1.className = "col-md-4";
 
-                div2.appendChild(img1);
-                div1.appendChild(div2);
+                    if(obj.imglist.length > 0) {
 
-                var div3 = document.createElement('div');
-                div3.className = "ms-3";
+                        var carousel = document.createElement('div');
+                        carousel.id = "carouselExample" + index;
+                        carousel.className = "carousel slide";
 
-                var div4 = document.createElement('div');
-                div4.className = "fw-bold";
+                        var carousel_inner = document.createElement('div');
+                        carousel_inner.className = "carousel-inner";
 
-                var div4text = document.createTextNode(obj.memberid);
+                        obj.imglist.forEach((tmp, index) => {
 
-                div4.appendChild(div4text);
+                            if(index === 0) {
+                                var carousel_item = document.createElement('div');
+                                carousel_item.className = "carousel-item active";
 
-                var div5 = document.createElement('div');
+                                var img = document.createElement('img');
+                                img.src = `${contextPath}/review/image?no=${tmp.no}`;
+                                img.className = "d-block img-thumbnail w-100";
+                                img.style.width = "232px";
+                                img.style.height = "174px";
 
-                var div5text = document.createTextNode(obj.content);
+                                carousel_item.appendChild(img);
 
-                div5.appendChild(div5text);
+                                carousel_inner.appendChild(carousel_item);
+                            }
 
-                div3.appendChild(div4);
-                div3.appendChild(div5);
+                            else {
 
-                div1.appendChild(div3);
+                                var carousel_item = document.createElement('div');
+                                carousel_item.className = "carousel-item";
 
-                inquiry_box.appendChild(div1);
+                                var img = document.createElement('img');
+                                img.src = `${contextPath}/review/image?no=${tmp.no}`;
+                                img.className = "d-block img-thumbnail w-100";
+                                img.style.width = "232px";
+                                img.style.height = "174px";
+
+                                carousel_item.appendChild(img);
+
+                                carousel_inner.appendChild(carousel_item);
+
+                            }
+
+                        })
+
+                        carousel.appendChild(carousel_inner);
+
+                        var button_prev = document.createElement('button');
+                        button_prev.className = "carousel-control-prev";
+
+                        var span_icon_prev = document.createElement("span");
+                        span_icon_prev.className = "carousel-control-prev-icon";
+                        var span_hidden_prev = document.createElement("span");
+                        span_hidden_prev.className = "visually-hidden";
+                        span_hidden_prev.textContent = "Previous";
+
+                        button_prev.appendChild(span_icon_prev);
+                        button_prev.appendChild(span_hidden_prev);
+
+                        button_prev.addEventListener('click', event => {
+                            console.log(-1);
+                            new bootstrap.Carousel("#carouselExample"+index, {}).prev();
+                        })
+
+                        carousel.appendChild(button_prev);
+
+                        var button_next = document.createElement('button');
+                        button_next.className = "carousel-control-next";
+
+                        var span_icon_next = document.createElement("span");
+                        span_icon_next.className = "carousel-control-next-icon";
+                        var span_hidden_next = document.createElement("span");
+                        span_hidden_next.className = "visually-hidden";
+                        span_hidden_next.textContent = "Next";
+
+                        button_next.appendChild(span_icon_next);
+                        button_next.appendChild(span_hidden_next);
+
+                        button_next.addEventListener('click', event => {
+                            console.log(1);
+                            new bootstrap.Carousel(carousel, {}).next();
+                        })
+
+                        carousel.appendChild(button_next);
+
+                        // carousel.innerHTML += `<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        //                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        //                       <span class="visually-hidden">Previous</span>
+                        //                     </button>
+                        //                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        //                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        //                       <span class="visually-hidden">Next</span>
+                        //                     </button>`;
+
+                        // `<div id="carouselExample" class="carousel slide">
+                        //                     <div class="carousel-inner">
+                        //                       <div class="carousel-item active">
+                        //                         <img th:src="@{/review/image(no=92)}" class="d-block img-thumbnail" alt="..." style="width: 220px; height: 165px;">
+                        //                       </div>
+                        //                       <div class="carousel-item">
+                        //                         <img th:src="@{/review/image(no=93)}" class="d-block img-thumbnail" alt="..." style="width: 220px; height: 165px;">
+                        //                       </div>
+                        //                     </div>
+                        //                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        //                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        //                       <span class="visually-hidden">Previous</span>
+                        //                     </button>
+                        //                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        //                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        //                       <span class="visually-hidden">Next</span>
+                        //                     </button>
+                        //                   </div>`
+
+                        col1.appendChild(carousel);
+                    }
+
+                    else {
+
+                        var img = document.createElement('img');
+
+                        img.src = `${contextPath}/image/logo.svg`;
+                        img.className = "d-block img-thumbnail w-100";
+                        img.style.width = "232px";
+                        img.style.height = "174px";
+
+                        col1.appendChild(img);
+                    }
+
+                    var col2 = document.createElement('div');
+                    col2.className = "col-md-8";
+
+                    var card_body = document.createElement('div');
+                    card_body.className = "card-body";
+
+                    var card_title = document.createElement('h6');
+                    card_title.className = "card-title";
+                    card_title.textContent = obj.id;
+
+                    var card_text1 = document.createElement('div');
+                    card_text1.className = "card-text";
+                    card_text1.innerHTML = obj.content;
+
+                    var card_text2 = document.createElement('p');
+                    card_text2.className = "card-text";
+                    card_text2.textContent = obj.regdate;
+
+                    card_body.appendChild(card_title);
+                    card_body.appendChild(card_text1);
+                    card_body.appendChild(card_text2);
+
+                    col2.appendChild(card_body);
+
+                    row.appendChild(col1);
+                    row.appendChild(col2);
+
+                    card.appendChild(row);
+
+                    box.appendChild(card);
+                    
+                })
             }
 
+            else {
 
+                var h5 = document.createElement('h5');
 
-            /*
-            <div class="d-flex">
-                                            <div class="flex-shrink-0"><img class="rounded-circle"
-                                                    src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                            <div class="ms-3">
-                                                <div class="fw-bold">Commenter Name</div>
-                                                When I look at the universe and all the ways the universe wants to kill us, I
-                                                find it hard to reconcile that with statements of beneficence.
-                                            </div>
-                                        </div>
-            */
+                h5.className = "text-center";
+                h5.textContent = "작성된 리뷰가 없습니다.";
+
+                box.appendChild(h5);
+
+            }
+
+            
 
         }
 
-
-
+        selectReviewList(1);
 
         /*]]>*/
     </script>

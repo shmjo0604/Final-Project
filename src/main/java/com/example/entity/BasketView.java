@@ -48,13 +48,15 @@ public class BasketView {
     private String classend = null;
 
     @Column(name = "CLASSLEVEL") //level이라 해야하는 데 실수로 lavel로 씀 나중에 고쳐야 함
-    private int classlavel;
+    private int classlevel;
 
     @Column(name = "TOTALPRICE")
     private int totalprice;
 
     @Transient
     private long mainImg;
+
+    private int maximum;
 
 
 

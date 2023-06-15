@@ -27,6 +27,8 @@ public class ClassUnitView {
 	private int price;
 	// 소개글
 	private String intro;
+	// 상호명
+	private String nickname;
 	// 커리큘럼
 	private String curriculum;
 	// 조회수
@@ -82,6 +84,10 @@ public class ClassUnitView {
     
 	// 클래스 메인 이미지 번호
 	private long mainImg;
+	// 클래스 프로필 이미지 번호
+	private long profileImg;
 	// 신청할 인원수
 	private int person;
+	// 각 유닛별 결제 금액
+	private int payment;
 }

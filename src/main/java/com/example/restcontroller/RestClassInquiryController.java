@@ -15,9 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.entity.ClassAnswer;
 import com.example.entity.ClassInquiry;
+import com.example.entity.ClassInquiryView;
 import com.example.entity.Member;
+import com.example.service.classproduct.ClassAnswerService;
 import com.example.service.classproduct.ClassInquiryService;
+import com.example.service.classproduct.ClassManageService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,6 +31,8 @@ import lombok.extern.slf4j.Slf4j;
 public class RestClassInquiryController {
 
     @Autowired ClassInquiryService inquiryService;
+    @Autowired ClassManageService manageService;
+    @Autowired ClassAnswerService answerService;
 
     final String format = "RestClassInquiryController => {}";
 
@@ -46,7 +52,7 @@ public class RestClassInquiryController {
 
         int ret = inquiryService.insertClassInquiryOne(obj);
 
-        //log.info(format, obj);
+        log.info(format, obj);
 
         retMap.put("ret", ret);
 
@@ -90,4 +96,43 @@ public class RestClassInquiryController {
 
         return retMap;
     }
+
+    @GetMapping(value = "/selectoneinquiry.json")
+    public Map<String, Object> selectoneinquiryGET(
+        @RequestParam(name = "no") long no
+        ) {
+            
+        Map<String, Object> retMap = new HashMap<>();
+
+        // 1. 문의 번호(no)를 매개로 객체 조회
+            
+        ClassInquiryView obj = inquiryService.selectClassInquiryViewOne(no);
+
+        //log.info(format, obj.toString());
+
+        retMap.put("status", -1);
+
+        if(obj != null) {
+
+            // 2. null이 아닐 경우, 문의 객체 전달 (답변 객체 초기값 null 전달)
+
+            retMap.put("status", 200);
+            retMap.put("obj", obj);
+            retMap.put("answer", null);
+
+            // 3. 답변이 있을 경우, 답변 객체 전달 
+
+            ClassAnswer classAnswer = answerService.selectClassAnswerOne(no);
+
+            if(classAnswer != null) {
+                
+                //log.info(format, classAnswer.toString());
+                retMap.put("answer", classAnswer);
+            }
+            
+        }
+
+        return retMap;
+    }
+
 }

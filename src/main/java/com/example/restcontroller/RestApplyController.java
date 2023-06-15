@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.dto.Apply;
 import com.example.dto.ApplyList;
 import com.example.service.apply.ApplyService;
+import com.example.service.classproduct.ClassUnitService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,6 +28,7 @@ public class RestApplyController {
     final String format = "RestApplyController => {}";
 
     @Autowired ApplyService aService;
+    @Autowired ClassUnitService unitService;
     
     @PostMapping(value = "/success.json")
     public Map<String, Object> applysuccessPOST(@RequestBody ApplyList applylist, @AuthenticationPrincipal User user) {
@@ -49,9 +51,13 @@ public class RestApplyController {
             obj.setPayment(paymentArray[i]);
             obj.setPerson(personArray[i]);
             obj.setUnitno(unitnoArray[i]);
+            obj.setOwnerid(unitService.selectClassUnitViewOne(unitnoArray[i]).getMemberid());
+            obj.setClasscode(unitService.selectClassUnitViewOne(unitnoArray[i]).getClasscode());
 
             list.add(obj);
         }
+
+        log.info(format, list.toString());
 
         int ret = aService.insertApplyBatch(list);        
 

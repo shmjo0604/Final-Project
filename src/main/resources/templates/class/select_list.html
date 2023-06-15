@@ -21,7 +21,7 @@
                                 <input id="keyword" type="text" class="form-control" placeholder="검색어를 입력하세요."
                                     aria-label="Text input with dropdown button"
                                     onkeyup="if(window.event.keyCode==13){searchClassAction()}" />
-                                <button class="btn btn-primary" type="button" onclick="searchClassAction()">
+                                <button class="btn btn-success" type="button" onclick="searchClassAction()">
                                     <i class="fas fa-search fa-sm"></i>
                                 </button>
                             </div>
@@ -158,8 +158,13 @@
         <script th:src="@{/js/axios.min.js}"></script>
         <!--twbsPagination js-->
         <script th:src="@{/js/jquery.twbsPagination.min.js}"></script>
-        <script>
+        <script th:inline="javascript">
+
             const contextPath = $('#contextPathHolder').attr('data-contextPath');
+
+            const selection = /*[[${selection}]]*/'';
+
+            // console.log("selection", selection);
 
             var citycode = 0;
             var localcode = 0;
@@ -173,8 +178,13 @@
 
             var option = 1;
 
+            if(selection !== 0) {
+                $("#activityselect").val(selection).prop("selected", true);
+                activitycode = selection;
+            }
+
             async function getLocalcate(code) {
-                console.log(code);
+                //console.log(code);
 
                 //const localselect = $('#localselect')[0];
 
@@ -199,7 +209,7 @@
                     //const body = {refcode : code};
 
                     const { data } = await axios.get(url, { headers });
-                    console.log(data);
+                    //console.log(data);
 
                     $('#localselect').children('option').remove();
                     //localselect.options.length = 0;
@@ -221,7 +231,7 @@
             }
 
             async function getClasscate(code) {
-                console.log(code);
+                //console.log(code);
 
                 if (code == 1) {
 
@@ -240,7 +250,7 @@
                     //const body = {refcode = code, chk = 'classcate'};
 
                     const { data } = await axios.get(url, { headers });
-                    console.log(data);
+                    //console.log(data);
 
                     $('#actdetailselect').children('option').remove();
 
@@ -260,7 +270,7 @@
             }
 
             function setLocalcate(code) {
-                console.log(code);
+                //console.log(code);
 
                 if (code % 100 == 1) {
                     localcode = 0;
@@ -271,7 +281,7 @@
             }
 
             function setActcate(code) {
-                console.log(code);
+                //console.log(code);
 
                 if (code % 100 == 1) {
                     actcode = 0;
@@ -288,7 +298,7 @@
             })
 
             $(".levelchk").on("click", function (e) {
-                console.log(e.target.value);
+                //console.log(e.target.value);
                 classlevel = e.target.value;
             })
 
@@ -383,22 +393,21 @@
                                 classlist.innerHTML +=
 
                                     '<div class="col">' +
-                                    '<a href="#" class="nav-link" onclick=updatehit(' + obj.classcode + ')>' +
-                                    '<div class="card shadow-sm">' +
-                                    '<div class="card-header text-center">' + obj.title + '</div>' +
-                                    '<img class="card-img-top" src="' + contextPath + '/class/image?no=' + obj.mainImg + '">' +
-                                    '<div class="card-body">' +
-                                    '<p class="card-text"> 가격(1인) : ' + priceToString(obj.price) + '원' + '</p>' +
-                                    '<p class="card-text"> 주소 : ' + obj.address1 + " " + obj.address2 + " " + obj.address3 + '</p>' +
-                                    /* '<div class="d-flex justify-content-between align-items-center">' + 
-                                        '<div>' +
-                                            '<button class="btn btn-sm btn-outline-success">' + '<a href="product.do?classcode=' 
-                                                    + obj.classcode + '" class="nav-link">' + '상세 정보 조회' + '</a>' + '</button>' +
-                                        '<div>' +
-                                    '</div>' + */
-                                    '</div>' +
-                                    '</div>' +
-                                    '</a>' +
+                                        '<a href="#" class="nav-link" onclick=updatehit(' + obj.classcode + ')>' +
+                                            '<div class="card shadow-sm">' +
+                                                '<div class="card-header text-center">' + obj.title + '</div>' +
+                                                '<img class="card-img-top" height="269" style="object-fit:cover" src="' + contextPath + '/class/image?no=' + obj.mainImg + '">' +
+                                                '<div class="card-body">' +
+                                                    '<div class="d-flex align-items-center justify-content-end mb-2">' +
+                                                        '<div class="card-text nickname text-center me-2">' + obj.nickname + '</div>' +
+                                                        '<img style="width: 30px; height: 30px; object-fit:cover; border-radius: 10px;" src="' +
+                                                        contextPath + '/class/image?no=' + obj.profileImg + '">' + 
+                                                    '</div>' + 
+                                                    '<p class="card-text price fw-bold">' + priceToString(obj.price) + '원(1인)' + '</p>' +
+                                                    '<p class="card-text local">' + obj.address1 + " " + obj.address2 + " " + obj.address3 + '</p>' +
+                                                '</div>' +
+                                            '</div>' +
+                                        '</a>' +
                                     '</div>';
                             }
 
@@ -418,17 +427,18 @@
                                     '<a href="#" class="nav-link" onclick=updatehit(' + obj.classcode + ')>' +
                                     '<div class="card shadow-sm">' +
                                     '<div class="card-header text-center">' + obj.title + '</div>' +
-                                    '<img class="card-img-top" src="' + contextPath + '/class/image?no=' + obj.mainImg + '">' +
+                                    '<img class="card-img-top" height="269" style="object-fit:cover" src="' + contextPath + '/class/image?no=' + obj.mainImg + '">' +
                                     '<div class="card-body">' +
-                                    '<p class="card-text"> 날짜 : ' + obj.classdate + '</p>' +
-                                    '<p class="card-text"> 가격(1인) : ' + priceToString(obj.price) + '원' + '</p>' +
-                                    '<p class="card-text"> 주소 : ' + obj.address1 + " " + obj.address2 + " " + obj.address3 + '</p>' +
-                                    /* '<div class="d-flex justify-content-between align-items-center">' + 
-                                        '<div>' +
-                                            '<button class="btn btn-sm btn-outline-success">' + '<a href="product.do?classcode=' 
-                                                    + obj.classcode + '" class="nav-link">' + '상세 정보 조회' + '</a>' + '</button>' +
-                                        '<div>' +
-                                    '</div>' + */
+                                        '<div class="d-flex align-items-center justify-content-end mb-2">' +
+                                            '<div class="card-text nickname text-center me-2">' + obj.nickname + '</div>' +
+                                            '<img style="width: 30px; height: 30px; object-fit:cover; border-radius: 10px;" src="' +
+                                            contextPath + '/class/image?no=' + obj.profileImg + '">' + 
+                                        '</div>' +
+                                        '<div class="d-flex align-items-center mb-2">' +
+                                            '<div class="card-text classdate flex-fill me-1">' + obj.classdate + '</div>' +
+                                            '<div class="card-text price fw-bold flex-fill">' + priceToString(obj.price) + '원(1인)' + '</div>' +
+                                        '</div>' +
+                                    '<p class="card-text local">' + obj.address1 + " " + obj.address2 + " " + obj.address3 + '</p>' +
                                     '</div>' +
                                     '</div>' +
                                     '</a>' +
