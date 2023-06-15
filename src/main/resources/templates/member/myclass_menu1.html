@@ -97,7 +97,7 @@
                                     </div>
 
                                     <!-- dropdowm -->
-                                    <!-- dropdowm 비활성화 -->
+                                    <!-- dropdowm 활성화 -->
                                     <th:block th:if="${obj.chk == 0 || obj.chk == 1}">
                                     <div class="dropdown" style="float: left; width: auto; height: auto;">
                                         <button class="btn btn-outline-success dropdown-toggle" type="button"
@@ -181,7 +181,7 @@
                                         </button>
                                     </th:block>
 
-                                    <!-- 활성화 상태 -->
+                                    <!-- 활성화 버튼 -->
                                     <th:block th:if="${obj.chk == 0 || obj.chk== 1 }">
                                         <input type="hidden" th:value="${obj.classcode}" name="classcode" >
                                         <input type="hidden" th:value="${obj.chk}" name="chk" >
@@ -190,7 +190,7 @@
 
                                     </th:block>
 
-                                    <!-- 비활성화 상태 -->
+                                    <!-- 비활성화 버튼 -->
                                     <th:block th:if="${obj.chk == 3}">
                                         <input type="hidden" th:value="${obj.classcode}" name="classcode" >
                                         <input type="hidden" th:value="${obj.chk}" name="chk" >
@@ -223,12 +223,11 @@
 
         /* 삭제 버튼 */
         function deletePost() {
-            if (confirm('삭제하시겠습니까?') == false) {
-                alert("취소하였습니다.");
-                return false;
-            } else {
-                alert("삭제되었습니다. 홈화면으로 이동합니다.");
+            if (confirm('삭제하시겠습니까?') == true) {
                 document.getElementById('deleteForm').submit();
+                alert("삭제되었습니다. 홈화면으로 이동합니다.");
+            } else {
+                alert("취소하였습니다.");
             }
         }
 
