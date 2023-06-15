@@ -40,7 +40,7 @@
             /* transform: translateY(-30%); */
         }
 
-        .container {
+        .selectone {
             padding-top: 150px;
         }
 
@@ -73,12 +73,9 @@
     <!--header 영역-->
     <header th:replace="~{header :: headerFragment}"></header>
 
-    <article>
+    <article id="wrapper">
 
-
-        <div class="container" role="main">
-
-
+        <div class="container selectone" role="main">
 
             <!-- <form id="form" method="get" th:action="@{/community/update.do}"  style="display: inline-block;"> -->
             <label class="title" name="title" th:text="${community.title}" style="font-size: 28px;"></label><br />
