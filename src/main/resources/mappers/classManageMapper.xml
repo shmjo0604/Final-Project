@@ -31,8 +31,8 @@
     <!-- 4. 클래스 내용 수정 --> 
     <update id="updateClassOne" parameterType="ClassProduct">
         UPDATE classproduct SET title = #{title}, postcode = #{postcode}, address1 = #{address1}, address2 = #{address2}, address3 = #{address3}, 
-            latitude = #{latitude}, longitude = #{longitude}, price = #{price}, nickname = #{nickname}, intro=#{intro}, instructor = #{instructor}, 
-            curriculum = #{curriculum}, sns = #{sns} WHERE classcode = #{classcode}
+            latitude = #{latitude}, longitude = #{longitude}, price = #{price}, nickname = #{nickname}, sns = #{sns}, intro=#{intro}, instructor = #{instructor}, 
+            curriculum = #{curriculum} WHERE classcode = #{classcode}
     </update>
 
     <!-- 5-1. 클래스 프로필 이미지 번호 조회 -->

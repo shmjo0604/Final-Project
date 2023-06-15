@@ -391,7 +391,7 @@ public class MemberController {
                 int ret =  cService.updateClassActive(obj);
                 
                 //log.info(" active => {}", obj.toString());
-                log.info(format, ret);
+                //log.info(format, ret);
                 if (ret == 1) {
                     return "redirect:/member/myclass.do?menu=1";
                 }
