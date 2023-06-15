@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.entity.ClassProduct;
+import com.example.entity.BasketView;
 
 @Repository
-public interface MainRepository extends JpaRepository<ClassProduct, Long> {
-   
-    List<ClassProduct> findAllTopSixByOrderByClasscodeDesc();
+public interface BasketViewRepository extends JpaRepository<BasketView, Long> {
+    
+    List<BasketView> findByMemberidOrderByNoDesc(String id);
 
 }

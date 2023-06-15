@@ -17,36 +17,37 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.entity.ClassProduct;
-import com.example.repository.MainRepository;
 import com.example.service.classproduct.ClassManageService;
-
-import lombok.RequiredArgsConstructor;
+import com.example.service.classproduct.ClassSelectService;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequiredArgsConstructor
 public class MainController {
     
-    final MainRepository mRepository;
+    @Autowired ClassSelectService selectService;
     @Autowired ClassManageService cService;
 
     @GetMapping(value="/home.do")
     public String homeGET(@AuthenticationPrincipal User user,
         Model model
     ) {
-        List<ClassProduct> list = mRepository.findAllTopSixByOrderByClasscodeDesc();
+        List<ClassProduct> list = selectService.selectMainHomeClassList();
         if(!list.isEmpty()){
             for (ClassProduct obj : list ) {
-                System.out.println(obj.getClasscode());
+
+                // System.out.println(obj.getClasscode());
+
                 long mainImg = cService.selectClassMainImageNo(obj.getClasscode());
+                long profileImg = cService.selectClassProfileImageNo(obj.getClasscode());
                 obj.setMainImg(mainImg);
+                obj.setProfileImg(profileImg);
             }
         }
 
         model.addAttribute("list", list);
         model.addAttribute("user", user);
-        log.info("select one=> {}", list);
+        // log.info("select one=> {}", list);
         
         return "home";
     }

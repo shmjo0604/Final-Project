@@ -13,16 +13,17 @@ import com.example.entity.Community;
 public interface CommunityService {
 
   
-    //커뮤니티 게시글 작성
-    //public int insertcommnuityOne();
+    // 1. 커뮤니티 게시글 작성
+    public int insertCommnuityOne(Community obj);
 
-    //커뮤니티 게시글 전체조회
-    public List<Community> selectCommunityList();
+    // 2. 커뮤니티 게시글 조회 (paging)
+    public List<Community> selectCommunityList(int first, int last);
 
-    //커뮤니티 게시글 1개 조회
-    public Community findByNo(long no);
+    // 3. 커뮤니티 게시글 1개 조회
+    public Community selectCommunityOne(long no);
     
-
+    // 4. 커뮤니티 게시글 전채 개수 조회
+    public long countCommunityList();
 
  
 

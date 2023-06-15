@@ -72,11 +72,12 @@ const quill = new Quill("#editor", {
   theme: "snow",
 });
 
-// 리뷰이미지 함수(1234)
+// 리뷰 이미지 등록 관련 함수
 
 function preview1() {
   document.getElementById("click_reviewimage1").click();
 }
+
 function readURL1(input) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
@@ -92,6 +93,7 @@ function readURL1(input) {
 function preview2() {
   document.getElementById("click_reviewimage2").click();
 }
+
 function readURL2(input) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
@@ -107,6 +109,7 @@ function readURL2(input) {
 function preview3() {
   document.getElementById("click_reviewimage3").click();
 }
+
 function readURL3(input) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
@@ -122,6 +125,7 @@ function readURL3(input) {
 function preview4() {
   document.getElementById("click_reviewimage4").click();
 }
+
 function readURL4(input) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
@@ -134,67 +138,76 @@ function readURL4(input) {
   }
 }
 
-// 에디터 내용 전달
+// editor 내용 전달
 
 function getEditorContent() {
+
   const content = quill.root.innerHTML; //위쪽의 editor객체를 통해서 가져오기
   const form = document.getElementById("myform");
-
-  // let content1 = content.substring(4, 10);
-
 
   var input = document.createElement("input");
   input.type = "text";
   input.name = "content";
   input.id = "contentstyle";
   input.value = content;
-
   form.appendChild(input);
 
   form.submit();
+  
 }
 
-function reviewNone() {
-  const button1 = document.getElementById("button1");
-  if (button1.style.display !== 'none') {
-    button1.style.display = 'none';
-    console.log('ok');
-  }
-  else {
-    button1.style.display = 'block';
-  }
-}
+// 리뷰 모달
 
-
-
-// 신청번호 받아서 프로덕트유닛 내용 불러오기
-
-function modalAction(no, classcode, title, classdate, classstart, classlevel, price, person, classend) {
+function modalAction(no, classcode, price, title, classdate, classlevel, classstart, classend) {
   const modal = new bootstrap.Modal(
     document.getElementById("exampleModal"),
     {}
   );
+
+  console.log(no);
 
   const img = document.getElementById("mainimage1");
   const no1 = document.getElementById("no");
   const title1 = document.getElementById("title");
   const classdate1 = document.getElementById("classdate");
   const classstart1 = document.getElementById("classstart");
+  const classend1 = document.getElementById("classend");
   const classlevel1 = document.getElementById("classlevel");
   const price1 = document.getElementById("price");
 
   img.src = "/specialday/member/image?classcode=" + classcode;
   no1.value = no;
-  title1.value = "이름 : " + title;
-  classdate1.value = classdate;
-  classstart1.value = classstart + "~" + classend;
-  classlevel1.value = classlevel;
-  price1.value = price;
+  title1.textContent = title;
+  classdate1.textContent = classdate;
+  classstart1.textContent = classstart;
+  classend1.textContent = classend;
+  classlevel1.textContent = getclasslevelName(classlevel);
+  price1.textContent = price.toLocaleString() + '원';
 
   modal.show();
+  
 }
 
-async function modalAction1(no) {
+function getclasslevelName(level) {
+
+  if(level === 1) {
+    return "입문자";
+  }
+  else if(level === 2) {modalAction1
+    return "경험자";
+  }
+  else if(level === 3) {
+    return "숙련자";
+  }
+
+}
+
+// 상세보기 모달
+
+async function modalAction1(no, applychk) {
+
+  console.log(applychk);
+
   const modal = new bootstrap.Modal(
     document.getElementById("exampleModal1"),
     {}
@@ -217,6 +230,7 @@ async function modalAction1(no) {
   let title = "";
   let payment = "";
   // let no = 0;
+  let unitno = 0;
 
   let cancle = document.getElementById('cancle');
   let confirmdate1 = "";
@@ -227,11 +241,9 @@ async function modalAction1(no) {
   let levelname = "입문자";
   let paymentchk = "";
 
-
-
   for (let tmp of data.list) {
 
-    console.log(tmp.statuschk)
+    // console.log(tmp.statuschk)
 
     if (tmp.statuschk == 1) { // 결제완료
       confirmdate1 = tmp.confirmdate + "";
@@ -246,7 +258,7 @@ async function modalAction1(no) {
     chk = tmp.chk;
     classlevel = tmp.classlevel
     classcode = tmp.classcode
-    // classcode = tmp.classcode;
+    classcode = tmp.classcode;
     classstart = tmp.classstart;
     classend = tmp.classend;
     classdate = tmp.classdate;
@@ -256,21 +268,18 @@ async function modalAction1(no) {
     title = tmp.title;
     // no = tmp.no;
     regdate = tmp.regdate + "";
+    unitno = tmp.unitno;
   }
-
-
-
 
   confirmdate1 = confirmdate1.substring(0, 10);
   confirmdate2 = confirmdate2.substring(0, 10);
   confirmdate3 = confirmdate3.substring(0, 10);
   regdate = regdate.substring(0, 10);
 
-  console.log(confirmdate1);
-  console.log(confirmdate2);
-  console.log(confirmdate3);
+  // console.log(confirmdate1);
+  // console.log(confirmdate2);
+  // console.log(confirmdate3);
 
-  // 결제정보, 클래스정보
   const applyregdate2 = document.getElementById("applyregdate1");
   const mainimage3 = document.getElementById("mainimage2");
   const title2 = document.getElementById("title1");
@@ -283,6 +292,10 @@ async function modalAction1(no) {
   const person2 = document.getElementById("person1");
   const payment2 = document.getElementById("payment1");
   let chk2 = document.getElementById("chk1");
+
+  const classcode1 = document.getElementById("classcode1");
+  const unitno1 = document.getElementById("unitno1");
+  const person4 = document.getElementById("person3");
 
   // 취소일자
   const cancledate2 = document.getElementById("cancledate1");
@@ -320,11 +333,11 @@ async function modalAction1(no) {
     levelname = "숙련자";
   }
 
-  console.log(levelname)
+  //console.log(levelname)
 
 
   mainimage3.src = "/specialday/member/image?classcode=" + classcode;
-  // no2.value = no;
+  no2.value = no;
   title2.value = "이름: " + title;
   classdate3.value = classdate;
   classstart2.value = classstart + "~" + classend;
@@ -341,24 +354,29 @@ async function modalAction1(no) {
   cancledate2.value = confirmdate2;
   applyregdate3.value = confirmdate1;
 
+  classcode1.value = classcode;
+  unitno1.value = unitno;
+  person4.value = person;
+
+  if(applychk === 1) {
+    $("#applycancelbtn").css("display", "block");
+  }
+  else {
+    $("#applycancelbtn").css("display", "none");
+  }
+
   modal.show();
 }
 
 
-function formaction(no) {
-  const form = document.getElementById("form1")
+function cancelAction() {
 
+  if(confirm("정말 신청취소하시겠습니까?")) {
 
-  form.action = "http://192.168.219.103:8080/specialday/member/updatechk1.do";
-  form.style.display = "none";
-  form.method = "get";
+    const form = document.getElementById("form1");
 
-  const input = document.createElement("input");
-  input.type = "hidden";
-  input.name = "no";
-  input.value = no;
+    form.submit();
 
-  form.appendChild(input);
+  }
 
-  form.submit();
 }

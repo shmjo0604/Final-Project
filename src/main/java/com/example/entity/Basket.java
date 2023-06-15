@@ -1,5 +1,8 @@
 package com.example.entity;
 
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -25,6 +31,12 @@ public class Basket {
 
   // 신청 인원
   private int cnt;
+
+  // 등록일자
+  @CreationTimestamp
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+  @Column(name = "REGDATE", insertable = true, updatable = false)
+  private Date regdate;
 
   // 회원 테이블
   @ManyToOne(fetch = FetchType.LAZY)

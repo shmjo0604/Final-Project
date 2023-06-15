@@ -56,6 +56,8 @@ public class BasketView {
     @Transient
     private long mainImg;
 
+    private int maximum;
+
 
 
     

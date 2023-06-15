@@ -18,11 +18,11 @@
        
         Swal.fire({
             icon: 'success',
-            title: '[[${alertMessage}]]',
+            text: '[[${alertMessage}]]',
             showConfirmButton: true
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = contextPath + '[[${alertUrl}]]';
+                window.location.href = (contextPath + '[[${alertUrl}]]').replace(/&amp;/gi, '&');
         }})
     </script>
 </body>

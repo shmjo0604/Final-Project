@@ -32,7 +32,7 @@
 
 <!--(4) ClassUnit 삭제-->
 <update id="updateUnitOneInactive" parameterType="long">
-    UPDATE CLASSUNIT SET chk = 0 WHERE no = #{no};
+    UPDATE CLASSUNIT SET chk = 0 WHERE no = #{no}
 </update>
 
 <!--(4-1) ClassUnit 일괄 삭제-->
@@ -47,5 +47,36 @@
 <select id="selectClassUnitViewOne" parameterType="long" resultType="ClassUnitView">
     SELECT u.* FROM classunitview u WHERE no = #{unitno}
 </select>
+
+<!--(6) ClassUnit 개설 일정 조회-->
+<select id="selectUnitListToCal" parameterType="long" resultType="ClassUnit">
+    SELECT * FROM CLASSUNIT WHERE CLASSCODE = #{classcode} AND CHK = 1
+</select>
+
+<!--(7) ClassUnit 페이징 조회 (by classcode)-->
+<select id="selectUnitListByClasscode" parameterType="map" resultType="ClassUnit">
+    SELECT u.* FROM 
+    (SELECT ROW_NUMBER() OVER(ORDER BY classdate DESC) AS rnum, 
+    * FROM CLASSUNIT WHERE CLASSCODE = #{classcode} AND CHK = 1 ORDER BY no DESC) u 
+    WHERE u.rnum <![CDATA[ >= ]]> ${first} AND u.rnum <![CDATA[ <= ]]> ${last} ORDER BY u.rnum ASC
+</select>
+
+<!--(8) ClassUnit 전체 개수 (by classcode)-->
+
+<select id="selectUnitListCountByClasscode" parameterType="long" resultType="long">
+    SELECT COUNT(*) FROM CLASSUNIT WHERE CLASSCODE = #{classcode} AND CHK = 1
+</select>
+
+<!--(9) ClassUnit 전체 조회 (chk = 1)-->
+
+<select id="selectClassUnitAll" resultType="ClassUnit">
+    SELECT c.* FROM CLASSUNIT c WHERE c.chk = 1
+</select>
+
+<!--(10) ClassUnit 완료 상태 변경(Scheduler에서 사용)-->
+
+<update id="updateClassUnitComplete" parameterType="long">
+    UPDATE CLASSUNIT SET chk = 2 WHERE no = #{no}
+</update>
 
 </mapper>

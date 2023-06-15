@@ -4,8 +4,10 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page Title</title>
+  <title>마이페이지</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!--웹 페이지 아이콘 변경-->
+  <link rel="icon" th:href="@{/image/logo.ico}">
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -21,7 +23,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <!--thymeleaf contextpath-->
   <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}" />
-
+  <!-- quill CSS -->
+  <link rel="stylesheet" th:href="@{/css/quill.snow.css}" />
   <style>
     html,
     body {
@@ -63,6 +66,11 @@
       text-decoration: none;
       color: black;
     }
+
+    .side_one:hover{
+      background-color: honeydew;
+    }
+
   </style>
 </head>
 
@@ -72,46 +80,36 @@
 
   <!--main 영역-->
   <div id="body-wrapper">
-    <div id="body-content" class="container">
+    <div id="body-content"  class="container">
       <div class="row">
         <!--left-->
-        <div class="col-md-3">
+        <div class="col-sm-3" style="width: 250px; left: 0; height: 800px; border: 1px solid rgba(199, 196, 196, 0.466);">
           <div class="sidevar">
-            <div class="sidevar-header">
-              <a style="margin-left: 30px; font-size: large">마이페이지</a>
-            </div>
-            <div class="sidevar-menu">
-              <ul>
-                <hr style="border: 2px solid; color: forestgreen" />
-                <li>
-                  <a th:href="@{mypage.do(menu=1,page=1)}">신청 내역</a>
-                </li>
-                <hr />
-                <li><a th:href="@{mypage.do(menu=2,page=1)}">리뷰 내역</a></li>
-                <hr />
-                <li><a th:href="@{mypage.do(menu=3)}">문의 내역</a></li>
-                <hr />
-                <li>
-                  <a class="opener" data-bs-toggle="collapse" href="#collapseExample" role="button"
-                    aria-expanded="false" aria-controls="collapseExample">계정 설정 <span
-                      style="margin-left: 130px; font-size: 1rem; font-weight: bold; color: rgba(0,0,0,0.4);">
-                      ∨</span>
-                  </a>
-                  <ul class="collapse" id="collapseExample">
-                    <li><a th:href="@{mypage.do(menu=4)}">나의 정보</a></li>
-                    <li>
-                      <a th:href="@{mypage.do(menu=5)}">비밀번호 변경</a>
-                    </li>
-                    <li><a th:href="@{mypage.do(menu=6)}">회원 탈퇴</a></li>
-                  </ul>
-                </li>
-                <hr />
-              </ul>
-            </div>
+              <div class="sidevar-menu">
+                  <ul style="padding-left : 5px; padding-right: 5px; padding-top: 20px;">
+                      <span>※ 마이페이지</span>
+                      <hr style="border: 0.5px solid rgb(0, 0, 0); margin-top: 10px;"/>
+                      <li style="list-style: none;" class="side_one"><a th:href="@{mypage.do(menu=1,page=1)}" style="text-decoration: none; color: black; font-weight: bold; font-size: medium;">신청 내역</a></li>
+                      <hr/>
+                      <li style="list-style: none;" class="side_one"><a th:href="@{mypage.do(menu=2,page=1)}" style="text-decoration: none; color: black; font-weight: bold; font-size: medium;">리뷰 내역</a></li>
+                      <hr/>
+                      <li style="list-style: none;" class="side_one"><a th:href="@{mypage.do(menu=3,page=1)}" style="text-decoration: none; color: black; font-weight: bold; font-size: medium;">문의 내역</a></li>
+                      <hr/>
+                      <li style="list-style: none;" class="side_one"><a class="opener" data-bs-toggle="collapse" href="#collapseExample" role="button"style= "text-decoration: none; color: black; font-weight: bold; font-size: medium;"
+                        aria-expanded="false" aria-controls="collapseExample">계정 설정<span
+                        style="margin-left: 115px; font-size: 1rem; font-weight: bold; color: rgba(0,0,0,0.4);">
+                        ∨</span></a></li>
+                        <ul class="collapse" id="collapseExample" style="list-style: none; padding-left: 10px;">
+                          <li><a th:href="@{mypage.do(menu=4)}" style=" font-size: 0.8rem; font-weight: bold; color: rgba(0,0,0,0.4);  text-decoration: none;">나의 정보</a></li>
+                          <li>
+                            <a th:href="@{mypage.do(menu=5)}" style=" font-size: 0.8rem; font-weight: bold; color: rgba(0,0,0,0.4);  text-decoration: none;">비밀번호 변경</a>
+                          </li>
+                          <li><a th:href="@{mypage.do(menu=6)}" style=" font-size: 0.8rem; font-weight: bold; color: rgba(0,0,0,0.4);  text-decoration: none;">회원 탈퇴</a></li>
+                        </ul>
+                    </ul>
+              </div>
           </div>
-        </div>
-        <!--/left-->
-
+      </div> 
         <!--right-->
 
         <th:block th:if="${#strings.equals(param.menu, '1')}">
@@ -160,8 +158,6 @@
   <script th:src="@{/js/sweetalert2@11.js}"></script>
   <!-- font awesome용 스크립트 CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-  <!--리뷰리스트 js-->
-  <script th:src="@{/js/review/reviewlist.js}"></script>
 
   <script th:inline="javascript">
     /*<![CDATA[*/

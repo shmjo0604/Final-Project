@@ -335,3 +335,77 @@ html .ui-button.ui-state-disabled:active {
 .info .link {
 	color: #5085BB;
 }
+
+.local{
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 6px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-sizing: border-box;
+    border: 1px solid rgb(0, 150, 136);
+    border-radius: 3px;
+    min-width: 3rem;
+    color: rgb(81, 91, 96);
+    background-color: rgb(242, 250, 249);
+    font-size: 12px;
+    line-height: 13px;
+    font-family: "Noto Sans KR";
+    font-style: normal;
+}
+
+.price{
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 6px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-sizing: border-box;
+    border: 1px solid rgb(0, 150, 136);
+    border-radius: 3px;
+    min-width: 3rem;
+    color: rgb(81, 91, 96);
+    background-color: rgb(231, 251, 230);
+    font-size: 13px;
+    line-height: 13px;
+    font-family: "Noto Sans KR";
+    font-style: normal;
+}
+
+.nickname {
+
+	font-size: 13px;
+	font-family: "Noto Sans KR";
+    font-style: normal;
+
+}
+
+.classdate {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 6px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-sizing: border-box;
+    border: 1px solid rgb(0, 150, 136);
+    border-radius: 3px;
+    min-width: 3rem;
+    color: rgb(81, 91, 96);
+    background-color: rgb(230, 247, 251);
+    font-size: 13px;
+    line-height: 13px;
+    font-family: "Noto Sans KR";
+    font-style: normal;
+}

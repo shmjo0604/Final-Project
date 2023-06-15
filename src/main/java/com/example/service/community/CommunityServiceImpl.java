@@ -17,39 +17,54 @@ public class CommunityServiceImpl implements CommunityService {
     @Autowired
     public CommunityRepository cRepository;
 
-    // 게시글 작성
-    // @Override
-    // public int insertcommnuityOne() {
-    // try {
-    // return cRepository.save();
-    // } catch (Exception e) {
-    // return -1;
-    // }
-    // }
-
-    // 게시글 전체 조회
     @Override
-    public List<Community> selectCommunityList() {
+    public int insertCommnuityOne(Community obj) {
         try {
-            return cRepository.findAllByOrderByNoDesc();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            cRepository.save(obj);
+            return 1;
         }
-
+        catch(Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
-    // 게시글 1개조회
     @Override
-    public Community findByNo(long no) {
+    public List<Community> selectCommunityList(int first, int last) {
         try {
-            return cRepository.findByNo(no);
-        } catch (Exception e) {
+            return cRepository.selectOrderByNoDescPaging(first, last);
+        }
+        catch(Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
+    @Override
+    public long countCommunityList() {
+        try {
+            return cRepository.countBy();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 
+    @Override
+    public Community selectCommunityOne(long no) {
+        try {
+            return cRepository.findById(no).orElse(null);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+
+
+    
 
 }

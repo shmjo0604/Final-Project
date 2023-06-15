@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 
 import com.example.dto.ClassImage;
 import com.example.dto.ClassProduct;
+import com.example.entity.ClassInquiry;
 import com.example.entity.ClassInquiryView;
+import com.example.entity.ClassInquiryViewVo;
 
 @Service
 public interface ClassManageService {
@@ -44,15 +46,29 @@ public interface ClassManageService {
     public ClassImage selectClassImageOne(long no);
 
     // 7. 클래스 이미지 수정
-    public int updateClassImageOne(ClassImage obj);
+    public int updateClassImageOne(List<com.example.entity.ClassImage> subImg, com.example.entity.ClassImage profileImg, 
+        com.example.entity.ClassImage mainImg, long classcode);
 
     // 8. 클래스 이미지 삭제
     public int deleteClassImageOne(long no);
 
-    // 9. 클래스 문의 전체 조회
-    public List<ClassInquiryView> selectClassInquiryList(String owner);
+    // 9. 클래스 문의 전체 조회 (pagination)
+    public List<ClassInquiryViewVo> selectClassInquiryList(String owner, int first, int last);
 
     // 10. 클래스 문의 1개 조회
     public ClassInquiryView selectClassInquiryOne(long no);
+
+    // 11. 클래스 문의 답변 등록
+    public int insertClassInquiryAnswerOne(ClassInquiryView obj);
+
+    // 12. 클래스 문의 답변완료(chk=1)
+    public int updateClassAnswer(ClassInquiry obj);
+
+    // 13. 클래스 문의 전체 개수
+    public long selectClassInquiryListCount(String owner);
+
+    public long countByOwnerAndChk(String owner, int chk);
+
+    public List<ClassInquiryViewVo> selectByOwnerANDChkOrderByNoDescPaging(String owner, int first, int last, int chk);
     
 }

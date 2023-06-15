@@ -79,6 +79,18 @@ async function getNotification() {
         }
 
     }
+
+    else if(data.status === -1) {
+
+        const notification = document.querySelector("#notification_dropdown");
+
+        var div = document.createElement('div');
+
+        div.className = "dropdown-item text-center small text-gray-500";
+        div.textContent = "알림이 없습니다.";
+
+        notification.appendChild(div);
+    }
 }
 
 function dateFormat(d) {

@@ -207,19 +207,18 @@
                         classlist_map.innerHTML +=
 
                             '<div class="col mb-3">' +
-                            '<a href="product.do?classcode=' + obj.classcode + '" class="nav-link">' +
+                            '<a href="#" onclick=updatehit(' + obj.classcode + ') class="nav-link">' +
                             '<div class="card shadow-sm">' +
                             '<div class="card-header text-center">' + obj.title + '</div>' +
-                            '<img class="card-img-top" src="' + contextPath + '/class/image?no=' + obj.mainImg + '">' +
+                            '<img class="card-img-top" height="269" style="object-fit:cover" src="' + contextPath + '/class/image?no=' + obj.mainImg + '">' +
                             '<div class="card-body">' +
-                            '<p class="card-text"> 가격(1인) : ' + priceToString(obj.price) + '원' + '</p>' +
-                            '<p class="card-text"> 주소 : ' + obj.address1 + " " + obj.address2 + " " + obj.address3 + '</p>' +
-                            /* '<div class="d-flex justify-content-between align-items-center">' + 
-                                '<div>' +
-                                    '<button class="btn btn-sm btn-outline-success">' + '<a href="product.do?classcode=' 
-                                            + obj.classcode + '" class="nav-link">' + '상세 정보 조회' + '</a>' + '</button>' +
-                                '<div>' +
-                            '</div>' + */
+                            '<div class="d-flex align-items-center justify-content-end mb-2">' +
+                            '<div class="card-text nickname text-center me-2">' + obj.nickname + '</div>' +
+                            '<img style="width: 30px; height: 30px; object-fit:cover; border-radius: 10px;" src="' +
+                            contextPath + '/class/image?no=' + obj.profileImg + '">' +
+                            '</div>' +
+                            '<p class="card-text price fw-bold">' + priceToString(obj.price) + '원(1인)' + '</p>' +
+                            '<p class="card-text local">' + obj.address1 + " " + obj.address2 + " " + obj.address3 + '</p>' +
                             '</div>' +
                             '</div>' +
                             '</a>' +
@@ -242,17 +241,20 @@
                             '<a href="product.do?classcode=' + obj.classcode + '" class="nav-link">' +
                             '<div class="card shadow-sm">' +
                             '<div class="card-header text-center">' + obj.title + '</div>' +
-                            '<img class="card-img-top" src="' + contextPath + '/class/image?no=' + obj.mainImg + '">' +
+                            '<img class="card-img-top" height="269" style="object-fit:cover" src="' + contextPath + '/class/image?no=' + obj.mainImg + '">' +
                             '<div class="card-body">' +
-                            '<p class="card-text"> 날짜 : ' + obj.classdate + '</p>' +
-                            '<p class="card-text"> 가격(1인) : ' + priceToString(obj.price) + '원' + '</p>' +
-                            '<p class="card-text"> 주소 : ' + obj.address1 + " " + obj.address2 + " " + obj.address3 + '</p>' +
-                            /* '<div class="d-flex justify-content-between align-items-center">' + 
-                                '<div>' +
-                                    '<button class="btn btn-sm btn-outline-success">' + '<a href="product.do?classcode=' 
-                                            + obj.classcode + '" class="nav-link">' + '상세 정보 조회' + '</a>' + '</button>' +
-                                '<div>' +
-                            '</div>' + */
+                            '<div class="d-flex align-items-center justify-content-end mb-2">' +
+                            '<div class="card-text nickname text-center me-2">' + obj.nickname + '</div>' +
+                            '<img style="width: 30px; height: 30px; object-fit:cover; border-radius: 10px;" src="' +
+                            contextPath + '/class/image?no=' + obj.profileImg + '">' +
+                            '</div>' +
+                            '<div class="d-flex align-items-center mb-2">' +
+                            '<div class="card-text classdate flex-fill me-1">' + obj.classdate + '</div>' +
+                            '<div class="card-text price fw-bold flex-fill">' + priceToString(obj.price) + '원(1인)' + '</div>' +
+                            '</div>' +
+
+                            '<p class="card-text local">' + obj.address1 + " " + obj.address2 + " " + obj.address3 + '</p>' +
+
                             '</div>' +
                             '</div>' +
                             '</a>' +
@@ -274,7 +276,7 @@
 
                     //jsonObj = JSON.stringify(jsonObj);
 
-                    if(obj.address3 === null) {
+                    if (obj.address3 === null) {
                         obj.address3 = "";
                     }
 
@@ -282,8 +284,8 @@
                         title: obj.title,
                         latlng: new kakao.maps.LatLng(Number(obj.latitude), Number(obj.longitude)),
                         price: obj.price,
-                        address : obj.address1 + obj.address2 + obj.address3,
-                        mainImg : Number(obj.mainImg)
+                        address: obj.address1 + obj.address2 + obj.address3,
+                        mainImg: Number(obj.mainImg)
                     });
 
                 }
@@ -311,11 +313,11 @@
 
                 var bounds = new kakao.maps.LatLngBounds();
 
-               
 
-                positions.forEach(function(pos) {
 
-                     // 마커 이미지의 이미지 주소입니다
+                positions.forEach(function (pos) {
+
+                    // 마커 이미지의 이미지 주소입니다
                     var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 
                     // 마커 이미지의 이미지 크기 입니다
@@ -331,7 +333,7 @@
                         title: pos.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
                         image: markerImage // 마커 이미지 
                     });
-                    
+
                     var img = document.createElement('img');
                     img.setAttribute("src", contextPath + "/class/image?no=" + pos.mainImg);
                     // img.setAttribute("width", "90");
@@ -369,7 +371,7 @@
                     var closebutton = document.createElement('button');
                     closebutton.classList.add('close');
 
-                    closebutton.onclick = function() {
+                    closebutton.onclick = function () {
                         overlay.setMap(null);
                     }
                     // closebutton.appendChild('<i class="bi bi-x-circle"></i>');
@@ -383,7 +385,7 @@
 
                     var info = document.createElement('div');
                     info.classList.add('info');
-                    
+
                     info.appendChild(head);
                     info.appendChild(body);
 
@@ -403,23 +405,23 @@
                     // closebutton.onclick = function() {
                     //     overlay.setMap(null);
                     // }
-                
+
                     // content1.appendChild(closebutton);
 
                     var overlay = new daum.maps.CustomOverlay({
                         position: pos.latlng,
                         content: wrap,
-                        map:map
+                        map: map
                     });
 
-                    kakao.maps.event.addListener(marker, 'click', function(){
+                    kakao.maps.event.addListener(marker, 'click', function () {
                         overlay.setMap(map);
                     });
 
                     bounds.extend(pos.latlng);
 
-                }) 
-                
+                })
+
                 // for (var i = 0; i < positions.length; i++) {
 
                 //     // 마커 이미지의 이미지 크기 입니다
@@ -435,7 +437,7 @@
                 //         title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
                 //         image: markerImage // 마커 이미지 
                 //     });
-                    
+
                 //     var content = document.createElement('div');
 
                 //     var info = document.createElement('span');
@@ -472,6 +474,23 @@
 
             function priceToString(price) {
                 return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            }
+
+            async function updatehit(code) {
+
+                //console.log(code);
+
+                const url = contextPath + '/api/class/updatehit.json';
+                const headers = { "Content-Type": "application/json" };
+                const body = { classcode: code };
+
+                const { data } = await axios.put(url, body, { headers });
+
+                //console.log(data);
+
+                if (data.ret === 1) {
+                    window.location.href = contextPath + '/class/product.do?classcode=' + code;
+                }
             }
 
         </script>

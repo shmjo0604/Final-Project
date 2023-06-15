@@ -15,74 +15,52 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=DynaPuff&family=Permanent+Marker&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
     <!--웹 페이지 아이콘 변경-->
     <link rel="icon" th:href="@{/image/logo.ico}">
 </head>
 
 <body>
     <header th:fragment="headerFragment" class="sticky-top">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-            <!-- Sidebar Toggle (Topbar) -->
-            <!-- <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                <i class="fa fa-bars"></i>
-            </button> -->
 
             <!-- Logo -->
             <div class="navbar-brand d-flex align-items-center lh-1 me-10 transition-opacity opacity-75-hover">
                 <!-- 로고 아이콘 -->
-                <img th:src="@{/image/logo.svg}">
-                <a th:href="@{/home.do}" class="logo nav-link">Special Day</a>
-            </div>
+                <img th:src="@{/image/logo.svg}" style="width: 50px; height: 50px;">
+                <a th:href="@{/home.do}" class="nav-link logo">스폐셜데이</a>
 
-            <!-- Topbar Navbar -->
-            <ul class="navbar-nav ml-auto">
-
-                <!-- Nav Item - Search Dropdown (Visible Only XS)
-                <li class="nav-item dropdown no-arrow d-sm-none">
-                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-search fa-fw"></i>
-                    </a>
-                    Dropdown - Messages
-                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-start p-3 shadow animated--grow-in"
-                        aria-labelledby="searchDropdown">
-                        <form class="form-inline mr-auto w-100 navbar-search">
-                            <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small"
-                                    placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </li> -->
+                <div class="topbar-divider d-none d-sm-block"></div>
 
                 <!-- Topbar Search -->
                 <a th:href="@{/class/select.do}"
                     class="nav-link d-none d-sm-inline-block mr-auto ml-md-3 my-2 mw-100 navbar-search">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" style="cursor:pointer;"
-                            placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group" style="width: 350px;">
+                        <input type="text" class="form-control bg-light border-0 small search-font" style="cursor:pointer; font-family: 'Do Hyeon', sans-serif;"
+                            placeholder="당신의 특별한 하루를 만들어보세요." aria-label="Search" aria-describedby="basic-addon2">
                         <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
+                            <button class="btn btn-success" type="button">
                                 <i class="fas fa-search fa-sm"></i>
                             </button>
                         </div>
                     </div>
                 </a>
+            </div>
+
+
+
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
 
                 <div class="topbar-divider d-none d-sm-block"></div>
 
                 <div class="d-flex align-items-center">
-                    <a th:href="@{/class/insert.do}" class="btn btn-outline-success">클래스 등록</a>
+                    <a th:href="@{/class/insert.do}" class="btn btn-effect" style="border: 1px solid rgb(51, 128, 74); background-color: rgb(244, 255, 245);"><i class="fa-regular fa-calendar-plus"> </i> 클래스 등록</a>
                 </div>
 
                 <div class="topbar-divider d-none d-sm-block"></div>
@@ -147,10 +125,10 @@
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-envelope fa-fw"></i>
                             <!-- Counter - Messages -->
-                            <span class="badge badge-danger badge-counter">7</span>
+                            <!-- <span class="badge badge-danger badge-counter">7</span> -->
                         </a>
                         <!-- Dropdown - Messages -->
-                        <div class="dropdown-list dropdown-menu dropdown-menu-end dropdown-menu-start shadow animated--grow-in"
+                        <!-- <div class="dropdown-list dropdown-menu dropdown-menu-end dropdown-menu-start shadow animated--grow-in"
                             aria-labelledby="messagesDropdown">
                             <h6 class="dropdown-header">
                                 Message Center
@@ -198,7 +176,7 @@
                                 </div>
                             </a>
                             <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                        </div>
+                        </div> -->
                     </li>
 
                     <div class="topbar-divider d-none d-sm-block"></div>
@@ -207,8 +185,8 @@
 
                 <th:block th:if="${user == null}">
                     <div class="d-flex justify-content-between align-items-center">
-                        <a th:href="@{/login.do}" class="btn btn-outline-success me-2">로그인</a>
-                        <a th:href="@{/member/join.do}" class="btn btn-outline-success">회원가입</a>
+                        <a th:href="@{/login.do}" class="btn me-2 btn-effect1" style="border: 1px solid gray; width: 100px;">로그인</a>
+                        <a th:href="@{/member/join.do}" class="btn btn-effect1" style="border: 1px solid gray; width: 100px;">회원가입</a>
                     </div>
                 </th:block>
                 <th:block th:if="${user != null}">

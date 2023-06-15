@@ -2,14 +2,16 @@ package com.example.service.review;
 
 import java.util.List;
 
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Apply;
 import com.example.entity.Review;
-import com.example.entity.Reviewview;
+import com.example.entity.ReviewImage;
+import com.example.entity.ReviewImageProjection;
+import com.example.entity.ReviewView;
 import com.example.repository.ApplyRepository;
-import com.example.repository.ReviewRepository;
+import com.example.repository.ReviewImageRepository;
+import com.example.repository.ReviewViewRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,8 +19,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ReviewServiceImpl implements ReviewService {
 
-    final ReviewRepository r1Repository;
+    final ReviewViewRepository r1Repository;
     final ApplyRepository applyRepository;
+    final ReviewImageRepository reviewImageRepository;
 
     @Override
     public int insertReview(Review obj) {
@@ -31,6 +34,10 @@ public class ReviewServiceImpl implements ReviewService {
             obj.setApply(ret);
 
             r1Repository.save(obj);
+
+            ret.setChk(4);
+
+            applyRepository.save(ret);
 
             return 1;
 
@@ -52,18 +59,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<Reviewview> selectListReview(String id, Pageable pageable) {
-        try {
-            return r1Repository.findByIdIgnoreCaseOrderByRegdateDesc(id, pageable);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    @Override
-    public List<Reviewview> selectlistReviewview(String id) {
+    public List<ReviewView> selectlistReviewview(String id) {
         try {
             return r1Repository.findById(id);
 
@@ -74,7 +70,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<Reviewview> selectReviewByIdPagenation(String id, int start, int end) {
+    public List<ReviewView> selectReviewByIdPagenation(String id, int start, int end) {
         try {
             return r1Repository.selectReviewByIdPagenation(id, start, end);
         } catch (Exception e) {
@@ -83,9 +79,69 @@ public class ReviewServiceImpl implements ReviewService {
         }
     }
 
+    @Override
+    public int insertReviewImage(List<ReviewImage> obj) {
+
+        try {
+            reviewImageRepository.saveAll(obj);
+            return 1;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+
+        }
+    }
+
+    @Override
+    public List<ReviewView> selectByClasscode(long classcode, int first, int last) {
+        try {
+            List<ReviewView> list = r1Repository.selectByClasscode(classcode, first, last);
+
+            return list;
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public long countByClasscode(long classcode) {
+        try {
+            return r1Repository.countByClasscode(classcode);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    @Override
+    public List<ReviewImageProjection> selectReviewImageNoList(long reviewno) {
+        try {
+            return reviewImageRepository.findByReview_No(reviewno);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ReviewImage selectReivewImageOne(long no) {
+        try {
+            return reviewImageRepository.findById(no).orElse(null);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     // 리뷰 하나만 조회
     @Override
-    public Reviewview selectReviewOne(String id, long no) {
+    public ReviewView selectReviewOne(String id, long no) {
         try {
             return r1Repository.findByIdAndNo(id, no);
 
@@ -105,7 +161,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<Reviewview> selectReviewByIdPagenationAsc(String id, int start, int end) {
+    public List<ReviewView> selectReviewByIdPagenationAsc(String id, int start, int end) {
         try {
             return r1Repository.selectReviewByIdPagenationAsc(id, start, end);
         } catch (Exception e) {
@@ -113,4 +169,27 @@ public class ReviewServiceImpl implements ReviewService {
             return null;
         }
     }
+
+    @Override
+    public ReviewImage selectReviewImage(long no) {
+        try {
+            return reviewImageRepository.findByNo(no);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Long> reviewImagelistNo(long no) {
+        try {
+            return reviewImageRepository.reviewImagelistNo(no);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }
+
+

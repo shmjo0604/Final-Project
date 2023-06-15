@@ -1,12 +1,14 @@
 package com.example.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.data.annotation.Immutable;
 
@@ -16,7 +18,7 @@ import lombok.Data;
 @Immutable
 @Entity
 @Table(name = "REVIEWVIEW")
-public class Reviewview {
+public class ReviewView {
 
     @Id
     @Column(name = "NO")
@@ -60,5 +62,9 @@ public class Reviewview {
 
     @Column(name = "PRICE")
     private int price;
+
+    @Transient
+    private List<ReviewImageProjection> imglist;
+
 
 }

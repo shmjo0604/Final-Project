@@ -10,6 +10,7 @@ import com.example.dto.ActDetailCate;
 import com.example.dto.ActivityCate;
 import com.example.dto.CityCate;
 import com.example.dto.ClassProduct;
+import com.example.dto.ClassProductView;
 import com.example.dto.ClassUnit;
 import com.example.dto.ClassUnitView;
 import com.example.dto.LocalCate;
@@ -80,7 +81,8 @@ public class ClassSelectServiceImpl implements ClassSelectService {
 
                     long mainImgNo = manageMapper.selectClassMainImageNo(obj.getClasscode());
                     obj.setMainImg(mainImgNo);
-    
+                    
+                    obj.setProfileImg(manageMapper.selectClassProfileImageNo(obj.getClasscode()));
                 }
 
             }
@@ -105,7 +107,7 @@ public class ClassSelectServiceImpl implements ClassSelectService {
     }
 
     @Override
-    public ClassProduct selectClassProductOne(long classcode) {
+    public ClassProductView selectClassProductOne(long classcode) {
         try {
             return cMapper.selectClassProductOne(classcode);
         }
@@ -128,6 +130,7 @@ public class ClassSelectServiceImpl implements ClassSelectService {
                     long mainImgNo = manageMapper.selectClassMainImageNo(obj.getClasscode());
                     obj.setMainImg(mainImgNo);
                     
+                    obj.setProfileImg(manageMapper.selectClassProfileImageNo(obj.getClasscode()));
                 }
 
             }
@@ -207,6 +210,8 @@ public class ClassSelectServiceImpl implements ClassSelectService {
                     long mainImgNo = manageMapper.selectClassMainImageNo(obj.getClasscode());
                     obj.setMainImg(mainImgNo);
     
+                    obj.setProfileImg(manageMapper.selectClassProfileImageNo(obj.getClasscode()));
+
                 }
 
             }
@@ -231,11 +236,25 @@ public class ClassSelectServiceImpl implements ClassSelectService {
 
                     long mainImgNo = manageMapper.selectClassMainImageNo(obj.getClasscode());
                     obj.setMainImg(mainImgNo);
+
+                    obj.setProfileImg(manageMapper.selectClassProfileImageNo(obj.getClasscode())); 
                     
                 }
 
             }
 
+            return list;
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<com.example.entity.ClassProduct> selectMainHomeClassList() {
+        try {
+            List<com.example.entity.ClassProduct> list = cRepository.findAllTopSixByOrderByClasscodeDesc();
             return list;
         }
         catch(Exception e) {
