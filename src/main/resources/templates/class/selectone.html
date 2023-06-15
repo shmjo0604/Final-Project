@@ -176,6 +176,24 @@
         .utable>td {
             font-size: 12px;
         }
+        
+        .card-id{
+            color: rgba(0, 0, 0, 0.5);
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 5px;
+            
+        }
+
+        .card-regdate{
+            position: relative;
+            bottom: -50px;
+        }
+
+        .card-button:hover{
+            background-color: #11d511;
+        }
+
     </style>
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
@@ -264,7 +282,7 @@
                             <h3 class="d-flex align-items-center my-3"><i
                                     class="bi bi-signpost-fill me-2"></i><span>커리큘럼
                                     소개</span></h3>
-
+                                    
                             <div th:utext="${obj.curriculum}"></div>
                         </div>
 
@@ -275,7 +293,12 @@
                             <h3 class="d-flex align-items-center my-3"><i class="bi bi-person-vcard me-2"></i><span>강사
                                     소개</span>
                             </h3>
-                            <div th:utext="${obj.instructor}"></div>
+                            <img th:src="@{/class/image(no=${profile})}"class="mb-3" style="width: 180px; height: 150px;">
+                            <div th:utext="${obj.instructor}">
+                                
+                            </div>
+                            <!-- <div th:utext="${obj.sns}"></div> -->
+                           
                         </div>
 
                         <hr>
@@ -985,20 +1008,31 @@
                     card_body.className = "card-body";
 
                     var card_title = document.createElement('h6');
-                    card_title.className = "card-title";
+                    card_title.className = "card-title card-id";
                     card_title.textContent = obj.id;
 
                     var card_text1 = document.createElement('div');
-                    card_text1.className = "card-text";
+                    card_text1.className = "card-text ";
                     card_text1.innerHTML = obj.content;
 
                     var card_text2 = document.createElement('p');
-                    card_text2.className = "card-text";
-                    card_text2.textContent = obj.regdate;
+                    card_text2.className = "card-text card-regdate";
+                    var reviewdate = new Date(obj.regdate) 
+                    // var day = ['일','월','화','수','목','금','토','일']
+                    // var reviewDateFormat = reviewdate.getFullYear() + "년"
+                    //  + (reviewdate.getMonth()+1)+ "월" + reviewdate.getDate() + "일" + day[reviewdate.getDay()]+ '요일'
+                    card_text2.textContent = reviewdate;
+                    
+                    var card_text3 = document.createElement('button');
+                    card_text3.className="card-button btn btn-success float-end"
+                    card_text3.innerHTML="추천해요!";
+                    // card_text3.value = "추천해요!";
+                    // card_text3.type="button";
 
                     card_body.appendChild(card_title);
                     card_body.appendChild(card_text1);
                     card_body.appendChild(card_text2);
+                    card_body.appendChild(card_text3);
 
                     col2.appendChild(card_body);
 

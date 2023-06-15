@@ -52,5 +52,7 @@ public class ClassProductView {
 
     //클래스 프로필 이미지 번호
 	private long profileImg;
+	//클래스 sns
+	private String sns;
 
 }
