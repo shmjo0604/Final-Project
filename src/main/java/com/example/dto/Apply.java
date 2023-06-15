@@ -17,4 +17,9 @@ public class Apply {
 	private String memberid;
 	// 유닛 번호 (FK)
 	private long unitno;
+
+	// 클래스 등록자 아이디(판매자)
+	private String ownerid;
+	// 클래스 코드
+	private long classcode;
 }

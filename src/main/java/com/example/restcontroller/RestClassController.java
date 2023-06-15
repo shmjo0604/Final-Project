@@ -34,7 +34,7 @@ public class RestClassController {
     
     @Value("${classselect.page}") int pageEach;
 
-    final String format = "RestClassSelectCateController => {}";
+    final String format = "RestClassController => {}";
 
     @GetMapping(value = "/selectcatelist.json")
     public Map<String, Object> selectcatelistGET(
@@ -213,7 +213,8 @@ public class RestClassController {
 
         if(obj != null) {
 
-           log.info(format, obj.toString());
+           //log.info(format, obj.toString());
+           
            retMap.put("ret", 1);
            retMap.put("obj", obj); 
 

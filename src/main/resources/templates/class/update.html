@@ -34,7 +34,8 @@
 
     <!-- main 영역 -->
     <div id="wrapper">
-        <form id="form_update" th:action="@{update.do( classcode=${obj.classcode} )}" method="post" enctype="multipart/form-data">
+        <form id="form_update" th:action="@{update.do( classcode=${obj.classcode} )}" method="post"
+            enctype="multipart/form-data">
             <div class="container border-top">
                 <div class="maincontent row">
                     <div class="leftside col-2" id="btn_cate">
@@ -174,10 +175,9 @@
                                                 <h6 style="display:inline; padding-right:50px; color: #FF8E8E">(필수)</h6>
                                             </h6>
 
-                                            <br>
                                             <input id="nickname" class="form-control w-50 my-3" type="text"
                                                 th:value="${obj.nickname}" maxlength="50" placeholder="ex)나무이야기"
-                                                autofocus required>
+                                                autofocus required />
                                         </div>
 
                                         <div>
@@ -260,12 +260,20 @@
                                                 <h6 style="display:inline; font-weight:bold;">추가 클래스 이미지</h6>
                                                 <h6 style="display:inline; padding-right:50px; color: blue">(선택)</h6>
                                                 <div class="my-3">
+                                                    <!-- <button class="btn btn-sm btn-delete"
+                                                        onclick="deleteImg()">삭제</button> -->
                                                     <div id="input-addimage" style="height: 200px;"
-                                                    class="mb-3 border rounded w-100 d-flex flex-wrap">
+                                                        class="mb-3 border rounded w-100 d-flex flex-wrap">
                                                         <th:block th:each="subImg : ${subImg}">
-                                                            <img id="insert_classSub" th:src="@{/class/image(no=${subImg})}"
-                                                                style="width: 100px; height: 80px; cursor: pointer;"
-                                                                class="mb-3" onclick="clickClassSub()" /> 
+                                                            <div class="container1" style="position: relative;">
+                                                                <!-- <input type="checkbox" class="checkbox" id="check1"
+                                                                    style="position: absolute; top:10px; right: 5px;"> -->
+                                                                <img id="insert_classSub"
+                                                                    th:src="@{/class/image(no=${subImg})}"
+                                                                    style="width: 75px; height: 75px; cursor: pointer;"
+                                                                    class="classsub mx-1 my-2"
+                                                                    onclick="clickClassSub()" />
+                                                            </div>
                                                         </th:block>
                                                     </div>
                                                     <input type="file" multiple name="classSub" id="file_classSub"
@@ -299,7 +307,7 @@
                                             </div>
                                             <!-- Create the editor container -->
                                             <div style="margin-top: 10px; background-color: white;">
-                                                <div id="editor2" th:utext="${obj.instructor}" style="height: 300px;">
+                                                <div id="editor2" th:utext="${obj.intro}" style="height: 300px;">
                                                     <!-- <p>클래스를 소개해주세요.^^</p> -->
                                                 </div>
                                             </div>
@@ -375,7 +383,7 @@
                                             <h6 style="display:inline; font-weight:bold;">가격
                                                 <h6 style="display:inline; padding-right:50px; color: #FF8E8E">(필수)</h6>
                                             </h6>
-                                            <div class="tool">addCommas
+                                            <div class="tool">
                                                 <span> <img id="insert-img" th:src="@{/image/물음표.png}"
                                                         style="width: 20px; height: 20px; cursor: pointer;"> 도움말
                                                 </span>
@@ -417,7 +425,6 @@
                             <input id="form_intro" name="intro">
                             <input id="form_curriculum" name="curriculum">
                             <input id="form_nickname" type="text" name="nickname">
-                            <input id="form_nickname" type="text" name="nickname">
                         </div>
                     </div>
                 </div>
@@ -428,6 +435,8 @@
     <!--footer 영역-->
     <footer th:replace="~{footer :: footerFragment}"></footer>
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.5/axios.min.js"></script>
     <!--jQuery-->
     <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
     <!--axios library-->
@@ -439,7 +448,64 @@
     <!--Bootstrap 용 js -->
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 
-    <script th:inline="javascript">
+    <script type="text/javascript" th:inline="javascript">
+
+        //  async function clickClassSub(no){
+        //     let url = /*[[@{/api/classmanage/deleteone.json}]]*/"";
+        //     url += `no=${no}`;
+        //     const body = { 
+        //                     no : no };
+        //     const headers = {"Content-Type":"application/json"};
+        //     const { data } = await axios.put(url, body, { headers:headers });
+        //     console.log("no:", no);
+
+        //     if(data.status === 200){
+        //         alert("삭제가 완료되었습니다.");
+        //         const deletedImg = document.getElementById(`unit-${no}`);
+        //         if (deletedImg) {
+        //             const parentDiv = deletedUnit.parentElement;
+        //             if (parentDiv) {
+        //                 parentDiv.style.border = "none";
+        //                 parentDiv.style.backgroundColor = "transparent";
+        //                 parentDiv.style.height = "0";
+        //                 parentDiv.style.padding = "0";
+        //                 parentDiv.style.marginTop = "0";
+
+        //             }
+        //             deletedUnit.remove();
+        //         }
+        //     }
+        //     else {
+        //         alert("삭제에 실패하였습니다.");
+        //     }
+        // };
+
+
+        // 서브이미지 삭제 클릭
+        $("#insert_classSub").on("click", ".imgDeleteBtn", function (e) {
+            deleteImg();
+        });
+
+        const no = /*[[${subImg}]]*/"";
+        async function clickClassSub() {
+            console.log(no[0]);
+
+            const url = /*[[@{/api/classmanage/deleteone.json}]]*/"";
+            const body = { no: no[0] };
+            const headers = { "Content-Type": "application/json" };
+            const { data } = await axios.delete(url, { headers: headers, data: body });
+            console.log('반환되는 결과', data);
+
+            if (data != null ) {
+                $(document).ready(function () {
+                    $("img").click(function () {
+                        $(this).attr('src', "");
+                        alert("파일을 삭제하였습니다.")
+                    })
+                });
+            }
+
+        }
 
         /*<![CDATA[*/
 
@@ -1008,10 +1074,10 @@
             console.log(content_length);
             console.log(content);
 
-            // if (file.value === "") {
-            //     alert("이미지 파일을 첨부하세요.");
-            //     return false;
-            // }
+            if (file.value === "") {
+                alert("이미지 파일을 첨부하세요.");
+                return false;
+            }
             if (nickname.value === "") {
                 alert("상호명을 작성하세요.");
                 nickname.focus();
@@ -1132,6 +1198,8 @@
             const localcode = document.getElementById("localselect");
             const actdetailcode = document.getElementById("actdetailselect");
 
+            console.log(nickname.value);
+
 
             /* console.log(title.value);
             console.log(postcode.value);
@@ -1211,7 +1279,7 @@
                 return false;
             }
 
-            /* if( content_length2 < 30) {
+            if( content_length2 < 30) {
                 alert("클래스 소개를 작성하세요.");
                 pageintro();
                 return false;
@@ -1221,7 +1289,7 @@
                 alert("커리큘럼 내용을 작성하세요.");
                 pagecorri();
                 return false;
-            } */
+            }
 
             if (price.value.length <= 0) {
                 alert("금액을 입력하세요.");
@@ -1246,6 +1314,7 @@
             document.getElementById("form_curriculum").value = curriculum;
             document.getElementById("form_nickname").value = nickname.value;
 
+            console.log($("#form_nickname").val());
             // 5. 전송
 
             form.submit();

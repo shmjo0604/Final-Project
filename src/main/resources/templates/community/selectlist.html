@@ -23,6 +23,22 @@
     <!--thymeleaf contextpath-->
     <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}" />
     <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        #wrapper {
+            min-height: 100%;
+            position: relative;
+            /* padding-bottom: 60px; */
+        }
+
+        footer {
+            position: relative;
+            /* transform: translateY(-30%); */
+        }
+
         .logo-wrap img {
             width: 300px;
             height: 200px;
@@ -38,72 +54,88 @@
     <!--header 영역-->
     <header th:replace="~{header :: headerFragment}"></header>
 
+    <div id="wrapper">
+        <h1 class="text-center" style=" font-weight: bolder; color: rgb(103, 179, 103) ;"> SPECIAL DAY 커뮤니티</h1>
+        <div class="container">
+            <table class="table teble-hover text-striped text-center" style="border: 1px rgb(184, 181, 181) ;">
+                <br />
+                <thead>
+                    <tr>
+                        <th scope="no">글번호</th>
+                        <th scope="cate" name="cate">글 분류</th>
+                        <th scope="title">제목</th>
+                        <th scope="id">작성자ID</th>
+                        <th scope="hit">조회수</th>
+                        <th scope="replycnt">댓글수</th>
+                        <th scope="regdate">작성날짜</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-    <h1 class="text-center" style=" font-weight: bolder; color: rgb(103, 179, 103) ;"> SPECIAL DAY 커뮤니티</h1>
-    <div class="container">
-        <table class="table teble-hover text-striped text-center" style="border: 1px rgb(184, 181, 181) ;">
-            <br />
-            <thead>
-                <tr>
-                    <th scope="no">글번호</th>
-                    <th scope="cate" name="cate">글 분류</th>
-                    <th scope="title">제목</th>
-                    <th scope="id">작성자ID</th>
-                    <th scope="hit">조회수</th>
-                    <th scope="replycnt">댓글수</th>
-                    <th scope="regdate">작성날짜</th>
-                </tr>
-            </thead>
-            <tbody>
+                    <tr th:each="obj : ${list}">
+                        <td th:text="${obj.no}"></td>
+                        <td th:text="${obj.cate}"></td>
+                        <td><a th:href="@{/community/selectone.do(no=${obj.no})}" th:text="${obj.title}"></a></td>
+                        <td th:text="${obj.member.id}"></td>
+                        <td th:text="${obj.hit}"></td>
+                        <td th:text="${obj.replycnt}"></td>
+                        <td th:text="${obj.regdate}"></td>
 
-                <tr th:each="obj : ${list}">
-                    <td th:text="${obj.no}"></td>
-                    <td th:text="${obj.cate}"></td>
-                    <td><a th:href="@{/community/selectone.do(no=${obj.no})}" th:text="${obj.title}"></a></td>
-                    <td th:text="${obj.member.id}"></td>
-                    <td th:text="${obj.hit}"></td>
-                    <td th:text="${obj.replycnt}"></td>
-                    <td th:text="${obj.regdate}"></td>
+                    </tr>
+                </tbody>
+            </table>
 
-                </tr>
-            </tbody>
-        </table>
-        <ul class="pagination justify-content-center">
-            <li><a href="#" style="margin-right: 10px;text-decoration: none;font-size: 20px;font-weight: bold;"
-                    class="text-secondary">◀</a></li>
-            <li><a href="#" style="margin-right: 10px;text-decoration: none;font-size: 20px;font-weight: bold"
-                    class="text-secondary">1</a></li>
-            <li><a href="#" style="margin-right: 10px;text-decoration: none;font-size: 20px;font-weight: bold"
-                    class="text-secondary">2</a></li>
-            <li><a href="#" style="margin-right: 10px;text-decoration: none;font-size: 20px;font-weight: bold"
-                    class="text-secondary">3</a></li>
-            <li><a href="#" style="margin-right: 10px;text-decoration: none;font-size: 20px;font-weight: bold"
-                    class="text-secondary">4</a></li>
-            <li><a href="#" style="margin-right: 10px;text-decoration: none;font-size: 20px;font-weight: bold"
-                    class="text-secondary">5</a></li>
-            <li><a href="#" style="margin-right: 10px;text-decoration: none;font-size: 20px;font-weight: bold"
-                    class="text-secondary">6</a></li>
-            <li><a href="#" style="margin-right: 10px;text-decoration: none;font-size: 20px;font-weight: bold"
-                    class="text-secondary">▶</a></li>
-        </ul>
-        <a th:href="@{insert.do}" class="btn btn-outline-info float-right">글쓰기</a>
+            <div class="row justify-content-center">
+                <div class="col-4">
+                    <ul id="pagination-demo" class="pagination-sm "></ul>
+                </div>
+            </div>
+
+            <a th:href="@{insert.do}" class="btn btn-outline-info float-right">글쓰기</a>
 
 
+        </div>
     </div>
 
-    
+    <!--footer 영역-->
+    <footer th:replace="~{footer :: footerFragment}"></footer>
+
     <!--jQuery-->
     <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
+    <!--twbsPagination js-->
+    <script th:src="@{/js/jquery.twbsPagination.min.js}"></script>
     <!--axios library-->
     <script th:src="@{/js/axios.min.js}"></script>
     <!--Bootstrap 용 js -->
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-    <script>
+    <script th:inline="javascript">
 
         const contextPath = $('#contextPathHolder').attr('data-contextPath');
+
+        var pages = /*[[${pages}]]*/'';
+
+        $(document).ready(function () {
+            $('#pagination-demo').twbsPagination({
+                totalPages: Number(pages),
+                visiblePages: 10,
+                first: '처음',
+                last: '마지막',
+                prev: '이전',
+                next: '다음',
+                initiateStartPageClick: false,
+                startPage: Number(/*[[${param.page}]]*/),
+                // 주소창에서 page 값을 받아옴 -> 그 값에 해당하는 목록 버튼이 활성
+                onPageClick: function (event, page) {
+
+                    window.location.href = "selectlist.do?page=" + page;
+
+                }
+            });
+        });
 
     </script>
     <!--Main js-->
     <script th:src="@{/js/main.js}"></script>
 </body>
+
 </html>

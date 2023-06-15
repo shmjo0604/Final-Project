@@ -1,7 +1,14 @@
 <div th:fragment="menu_1" class="col-9" style="min-height: 100vh;">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!--jQuery-->
+    <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
+    <!--axios library-->
+    <script th:src="@{/js/axios.min.js}"></script>
+    <!--Bootstrap 용 js -->
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <script>
+
+        const contextPath = $("#contextPathHolder").attr("data-contextPath");
 
         // Close the dropdown if the user clicks outside of it
         window.onclick = function (event) {
@@ -35,6 +42,10 @@
         .dropbtn:hover img {
             transform: scale(1.12);
         }
+        
+        .dropdown-item {
+            text-align: center;
+        }
 
         .dropdown-content {
             display: none;
@@ -62,21 +73,6 @@
             display: block;
         }
 
-        /* .noact {
-            float: right;
-            font-size: 13px;
-            color: dimgray;
-            margin-top: 5px;
-        }
-
-        .noact:hover {
-            color: black;
-        } */
-
-        /* .btn{
-            background-color: rgb(242, 250, 249);
-            color: black;
-        } */
     </style>
 
     <div class="container">
@@ -112,8 +108,7 @@
                                         <!-- menu -->
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                             <li><a class="dropdown-item" id="imput_btn"
-                                                    th:href="@{/classunit/myunit.do( classcode=${obj.classcode}, menu=1)}">일정
-                                                    등록</a></li>
+                                                    th:href="@{/classunit/myunit.do( classcode=${obj.classcode}, menu=1)}">관리</a></li>
                                             <li> <a class="dropdown-item" id="modify_btn"
                                                     th:href="@{/class/update.do( classcode=${obj.classcode} )}">수정</a>
                                             </li>
@@ -138,8 +133,7 @@
                                         <!-- menu -->
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                             <li><a class="dropdown-item" id="imput_btn"
-                                                    th:href="@{/classunit/myunit.do( classcode=${obj.classcode} )}">일정
-                                                    등록</a></li>
+                                                    th:href="@{/classunit/myunit.do( classcode=${obj.classcode} )}">관리</a></li>
                                             <li> <a class="dropdown-item" id="modify_btn"
                                                     th:href="@{/class/update.do( classcode=${obj.classcode} )}">수정</a>
                                             </li>
@@ -158,13 +152,15 @@
                                 <!-- card 이미지 -->
                                 <div class="card-image">
                                     <img th:src="@{/class/image(no=${obj.mainImg})}"
-                                        style="width: 100%; height: 200px; background-color: darkgray;" />
+                                        style="width: 100%; height: 200px; object-fit:cover; background-color: darkgray;" />
                                 </div>
                                 <!-- card 내용 -->
                                 <div class="card-body">
-                                    <p class="card-title" style="font-weight: bold; font-size: large;"
+                                    <p class="card-title" style="font-weight: bold; font-size: '15px';"
                                         th:text="${obj.title}"></p>
-                                    상호명 : <p class="card-nickname"
+                                    상호명 : 
+                                    <img th:src="@{/class/image(no=${obj.profileImg} )}" style="width: 25px; height: 25px; object-fit:cover; float: right; border-radius: 10px;" />
+                                    <p class="card-nickname"
                                         style="font-weight: normal; font-size: medium; float: right;"
                                         th:text="${obj.nickname}"></p>
                                     <!-- 소개글: <p class="card-text" style="font-weight: normal; font-size: medium;" th:utext="${obj.intro}"></p> -->
@@ -187,25 +183,20 @@
 
                                     <!-- 활성화 상태 -->
                                     <th:block th:if="${obj.chk == 0 || obj.chk== 1 }">
-                                        <form method="post" id="noactiveForm"
-                                            th:action="@{/member/myclass.do(menu=1)}">
-                                            <input type="hidden" th:value="${obj.classcode}" name="classcode" >
-                                            <input type="hidden" th:value="${obj.chk}" name="chk" >
-                                            <button type="button" class="btn btn-sm" onclick="nonactive()"
-                                                style="margin-top: 10px; text-decoration: underline; background-color: transparent; float: right;">비활성화
-                                                하기</button>
-                                        </form>
+                                        <input type="hidden" th:value="${obj.classcode}" name="classcode" >
+                                        <input type="hidden" th:value="${obj.chk}" name="chk" >
+                                        <button type="button" class="btn btn-sm" th:onclick="nonactive([[${obj.classcode}]], [[${obj.chk}]])"
+                                            style="margin-top: 10px; text-decoration: underline; background-color: transparent; float: right;">비활성화 하기</button>
+
                                     </th:block>
 
                                     <!-- 비활성화 상태 -->
                                     <th:block th:if="${obj.chk == 3}">
-                                        <form method="post" id="activeForm"
-                                            th:action="@{/member/myclass.do(menu=1)}">
-                                            <input type="hidden" th:value="${obj.classcode}" name="classcode" >
-                                            <input type="hidden" th:value="${obj.chk}" name="chk" >
-                                            <button type="button" class="btn btn-sm" onclick="active()"
-                                                style="margin-top: 10px; text-decoration: underline; background-color: transparent; float: right;">활성화 하기</button>
-                                        </form>
+                                        <input type="hidden" th:value="${obj.classcode}" name="classcode" >
+                                        <input type="hidden" th:value="${obj.chk}" name="chk" >
+                                        <button type="button" class="btn btn-sm" th:onclick="active([[${obj.classcode}]], [[${obj.chk}]])"
+                                        style="margin-top: 10px; text-decoration: underline; background-color: transparent; float: right;">활성화 하기</button>
+                                        
                                     </th:block>
 
                                 </div>
@@ -214,6 +205,17 @@
                     </div>
                 </div>
             </th:block>
+            <form method="post" id="noactiveForm"
+                th:action="@{/member/myclass.do(menu=1)}" style="display:none;">
+                <input type="text" name="classcode" id="nonclasscode">
+                <input type="text" name="chk" id="nonchk">
+            </form>
+
+            <form method="post" id="activeForm"
+                th:action="@{/member/myclass.do(menu=1)}" style="display:none;">
+                <input type="text" name="classcode" id="aclasscode">
+                 <input type="text" name="chk" id="achk">
+            </form>
         </div>
     </div>
 
@@ -231,11 +233,15 @@
         }
 
         /* 비활성화 버튼 */
-        function nonactive() {
+        function nonactive(classcode, chk) {
+
+            console.log(classcode);
+            console.log(chk);
             
             if ( confirm('비활성화 하시겠습니까?') == true ) {
+                document.getElementById('nonclasscode').value=classcode;
+                document.getElementById('nonchk').value=chk;
                 document.getElementById('noactiveForm').submit();
-                alert('비활성화 되었습니다.');
             }
             else {
                 alert('활성화 상태입니다.');
@@ -243,10 +249,13 @@
         }
 
         /* 활성화 버튼 */
-        function active() {
+        function active(classcode, chk) {
+
+            // console.log(chk);
 
             if ( confirm('활성화 하시겠습니까?') == true ) {
-                alert('활성화 되었습니다.');
+                document.getElementById('aclasscode').value=classcode;
+                document.getElementById('achk').value=chk;
                 document.getElementById('activeForm').submit();
             }
             else {
@@ -255,7 +264,6 @@
                 $('#dropdownMenuButton1').prop('disabled', true);
             }
         }
-
         
     </script>
 </div>

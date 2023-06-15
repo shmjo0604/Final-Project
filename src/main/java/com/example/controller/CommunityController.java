@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.data.domain.PageRequest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -34,11 +34,14 @@ import lombok.extern.slf4j.Slf4j;
 public class CommunityController {
 
     final String format = "커뮤니티컨트롤러 => {}";
+
     final CommunityRepository communityRepository;
     final ReplyRepository rRepository;
     final CommunityService communityService;
     final ReplyService rService;
-    final HttpSession hSession;
+
+    @Value("${communitylist.page}")
+    int paging;
 
     // 커뮤니티 글작성
     @GetMapping(value = "/insert.do")
@@ -48,7 +51,7 @@ public class CommunityController {
 
         if (user != null) {
             model.addAttribute("user", user);
-            System.out.println(user.toString());
+
         }
 
         return "/community/insert";
@@ -61,10 +64,6 @@ public class CommunityController {
 
         if (user != null) {
 
-            community.getCate();
-            community.getTitle();
-            community.getContent();
-
             Community ret = communityRepository.save(community);
             System.out.println(ret);
 
@@ -74,31 +73,50 @@ public class CommunityController {
 
     // 커뮤니티 게시판 보기
     @GetMapping(value = "/selectlist.do")
-    public String selectlistGET(Model model, @AuthenticationPrincipal User user,  @RequestParam(name = "type", defaultValue = "title") String type,
-    @RequestParam(name = "page", defaultValue = "0") int page,  @RequestParam(name = "text", defaultValue = "") String text) {
+    public String selectlistGET(
+            Model model,
+            @AuthenticationPrincipal User user,
+            @RequestParam(name = "type", defaultValue = "title") String type,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "text", defaultValue = "") String text) {
 
-        List<Community> list = communityRepository.findAllByOrderByNoDesc();
+        if(page == 0) {
+            return "redirect:/community/selectlist.do?page=1";
+        }
+
+        long count = communityService.countCommunityList();
+                
+        // log.info(format, count);
+
+        long pages = (count-1)/paging + 1;
+
+        int first = (page * paging) - (paging-1);
+        int last = page * paging;
+
+        List<Community> list = communityService.selectCommunityList(first, last);
+
+        // for (Community obj : list) {
+        //     log.info(format, obj.toString());
+        // }
 
         if (user != null) {
             model.addAttribute("user", user);
-            System.out.println(user.toString());
         }
-        for (Community obj : list) {
-            log.info(format, obj.toString());
-        }
+
+        model.addAttribute("pages", pages);
         model.addAttribute("list", list);
 
         return "/community/selectlist";
-         
+
     }
 
     // 커뮤니티 게시판글 보기
     @GetMapping(value = "/selectone.do")
     public String selectoneGET(Model model, @RequestParam(name = "no") long no, @AuthenticationPrincipal User user) {
-       
+
         Community community = communityRepository.findByNo(no);
-       List<Reply> list =  rRepository.findByCommunity_noOrderByNoDesc(no);
-       
+        List<Reply> list = rRepository.findByCommunity_noOrderByNoDesc(no);
+
         if (user != null) {
             model.addAttribute("user", user);
             System.out.println(user.toString());
@@ -109,22 +127,24 @@ public class CommunityController {
 
         return "/community/selectone";
 
-
-
     }
 
     @RequestMapping(value = "/delete.do", method = { RequestMethod.POST })
     public String deleteGET(@AuthenticationPrincipal User user, @ModelAttribute Community obj,
-            Model model) {
+            Model model, HttpSession httpSession) {
         try {
-            log.info(format, obj.toString());
+
+            // log.info(format, obj.toString());
             communityRepository.deleteById(obj.getNo());
 
-            return "redirect:/community/selectlist.do";
+            httpSession.setAttribute("alertMessage", "삭제되었습니다.");
+            httpSession.setAttribute("alertUrl", "/community/selectlist.do");
+
+            return "redirect:/alert.do";
         } catch (Exception e) {
             e.printStackTrace();
             // return "redirect:/home.do";
-            return "redirect:/community/selectlist.do";
+            return "redirect:/community/selectone.do?no="+obj.getNo();
         }
     }
 
@@ -187,20 +207,18 @@ public class CommunityController {
     }
 
     @PostMapping(value = "/replyinsert.do")
-    public String replyinsertPOST( 
-        @ModelAttribute Reply reply , @AuthenticationPrincipal User user , Model model) throws IOException{
-            log.info(format , reply.toString());
+    public String replyinsertPOST(
+            @ModelAttribute Reply reply, @AuthenticationPrincipal User user, Model model) throws IOException {
+        log.info(format, reply.toString());
 
-            if(reply != null) {
-                reply.getContent();
+        if (reply != null) {
+            reply.getContent();
 
-                Reply ret = rRepository.save(reply);
-                System.out.println(ret);
+            Reply ret = rRepository.save(reply);
+            System.out.println(ret);
 
-            }
-            return "redirect:/community/selectone.do?no="+reply.getCommunity().getNo();
+        }
+        return "redirect:/community/selectone.do?no=" + reply.getCommunity().getNo();
     }
-
-
 
 }

@@ -12,27 +12,36 @@ import com.example.dto.ClassUnitView;
 public interface ClassUnitService {
     
     /* (1) ClassUnit 등록*/
-	public int insertUnitOne(ClassUnit obj);
+	public int insertUnitOne(com.example.entity.ClassUnit obj);
 	
 	/* (1-1) 클래스 가격 조회 => Unit 등록 시 추가 금액 등록을 위해 */
 	public long selectPriceOne(long classcode); 
 		
 	/* (2) ClassUnit 전체 조회 */
-	public List<ClassUnit> selectUnitList(long classcode);
+	public List<com.example.entity.ClassUnit> selectUnitList(long classcode);
 	
 	/* (2-1) ClassUnit 하나 조회 */
-	public ClassUnit selectUnitOne(ClassUnit obj);
+	public com.example.entity.ClassUnit selectUnitOne(long classcode, long no);
 	
 	/* (3) ClassUnit 수정 */
-	public int updateUnitOne(ClassUnit obj);
+	public int updateUnitOne(long classcode, long no);
 	
 	/* (4) ClassUnit 삭제 -> View 상에서만 삭제(DB에서는 삭제 불가) */
-	public int updateUnitOneInactive(long no);
+	public int updateUnitOneInactive(long classcode, long no);
 	
-	/* (4-1) ClassUnit 일괄 삭제 */
-    public int updateUnitBatchInactive(Map<String, Object> map);
+	/* (5) ClassUnit 전체 삭제 */
+    public int updateUnitAllInactive(long classcode);
 
-	/* (5) ClassUnitView 하나 조회 */
+	/* (6) ClassUnit 개설 일정 조회 */
+	public List<ClassUnit> selectUnitListToCal(long classcode);
+	
+	/* (7) ClassUnitView 하나 조회 */
 	public ClassUnitView selectClassUnitViewOne(long unitno);
+
+	/* (8) ClassUnit 페이징 조회 (by classcode) */
+	public List<ClassUnit> selectUnitListByClasscode(Map<String, Object> map);
+
+	/* (9) ClassUnit 전체 개수 (by classcode) */
+	public long selectUnitListCountByClasscode(long classcode);
 
 }

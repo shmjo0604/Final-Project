@@ -32,5 +32,7 @@ public class ClassImage {
 	private Date regdate;
 	// 클래스 코드(FK)
 	private long classcode;
+    public void add(ClassImage classSub) {
+    }
 	
 }

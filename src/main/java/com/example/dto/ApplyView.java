@@ -15,8 +15,8 @@ public class ApplyView {
     private String title;
     // 가격
     private int price;
-    // 승인여부 (0, 1)
-    private int chk;
+    // 클래스 승인여부 (0, 1)
+    private int classchk;
     // 회원 아이디
     private String memberid;
     // 실시 날짜
@@ -44,7 +44,20 @@ public class ApplyView {
     // 신청할 인원수
     private int person;
     // 신청날짜
-    private Date applyregdate;
+    private Date regdate;
     // 신청번호
     private long no;
+    // 유닛 chk
+    private int unitchk;
+    // 신청 상태
+    private int chk;
+    /*** 추가 ***/
+    // 현재 신청 인원
+    private int cnt;
+    // 클래스 개설자 id 
+    private String ownerid;
+    // 신청자 전화번호
+    private String phone;
+
+
 }

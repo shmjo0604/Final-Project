@@ -1,7 +1,15 @@
 /****** header ******/
+.align-items-center > .btn-effect:hover {
+  background-color: rgb(229, 243, 231) !important;
+} 
+.align-items-center > .btn-effect1:hover {
+  background-color: rgb(245, 242, 242) !important;
+} 
 
 .logo {
-  font-family: 'Permanent Marker', cursive;
+  font-family: 'Do Hyeon', sans-serif;
+  color: green !important;
+  font-size: xx-large;
 }
 
 .topbar #sidebarToggleTop {

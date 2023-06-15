@@ -1,13 +1,8 @@
 <div th:fragment="menu_apply" class="col-md-8" style="margin-left: 30px">
 
-  <head>
-    <link rel="stylesheet" th:href="@{/css/review/review.css}" />
-    <link rel="stylesheet" th:href="@{/css/quill.snow.css}" />
-  </head>
-  <!--********************************************************************************************************************************************************************-->
-  <!--********************************************************************** 1. 통계 박스 ********************************************************************************-->
-  <!--********************************************************************************************************************************************************************-->
-
+  <!--******************************* 1. 통계 박스 ********************************-->
+  <link rel="stylesheet" th:href="@{/css/member/detailview.css}" />
+  <link rel="stylesheet" th:href="@{/css/member/menu_apply.css}" />
   <style>
     /* 처리상태 count box(상단) */
     .box {
@@ -43,20 +38,20 @@
     <div class="row" style="background-color: honeydew; border-radius: 15px">
       <div class="col-sm-4">
         <div class="box effect">
-          <h3>신청완료</h3>
-          <h1>1</h1>
+          <h3>결제완료</h3>
+          <h1 th:text="${chk1}"></h1>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="box effect">
+          <h3>결제취소</h3>
+          <h1 th:text="${chk2}"></h1>
         </div>
       </div>
       <div class="col-sm-4">
         <div class="box effect">
           <h3>참여완료</h3>
-          <h1>0</h1>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="box effect">
-          <h3>신청취소</h3>
-          <h1>0</h1>
+          <h1 th:text="${chk3}"></h1>
         </div>
       </div>
     </div>
@@ -67,184 +62,109 @@
       <div style="float: left; font-weight: bold">| 신청 클래스 정보</div>
       <div style="float: right">
         <div class="btn-group" role="group">
-          <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            전체상태
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">신청완료</a></li>
-            <li><a class="dropdown-item" href="#">참여완료</a></li>
-            <li><a class="dropdown-item" href="#">신청취소</a></li>
-          </ul>
+
+          <select class="form-select" style="width: 120px;" onchange="selectoption(this.value)">
+
+            <option value="0" selected>전체</option>
+            <option value="1" th:selected="${#strings.equals(param.chk, '1')}">결제완료</option>
+            <option value="2" th:selected="${#strings.equals(param.chk, '2')}">결제취소</option>
+            <option value="3" th:selected="${#strings.equals(param.chk, '3')}">참여완료</option>
+
+          </select>
+
+
         </div>
         <div class="btn-group" role="group">
-          <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            신청순
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">최신순</a></li>
-            <li><a class="dropdown-item" href="#">오래된순</a></li>
-          </ul>
+          <select class="form-select" style="width: 100px;" onchange="selectorder(this.value)">
+
+            <option value="1">최신순</option>
+            <option value="2">오래된순</option>
+
+          </select>
         </div>
       </div>
     </div>
   </div>
 
-  <!--*****************************************************************************************************************************************************************-->
-  <!--********************************************************************** 2. 테이블 ********************************************************************************-->
-  <!--*****************************************************************************************************************************************************************-->
+
+  <!--************* 2. 테이블 ******************-->
   <style>
     .center {
       text-align: center;
     }
   </style>
 
-  <table class="table table-bordered">
-    <thead>
-      <tr style="background-color: rgb(219, 217, 217); text-align: center">
-        <th>결제일자</th>
-        <th>이미지</th>
-        <th>신청 정보</th>
-        <th>결제금액</th>
-        <th>처리상태</th>
-      </tr>
-    </thead>
-    <tbody style="vertical-align: middle" id="tbody">
-      <!-- <tr th:each="obj : ${list}">
-        <td class="center">
-          <p th:text="${#dates.format(obj.applyregdate,'yyyy.MM.dd')}"></p>
-          <div
-            style="display: flex; flex-direction: column; align-items: center"
-          >
-            <button
-              class="btn btn-sm btn-outline-success"
-              style="height: 30px; width: 90px"
-            >
-              상세보기 >
+  <th:block th:if="${#lists.isEmpty(list)}">
+
+    <h3 class="mt-5 text-center">클래스 신청 내역이 없습니다.</h3>
+
+  </th:block>
+
+  <th:block th:if="${!#lists.isEmpty(list)}">
+    <table class="table table-bordered">
+      <thead>
+        <tr style="background-color: rgb(219, 217, 217); text-align: center">
+          <th>결제일자</th>
+          <th>이미지</th>
+          <th>신청 정보</th>
+          <th>결제금액</th>
+          <th>처리상태</th>
+        </tr>
+      </thead>
+      <tbody style="vertical-align: middle" id="tbody">
+        <tr th:each="obj : ${list}">
+          <td class="center">
+            <p th:text="${#dates.format(obj.regdate,'yyyy-MM-dd')}"></p>
+            <div style="display: flex; flex-direction: column; align-items: center">
+              <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px"
+                th:onclick="modalAction1([[${obj.no}]], [[${obj.chk}]])">
+                상세보기
+              </button>
+            </div>
+          </td>
+          <td class=" center">
+            <img th:src="@{/member/image(classcode=${obj.classcode})}" style="width: 100px; height: 100px" />
+          </td>
+          <td style="font-size: small">
+            <div class="mb-2"><a th:text="|<${obj.title}>|" class="a_underline" th:href="@{/class/product.do(classcode=${obj.classcode})}"></div>
+            </a>
+            <div id="classdate1" th:text=" '날짜: ' + ${obj.classdate}"></div>
+            <div th:text=" '시간: ' + ${obj.classstart} + '~' + ${obj.classend}"></div>
+            <div th:text=" '난이도: ' + ${obj.classlevel}"></div>
+            <div th:text=" '금액(1인): ' + ${obj.price}+'원'"></div>
+            <div th:text=" '신청인원: ' + ${obj.person}+'명'"></div>
+          </td>
+          <td th:text="${obj.price}+'원'" style="font-weight: bold" class="center"></td>
+          <td class="center">
+
+            <p th:if="${obj.chk} == 1" style="text-align: center">결제완료 </p>
+            <p th:if="${obj.chk} == 2" style="text-align: center">결제취소 </p>
+            <p th:if="${obj.chk} == 3 or ${obj.chk} == 4" style="text-align: center">참여완료 </p>
+
+            <button th:if="${obj.chk} == 3 or ${obj.chk} == 4" class="btn btn-sm btn-secondary" type="button"
+              style="height: 30px; width: 90px" th:onclick="modalAction([[${obj.no}]],[[${obj.classcode}]],[[${obj.price}]], [[${obj.title}]],  [[${obj.classdate}]],[[${obj.classlevel}]], [[${obj.classstart}]], [[${obj.classend}]])">
+              리뷰작성
             </button>
-            <button class="btn btn-sm btn-danger"
-                            style="height: 30px; width: 90px; margin-top: 5px;">신청취소</button>
-          </div>
-        </td>
-        <td class="center">
-          <img
-            th:src="@{/member/image.do(classcode=${obj.classcode})}"
-            style="width: 100px; height: 100px"
-          />
-        </td>
-        <td style="font-size: small">
-         <div class="mb-2"><a th:text=" '<'+${obj.title}+'>'" class="a_underline" href="#"></div>
-          </a>
-          <div id="classdate1" th:text=" '날짜: ' + ${obj.classdate}"></div>
-          <div
-            th:text=" '시간: ' + ${obj.classstart} + '~' + ${obj.classend}"
-          ></div>
-          <div th:text=" '난이도: ' + ${obj.classlevel}"></div>
-          <div th:text=" '금액(1인): ' + ${obj.price}+'원'"></div>
-          <div th:text=" '신청인원: ' + ${obj.person}+'명'"></div>
-        </td>
-        <td
-          th:text="${obj.price}+'원'"
-          style="font-weight: bold"
-          class="center"
-        >
-          25,000원
-        </td>
-        <td class="center">
-          <p style="text-align: center">신청완료</p>
-          <button
-            class="btn btn-sm btn-secondary"
-            type="button"
-            style="height: 30px; width: 90px"
-            onclick="modalAction('2','도자기 슥','6월1일','15:00','입문자','10000원','2명')"
-          >
-            리뷰작성>
-          </button>
-        </td>
-      </tr> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-      <!-- 처리상태별 예시 -->
-      <!-- <tr>
-                <td class="center">
-                    <p>2023-05-22</p>
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                        <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px;">상세보기
-                            ></button>
-                        <button class="btn btn-sm btn-danger"
-                            style="height: 30px; width: 90px; margin-top: 5px;">신청취소</button>
-                    </div>
-                </td>
-                <td class="center">
-                    <img src="https://cdnimage.ebn.co.kr/news/202003/news_1583367095_1024915_main1.jpg"
-                        style="width: 100px; height: 100px;">
-
-                </td>
-                <td style="font-size: small;">
-                    <a href="#">
-                        <p style="margin-top: 10px;">서핑 여름 특강</p>
-                    </a> 
-                    <div>일자 : 2023-06-01</div>
-                    <div>시간 : 15:00 ~ 21:00</div>
-                    <div>난이도 : 입문자</div>
-                    <div >1인기준 금액 : 25000</div>
-                    <div >신청인원 : 1명</div>
-                </td>
-                <td style="font-weight: bold;" class="center">55,000원</td>
-                <td class="center">
-                    <p style="text-align: center;">참여완료</p>
-                    <button class="btn btn-sm btn-secondary" type="button" style="height: 30px; width: 90px;"
-                     onclick="modalAction('2','도자기 슥','6월1일','15:00','입문자','10000원','2명')">리뷰작성></button>
-                </td>
-            </tr>
-            <tr>
-                <td class="center">
-                    <p>2023-05-20</p>
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                        <button class="btn btn-sm btn-outline-success" style="height: 30px; width: 90px;">상세보기
-                            ></button>
-                        <button class="btn btn-sm btn-danger disabled"
-                            style="height: 30px; width: 90px; margin-top: 5px;">신청취소</button>
-                    </div>
-                </td>
-                <td class="center">
-                    <img src="https://cdnimage.ebn.co.kr/news/202003/news_1583367095_1024915_main1.jpg"
-                        style="width: 100px; height: 100px;">
-                </td>
-                <td style="font-size: small;">
-                    <a href="#">
-                        <p style="margin-top: 10px;">유화 원데이클래스</p>
-                    </a>
-                    <div>일자 : 2023-06-01</div>
-                    <div>시간 : 15:00 ~ 21:00</div>
-                    <div>난이도 : 입문자</div>
-                    <div>1인기준 금액 : 25000</div>
-                    <div>신청인원 : 1명</div>
-                </td>
-                <td style="font-weight: bold;" class="center">155,000원</td>
-                <td class="center">
-                    <p style="text-align: center;">신청취소</p>
-                    <button class="btn btn-sm btn-secondary disabled" style="height: 30px; width: 90px;">리뷰작성 ></button>
-                </td>
-            </tr> -->
-
-      <!-- 클래스 신청내역이 없을 경우-->
-      <!-- <h7>클래스 신청내역이 존재하지 않습니다.</h7>
-                <button>클래스 조회 화면으로 가는 버튼</button> -->
-    </tbody>
-  </table>
-
-  <div class="row justify-content-center">
-    <div class="col-4">
-      <ul id="pagination-demo" class="pagination-sm "></ul>
+    <div class="row justify-content-center">
+      <div class="col-6 d-flex justify-content-center">
+        <ul id="pagination-demo" class="pagination-sm"></ul>
+      </div>
     </div>
-  </div>
+  </th:block>
 
   <!-- 리뷰 모달 -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    data-bs-backdrop="static">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header" style="background-color: #008000; height: 50px">
+        <div class="modal-header" style="background-color: #008000;">
+          <div class="me-auto"></div>
+          <h4 class="text-white align-middle">리뷰 작성</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form th:action="@{/review/insert.do}" id="myform" method="post" enctype="multipart/form-data">
@@ -252,7 +172,7 @@
             <div class="container-fluid">
               <div class="row d-flex flex-nowrap" style="height: 110px">
                 <div class="row col-md-6 mx-3" style="border: 1px solid #d3d3d3">
-                  <img class="mt-2" name="mainimage" id="mainimage1" th:src="@{/member/image(classcode=0)}" style="
+                  <img class="mt-2" id="mainimage1" style="
                       width: 110px;
                       height: 90px;
                       position: relative;
@@ -262,22 +182,21 @@
                   <!-- 클래스 간략한 정보 -->
                   <div class="reviewcontent col-8 mt-2" style="height: 90px; position: relative; left: -15px">
                     <div class="summary d-flex-nowrap">
-                      <input id="title" type="text" style="width: 250px;" />
+                      제목 : <span id="title"></span>
                     </div>
                     <div class="summary">
-                      날짜: <input id="classdate" type="text" />
+                      날짜: <span id="classdate"></span>
                     </div>
                     <div class="summary">
-                      시간: <input id="classstart" type="text" />
+                      시간: <span id="classstart"></span> ~ <span id="classend"></span>
                     </div>
                     <div class="summary">
-                      난이도: <input id="classlevel" type="text" />
+                      난이도: <span id="classlevel"></span>
                     </div>
                     <div class="summary">
-                      가격: <input id="price" type="text" />
+                      가격: <span id="price"></span>
                     </div>
-                    <!-- <div class="summary">인원: <input  id="cnt" type="text"></div> -->
-                    <input class="summary" id="no" name="apply.no" type="hidden" />
+                    <input class="summary d-none" id="no" name="no" type="block" />
                   </div>
                 </div>
 
@@ -317,28 +236,28 @@
                         border: 1px dashed gray;
                         width: 160px;
                         height: 150px;
-                      " src="" onclick="preview1(this)" />
+                      " th:src="@{/image/default.png}" onclick="preview1(this)" />
                   </div>
                   <div>
                     <img for="file1" id="insert_reviewimage2" class="d-sm-inline-flex mx-2 mt-2" style="
                         border: 1px dashed gray;
                         width: 160px;
                         height: 150px;
-                      " src="" onclick="preview2()" />
+                      " th:src="@{/image/default.png}" onclick="preview2()" />
                   </div>
                   <div>
                     <img for="file1" id="insert_reviewimage3" class="d-sm-inline-flex mx-2 mt-2" style="
                         border: 1px dashed gray;
                         width: 160px;
                         height: 150px;
-                      " src="" onclick="preview3()" />
+                      " th:src="@{/image/default.png}" onclick="preview3()" />
                   </div>
                   <div>
                     <img for="file1" id="insert_reviewimage4" class="d-sm-inline-flex mx-2 mt-2" style="
                         border: 1px dashed gray;
                         width: 160px;
-                        height: 150px;
-                      " src="" onclick="preview4()" />
+                        height: 150px; 
+                      " th:src="@{/image/default.png}" onclick="preview4()" />
                   </div>
                 </div>
               </div>
@@ -351,154 +270,152 @@
                     height: 70px;
                     font-size: larger;
                     font-weight: bold;
-                    color: white;
-                  " onclick="getEditorContent()" />
+                    color: white;" onclick="getEditorContent();" />
               </div>
             </div>
           </div>
-          <input type="hidden" name="pages" th:value="${pages}" />
         </form>
-        <!-- 스크립트 -->
-        <script th:src="@{/js/quill.js}"></script>
-        <script th:src="@{/js/review/review.js}"></script>
-        <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
-
-        <!-- 신청페이지 조회 -->
-        <script th:inline="javascript">
-          $(function () {
-            async function ajaxBoardList(page) {
-              const url = '/specialday/api/member/selectlist.json?page=' + page;
-              const headers = { "Content-Type": "application/json" };
-              const { data } = await axios.get(url, { headers });
-
-              console.log(data);
-
-              //2.함수를 pages정보를 넘겨서 생성시킴
-              initPagination(data.pages);
-
-              const tbody = document.getElementById('tbody');
-              tbody.innerHTML = '';
-
-              for (let tmp of data.list) {
-                function getyear() {
-                  var applyregdate = tmp.applyregdate;
-                  var result = applyregdate.substring(0, 10)
-                  return result;
-                }
-
-                const chk = tmp.chk;
-                const level = tmp.classlevel;
-                let str = "";
-                let str1 = "";
-
-                function chkchk() {
-                  if (chk == 1) {
-                    str = "신청완료";
-                    // addclassname()
-                  }
-                  else if (chk == 2) {
-                    str = "신청취소";
-                  }
-                  else if (chk == 2) {
-                    str = "참여완료";
-                  }
-                  return str;
-                }
-
-                function levelchk() {
-                  if (level === 1) {
-                    str1 = "입문자";
-                  }
-                  else if (level === 2) {
-                    str1 = "경험자";
-                  }
-                  else if (level === 3) {
-                    str1 = "숙련자";
-                  }
-                  return str1;
-                }
-
-
-
-                tbody.innerHTML +=
-                  `<tr>` +
-                  `<td class="center">` +
-                  `<p>` + getyear() + `</p>` +
-                  ` <div
-            style="display: flex; flex-direction: column; align-items: center"
-          >
-            <button
-              class="btn btn-sm btn-outline-success"
-              style="height: 30px; width: 90px"
-            >
-              상세보기 >
-            </button>
-          </div>
-        </td>
-        <td class="center"> 
-          <img src="/specialday/member/image?classcode=` + tmp.classcode + `" style="width: 100px; height: 100px"/>
-        </td> 
-        <td style="font-size: small">
-         <div class="mb-2">
-          <a class="a_underline" href="#">` + "<" + tmp.title + ">" + `</a>
-            </div>
-
-            <div id="classdate1">` + "날짜:" + tmp.classdate + `</div>
-            <div >` + "시간:" + tmp.classstart + "~" + tmp.classend + `</div>
-            <div >` + "난이도:" + levelchk() + `</div>
-            <div >` + "금액(1인):" + tmp.price + "원" + `</div>
-            <div >` + "신청인원:" + tmp.person + "명" + `</div>
-        </td>
-        <td style="font-weight: bold" class="center">` + tmp.totalprice + "원" + `</td>
-        <td class="center">
-          <p style="text-align: center">`+ chkchk() + `</p>
-          <button
-            class="btn btn-sm btn-secondary" 
-            id ="button"
-            type="button"
-            style="height: 30px; width: 90px"
-            onclick="modalAction(`+ tmp.no + "," + tmp.classcode + "," + tmp.price + ",\'" + tmp.title + "\'" + ",\'" + tmp.classdate
-                  + "\'" + ",\'" + tmp.classlevel + "\'" + ",\'" + tmp.classstart + "\'" + ",\'" + tmp.classend + "\'" + `)"> 리뷰작성
-          </button >
-        </td >
-                    </tr >`;
-              }
-            };
-            ajaxBoardList(1)
-
-            //<!-- 페이지네이션 -->     
-            function initPagination(pages) {
-              $('#pagination-demo').twbsPagination('destroy');
-              var totalpages = $("input[name=pages]").val();
-              let query = window.location.search;
-              let param = new URLSearchParams(query);
-              let startpage = param.get("page");
-              $("#pagination-demo").twbsPagination({
-                totalPages: totalpages,
-                visiblePages: 5,
-                startPage: startpage,
-                first: "≪",
-                last: "≫",
-                prev: "<",
-                next: ">",
-
-                initiateStartPageClick: false,
-                nextClass: "page-item next",	// 이전 페이지 CSS class
-                prevClass: "page-item prev",	// 다음 페이지 CSS class
-                lastClass: "page-item last",	// 마지막 페이지 CSS calss
-                firstClass: "page-item first",	// 첫 페이지 CSS class
-                pageClass: "page-item",	// 페이지 버튼의 CSS class
-                activeClass: "active",	// 클릭된 페이지 버튼의 CSS class
-                disabledClass: "disabled",	// 클릭 안된 페이지 버튼의 CSS class
-                anchorClass: "page-link",	//버튼 안의 앵커에 대한 CSS class
-                onPageClick: function (event, page) {
-                  ajaxBoardList(page);
-                },
-              });
-            }
-          }); 
-        </script>
       </div>
     </div>
   </div>
+
+  <!-- 신청 내역 상세 보기 Modal -->
+  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class=" col d-inline">
+            <img class="logo1" th:src="@{/image/logo.svg}" />
+          </div>
+          <h1 class="title mt-4" id="exampleModalLabel">주문 상세</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row d-flex " style="height: auto;">
+              <form th:action="@{/apply/cancel.do}" id="form1" method="POST">
+                <input class="date mt-1" id="applyregdate1" disabled />
+                <div class="hr1"></div>
+                <img class="mainimage1 mt-3 mx-3" name="mainimage" id="mainimage2" />
+                <div class="reviewcontent1 col-9 mt-3 "
+                  style="height: 90px; position: relative; left: 110px; top: -110px;">
+                  <div class="summary1 mx-1" style="width: 300px;">
+                    <input id="title1" type="text" disabled style="width: 280px;" />
+                  </div>
+                  <div class="summary1 mx-2 mt-1">
+                    날짜: <input id="classdate2" disabled type="text" />
+                  </div>
+                  <div class="summary1 mx-2 mt-1">
+                    시간: <input id="classstart1" disabled type="text" />
+                  </div>
+                  <div class="summary1 mx-2 mt-1">
+                    난이도: <input id="classlevel1" disabled type="text" />
+                  </div>
+                  <div class="summary1 mx-2 mt-1">
+                    가격: <input id="price1" disabled type="text" />
+                  </div>
+                </div>
+                <div class="hr2 mt-4"></div>
+                <div class="detail">결제정보</div>
+                <div class="detail-1 mx-2 mt-1">
+                  결제날짜 : <input class="detail-3" id="applyregdate2" disabled type="text" />
+                </div>
+                <div class="detail-1 mx-2 mt-2">
+                  클래스금액(1인) : <input class="detail-3" id="price2" disabled type="text" />
+                </div>
+                <div class="detail-1 mx-2 mt-2">
+                  신청인원 : <input class="detail-3" id="person1" name="person" disabled type="text" />
+                </div>
+                <div class="detail-1 mx-2 mt-2">
+                  총결제 : <input class="detail-3" id="payment1" disabled type="text" />
+                </div>
+                <div class="detail-1 mx-2 mt-2">
+                  처리상태 : <input class="chk detail-3" disabled id="chk1" /></div>
+                <div class="hr3 mt-2 mb-2"></div>
+
+                <div id="cancle">
+                  <div class="detail mt-4">결제취소정보</div>
+                  <div class="detail-1 mx-2 mt-1">
+                    취소일자 : <input class="detail-3" id="cancledate1" disabled type="text" />
+                  </div>
+                  <div class="detail-1 mx-2 mt-1">
+                    클래스금액(1인) : <input class="detail-3" id="price3" disabled type="text" />
+                  </div>
+                  <div class="detail-1 mx-2 mt-2">
+                    신청인원 : <input class="detail-3" id="person2" disabled type="text" />
+                  </div>
+                  <div class="detail-1 mx-2 mt-2">
+                    환불금액 : <input class="detail-3" id="payment2" disabled type="text" style="color: red;" />
+                  </div>
+                  <div class="hr3"></div>
+                </div>
+
+                <button id="applycancelbtn" class="chkbtn btn btn-sm btn-danger float-end" type="button"
+                  style="height: 30px; width: 90px; display:none;" onclick="cancelAction()">신청취소</button>
+
+                <input type="hidden" id="no1" name="no">
+                <input type="hidden" id="classcode1" name="classcode">
+                <input type="hidden" id="unitno1" name="unitno">
+                <input type="hidden" id="person3" name="person">
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 스크립트 -->
+  <script th:src="@{/js/quill.js}"></script>
+  <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
+  <script th:src="@{/js/member/mypage_apply.js}"></script>
+
+  <!-- 신청페이지 조회 -->
+  <script th:inline="javascript">
+
+    var pages = /*[[${pages}]]*/'';
+    var chk = /*[[${param.chk}]]*/'';
+
+    function selectoption(chk) {
+      
+      //console.log(chk);
+
+      if(chk === 0) {
+        window.location.href = "mypage.do?menu=1&page=1";
+      }
+      else {
+        window.location.href = `mypage.do?menu=1&page=1&chk=${chk}`;
+      }
+      
+    }
+
+    $(document).ready(function () {
+      $('#pagination-demo').twbsPagination({
+        totalPages: Number(pages),
+        visiblePages: 10,
+        first: '처음',
+        last: '마지막',
+        prev: '이전',
+        next: '다음',
+        initiateStartPageClick: false,
+        startPage: Number(/*[[${param.page}]]*/),
+
+        // 주소창에서 page 값을 받아옴 -> 그 값에 해당하는 목록 버튼이 활성
+
+        onPageClick: function (event, page) {
+          
+          if(chk === null) {
+            window.location.href = `mypage.do?menu=1&page=${page}`;
+          }
+          else {
+            window.location.href = `mypage.do?menu=1&page=${page}&chk=${chk}`;
+          }
+          
+          
+        }
+      });
+    });
+
+  </script>
 </div>

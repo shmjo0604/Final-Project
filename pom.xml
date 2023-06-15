@@ -16,6 +16,10 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
+
+	<!-- 서버 배포용 war -->
+	<packaging>war</packaging>
+	
 	<dependencies>
 
 		<dependency>
