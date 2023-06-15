@@ -25,6 +25,22 @@
     <!--thymeleaf contextpath-->
     <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}" />
     <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        #wrapper {
+            min-height: 100%;
+            position: relative;
+            /* padding-bottom: 60px; */
+        }
+
+        footer {
+            position: relative;
+            /* transform: translateY(-30%); */
+        }
+
         .container {
             padding-top: 100px;
         }
@@ -49,47 +65,48 @@
     <header th:replace="~{header :: headerFragment}"></header>
 
 
-    <div class="container" role="main">
+    <div id="wrapper" class="container" role="main">
         <form name="form" id="form" th:action="@{/community/update.do}" method="post">
             <h3>커뮤니티 게시글 수정</h3>
-                <input type="number" name="no" th:value="${community.no}" />   
-                <div class="mb-3">
-                    <label for="reg-id">글분류</label>
-                    <select class="form-select" aria-label="Default select example" th:value="${community.cate}" name="cate" id="cate">
-                        <option selected th:text="${community.cate}" ></option>
-                        <option value="궁금해요">궁금해요</option>
-                        <option value="함께해요">함께해요</option>
-                        <option value="추천해요">추천해요</option>
-                        <option value="양도해요">양도해요</option>
-                    </select>
+            <input type="number" name="no" th:value="${community.no}" />
+            <div class="mb-3">
+                <label for="reg-id">글분류</label>
+                <select class="form-select" aria-label="Default select example" th:value="${community.cate}" name="cate"
+                    id="cate">
+                    <option selected th:text="${community.cate}"></option>
+                    <option value="궁금해요">궁금해요</option>
+                    <option value="함께해요">함께해요</option>
+                    <option value="추천해요">추천해요</option>
+                    <option value="양도해요">양도해요</option>
+                </select>
+            </div>
+
+            <!--제목-->
+            <div class="mb-3">
+                <label for="title" class="form-label">제목</label>
+                <input type="text" class="form-control" id="title" name="title" th:value="${community.title}">
+            </div>
+
+            <!--내용-->
+
+            <div style="margin-top: 15px; background-color: white;border: 1px solid #DEE2E6;border-radius: 10px;">
+                <div ontenteditable="true" id="editor" style="height: 300px;">
+                    <div th:utext="${community.content}"></div>
                 </div>
-
-                <!--제목-->
-                <div class="mb-3">
-                    <label for="title" class="form-label" >제목</label>
-                    <input type="text" class="form-control" id="title" name="title" th:value="${community.title}">
-                </div>
-
-                <!--내용-->
-              
-                <div style="margin-top: 15px; background-color: white;border: 1px solid #DEE2E6;border-radius: 10px;">
-                    <div ontenteditable="true" id="editor" style="height: 300px;">
-                        <div th:utext="${community.content}"></div>
-                    </div>
-                </div>
-                <textarea name="content" id="content" style="display: none;"></textarea>
+            </div>
+            <textarea name="content" id="content" style="display: none;"></textarea>
 
 
-                <!--버튼-->
-                <div class="mt-4 mb-0">
-                    <input type="button" class="btn btn-sm btn-primary" onclick="updateAction()" value="업로드"></input>
-                    <a th:href="@{./selectlist.do}" class="btn btn-sm btn-outline-primary float-right">목록으로</a>
-                </div>   
+            <!--버튼-->
+            <div class="mt-4 mb-0">
+                <input type="button" class="btn btn-sm btn-primary" onclick="updateAction()" value="업로드"></input>
+                <a th:href="@{./selectlist.do}" class="btn btn-sm btn-outline-primary float-right">목록으로</a>
+            </div>
         </form>
     </div>
 
-
-
+    <!--footer 영역-->
+    <footer th:replace="~{footer :: footerFragment}"></footer>
 
     <!--jQuery-->
     <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
