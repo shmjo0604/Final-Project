@@ -8,7 +8,7 @@
         INSERT INTO classproduct( title, postcode, address1, address2, address3, price, instructor, intro, curriculum, 
         localcode, actdetailcode, nickname, memberid, latitude, longitude )
         VALUES ( #{title}, #{postcode}, #{address1}, #{address2}, #{address3}, #{price}, #{instructor}, #{intro}, #{curriculum}, 
-        #{localcode}, #{actdetailcode}, #{nickname}, #{memberid}, #{latitude}, #{longitude} )
+        #{localcode}, #{actdetailcode}, #{nickname}, #{memberid}, #{latitude}, #{longitude}, #{sns} )
     </insert>
 
     <!-- 2. 지역 상위 분류 조회 -->
