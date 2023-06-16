@@ -34,6 +34,7 @@
                 </thead>
 
                 <tbody id="emp_rows">
+                    <!-- 문의 내역없음 표시하기 -->
                     <th:block th:if="${}"></th:block>
                     <!-- 처리상태(0) : 답변대기 -->
                     <th:block th:each="obj, objStat : ${list}">
