@@ -173,45 +173,44 @@
                     <div class="form-group flex-container" style="display: inline-block;">
                         <div class="row vertical-line">
                             <div class="col-md-6">
-                                <label style="font-size: small; margin-top: 10px; margin-bottom: 20px; font-weight: bold;">( * )은 필수 입력사항입니다.</label><br />
                                 <input type="hidden" class="form-control" id="classcode" th:value="${classcode}"
                                     name="classcode">
 
                                 <div class="row" style=" margin-bottom: 10px;">
                                     <div class="col-sm-3" style="width: 100%;">
-                                        <label for="classdate" class="col-form-label">* 날짜</label>
-                                        <input class="form-control datepicker date" id="classdate" name="classdate" placeholder="클래스를 진행할 날짜를 입력하세요">
+                                        <label for="classdate" class="col-form-label">날짜<h7 style="display:inline; color: #FF8E8E">(필수)</h6></label>
+                                        <input class="form-control datepicker date" id="classdate" name="classdate" placeholder="클래스 진행 날짜를 입력하세요.">
                                     </div>
                                     <input type="hidden" name="classday" id="classday">
                                 </div>
 
                                 <div class="row" style="margin-top: 20px;">
                                     <div class="col-sm-3" style="width: 50%;">
-                                        <label for="classstart" class="col-form-label">* 시작 시각</label>
+                                        <label for="classstart" class="col-form-label">시작 시각<h7 style="display:inline; color: #FF8E8E">(필수)</h6></label>
                                         <input type="time" class="form-control" id="classstart" name="classstart">
                                     </div>
                                     <div class="col-sm-3" style="width: 50%;">
-                                        <label for="classend" class="col-form-label">* 종료 시각</label>
+                                        <label for="classend" class="col-form-label">종료 시각<h7 style="display:inline; color: #FF8E8E">(필수)</h6></label>
                                         <input type="time" class="form-control" id="classend" name="classend">
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-top: 20px;">
                                     <div class="col-sm-3" style="width: 50%;">
-                                        <label for="minimum" class="col-form-label">* 최소인원</label>
-                                        <input type="number" class="form-control" id="minimum" name="minimum" placeholder="최소인원을 입력하세요">
+                                        <label for="minimum" class="col-form-label">최소인원<h7 style="display:inline; color: #FF8E8E">(필수)</h6></label>
+                                        <input type="number" class="form-control" id="minimum" name="minimum" placeholder="최소인원을 입력하세요.">
                                     </div>
                                     <div class="col-sm-3" style="width: 50%;">
-                                        <label for="maximum" class="col-form-label">* 최대인원</label>
-                                        <input type="number" class="form-control" id="maximum" name="maximum" placeholder="최대인원을 입력하세요">
+                                        <label for="maximum" class="col-form-label">최대인원<h7 style="display:inline; color: #FF8E8E">(필수)</h6></label>
+                                        <input type="number" class="form-control" id="maximum" name="maximum" placeholder="최대인원을 입력하세요.">
                                     </div>
                                 </div>        
                             </div>
                             <div class="col-md-6">
                                 <div class="col">
                                     <label
-                                        style="font-size: small; margin-top: 10px; margin-bottom: 10px; font-weight: bold; color: rgb(221, 52, 52);">
-                                        클래스 난이도와 수강금액에 변동이있을 시 작성해주세요.</label><br />
+                                        style="font-size: small; margin-top: 10px; margin-bottom: 10px; background-color: antiquewhite;">
+                                        클래스 난이도 변경 시 추가금액을 설정할 수 있습니다.</label><br />
                                     <div class="form-check form-check-inline" style="margin-top: 10px;">
                                         <input type="radio" class="form-check-input radio-value level-value-detail"
                                             id="classlevel1" name="classlevel" value="1" checked>
@@ -236,14 +235,14 @@
                                 <div style="width: 100%;">
                                     <label for="addprice" class="col-form-label">추가 금액</label>
                                     <input type="number" class="form-control" id="addprice" name="addprice" value=""
-                                        disabled oninput="calculateDiscount()" style="width: 50%;" placeholder="난이도 변경시 입력 가능">
+                                        disabled oninput="calculateDiscount()" style="width: 50%;" placeholder="0원">
                                 </div>
                                 <div style="width: 50%;">
                                     <input type="checkbox" class="form-check-input" id="discount-chk"
                                         name="discount-chk" onchange="toggleDiscountInput()" style="margin-top: 10px;">
                                     <label for="discount" class="col-form-label" style="margin-left: 5px;">할인 비율
                                         설정(%)</label>
-                                    <input type="number" class="form-control" id="discount" name="discount" value=""
+                                    <input type="number" class="form-control" id="discount" name="discount" value="" placeholder="0%"
                                         disabled oninput="calculateDiscount(); discountedPrice();">
                                 </div>
                                 <div style="width: 50%;">
