@@ -15,7 +15,7 @@
  -   Thymeleaf Ajax
  -    Restful
  -     Spring Security
- -     
+
 - API : 결제, 맵, 이메일
 - 프론트 : html5-css-javascript
 - 협업툴 : Notion, Figma, Github
