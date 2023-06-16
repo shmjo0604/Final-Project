@@ -10,7 +10,7 @@
 - 언어 : JAVA
 - 데이터베이스 : H2 Oracle, Redis
 - 프레임워크 : Spring Boot
-      -- jpa
+ - jpa
       -- Mybatis
       -- Thymeleaf Ajax
       -- Restful
