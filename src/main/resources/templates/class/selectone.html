@@ -1020,14 +1020,15 @@
                     var card_text2 = document.createElement('p');
                     card_text2.className = "card-text card-regdate";
                     var reviewdate = new Date(obj.regdate)
-                    // var day = ['일','월','화','수','목','금','토','일']
-                    // var reviewDateFormat = reviewdate.getFullYear() + "년"
-                    //  + (reviewdate.getMonth()+1)+ "월" + reviewdate.getDate() + "일" + day[reviewdate.getDay()]+ '요일'
+                    var day = ['일', '월', '화', '수', '목', '금', '토', '일']
+                    var reviewDateFormat = reviewdate.getFullYear() + "년"
+                        + (reviewdate.getMonth() + 1) + "월" + reviewdate.getDate() + "일" + day[reviewdate.getDay()] + '요일'
                     card_text2.textContent = reviewdate;
 
                     var card_text3 = document.createElement('button');
                     card_text3.className = "card-button btn btn-success float-end"
                     card_text3.innerHTML = "추천해요!";
+                    // 왜 안되지?
                     // card_text3.value = "추천해요!";
                     // card_text3.type="button";
 
