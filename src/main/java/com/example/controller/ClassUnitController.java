@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.dto.ApplyView;
 import com.example.dto.ClassUnit;
 import com.example.service.apply.ApplyService;
-import com.example.service.classproduct.ClassSelectService;
 import com.example.service.classproduct.ClassUnitService;
 
 import lombok.extern.slf4j.Slf4j;
