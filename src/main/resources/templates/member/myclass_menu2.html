@@ -35,11 +35,15 @@
 
                 <tbody id="emp_rows">
                     <!-- 문의 내역없음 표시하기 -->
-                    <th:block th:if="${obj.rnum}==none">
-                        <input type="text" value=" 문의 내역 없음">
+                    <th:block th:if="${#lists.isEmpty(list)}">
+                        <div style="padding-left: 2rem;">
+                            <h6>문의내역이 존재하지 않습니다.</h6>
+                        </div>
                     </th:block>
+                    
                     <!-- 처리상태(0) : 답변대기 -->
-                    <th:block th:each="obj, objStat : ${list}">
+                    <th:block th:if="${!#lists.isEmpty(list)}">
+                        <th:block th:each="obj, objStat : ${list}">
                         <tr>
                             <td th:text="${obj.rnum}"></td>
                             <td><a th:text="${obj.classtitle}" th:href="@{/class/product.do(classcode=${obj.classcode} )}"
@@ -69,6 +73,7 @@
                                 </th:block>
                             </td>
                         </tr>
+                        </th:block>
                     </th:block>
                 </tbody>
             </table>
