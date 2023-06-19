@@ -35,7 +35,9 @@
 
                 <tbody id="emp_rows">
                     <!-- 문의 내역없음 표시하기 -->
-                    <th:block th:if="${}"></th:block>
+                    <th:block th:if="${obj.rnum}==none">
+                        <input type="text" value=" 문의 내역 없음">
+                    </th:block>
                     <!-- 처리상태(0) : 답변대기 -->
                     <th:block th:each="obj, objStat : ${list}">
                         <tr>
