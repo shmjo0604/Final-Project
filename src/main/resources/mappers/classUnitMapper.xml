@@ -79,4 +79,10 @@
     UPDATE CLASSUNIT SET chk = 2 WHERE no = #{no}
 </update>
 
+<!--(11) ClassUnit 신청 인원 존재 유무 확인 (by memberid)-->
+
+<select id="selectUnitViewCntCheck" parameterType="string" resultType="int">
+    SELECT SUM(u.cnt) FROM unitview u WHERE u.memberid = #{memberid} AND u.unitchk = 1
+</select>
+
 </mapper>

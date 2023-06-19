@@ -52,4 +52,7 @@ public interface ClassUnitMapper {
 	/* (10) ClassUnit 완료 상태 변경(chk -> 2) */
 	public int updateClassUnitComplete(long no);
 
+	/* (11) ClassUnit 신청 인원 존재 유무 확인 (by memberid) */
+	public int selectUnitViewCntCheck(String memberid);
+
 }

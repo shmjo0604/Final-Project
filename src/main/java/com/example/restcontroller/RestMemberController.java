@@ -28,6 +28,7 @@ import com.example.dto.Member;
 import com.example.service.MailService;
 import com.example.service.RedisUtil;
 import com.example.service.apply.ApplyService;
+import com.example.service.classproduct.ClassUnitService;
 import com.example.service.member.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +46,9 @@ public class RestMemberController {
     RedisUtil redisUtil;
     @Autowired
     ApplyService aService;
+    @Autowired
+    ClassUnitService unitService;
+
     BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 
     final String format = "RestMemberController => {}";
@@ -128,12 +132,12 @@ public class RestMemberController {
 
         Map<String, Object> retMap = new HashMap<>();
 
-        //log.info(format, obj.getPassword());
+        // log.info(format, obj.getPassword());
 
         try {
             Member member = mService.selectMemberOne(obj.getId());
 
-            //log.info(format, member.toString());
+            // log.info(format, member.toString());
 
             member.setPassword(bcpe.encode(obj.getPassword()));
 
@@ -153,7 +157,7 @@ public class RestMemberController {
 
         Map<String, Object> retMap = new HashMap<>();
 
-        //log.info(format, obj.getPassword());
+        // log.info(format, obj.getPassword());
 
         Member ret = mService.selectMemberOne(obj.getId());
 
@@ -172,7 +176,7 @@ public class RestMemberController {
 
         Map<String, Object> retMap = new HashMap<>();
 
-        //log.info(format, obj.toString());
+        // log.info(format, obj.toString());
 
         int ret = mService.updateMemberOne(obj);
 
@@ -218,24 +222,46 @@ public class RestMemberController {
 
         Map<String, Object> retMap = new HashMap<>();
 
+        // 1. 비밀번호 일치 여부 확인
+
         Member member = mService.selectMemberOne(obj.getId());
 
         if (bcpe.matches(obj.getPassword(), member.getPassword())) {
 
-            int ret = mService.deleteMemberOne(obj);
+            // 2. 등록된 ClassUnit 신청 이력 확인 ( cnt > 0이면, 탈퇴 불가 )
 
-            if (ret == 1) {
+            int cntCheck = unitService.selectUnitViewCntCheck(obj.getId());
 
-                retMap.put("status", 200);
+            log.info(format, cntCheck);
+
+            if (cntCheck > 0) {
+
+                retMap.put("status", -1);
+                retMap.put("errormessage", "신청 내역이 존재하는 클래스 일정이 있습니다. 탈퇴가 불가능합니다.");
 
             }
 
-            else {
-                retMap.put("status", 0);
+            else if (cntCheck == 0) {
+
+                // 3. 회원 탈퇴 처리
+                int ret = mService.deleteMemberOne(obj);
+
+                if (ret == 1) {
+
+                    retMap.put("status", 200);
+
+                } else {
+
+                    retMap.put("status", 0);
+
+                }
             }
 
         } else {
+
             retMap.put("status", -1);
+            retMap.put("errormessage", "비밀번호가 일치하지 않습니다.");
+
         }
 
         return retMap;
@@ -291,7 +317,7 @@ public class RestMemberController {
         Map<String, Object> map = new HashMap<>();
 
         List<ApplyStatusView> list = new ArrayList<>();
-        
+
         String id = user.getUsername();
 
         map.put("id", id);

@@ -174,5 +174,16 @@ public class ClassUnitServiceImpl implements ClassUnitService {
             return -1;
         }
     }
+
+    @Override
+    public int selectUnitViewCntCheck(String memberid) {
+        try {
+            return cMapper.selectUnitViewCntCheck(memberid);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
     
 }

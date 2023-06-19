@@ -91,6 +91,10 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public int deleteMemberOne(Member obj) {
         try {
+
+            // 1. 클래스가 있다면, 등록된 클래스를 모두 삭제(update)
+            // 2. 게시글 삭제(delete)
+
             return mMapper.deleteMemberOne(obj);
         }
         catch(Exception e) {

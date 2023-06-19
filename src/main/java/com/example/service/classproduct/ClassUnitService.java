@@ -44,4 +44,7 @@ public interface ClassUnitService {
 	/* (9) ClassUnit 전체 개수 (by classcode) */
 	public long selectUnitListCountByClasscode(long classcode);
 
+	/* (10) ClassUnit 신청 인원 존재 유무 확인 (by memberid) */
+	public int selectUnitViewCntCheck(String memberid);
+
 }
