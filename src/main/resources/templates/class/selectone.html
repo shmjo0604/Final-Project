@@ -867,7 +867,7 @@
             console.log(data);
 
             const box = document.querySelector("#review_box");
-
+            $('#review_box').empty();
             // box.innerHTML = "";
 
             if (data.status === 200) {
@@ -1078,11 +1078,7 @@
 
             }
 
-
-
         }
-
-
 
         selectReviewList(1);
 
@@ -1097,10 +1093,10 @@
             if(data.ret === 1){
                 selectReviewList(1);
             }
-            console.log(data);
-            console.log(no);
-            console.log(classcode);
-            console.log('오케이');
+            // console.log(data);
+            // console.log(no);
+            // console.log(classcode);
+            // console.log('오케이');
         }
 
         /*]]>*/
