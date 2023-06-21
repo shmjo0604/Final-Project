@@ -1014,16 +1014,16 @@
                     card_title.textContent = obj.id;
 
                     var card_text1 = document.createElement('div');
-                    card_text1.className = "card-text ";
+                    card_text1.className = "card-text mt-3 ";
                     card_text1.innerHTML = obj.content;
 
                     var card_text2 = document.createElement('p');
                     card_text2.className = "card-text card-regdate";
                     var reviewdate = new Date(obj.regdate)
                     var day = ['일', '월', '화', '수', '목', '금', '토', '일']
-                    var reviewDateFormat = reviewdate.getFullYear() + "년"
-                        + (reviewdate.getMonth() + 1) + "월" + reviewdate.getDate() + "일" + day[reviewdate.getDay()] + '요일'
-                    card_text2.textContent = reviewdate;
+                    var reviewDateFormat = reviewdate.getFullYear() + "년 "
+                        + (reviewdate.getMonth() + 1) + "월" + reviewdate.getDate() + "일"+ "\u00A0" +'('+day[reviewdate.getDay()] + '요일)'
+                    card_text2.textContent = reviewDateFormat;
 
                     var card_text3 = document.createElement('button');
                     card_text3.className = "card-button btn btn-success float-end"
