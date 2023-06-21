@@ -35,11 +35,11 @@ public class RestVerifyController {
     @PostMapping(value = "/api/verifyiamport.json")
     public IamportResponse<Payment> paymentyByImUid(@RequestBody ImpVerify obj) throws IamportResponseException, IOException {
 
-        log.info(format, apikey);
-        log.info(format, apisecret);
-        log.info(format, obj.getImp_uid());
+        //log.info(format, apikey);
+        //log.info(format, apisecret);
+        //log.info(format, obj.getImp_uid());
 
-        log.info(format, "paymentByImpUid 진입");
+        //log.info(format, "paymentByImpUid 진입");
 
         return iamportClient.paymentByImpUid(obj.getImp_uid());
 

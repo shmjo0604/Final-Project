@@ -228,11 +228,13 @@ public class RestMemberController {
 
         if (bcpe.matches(obj.getPassword(), member.getPassword())) {
 
-            // 2. 등록된 ClassUnit 신청 이력 확인 ( cnt > 0이면, 탈퇴 불가 )
-
             int cntCheck = unitService.selectUnitViewCntCheck(obj.getId());
+            long applyCheck = aService.countApplyListOne(obj.getId());
 
             log.info(format, cntCheck);
+            log.info(format, applyCheck);
+
+            // 2. 등록된 ClassUnit 신청 이력 확인 ( cnt > 0이면, 탈퇴 불가 )
 
             if (cntCheck > 0) {
 
@@ -241,7 +243,15 @@ public class RestMemberController {
 
             }
 
-            else if (cntCheck == 0) {
+            // 3. 결제 내역 확인 ( applychk = 2인 내역이 존재하면, 탈퇴 불가 )
+
+            else if(cntCheck == 0 && applyCheck > 0) {
+
+                retMap.put("status", -1);
+                retMap.put("errormessage", "실시되지 않은 클래스 결제 내역이 존재합니다. 탈퇴가 불가능합니다.");
+            }
+
+            else if(cntCheck == 0 && applyCheck == 0) {
 
                 // 3. 회원 탈퇴 처리
                 int ret = mService.deleteMemberOne(obj);

@@ -45,8 +45,8 @@ public class ApplyController {
         @RequestParam(name = "unitno[]", required = false) List<Long> unitnoList,
         @RequestParam(name = "person[]", required = false) List<Integer> personList) {
 
-        log.info(format, unitnoList);
-        log.info(format, personList);
+        //log.info(format, unitnoList);
+        //log.info(format, personList);
 
         if(unitnoList.isEmpty() || personList.isEmpty()) {
             return "redirect:/class/select.do";
@@ -65,7 +65,7 @@ public class ApplyController {
             list.add(obj);
         }
         
-        log.info(format, list.toString());
+        //log.info(format, list.toString());
         
         // if(obj.getMaximum()-obj.getCnt() < person) {
 
@@ -94,7 +94,7 @@ public class ApplyController {
         @ModelAttribute Apply apply,
         HttpSession httpSession) {
 
-        log.info(format, apply.toString());
+        //log.info(format, apply.toString());
 
         int ret = aService.updateApplyCancel(apply);
 
