@@ -193,6 +193,14 @@
         .card-button:hover {
             background-color: #11d511;
         }
+
+        .card-hit {
+            color: gray;
+            width: 100px;
+            position: relative;
+            left: 120px;
+            bottom: 115px;
+        }
     </style>
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
@@ -1022,12 +1030,21 @@
                     var reviewdate = new Date(obj.regdate)
                     var day = ['일', '월', '화', '수', '목', '금', '토', '일']
                     var reviewDateFormat = reviewdate.getFullYear() + "년 "
-                        + (reviewdate.getMonth() + 1) + "월" + reviewdate.getDate() + "일"+ "\u00A0" +'('+day[reviewdate.getDay()] + '요일)'
+                        + (reviewdate.getMonth() + 1) + "월" + reviewdate.getDate() + "일" + "\u00A0" + '(' + day[reviewdate.getDay()] + '요일)'
                     card_text2.textContent = reviewDateFormat;
 
                     var card_text3 = document.createElement('button');
                     card_text3.className = "card-button btn btn-success float-end"
                     card_text3.innerHTML = "추천해요!";
+                    card_text3.onclick = function () { hitReview(obj.no, obj.classcode) }
+
+                    var card_text4 = document.createElement('p');
+                    card_text4.className = "card-hit float-end";
+                    card_text4.textContent = "조회수: " + obj.hit;
+
+
+                    // 바깥에 만드는 거랑 안에 만드는거랑 먼 차이?
+
                     // 왜 안되지?
                     // card_text3.value = "추천해요!";
                     // card_text3.type="button";
@@ -1036,6 +1053,7 @@
                     card_body.appendChild(card_text1);
                     card_body.appendChild(card_text2);
                     card_body.appendChild(card_text3);
+                    card_body.appendChild(card_text4);
 
                     col2.appendChild(card_body);
 
@@ -1064,7 +1082,26 @@
 
         }
 
+
+
         selectReviewList(1);
+
+        async function hitReview(no, classcode) {
+
+            const url = contextPath + '/api/review/updatehit.json'
+            const headers = { "Content-Type": "application/json" };
+            const body = { no: Number(no) }
+            const { data } = await axios.put(url, body, { headers });
+
+            // window.location.href = "product.do?classcode=" +classcode;
+            if(data.ret === 1){
+                selectReviewList(1);
+            }
+            console.log(data);
+            console.log(no);
+            console.log(classcode);
+            console.log('오케이');
+        }
 
         /*]]>*/
     </script>
