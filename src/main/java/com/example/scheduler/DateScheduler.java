@@ -15,6 +15,7 @@ import com.example.entity.Basket;
 import com.example.mapper.ClassUnitMapper;
 import com.example.repository.BasketRepository;
 import com.example.repository.ClassUnitRepository;
+import com.example.service.basket.BasketService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,6 +28,8 @@ public class DateScheduler {
     @Autowired ClassUnitMapper unitMapper;
     @Autowired BasketRepository basketRepository;
     @Autowired ClassUnitRepository unitRepository;
+
+    @Autowired BasketService basketService;
 
     // 1. ClassUnit 완료 상태 변경 & 해당 상태에 따라 장바구니에서도 해당 ClassUnit 삭제(매일 자정에 실행)
 
@@ -115,9 +118,5 @@ public class DateScheduler {
         }
 
     }
-
-    
-
-
 
 }

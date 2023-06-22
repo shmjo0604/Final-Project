@@ -231,8 +231,8 @@ public class RestMemberController {
             int cntCheck = unitService.selectUnitViewCntCheck(obj.getId());
             long applyCheck = aService.countApplyListOne(obj.getId());
 
-            log.info(format, cntCheck);
-            log.info(format, applyCheck);
+            //log.info(format, cntCheck);
+            //log.info(format, applyCheck);
 
             // 2. 등록된 ClassUnit 신청 이력 확인 ( cnt > 0이면, 탈퇴 불가 )
 
