@@ -49,11 +49,13 @@ public class ClassUnitController {
 
         if(menu == 1) {
             long defaultPrice = cuService.selectPriceOne(classcode);
-            List<ClassUnit> list = cuService.selectUnitListToCal(classcode);
+            List<ClassUnit> list = cuService.selectUnitListToCalendar(classcode);
+            String title = cuService.selectClassProductTitleOne(classcode);
 
             model.addAttribute("classcode", classcode);
             model.addAttribute("defaultPrice", defaultPrice);
             model.addAttribute("list", list);
+            model.addAttribute("title",title);
         }
 
         else if(menu == 2){
