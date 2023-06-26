@@ -75,7 +75,7 @@
                     <tr th:each="obj : ${list}">
                         <td th:text="${obj.no}"></td>
                         <td th:text="${obj.cate}"></td>
-                        <td><a th:href="@{/community/selectone.do(no=${obj.no})}" th:text="${obj.title}"></a></td>
+                        <td><a th:href="@{/community/selectone.do(no=${obj.no})}" th:text="${obj.title}" th:onclick="updatehit([[${obj.no}]])"></a></td>
                         <td th:text="${obj.member.id}"></td>
                         <td th:text="${obj.hit}"></td>
                         <td th:text="${obj.replycnt}"></td>
@@ -136,6 +136,22 @@
     </script>
     <!--Main js-->
     <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/js/axios.min.js}"></script>
+
+    <script>
+        async function updatehit(no){
+
+            const url = contextPath + '/api/community/updatehit.json';
+            const headers = { "Content-Type": "application/json" };
+            const body = { no: no };
+
+            const { data } = await axios.put(url, body, { headers });
+
+            console.log(data);
+         
+            
+        }
+    </script>
 </body>
 
 </html>
