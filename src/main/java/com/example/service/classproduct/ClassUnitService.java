@@ -32,8 +32,8 @@ public interface ClassUnitService {
 	/* (5) ClassUnit 전체 삭제 */
     public int updateUnitAllInactive(long classcode);
 
-	/* (6) ClassUnit 개설 일정 조회 */
-	public List<ClassUnit> selectUnitListToCalendar(long classcode);
+	/* (6) ClassUnit 개설 일정 조회(calendar) */
+	public List<ClassUnit> selectUnitListToCal(long classcode);
 	
 	/* (7) ClassUnitView 하나 조회 */
 	public ClassUnitView selectClassUnitViewOne(long unitno);

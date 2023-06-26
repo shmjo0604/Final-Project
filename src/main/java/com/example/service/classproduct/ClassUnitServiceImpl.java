@@ -143,9 +143,9 @@ public class ClassUnitServiceImpl implements ClassUnitService {
     }
 
     @Override
-    public List<ClassUnit> selectUnitListToCalendar(long classcode) {
+    public List<ClassUnit> selectUnitListToCal(long classcode) {
         try {
-            return cMapper.selectUnitListToCalendar(classcode);
+            return cMapper.selectUnitListToCal(classcode);
         }
         catch(Exception e) {
             e.printStackTrace();
