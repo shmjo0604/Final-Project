@@ -198,7 +198,7 @@
 
                                 <div class="row" style=" margin-bottom: 10px; margin-top: 10px;">
                                     <div class="col-sm-3" style="width: 100%;">
-                                        <label for="classdate" class="col-form-label">날짜<h7 style="display:inline; color: #FF8E8E">(필수)</h6></label>
+                                        <label for="classdate" class="col-form-label">날짜<h6 style="display:inline; color: #FF8E8E">(필수)</h6></label>
                                         <input class="form-control datepicker date" id="classdate" name="classdate" placeholder="클래스 진행 날짜를 입력하세요.">
                                     </div>
                                     <input type="hidden" name="classday" id="classday">
@@ -206,22 +206,22 @@
 
                                 <div class="row" style="margin-top: 20px;">
                                     <div class="col-sm-3" style="width: 50%;">
-                                        <label for="classstart" class="col-form-label">시작 시각<h7 style="display:inline; color: #FF8E8E">(필수)</h6></label>
+                                        <label for="classstart" class="col-form-label">시작 시각<h6 style="display:inline; color: #FF8E8E">(필수)</h6></label>
                                         <input type="time" class="form-control" id="classstart" name="classstart">
                                     </div>
                                     <div class="col-sm-3" style="width: 50%;">
-                                        <label for="classend" class="col-form-label">종료 시각<h7 style="display:inline; color: #FF8E8E">(필수)</h6></label>
+                                        <label for="classend" class="col-form-label">종료 시각<h6 style="display:inline; color: #FF8E8E">(필수)</h6></label>
                                         <input type="time" class="form-control" id="classend" name="classend">
                                     </div>
                                 </div>
 
                                 <div class="row" style="margin-top: 20px;">
                                     <div class="col-sm-3" style="width: 50%;">
-                                        <label for="minimum" class="col-form-label">최소인원<h7 style="display:inline; color: #FF8E8E">(필수)</h6></label>
+                                        <label for="minimum" class="col-form-label">최소인원<h6 style="display:inline; color: #FF8E8E">(필수)</h6></label>
                                         <input type="number" class="form-control" id="minimum" name="minimum" placeholder="최소인원을 입력하세요.">
                                     </div>
                                     <div class="col-sm-3" style="width: 50%;">
-                                        <label for="maximum" class="col-form-label">최대인원<h7 style="display:inline; color: #FF8E8E">(필수)</h6></label>
+                                        <label for="maximum" class="col-form-label">최대인원<h6 style="display:inline; color: #FF8E8E">(필수)</h6></label>
                                         <input type="number" class="form-control" id="maximum" name="maximum" placeholder="최대인원을 입력하세요.">
                                     </div>
                                 </div>        
@@ -230,7 +230,7 @@
                                 <div class="col">
                                     <label
                                         style="font-size: small; margin-top: 10px; margin-bottom: 10px; background-color: antiquewhite; font-family: 'Noto Sans KR', sans-serif; text-decoration-line: underline;">
-                                        <i class="fa-solid fa-user-pen"></i> 클래스 난이도 변경 시에만 추가금액을 설정할 수 있습니다.</label><br />
+                                        <i class="fa-solid fa-user-pen"></i> 경험자 및 숙련자 대상일 경우만 추가금액을 설정할 수 있습니다.</label><br />
                                     <div class="form-check form-check-inline" style="margin-top: 10px;">
                                         <input type="radio" class="form-check-input radio-value level-value-detail"
                                             id="classlevel1" name="classlevel" value="1" checked>
@@ -295,10 +295,10 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">변경할 내용을 입력하세요.</h5>
+                <div class="modal-header" style="background-color: rgb(45, 187, 140); height: 55px;">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-family: 'Noto Sans KR', sans-serif; color: white;"><i class="fa-regular fa-calendar" style="color: white;"></i> 변경할 내용을 입력하세요.</h5>
                     <button type="button" class="close" onclick="cancel()"
-                        style="border: none; background-color: white; font-size: xx-large;">
+                        style="border: none; background-color: rgb(45, 187, 140); font-size: xx-large; color: white;">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -306,47 +306,44 @@
                     <div class="form-group flex-container" style="display: inline-block;">
                         <div class="row vertical-line">
                             <div class="col-md-6">
-                                <label
-                                    style="font-size: small; margin-top: 10px; margin-bottom: 20px; font-weight: bold;">
-                                    ( * )은 필수 입력사항입니다.</label><br />
-                                <input type="hidden" id="classcode2" th:value="${classcode}">
+                                <input type="hidden" class="form-control" id="classcode2" th:value="${classcode}">
                                 <input type="hidden" id="unitno2" th:value="${no}">
 
-                                <div class="row" style="margin-bottom: 10px;">
+                                <div class="row" style="margin-bottom: 10px; margin-top: 10px;">
                                     <div class="col-sm-3" style="width: 100%;">
-                                        <label for="classdate2" class="col-form-label">* 날짜</label>
-                                        <input class="form-control datepicker date" id="classdate2" name="classdate2" placeholder="클래스를 진행할 날짜를 입력하세요">
+                                        <label for="classdate2" class="col-form-label">날짜<h6 style="display:inline; color: #FF8E8E">(필수)</h6></label>
+                                        <input class="form-control datepicker date" id="classdate2" name="classdate2" placeholder="클래스 진행 날짜를 입력하세요.">
                                     </div>
                                     <input type="hidden" name="classda2y" id="classday2">
                                 </div>
 
                                 <div class="row" style="margin-top: 20px;">
                                     <div class="col-sm-3" style="width: 50%;">
-                                        <label for="classstart2" class="col-form-label">* 시작 시각</label>
+                                        <label for="classstart2" class="col-form-label">시작 시각<h6 style="display:inline; color: #FF8E8E">(필수)</h6></label>
                                         <input type="time" class="form-control" id="classstart2" name="classstart2">
                                     </div>
                                     <div class="col-sm-3" style="width: 50%;">
-                                        <label for="classend2" class="col-form-label">* 종료 시각</label>
+                                        <label for="classend2" class="col-form-label">종료 시각<h6 style="display:inline; color: #FF8E8E">(필수)</h6></label>
                                         <input type="time" class="form-control" id="classend2" name="classend2">
                                     </div>
                                 </div>
                                 
                                 <div class="row" style="margin-top: 20px;">
                                     <div class="col-sm-3" style="width: 50%;">
-                                        <label for="minimum2" class="col-form-label">* 최소인원</label>
-                                        <input type="number" class="form-control" id="minimum2" name="minimum2" placeholder="최소인원을 입력하세요">
+                                        <label for="minimum2" class="col-form-label">최소인원<h6 style="display:inline; color: #FF8E8E">(필수)</h6></label>
+                                        <input type="number" class="form-control" id="minimum2" name="minimum2" placeholder="최소인원을 입력하세요.">
                                     </div>
                                     <div class="col-sm-3" style="width: 50%;">
-                                        <label for="maximum2" class="col-form-label">* 최대인원</label>
-                                        <input type="number" class="form-control" id="maximum2" name="maximum2" placeholder="최대인원을 입력하세요">
+                                        <label for="maximum2" class="col-form-label">최대인원<h6 style="display:inline; color: #FF8E8E">(필수)</h6></label>
+                                        <input type="number" class="form-control" id="maximum2" name="maximum2" placeholder="최대인원을 입력하세요.">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="col">
                                     <label
-                                        style="font-size: small; margin-top: 10px; margin-bottom: 10px; font-weight: bold; color: rgb(221, 52, 52);">
-                                        클래스 난이도와 수강금액에 변동이있을 시 작성해주세요.</label><br />
+                                        style="font-size: small; margin-top: 10px; margin-bottom: 10px; background-color: antiquewhite; font-family: 'Noto Sans KR', sans-serif; text-decoration-line: underline;">
+                                        <i class="fa-solid fa-user-pen"></i> 경험자 및 숙련자 대상일 경우만 추가금액을 설정할 수 있습니다.</label><br />
                                     <div class="form-check form-check-inline" style="margin-top: 10px;">
                                         <input type="radio" class="form-check-input radio-value level-value-detail"
                                             id="classlevel4" name="classlevel" value="1">
@@ -363,28 +360,28 @@
                                         <label class="form-check-label" for="classlevel3">숙련자</label>
                                     </div>
                                 </div>
-                                <div style="width: 50%;">
+                                <div style="width: 50%; margin-top: 10px;">
                                     <label for="defaultPrice2" class="col-form-label">입문자 수강금액</label>
                                     <input type="number" class="form-control" id="defaultPrice2" name="defaultPrice2"
                                         disabled readonly>
                                 </div>
-                                <div style="width: 50%;">
+                                <div style="width: 100%; margin-top: 5px;">
                                     <label for="addprice2" class="col-form-label">추가 금액</label>
-                                    <input type="number" class="form-control" id="addprice2" name="addprice2" value="" placeholder="난이도 변경시 입력 가능"
-                                        disabled oninput="calculateDiscount2()">
+                                    <input type="number" class="form-control" id="addprice2" name="addprice2" value=""
+                                        disabled oninput="calculateDiscount2()" style="width: 50%;" placeholder="0원">
                                 </div>
-                                <div style="width: 50%;">
+                                <div style="width: 50%; margin-top: 5px;">
                                     <input type="checkbox" class="form-check-input" id="discount-chk2"
-                                        name="discount-chk" onchange="toggleDiscountInput2()" style="margin-top: 10px;">
+                                        name="discount-chk2" onchange="toggleDiscountInput2()" style="margin-top: 10px;">
                                     <label for="discount2" class="col-form-label" style="margin-left: 5px;">할인 비율
                                         설정(%)</label>
-                                    <input type="number" class="form-control" id="discount2" name="discount2" value=""
-                                        disabled oninput="calculateDiscount2()">
+                                    <input type="number" class="form-control" id="discount2" name="discount2" value="" placeholder="0%"
+                                        disabled oninput="calculateDiscount2(); discountedPrice2();">
                                 </div>
-                                <div style="width: 50%;">
-                                    <label for="discount_price2" class="col-form-label">할인된 금액</label>
+                                <div style="width: 50%; margin-top: 5px;">
+                                    <label for="discount_price2" class="col-form-label">계산된 금액</label>
                                     <input type="number" class="form-control" id="discount_price2"
-                                        name="discount_price2" value="" readonly>
+                                        name="discount_price2" placeholder="금액을 확인하세요." value="" readonly>
                                 </div>
                             </div>
                         </div>
@@ -393,11 +390,11 @@
                 <div class="modal-footer">
                     <div class="d-flex justify-content-between" style="width: 100%;">
                         <div style="width: 49%;">
-                            <button type="button" style="border: 1px solid rgb(207, 206, 206);; width: 100%;" class="btn btn-sm"
+                            <button type="button" style="border: 1px solid rgb(207, 206, 206);; width: 100%; font-family: 'Noto Sans KR', sans-serif;" class="btn btn-sm"
                                 data-dismiss="modal" onclick="cancel2()">닫기</button>
                         </div>
                         <div style="width: 49%;">
-                            <input type="button" value="완료" style="border: 1px solid rgb(207, 206, 206);; width: 100%;"
+                            <input type="button" value="완료" style="border: 1px solid rgb(207, 206, 206);; width: 100%; font-family: 'Noto Sans KR', sans-serif;"
                                 class="btn btn-sm" onclick="updateInspection()">
                         </div>
                     </div>
@@ -513,7 +510,6 @@
                     return "#006F4A";
             }
         }
-
 
         // 모달창 닫기 
         function cancel() {
@@ -653,10 +649,10 @@
             }
         }
         
-        // 추가금액 입력값 변경 시 할인 계산 수행
+        // 추가금액 입력값 변경 시 계산 수행
         document.getElementById("addprice").addEventListener("input", calculateDiscount);
         
-        // 할인 비율 변경 시 할인 계산 수행
+        // 할인 비율 변경 시 계산 수행
         document.getElementById("discount").addEventListener("input", calculateDiscount);
 
         // 할인 비율 설정시 체크 후 입력란 활성화
@@ -862,6 +858,7 @@
 
                     await selectAll(); // 일정 재조회
                     unitList.style.display = "block"; // 일정 리스트 
+                    location.reload();
                 }
                 else {
                     alert("전체 일정 삭제에 실패하였습니다.");
@@ -869,7 +866,7 @@
             }
         }
 
-        /******************************** 일정 하나 수정, 삭제 ***************************************/
+        /******************************** 한 개의 일정 수정 및 삭제 ***************************************/
 
 
         // 1. 수정을 위해 먼저 기존 내역 불러오기 위한 GET호출
@@ -999,20 +996,40 @@
         }
 
 
-        // 할인 금액 계산
+        // 할인가만 적용한 계산
+        function discountedPrice2() {
+            var defaultPrice = parseInt(document.getElementById("defaultPrice2").value);
+            var discount = parseInt(document.getElementById("discount2").value);
+            var discountedPrice = defaultPrice - (defaultPrice * discount / 100);
+            document.getElementById("discount_price2").value = discountedPrice;
+        }
+        
+        // 추가음액과 할인가 적용 계산
         function calculateDiscount2() {
             var defaultPrice = parseInt(document.getElementById("defaultPrice2").value);
             var discount = parseInt(document.getElementById("discount2").value);
-            var addprice = parseInt(document.getElementById("addprice2").value);
+            var addPrice = parseInt(document.getElementById("addprice2").value);
 
             var totalAmount = defaultPrice + addprice;
             var discountAmount = totalAmount * discount / 100;
             var discountPrice = totalAmount - discountAmount;
 
-            // 할인된 금액을 discount_price input 요소에 업데이트
-            document.getElementById("discount_price2").value = discountPrice || totalAmount;
+            if (!addPrice) {
+                discountedPrice2(); // 추가금액이 없을 때 할인가만 적용한 계산 수행
+              } else {
+                var totalAmount = defaultPrice + addPrice;
+                var discountAmount = totalAmount * (discount / 100);
+                var discountPrice = totalAmount - discountAmount;
+            
+                document.getElementById("discount_price2").value = discount ? discountPrice : totalAmount;
+            }
         }
-        document.getElementById("discount2").addEventListener("change", calculateDiscount2);
+
+        // 추가금액 입력값 변경 시 할인 계산 수행
+        document.getElementById("addprice2").addEventListener("input", calculateDiscount2);
+
+        // 할인 비율 변경 시 할인 계산 수행
+        document.getElementById("discount2").addEventListener("input", calculateDiscount2);
 
         // 할일 비율 설정시 체크 후 입력란 활성화
         function toggleDiscountInput2() {
@@ -1036,17 +1053,28 @@
         function handleRadioClick2() {
             var addpriceInput = document.getElementById('addprice2');
             var level = document.querySelector('input[name="classlevel"]:checked').value;
-
-            if (level === '1') {
-                addpriceInput.disabled = true;
-                addpriceInput.value = '0';
-            } else {
-                addpriceInput.disabled = false;
-            }
+            addpriceInput.disabled = !(level === '2' || level === '3');
+            addpriceInput.value = '';
         }
 
         radioBtns2.forEach(function (radioBtn2) {
             radioBtn2.addEventListener('click', handleRadioClick2);
+        });
+
+        // 난이도 체크가 변경될 때 discount_price2 초기화
+        $(document).ready(function() {
+            $('input[name="classlevel"]').change(function() {
+                $('#discount_price2').val('');
+
+                var isChecked = $(this).prop('checked');
+                if (isChecked) {
+                    $('#discount-chk2').prop('checked', false);
+                    $('#discount2').val('');
+                    $('#discount2').prop('disabled', true);
+                } else {
+                    $('#discount-chk2').prop('checked', true);
+                }
+            });
         });
 
         //모달 창 닫힐 때 초기화 함수 호출
