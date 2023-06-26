@@ -18,16 +18,5 @@ public interface ClassUnitRepository extends JpaRepository<ClassUnit, Long> {
     ClassUnit findByClassproduct_classcodeAndNo(long classcode, long no);
 
     ClassUnitProjectionChk findByNo(long no);
-
-
-
-    
-
-
-
-
-
-
-    
     
 }

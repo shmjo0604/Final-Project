@@ -52,7 +52,7 @@
                 <th style="font-family: 'Nanum Gothic', sans-serif;">신청내역</th>
             </tr>
         </thead>
-        <tbody class="">
+        <tbody>
             <tr th:each="obj : ${list}">
                 <td style="font-family: 'Nanum Gothic', sans-serif;">
                     <input type="hidden" th:value="${obj.no}" th:text="${obj.rnum}" disabled>

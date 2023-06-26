@@ -47,5 +47,16 @@ public class AdminServiceImpl implements AdminService {
         } 
     }
 
+    @Override
+    public int updateClassProductChk(long classcode) {
+        try {
+            return adMapper.updateClassProductChk(classcode);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return -1;
+        } 
+    }
+
 
 }

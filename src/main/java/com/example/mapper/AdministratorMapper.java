@@ -18,5 +18,8 @@ public interface AdministratorMapper {
 
     // 3. 클래스 등록 신청 정보 조회
     public List<ClassProduct> selectClassProductList();
+
+    // 4. 클래스 승인(chk : 0 -> 1)
+    public int updateClassProductChk(long classcode);
     
 }

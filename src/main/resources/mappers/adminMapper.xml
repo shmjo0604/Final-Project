@@ -15,6 +15,12 @@
 
     <!-- 3. 클래스 등록 신청 정보 조회 -->
     <select id="selectClassProductList" resultType="ClassProduct">
-        SELECT * FROM CLASSPRODUCT WHERE CHK = 0 ORDER BY REGDATE DESC
+        SELECT * FROM CLASSPRODUCT WHERE CHK IN(0,1) ORDER BY REGDATE DESC
     </select>
+
+    <!-- 4. 클래스 승인 -->
+    <update id="updateClassProductChk" parameterType="long">
+        UPDATE CLASSPRODUCT SET CHK=1 WHERE CLASSCODE = #{classcode}
+    </update>
+
 </mapper>
