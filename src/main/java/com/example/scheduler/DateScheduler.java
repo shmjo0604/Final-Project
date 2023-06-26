@@ -35,7 +35,7 @@ public class DateScheduler {
 
     @Scheduled(cron = "0 0 0 * * *")
     // @Scheduled(cron = "*/10 * * * * *")
-    @Transactional
+    // @Transactional
     public void ClassUnitComplete() throws Exception {
 
         // (1). chk = 1 (실행 이전 상태 ClassUnit 모두 조회)
@@ -88,7 +88,7 @@ public class DateScheduler {
     // 2. Basket 30일 이후 삭제 (매일 자정에 실행)
     @Scheduled(cron = "0 0 0 * * *")
     // @Scheduled(cron = "*/5 * * * * *")
-    @Transactional
+    // @Transactional
     public void BasketExpiration() throws Exception {
 
         // (1). 장바구니 전체 목록 호출

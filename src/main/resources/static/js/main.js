@@ -10,7 +10,7 @@ async function getNotification() {
     const headers = { "Content-Type": "application/json" };
     const { data } = await axios.get(url, { headers });
 
-    console.log("notification", data);
+    // console.log("notification", data);
 
     if(data.status === 200) {
 
@@ -84,12 +84,16 @@ async function getNotification() {
 
         const notification = document.querySelector("#notification_dropdown");
 
-        var div = document.createElement('div');
+        if (notification !== null) {
 
-        div.className = "dropdown-item text-center small text-gray-500";
-        div.textContent = "알림이 없습니다.";
+            var div = document.createElement('div');
 
-        notification.appendChild(div);
+            div.className = "dropdown-item text-center small text-gray-500";
+            div.textContent = "알림이 없습니다.";
+    
+            notification.appendChild(div);
+
+        }
     }
 }
 
