@@ -17,6 +17,6 @@ public interface AdminService {
     public Administrator selectAdminOne(String id);
 
     // 3. 클래스 등록 신청 정보 조회
-    public List<ClassProduct> selectClassProductOne();
+    public List<ClassProduct> selectClassProductList();
 
 }

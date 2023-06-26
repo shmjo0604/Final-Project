@@ -37,9 +37,9 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<ClassProduct> selectClassProductOne() {
+    public List<ClassProduct> selectClassProductList() {
         try {
-            return adMapper.selectClassProductOne();
+            return adMapper.selectClassProductList();
         }
         catch(Exception e) {
             e.printStackTrace();

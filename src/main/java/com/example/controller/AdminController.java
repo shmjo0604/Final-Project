@@ -56,7 +56,7 @@ public class AdminController {
     @GetMapping(value = "/home.do")
     public String homeGET(Model model) {
 
-        List<ClassProduct> list = adService.selectClassProductOne();
+        List<ClassProduct> list = adService.selectClassProductList();
         // log.info(format, list.toString());
         model.addAttribute("list", list);
 
