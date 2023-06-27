@@ -1,6 +1,17 @@
+html,
 body {
     margin: 0;
-    /* background-color: #7addc9; */
+    padding: 0;
+    height: 100%;
+}
+
+#body-wrapper {
+    min-height: 100%;
+    position: relative;
+}
+
+footer {
+    position: relative;
 }
 
 * {
@@ -227,7 +238,7 @@ td {
     cursor: pointer;
   } */
 
-  .modal {
+.modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -236,69 +247,65 @@ td {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}
 
-  .modal .bg {
+.modal .bg {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
-  }
+}
 
-  .modalBox {
+.modalBox {
     position: absolute;
     background-color: #fff;
     width: 400px;
     height: 200px;
     padding: 15px;
-  }
+}
 
-  .modalBox button {
+.modalBox button {
     display: block;
     width: 80px;
     margin: 0 auto;
-  }
+}
 
-  .hidden {
+.hidden {
     display: none;
-  }
+}
 
-  .openBtn{
+.openBtn {
     padding: 7px;
     font-size: 10px;
     background-color: green;
     color: white;
     border: none;
-  }
+}
 
-  .date:before  {
+.date:before {
     content: "일자 : ";
-  }
+}
 
-  .starttime:before  {
+.starttime:before {
     content: "시작시간 : ";
-  }
+}
 
-  .endtime:before  {
+.endtime:before {
     content: "종료시간 : ";
-  }
+}
 
-  .level:before  {
+.level:before {
     content: "난이도 : ";
-  }
+}
 
-  .addprice:before  {
+.addprice:before {
     content: "1인당 가격 : ";
-  }
+}
 
-  .cnt {
+.cnt {
     font-weight: bold;
     text-align: center;
     justify-content: center;
     margin: 0 auto;
-    
-    
-  }
-  
-  
-  
-  
+
+
+}

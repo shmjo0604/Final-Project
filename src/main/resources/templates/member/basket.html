@@ -31,7 +31,7 @@
     <!--header 영역-->
     <header th:replace="~{header :: headerFragment}"></header>
 
-    <section class="cart">
+    <section id="body-wrapper" class="cart">
         <div class="cart__information">
             <input type="hidden" value="${login.userid}" id="login_userid">
             <ul>

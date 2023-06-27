@@ -185,7 +185,7 @@
                                                 <th>승인</th>
                                             </tr>
                                         </thead>
-                                        <tbody>확
+                                        <tbody>
                                             <tr th:each="obj, index : ${list}">
                                                 <td th:text="${index.index + 1}"></td>
                                                 <td th:text="${#dates.format(obj.regdate, 'yyyy.MM.dd')}"></td>

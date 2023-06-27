@@ -69,7 +69,7 @@
       font-size: smaller;
     }
 
-    #content2{
+    #content2 {
       width: 720px;
       height: 260px;
       border: 0;
@@ -94,8 +94,8 @@
       <div class="col-sm-4">
         <div class="box effect">
           <h3>평균별점</h3>
-          <h1  th:if="${avg > 0} " th:text="${avg}"></h1>
-          <h1  th:if="${avg == -1 }">0</h1>
+          <h1 th:if="${avg > 0} " th:text="${avg}"></h1>
+          <h1 th:if="${avg == -1 }">0</h1>
 
           <a th:if="${avg} >= 1 and ${avg} < 2" style="color: darkgreen; margin-left: 65px;">★☆☆☆☆</a>
           <a th:if="${avg} >=2  and ${avg} < 3 " style="color: darkgreen; margin-left: 65px;">★★☆☆☆</a>
@@ -177,12 +177,10 @@
         </tbody>
 
       </table>
+
+      <ul id="pagination-demo1" class="col pagination" style="position: relative; left: 280px;"></ul>
+      <div class="page"></div>
     </th:block>
-
-    <ul id="pagination-demo1" class="col pagination" style="position: relative; left: 280px;"></ul>
-    <div class="page">
-
-    </div>
 
     <!-- 리뷰 모달 -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -241,26 +239,22 @@
                       <div class="carousel-inner">
                         <div class="carousel-item active">
                           <div>
-                            <img class="d-block mt-1" id="rimage0"
-                              style="height: 290px; width: 500px" />
+                            <img class="d-block mt-1" id="rimage0" style="height: 290px; width: 500px" />
                           </div>
                         </div>
                         <div class="carousel-item">
                           <div>
-                            <img  class="d-block mt-1" id="rimage1"
-                              style="height: 290px; width: 500px" />
+                            <img class="d-block mt-1" id="rimage1" style="height: 290px; width: 500px" />
                           </div>
                         </div>
                         <div class="carousel-item">
                           <div>
-                            <img  class="d-block mt-1" id="rimage2"
-                              style="height: 290px; width: 500px" />
+                            <img class="d-block mt-1" id="rimage2" style="height: 290px; width: 500px" />
                           </div>
                         </div>
                         <div class="carousel-item">
                           <div>
-                            <img  class="d-block mt-1" id="rimage3"
-                              style="height: 290px; width: 500px" />
+                            <img class="d-block mt-1" id="rimage3" style="height: 290px; width: 500px" />
                           </div>
                         </div>
                       </div>
@@ -399,27 +393,31 @@
 
       // 리뷰 이미지 조회
       mainimage1.src = "/specialday/member/image?classcode=" + data.review.classcode;
-      
-      if(typeof reviewNolist[0] != "undefined"){
-        rimage0.src = "/specialday/review/image?no=" + reviewNolist[0];}
-        else{
-          rimage0.src = "/specialday/review/image?no=0";
-        }
-        if(typeof reviewNolist[1] != "undefined"){
-        rimage1.src = "/specialday/review/image?no=" + reviewNolist[1];}
-        else{
-          rimage1.src = "/specialday/review/image?no=0";
-        }
-        if(typeof reviewNolist[2] != "undefined"){
-        rimage2.src = "/specialday/review/image?no=" + reviewNolist[2];}
-        else{
-          rimage2.src = "/specialday/review/image?no=0";
-        }
-        if(typeof reviewNolist[3] != "undefined"){
-        rimage3.src = "/specialday/review/image?no=" + reviewNolist[3];}
-        else{
-          rimage3.src = "/specialday/review/image?no=0";
-        }
+
+      if (typeof reviewNolist[0] != "undefined") {
+        rimage0.src = "/specialday/review/image?no=" + reviewNolist[0];
+      }
+      else {
+        rimage0.src = "/specialday/review/image?no=0";
+      }
+      if (typeof reviewNolist[1] != "undefined") {
+        rimage1.src = "/specialday/review/image?no=" + reviewNolist[1];
+      }
+      else {
+        rimage1.src = "/specialday/review/image?no=0";
+      }
+      if (typeof reviewNolist[2] != "undefined") {
+        rimage2.src = "/specialday/review/image?no=" + reviewNolist[2];
+      }
+      else {
+        rimage2.src = "/specialday/review/image?no=0";
+      }
+      if (typeof reviewNolist[3] != "undefined") {
+        rimage3.src = "/specialday/review/image?no=" + reviewNolist[3];
+      }
+      else {
+        rimage3.src = "/specialday/review/image?no=0";
+      }
 
       title.value = "이름: " + data.review.title;
       classlevel.value = "난이도: " + levelname;

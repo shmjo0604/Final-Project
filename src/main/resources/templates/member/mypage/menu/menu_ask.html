@@ -106,50 +106,59 @@
             }
         </style>
 
-        <table class="table table-bordered center">
-            <thead>
-                <tr>
-                    <th>번호</th>
-                    <th>문의날짜</th>
-                    <th>클래스 명칭</th>
-                    <th>제목</th>
-                    <th>처리상태</th>
-                </tr>
-            </thead>
-            <tbody style="vertical-align: middle;">
-                <!-- 처리상태(1) : 답변대기 -->
-                <th:block th:if="${#lists.isEmpty(list)}">
-                    <h7>문의내역이 존재하지 않습니다.</h7>
-                </th:block>
-                <th:block th:if="${!#lists.isEmpty(list)}">
-                    <tr th:each="obj : ${list}">
-                        <td th:text="${obj.rnum}"> </td>
-                        <td th:text="${#dates.format(obj.regdate,'yyyy-MM-dd')}"></td>
-                        <td>
-                            <p th:text="${obj.classtitle}"></p>
-                            <a style="text-decoration-line: none;"
-                                th:href="@{/class/product.do(classcode=${obj.classcode})}">[클래스 보러가기]</a>
-                        </td>
-                        <td>
-                            <label class="title" th:onclick="openModal([[${obj.no}]])" th:text="${obj.title}"></label>
-                        </td>
-                        <!-- 답변확인을 위해 문의 모달 창 뜨도록 -->
-                        <th:block th:if="${obj.chk == 1}">
-                            <td style="color: blue">답변완료</td>
-                        </th:block>
-                        <th:block th:if="${obj.chk == 0}">
-                            <td style="color: red">답변대기</td>
-                        </th:block>
-                    </tr>
-                </th:block>
-            </tbody>
-        </table>
 
-        <div class="row justify-content-center">
-            <div class="col-6 d-flex justify-content-center">
-                <ul id="pagination-demo" class="pagination-sm "></ul>
+        <th:block th:if="${#lists.isEmpty(list)}">
+            <h3 class="mt-5 text-center">문의내역이 존재하지 않습니다.</h3>
+        </th:block>
+
+        <th:block th:if="${!#lists.isEmpty(list)}">
+            <div>
+                <table class="table table-bordered center">
+                    <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>문의날짜</th>
+                            <th>클래스 명칭</th>
+                            <th>제목</th>
+                            <th>처리상태</th>
+                        </tr>
+                    </thead>
+                    <tbody style="vertical-align: middle;">
+                        <!-- 처리상태(1) : 답변대기 -->
+
+
+                        <tr th:each="obj : ${list}">
+                            <td th:text="${obj.rnum}"> </td>
+                            <td th:text="${#dates.format(obj.regdate,'yyyy-MM-dd')}"></td>
+                            <td>
+                                <p th:text="${obj.classtitle}"></p>
+                                <a style="text-decoration-line: none;"
+                                    th:href="@{/class/product.do(classcode=${obj.classcode})}">[클래스 보러가기]</a>
+                            </td>
+                            <td>
+                                <label class="title" th:onclick="openModal([[${obj.no}]])"
+                                    th:text="${obj.title}"></label>
+                            </td>
+                            <!-- 답변확인을 위해 문의 모달 창 뜨도록 -->
+                            <th:block th:if="${obj.chk == 1}">
+                                <td style="color: blue">답변완료</td>
+                            </th:block>
+                            <th:block th:if="${obj.chk == 0}">
+                                <td style="color: red">답변대기</td>
+                            </th:block>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+
+                <div class="row justify-content-center">
+                    <div class="col-6 d-flex justify-content-center">
+                        <ul id="pagination-demo" class="pagination-sm "></ul>
+                    </div>
+                </div>
             </div>
-        </div>
+        </th:block>
     </div>
 
     <!-- 모달 창 -->

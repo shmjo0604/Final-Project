@@ -250,14 +250,14 @@
                                 <h3 th:text="${obj.title}"></h3>
                             </div>
 
-                            <div class="ms-auto d-flex justify-content-between">
+                            <!-- <div class="ms-auto d-flex justify-content-between">
                                 <h4 class="mx-2"><i class="bi bi-heart-fill"></i>
                                     <span class="ms-2 mt-1" style="display:inline-block;">100</span>
                                 </h4>
                                 <h4 class="ms-2"><i class="bi bi-star-fill"></i>
                                     <span class="ms-2 mt-1" style="display:inline-block;">4.0</span>
                                 </h4>
-                            </div>
+                            </div> -->
                         </div>
 
                     </div>
@@ -718,7 +718,7 @@
                     '신청 인원수 선택 : ' + '<select id="select-remain" onchange="selectperson(this.value)"></select>' + '</span>' +
                     '</div>' +
                     '<div class="my-3">' +
-                    '<span>가격(1인) : ' + totalprice + '원' + '</span>' +
+                    '<span>가격(1인) : ' + priceToString(totalprice) + '</span>' +
                     '</div>' +
                     '<div>' +
                     '<div>총 결제 금액 : ' + '<span id="payment"></span>' + '</div>'
@@ -751,7 +751,11 @@
             const payment = document.querySelector("#payment");
             payment.innerHTML = "";
 
-            payment.innerHTML += totalprice * person + '원';
+            payment.innerHTML += priceToString(totalprice * person);
+        }
+
+        function priceToString(price) {
+            return price.toLocaleString() + '원'
         }
 
         const lat = /*[[${obj.latitude}]]*/"";
@@ -1025,7 +1029,7 @@
                     card_text1.className = "card-text mt-3 ";
                     card_text1.innerHTML = obj.content;
 
-                    var card_text2 = document.createElement('p');
+                    var card_text2 = document.createElement('div');
                     card_text2.className = "card-text card-regdate";
                     var reviewdate = new Date(obj.regdate)
                     var day = ['일', '월', '화', '수', '목', '금', '토', '일']
@@ -1040,7 +1044,7 @@
 
                     var card_text4 = document.createElement('p');
                     card_text4.className = "card-hit float-end";
-                    card_text4.textContent = "조회수: " + obj.hit;
+                    card_text4.textContent = "추천수 : " + obj.hit;
 
 
                     // 바깥에 만드는 거랑 안에 만드는거랑 먼 차이?

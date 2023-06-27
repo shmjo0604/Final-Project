@@ -87,7 +87,8 @@
                     </div>
                     <div class="col-4">
                         <div>
-                            <input id="classdate" class="form-control datepicker" placeholder="날짜를 선택하세요">
+                            <input id="classdate" class="form-control datepicker" placeholder="날짜를 선택하세요"
+                                oninput="activeLevel()">
                         </div>
                     </div>
                     <div class="col-2" style="display:none;">시간</div>
@@ -123,7 +124,7 @@
                                 class="bi bi-search me-2"></i>검색</button>
                     </div>
                 </div>
-                
+
                 <div class="d-flex justify-content-end">
                     <select class="form-select" style="width: 100px;" onchange="selectoption(this.value)">
 
@@ -178,7 +179,7 @@
 
             var option = 1;
 
-            if(selection !== 0) {
+            if (selection !== 0) {
                 $("#activityselect").val(selection).prop("selected", true);
                 activitycode = selection;
             }
@@ -357,7 +358,7 @@
                 }
 
                 // console.log(page);
-                console.log(keyword)
+                // console.log(keyword);
 
                 const url = contextPath + "/api/class/selectclasslist.json";
                 const headers = { "Content-Type": "application/json" };
@@ -369,7 +370,7 @@
                             citycode: citycode, activitycode: activitycode,
                             localcode: localcode, actcode: actcode,
                             classlevel: classlevel, classdate: classdate,
-                            minprice: minprice, maxprice: maxprice, keyword: keyword, 
+                            minprice: minprice, maxprice: maxprice, keyword: keyword,
                             page: page, option: option
                         }
                     },
@@ -394,21 +395,21 @@
                                 classlist.innerHTML +=
 
                                     '<div class="col">' +
-                                        '<a href="#" class="nav-link" onclick=updatehit(' + obj.classcode + ')>' +
-                                            '<div class="card shadow-sm">' +
-                                                '<div class="card-header text-center">' + obj.title + '</div>' +
-                                                '<img class="card-img-top" height="269" style="object-fit:cover" src="' + contextPath + '/class/image?no=' + obj.mainImg + '">' +
-                                                '<div class="card-body">' +
-                                                    '<div class="d-flex align-items-center justify-content-end mb-2">' +
-                                                        '<div class="card-text nickname text-center me-2">' + obj.nickname + '</div>' +
-                                                        '<img style="width: 30px; height: 30px; object-fit:cover; border-radius: 10px;" src="' +
-                                                        contextPath + '/class/image?no=' + obj.profileImg + '">' + 
-                                                    '</div>' + 
-                                                    '<p class="card-text price fw-bold">' + priceToString(obj.price) + '원(1인)' + '</p>' +
-                                                    '<p class="card-text local">' + obj.address1 + " " + obj.address2 + " " + obj.address3 + '</p>' +
-                                                '</div>' +
-                                            '</div>' +
-                                        '</a>' +
+                                    '<a href="#" class="nav-link" onclick=updatehit(' + obj.classcode + ')>' +
+                                    '<div class="card shadow-sm">' +
+                                    '<div class="card-header text-center">' + obj.title + '</div>' +
+                                    '<img class="card-img-top" height="269" style="object-fit:cover" src="' + contextPath + '/class/image?no=' + obj.mainImg + '">' +
+                                    '<div class="card-body">' +
+                                    '<div class="d-flex align-items-center justify-content-end mb-2">' +
+                                    '<div class="card-text nickname text-center me-2">' + obj.nickname + '</div>' +
+                                    '<img style="width: 30px; height: 30px; object-fit:cover; border-radius: 10px;" src="' +
+                                    contextPath + '/class/image?no=' + obj.profileImg + '">' +
+                                    '</div>' +
+                                    '<p class="card-text price fw-bold">' + priceToString(obj.price) + '원(1인)' + '</p>' +
+                                    '<p class="card-text local">' + obj.address1 + " " + obj.address2 + " " + obj.address3 + '</p>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</a>' +
                                     '</div>';
                             }
 
@@ -430,15 +431,15 @@
                                     '<div class="card-header text-center">' + obj.title + '</div>' +
                                     '<img class="card-img-top" height="269" style="object-fit:cover" src="' + contextPath + '/class/image?no=' + obj.mainImg + '">' +
                                     '<div class="card-body">' +
-                                        '<div class="d-flex align-items-center justify-content-end mb-2">' +
-                                            '<div class="card-text nickname text-center me-2">' + obj.nickname + '</div>' +
-                                            '<img style="width: 30px; height: 30px; object-fit:cover; border-radius: 10px;" src="' +
-                                            contextPath + '/class/image?no=' + obj.profileImg + '">' + 
-                                        '</div>' +
-                                        '<div class="d-flex align-items-center mb-2">' +
-                                            '<div class="card-text classdate flex-fill me-1">' + obj.classdate + '</div>' +
-                                            '<div class="card-text price fw-bold flex-fill">' + priceToString(obj.price) + '원(1인)' + '</div>' +
-                                        '</div>' +
+                                    '<div class="d-flex align-items-center justify-content-end mb-2">' +
+                                    '<div class="card-text nickname text-center me-2">' + obj.nickname + '</div>' +
+                                    '<img style="width: 30px; height: 30px; object-fit:cover; border-radius: 10px;" src="' +
+                                    contextPath + '/class/image?no=' + obj.profileImg + '">' +
+                                    '</div>' +
+                                    '<div class="d-flex align-items-center mb-2">' +
+                                    '<div class="card-text classdate flex-fill me-1">' + obj.classdate + '</div>' +
+                                    '<div class="card-text price fw-bold flex-fill">' + priceToString(obj.price) + '원(1인)' + '</div>' +
+                                    '</div>' +
                                     '<p class="card-text local">' + obj.address1 + " " + obj.address2 + " " + obj.address3 + '</p>' +
                                     '</div>' +
                                     '</div>' +
@@ -520,6 +521,20 @@
                 option = value;
 
                 searchClassAction(1);
+
+            }
+
+            /* 날짜를 입력하지 않았을 때, 난이도 비활성화 (클래스 난이도 선택은 날짜 선택 시만) */
+
+            function activeLevel() {
+
+                const date = document.querySelector("#classdate");
+
+                if (date.value.length < 10) {
+                    const levelchk = $('.levelchk');
+
+                    levelchk.addClass('disabled');
+                }
 
             }
         </script>
