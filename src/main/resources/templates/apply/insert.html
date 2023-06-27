@@ -338,9 +338,9 @@
             //     unitnoArray.push($(item).val());
             // });
 
-            console.log(unitnoArray);
-            console.log(personArray);
-            console.log(paymentArray);
+            //console.log(unitnoArray);
+            //console.log(personArray);
+            //console.log(paymentArray);
 
             //iamport 대신 자신의 "가맹점 식별코드"를 사용
             IMP.request_pay({
@@ -356,7 +356,7 @@
                 buyer_postcode: '123-456'
             }, async function (rsp) { // callback
 
-                console.log(rsp);
+                //console.log(rsp);
 
                 // 1. 결제 검증
 
@@ -366,7 +366,7 @@
 
                 await axios.post(url, body, { headers }).then(async function (result) {
 
-                    console.log(result);
+                    //console.log(result);
 
                     if (rsp.paid_amount === result.data.response.amount) {
 

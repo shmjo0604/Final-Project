@@ -327,6 +327,8 @@
       const body = { id: userId, password: password.value };
       const { data } = await axios.put(url, body, { headers });
 
+      console.log(data);
+
       if (data.status === 200) {
         const modal = new bootstrap.Modal(
           document.getElementById("signoutPass"),
@@ -334,6 +336,11 @@
         );
         modal.show();
       } else if (data.status === -1) {
+
+        var failmessage = document.getElementById("singoutFailMessage");
+
+        failmessage.textContent = data.errormessage;
+
         const modal = new bootstrap.Modal(
           document.getElementById("signoutFail"),
           {}

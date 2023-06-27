@@ -16,4 +16,8 @@ public interface ClassProductRepository extends JpaRepository<ClassProduct, Long
         nativeQuery = true)
     List<ClassProduct> findAllTopSixByOrderByClasscodeDesc();
 
+    int countByMember_id(String id);
+
+    List<ClassProduct> findByMember_idAndChk(String id, int chk);
+
 }

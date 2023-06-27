@@ -17,9 +17,11 @@ public interface CommunityRepository extends JpaRepository<Community, Long> {
 
     Community findByNo(long no);
 
-    Community findByMember_id(String id);
+    List<Community> findByMember_id(String id);
 
     long countBy();
+
+    long countByMember_id(String id);
 
     @Query(
         value="SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY c.no DESC) rnum, c.* FROM COMMUNITY c) c WHERE rnum BETWEEN :first AND :last ORDER BY c.rnum ASC ", 

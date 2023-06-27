@@ -92,14 +92,14 @@
                                     <div class="col-md-6">
                                         <div class="form-floating mb-4 mb-md-0">
                                             <input class="form-control" id="password" type="password" name="password"
-                                                placeholder="Enter your password"/>
+                                                placeholder="Enter your password" maxlength="15"/>
                                             <label for="password">비밀번호</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
                                             <input class="form-control" id="password1" type="password"
-                                                placeholder="Enter your password"/>
+                                                placeholder="Enter your password" maxlength="15"/>
                                             <label for="password1">비밀번호 확인</label>
                                         </div>
                                     </div>
@@ -189,7 +189,7 @@
             //console.log(gender);
 
             var emailregex = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-
+            var pwregex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
 
             if (id.value.length <= 0) {
                 alert('아이디를 입력하세요');
@@ -204,6 +204,11 @@
             if (pw1.value.length <= 0) {
                 alert('비밀번호를 입력하세요');
                 pw1.focus();
+                return false;
+            }
+            if (!pwregex.test(pw.value)) {
+                alert("비밀번호는 영문, 숫자, 특수문자 조합 8~15자이어야 합니다.");
+                pw.focus();
                 return false;
             }
             if (pw.value !== pw1.value) {

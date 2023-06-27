@@ -6,6 +6,8 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>SPECIAL DAY : 로그인</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!--웹 페이지 아이콘 변경-->
+    <link rel="icon" th:href="@{/image/logo.ico}">
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -175,12 +177,12 @@
                         <div class="card-body">
                             <form id="form" th:action="@{/loginaction.do}" method="post">
                                 <div class="form-floating mb-4">
-                                    <input id="id" class="form-control" type="text" placeholder="ID" name="id">
+                                    <input id="id" class="form-control" type="text" placeholder="ID" name="id" onkeyup="if(window.event.keyCode==13){loginAction()}">
                                     <label>아이디</label>
                                 </div>
                                 <div class="form-floating mb-4">
                                     <input id="pw" class="form-control" type="password" placeholder="Password"
-                                        name="password" >
+                                        name="password" onkeyup="if(window.event.keyCode==13){loginAction()}">
                                     <label>패스워드</label>
                                 </div>
                                 <div class="find-wrap d-flex justify-content-center" id="find-wrap">

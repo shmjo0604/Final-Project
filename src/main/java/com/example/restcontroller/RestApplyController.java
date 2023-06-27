@@ -35,7 +35,7 @@ public class RestApplyController {
 
         Map<String, Object> retMap = new HashMap<>();
 
-        log.info(format, applylist.toString());
+        //log.info(format, applylist.toString());
 
         int[] paymentArray = applylist.getPaymentArray();
         int[] personArray = applylist.getPersonArray();
@@ -57,11 +57,11 @@ public class RestApplyController {
             list.add(obj);
         }
 
-        log.info(format, list.toString());
+        //log.info(format, list.toString());
 
         int ret = aService.insertApplyBatch(list);        
 
-        log.info(format, ret);
+        //log.info(format, ret);
 
         retMap.put("ret", ret);
 

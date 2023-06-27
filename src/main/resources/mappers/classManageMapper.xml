@@ -67,6 +67,6 @@
 
     <!-- 9. 클래스 답변완료 -->
     <update id="updateClassAnswer" parameterType="ClassInquiry">
-        UPDATE classinquiry SET chk = 1 WHERE no=#{no}
+        UPDATE classinquiry SET chk = 1 WHERE no = #{no}
     </update>
 </mapper>

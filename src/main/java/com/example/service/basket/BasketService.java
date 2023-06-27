@@ -23,6 +23,9 @@ public interface BasketService {
     // 4. 선택 상품 삭제
     public int deleteBakset(List<Long> list);
 
+    // 5. 전체 장바구니 조회
+    public List<Basket> baksetAll();
+
     
 
     
