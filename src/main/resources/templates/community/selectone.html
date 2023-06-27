@@ -79,14 +79,16 @@
 
             <!-- <form id="form" method="get" th:action="@{/community/update.do}"  style="display: inline-block;"> -->
             <label class="title" name="title" th:text="${community.title}" style="font-size: 28px;"></label><br />
-            <label class="no" name="no" th:text="${community.no}"></label>
-            | <label class="cate" name="cate" th:text="${community.cate}"></label>
+            <!-- <label class="no" name="no" th:text="${community.no}"></label> -->
+            <label class="cate" name="cate" th:text="${community.cate}"></label>
             | <label class="writer" th:text="${community.member.id}"></label>
-            | <label class="date" th:text="${community.regdate}"></label><br />
+            | <label class="date" th:text="${community.regdate}"></label>
+            | 조회수 <label class="date" th:text="${community.hit}"></label><br />
             <hr />
             <label class="content" name="content" th:utext="${community.content}"
                 style="padding-bottom:80px;font-size: 18px;"></label><br />
-            <div class="buttons">
+
+            <div class="buttons" th:if="${community.member.id == user.username}">
                 <button class="btn btn-sm btn-primary"> <a class="nav-link"
                         th:href="@{update.do(no=${community.no})}">수정</a></button>
                 <input type="hidden" name="no" th:value="${community.no}" />
@@ -105,18 +107,18 @@
             <form class="mb-3" name="replybox" style="padding-top: 100px;" id="reply_form"
                 th:action="@{/community/replyinsert.do}" method="post">
                 <input type="hidden" name="community.no" th:value="${community.no}" />
-                <input type="text" class="form-control" id="memberid" th:value="${user.username}" name="member.id"
+                <input type="hidden" class="form-control" id="memberid" th:value="${user.username}" name="member.id"
                     readonly />
                 <textarea id="reply_content" class="form-control mb-2" rows="4" name="content"
                     placeholder="욕설과 비방은 형사처벌의 대상이 될 수 있습니다"></textarea>
-                <button type="submit" class="btn btn-outline btn-primary" onclick="insertreply()">댓글</button>
+                <button type="button" class="btn btn-success" onclick="insertreply()">댓글 입력</button>
             </form>
 
 
             <!--댓글 목록-->
             <hr />
             <h5>댓글</h5>
-            <div style="background-color: rgb(234, 234, 234);">
+            <div class="mb-3" style="background-color: rgb(234, 234, 234);">
                 <tr th:each="tmp : ${list}">
                     <div style="padding: 10px; margin-left: 20px; margin-right: 20px;">
                         <div style="font-weight: bold;">
@@ -179,8 +181,6 @@
         }
         function insertreply() {
             const reply_content = document.getElementById("reply_content");
-
-
 
             if (reply_content.value <= 0) {
                 alert('댓글을 입력해주세요')
