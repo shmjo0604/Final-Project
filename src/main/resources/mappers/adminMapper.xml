@@ -19,8 +19,13 @@
     </select>
 
     <!-- 4. 클래스 승인 -->
-    <update id="updateClassProductChk" parameterType="long">
+    <update id="updateClassProductChk_Confirm" parameterType="long">
         UPDATE CLASSPRODUCT SET CHK=1 WHERE CLASSCODE = #{classcode}
+    </update>
+
+    <!-- 5. 클래스 승인 취소 -->
+    <update id="updateClassProductChk_Cancle" parameterType="long">
+        UPDATE CLASSPRODUCT SET CHK=0 WHERE CLASSCODE = #{classcode}
     </update>
 
 </mapper>

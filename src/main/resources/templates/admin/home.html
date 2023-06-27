@@ -185,21 +185,22 @@
                                                 <th>승인</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody>확
                                             <tr th:each="obj, index : ${list}">
                                                 <td th:text="${index.index + 1}"></td>
                                                 <td th:text="${#dates.format(obj.regdate, 'yyyy.MM.dd')}"></td>
                                                 <td th:text="${obj.memberid}"></td>
                                                 <td th:text="${obj.sns}"></td>
                                                 <td th:text="${obj.title}"></td>
-                                                <td>
-                                                    <span th:if="${obj.chk == 0}">대기중</span>
-                                                    <span th:if="${obj.chk == 1}">완료</span>
-                                                </td>
-                                                <td>
-                                                    <span th:if="${obj.chk == 0}"><button class="btn btn-success btn-sm" style="border: 1px solid gray; width: 50px; height: 30px;" th:onclick="confirmFunc([[${obj.classcode}]])">확인</button></span>
-                                                    <span th:if="${obj.chk == 1}"><button class="btn btn-success btn-sm" style="border: 1px solid gray; width: 50px; height: 30px;" th:onclick="confirmFunc([[${obj.classcode}]])" disabled>확인</button></span>
-                                                </td>
+
+                                                <div th:if="${obj.chk == 0}">
+                                                    <td><span>대기중</span></td>
+                                                    <td><button class="btn btn-success btn-sm" style="border: 1px solid gray; width: 50px; height: 30px;" th:onclick="confirmFunc([[${obj.classcode}]])">확인</button></td>
+                                                </div>
+                                                <div th:if="${obj.chk == 1}"> 
+                                                    <td><span>완료</span></td>
+                                                    <td><button class="btn btn-danger btn-sm" style="border: 1px solid gray; width: 50px; height: 30px;" th:onclick="cancleFunc([[${obj.classcode}]])">취소</button></td>
+                                                </div>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -238,7 +239,7 @@
             }
         });
 
-        // 테이블
+        // simpleDatatables
         $(document).ready(function () {
             const dataTable = new simpleDatatables.DataTable("#datatablesSimple1", {
                 searchable: false,
@@ -252,8 +253,7 @@
             })
         });
 
-
-        // 오늘날짜
+        // 당일날짜
         window.addEventListener('DOMContentLoaded', function() {
         var dateElements = document.querySelectorAll('.date');
         var today = new Date();
@@ -270,7 +270,7 @@
         async function confirmFunc(classcode) {
             console.log(classcode);
             // PUT호출
-            const url = /*[[@{/api/admin/updatechk.json}]]*/"";
+            const url = /*[[@{/api/admin/updatechkToConfirm.json}]]*/"";
             const headers = { "Content-Type": "application/json" };
             const body = { classcode : classcode };
             console.log(body);
@@ -279,10 +279,29 @@
             console.log('반환되는 결과', data);
             if (data.status === 200) {
                 alert("클래스 승인완료")
-                
             }
             else {
                 alert("클래스 승인실패");
+            }
+        }
+
+
+        async function cancleFunc(classcode) {
+            console.log(classcode);
+            // PUT호출
+            const url = /*[[@{/api/admin/updatechkToCancle.json}]]*/"";
+            const headers = { "Content-Type": "application/json" };
+            const body = { classcode : classcode };
+            console.log(body);
+            const { data } = await axios.put(url, body, { headers: headers });
+            
+            console.log('반환되는 결과', data);
+            if (data.status === 200) {
+                alert("클래스 승인취소 완료")
+                
+            }
+            else {
+                alert("클래스 승인취소 실패");
             }
         }
     

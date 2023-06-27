@@ -20,6 +20,9 @@ public interface AdministratorMapper {
     public List<ClassProduct> selectClassProductList();
 
     // 4. 클래스 승인(chk : 0 -> 1)
-    public int updateClassProductChk(long classcode);
+    public int updateClassProductChk_Confirm(long classcode);
+
+    // 5. 클래스 승인 취소(chk : 1 -> 0)
+    public int updateClassProductChk_Cancle(long classcode);
     
 }

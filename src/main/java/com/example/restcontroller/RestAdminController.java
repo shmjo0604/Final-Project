@@ -24,22 +24,39 @@ public class RestAdminController {
     final String format = "RestAdmin => {}";
     @Autowired AdminService adService;
 
-    @PutMapping(value = "/updatechk.json")
-public Map<String, Integer> updatechkPUT(@RequestBody Map<String, Object> request) {
-    Map<String, Integer> retMap = new HashMap<>();
+    @PutMapping(value = "/updatechkToConfirm.json")
+    public Map<String, Integer> updatechkToConfirmPUT(@RequestBody Map<String, Object> request) {
+        Map<String, Integer> retMap = new HashMap<>();
 
-    long classcode = Long.parseLong(request.get("classcode").toString());
-    log.info(format, classcode);
+        long classcode = Long.parseLong(request.get("classcode").toString());
+        log.info(format, classcode);
 
-    int ret = adService.updateClassProductChk(classcode);
-    if (ret == 1) {
-        retMap.put("status", 200);
-    } else {
-        retMap.put("status", -1);
+        int ret = adService.updateClassProductChk_Confirm(classcode);
+        if (ret == 1) {
+            retMap.put("status", 200);
+        } else {
+            retMap.put("status", -1);
+        }
+
+        return retMap;
     }
 
-    return retMap;
-}
+    @PutMapping(value = "/updatechkToCancle.json")
+    public Map<String, Integer> updatechkToCanclePUT(@RequestBody Map<String, Object> request) {
+        Map<String, Integer> retMap = new HashMap<>();
+
+        long classcode = Long.parseLong(request.get("classcode").toString());
+        log.info(format, classcode);
+
+        int ret = adService.updateClassProductChk_Cancle(classcode);
+        if (ret == 1) {
+            retMap.put("status", 200);
+        } else {
+            retMap.put("status", -1);
+        }
+
+        return retMap;
+    }
 
     
 }
