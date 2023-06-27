@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Community;
+import com.example.entity.CommunityView;
 
 
 
@@ -17,7 +18,7 @@ public interface CommunityService {
     public int insertCommnuityOne(Community obj);
 
     // 2. 커뮤니티 게시글 조회 (paging)
-    public List<Community> selectCommunityList(int first, int last);
+    public List<CommunityView> selectCommunityList(long first, long last);
 
     // 3. 커뮤니티 게시글 1개 조회
     public Community selectCommunityOne(long no);

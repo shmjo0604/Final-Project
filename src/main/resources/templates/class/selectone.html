@@ -302,11 +302,10 @@
                             </h3>
                             <img th:src="@{/class/image(no=${profile})}" class="mb-3"
                                 style="width: 180px; height: 150px;">
-                            <div th:utext="${obj.instructor}">
-
+                            <div th:utext="${obj.instructor}"></div>
+                            <div class="fs-5">
+                                <i class="bi bi-link-45deg me-2"></i><span class="fw-bold">SNS</span> | <a th:href="|https://${obj.sns}|" th:text="${obj.sns}"></a>
                             </div>
-                            <!-- <div th:utext="${obj.sns}"></div> -->
-
                         </div>
 
                         <hr>

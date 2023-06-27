@@ -38,4 +38,5 @@
     border: 0;
     width: auto;
     height: auto;
+    text-overflow: ellipsis;
 }

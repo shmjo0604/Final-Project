@@ -61,8 +61,8 @@
       color: blue;
     }
 
-    .content1 {
-      width: 150px;
+    .content1 p {
+      width: 170px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -163,8 +163,9 @@
               </a>
             </td>
             <td>
-              <div th:utext="|&nbsp;&nbsp;&nbsp;&nbsp;${obj.content}|" class="area content1">
-                <div>
+              
+              <div th:utext="|${obj.content}|" class="area content1"><div>
+              
             </td>
             <td th:if="${obj.rating} == 1" style="color: darkgreen;">★</td>
             <td th:if="${obj.rating} == 2" style="color: darkgreen;">★★</td>

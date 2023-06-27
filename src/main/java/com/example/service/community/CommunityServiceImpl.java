@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Community;
+import com.example.entity.CommunityView;
 import com.example.mapper.CommunityMapper;
 import com.example.repository.CommunityRepository;
+import com.example.repository.CommunityViewRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,9 +17,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CommunityServiceImpl implements CommunityService {
 
-    @Autowired
-    public CommunityRepository cRepository;
-    public CommunityMapper cMapper;
+    @Autowired CommunityRepository cRepository;
+    @Autowired CommunityViewRepository cViewRepository;
+    @Autowired CommunityMapper cMapper;
+    
     @Override
     public int insertCommnuityOne(Community obj) {
         try {
@@ -31,9 +34,10 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
-    public List<Community> selectCommunityList(int first, int last) {
+    public List<CommunityView> selectCommunityList(long first, long last) {
         try {
-            return cRepository.selectOrderByNoDescPaging(first, last);
+            return cViewRepository.findByRnumBetweenOrderByRnumAsc(first, last);
+            // return cRepository.selectOrderByNoDescPaging(first, last);
         }
         catch(Exception e) {
             e.printStackTrace();

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.entity.Community;
+import com.example.entity.CommunityView;
 import com.example.entity.Reply;
 import com.example.repository.CommunityRepository;
 import com.example.repository.ReplyRepository;
@@ -90,10 +91,11 @@ public class CommunityController {
 
         long pages = (count-1)/paging + 1;
 
-        int first = (page * paging) - (paging-1);
-        int last = page * paging;
+        long first = (page * paging) - (paging-1);
+        long last = page * paging;
 
-        List<Community> list = communityService.selectCommunityList(first, last);
+        // List<Community> list = communityService.selectCommunityList(first, last);
+        List<CommunityView> list = communityService.selectCommunityList(first, last);
 
         // for (Community obj : list) {
         //     log.info(format, obj.toString());

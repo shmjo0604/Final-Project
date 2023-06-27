@@ -44,7 +44,12 @@
             <thead style="background-color: gainsboro;">
                 <tr>
                     <td>
-                        <input id="selectAll" type="checkbox" checked="checked" onclick="selectAll(this)">
+                        <th:block th:if="${#lists.isEmpty(list)}">
+                            <input id="selectAll" type="checkbox" onclick="selectAll(this)">
+                        </th:block>
+                        <th:block th:if="${!#lists.isEmpty(list)}">
+                            <input id="selectAll" type="checkbox" checked="checked" onclick="selectAll(this)">
+                        </th:block>
                         <span>전체선택</span>
                     </td>
                     <td>번호</td>

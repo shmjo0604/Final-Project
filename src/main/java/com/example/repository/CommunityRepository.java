@@ -28,7 +28,6 @@ public interface CommunityRepository extends JpaRepository<Community, Long> {
         nativeQuery = true)
     List<Community> selectOrderByNoDescPaging(@Param("first") int first, @Param("last") int last);
 
-
     // List<Community> findByTitleIgnoreCaseContainingOrderByNoDesc(String title);
     // List<Community> findByContentIgnoreCaseContainingOrderByNoDesc(String content);
     // List<Community> findByWriterIgnoreCaseContainingOrderByNoDesc(String writer);

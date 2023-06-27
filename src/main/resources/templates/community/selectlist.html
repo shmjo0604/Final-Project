@@ -73,10 +73,10 @@
                 <tbody>
 
                     <tr th:each="obj : ${list}">
-                        <td th:text="${obj.no}"></td>
+                        <td th:text="${obj.rnum}"></td>
                         <td th:text="${obj.cate}"></td>
                         <td><a th:href="@{/community/selectone.do(no=${obj.no})}" th:text="${obj.title}" th:onclick="updatehit([[${obj.no}]])"></a></td>
-                        <td th:text="${obj.member.id}"></td>
+                        <td th:text="${obj.memberid}"></td>
                         <td th:text="${obj.hit}"></td>
                         <td th:text="${obj.replycnt}"></td>
                         <td th:text="${obj.regdate}"></td>

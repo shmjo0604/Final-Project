@@ -134,7 +134,7 @@
             <div th:text=" '금액(1인): ' + ${obj.price}+'원'"></div>
             <div th:text=" '신청인원: ' + ${obj.person}+'명'"></div>
           </td>
-          <td th:text="${obj.price}+'원'" style="font-weight: bold" class="center"></td>
+          <td th:text="|${#numbers.formatInteger(obj.payment, 3, 'COMMA')}원|" style="font-weight: bold" class="center"></td>
           <td class="center">
 
             <p th:if="${obj.chk} == 1" style="text-align: center">결제완료 </p>

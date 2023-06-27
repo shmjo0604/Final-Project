@@ -71,30 +71,30 @@
                 <ul class="icon-list">
                     <li>
                         <a th:href="@{/class/select.do(search=list, selection=2)}" class="cate-a">
-                            <div class="cate">
-                                <img th:src="@{/image/공예.png}" id="cate-icon" alt="도자기">
+                            <div class="cate" style="width: 300px; height: 340px; padding: 20px; margin-right: 70px;">
+                                <img th:src="@{/image/공예.png}" id="cate-icon" alt="공예" style="width: 250px; height: 250px; margin-bottom: 20px;">
                                 <span>
-                                    <p class="icon-name">공예</p>
+                                    <p class="icon-name" style="font-family: 'Do Hyeon', sans-serif; color: gray; font-size: x-large; font-weight: lighter;">공예</p>
                                 </span>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a th:href="@{/class/select.do(search=list, selection=3)}" class="cate-a">
-                            <div class="cate">
-                                <img th:src="@{/image/스포츠.png}" id="cate-icon" alt="스포츠/건강">
+                            <div class="cate" style="width: 300px; height: 340px; padding: 20px; margin-right: 70px;">
+                                <img th:src="@{/image/스포츠.png}" id="cate-icon" alt="스포츠/건강" style="width: 250px; height: 250px; margin-bottom: 20px;">
                                 <span>
-                                    <p class="icon-name">스포츠/건강</p>
+                                    <p class="icon-name" style="font-family: 'Do Hyeon', sans-serif; color: gray; font-size: x-large; font-weight: lighter;">스포츠/건강</p>
                                 </span>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a th:href="@{/class/select.do(search=list, selection=4)}" class="cate-a">
-                            <div class="cate">
-                                <img th:src="@{/image/미술1.png}" id="cate-icon" alt="미술">
+                            <div class="cate" style="width: 300px; height: 340px; padding: 20px;">
+                                <img th:src="@{/image/미술.png}" id="cate-icon" alt="미술" style="width: 250px; height: 250px; margin-bottom: 20px;">
                                 <span>
-                                    <p class="icon-name">미술</p>
+                                    <p class="icon-name" style="font-family: 'Do Hyeon', sans-serif; color: gray; font-size: x-large; font-weight: lighter;">미술</p>
                                 </span>
                             </div>
                         </a>
@@ -106,30 +106,30 @@
                 <ul class="icon-list">
                     <li>
                         <a th:href="@{/class/select.do(search=list, selection=5)}" class="cate-a">
-                            <div class="cate">
-                                <img th:src="@{/image/쿠킹.png}" id="cate-icon" alt="도자기">
+                            <div class="cate" style="width: 300px; height: 340px; padding: 20px; margin-right: 70px;">
+                                <img th:src="@{/image/쿠킹.png}" id="cate-icon" alt="쿠킹" style="width: 250px; height: 250px; margin-bottom: 20px;">
                                 <span>
-                                    <p class="icon-name">쿠킹</p>
+                                    <p class="icon-name" style="font-family: 'Do Hyeon', sans-serif; color: gray; font-size: x-large; font-weight: lighter;">쿠킹</p>
                                 </span>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a th:href="@{/class/select.do(search=list, selection=6)}" class="cate-a">
-                            <div class="cate">
-                                <img th:src="@{/image/음악.png}" id="cate-icon" alt="스포츠/건강">
+                            <div class="cate" style="width: 300px; height: 340px; padding: 20px; margin-right: 70px;">
+                                <img th:src="@{/image/음악.png}" id="cate-icon" alt="음악" style="width: 250px; height: 250px; margin-bottom: 20px;">
                                 <span>
-                                    <p class="icon-name">음악/영상</p>
+                                    <p class="icon-name" style="font-family: 'Do Hyeon', sans-serif; color: gray; font-size: x-large; font-weight: lighter;">음악/영상</p>
                                 </span>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a th:href="@{/class/select.do(search=list, selection=7)}" class="cate-a">
-                            <div class="cate">
-                                <img th:src="@{/image/뷰티.png}" id="cate-icon" alt="미술">
+                            <div class="cate" style="width: 300px; height: 340px; padding: 20px;">
+                                <img th:src="@{/image/뷰티.png}" id="cate-icon" alt="뷰티" style="width: 250px; height: 250px; margin-bottom: 20px;">
                                 <span>
-                                    <p class="icon-name">뷰티</p>
+                                    <p class="icon-name" style="font-family: 'Do Hyeon', sans-serif; color: gray; font-size: x-large; font-weight: lighter;">뷰티</p>
                                 </span>
                             </div>
                         </a>
@@ -145,7 +145,7 @@
                             <th:block th:each="obj : ${list}" th:if="${obj.chk == 1}">
                                 <div class="col">
                                     <div class="class">
-                                        <a style="cursor: pointer" th:onclick="updatehit([[${obj.classcode}]])"
+                                        <a href="#" th:onclick="updatehit([[${obj.classcode}]])"
                                             class="new-c1">
                                             <div class="new-c2">
                                                 <div class="class-image">
