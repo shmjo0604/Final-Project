@@ -174,5 +174,16 @@ public class ClassUnitServiceImpl implements ClassUnitService {
             return -1;
         }
     }
+
+    @Override
+    public String selectClassProductTitleOne(long classcode) {
+        try {
+            return cMapper.selectClassProductTitleOne(classcode);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     
 }

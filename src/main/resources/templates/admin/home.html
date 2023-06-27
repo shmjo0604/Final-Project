@@ -30,20 +30,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
         integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        $(document).ready(function () {
-            const sidebarToggle = $('#sidebarToggle');
-            if (sidebarToggle) {
-                sidebarToggle.click(function () {
-                    console.log('버튼클릭');
-                    event.preventDefault(); // 아래쪽 요소로 이벤트가 전파 안되도록
-                    document.body.classList.toggle('sb-sidenav-toggled'); // toggle은 클래스의 유무를 체크해서 없으면 add, 있으면 remove를 자동으로 시켜준다.
-                    localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
-                    //sb|sidebar-toggle : sb로 시작하고 sidebar-toggle로 끝나는 단어가 있으면  sb-sidenav-toggled로 바꿔라
-                });
-            }
-        });
-    </script>
+    <!--google-font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">  
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
 </head>
 
 <body class="sb-nav-fixed">
@@ -81,12 +73,11 @@
                     <i class="bi bi-person-lines-fill"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="profile">
-                    <li><a class="dropdown-item" href="#!">메인홈</a></li>
-                    <!-- <li><a class="dropdown-item" href="#!">로그</a></li> -->
+                    <li><a class="dropdown-item" th:href="@{/login.do}">메인홈</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" th:href="@{/logout.do}">로그아웃</a></li>
+                    <li><a class="dropdown-item" th:href="@{/admin/login.do}">로그아웃</a></li>
                 </ul>
             </li>
         </ul>
@@ -105,13 +96,13 @@
                             대시보드
                         </a>
                         <div class="sb-sidenav-menu-heading">관리</div>
-                        <a class="nav-link" href="charts.html">
+                        <a class="nav-link" href="./home.do">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            클래스 승인
+                            통계
                         </a>
-                        <a class="nav-link" href="table.html">
+                        <a class="nav-link" href="./home.do">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            문의
+                            승인
                         </a>
                     </div>
                 </div>
@@ -124,13 +115,13 @@
         <div id="layoutContent">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">대시보드</h1>
+                    <h3 class="mt-4" style="font-family: 'Noto Sans KR', sans-serif; font-weight: bold;">대시보드</h3>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active" style="margin: 5px;"><span class="date"></span></li>
                     </ol>
                     
                     <!-- 카드 -->
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-lg-3 col-md-6">
                             <div class="card bg-primary text-white mb-4">
                                 <div class="card-body">회원</div>
@@ -163,7 +154,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- 테이블(보드) -->
                     <div class="row" style="margin: 10px;">
@@ -186,65 +177,36 @@
                                         <thead>
                                             <tr>
                                                 <th>번호</th>
-                                                <th>아이디</th>
                                                 <th>신청일자</th>
-                                                <th>분류</th>
-                                                <th>제목</th>
-                                                <th>자격사항</th>
-                                                <th>처리상태</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>test1</td>
-                                                <td>2023-06-11</td>
-                                                <td>공예</td>
-                                                <td>재밌는 전통 공예</td>
-                                                <td><button class="btn btn-sm" style="border: 1px solid gray; width: 80px; height: 30px;">보기</button></td>
-                                                <td>대기</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-table me-1"></i>
-                                    서비스 문의 내역
-                                </div>
-                                <div class="card-body">
-                                    <!-- 테이블 -->
-                                    <table id="datatablesSimple2">
-                                        <thead>
-                                            <tr>
-                                                <th>번호</th>
-                                                <th>제목</th>
-                                                <th>내용</th>
-                                                <th>날짜</th>
                                                 <th>아이디</th>
+                                                <th>SNS</th>
+                                                <th>클래스명</th>
                                                 <th>처리상태</th>
-                                                <th>조회</th>
+                                                <th>승인</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td >1</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>2011/04/25</td>
-                                                <td>test8</td>
-                                                <td>답변대기</td>
-                                                <td><button class="btn btn-sm" style="border: 1px solid gray; width: 80px; height: 30px;">보기</button></td>
+                                        <tbody>확
+                                            <tr th:each="obj, index : ${list}">
+                                                <td th:text="${index.index + 1}"></td>
+                                                <td th:text="${#dates.format(obj.regdate, 'yyyy.MM.dd')}"></td>
+                                                <td th:text="${obj.memberid}"></td>
+                                                <td th:text="${obj.sns}"></td>
+                                                <td th:text="${obj.title}"></td>
+
+                                                <div th:if="${obj.chk == 0}">
+                                                    <td><span>대기중</span></td>
+                                                    <td><button class="btn btn-success btn-sm" style="border: 1px solid gray; width: 50px; height: 30px;" th:onclick="confirmFunc([[${obj.classcode}]])">확인</button></td>
+                                                </div>
+                                                <div th:if="${obj.chk == 1}"> 
+                                                    <td><span>완료</span></td>
+                                                    <td><button class="btn btn-danger btn-sm" style="border: 1px solid gray; width: 50px; height: 30px;" th:onclick="cancleFunc([[${obj.classcode}]])">취소</button></td>
+                                                </div>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
             </main>
         </div>
@@ -259,8 +221,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <!-- Simple DataTable용 js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
-    <script>
-        // 테이블
+
+    <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.5/axios.min.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+        // 왼쪽 사이드바
+        $(document).ready(function () {
+            const sidebarToggle = $('#sidebarToggle');
+            if (sidebarToggle) {
+                sidebarToggle.click(function () {
+                    console.log('버튼클릭');
+                    event.preventDefault(); // 아래쪽 요소로 이벤트가 전파 안되도록
+                    document.body.classList.toggle('sb-sidenav-toggled'); // toggle은 클래스의 유무를 체크해서 없으면 add, 있으면 remove를 자동으로 시켜준다.
+                    localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+                    //sb|sidebar-toggle : sb로 시작하고 sidebar-toggle로 끝나는 단어가 있으면  sb-sidenav-toggled로 바꿔라
+                });
+            }
+        });
+
+        // simpleDatatables
         $(document).ready(function () {
             const dataTable = new simpleDatatables.DataTable("#datatablesSimple1", {
                 searchable: false,
@@ -274,8 +253,7 @@
             })
         });
 
-
-        // 오늘날짜
+        // 당일날짜
         window.addEventListener('DOMContentLoaded', function() {
         var dateElements = document.querySelectorAll('.date');
         var today = new Date();
@@ -288,6 +266,46 @@
             dateElements[i].textContent = formattedDate;
         }
         });
+    
+        async function confirmFunc(classcode) {
+            console.log(classcode);
+            // PUT호출
+            const url = /*[[@{/api/admin/updatechkToConfirm.json}]]*/"";
+            const headers = { "Content-Type": "application/json" };
+            const body = { classcode : classcode };
+            console.log(body);
+            const { data } = await axios.put(url, body, { headers: headers });
+            
+            console.log('반환되는 결과', data);
+            if (data.status === 200) {
+                alert("클래스 승인완료")
+                location.reload();
+            }
+            else {
+                alert("클래스 승인실패");
+            }
+        }
+
+
+        async function cancleFunc(classcode) {
+            console.log(classcode);
+            // PUT호출
+            const url = /*[[@{/api/admin/updatechkToCancle.json}]]*/"";
+            const headers = { "Content-Type": "application/json" };
+            const body = { classcode : classcode };
+            console.log(body);
+            const { data } = await axios.put(url, body, { headers: headers });
+            
+            console.log('반환되는 결과', data);
+            if (data.status === 200) {
+                alert("클래스 승인취소 완료")
+                location.reload();
+                
+            }
+            else {
+                alert("클래스 승인취소 실패");
+            }
+        }
     
     </script>
 </body>

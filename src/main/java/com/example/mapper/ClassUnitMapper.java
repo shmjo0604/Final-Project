@@ -37,7 +37,7 @@ public interface ClassUnitMapper {
 	/* (5) ClassUnitView 하나 조회 */
 	public ClassUnitView selectClassUnitViewOne(long unitno);
 
-	/* (6) ClassUnit 개설 일정 조회 */
+	/* (6) ClassUnit 개설 일정 조회(calendar)*/
 	public List<ClassUnit> selectUnitListToCal(long classcode);
 
 	/* (7) ClassUnit 페이징 조회 (by classcode) */
@@ -52,4 +52,6 @@ public interface ClassUnitMapper {
 	/* (10) ClassUnit 완료 상태 변경(chk -> 2) */
 	public int updateClassUnitComplete(long no);
 
+	// (11) 클래스 타이틀 조회
+	public String selectClassProductTitleOne(long classcode);
 }

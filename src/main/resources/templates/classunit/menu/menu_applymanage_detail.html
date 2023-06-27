@@ -10,9 +10,9 @@
     <link rel="icon" th:href="@{/image/logo.ico}">
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=DynaPuff&family=Permanent+Marker&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">  
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <!--Bootstrap 용 CSS-->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <!--CSS-->
@@ -52,9 +52,9 @@
             background-color: unset;
         }
 
-        .table.table-borderd.center,
-        .table.table-borderd.center thead tr th,
-        .table.table-borderd.center tbody tr td {
+        .table.table-bordered.center,
+        .table.table-bordered.center thead tr th,
+        .table.table-bordered.center tbody tr td {
             text-align: center;
         }
 
@@ -68,7 +68,10 @@
 
         .menu:hover { background-color: rgb(245, 241, 241);}
 
-        .btn:hover{background-color: rgb(245, 241, 241);}
+        /* 결제완료일 때 승인 버튼 스타일 */
+        .btn-approval:hover {
+            background-color: rgb(245, 241, 241);
+        }
     </style>
 </head>
 
@@ -88,14 +91,14 @@
                     <div class="sidevar">
                         <div class="sidevar-menu">
                             <ul style="padding-left : 5px; padding-right: 5px; padding-top: 20px;">
-                                <label style="font-size: small;"><i class="fa-solid fa-list" style="color: black;"></i> 일정 관리 및 신청 관리</label>
+                                <label style="font-size: medium; font-family: 'Do Hyeon', sans-serif; color: gray;"><i class="fa-solid fa-list" style="color: gray;"></i> 일정 및 신청 관리</label>
                                 <hr style="border: 0.5px solid rgb(0, 0, 0); margin-top: 5px;"/>
                                 <li style="list-style: none;"><a th:href="@{myunit.do(classcode=${classcode}, menu=1)}" style="text-decoration: none; color: black; font-weight: bold; font-size: medium;" class="menu">일정 관리</a></li>
                                 <hr style="margin-top: 5px; margin-bottom: 5px;" />
                                 <li style="list-style: none;"><a th:href="@{myunit.do(classcode=${classcode}, menu=2)}" style="text-decoration: none; color: black; font-weight: bold; font-size: medium;" class="menu">신청 관리</a></li>
                                 <hr style="margin-top: 5px; margin-bottom: 5px;" />
                             </ul>
-                            <button class="btn btn-sm" style="width: 215px; border: 1px solid rgba(224, 221, 221, 0.466); height: 40px; margin-top: 560px; color: gray;"><a class="nav-link" th:href="@{/member/myclass.do?menu=1}">클래스 관리</a></button>
+                            <button class="btn btn-sm" style="width: 215px; border: 1px solid rgba(168, 166, 166, 0.466); height: 40px; margin-top: 560px; color: gray; font-weight: bold;"><a class="nav-link" th:href="@{/member/myclass.do?menu=1}">클래스 관리</a></button>
                             
                         </div>
                     </div>
@@ -103,40 +106,40 @@
                 <!-- /left -->
 
                 <!-- right -->
-                <div class="col-sm-8" style="margin-top: 30px; margin-left: 50px;">
-                    <div style="border: 1px solid rgb(187, 184, 184); height:700px; padding:20px;">
-                        <a href="javascript:window.history.go(-1);"><i class="fa-solid fa-circle-chevron-left" style="color: rgb(23, 99, 59); font-size: x-large;"></i></a>
-                        <h3 style="font-weight: bold;" class="text-center">신청 내역</h3><br />
+                <div class="col-sm-8" style="margin-left: 50px;">
+                    <div style="border: 1px solid rgb(212, 209, 209); height:800px; padding:20px;">
+                        <a href="javascript:window.history.go(-1);"><i class="fa-solid fa-circle-chevron-left" style="color: rgb(33, 137, 81); font-size: x-large;"></i></a>
+                        <h3 style="font-weight: bold; font-family: 'Noto Sans KR', sans-serif;" class="text-center">신청 내역</h3><br />
                         <th:block th:if="${#lists.isEmpty(list)}">
-                            <h3 class="text-center" style="font-size: larger; color: gray; margin-top: 250px; margin-bottom: 300px;">신청 인원이 없습니다.</h3>
+                            <h3 class="text-center" style="font-size: larger; color: gray; margin-top: 250px; margin-bottom: 300px; font-family: 'Nanum Gothic', sans-serif;">신청 인원이 없습니다.</h3>
                         </th:block>
 
                         <th:block th:if="${!#lists.isEmpty(list)}">
-                            <table class="table table-borderd center">
+                            <table class="table table-bordered center">
                                 <thead>
                                     <tr>
-                                        <th>신청일자</th>
-                                        <th>아이디</th>
-                                        <th>전화번호</th>
-                                        <th>신청인원</th>
-                                        <th>승인내역</th>
-                                        <th></th>
+                                        <th style="font-family: 'Nanum Gothic', sans-serif;">신청일자</th>
+                                        <th style="font-family: 'Nanum Gothic', sans-serif;">아이디</th>
+                                        <th style="font-family: 'Nanum Gothic', sans-serif;">전화번호</th>
+                                        <th style="font-family: 'Nanum Gothic', sans-serif;">신청인원</th>
+                                        <th style="font-family: 'Nanum Gothic', sans-serif;">처리상태</th>
+                                        <th style="font-family: 'Nanum Gothic', sans-serif;">승인내역</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr th:each="obj : ${list}">
-                                        <td th:text="${#dates.format(obj.regdate, 'yyyy-MM-dd')}"></td>
-                                        <td th:text="${obj.memberid}"></td>
-                                        <td th:text="${obj.phone}"></td>
-                                        <td th:text="|${obj.person}명|"></td>
+                                        <td style="font-family: 'Nanum Gothic', sans-serif;" th:text="${#dates.format(obj.regdate, 'yyyy-MM-dd')}"></td>
+                                        <td style="font-family: 'Nanum Gothic', sans-serif;" th:text="${obj.memberid}"></td>
+                                        <td style="font-family: 'Nanum Gothic', sans-serif;" th:text="${obj.phone}"></td>
+                                        <td style="font-family: 'Nanum Gothic', sans-serif;" th:text="|${obj.person}명|"></td>
 
                                         <div th:if="${obj.chk == 1}">
-                                            <td><span th:classappend="${obj.chk == 3} ? 'completed' : ''">결제완료</span></td>
-                                            <td><button type="button" class="btn btn-sm" style="border: 1px solid gray; background-color: ghostwhite;" th:onclick="'update(' + ${obj.no} + ',' + ${obj.unitno} + ', this)'">승인</button></td>
+                                            <td style="font-family: 'Nanum Gothic', sans-serif;"><span th:classappend="${obj.chk == 3} ? 'completed' : ''">결제완료</span></td>
+                                            <td style="font-family: 'Nanum Gothic', sans-serif;"><button type="button" class="btn btn-sm btn-approval" style="border: 1px solid gray; width: 50px;" th:onclick="'update(' + ${obj.no} + ',' + ${obj.unitno} + ', this)'">승인</button></td>
                                         </div>
                                         <div th:if="${obj.chk == 3}">
-                                            <td><span>참여완료</span></td>
-                                            <td><button type="button" class="btn btn-sm" style="border: 1px solid gray; width: 70px;" disabled>승인</button></td>
+                                            <td style="font-family: 'Nanum Gothic', sans-serif;"><span>참여완료</span></td>
+                                            <td style="font-family: 'Nanum Gothic', sans-serif;"><button type="button" class="btn btn-sm" style="border: 1px solid gray; width: 50px;" disabled>승인</button></td>
                                         </div>
                   
                                     </tr>

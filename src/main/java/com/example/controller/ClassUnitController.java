@@ -50,12 +50,12 @@ public class ClassUnitController {
         if(menu == 1) {
             long defaultPrice = cuService.selectPriceOne(classcode);
             List<ClassUnit> list = cuService.selectUnitListToCal(classcode);
-            
-            //log.info(format, list.toString());
+            String title = cuService.selectClassProductTitleOne(classcode);
 
             model.addAttribute("classcode", classcode);
             model.addAttribute("defaultPrice", defaultPrice);
             model.addAttribute("list", list);
+            model.addAttribute("title",title);
         }
 
         else if(menu == 2){
@@ -84,7 +84,7 @@ public class ClassUnitController {
         return "/classunit/unit";
     }
 
-    @GetMapping(value = "/applymanage.do")
+    @GetMapping(value = "/applymanage_detail.do")
     public String applymanageGET(
         @RequestParam(name = "unitno", defaultValue = "0") long unitno,
         @RequestParam(name = "classcode", defaultValue = "0") long classcode, 
@@ -97,7 +97,7 @@ public class ClassUnitController {
         model.addAttribute("list", list);
         model.addAttribute("user", user);
 
-        return "/classunit/unitmanage";
+        return "/classunit/menu/menu_applymanage_detail";
     }
     
 }
