@@ -47,7 +47,7 @@ public class Community {
   private String content;
 
   // 글 조회수
-  private int hit =1;
+  private int hit  = 1;
 
   // 등록 일자
   @UpdateTimestamp

@@ -25,6 +25,9 @@ public interface CommunityService {
     // 4. 커뮤니티 게시글 전채 개수 조회
     public long countCommunityList();
 
+    //게시글 조회수 증가
+    public int updatehit(long no);
+
  
 
 }

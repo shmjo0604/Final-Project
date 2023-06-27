@@ -467,9 +467,9 @@
             const modal_email = document.getElementById("modal_email");
             const modal_phone = document.getElementById("modal_phone");
 
-            //console.log(modal_name.value);
-            //console.log(modal_email.value);
-            //console.log(modal_phone.value);
+            console.log(modal_name.value);
+            console.log(modal_email.value);
+            console.log(modal_phone.value);
 
             if (modal_name.value.length <= 0) {
                 alert('이름을 입력하세요');
@@ -490,7 +490,7 @@
             }
 
             const url = contextPath + '/api/member/findid.json';
-            const headers = { "Content-Type": "application/json" };
+            const headers = { "Content-Type" : "application/json" };
             const { data } = await axios.get(url,
                 { params: { name: modal_name.value, email: modal_email.value, phone: modal_phone.value } },
                 { headers });

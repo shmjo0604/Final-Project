@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Community;
+import com.example.mapper.CommunityMapper;
 import com.example.repository.CommunityRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ public class CommunityServiceImpl implements CommunityService {
 
     @Autowired
     public CommunityRepository cRepository;
-
+    public CommunityMapper cMapper;
     @Override
     public int insertCommnuityOne(Community obj) {
         try {
@@ -61,6 +62,20 @@ public class CommunityServiceImpl implements CommunityService {
             return null;
         }
     }
+
+    @Override
+    public int updatehit(long no) {
+        try {
+            return cMapper.updatehit(no);
+            
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+  
 
 
 
