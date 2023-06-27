@@ -76,7 +76,7 @@ public class RestClassController {
 
         Map<String, Object> retMap = new HashMap<>();
 
-        //log.info(format, map.toString());
+        log.info(format, map.toString());
 
         String optionStr = (String)map.get("option");
         int option = Integer.parseInt(optionStr);

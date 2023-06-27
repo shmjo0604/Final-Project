@@ -44,7 +44,10 @@ public interface ClassUnitService {
 	/* (9) ClassUnit 전체 개수 (by classcode) */
 	public long selectUnitListCountByClasscode(long classcode);
 
-	// (10) 클래스 타이틀 조회
+	/* (10) 클래스 타이틀 조회 */ 
 	public String selectClassProductTitleOne(long classcode);
+
+	/* (10) ClassUnit 신청 인원 존재 유무 확인 (by memberid) */
+	public int selectUnitViewCntCheck(String memberid);
 
 }

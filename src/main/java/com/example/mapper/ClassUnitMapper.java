@@ -52,6 +52,9 @@ public interface ClassUnitMapper {
 	/* (10) ClassUnit 완료 상태 변경(chk -> 2) */
 	public int updateClassUnitComplete(long no);
 
-	// (11) 클래스 타이틀 조회
+	/* (11) 클래스 타이틀 조회 */ 
 	public String selectClassProductTitleOne(long classcode);
+
+	/* (12) ClassUnit 신청 인원 존재 유무 확인 (by memberid) */
+	public int selectUnitViewCntCheck(String memberid);
 }

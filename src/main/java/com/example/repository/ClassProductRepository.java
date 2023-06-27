@@ -12,7 +12,7 @@ import com.example.entity.ClassProduct;
 public interface ClassProductRepository extends JpaRepository<ClassProduct, Long> {
     
     @Query(
-        value="SELECT * FROM (SELECT c.*, ROW_NUMBER() OVER(ORDER BY c.classcode DESC) rnum FROM CLASSPRODUCT c) c WHERE rnum BETWEEN 1 AND 6 ORDER BY c.rnum ASC ", 
+        value="SELECT * FROM (SELECT c.*, ROW_NUMBER() OVER(ORDER BY c.classcode DESC) rnum FROM CLASSPRODUCT c WHERE c.chk = 1) c WHERE rnum BETWEEN 1 AND 6 ORDER BY c.rnum ASC ", 
         nativeQuery = true)
     List<ClassProduct> findAllTopSixByOrderByClasscodeDesc();
 

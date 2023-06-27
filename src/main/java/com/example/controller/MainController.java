@@ -33,6 +33,9 @@ public class MainController {
         Model model
     ) {
         List<ClassProduct> list = selectService.selectMainHomeClassList();
+
+        log.info("메인 => {}", list.size());
+
         if(!list.isEmpty()){
             for (ClassProduct obj : list ) {
 
@@ -47,7 +50,6 @@ public class MainController {
 
         model.addAttribute("list", list);
         model.addAttribute("user", user);
-        // log.info("select one=> {}", list);
         
         return "home";
     }
