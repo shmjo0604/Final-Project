@@ -229,7 +229,7 @@ public class RestClassController {
 
         Map<String, Object> retMap = new HashMap<>();
 
-        // log.info(format, obj.toString());
+        log.info(format, obj.toString());
 
         int ret = cService.updateClassProductHit(obj);
 

@@ -190,6 +190,16 @@ public class ReviewServiceImpl implements ReviewService {
         }
     }
 
+    @Override
+    public int updateReviewHit(long no) {
+       try {
+        return r1Repository.updateReviewHit(no);
+       } catch (Exception e) {
+        e.printStackTrace();
+        return -1;
+       }
+    }
+
 }
 
 

@@ -107,7 +107,7 @@ public class ClassController {
         long profile = manageService.selectClassProfileImageNo(classcode);
         List<ClassUnit> list = unitService.selectUnitListToCal(classcode);
 
-        //log.info(format, obj.toString());
+        log.info(format, obj.toString());
 
         model.addAttribute("obj", obj);
         model.addAttribute("mainImg", mainImg);

@@ -176,6 +176,31 @@
         .utable>td {
             font-size: 12px;
         }
+
+        .card-id {
+            color: rgba(0, 0, 0, 0.5);
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 5px;
+
+        }
+
+        .card-regdate {
+            position: relative;
+            bottom: -50px;
+        }
+
+        .card-button:hover {
+            background-color: #11d511;
+        }
+
+        .card-hit {
+            color: gray;
+            width: 100px;
+            position: relative;
+            left: 120px;
+            bottom: 115px;
+        }
     </style>
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
@@ -215,7 +240,7 @@
                                 <img th:src="@{/class/image(no=${tmp})}">
                             </th:block>
                         </div>
-                
+
                     </div>
 
                     <div class="border-bottom">
@@ -275,7 +300,13 @@
                             <h3 class="d-flex align-items-center my-3"><i class="bi bi-person-vcard me-2"></i><span>강사
                                     소개</span>
                             </h3>
-                            <div th:utext="${obj.instructor}"></div>
+                            <img th:src="@{/class/image(no=${profile})}" class="mb-3"
+                                style="width: 180px; height: 150px;">
+                            <div th:utext="${obj.instructor}">
+
+                            </div>
+                            <!-- <div th:utext="${obj.sns}"></div> -->
+
                         </div>
 
                         <hr>
@@ -346,7 +377,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </th:if>
+                                </th:if>
                         </div>
 
                         <!--문의 작성 Modal-->
@@ -370,8 +401,9 @@
                                                     <tr>
                                                         <td class="text-center align-middle">문의 제목</td>
                                                         <td>
-                                                            <input id="inquiry_title" class="form-control" name="title" type="text"
-                                                                placeholder="문의 제목을 작성하세요" style="width:100%;">
+                                                            <input id="inquiry_title" class="form-control" name="title"
+                                                                type="text" placeholder="문의 제목을 작성하세요"
+                                                                style="width:100%;">
                                                         </td>
                                                     </tr>
                                                 </thead>
@@ -385,7 +417,7 @@
                                                                 style="width:100%;" rows="10"></textarea>
                                                         </td>
                                                     </tr>
-                                                    
+
                                                 </tbody>
                                             </table>
                                         </div>
@@ -399,10 +431,11 @@
                                         </div>
 
                                         <th:block th:if="${user != null}">
-                                            <input name="member.id" type="hidden" th:value="${user.username}"/>
+                                            <input name="member.id" type="hidden" th:value="${user.username}" />
                                         </th:block>
-                                        <input name="classproduct.classcode" type="hidden" th:value="${obj.classcode}"/>
-                                        <input name="classproduct.member.id" type="hidden" th:value="${obj.memberid}"/>
+                                        <input name="classproduct.classcode" type="hidden"
+                                            th:value="${obj.classcode}" />
+                                        <input name="classproduct.member.id" type="hidden" th:value="${obj.memberid}" />
                                     </form>
                                 </div>
                             </div>
@@ -638,7 +671,7 @@
 
         function createEventObjects() {
             return list.map(function (obj) {
-                
+
                 return {
                     title: obj.classstart,
                     start: obj.classdate,
@@ -764,12 +797,12 @@
 
         function applyAction() {
 
-            if($("#unitno").val() === '') {
+            if ($("#unitno").val() === '') {
                 alert("클래스 날짜를 선택해주세요.");
                 return false;
             }
 
-            if($("#person").val() === '') {
+            if ($("#person").val() === '') {
                 alert("신청 인원을 선택해주세요.");
                 return false;
             }
@@ -779,16 +812,16 @@
 
         function basketAction() {
 
-            if($("#basket_unitno").val() === '') {
+            if ($("#basket_unitno").val() === '') {
                 alert("클래스 날짜를 선택해주세요.");
                 return false;
             }
 
-            if($("#basket_cnt").val() === '') {
+            if ($("#basket_cnt").val() === '') {
                 alert("신청 인원을 선택해주세요.");
                 return false;
             }
- 
+
             $("#form-basket").submit();
         }
 
@@ -811,12 +844,12 @@
             const title = document.getElementById("inquiry_title");
             const content = document.getElementById("inquiry_content");
 
-            if(title.value.length < 1) {
+            if (title.value.length < 1) {
                 alert("문의 제목을 입력해주세요");
                 return false;
             }
 
-            if(content.value.length < 1) {
+            if (content.value.length < 1) {
                 alert("문의 내용을 입력해주세요");
                 return false;
             }
@@ -834,11 +867,11 @@
             console.log(data);
 
             const box = document.querySelector("#review_box");
-
+            $('#review_box').empty();
             // box.innerHTML = "";
 
-            if(data.status === 200) {
-                
+            if (data.status === 200) {
+
                 data.list.forEach((obj, index) => {
 
                     var card = document.createElement('div');
@@ -850,7 +883,7 @@
                     var col1 = document.createElement('div');
                     col1.className = "col-md-4";
 
-                    if(obj.imglist.length > 0) {
+                    if (obj.imglist.length > 0) {
 
                         var carousel = document.createElement('div');
                         carousel.id = "carouselExample" + index;
@@ -861,7 +894,7 @@
 
                         obj.imglist.forEach((tmp, index) => {
 
-                            if(index === 0) {
+                            if (index === 0) {
                                 var carousel_item = document.createElement('div');
                                 carousel_item.className = "carousel-item active";
 
@@ -911,7 +944,7 @@
 
                         button_prev.addEventListener('click', event => {
                             console.log(-1);
-                            new bootstrap.Carousel("#carouselExample"+index, {}).prev();
+                            new bootstrap.Carousel("#carouselExample" + index, {}).prev();
                         })
 
                         carousel.appendChild(button_prev);
@@ -985,20 +1018,42 @@
                     card_body.className = "card-body";
 
                     var card_title = document.createElement('h6');
-                    card_title.className = "card-title";
+                    card_title.className = "card-title card-id";
                     card_title.textContent = obj.id;
 
                     var card_text1 = document.createElement('div');
-                    card_text1.className = "card-text";
+                    card_text1.className = "card-text mt-3 ";
                     card_text1.innerHTML = obj.content;
 
                     var card_text2 = document.createElement('p');
-                    card_text2.className = "card-text";
-                    card_text2.textContent = obj.regdate;
+                    card_text2.className = "card-text card-regdate";
+                    var reviewdate = new Date(obj.regdate)
+                    var day = ['일', '월', '화', '수', '목', '금', '토', '일']
+                    var reviewDateFormat = reviewdate.getFullYear() + "년 "
+                        + (reviewdate.getMonth() + 1) + "월" + reviewdate.getDate() + "일" + "\u00A0" + '(' + day[reviewdate.getDay()] + '요일)'
+                    card_text2.textContent = reviewDateFormat;
+
+                    var card_text3 = document.createElement('button');
+                    card_text3.className = "card-button btn btn-success float-end"
+                    card_text3.innerHTML = "추천해요!";
+                    card_text3.onclick = function () { hitReview(obj.no, obj.classcode) }
+
+                    var card_text4 = document.createElement('p');
+                    card_text4.className = "card-hit float-end";
+                    card_text4.textContent = "조회수: " + obj.hit;
+
+
+                    // 바깥에 만드는 거랑 안에 만드는거랑 먼 차이?
+
+                    // 왜 안되지?
+                    // card_text3.value = "추천해요!";
+                    // card_text3.type="button";
 
                     card_body.appendChild(card_title);
                     card_body.appendChild(card_text1);
                     card_body.appendChild(card_text2);
+                    card_body.appendChild(card_text3);
+                    card_body.appendChild(card_text4);
 
                     col2.appendChild(card_body);
 
@@ -1008,7 +1063,7 @@
                     card.appendChild(row);
 
                     box.appendChild(card);
-                    
+
                 })
             }
 
@@ -1023,11 +1078,26 @@
 
             }
 
-            
-
         }
 
         selectReviewList(1);
+
+        async function hitReview(no, classcode) {
+
+            const url = contextPath + '/api/review/updatehit.json'
+            const headers = { "Content-Type": "application/json" };
+            const body = { no: Number(no) }
+            const { data } = await axios.put(url, body, { headers });
+
+            // window.location.href = "product.do?classcode=" +classcode;
+            if(data.ret === 1){
+                selectReviewList(1);
+            }
+            // console.log(data);
+            // console.log(no);
+            // console.log(classcode);
+            // console.log('오케이');
+        }
 
         /*]]>*/
     </script>

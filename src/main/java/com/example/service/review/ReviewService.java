@@ -53,4 +53,7 @@ public interface ReviewService {
 
     // 14. 리뷰이미지 번호 조회
     public List<Long> reviewImagelistNo(long no);
+
+     // 15. 리뷰 클릭시 조회수 증가
+    public int updateReviewHit(long no);
 }

@@ -10,6 +10,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -95,6 +97,22 @@ public class RestReviewController {
         map.put("reviewNolist", reviewNolist);
 
         return map;
+
+    }
+
+    @PutMapping(value = "/updatehit.json")
+    public Map<String, Object> updatehitPUT(@RequestBody com.example.entity.Review obj) {
+
+        Map<String, Object> retMap = new HashMap<>();
+
+        log.info(format, obj.toString());
+        // log.info(format, obj.getNo());
+
+        int ret = rService.updateReviewHit(obj.getNo());
+
+        retMap.put("ret", ret);
+
+        return retMap;
 
     }
 

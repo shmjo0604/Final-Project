@@ -7,12 +7,15 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.entity.Review;
 import com.example.entity.ReviewView;
 
+@Transactional
 @Repository
 public interface ReviewViewRepository extends JpaRepository<ReviewView, Long> {
 
@@ -47,6 +50,11 @@ public interface ReviewViewRepository extends JpaRepository<ReviewView, Long> {
     @Query(value = "SELECT * FROM ( SELECT r.*, ROW_NUMBER() OVER (ORDER BY regdate ASC) rown FROM REVIEWVIEW r WHERE r.id =:id) WHERE rown BETWEEN :start AND :end ORDER BY regdate ASC", nativeQuery = true)
     public List<ReviewView> selectReviewByIdPagenationAsc(@Param("id") String id, @Param("start") int start,
                     @Param("end") int end);
+
+    // 7. 리뷰 클릭시 조회수 증가
+    @Modifying
+    @Query(value ="UPDATE REVIEW r SET HIT=HIT+1 WHERE r.no=:no",nativeQuery = true)
+    public int updateReviewHit(@Param("no") long no);
 
 
     interface ReviewViewVo {
