@@ -19,70 +19,74 @@
                 </tr>
             </table>
 
-            <table class="table table-lg table-hover m-3" style="white-space:nowrap;">
-                <thead>
-                    <tr class="table-success">
-                        <th scope="col">NO</th>
-                        <th scope="col">클래스명</th>
-                        <th scope="col">문의제목</th>
-                        <!-- <th scope="col">문의내용</th> -->
-                        <th scope="col">문의날짜</th>
-                        <th scope="col">작성자</th>
-                        <th scope="col">작성</th>
-                        <th scope="col">처리상태</th>
-                    </tr>
-                </thead>
+            <!-- 문의 내역없음 표시하기 -->
+            <th:block th:if="${#lists.isEmpty(list)}">
+                        
+                <h3 class='mt-5 text-center'>문의내역이 존재하지 않습니다.</h6>
+            
+            </th:block>
 
-                <tbody id="emp_rows">
-                    <!-- 문의 내역없음 표시하기 -->
-                    <th:block th:if="${#lists.isEmpty(list)}">
-                        <div style="padding-left: 1rem;">
-                            <h6>문의내역이 존재하지 않습니다.</h6>
-                        </div>
-                    </th:block>
-                    
-                    <!-- 처리상태(0) : 답변대기 -->
-                    <th:block th:if="${!#lists.isEmpty(list)}">
-                        <th:block th:each="obj, objStat : ${list}">
-                        <tr>
-                            <td th:text="${obj.rnum}"></td>
-                            <td><a th:text="${obj.classtitle}" th:href="@{/class/product.do(classcode=${obj.classcode} )}"
-                                style="text-decoration: none;" id="classtitle"></a></td>
-                            <td th:text="${obj.title}"></td>
-                            <!-- <td class="txt" th:text="${obj.content}"><label id="modal"></label></td> -->
-                            <td th:text="${#dates.format(obj.regdate, 'yyyy.MM.dd')}"></td>
-                            <td th:text="${obj.memberid}"></td>
-                            <td>
-                                <th:block th:if="${obj.chk == 0}">
-                                    <button type="button" id="myModal" class="createBtn btn btn-danger"
-                                        th:onclick="answerModal([[${obj.no}]])">
-                                        작성</button>
-                                </th:block>
-                                <th:block th:if="${obj.chk == 1}">
-                                    <button type="button" id="myModal" class="btn btn-success"
-                                        th:onclick="answerModal([[${obj.no}]])">
-                                        수정</button>
-                                </th:block>
-                            </td>
-                            <td>
-                                <th:block th:if="${obj.chk == 0}">
-                                    <div style="color: red;">답변대기</div>
-                                </th:block>
-                                <th:block th:if="${obj.chk == 1}">
-                                    <div style="color: blue;">답변완료</div>
-                                </th:block>
-                            </td>
+            <th:block th:if="${!#lists.isEmpty(list)}">
+                <table class="table table-lg table-hover m-3" style="white-space:nowrap;">
+                    <thead>
+                        <tr class="table-success">
+                            <th scope="col">NO</th>
+                            <th scope="col">클래스명</th>
+                            <th scope="col">문의제목</th>
+                            <!-- <th scope="col">문의내용</th> -->
+                            <th scope="col">문의날짜</th>
+                            <th scope="col">작성자</th>
+                            <th scope="col">작성</th>
+                            <th scope="col">처리상태</th>
                         </tr>
-                        </th:block>
-                    </th:block>
-                </tbody>
-            </table>
+                    </thead>
 
-            <div class="row justify-content-center">
-                <div class="col-4">
-                    <ul id="pagination-demo" class="pagination-sm "></ul>
+                    <tbody id="emp_rows">
+                        
+                        <!-- 처리상태(0) : 답변대기 -->
+                        
+                            <th:block th:each="obj, objStat : ${list}">
+                            <tr>
+                                <td th:text="${obj.rnum}"></td>
+                                <td><a th:text="${obj.classtitle}" th:href="@{/class/product.do(classcode=${obj.classcode} )}"
+                                    style="text-decoration: none;" id="classtitle"></a></td>
+                                <td th:text="${obj.title}"></td>
+                                <!-- <td class="txt" th:text="${obj.content}"><label id="modal"></label></td> -->
+                                <td th:text="${#dates.format(obj.regdate, 'yyyy.MM.dd')}"></td>
+                                <td th:text="${obj.memberid}"></td>
+                                <td>
+                                    <th:block th:if="${obj.chk == 0}">
+                                        <button type="button" id="myModal" class="createBtn btn btn-danger"
+                                            th:onclick="answerModal([[${obj.no}]])">
+                                            작성</button>
+                                    </th:block>
+                                    <th:block th:if="${obj.chk == 1}">
+                                        <button type="button" id="myModal" class="btn btn-success"
+                                            th:onclick="answerModal([[${obj.no}]])">
+                                            수정</button>
+                                    </th:block>
+                                </td>
+                                <td>
+                                    <th:block th:if="${obj.chk == 0}">
+                                        <div style="color: red;">답변대기</div>
+                                    </th:block>
+                                    <th:block th:if="${obj.chk == 1}">
+                                        <div style="color: blue;">답변완료</div>
+                                    </th:block>
+                                </td>
+                            </tr>
+                            </th:block>
+                        
+                    </tbody>
+                </table>
+
+                <div class="row justify-content-center">
+                    <div class="col-4">
+                        <ul id="pagination-demo" class="pagination-sm "></ul>
+                    </div>
                 </div>
-            </div>
+
+            </th:block>
 
             <!-- 모달 창 -->
             <div class="modal modal-center fade" id="classAnswerModal" data-bs-backdrop="static" tabindex="-1"

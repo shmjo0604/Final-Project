@@ -145,7 +145,7 @@
                             <th:block th:each="obj : ${list}" th:if="${obj.chk == 1}">
                                 <div class="col">
                                     <div class="class">
-                                        <a href="#" th:onclick="updatehit([[${obj.classcode}]])"
+                                        <a style="cursor: pointer" th:onclick="updatehit([[${obj.classcode}]])"
                                             class="new-c1">
                                             <div class="new-c2">
                                                 <div class="class-image">
@@ -332,6 +332,8 @@
                 $('.slide li').eq(nowNum).show();
             });
         });
+
+        // 클래스 조회수 증가
 
         async function updatehit(code) {
 
