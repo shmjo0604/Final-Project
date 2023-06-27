@@ -22,29 +22,6 @@
     <!--thymeleaf contextpath-->
     <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}" />
     <style>
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-        }
-
-        #body-wrapper {
-            min-height: 100%;
-            position: relative;
-        }
-
-        
-        #body-content {
-            padding-bottom: 150px;
-            
-        }
-
-        footer {
-            position: relative;
-            height: 150px;
-        }
-
          /* 사이드바 메뉴 hover */
         .menu {
             display: inline-block;
@@ -105,7 +82,10 @@
     </div>
     
     <!--footer 영역-->
-    <footer th:replace="~{footer :: footerFragment}"></footer>
+    <div style="margin-top: 150px;">
+        <footer th:replace="~{footer :: footerFragment}"></footer>
+    </div>
+    
     <script>
         const contextPath = $("#contextPathHolder").attr("data-contextPath");
     </script>

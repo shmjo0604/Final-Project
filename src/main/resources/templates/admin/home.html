@@ -161,8 +161,8 @@
                         <div class="col">
                             <div class="card mb-4">
                                 <div class="card-header">
-                                    <i class="fas fa-table me-1"></i>
-                                    클래스 신청 내역
+                                    <i class="fa-solid fa-user-pen"></i>
+                                    클래스 등록 관리
                                 </div>
                                 <div class="card-body">
                                     
@@ -173,7 +173,7 @@
                                         #datatablesSimple2 th {text-align: center;}
                                         #datatablesSimple2 td {text-align: center;}
                                     </style>
-                                    <table id="datatablesSimple1">
+                                    <table id="datatablesSimple1" class="table table-hover">
                                         <thead>
                                             <tr>
                                                 <th>번호</th>
@@ -192,15 +192,18 @@
                                                 <td th:text="${obj.memberid}"></td>
                                                 <td th:text="${obj.sns}"></td>
                                                 <td th:text="${obj.title}"></td>
-
-                                                <div th:if="${obj.chk == 0}">
-                                                    <td><span>대기중</span></td>
-                                                    <td><button class="btn btn-success btn-sm" style="border: 1px solid gray; width: 50px; height: 30px;" th:onclick="confirmFunc([[${obj.classcode}]])">확인</button></td>
-                                                </div>
-                                                <div th:if="${obj.chk == 1}"> 
-                                                    <td><span>완료</span></td>
-                                                    <td><button class="btn btn-danger btn-sm" style="border: 1px solid gray; width: 50px; height: 30px;" th:onclick="cancleFunc([[${obj.classcode}]])">취소</button></td>
-                                                </div>
+                                                <td>
+                                                    <span th:if="${obj.chk == 0}" th:classappend="${obj.chk == 1} ? 'completed' : ''">대기</span>
+                                                    <span th:if="${obj.chk == 1}">완료</span>
+                                                </td>
+                                                <td>
+                                                    <div th:if="${obj.chk == 0}">
+                                                        <button class="btn btn-success btn-sm" style="border: 1px solid gray; width: 70px; height: 30px;" th:onclick="'confirmFunc(\'' + ${obj.classcode} + '\', this)'">확인</button>
+                                                    </div>
+                                                    <div th:if="${obj.chk == 1}">
+                                                        <button class="btn btn-danger btn-sm" style="border: 1px solid gray; width: 70px; height: 30px;" th:onclick="'cancelFunc(\'' + ${obj.classcode} + '\', this)'">취소</button>
+                                                    </div>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -267,27 +270,38 @@
         }
         });
     
-        async function confirmFunc(classcode) {
+        async function confirmFunc(classcode, button) {
             console.log(classcode);
             // PUT호출
             const url = /*[[@{/api/admin/updatechkToConfirm.json}]]*/"";
             const headers = { "Content-Type": "application/json" };
-            const body = { classcode : classcode };
+            const body = { classcode: classcode };
             console.log(body);
             const { data } = await axios.put(url, body, { headers: headers });
-            
+        
             console.log('반환되는 결과', data);
             if (data.status === 200) {
                 alert("클래스 승인완료")
-                location.reload();
-            }
-            else {
+                const spanElement = $(button).closest('td').find('span');
+                spanElement.text('완료');
+                spanElement.addClass('completed');
+        
+                // 처리상태 변경(대기 => 완료)
+                const statusElement = $(button).closest('tr').find('td:nth-child(6)');
+                statusElement.find('span').text('완료');
+                statusElement.find('span').addClass('completed');
+                
+                // "취소" 버튼으로 변경
+                $(button).text('취소');
+                $(button).attr('onclick', 'cancelFunc(\'' + classcode + '\', this)');
+                $(button).removeClass('btn-success').addClass('btn-danger');
+            } else {
                 alert("클래스 승인실패");
             }
         }
 
 
-        async function cancleFunc(classcode) {
+        async function cancelFunc(classcode, button) {
             console.log(classcode);
             // PUT호출
             const url = /*[[@{/api/admin/updatechkToCancle.json}]]*/"";
@@ -299,8 +313,19 @@
             console.log('반환되는 결과', data);
             if (data.status === 200) {
                 alert("클래스 승인취소 완료")
-                location.reload();
-                
+                const spanElement = $(button).closest('td').find('span');
+                spanElement.text('완료');
+                spanElement.addClass('completed');
+        
+                // 처리상태 변경(완료 => 대기)
+                const statusElement = $(button).closest('tr').find('td:nth-child(6)');
+                statusElement.find('span').text('대기');
+                statusElement.find('span').addClass('completed');
+
+                // "확인" 버튼으로 변경
+                $(button).text('확인');
+                $(button).attr('onclick', 'confirmFunc(\'' + classcode + '\', this)');
+                $(button).removeClass('btn-danger').addClass('btn-success');
             }
             else {
                 alert("클래스 승인취소 실패");

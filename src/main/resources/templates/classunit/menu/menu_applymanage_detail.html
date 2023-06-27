@@ -26,28 +26,6 @@
     <!--thymeleaf contextpath-->
     <link id="contextPathHolder" th:data-contextPath="${#httpServletRequest.getContextPath()}" />
     <style>
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-        }
-
-        #body-wrapper {
-            min-height: 100%;
-            position: relative;
-        }
-
-
-        #body-content {
-            padding-bottom: 150px;
-
-        }
-
-        footer {
-            position: relative;
-            height: 150px;
-        }
         .completed {
             background-color: unset;
         }
@@ -67,11 +45,6 @@
         }
 
         .menu:hover { background-color: rgb(245, 241, 241);}
-
-        /* 결제완료일 때 승인 버튼 스타일 */
-        .btn-approval:hover {
-            background-color: rgb(245, 241, 241);
-        }
     </style>
 </head>
 
@@ -121,7 +94,7 @@
                                         <th style="font-family: 'Nanum Gothic', sans-serif;">신청일자</th>
                                         <th style="font-family: 'Nanum Gothic', sans-serif;">아이디</th>
                                         <th style="font-family: 'Nanum Gothic', sans-serif;">전화번호</th>
-                                        <th style="font-family: 'Nanum Gothic', sans-serif;">신청인원</th>
+                                        <th style="font-family: 'Nanum Gothic', sans-serif;">수강인원</th>
                                         <th style="font-family: 'Nanum Gothic', sans-serif;">처리상태</th>
                                         <th style="font-family: 'Nanum Gothic', sans-serif;">승인내역</th>
                                     </tr>
@@ -133,15 +106,18 @@
                                         <td style="font-family: 'Nanum Gothic', sans-serif;" th:text="${obj.phone}"></td>
                                         <td style="font-family: 'Nanum Gothic', sans-serif;" th:text="|${obj.person}명|"></td>
 
-                                        <div th:if="${obj.chk == 1}">
-                                            <td style="font-family: 'Nanum Gothic', sans-serif;"><span th:classappend="${obj.chk == 3} ? 'completed' : ''">결제완료</span></td>
-                                            <td style="font-family: 'Nanum Gothic', sans-serif;"><button type="button" class="btn btn-sm btn-approval" style="border: 1px solid gray; width: 50px;" th:onclick="'update(' + ${obj.no} + ',' + ${obj.unitno} + ', this)'">승인</button></td>
-                                        </div>
-                                        <div th:if="${obj.chk == 3}">
-                                            <td style="font-family: 'Nanum Gothic', sans-serif;"><span>참여완료</span></td>
-                                            <td style="font-family: 'Nanum Gothic', sans-serif;"><button type="button" class="btn btn-sm" style="border: 1px solid gray; width: 50px;" disabled>승인</button></td>
-                                        </div>
-                  
+                                        <td style="font-family: 'Nanum Gothic', sans-serif;">
+                                            <span th:if="${obj.chk == 1}" th:classappend="${obj.chk == 3} ? 'completed' : ''">결제완료</span>
+                                            <span th:if="${obj.chk == 3}">참여완료</span>
+                                        </td>
+                                        <td style="font-family: 'Nanum Gothic', sans-serif;">
+                                            <div th:if="${obj.chk == 1}">
+                                                <button type="button" class="btn btn-secondary btn-sm btn-approval" style="border: 1px solid gray; width: 70px; height: 30px;" th:onclick="'update(' + ${obj.no} + ',' + ${obj.unitno} + ', this)'">승인</button>
+                                            </div>
+                                            <div th:if="${obj.chk == 3}">
+                                                <button type="button" class="btn btn-secondary btn-sm" style="border: 1px solid gray; width: 70px; height: 30px;" disabled>승인</button>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -155,7 +131,9 @@
     </div>
 
     <!--footer 영역-->
-    <footer th:replace="~{footer :: footerFragment}"></footer>
+    <div style="margin-top: 150px;">
+        <footer th:replace="~{footer :: footerFragment}"></footer>
+    </div>
 
     <!--jquery-->
     <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
@@ -175,11 +153,18 @@
 
             if (data.status === 200) {
                 alert("승인이 완료되었습니다.");
-                const spanElement = $(button).siblings('span');
+                const spanElement = $(button).closest('td').find('span');
                 spanElement.text('참여완료');
                 spanElement.addClass('completed');
-                $(button).css('background', '');
+
+                // 처리상태 변경(결제완료 => 참여완료)
+                const statusElement = $(button).closest('tr').find('td:nth-child(5)');
+                statusElement.find('span').text('참여완료');
+                statusElement.find('span').addClass('completed');
+
+                // 버튼 비활성화
                 $(button).prop('disabled', true);
+
             } else {
                 alert("승인할 수 없습니다.");
             }
