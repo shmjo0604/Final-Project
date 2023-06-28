@@ -66,7 +66,7 @@ public class CommunityController {
         if (user != null) {
 
             Community ret = communityRepository.save(community);
-            System.out.println(ret);
+            // System.out.println(ret);
 
         }
         return "redirect:/community/selectlist.do";
@@ -123,7 +123,7 @@ public class CommunityController {
             model.addAttribute("user", user);
             System.out.println(user.toString());
         }
-        log.info(format, list);
+        // log.info(format, list);
         model.addAttribute("list", list);
         model.addAttribute("community", community);
 
@@ -154,10 +154,10 @@ public class CommunityController {
     public String updateGET(@AuthenticationPrincipal User user,
             @RequestParam(name = "no") long no,
             Model model) {
-        log.info(format, no);
+        // log.info(format, no);
         Community com = communityRepository.findById(no).orElse(null);
 
-        log.info(format, com.toString());
+        // log.info(format, com.toString());
 
         if (user != null) {
             model.addAttribute("user", user);
@@ -172,7 +172,7 @@ public class CommunityController {
             @RequestParam(name = "no", defaultValue = "0", required = false) long no)
             throws IOException {
 
-        log.info("nocheck => {}", community.getNo());
+        // log.info("nocheck => {}", community.getNo());
 
         try {
             Community com = communityRepository.findById(no).orElse(null);
@@ -202,7 +202,7 @@ public class CommunityController {
 
         if (user != null) {
             model.addAttribute("user", user);
-            System.out.println(user.toString());
+            // System.out.println(user.toString());
         }
         model.addAttribute("community", community);
         return "/community/replyinsert";
@@ -211,13 +211,13 @@ public class CommunityController {
     @PostMapping(value = "/replyinsert.do")
     public String replyinsertPOST(
             @ModelAttribute Reply reply, @AuthenticationPrincipal User user, Model model) throws IOException {
-        log.info(format, reply.toString());
+        // log.info(format, reply.toString());
 
         if (reply != null) {
             reply.getContent();
 
             Reply ret = rRepository.save(reply);
-            System.out.println(ret);
+            // System.out.println(ret);
 
         }
         return "redirect:/community/selectone.do?no=" + reply.getCommunity().getNo();

@@ -107,7 +107,7 @@ public class ClassController {
         long profile = manageService.selectClassProfileImageNo(classcode);
         List<ClassUnit> list = unitService.selectUnitListToCal(classcode);
 
-        log.info(format, obj.toString());
+        // log.info(format, obj.toString());
 
         model.addAttribute("obj", obj);
         model.addAttribute("mainImg", mainImg);
@@ -164,9 +164,9 @@ public class ClassController {
             @RequestParam(name = "classMain", required = false) MultipartFile classMainImg)
             throws IOException {
 
-        log.info(format, profileImg);
-        log.info(format, classSubImg);
-        log.info(format, classMainImg);
+        // log.info(format, profileImg);
+        // log.info(format, classSubImg);
+        // log.info(format, classMainImg);
 
         // 1.Rest API 호출 -> 주소 기반 위도, 경도 값 반환(Map)
 
@@ -178,7 +178,7 @@ public class ClassController {
         obj.setMemberid(user.getUsername());  // security session에 저장된 ID 정보를 호출
 
         // 3. 결과 확인
-        log.info(format, obj.toString());
+        // log.info(format, obj.toString());
 
         // 4. ClassImage 리스트 객체 생성
 
@@ -222,7 +222,7 @@ public class ClassController {
 
         int ret = iService.insertClassOne(obj, list);
 
-        log.info(format, ret);
+        // log.info(format, ret);
 
         if (ret == 1) {
             return "redirect:/member/myclass.do?menu=";
@@ -265,7 +265,7 @@ public class ClassController {
 
         Model model) throws IOException {
     
-            log.info("image profile===========>{}", profileImg);
+            // log.info("image profile===========>{}", profileImg);
 
             Map<String, String> map = KakaoLocalAPI.getCoordinate(obj.getAddress1());
 
@@ -312,13 +312,13 @@ public class ClassController {
 
         int ret = manageService.updateClassOne(obj);
         int ret2 = manageService.updateClassImageOne(list, profile, classMain, classcode);
-        log.info("update class --- => {}", obj.toString());
-        log.info("update sub image --- => {}", list.toString());
-        log.info("update profile image --- => {}", profile.toString());
-        log.info("update main image --- => {}", classMain.toString());
+        // log.info("update class --- => {}", obj.toString());
+        // log.info("update sub image --- => {}", list.toString());
+        // log.info("update profile image --- => {}", profile.toString());
+        // log.info("update main image --- => {}", classMain.toString());
         if ( ret == 1 || ret2 == 1) {
-            log.info("update success class ---- =>{}", ret);
-            log.info("update success image ---- =>{}", ret2);
+            // log.info("update success class ---- =>{}", ret);
+            // log.info("update success image ---- =>{}", ret2);
             return "redirect:/member/myclass.do";
         } else {
             return "redirect:/class/update.do?classcode=" +classcode;

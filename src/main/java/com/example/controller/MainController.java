@@ -34,7 +34,7 @@ public class MainController {
     ) {
         List<ClassProduct> list = selectService.selectMainHomeClassList();
 
-        log.info("메인 => {}", list.size());
+        // log.info("메인 => {}", list.size());
 
         if(!list.isEmpty()){
             for (ClassProduct obj : list ) {
