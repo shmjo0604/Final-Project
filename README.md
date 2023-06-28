@@ -122,7 +122,7 @@
 
 **2. 클래스 등록**
 
-<img src=""> <br/><br/>
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/e7829a99-88e4-46c2-89ec-48b39e9806da"><br/><br/> <br/><br/>
 
 - 
 - 
