@@ -1,7 +1,6 @@
-# Final-Project
- 최종 프로젝트
-<img src = "https://raw.githubusercontent.com/pknu05/Final-Project/test2/image/day3.png" width="700">
-
+# Final-Project 
+![readme로고](https://github.com/pknu05/Final-Project/assets/123917210/057360af-fc74-432e-be58-b1cf3e4de3c5)
+</br>
 ## 1. 프로젝트 소개
 - 개발 기간: 2023.05.14~06.08
 - 개발 인원: 총 6명
