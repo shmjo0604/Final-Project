@@ -23,6 +23,8 @@
 <br/>
 <img src="https://github.com/pknu05/Final-Project/assets/123917210/6e677789-5a8b-4b94-a395-8923180659e2.png">
 
+<img src="https://raw.githubusercontent.com/pknu05/Final-Project/main/src/main/resources/static/image/비밀번호 찾기.gif?token=GHSAT0AAAAAACEIXGGXGQ3S4RMCNNCYLKPKZE4JGMA">
+
 >**프로젝트**: 원데이클래스 사이트
 >
 >**기획 및 제작** : 스페셜데이
@@ -115,6 +117,7 @@
 **1. 비밀번호 찾기(인증)**
 
 <img src="https://github.com/pknu05/Final-Project/assets/123917210/dcbc2f02-b024-4701-acf4-1578e9f7f045"><br/><br/>
+
 <예시>
 - SimpleMailMessage 클래스를 이용하여 메일 내용 설정
 - JavaMailSender를 이용하여 Gmail로 고객에게 인증번호 전송
