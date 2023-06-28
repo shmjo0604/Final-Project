@@ -33,8 +33,9 @@
         @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&display=swap');
 
         .link-secondary {
-            background-color: #d3eed1;
+            background-color: #8df08d;
             border-radius: 5px;
+            color: black;
         }
 
         .bd-placeholder-img {
@@ -201,6 +202,12 @@
             left: 120px;
             bottom: 115px;
         }
+        .selectone_cate {
+            background-color: #d3eed1;
+            
+            border-radius: 15px;
+            padding: 7px;
+        }
     </style>
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
@@ -230,8 +237,12 @@
 
             <div class="row g-5">
                 <div class="col-md-7">
-
-                    <p th:text="|${obj.activitycate} > ${obj.actdetailcate}|"></p>
+                    <div class="mb-3">
+                        <span class="selectone_cate" th:text="${obj.activitycate}"></span>
+                        >
+                        <span class="selectone_cate" th:text="${obj.actdetailcate}"></span>
+                    </div>
+                    <!-- <p th:text="|${obj.activitycate} > ${obj.actdetailcate}|"></p> -->
                     <div class="p-2 p-md-3 mb-4 rounded bg-dark">
 
                         <div class="slider">
