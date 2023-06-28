@@ -16,11 +16,17 @@
     - Thymeleaf Ajax
     - Restful
     - Spring Security
-
+      
 - API : 결제, 맵, 이메일
 - 프론트 : html5-css-javascript, Bootstrap
 - 협업툴 : Notion, Figma, Github
 - 개발툴 : vscode, Dbeaver
+<br/>
+  <img src="https://github.com/pknu05/Final-Project/assets/123917210/6a965e19-15a5-488f-95bb-1f56b6375b36.png" width="60">
+  <img src="https://github.com/pknu05/Final-Project/assets/123917210/a0b16d0a-2c60-43de-908d-7f961a9caffa" width="60">
+  <img src="https://github.com/pknu05/Final-Project/assets/123917210/fe8ad23c-f6c5-45d4-9b3d-6359b994b4e8" width="60">
+  <img src="https://github.com/pknu05/Final-Project/assets/123917210/e5483ab7-fa74-478a-bb3e-9844b2443e3a" width="60">
+  
 
 ## 3. 역할 담당
 
