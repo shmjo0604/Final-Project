@@ -34,6 +34,7 @@
 <div align="left">
  	<img src="https://img.shields.io/badge/ORACLE-F80000?style=flat&logo=oracle&logoColor=white" />
   <img src="https://img.shields.io/badge/H2-232F3E?style=flat&logo=h2&logoColor=white" />
+	<img src="https://img.shields.io/badge/Redis-DC382D?style=flat&logo=redis&logoColor=white" />
 </div> 
 <h4>백엔드</h4>
 <div align="left">
