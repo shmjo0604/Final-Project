@@ -136,7 +136,7 @@
             </div>
 
             <!-- 새로운 클래스 소개 영역 -->
-            <div style="background-color: rgb(246, 243, 243); padding: 30px; margin-top: 50px; margin-bottom: 120px;">
+            <div style="background-color: rgb(246, 243, 243); padding: 30px; margin-top: 50px; margin-bottom: 50px;">
                 <div class="main-newclass">
                     <h3 class="seb-title"><i class="fa-solid fa-star" style="color: #ffe26f;"></i><i class="fa-solid fa-star" style="color: #ffe26f;"></i><i class="fa-solid fa-star" style="color: #ffe26f;"></i> 신규 클래스 <i class="fa-solid fa-star" style="color: #ffe26f;"></i><i class="fa-solid fa-star" style="color: #ffe26f;"></i><i class="fa-solid fa-star" style="color: #ffe26f;"></i></h2>
                         <div class="newclass">
@@ -176,7 +176,7 @@
             
             
             <!-- 커뮤니티 영역 -->
-            <div class="main-commu" style="padding:30px;">
+            <div class="main-commu" style="padding:30px; margin-bottom: 120px;">
                 <h3 class="seb-title">커뮤니티 최신글</h2>
                     <div class="community">
                         <div class="row row-cols-1 row-cols-md-3">
@@ -186,7 +186,7 @@
                                     <br />
                                     <thead>
                                         <tr> 
-                                            <th scope="cate" name="cate">글분류</th>
+                                            <th scope="cate" name="cate">글 분류</th>
                                             <th scope="title">제목</th>
                                             <th scope="id">작성자ID</th>
                                         </tr>
@@ -195,7 +195,7 @@
                                         <tr th:each="obj : ${list1}">
                                             
                                             <td th:text="${obj.cate}"></td>
-                                            <td><a class="nav-link" th:href="@{/community/selectone.do(no=${obj.no})}" th:text="|${obj.title} (${obj.replycnt})|"></a></td>
+                                            <td><a class="nav-link hover-event" th:href="@{/community/selectone.do(no=${obj.no})}" th:text="|${obj.title} (${obj.replycnt})|"></a></td>
                                             <td th:text="${obj.member.id}"></td>
                                         </tr>
                                     </tbody>

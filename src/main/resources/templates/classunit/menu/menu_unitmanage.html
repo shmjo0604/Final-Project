@@ -111,10 +111,7 @@
         
     </style>
     <div>
-        <div style="font-size: x-large; font-family: 'Do Hyeon', sans-serif;  color: gray;">Title. <label style="color: black;" th:text="${title}"></label></div>
-        <hr style="border : 2px solid #339985;"/>
         <div id='calendar' style="margin-top: 20px;"></div>
-        <div style="margin-top: 5px; font-size: small; font-weight: normal; color: gray; color: gray; font-family: 'Noto Sans KR', sans-serif;"><i class="fa-solid fa-pen-to-square" style="color: gray;"></i> 클래스 상세일정을 등록해주세요.</div>
     </div>
     
 
@@ -836,7 +833,7 @@
             window.addEventListener('resize', setScrollMaxHeight);
         }
 
-        // 전체 일정 삭제
+        /**************************************** 전체 일정 삭제 *****************************************/
         document.getElementById("all_delete").onclick = async function () {
             // 삭제 확인 창 표시
             const confirmMessage = "정말로 전체 일정을 삭제하시겠습니까?";
@@ -855,7 +852,9 @@
 
                     await selectAll(); // 일정 재조회
                     unitList.style.display = "block"; // 일정 리스트 
-                    location.reload();
+                    setTimeout(function() {
+                        location.reload();
+                    }, 50);
                 }
                 else {
                     alert("전체 일정 삭제에 실패하였습니다.");
@@ -1123,7 +1122,9 @@
                         }
                         deletedUnit.remove();
                     }
-                    location.reload();
+                    setTimeout(function() {
+                        location.reload();
+                    }, 50);
                 }
                 else {
                     alert("삭제에 실패하였습니다.");

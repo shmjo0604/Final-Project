@@ -357,3 +357,8 @@ ul,ol,li {
     width: 70rem;
     margin: auto auto 5rem;
 }
+
+.hover-event:hover {
+    color: rgb(103, 137, 231);
+    text-decoration-line: underline;
+}
