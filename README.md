@@ -84,27 +84,27 @@
 <h3>김은정</h3>
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back: 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 메인페이지(header), 클래스 검색페이지, 클래스 상세페이지
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 
 
 <h3>이성희</h3>
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back: 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 메인페이지(header), 클래스 검색페이지, 클래스 상세페이지
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 
 
 <h3>박성주</h3>
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back: 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 메인페이지(header), 클래스 검색페이지, 클래스 상세페이지
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 
 
 <h3>천현빈</h3>
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back: 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 메인페이지(header), 클래스 검색페이지, 클래스 상세페이지
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 
 
 <h3>이재호</h3>
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back: 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 메인페이지(header), 클래스 검색페이지, 클래스 상세페이지
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 
 
 </div><br/>
 
