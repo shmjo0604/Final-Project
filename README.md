@@ -89,23 +89,23 @@
 
 <h3>● 이성희</h3>
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 클래스 승인, 일정등록, 일정조회 및 수정, 클래스 참여승인 	
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 마이페이지, 일정 관리페이지, 신청관리 페이지
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 클래스 승인, 일정등록, 일정조회 및 수정, 클래스 참여승인 	
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 마이페이지, 일정 관리페이지, 신청관리 페이지
 
 <h3>● 박성주</h3>
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 로그인, 아이디/비번 찾기, 회원탈퇴, 커뮤니티 관리, 댓글등록
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 로그인 페이지, 발표 PPT 작성, 메인 로고
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 로그인, 아이디/비번 찾기, 회원탈퇴, 커뮤니티 관리, 댓글등록
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 로그인 페이지, 발표 PPT 작성, 메인 로고
 
 <h3>● 천현빈</h3>
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 
 
 <h3>● 이재호</h3>
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 
 
 </div><br/>
 
@@ -148,7 +148,7 @@
 - 
 <br/>
 
-# :bulb: <a name="result">결론</a>
+# :bulb: <a name="result">결론(수정필요)</a>
 웹 관련 프로젝트를 처음으로 하면서 주제 선정, 데이터베이스설계, 기능 구현, 프로젝트 배포까지의
 과정을 거치면서 전반적인 개발의 흐름을 알 수 있었고, mybatis 뿐 아니라 jpa를 사용하며 개발자는
 프로젝트 수행 중 자신이 주로 사용하는 스택뿐 아니라 여러가지 기술스택을 사용함으로써
@@ -156,7 +156,7 @@
 이쪽 분야의 자료를 조사하면서 물류와 유통관련 지식도 함께 얻어가서 많은 것을 습득할 수 있었던
 프로젝트였습니다.<br/><br/>
 
-# :mag_right: <a name="fullfill">보완할점</a>
+# :mag_right: <a name="fullfill">보완할점(수정필요)</a>
 1. 전체 프로젝트
  - Security Filter 관련 아쉬운 필터링 부분
  - 관리자 계정의 선박 배정 및 차량 배정이 목적지에 따른 배정 유효성 검사가 없었던 점
