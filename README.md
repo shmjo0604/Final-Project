@@ -89,7 +89,7 @@
 
 <h3>● 이성희</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand : 클래스 승인, 일정등록, 일정조회 및 수정, 클래스 참여승인 	
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand : 클래스 승인, 클래스 활성/비활성, 일정등록, 일정조회 및 수정, 클래스 참여승인 	
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 마이페이지, 일정관리 페이지, 신청관리 페이지
 
 <h3>● 박성주</h3>
@@ -104,8 +104,8 @@
 
 <h3>● 이재호</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand : 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand : 신청 내역조회, 결제 상세정보, 리뷰내역 조회, 리뷰 상세보기, 리뷰추천
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 마이페이지, 신청목록 페이지, 리뷰목록 페이지, 결제상세 페이지, 리뷰상세 페이지
 
 </div><br/>
 
