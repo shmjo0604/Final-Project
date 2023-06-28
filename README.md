@@ -84,7 +84,7 @@
 <h3>● 김은정</h3>
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back :  
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 메인페이지, 클래스 등록페이지, 클래스 수정페이지, 문의내역(클래스)
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 메인페이지, 클래스 등록페이지, 클래스 수정페이지, 클래스 관리페이지, 문의내역(클래스)
 
 <h3>● 이성희</h3>
 
