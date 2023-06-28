@@ -80,17 +80,17 @@
 <h3>● 서명호</h3>
 
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand : 회원정보수정, 클래스 검색(조회), 신청/문의 알람, 이메일 인증, 클래스 신청, 결제
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 메인페이지(header), 클래스 검색페이지, 클래스 상세페이지
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 메인페이지(header), 클래스검색 페이지, 클래스상세 페이지
 
 <h3>● 김은정</h3>
 
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand :  클래스 등록, 클래스 수정, 클래스 목록조회, 문의내역 조회(판매자), 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 메인페이지, 클래스 등록페이지, 클래스 관리페이지, 문의내역(판매자)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 메인페이지, 클래스등록 페이지, 클래스관리 페이지, 문의내역(판매자)
 
 <h3>● 이성희</h3>
 
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand : 클래스 승인, 일정등록, 일정조회 및 수정, 클래스 참여승인 	
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 마이페이지, 일정 관리페이지, 신청관리 페이지
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 마이페이지, 일정관리 페이지, 신청관리 페이지
 
 <h3>● 박성주</h3>
 
@@ -99,8 +99,8 @@
 
 <h3>● 천현빈</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand : 장바구니 페이지, 결제완료 페이지
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand : 장바구니 추가, 장바구니 수정 및 삭제, 장바구니 조회, 결제정보 조회
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 장바구니 페이지, 결제확인 페이지, 결제완료 페이지
 
 <h3>● 이재호</h3>
 
