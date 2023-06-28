@@ -84,7 +84,7 @@
 
 <h3>● 김은정</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back :  
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back :  문의내역 조회, 
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 메인페이지, 클래스 등록페이지, 클래스 관리페이지, 문의내역(클래스)
 
 <h3>● 이성희</h3>
@@ -95,7 +95,7 @@
 <h3>● 박성주</h3>
 
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 로그인, 아이디/비번 찾기, 회원탈퇴, 커뮤니티 관리, 댓글등록
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 로그인 페이지, 발표 PPT 작성, 메인 로고
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 로그인 페이지
 
 <h3>● 천현빈</h3>
 
@@ -109,7 +109,7 @@
 
 </div><br/>
 
-# :bookmark_tabs: <a name="function">기능구현</a>
+# :bookmark_tabs: <a name="function">기능구현(최종 배포파일)</a>
 <br/>
 
 **1. 이메일 인증**
