@@ -93,8 +93,8 @@
 
 <h3>● 박성주</h3>
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 로그인, 회원가입, 커뮤니티 글쓰기, 커뮤니티 댓글작성
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 로그인 페이지, 회원가입 페이지, 회원정보수정 페이지,커뮤니티페이지
 
 <h3>● 천현빈</h3>
 
