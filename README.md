@@ -134,7 +134,7 @@
 
 **3. 일정등록/조회**
 
-<img src="https://github.com/pknu05/Final-Project/assets/123917210/06bc6b06-ce99-4249-b569-d2e63bb6b3df"> <br/><br/>
+<img src="https://raw.githubusercontent.com/pknu05/Final-Project/main/src/main/resources/static/image/일정등록.gif?token=GHSAT0AAAAAACEIXGGWBDXTCIDJ4RYMIHHYZE4J5DA"> <br/><br/>
 
 - 
 - 
