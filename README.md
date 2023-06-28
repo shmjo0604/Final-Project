@@ -113,13 +113,15 @@
 <br/>
 
 **1. 비밀번호 찾기(인증)**
-<img src="https://raw.githubusercontent.com/pknu05/Final-Project/blob/main/src/main/resources/static/image/비밀번호 찾기.gif"> <br/><br/>
+
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/dcbc2f02-b024-4701-acf4-1578e9f7f045"><br/><br/>
 - SimpleMailMessage 클래스를 이용하여 메일 내용 설정
 - JavaMailSender를 이용하여 Gmail로 고객에게 인증번호 전송
 - 전송된 인증번호를 입력하여 인증확인
 <br/>
 
 **2. 클래스 등록**
+
 <img src=""> <br/><br/>
 
 - 
@@ -127,6 +129,7 @@
 <br/>
 
 **3. 일정등록/조회**
+
 <img src=""> <br/><br/>
 
 - 
@@ -134,6 +137,7 @@
 <br/>
 
 **4. 클래스 검색/조회**
+
 <img src=""> <br/><br/>
 
 - 
@@ -141,6 +145,7 @@
 <br/>
 
 **5. 클래스 신청(장바구니)**
+
 <img src=""> <br/><br/>
 
 - 
@@ -149,6 +154,7 @@
 <br/>
 
 **5. 신청/리뷰내역 조회**
+
 <img src=""> <br/><br/>
 
 - 
@@ -157,6 +163,7 @@
 <br/>
 
 **5. 신청/문의 알람**
+
 <img src=""> <br/><br/>
 
 - 
@@ -165,6 +172,7 @@
 <br/>
 
 **5. 결제**
+
 <img src=""> <br/><br/>
 
 - 
