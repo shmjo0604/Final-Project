@@ -18,6 +18,7 @@
 
 
 # :books: <a name="outline">개요</a>
+<br/>
 <img src="https://github.com/pknu05/Final-Project/assets/123917210/6e677789-5a8b-4b94-a395-8923180659e2.png">
 
 >**프로젝트**: 원데이클래스 사이트
@@ -26,7 +27,7 @@
 >
 >**분류**: 팀프로젝트
 >
->**제작 기간**: 2023.05.14 ~ 2023.06.08
+>**제작 기간**: 2023.05.19 ~ 2023.06.13
 >
 >**프로젝트 주제**: 바쁜 일상속에서 자신에게 특별한 하루를 선물해줄 수 있는 원데이클래스 사이트 제작 
 
@@ -73,28 +74,28 @@
 
 <br/>
 
-# :family: <a name="team">팀원소개</a>
+# :family: <a name="team">팀원 역할 및 소개</a>
 <div><br/>
 	
 <h3>● 서명호</h3>
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 회원정보수정, 클래스 검색(조회), 신청/문의 알람, 이메일 인증, 클래스 신청, 결제
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 메인페이지(header), 클래스 검색페이지, 클래스 상세페이지
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 회원정보수정, 클래스 검색(조회), 신청/문의 알람, 이메일 인증, 클래스 신청, 결제
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 메인페이지(header), 클래스 검색페이지, 클래스 상세페이지
 
 <h3>● 김은정</h3>
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back :  
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 메인페이지, 클래스 등록페이지, 클래스 수정페이지, 클래스 관리페이지, 문의내역(클래스)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back :  
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 메인페이지, 클래스 등록페이지, 클래스 관리페이지, 문의내역(클래스)
 
 <h3>● 이성희</h3>
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 클래스 승인, 일정등록, 일정조회 및 수정, 클래스 참여승인 	
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 마이페이지, 일정 관리페이지, 신청관리 페이지
 
 <h3>● 박성주</h3>
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 로그인, 회원가입, 커뮤니티 글쓰기, 커뮤니티 댓글작성
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 로그인 페이지, 회원가입 페이지, 회원정보수정 페이지,커뮤니티페이지
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 로그인, 아이디/비번 찾기, 회원탈퇴, 커뮤니티 관리, 댓글등록
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 로그인 페이지, 발표 PPT 작성, 메인 로고
 
 <h3>● 천현빈</h3>
 
