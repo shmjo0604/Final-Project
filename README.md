@@ -14,7 +14,8 @@
   - 6번기능
 - :bulb: <a href="#result">결론</a>
 - :mag_right: <a href="#fullfill">보완할점</a>
-- :bookmark: <a href="#url">배포</a>
+- :bookmark: <a href="#url">배포</a><br/>
+
 
 # :books: <a name="outline">개요</a>
 <img src="https://github.com/pknu05/Final-Project/assets/123917210/6e677789-5a8b-4b94-a395-8923180659e2.png">
@@ -27,7 +28,9 @@
 >
 >**제작 기간**: 2023.05.14 ~ 2023.06.08
 >
->**담당 기능**: 이메일인증, 사업자등록번호 확인, 선박 시뮬레이션, 배송추적, 결제, 목록확인
+>**프로젝트 주제**: 바쁜 일상속에서 자신에게 특별한 하루를 선물해줄 수 있는 원데이클래스 사이트 제작 
+
+<br/>
 
 # :wrench: <a name="tech">기술스택</a>
 <h4>데이터베이스</h4>
@@ -68,8 +71,43 @@
 	<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white" />
 </div>
 
+<br/>
+
 # :family: <a name="team">팀원소개</a>
-<img src=""> <br/><br/>
+<div>
+	
+<h3>서명호</h3>
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back: 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 메인페이지(header), 클래스 검색페이지, 클래스 상세페이지
+
+<h3>김은정</h3>
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back: 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 메인페이지(header), 클래스 검색페이지, 클래스 상세페이지
+
+<h3>이성희</h3>
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back: 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 메인페이지(header), 클래스 검색페이지, 클래스 상세페이지
+
+<h3>박성주</h3>
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back: 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 메인페이지(header), 클래스 검색페이지, 클래스 상세페이지
+
+<h3>천현빈</h3>
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back: 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 메인페이지(header), 클래스 검색페이지, 클래스 상세페이지
+
+<h3>이재호</h3>
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back: 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 메인페이지(header), 클래스 검색페이지, 클래스 상세페이지
+
+</div><br/>
+
 # :bookmark_tabs: <a name="function">기능구현</a>
 **1. 이메일 인증**
 <img src=""> <br/><br/>
