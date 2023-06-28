@@ -26,6 +26,12 @@
   <img src="https://github.com/pknu05/Final-Project/assets/123917210/a0b16d0a-2c60-43de-908d-7f961a9caffa" width="60">
   <img src="https://github.com/pknu05/Final-Project/assets/123917210/fe8ad23c-f6c5-45d4-9b3d-6359b994b4e8" width="60">
   <img src="https://github.com/pknu05/Final-Project/assets/123917210/e5483ab7-fa74-478a-bb3e-9844b2443e3a" width="60">
+
+
+  <img src="https://github.com/pknu05/Final-Project/assets/123917210/ef341422-71a5-470a-abca-476ff85f76d7" width="60">
+  <img src="https://github.com/pknu05/Final-Project/assets/123917210/6c4bd9e7-572e-4fb6-9f75-955d961175f6" width="60">
+  <img src="https://github.com/pknu05/Final-Project/assets/123917210/a98523df-40f6-4361-98e0-6e35ce9a7577" width="60">
+  <img src="https://github.com/pknu05/Final-Project/assets/123917210/e5483ab7-fa74-478a-bb3e-9844b2443e3a" width="60">
   
 
 ## 3. 역할 담당
