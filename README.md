@@ -113,7 +113,7 @@
 <br/>
 
 **1. 비밀번호 찾기(인증)**
-<img src=""> <br/><br/>
+<img src="https://raw.githubusercontent.com/pknu05/Final-Project/blob/main/src/main/resources/static/image/비밀번호 찾기.gif"> <br/><br/>
 - SimpleMailMessage 클래스를 이용하여 메일 내용 설정
 - JavaMailSender를 이용하여 Gmail로 고객에게 인증번호 전송
 - 전송된 인증번호를 입력하여 인증확인
