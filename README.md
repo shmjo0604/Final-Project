@@ -79,33 +79,33 @@
 	
 <h3>● 서명호</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 회원정보수정, 클래스 검색(조회), 신청/문의 알람, 이메일 인증, 클래스 신청, 결제
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 메인페이지(header), 클래스 검색페이지, 클래스 상세페이지
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand : 회원정보수정, 클래스 검색(조회), 신청/문의 알람, 이메일 인증, 클래스 신청, 결제
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 메인페이지(header), 클래스 검색페이지, 클래스 상세페이지
 
 <h3>● 김은정</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back :  문의내역 조회, 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 메인페이지, 클래스 등록페이지, 클래스 관리페이지, 문의내역(클래스)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand :  클래스 등록, 클래스 수정, 클래스 목록조회, 문의내역 조회(판매자), 
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 메인페이지, 클래스 등록페이지, 클래스 관리페이지, 문의내역(판매자)
 
 <h3>● 이성희</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 클래스 승인, 일정등록, 일정조회 및 수정, 클래스 참여승인 	
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 마이페이지, 일정 관리페이지, 신청관리 페이지
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand : 클래스 승인, 일정등록, 일정조회 및 수정, 클래스 참여승인 	
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 마이페이지, 일정 관리페이지, 신청관리 페이지
 
 <h3>● 박성주</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 로그인, 아이디/비번 찾기, 회원탈퇴, 커뮤니티 관리, 댓글등록
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 로그인 페이지
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand : 로그인, 아이디/비번번호 찾기, 회원탈퇴, 커뮤니티 관리, 댓글등록
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 로그인 페이지, 아디기/비밀번호 찾기페이지, 커뮤니티 페이지 
 
 <h3>● 천현빈</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand : 장바구니 페이지, 결제완료 페이지
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 
 
 <h3>● 이재호</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand : 
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 
 
 </div><br/>
 
