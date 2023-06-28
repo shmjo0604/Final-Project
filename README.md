@@ -115,6 +115,7 @@
 **1. 비밀번호 찾기(인증)**
 
 <img src="https://github.com/pknu05/Final-Project/assets/123917210/dcbc2f02-b024-4701-acf4-1578e9f7f045"><br/><br/>
+<예시>
 - SimpleMailMessage 클래스를 이용하여 메일 내용 설정
 - JavaMailSender를 이용하여 Gmail로 고객에게 인증번호 전송
 - 전송된 인증번호를 입력하여 인증확인
@@ -130,7 +131,7 @@
 
 **3. 일정등록/조회**
 
-<img src=""> <br/><br/>
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/06bc6b06-ce99-4249-b569-d2e63bb6b3df"> <br/><br/>
 
 - 
 - 
@@ -181,6 +182,7 @@
 <br/>
 
 # :bulb: <a name="result">결론(수정필요)</a>
+<예시><br/><br/>
 웹 관련 프로젝트를 처음으로 하면서 주제 선정, 데이터베이스설계, 기능 구현, 프로젝트 배포까지의
 과정을 거치면서 전반적인 개발의 흐름을 알 수 있었고, mybatis 뿐 아니라 jpa를 사용하며 개발자는
 프로젝트 수행 중 자신이 주로 사용하는 스택뿐 아니라 여러가지 기술스택을 사용함으로써
@@ -189,6 +191,7 @@
 프로젝트였습니다.<br/><br/>
 
 # :mag_right: <a name="fullfill">보완할점(수정필요)</a>
+<예시>
 1. 전체 프로젝트
  - Security Filter 관련 아쉬운 필터링 부분
  - 관리자 계정의 선박 배정 및 차량 배정이 목적지에 따른 배정 유효성 검사가 없었던 점
