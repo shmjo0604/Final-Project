@@ -352,3 +352,8 @@ ul,ol,li {
     font-family: "Noto Sans KR";
     font-style: normal;
 }
+
+.main-commu {
+    width: 70rem;
+    margin: auto auto 5rem;
+}

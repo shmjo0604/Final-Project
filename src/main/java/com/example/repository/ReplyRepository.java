@@ -11,4 +11,6 @@ import com.example.entity.Reply;
 public interface ReplyRepository extends JpaRepository<Reply, Long> {
     
     List<Reply>  findByCommunity_noOrderByNoDesc(long no);
+
+    int countByCommunity_no(long communityno);
 }

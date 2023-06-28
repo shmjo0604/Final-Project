@@ -176,7 +176,35 @@
             
             
             <!-- 커뮤니티 영역 -->
-            <h3 class="seb-title">커뮤니티</h2>
+            <div class="main-commu" style="padding:30px;">
+                <h3 class="seb-title">커뮤니티 영역</h2>
+                    <div class="community">
+                        <div class="row row-cols-1 row-cols-md-3">
+                            <div class="container">
+                                <table class="table teble-hover text-striped text-center"
+                                    style="border: 1px rgb(184, 181, 181);">
+                                    <br />
+                                    <thead>
+                                        <tr> 
+                                            <th scope="cate" name="cate">글분류</th>
+                                            <th scope="title">제목</th>
+                                            <th scope="id">작성자ID</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="obj : ${list1}">
+                                            
+                                            <td th:text="${obj.cate}"></td>
+                                            <td><a class="nav-link" th:href="@{/community/selectone.do(no=${obj.no})}" th:text="|${obj.title} (${obj.replycnt})|"></a></td>
+                                            <td th:text="${obj.member.id}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!-- <h3 class="seb-title">커뮤니티</h2>
             <div class="main-cumu">
                     <table class="table teble-hover text-striped" style="border: 1px rgb(184, 181, 181) ;">
                         <br />
@@ -212,7 +240,7 @@
                             </td>
                         </tbody>
                     </table>
-            </div>
+            </div> -->
 
             <!-- 안내 영역 -->
             <!-- <div class="main-service">

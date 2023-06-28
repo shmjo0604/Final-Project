@@ -10,6 +10,7 @@ import com.example.entity.CommunityView;
 import com.example.mapper.CommunityMapper;
 import com.example.repository.CommunityRepository;
 import com.example.repository.CommunityViewRepository;
+import com.example.repository.ReplyRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,6 +20,7 @@ public class CommunityServiceImpl implements CommunityService {
 
     @Autowired CommunityRepository cRepository;
     @Autowired CommunityViewRepository cViewRepository;
+    @Autowired ReplyRepository replyRepository;
     @Autowired CommunityMapper cMapper;
     
     @Override
@@ -36,7 +38,13 @@ public class CommunityServiceImpl implements CommunityService {
     @Override
     public List<CommunityView> selectCommunityList(long first, long last) {
         try {
-            return cViewRepository.findByRnumBetweenOrderByRnumAsc(first, last);
+            List<CommunityView> list = cViewRepository.findByRnumBetweenOrderByRnumAsc(first, last);
+
+            for(CommunityView obj : list) {
+                obj.setReplycnt(replyRepository.countByCommunity_no(obj.getNo()));
+            }
+
+            return list;
             // return cRepository.selectOrderByNoDescPaging(first, last);
         }
         catch(Exception e) {
@@ -77,6 +85,24 @@ public class CommunityServiceImpl implements CommunityService {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    @Override
+    public List<Community> selectOrderByNoDescMain() {
+        try {
+
+            List<Community> list = cRepository.selectOrderByNoDescMain();
+
+            for(Community obj : list) {
+                obj.setReplycnt(obj.getReplyList().size());
+            }
+
+            return list;
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        } 
     }
 
   

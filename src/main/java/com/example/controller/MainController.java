@@ -17,8 +17,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.entity.ClassProduct;
+import com.example.entity.Community;
 import com.example.service.classproduct.ClassManageService;
 import com.example.service.classproduct.ClassSelectService;
+import com.example.service.community.CommunityService;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -27,6 +30,7 @@ public class MainController {
     
     @Autowired ClassSelectService selectService;
     @Autowired ClassManageService cService;
+    @Autowired CommunityService comService;
 
     @GetMapping(value="/home.do")
     public String homeGET(@AuthenticationPrincipal User user,
@@ -48,6 +52,9 @@ public class MainController {
             }
         }
 
+        List<Community> list1 = comService.selectOrderByNoDescMain();
+
+        model.addAttribute("list1", list1);
         model.addAttribute("list", list);
         model.addAttribute("user", user);
         

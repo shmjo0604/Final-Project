@@ -28,6 +28,11 @@ public interface CommunityRepository extends JpaRepository<Community, Long> {
         nativeQuery = true)
     List<Community> selectOrderByNoDescPaging(@Param("first") int first, @Param("last") int last);
 
+    @Query(
+        value="SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY c.no DESC) rnum, c.* FROM COMMUNITY c) c WHERE rnum BETWEEN 1 AND 6 ORDER BY c.rnum ASC ", 
+        nativeQuery = true)
+    List<Community> selectOrderByNoDescMain();
+
     // List<Community> findByTitleIgnoreCaseContainingOrderByNoDesc(String title);
     // List<Community> findByContentIgnoreCaseContainingOrderByNoDesc(String content);
     // List<Community> findByWriterIgnoreCaseContainingOrderByNoDesc(String writer);
