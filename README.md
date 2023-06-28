@@ -74,41 +74,43 @@
 <br/>
 
 # :family: <a name="team">팀원소개</a>
-<div>
+<div><br/>
 	
-<h3>서명호</h3>
+<h3>● 서명호</h3>
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back: 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 메인페이지(header), 클래스 검색페이지, 클래스 상세페이지
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 회원정보수정, 클래스 검색(조회), 신청/문의 알람, 이메일 인증, 클래스 신청, 결제
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 메인페이지(header), 클래스 검색페이지, 클래스 상세페이지
 
-<h3>김은정</h3>
+<h3>● 김은정</h3>
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back: 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back :  
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 메인페이지, 클래스 등록페이지, 클래스 수정페이지, 문의내역(클래스)
 
-<h3>이성희</h3>
+<h3>● 이성희</h3>
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back: 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 
 
-<h3>박성주</h3>
+<h3>● 박성주</h3>
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back: 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 
 
-<h3>천현빈</h3>
+<h3>● 천현빈</h3>
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back: 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 
 
-<h3>이재호</h3>
+<h3>● 이재호</h3>
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back: 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front: 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-back : 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-front : 
 
 </div><br/>
 
 # :bookmark_tabs: <a name="function">기능구현</a>
+<br/>
+
 **1. 이메일 인증**
 <img src=""> <br/><br/>
 - SimpleMailMessage 클래스를 이용하여 메일 내용 설정
