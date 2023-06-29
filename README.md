@@ -126,7 +126,7 @@
 
 **2. 클래스 등록**
 
-<img src="https://github.com/pknu05/Final-Project/assets/123917210/e7829a99-88e4-46c2-89ec-48b39e9806da"><br/><br/> <br/><br/>
+<img src="https://raw.githubusercontent.com/pknu05/Final-Project/main/src/main/resources/static/image/클래스등록.gif?token=GHSAT0AAAAAACCZQAQCC6TVGLM6HD543S6OZE46NEA"> <br/><br/>
 
 - 
 - 
