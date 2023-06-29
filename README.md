@@ -97,7 +97,7 @@
 <h3>● 박성주</h3>
 
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand : 로그인, 아이디/비번번호 찾기, 회원탈퇴, 커뮤니티 관리, 댓글등록
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 로그인 페이지, 아디기/비밀번호 찾기페이지, 커뮤니티 페이지 
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 로그인 페이지, 아이디/비밀번호 찾기페이지, 커뮤니티 페이지 
 
 <h3>● 천현빈</h3>
 
