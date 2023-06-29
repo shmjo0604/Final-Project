@@ -126,7 +126,7 @@
 
 **2. 클래스 등록**
 
-<img src="https://raw.githubusercontent.com/pknu05/Final-Project/main/src/main/resources/static/image/클래스등록.gif?token=GHSAT0AAAAAACCZQAQCC6TVGLM6HD543S6OZE46NEA"> <br/><br/>
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/98266ef9-db63-4943-8d4a-180023c9cbf9"> <br/><br/>
 
 - 
 - 
@@ -134,7 +134,7 @@
 
 **3. 일정등록/조회**
 
-<img src="https://raw.githubusercontent.com/pknu05/Final-Project/main/src/main/resources/static/image/일정등록.gif?token=GHSAT0AAAAAACEIXGGWBDXTCIDJ4RYMIHHYZE4J5DA"> <br/><br/>
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/4ab8e4e6-09e3-4f48-b3b7-a616f7fa5a2a"> <br/><br/>
 
 - 
 - 
