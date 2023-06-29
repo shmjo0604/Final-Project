@@ -87,8 +87,9 @@
             <hr />
             <label class="content" name="content" th:utext="${community.content}"
                 style="padding-bottom:80px;font-size: 18px;"></label><br />
-            <div style="display: inline-block;">
-                <div class="buttons" th:if="${community.member.id == user.username}" style="float: left;">
+            
+            <div style="display: inline-block; width: 100%;">
+                <div class="buttons" th:if="${community.member.id == user.username}" style="float:left;">
                     <button class="btn btn-sm btn-primary"> <a class="nav-link"
                             th:href="@{update.do(no=${community.no})}">수정</a></button>
                     <input type="hidden" name="no" th:value="${community.no}" />
