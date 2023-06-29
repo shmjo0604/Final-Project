@@ -92,17 +92,19 @@
                 <button class="btn btn-sm btn-primary"> <a class="nav-link"
                         th:href="@{update.do(no=${community.no})}">수정</a></button>
                 <input type="hidden" name="no" th:value="${community.no}" />
-                <button class="btn btn-sm btn-primary">
-                    <a class="nav-link" th:href="@{selectlist.do}">목록</a>
-                </button>
                 <form method="post" class="community_delete" id="form-delete" th:action="@{/community/delete.do}"
                     style="display: inline-block;">
                     <input type="hidden" name="no" th:value="${community.no}" />
                     <button type="button" class="btn btn-sm btn-primary" th:onclick="formAction1(2)">삭제</button>
                 </form>
-
+                <form method="get" class="community_list" id="select-list" th:action="@{/community/selectlist.do}"
+                style="display: inline-block;">
+                <button class="btn btn-sm btn-primary">
+                    <a class="nav-link" th:href="@{selectlist.do}">목록</a>
+                </button>
+                </form>
             </div>
-
+  
             <!--댓글-->
             <form class="mb-3" name="replybox" style="padding-top: 100px;" id="reply_form"
                 th:action="@{/community/replyinsert.do}" method="post">

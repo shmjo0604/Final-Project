@@ -143,6 +143,7 @@ public class CommunityController {
             httpSession.setAttribute("alertUrl", "/community/selectlist.do");
 
             return "redirect:/alert.do";
+            
         } catch (Exception e) {
             e.printStackTrace();
             // return "redirect:/home.do";
