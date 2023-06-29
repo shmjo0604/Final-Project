@@ -103,6 +103,7 @@ public class CommunityController {
 
         if (user != null) {
             model.addAttribute("user", user);
+            
         }
 
         model.addAttribute("pages", pages);
@@ -114,14 +115,15 @@ public class CommunityController {
 
     // 커뮤니티 게시판글 보기
     @GetMapping(value = "/selectone.do")
-    public String selectoneGET(Model model, @RequestParam(name = "no") long no, @AuthenticationPrincipal User user) {
+    public String selectoneGET(Model model, @RequestParam(name = "no") long no,
+    @AuthenticationPrincipal User user) {
 
         Community community = communityRepository.findByNo(no);
         List<Reply> list = rRepository.findByCommunity_noOrderByNoDesc(no);
 
-        if (user != null) {
-            model.addAttribute("user", user);
-            System.out.println(user.toString());
+        if (user == null) {
+           model.addAttribute("user", user);
+           return "redirect:/login.do";
         }
         // log.info(format, list);
         model.addAttribute("list", list);
@@ -143,7 +145,7 @@ public class CommunityController {
             httpSession.setAttribute("alertUrl", "/community/selectlist.do");
 
             return "redirect:/alert.do";
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             // return "redirect:/home.do";
