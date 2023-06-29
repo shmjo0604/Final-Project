@@ -87,24 +87,24 @@
             <hr />
             <label class="content" name="content" th:utext="${community.content}"
                 style="padding-bottom:80px;font-size: 18px;"></label><br />
-
-            <div class="buttons" th:if="${community.member.id == user.username}">
-                <button class="btn btn-sm btn-primary"> <a class="nav-link"
-                        th:href="@{update.do(no=${community.no})}">수정</a></button>
-                <input type="hidden" name="no" th:value="${community.no}" />
-                <form method="post" class="community_delete" id="form-delete" th:action="@{/community/delete.do}"
-                    style="display: inline-block;">
+            <div style="display: inline-block;">
+                <div class="buttons" th:if="${community.member.id == user.username}" style="float: left;">
+                    <button class="btn btn-sm btn-primary"> <a class="nav-link"
+                            th:href="@{update.do(no=${community.no})}">수정</a></button>
                     <input type="hidden" name="no" th:value="${community.no}" />
-                    <button type="button" class="btn btn-sm btn-primary" th:onclick="formAction1(2)">삭제</button>
-                </form>
-                <form method="get" class="community_list" id="select-list" th:action="@{/community/selectlist.do}"
-                style="display: inline-block;">
-                <button class="btn btn-sm btn-primary">
-                    <a class="nav-link" th:href="@{selectlist.do}">목록</a>
-                </button>
-                </form>
+                    <form method="post" class="community_delete" id="form-delete" th:action="@{/community/delete.do}"
+                        style="display: inline-block;">
+                        <input type="hidden" name="no" th:value="${community.no}" />
+                        <button type="button" class="btn btn-sm btn-primary" th:onclick="formAction1(2)">삭제</button>
+                    </form>
+                </div>
+                <div style="float:right;" > 
+                    <button class="btn btn-sm btn-primary" >
+                        <a class="nav-link" th:href="@{selectlist.do}">목록</a>
+                    </button>
+                </div>
             </div>
-  
+
             <!--댓글-->
             <form class="mb-3" name="replybox" style="padding-top: 100px;" id="reply_form"
                 th:action="@{/community/replyinsert.do}" method="post">
