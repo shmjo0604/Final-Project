@@ -317,7 +317,7 @@ async function modalAction1(no, applychk) {
     paymentchk = "결제취소";
     chk2.style.color = "#ff0000";
   }
-  else if (chk == 3) {
+  else {
     cancle.style.display = 'none';
     paymentchk = "참여완료";
     chk2.style.color = "#0067a3";
