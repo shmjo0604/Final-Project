@@ -40,41 +40,40 @@
 # :wrench: <a name="tech">기술스택</a>
 <h4>데이터베이스</h4>
 <div align="left">
- 	<img src="https://img.shields.io/badge/ORACLE-F80000?style=for-the-badge&logo=oracle&logoColor=white" />
-  	<img src="https://img.shields.io/badge/H2-232F3E?style=for-the-badge&logo=h2&logoColor=white" />
-	<img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white" />
+   <img src="https://img.shields.io/badge/ORACLE-F80000?style=for-the-badge&logo=oracle&logoColor=white" />
+   <img src="https://img.shields.io/badge/H2-232F3E?style=for-the-badge&logo=h2&logoColor=white" />
+   <img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white" />
 </div> 
 <h4>백엔드</h4>
 <div align="left">
- 	<img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=Java&logoColor=white"/>
-  	<img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" />
- 	<img src="https://img.shields.io/badge/Spring Security-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white" />
-  	<img src="https://img.shields.io/badge/JPA-59666C?style=for-the-badge&logo=hibernate&logoColor=white" />
- 	<img src="https://img.shields.io/badge/MyBatis-232F3E?style=for-the-badge&logo=mybatis&logoColor=white" />
-	
+    <img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=Java&logoColor=white"/>
+     <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" />
+    <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white" />
+     <img src="https://img.shields.io/badge/JPA-59666C?style=for-the-badge&logo=hibernate&logoColor=white" />
+    <img src="https://img.shields.io/badge/MyBatis-232F3E?style=for-the-badge&logo=mybatis&logoColor=white" />
 </div>
 </div> 
 <h4>프론트엔드</h4>
 <div align="left">
-	<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"/>
-	<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"/>
-  	<img src="https://img.shields.io/badge/JAVASCRIPT-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white"/>
-	<img src="https://img.shields.io/badge/jquery-000000?style=for-the-badge&logo=jquery&logoColor=white" />
-	<img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white" />
-	<img src="https://img.shields.io/badge/thymeleaf-005F0F?style=for-the-badge&logo=thymeleaf&logoColor=white" />
+   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"/>
+   <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"/>
+     <img src="https://img.shields.io/badge/JAVASCRIPT-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white"/>
+   <img src="https://img.shields.io/badge/jquery-000000?style=for-the-badge&logo=jquery&logoColor=white" />
+   <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white" />
+   <img src="https://img.shields.io/badge/Thymeleaf-005F0F?style=for-the-badge&logo=thymeleaf&logoColor=white" />
+     <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
 </div>
 <h4>배포</h4>
 <div align="left">
-	<img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white" />
+   <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white" />
+   <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
 </div>
 <h4>협업도구</h4>
 <div align="left">
-	<img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white" />
-	<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white" />
-	<img src="https://img.shields.io/badge/FIGMA-F24E1E?style=for-the-badge&logo=figma&logoColor=white" />
+   <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white" />
+   <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white" />
+   <img src="https://img.shields.io/badge/FIGMA-F24E1E?style=for-the-badge&logo=figma&logoColor=white" />
 </div>
-
-<br/>
 
 # :family: <a name="team">팀원 역할 및 소개</a>
 <div><br/>
@@ -190,27 +189,23 @@
 <br/>
 
 # :bulb: <a name="result">결론(수정필요)</a>
-<예시><br/><br/>
-웹 관련 프로젝트를 처음으로 하면서 주제 선정, 데이터베이스설계, 기능 구현, 프로젝트 배포까지의
-과정을 거치면서 전반적인 개발의 흐름을 알 수 있었고, mybatis 뿐 아니라 jpa를 사용하며 개발자는
-프로젝트 수행 중 자신이 주로 사용하는 스택뿐 아니라 여러가지 기술스택을 사용함으로써
-프로젝트를 하나씩 수행할 수록 점차 성장할 수 있으며, 이번에 수행한 프로젝트가 항만물류였는데
-이쪽 분야의 자료를 조사하면서 물류와 유통관련 지식도 함께 얻어가서 많은 것을 습득할 수 있었던
-프로젝트였습니다.<br/><br/>
+
+웹 개발 프로젝트를 진행하면서 주제 선정, ERD 설계, 기능 정의, 프로토타입 설정, 사전 조사의 중요성을 알게 되었습니다. 이러한 단계를 통해 프로젝트를 시작하기 전 팀원들과 함께 체계적인 사전 설계를 하였고, 그 결과 프로젝트의 원활한 진행과 프로젝트의 목표에 부합하는 사이트를 제작할 수 있었습니다.
+
+프로젝트에서 백엔드와 프론트엔드 역할을 구분하지 않고, 팀원들이 두 가지 역할을 모두 수행하면서 프로젝트의 요구사항과 개발 환경에 맞게 MyBatis와 JPA를 활용하여  데이터베이스와의 상호작용을 구현했습니다. 또한, HTML5, CSS, JavaScript를 활용하여 화면을 구성하였고 웹 사이트 전반적인 개발 과정을 이해할 수 있었습니다. 이를 통해 백엔드와 프론트엔드의 중요성을 인지했습니다.
+
+프로젝트의 협업을 위해 Notion이나 GitHub와 같은 도구를 적극적으로 활용하여 팀원들과의 의사소통, 작업 일정 관리, 코드 버전 관리 등을 효과적으로 진행했습니다. 또한 구글 캘린더나 카카오 주소와 같은 외부 API를 활용하여 사이트에 다양한 기능을 추가했습니다.
+
+마지막으로, 개발자 입장에서 좋은 사이트를 만드는 것도 중요하지만, 사용자 입장에서 편리하고 유용한 사이트를 만드는 것이 더욱 중요하다는 것을 깨달았습니다. 사용자의 니즈와 요구사항을 고려하여 사용자 경험을 최적화하는 노력이 필요하다는 것을 인지했습니다.<br/><br/>
 
 # :mag_right: <a name="fullfill">보완할점(수정필요)</a>
-<예시>
-1. 전체 프로젝트
- - Security Filter 관련 아쉬운 필터링 부분
- - 관리자 계정의 선박 배정 및 차량 배정이 목적지에 따른 배정 유효성 검사가 없었던 점
- - 반응형 웹을 이용하여 사이즈에 따른 페이지 깨짐이 없었어야한 점
- - 토큰 사용 및 aop등 수업에서 배운 기능들을 다 사용하지 못해본점
- <br/>
 
-2. 담당 기능 보완
- - 결제 및 취소 버튼이 결제완료 및 취소가 되어도 실행되는 점(유효성 검사)
- - 배송추적 자동으로 운행 중 상태를 만드는 스케줄러 부분이 미흡한 점
- - 주문 상세 목록 확인 디자인을 가시성 있게 못꾸민점
+- ERD 설계시 테이블 사이의 관계를 명확하게 설계하지 못했던 점
+- 테이블 view 생성시 여러번 번복하여 작업시간이 길이진 점
+- DTO/Entity 설계시 네이밍 규칙이 미흡했던 점
+- 프로젝트 진행 도중 중간점검을 하지 않고, 최종 병합시 오류를 수정한 점
+- 반응형 웹을 이용하여 사이즈에 따른 페이지 깨짐이 없었어야한 점
+- 스크립트와 css의 버전 혹은 위치가 달라 페이지의 기능과 스타일 정상적으로 수행이 되지 않았던 점 
 
 # :bookmark: <a name="url">배포</a>
 <a href="http://13.125.14.162:8080/ROOT2/orca/home.do">Orca Web Page</a>
