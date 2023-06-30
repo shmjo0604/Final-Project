@@ -33,9 +33,13 @@
         @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&display=swap');
 
         .link-secondary {
-            background-color: #8df08d;
-            border-radius: 5px;
+            background-color: #f1f5f1;
+            border-radius: 7px;
             color: black;
+            font-weight: bold;
+        }
+        .link-secondary:hover {
+            background-color: #d3eed1;
         }
 
         .bd-placeholder-img {
@@ -188,25 +192,30 @@
 
         .card-regdate {
             position: relative;
-            bottom: -50px;
         }
 
         .card-button:hover {
-            background-color: #11d511;
+            background-color: #89f689;
         }
 
         .card-hit {
             color: gray;
-            width: 100px;
-            position: relative;
-            left: 120px;
-            bottom: 115px;
+
         }
         .selectone_cate {
-            background-color: #d3eed1;
-            
-            border-radius: 15px;
+            font-weight: bold;
+            background-color: #f3fbee;
+            border-radius: 10px;
             padding: 7px;
+        }
+        .selectone_cate:first-child:hover {
+            background-color: #d3eed1;
+
+        }
+        .img-thumbnail {
+            /* max-width: 232px; */
+            /* height: 174px; */
+            /* object-fit: cover; */
         }
     </style>
     <!-- Custom styles for this template -->
@@ -1026,21 +1035,21 @@
                     }
 
                     var col2 = document.createElement('div');
-                    col2.className = "col-md-8";
+                    col2.className = "col-md-8 d-flex flex-column";
 
                     var card_body = document.createElement('div');
-                    card_body.className = "card-body";
+                    card_body.className = "card-body d-flex flex-column flex-grow-1";
 
                     var card_title = document.createElement('h6');
                     card_title.className = "card-title card-id";
                     card_title.textContent = obj.id;
 
                     var card_text1 = document.createElement('div');
-                    card_text1.className = "card-text mt-3 ";
+                    card_text1.className = "card-text mt-3 small";
                     card_text1.innerHTML = obj.content;
 
                     var card_text2 = document.createElement('div');
-                    card_text2.className = "card-text card-regdate";
+                    card_text2.className = "card-regdate small";
                     var reviewdate = new Date(obj.regdate)
                     var day = ['일', '월', '화', '수', '목', '금', '토', '일']
                     var reviewDateFormat = reviewdate.getFullYear() + "년 "
@@ -1048,28 +1057,32 @@
                     card_text2.textContent = reviewDateFormat;
 
                     var card_text3 = document.createElement('button');
-                    card_text3.className = "card-button btn btn-success float-end"
+                    card_text3.className = "btn btn-success btn-sm"
                     card_text3.innerHTML = "추천해요!";
                     card_text3.onclick = function () { hitReview(obj.no, obj.classcode) }
 
-                    var card_text4 = document.createElement('p');
-                    card_text4.className = "card-hit float-end";
+                    var card_footer = document.createElement('div');
+                    card_footer.className = "card-footer d-flex justify-content-between align-items-center";
+
+                    var card_header = document.createElement('div');
+                    card_header.className = "d-flex justify-content-between align-items-center";
+
+                    card_footer.appendChild(card_text2);
+                    card_footer.appendChild(card_text3);
+
+                    var card_text4 = document.createElement('span');
+                    card_text4.className = "card-hit small";
                     card_text4.textContent = "추천수 : " + obj.hit;
 
+                    card_header.appendChild(card_title);
+                    card_header.appendChild(card_text4);
 
-                    // 바깥에 만드는 거랑 안에 만드는거랑 먼 차이?
-
-                    // 왜 안되지?
-                    // card_text3.value = "추천해요!";
-                    // card_text3.type="button";
-
-                    card_body.appendChild(card_title);
+                    card_body.appendChild(card_header);
                     card_body.appendChild(card_text1);
-                    card_body.appendChild(card_text2);
-                    card_body.appendChild(card_text3);
-                    card_body.appendChild(card_text4);
+                    // card_body.appendChild(card_text4);
 
                     col2.appendChild(card_body);
+                    col2.appendChild(card_footer);
 
                     row.appendChild(col1);
                     row.appendChild(col2);
