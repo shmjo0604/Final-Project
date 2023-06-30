@@ -89,6 +89,7 @@
                 style="padding-bottom:80px;font-size: 18px;"></label><br />
             
             <div style="display: inline-block; width: 100%;">
+                <th:block th:if="${user != null}">
                 <div class="buttons" th:if="${community.member.id == user.username}" style="float:left;">
                     <button class="btn btn-sm btn-primary"> <a class="nav-link"
                             th:href="@{update.do(no=${community.no})}">수정</a></button>
@@ -99,6 +100,7 @@
                         <button type="button" class="btn btn-sm btn-primary" th:onclick="formAction1(2)">삭제</button>
                     </form>
                 </div>
+                </th:block>
                 <div style="float:right;" > 
                     <button class="btn btn-sm btn-primary" >
                         <a class="nav-link" th:href="@{selectlist.do}">목록</a>
@@ -110,11 +112,18 @@
             <form class="mb-3" name="replybox" style="padding-top: 100px;" id="reply_form"
                 th:action="@{/community/replyinsert.do}" method="post">
                 <input type="hidden" name="community.no" th:value="${community.no}" />
+                <th:block th:if="${user != null}">
                 <input type="hidden" class="form-control" id="memberid" th:value="${user.username}" name="member.id"
                     readonly />
+                </th:block>
                 <textarea id="reply_content" class="form-control mb-2" rows="4" name="content"
                     placeholder="욕설과 비방은 형사처벌의 대상이 될 수 있습니다"></textarea>
+                <th:block th:if="${user != null}">
                 <button type="button" class="btn btn-success" onclick="insertreply()">댓글 입력</button>
+                </th:block>
+                <th:block th:if="${user == null}">
+                <button type="button" class="btn btn-success"><a class="nav-link" th:href="@{/login.do}">댓글 입력</a></button>
+                </th:block>
             </form>
 
 

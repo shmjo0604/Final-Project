@@ -61,6 +61,7 @@ public class SecurityConfig {
             .antMatchers("/member/joinsuccess.do").permitAll()
             .antMatchers("/member", "/member/*").authenticated()
             .antMatchers("/classunit", "/classunit/*").authenticated()
+            .antMatchers("/community/insert.do").authenticated()
             .antMatchers("/admin/login.do").permitAll()
             .antMatchers("/admin/insert.do").permitAll()
             .antMatchers("/admin", "/admin/*").hasAnyAuthority("ROLE_ADMIN")

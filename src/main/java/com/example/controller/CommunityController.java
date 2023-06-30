@@ -121,11 +121,12 @@ public class CommunityController {
         Community community = communityRepository.findByNo(no);
         List<Reply> list = rRepository.findByCommunity_noOrderByNoDesc(no);
 
-        if (user == null) {
-           model.addAttribute("user", user);
-           return "redirect:/login.do";
-        }
+        // if (user == null) {
+        //    return "redirect:/login.do";
+        // }
+
         // log.info(format, list);
+        model.addAttribute("user", user);
         model.addAttribute("list", list);
         model.addAttribute("community", community);
 

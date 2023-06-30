@@ -54,6 +54,39 @@ function sample6_execDaumPostcode() {
         }).open();
 }
 
+/* 최초 실행 시 -> 세팅 */
+
+// 1. 지역 세팅
+
+(async (code, detailcode) => {
+
+    await getLocalcate(code);
+    
+    setlocalone(detailcode);
+
+})(2, 203);
+
+function setlocalone(detailcode) {
+    console.log(detailcode);
+    $("#localselect").val(detailcode).prop("selected", true);
+}
+
+// 2. 클래스 종류 세팅
+
+(async (code, detailcode) => {
+
+    await getActivitycate(code);
+    
+    setactivityone(detailcode);
+
+})(2, 208);
+
+function setactivityone(detailcode) {
+    console.log(detailcode);
+    $("#actdetailselect").val(detailcode).prop("selected", true);
+}
+
+
 // 지역 카테고리 함수
 async function getLocalcate(code) {
     //console.log(code);
@@ -97,6 +130,7 @@ async function getActivitycate(code) {
         $('#actdetailselect').children('option').remove();
         $('#actdetailselect').append('<option>전체</option>');
     }
+
     else {
         const url = contextPath + '/api/class/selectcatelist.json?refcode=' + code + '&chk=classcate';
         const headers = { "Content-Type": "application/json" };
