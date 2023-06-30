@@ -16,6 +16,8 @@
   - 신청/문의 알람
   - 결제
   - 커뮤니티
+  - 회원가입
+  - 로그인-아이디찾기
 - :bulb: <a href="#result">결론</a>
 - :mag_right: <a href="#fullfill">보완할점</a>
 - :bookmark: <a href="#url">배포</a><br/>
