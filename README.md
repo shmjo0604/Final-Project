@@ -6,6 +6,7 @@
 - :wrench: <a href="#tech">기술스택</a>
 - :family: <a href="#team">팀원소개</a>
 - :bookmark_tabs: <a href="#function">기능구현</a>
+  - 회원가입
   - 비밀번호 찾기(인증)
   - 클래스 등록
   - 일정등록/조회
@@ -14,6 +15,7 @@
   - 신청/리뷰내역 조회
   - 신청/문의 알람
   - 결제
+  - 커뮤니티
 - :bulb: <a href="#result">결론</a>
 - :mag_right: <a href="#fullfill">보완할점</a>
 - :bookmark: <a href="#url">배포</a><br/>
@@ -113,6 +115,7 @@
 # :bookmark_tabs: <a name="function">기능구현(최종 배포파일)</a>
 <br/>
 
+
 **1. 비밀번호 찾기(인증)**
 
 <img src="https://github.com/pknu05/Final-Project/assets/123917210/dcbc2f02-b024-4701-acf4-1578e9f7f045"><br/><br/>
@@ -196,6 +199,25 @@
 - 페이지네이션 활성화
 - 로그인이 되었을 때만 댓글 작성가능 (로그인이 되어있지 않은 상태에서 댓글입력시 로그인화면으로 이동)
 <br/>
+
+**10. 회원가입**
+
+<img src=""> <br/><br/>
+
+- MemberController로 DB에 저장
+- 중복된 아이디에 대해서는 사용불가 알림
+  (탈퇴된 아이디도 재사용 불가능)
+- 회원가입시 조건 충족되지 않을시 회원가입 안됨
+<br/> 
+
+**11. 아이디찾기(인증)**
+
+<img src=""> <br/><br/>
+
+- 이름 이메일 전화번호 하나라도 저장된 정보와 다르면 아이디 정보 제공되지 않음
+- 아이디 찾기로 아이디 정보가 뜰경우에만 비밀번호 재설정 버튼 활성화
+
+<br/> 
 
 # :bulb: <a name="result">결론(수정필요)</a>
 
