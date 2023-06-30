@@ -70,7 +70,7 @@
                                             <h6 style="display:inline; color: #FF8E8E">(필수)</h6>
                                         </label>
                                         <select id="cate1" class="form-select" onchange="getLocalcate(this.value)">
-                                            <option value="">지역을 선택하세요</option>
+                                            <option value=" ">지역을 선택하세요</option>
                                             <th:block th:each="obj : ${citylist}">
                                                 <th:block th:if="${obj.code != 1}">
                                                     <option th:value="${obj.code}" th:text="${obj.cate}"></option>
@@ -117,17 +117,17 @@
                                 <div class="row mt-4 justify-content-center">
                                     <div class="col-5">
                                         <div class="post">
-                                            <input type="text" id="sample6_postcode" placeholder="우편번호">
+                                            <input type="text" id="sample6_postcode" placeholder="우편번호" value="04039">
                                             <button type="button" class="btn btn-primary m-2"
                                                 onclick="sample6_execDaumPostcode()">우편번호 찾기</button>
                                             <h6 style="display:inline; color: #FF8E8E">(필수)</h6>
 
-                                            <input type="text" class="my-3 w-100" id="sample6_address" placeholder="주소">
+                                            <input type="text" class="my-3 w-100" id="sample6_address" placeholder="주소" value="서울 마포구 서교동 355-29">
                                             <div class="d-flex justify-content-between mt-2">
                                                 <input type="text" class="" id="sample6_detailAddress"
-                                                    placeholder="상세주소">
+                                                    placeholder="상세주소" value="홍익로5길 31">
                                                 <input type="text" class="" id="sample6_extraAddress"
-                                                    placeholder="참고항목">
+                                                    placeholder="참고항목" value="서교빌딩 201호">
                                             </div>
                                         </div>
                                     </div>
@@ -174,7 +174,7 @@
 
                                             <br>
                                             <input id="nickname" class="form-control w-50 my-3" type="text"
-                                                maxlength="50" placeholder="ex)나무이야기" autofocus required>
+                                                maxlength="50" placeholder="ex)나무이야기" value="파티드" autofocus required>
                                         </div>
 
                                         <div>
@@ -192,7 +192,13 @@
                                             </div>
                                             <div style="margin-top: 10px; background-color: white;">
                                                 <div id="editor1" style="height: 300px;">
-                                                    <p>자신의 경험,경력을 소개해주세요.^^</p>
+                                                    <p>- 파티드 대표
+                                                        - 도자기/유리공예 작업을 하는 공방입니다 •‿•<br>
+                                                        -초보자들도 쉽게 도자공예에 도전할 수 있어요<br>
+                                                        -홈카페, 홈인테리어 소품에 활용하기 좋아요<br>
+                                                        -하나뿐인 나만의 도자기를 만들 수 있어요<br>
+                                                        -집중할 수 있는 시간이기에 스트레스를 잠시나마 날릴 수 있어요
+                                                        </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -211,7 +217,8 @@
                                         </div>
 
                                         <input placeholder="https://instagram.com/sample" type="text" id="sns"
-                                            class="form-control w-50" style="width: 350px; height: 35px;"><br>
+                                            class="form-control w-50" style="width: 350px; height: 35px;"
+                                            value="potted01@naver.com"><br>
                                         <!-- <input placeholder="https://blog.com/sample" type="text"
                                             class="form-control w-50" style="width: 350px; height: 35px;"> -->
 
@@ -274,7 +281,7 @@
                                             <h6 style="display:inline; padding-right:50px; color: #FF8E8E">(필수)</h6>
 
                                             <input type="text" id="title" class="form-control w-50 my-3" maxlength="50"
-                                                placeholder="ex)원데이 목공 클래스" autofocus required>
+                                                placeholder="ex)원데이 목공 클래스" value="소규모 도자기 전사지 클래스" autofocus required>
                                         </div>
 
                                         <div class="my-3">
@@ -294,7 +301,20 @@
                                             <!-- Create the editor container -->
                                             <div style="margin-top: 10px; background-color: white;">
                                                 <div id="editor2" style="height: 300px;">
-                                                    <p>클래스를 소개해주세요.^^</p>
+                                                    <p>-	전사지 클래스는 재벌된 도자기에 색전사지를 이용해 완성시키는 클래스입니다.<br>
+                                                        초보자들도 쉽게 따라하실 수 있는 작업이고 손재주가 없다 해도 옆에서 도와드리니 걱정 안 하셔도되요.<br>
+                                                        프리이빗 클래스로 다른 일행분과 겹치지 않습니다.<br>
+                                                        -	소요시간: 1시간 30분 <br>
+                                                        * 완성 후 수령방법<br>
+                                                        클래스 후 가마소성이 진행되므로 평균 3주정도 추가 소요됩니다. (직접수령, 택배 택1)<br>
+                                                        - 직접수령 : 소성완료 후 최대 한달까지 보관 가능합니다.<br>
+                                                        - 택배 : 추가비용(3000)이 발생되며, 최대한 꼼꼼히 포장해드리지만 배송 중 파손은 책임지지않으니 양해바랍니다.<br>
+                                                        <br>
+                                                        -	이런 분들이 들으면 좋아요<br>
+                                                        • 연인과 색다른 데이트로 추억을 만들고 싶은 분들<br>
+                                                        • 친구들과 함께 우정 쌓으며 재미난 시간을 보내고 싶은 분들<br>
+                                                        • 홈카페, 식기류, 인테리어에 관심있는 분들<br>
+                                                        </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -338,8 +358,7 @@
                                         <div style="margin-top: 10px; background-color: white;">
                                             <div id="editor3" style="height: 300px;">
                                                 <p>
-                                                    커리큘럼을 최소 2단계 이상 소개해주세요.^^<br />예시)<br /> STEP1. 수업 소개<br /> STEP2.
-                                                    수업 내용<br /> STEP3. 수업 마무리
+                                                    ① 도자기, 전사지 안내 <br>② 재단작업 <br>③ 도자기에 붙이기 <br>④ 마무리 후 포토타임
                                                 </p>
                                                 <br>
                                             </div>
@@ -380,7 +399,7 @@
                                             </div><br>
 
                                             <input id="price" type="text" class="my-3" placeholder="금액을 입력하세요"
-                                                maxlength="10" onkeyup="addCommas(this)" autofocus>
+                                                maxlength="10" onkeyup="addCommas(this)" value="30000" autofocus>
                                             <span style="font-size: 20px; margin-left: 2px;">원</span>
                                         </div>
                                         <div class="changepage">
