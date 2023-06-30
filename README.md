@@ -146,7 +146,7 @@
 
 **4. 클래스 검색/조회**
 
-<img src=""> <br/><br/>
+<img src="https://github.com/pknu05/Final-Project/assets/123910896/0b57b0f5-1818-4c37-a131-933872858fef"> <br/><br/>
 
 - 검색 옵션 ( 지역 분류, 클래스 분류, 날짜, 난이도, 가격 ) 선택 후, 해당 조건에 맞는 클래스 목록 검색
 - 지역 및 날짜 선택 시, 지도 범위 내에 해당 조건에 맞는 클래스 장소 마커 표시 ( 카카오 맵 API 활용 → 오버레이 활용, 각 클래스 대표 이미지를 마커로 사용, 복수 마커 )
@@ -154,7 +154,7 @@
 
 **5. 클래스 신청(장바구니)**
 
-<img src="https://github.com/pknu05/Final-Project/assets/123910896/67db584e-b5e1-4d1e-af66-445d40eca3c7"> <br/><br/>
+<img src="https://github.com/pknu05/Final-Project/assets/123910896/8b682cf6-86a1-422b-9642-5b2946c5dd8d"> <br/><br/>
 
 - 주문한 클래스를 장바구니에 저장했을 때 장바구니 페이지에서 주문한 목록을 출력
 - checkbox로 체크되어있는 목록은 신청인원과 자동으로 계산이 되어 결제 금액에 총 금액이 출력
@@ -164,7 +164,7 @@
 
 **6. 신청/리뷰내역 조회**
 
-<img src=""> <br/><br/>
+<img src="https://github.com/pknu05/Final-Project/assets/123910896/cef7e83e-60ca-40c4-b821-969321412ffd"> <br/><br/>
 
 - 리뷰 내용 작성 ( 참여 완료 상태일 때만 가능)
 - 평점 입력 (1~5), 내용 입력(editor 사용), 이미지 첨부(개수 제한)
@@ -185,7 +185,7 @@
 
 **8. 결제**
 
-<img src=""> <br/><br/>
+<img src="https://github.com/pknu05/Final-Project/assets/123910896/a7b3d7c8-6bfd-490b-88a6-f07a8fd1f1ae"> <br/><br/>
 
 - 
 - 
