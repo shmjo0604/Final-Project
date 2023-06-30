@@ -81,33 +81,33 @@
 	
 <h3>● 서명호</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand : 회원정보수정, 클래스 검색(조회), 신청/문의 알람, 이메일 인증, 클래스 신청, 결제
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 메인페이지(header), 클래스검색 페이지, 클래스상세 페이지
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-end : 회원정보수정, 클래스 검색(조회), 신청/문의 알람, 이메일 인증, 클래스 신청, 결제
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-end : 메인페이지(header), 클래스검색 페이지, 클래스상세 페이지
 
 <h3>● 김은정</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand :  클래스 등록, 클래스 수정, 클래스 목록조회, 문의내역 조회(판매자), 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 메인페이지, 클래스등록 페이지, 클래스관리 페이지, 문의내역(판매자)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-end :  클래스 등록, 클래스 수정, 클래스 목록조회, 문의내역 조회(판매자), 
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-end : 메인페이지, 클래스등록 페이지, 클래스관리 페이지, 문의내역(판매자)
 
 <h3>● 이성희</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand : 클래스 승인, 클래스 활성/비활성, 일정등록, 일정조회 및 수정, 클래스 참여승인 	
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 마이페이지, 일정관리 페이지, 신청관리 페이지
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-end : 클래스 승인, 클래스 활성/비활성, 일정등록, 일정조회 및 수정, 클래스 참여승인 	
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-end : 마이페이지, 일정관리 페이지, 신청관리 페이지
 
 <h3>● 박성주</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand : 로그인, 아이디/비번번호 찾기, 회원탈퇴, 커뮤니티 관리, 댓글등록
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 로그인 페이지, 아이디/비밀번호 찾기페이지, 커뮤니티 페이지 
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-end : 로그인, 아이디/비번번호 찾기, 회원탈퇴, 커뮤니티 관리, 댓글등록
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-end : 로그인 페이지, 아이디/비밀번호 찾기페이지, 커뮤니티 페이지 
 
 <h3>● 천현빈</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand : 장바구니 추가, 장바구니 수정 및 삭제, 장바구니 조회, 결제정보 조회
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 장바구니 페이지, 결제확인 페이지, 결제완료 페이지
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-end : 장바구니 추가, 장바구니 수정 및 삭제, 장바구니 조회, 결제정보 조회
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-end : 장바구니 페이지, 결제확인 페이지, 결제완료 페이지
 
 <h3>● 이재호</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Backand : 신청 내역조회, 결제 상세정보, 리뷰내역 조회, 리뷰 상세보기, 리뷰추천
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Frontand : 마이페이지, 신청목록 페이지, 리뷰목록 페이지, 결제상세 페이지, 리뷰상세 페이지
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-end : 신청 내역조회, 결제 상세정보, 리뷰내역 조회, 리뷰 상세보기, 리뷰추천
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-end : 마이페이지, 신청목록 페이지, 리뷰목록 페이지, 결제상세 페이지, 리뷰상세 페이지
 
 </div><br/>
 
