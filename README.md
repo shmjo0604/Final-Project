@@ -194,7 +194,7 @@
 
 **9. 커뮤니티**
 
-<img src=""> <br/><br/>
+<img src="https://github.com/pknu05/Final-Project/assets/123910896/18b11537-048f-414e-a6b3-f4a28c099e74"> <br/><br/>
 
 - CommunityController를 이용하여 DB에 등록
 - 페이지네이션 활성화
