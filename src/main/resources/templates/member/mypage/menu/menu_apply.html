@@ -141,7 +141,7 @@
             <p th:if="${obj.chk} == 2" style="text-align: center">결제취소 </p>
             <p th:if="${obj.chk} == 3 or ${obj.chk} == 4" style="text-align: center">참여완료 </p>
 
-            <button th:if="${obj.chk} == 3 or ${obj.chk} == 4" class="btn btn-sm btn-secondary" type="button"
+            <button th:if="${obj.chk} == 3" class="btn btn-sm btn-secondary" type="button"
               style="height: 30px; width: 90px" th:onclick="modalAction([[${obj.no}]],[[${obj.classcode}]],[[${obj.price}]], [[${obj.title}]],  [[${obj.classdate}]],[[${obj.classlevel}]], [[${obj.classstart}]], [[${obj.classend}]])">
               리뷰작성
             </button>

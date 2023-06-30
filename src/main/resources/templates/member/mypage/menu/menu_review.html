@@ -75,33 +75,34 @@
       border: 0;
       background-color: white;
     }
+
+    .reviewrating{
+      position: relative;
+     
+    }
   </style>
   <div class="row-md-3">
     <p style="font-weight: bolder; font-size: large;">리뷰내역</p>
     <div class="row" style="background-color: honeydew; border-radius: 15px;">
-      <div class="col-sm-4">
+      <div class="col-sm-6">
         <div class="box effect">
           <h3>작성수</h3>
           <h1 th:text="${total}"></h1>
         </div>
       </div>
-      <div class="col-sm-4">
-        <div class="box effect">
-          <h3>조회수</h3>
-          <h1>7</h1>
-        </div>
-      </div>
-      <div class="col-sm-4">
+      
+      <div class="col-sm-6">
         <div class="box effect">
           <h3>평균별점</h3>
-          <h1 th:if="${avg > 0} " th:text="${avg}"></h1>
-          <h1 th:if="${avg == -1 }">0</h1>
+         
+          <a th:if="${avg} >= 1 and ${avg} < 2" style="color: darkgreen; margin-left: 32px; font-size: 2.8rem;">★☆☆☆☆</a>
+          <a th:if="${avg} >=2  and ${avg} < 3 " style="color: darkgreen; margin-left: 32px; font-size: 2.8rem;">★★☆☆☆</a>
+          <a th:if="${avg} >=3  and ${avg} < 4" style="color: darkgreen; margin-left: 32px; font-size: 2.8rem;">★★★☆☆</a>
+          <a th:if="${avg} >=4 and ${avg} < 5" style="color: darkgreen; margin-left: 32px; font-size: 2.8rem;">★★★★☆</a>
+          <a th:if="${avg} >=5  and ${avg} < 6" style="color: darkgreen; margin-left: 32px; font-size: 2.8rem;">★★★★★</a>
 
-          <a th:if="${avg} >= 1 and ${avg} < 2" style="color: darkgreen; margin-left: 65px;">★☆☆☆☆</a>
-          <a th:if="${avg} >=2  and ${avg} < 3 " style="color: darkgreen; margin-left: 65px;">★★☆☆☆</a>
-          <a th:if="${avg} >=3  and ${avg} < 4" style="color: darkgreen; margin-left: 65px;">★★★☆☆</a>
-          <a th:if="${avg} >=4 and ${avg} < 5" style="color: darkgreen; margin-left: 65px;">★★★★☆</a>
-          <a th:if="${avg} >=5  and ${avg} < 6" style="color: darkgreen; margin-left: 65px;">★★★★★</a>
+          <h3 reviewrating th:if="${avg > 0} " th:text="'('+${avg}+')'"></h3>
+          <h3 reviewrating th:if="${avg == -1 }">(0)</h3>
 
         </div>
       </div>
