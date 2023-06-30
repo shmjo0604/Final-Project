@@ -27,9 +27,21 @@
 </head>
 
 <style>
+    html,
     body {
         margin: 0;
+        padding: 0;
+        height: 100%;
         /* background-color: #7addc9; */
+    }
+
+    #body-wrapper {
+        min-height: 80%;
+        position: relative;
+    }
+
+    footer {
+        position: relative;
     }
 
     * {
@@ -207,17 +219,17 @@
         color: white;
         border: none;
     }
-
 </style>
 
 <body>
     <header th:replace="~{header :: headerFragment}"></header>
 
-    
+    <div id="body-wrapper">
+
         <h3 class="text-center">신청 정보 확인 및 결제</h3>
         <section class="cart">
             <table class="cart__list">
-                
+
                 <thead style="background-color: gainsboro;">
                     <tr>
                         <td>번호</td>
@@ -250,19 +262,19 @@
                             <th:block th:if="${obj.classlevel == 3}">
                                 <p>난이도 : 숙련자</p>
                             </th:block>
-                            
+
                             <p th:text="|신청 인원 : ${obj.person}명|"></p>
                             <input type="hidden" class="form-control-plaintext w-25" name="person[]"
                                 th:value="${obj.person}">
-                            
+
                         </td>
 
                         <td>
-                            
+
                             <p th:text="|${#numbers.formatInteger(obj.payment, 3, 'COMMA')}원|"></p>
                             <input type="hidden" class="form-control-plaintext w-25" name="payment[]"
                                 th:value="${obj.payment}">
-                            
+
                         </td>
                     </tr>
                     <tr class="cart__list__detail3">
@@ -270,12 +282,13 @@
                         <td></td>
                         <td></td>
                         <td>
-                            <span th:text="|${#numbers.formatInteger(#aggregates.sum(list.![payment]), 3, 'COMMA')}원|"></span><br>
+                            <span
+                                th:text="|${#numbers.formatInteger(#aggregates.sum(list.![payment]), 3, 'COMMA')}원|"></span><br>
                         </td>
                     </tr>
 
                 </tbody>
-            
+
             </table>
             <div class="cart__mainbtns">
                 <a th:href="@{/home.do}"><button class="cart__bigorderbtn left" type="button">쇼핑 계속하기</button></a>
@@ -283,7 +296,9 @@
                 <button class="cart__bigorderbtn right" type="button" onclick="requestPay()">결제하기</button>
             </div>
         </section>
-    
+
+    </div>
+
 
     <!--footer 영역-->
     <footer th:replace="~{footer :: footerFragment}"></footer>
