@@ -108,13 +108,13 @@
 
                                         <td style="font-family: 'Nanum Gothic', sans-serif;">
                                             <span th:if="${obj.chk == 1}" th:classappend="${obj.chk == 3} ? 'completed' : ''">결제완료</span>
-                                            <span th:if="${obj.chk == 3}">참여완료</span>
+                                            <span th:if="${obj.chk == 3 || obj.chk == 4}">참여완료</span>
                                         </td>
                                         <td style="font-family: 'Nanum Gothic', sans-serif;">
                                             <div th:if="${obj.chk == 1}">
                                                 <button type="button" class="btn btn-secondary btn-sm btn-approval" style="border: 1px solid gray; width: 70px; height: 30px;" th:onclick="'update(' + ${obj.no} + ',' + ${obj.unitno} + ', this)'">승인</button>
                                             </div>
-                                            <div th:if="${obj.chk == 3}">
+                                            <div th:if="${obj.chk == 3 || obj.chk == 4}">
                                                 <button type="button" class="btn btn-secondary btn-sm" style="border: 1px solid gray; width: 70px; height: 30px;" disabled>승인</button>
                                             </div>
                                         </td>
