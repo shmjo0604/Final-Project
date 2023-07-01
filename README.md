@@ -92,7 +92,7 @@
 # :scroll: <a name="team">ERD 다이어그램(추가필요)</a>
 
 <br/>
-<img src="https://github.com/pknu05/Final-Project/assets/123917210/de669465-6491-405d-8941-bd0a0516a69c" />
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/2f48d381-fd2c-48d4-9a0d-fd44e790d2fb" />
 <br/><br/>
 
 # :family: <a name="team">팀원 역할 및 소개</a>
