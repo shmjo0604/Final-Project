@@ -37,8 +37,8 @@
 
 # :books: <a name="outline">개요</a>
 <br/>
-<img src="https://github.com/pknu05/Final-Project/assets/44632544/3af41267-72d3-48ff-8dfd-aac0d62ae130">
-<br/>
+<img src="https://github.com/pknu05/Final-Project/assets/44632544/3af41267-72d3-48ff-8dfd-aac0d62ae130"><br/><br/>
+
 >**프로젝트**: 원데이클래스 사이트
 >
 >**기획 및 제작** : 스페셜데이
