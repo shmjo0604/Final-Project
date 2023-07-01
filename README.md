@@ -110,8 +110,8 @@
 
 <h3>● 이성희</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-end : 클래스 승인, 클래스 활성/비활성, 일정등록, 일정조회 및 수정, 클래스 참여승인 	
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-end : 마이페이지, 일정관리 페이지, 신청관리 페이지
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-end : 클래스 승인, 클래스 활성/비활성, 일정등록 및 조회, 일정수정 및 삭제, 클래스 참여승인 	
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-end : 마이페이지, 일정관리 페이지, 신청관리 페이지, 관리자 페이지
 
 <h3>● 박성주</h3>
 
