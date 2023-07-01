@@ -183,7 +183,15 @@
 - 문의 답변 (Modal)
 <br/>
 
-**8. 결제**
+**8. 신청/결제 취**
+
+<img src="https://github.com/pknu05/Final-Project/assets/123910896/ffcd56ce-2a7e-4002-9172-6ca811878f9e"> <br/><br/>
+
+- 페이지네이션 기능
+- 결제 취소 기능 (Modal)
+<br/>
+
+**9. 결제**
 
 <img src="https://github.com/pknu05/Final-Project/assets/123910896/a7b3d7c8-6bfd-490b-88a6-f07a8fd1f1ae"> <br/><br/>
 
@@ -192,7 +200,7 @@
 - 
 <br/>
 
-**9. 커뮤니티**
+**10. 커뮤니티**
 
 <img src="https://github.com/pknu05/Final-Project/assets/123910896/fd403bf2-7428-46a8-b5d2-a1d5068c537c"> <br/><br/>
 
@@ -201,7 +209,7 @@
 - 로그인이 되었을 때만 댓글 작성가능 (로그인이 되어있지 않은 상태에서 댓글입력시 로그인화면으로 이동)
 <br/>
 
-**10. 회원가입**
+**11. 회원가입**
 
 <img src=""> <br/><br/>
 
@@ -211,7 +219,7 @@
 - 회원가입시 조건 충족되지 않을시 회원가입 안됨
 <br/> 
 
-**11. 아이디찾기(인증)**
+**12. 아이디찾기(인증)**
 
 <img src=""> <br/><br/>
 
@@ -219,7 +227,7 @@
 - 아이디 찾기로 아이디 정보가 뜰경우에만 비밀번호 재설정 버튼 활성화
 
 <br/> 
-**12. 비밀번호교체 회원탈퇴**
+**13. 비밀번호교체 회원탈퇴**
 
 <img src="https://github.com/pknu05/Final-Project/assets/123910896/9a66befd-5ac0-4b21-825e-1b9af54a22e7"> <br/><br/>
 
