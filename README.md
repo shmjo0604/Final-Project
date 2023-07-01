@@ -159,7 +159,8 @@
 - 전송된 인증번호를 입력하여 인증확인
 <br/>
 
-# 2. 클래스 등록
+# 2. 클래스 등록(관리자 승인)
+## &nbsp;&nbsp;2-1. 클래스 등록
 
 <img src="https://github.com/pknu05/Final-Project/assets/123917210/878dcade-f7c9-4a01-ae39-15d327296d92"> <br/><br/>
 - KakaoLocal API를 이용하여 주소 기반 위도, 경도 값을 반환(Map)
@@ -167,13 +168,17 @@
 - input태그에 multifile 옵션을 추가, 이미지 여러장 등록 가능
 <br/>
 
-## &nbsp;&nbsp;클래스 상세페이지
+## &nbsp;&nbsp;2-2. 클래스 승인(관리자)
+
+
+## &nbsp;&nbsp;2-3. 클래스 상세페이지
 
 <img src="https://github.com/pknu05/Final-Project/assets/123917210/f0e5d7d2-fede-49e9-b634-65cb48311fce"> <br/><br/>
 - 등록한 클래스의 상세정보를 조회할 수 있는 페이지 (리뷰추천, 문의하기, 신청하기 기능으로 구성)
+     
 <br/>
 
-# 3. 일정등록/관리
+# 3. 일정등록 및 신청관리
 
 <img src="https://github.com/pknu05/Final-Project/assets/123917210/f80c7950-4dab-4989-81be-c1cf2cc1ab84"> <br/><br/>
 - Google Calendar API를 이용하여 날짜를 선택 후 해당하는 날짜에 클래스 일정 등록
