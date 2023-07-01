@@ -171,7 +171,7 @@
 
 ## &nbsp;&nbsp;2-2. 클래스 승인(관리자)
 
-<img src="https://github.com/pknu05/Final-Project/assets/44632544/4598c1a9-3dfb-4910-85bd-d3493909e274"> <br/><br/>
+<img src="https://github.com/pknu05/Final-Project/assets/44632544/2cf3c1b2-08a5-43b7-bd58-cc9013de2f52"> <br/><br/>
 - 등록된 관리자 정보로 로그인, 아이디와 비밀번호 정보가 일치할 경우 관리자만 접근할 수 있는 서비스 페이지로 이동
 - 전체 클래스 관리 목록에서 신규 클래스 등록 정보를 확인 후 승인여부 값 업데이트 
 <br/>
@@ -187,15 +187,16 @@
 # 3. 클래스 일정 및 신청관리
 ## &nbsp;&nbsp;3-1. 일정관리
 
-<img src="https://github.com/pknu05/Final-Project/assets/123917210/f80c7950-4dab-4989-81be-c1cf2cc1ab84"> <br/><br/>
+<img src="https://github.com/pknu05/Final-Project/assets/44632544/f587ff02-0d04-4073-b015-0e58e6b1ab54"> <br/><br/>
 - 일정 등록을 위한 필수정보(날짜, 시간, 인원) 유효성 검사, 난이도변경에 따른 추가 금액 입력란 활성화 및 할인율 설정, 총 금액확인 기능 구현
 - Fullcalendar 라이브러리를 이용한 달력 구현, 등록한 클래스 일정 정보를 달력에서 월별 조회
 - 사이드바에서 전체일정 조회 후 특정 일정 수정 및 삭제, 전체삭제 가능 
 <br/>
 
 ## &nbsp;&nbsp;3-2. 신청관리
-<img src=""> <br/><br/>
--
+<img src="https://github.com/pknu05/Final-Project/assets/44632544/32c83bfa-0ecd-4143-a1d2-b2a4cf63fad2"> <br/><br/>
+- 등록한 일정별 신청인원 조회
+- 신청내역 => 신청자 정보 확인, 클래스 종료 시 신청 처리상태 결제완료에서 참여완료로 업데이트(승인)
 
 # 4. 클래스 검색/조회
 
