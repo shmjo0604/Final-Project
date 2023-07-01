@@ -285,5 +285,5 @@
 - 스크립트와 css의 버전 혹은 위치가 달라 페이지의 기능과 스타일 정상적으로 수행이 되지 않았던 점 
 
 # :bookmark: <a name="url">배포</a>
-<a href="http://13.125.14.162:8080/ROOT2/orca/home.do">Orca Web Page</a>
-- AWS와 Docker를 이용한 배포
+<a href="http://52.79.248.26:8080/specialday/home.do">Specialday Web Page</a>
+- AWS EC2에 배포
