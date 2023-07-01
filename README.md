@@ -12,7 +12,9 @@
    	- 1-2. 아이디 찾기
 	- 1-3. 비밀번호 찾기
   - 2.&nbsp;클래스 등록
-   	- 2-1. 클래스 상세 페이지
+   	- 2-1. 클래스 등록
+      	- 2-2. 클래스 승인(관리자)
+      	- 2-3. 클래스 상세정보 조회
   - 3.&nbsp;일정등록/관리
   - 4.&nbsp;클래스 검색/조회
 	- 4-1. 클래스검색(카테고리)
@@ -25,10 +27,9 @@
 	- 6-2. 리뷰 작성
 	- 6-3. 리뷰 추천 
   - 7.&nbsp;커뮤니티(글쓰기,댓글)
-  - 8.&nbsp;신청/문의 알람
+  - 8.&nbsp;신청/문의 알림
 	- 8-1. 신청 승인
 	- 8-2. 문의 답변
-  - 9.&nbsp;관리자
     
 - :bulb: <a href="#result">결론</a>
 - :mag_right: <a href="#fullfill">보완할점</a>
@@ -89,7 +90,7 @@
    <img src="https://img.shields.io/badge/FIGMA-F24E1E?style=for-the-badge&logo=figma&logoColor=white" />
 </div><br/>
 
-# :scroll: <a name="team">ERD 다이어그램(추가필요)</a>
+# :scroll: <a name="team">ERD 다이어그램</a>
 
 <br/>
 <img src="https://github.com/pknu05/Final-Project/assets/44632544/8a346ba7-67cc-4300-bc2d-8a1e0f100532" />
@@ -100,7 +101,7 @@
 	
 <h3>● 서명호</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-end : 회원정보수정, 클래스 검색(조회), 신청/문의 알람, 이메일 인증, 클래스 신청, 결제
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-end : 회원정보수정, 클래스 검색(조회), 신청/문의 알림, 이메일 인증, 클래스 신청, 결제
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-end : 메인페이지(header), 클래스검색 페이지, 클래스상세 페이지
 
 <h3>● 김은정</h3>
@@ -169,12 +170,13 @@
 <br/>
 
 ## &nbsp;&nbsp;2-2. 클래스 승인(관리자)
-<img src=""> <br/><br/>
+
+<img src="https://github.com/pknu05/Final-Project/assets/44632544/4598c1a9-3dfb-4910-85bd-d3493909e274"> <br/><br/>
 - 등록된 관리자 정보로 로그인, 아이디와 비밀번호 정보가 일치할 경우 관리자만 접근할 수 있는 서비스 페이지로 이동
 - 전체 클래스 관리 목록에서 신규 클래스 등록 정보를 확인 후 승인여부 값 업데이트 
 <br/>
 
-## &nbsp;&nbsp;2-3. 클래스 상세페이지
+## &nbsp;&nbsp;2-3. 클래스 상세정보 조회
 
 <img src="https://github.com/pknu05/Final-Project/assets/123917210/f0e5d7d2-fede-49e9-b634-65cb48311fce"> <br/><br/>
 - 등록한 클래스의 상세정보를 조회할 수 있는 페이지 (리뷰추천, 문의하기, 신청하기 기능으로 구성)
@@ -182,13 +184,18 @@
      
 <br/>
 
-# 3. 일정등록/관리
+# 3. 클래스 일정 및 신청관리
+## &nbsp;&nbsp;3-1. 일정관리
 
 <img src="https://github.com/pknu05/Final-Project/assets/123917210/f80c7950-4dab-4989-81be-c1cf2cc1ab84"> <br/><br/>
 - 일정 등록을 위한 필수정보(날짜, 시간, 인원) 유효성 검사, 난이도변경에 따른 추가 금액 입력란 활성화 및 할인율 설정, 총 금액확인 기능 구현
 - Fullcalendar 라이브러리를 이용한 달력 구현, 등록한 클래스 일정 정보를 달력에서 월별 조회
 - 사이드바에서 전체일정 조회 후 특정 일정 수정 및 삭제, 전체삭제 가능 
 <br/>
+
+## &nbsp;&nbsp;3-2. 신청관리
+<img src=""> <br/><br/>
+-
 
 # 4. 클래스 검색/조회
 
@@ -241,7 +248,7 @@
 - rest API를 이용하여 추천해요 버튼 클릭시 해당하는 리뷰 조회수 증가
 <br/>
 
-# 7. 커뮤니티(글쓰기,댓글)
+# 7. 커뮤니티(글쓰기, 댓글)
 
 <img src="https://github.com/pknu05/Final-Project/assets/123910896/fd403bf2-7428-46a8-b5d2-a1d5068c537c"> <br/><br/>
 
@@ -250,29 +257,22 @@
 - 로그인이 되었을 때만 댓글 작성가능 (로그인이 되어있지 않은 상태에서 댓글입력시 로그인화면으로 이동)
 <br/>
 
-# 8. 신청/문의 알람
+# 8. 신청/문의 알림
 
-## &nbsp;&nbsp;8-1. 신청 승인
+## &nbsp;&nbsp;8-1. 클래스 신청 알림
 
 <img src=""> <br/><br/>
 - 신청승인
 -  
 
 
-## &nbsp;&nbsp;8-2. 문의 답변
+## &nbsp;&nbsp;8-2. 클래스 문의 알림
 
 <img src=""> <br/><br/>
 - 해당 클래스 문의 등록(문의하기 Modal) ⇒ 로그인 상태가 아닐 시, 로그인 페이지 이동
 - 내 클래스 문의 내역 확인 및 처리 상태 확인
 - 답변 대기 상태 시, 문의 답변 가능
 - 문의 답변 (Modal)
-<br/>
-
-# 9. 관리자
-
-<img src=""> <br/><br/>
-
-- 관리자
 <br/>
 
 # :bulb: <a name="result">결론</a>
