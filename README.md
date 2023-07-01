@@ -37,7 +37,7 @@
 
 # :books: <a name="outline">개요</a>
 <br/>
-<img src="https://github.com/pknu05/Final-Project/assets/123917210/b1c6fed7-6a08-4931-84d8-0249936c7031">
+<img src="https://github.com/pknu05/Final-Project/assets/44632544/3af41267-72d3-48ff-8dfd-aac0d62ae130">
 
 >**프로젝트**: 원데이클래스 사이트
 >
@@ -92,7 +92,7 @@
 # :scroll: <a name="team">ERD 다이어그램(추가필요)</a>
 
 <br/>
-<img src="https://github.com/pknu05/Final-Project/assets/123917210/2f48d381-fd2c-48d4-9a0d-fd44e790d2fb" />
+<img src="https://github.com/pknu05/Final-Project/assets/44632544/8a346ba7-67cc-4300-bc2d-8a1e0f100532" />
 <br/><br/>
 
 # :family: <a name="team">팀원 역할 및 소개</a>
