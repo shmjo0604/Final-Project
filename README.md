@@ -134,7 +134,7 @@
 
 </div><br/>
 
-# :bookmark_tabs: <a name="function">기능구현(최종 배포파일)</a>
+# :bookmark_tabs: <a name="function">기능구현</a>
 <br/>
 
 # 홈 화면
