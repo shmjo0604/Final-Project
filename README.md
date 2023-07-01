@@ -226,7 +226,7 @@
 
 ## &nbsp;&nbsp;6-3. 리뷰 추천
 
-<img src="https://github.com/pknu05/Final-Project/assets/123917210/938a6c55-9795-43b6-81ef-c1deb09751f4"> <br/><br/>
+<img src="github.com/pknu05/Final-Project/assets/123917210/f802d15a-b821-4f19-99d5-cce86dc05971"> <br/><br/>
 - 리뷰 등록시 클래스 상세페이지에서 조회 가능
 - rest API를 이용하여 추천해요 버튼 클릭시 해당하는 리뷰 조회수 증가
 <br/>
