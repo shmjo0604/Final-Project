@@ -183,9 +183,9 @@
 - 문의 답변 (Modal)
 <br/>
 
-**8. 신청/결제 취**
+**8. 신청/결제 취소**
 
-<img src="https://github.com/pknu05/Final-Project/assets/123910896/ffcd56ce-2a7e-4002-9172-6ca811878f9e"> <br/><br/>
+<img src="https://github.com/pknu05/Final-Project/assets/123910896/e0c338be-6421-443f-8eb4-7085e3b45d4b"> <br/><br/>
 
 - 페이지네이션 기능
 - 결제 취소 기능 (Modal)
