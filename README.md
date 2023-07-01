@@ -93,7 +93,7 @@
    <img src="https://img.shields.io/badge/FIGMA-F24E1E?style=for-the-badge&logo=figma&logoColor=white" />
 </div><br/>
 
-# :scroll: <a name="team">ERD 다이어그램</a>
+# :scroll: <a name="team">ERD</a>
 
 <br/>
 <img src="https://github.com/pknu05/Final-Project/assets/44632544/8a346ba7-67cc-4300-bc2d-8a1e0f100532" />
@@ -277,7 +277,7 @@
 - 문의 답변(Modal)
 <br/>
 
-## &nbsp;&nbsp;8-2. 클래스 문의 답변완료 알림(구매자)
+## &nbsp;&nbsp;8-3. 클래스 문의 답변완료 알림(구매자)
 
 <img src="https://github.com/pknu05/Final-Project/assets/44632544/4b40601e-1057-4839-b2b9-cdc29131c7b5"> <br/><br/>
 - 클래스 문의 알림을 선택하여 마이페이지의 문의내역 페이지로 이동
