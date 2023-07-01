@@ -206,7 +206,7 @@
 ## &nbsp;&nbsp;5-2. 클래스 신청(결제)
 
 <img src="https://github.com/pknu05/Final-Project/assets/123910896/a7b3d7c8-6bfd-490b-88a6-f07a8fd1f1ae"> <br/><br/>
-- import.payment API를 이용하여 선택한 클래스를 실제로 결제할 수 있도록 구현 
+- import.payment API를 이용하여 선택한 클래스를 실제로 결제가 가능 하도록 구현 
 <br/>
 
 # 6. 신청/리뷰내역 조회
