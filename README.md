@@ -1,22 +1,35 @@
-
 # PORTFOLIO
 # :clipboard: 목차
 
 - :books: <a href="#outline">개요</a>
 - :wrench: <a href="#tech">기술스택</a>
+- :scroll: <a href="#tech">ERD 다이어그램</a>
 - :family: <a href="#team">팀원소개</a>
 - :bookmark_tabs: <a href="#function">기능구현</a>
-  - 회원가입
-  - 비밀번호 찾기(인증)
-  - 클래스 등록
-  - 일정등록/조회
-  - 클래스 검색/조회
-  - 클래스 신청(장바구니)
-  - 신청/리뷰내역 조회
-  - 신청/문의 알람
-  - 결제
-  - 커뮤니티
-  - 로그인-아이디찾기
+  - 홈화면
+  - 1.&nbsp;로그인
+  	- 1-1. 회원가입
+   	- 1-2. 아이디 찾기
+	- 1-3. 비밀번호 찾기
+  - 2.&nbsp;클래스 등록
+   	- 2-1. 클래스 상세 페이지
+  - 3.&nbsp;일정등록/관리
+  - 4.&nbsp;클래스 검색/조회
+	- 4-1. 클래스검색(카테고리)
+	- 4-2. 클래스검색(지도)
+  - 5.&nbsp;클래스 신청 및 결제
+	- 5-1. 클래스 신청(장바구니)
+	- 5-2. 클래스 신청(결제)
+  - 6.&nbsp;신청/리뷰내역 조회
+	- 6-1. 신청 내역 상세보기
+	- 6-2. 리뷰 작성
+	- 6-3. 리뷰 추천 
+  - 7.&nbsp;신청/문의 알람
+	- 7-1. 신청 승인
+	- 7-2. 문의 답변
+  - 8.&nbsp;커뮤니티(글쓰기,댓글)
+  - 9.&nbsp;관리자
+    
 - :bulb: <a href="#result">결론</a>
 - :mag_right: <a href="#fullfill">보완할점</a>
 - :bookmark: <a href="#url">배포</a><br/>
@@ -24,9 +37,7 @@
 
 # :books: <a name="outline">개요</a>
 <br/>
-<img src="https://github.com/pknu05/Final-Project/assets/123917210/6e677789-5a8b-4b94-a395-8923180659e2.png">
-
-<img src="https://raw.githubusercontent.com/pknu05/Final-Project/main/src/main/resources/static/image/비밀번호 찾기.gif?token=GHSAT0AAAAAACEIXGGXGQ3S4RMCNNCYLKPKZE4JGMA">
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/b1c6fed7-6a08-4931-84d8-0249936c7031">
 
 >**프로젝트**: 원데이클래스 사이트
 >
@@ -76,7 +87,13 @@
    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white" />
    <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white" />
    <img src="https://img.shields.io/badge/FIGMA-F24E1E?style=for-the-badge&logo=figma&logoColor=white" />
-</div>
+</div><br/>
+
+# :scroll: <a name="team">ERD 다이어그램(추가필요)</a>
+
+<br/>
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/de669465-6491-405d-8941-bd0a0516a69c" />
+<br/><br/>
 
 # :family: <a name="team">팀원 역할 및 소개</a>
 <div><br/>
@@ -116,127 +133,139 @@
 # :bookmark_tabs: <a name="function">기능구현(최종 배포파일)</a>
 <br/>
 
+# 홈 화면
 
-**1. 비밀번호 찾기(인증)**
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/ed817021-bec0-4326-8095-33406b9dd377"><br/><br/>
 
-<img src="https://github.com/pknu05/Final-Project/assets/123917210/dcbc2f02-b024-4701-acf4-1578e9f7f045"><br/><br/>
+# 1. 로그인
+## &nbsp;&nbsp;1-1. 회원가입 
 
-<예시>
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/5d2b82ec-d505-4b81-95bc-2db417992691"><br/><br/>
+- 입력한 아이디와 비밀번호, 연락처와 같은 개인정보를 DB에 insert하여 회원가입 기능 구현
+- MemberController로 DB에 저장
+- 중복된 아이디, 탈퇴한 아이디에 대해서는 사용불가 알림이 뜨도록 유효성 검사 추가
+  
+## &nbsp;&nbsp;1-2. 아이디 찾기
+
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/2071d665-991e-4fbc-a62a-fd3d785e6a18"><br/><br/>
+- member 테이블에 저장되어 있는 개인정보와 모두 일치하는 id를 찾아서 조회
+- 아이디 찾기로 아이디를 조회에 성공했을 경우에만 비밀번호 재설정 버튼 활성화
+ 
+## &nbsp;&nbsp;1-3. 비밀번호 변경
+
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/22957948-1846-49e4-a2e5-dba8fbe53df0"><br/><br/>
 - SimpleMailMessage 클래스를 이용하여 메일 내용 설정
 - JavaMailSender를 이용하여 Gmail로 고객에게 인증번호 전송
 - 전송된 인증번호를 입력하여 인증확인
 <br/>
 
-**2. 클래스 등록**
+# 2. 클래스 등록
 
-<img src="https://github.com/pknu05/Final-Project/assets/123917210/98266ef9-db63-4943-8d4a-180023c9cbf9"> <br/><br/>
-
-- KakaoLocalAPI를 이용하여 주소 기반 위도, 경도 값 반환(Map)하여 등록
-- ClassController를  이용하여 DB에 값 등록
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/878dcade-f7c9-4a01-ae39-15d327296d92"> <br/><br/>
+- KakaoLocal API를 이용하여 주소 기반 위도, 경도 값을 반환(Map)
+- Quill editor를 이용하여 강사소개, 클래스 내용, 커리큘럼을 DB에 등록
+- input태그에 multifile 옵션을 추가, 이미지 여러장 등록 가능
 <br/>
 
-**3. 일정등록/조회**
+## &nbsp;&nbsp;클래스 상세페이지
 
-<img src="https://github.com/pknu05/Final-Project/assets/123917210/4ab8e4e6-09e3-4f48-b3b7-a616f7fa5a2a"> <br/><br/>
-
-- 모달을 통하여 일정을 DB에 등록
-- 추가된 클래스를 전체일정이라는 사이드바 페이지를 이용해 클래스 수정 및 삭제
-
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/f0e5d7d2-fede-49e9-b634-65cb48311fce"> <br/><br/>
+- 등록한 클래스의 상세정보를 조회할 수 있는 페이지 (리뷰추천, 문의하기, 신청하기 기능으로 구성)
 <br/>
 
-**4. 클래스 검색/조회**
+# 3. 일정등록/관리
+
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/f80c7950-4dab-4989-81be-c1cf2cc1ab84"> <br/><br/>
+- Google Calendar API를 이용하여 날짜를 선택 후 해당하는 날짜에 클래스 일정 등록
+- 등록한 일정을 달력에 표시하고 사이드바 메뉴에서 전체일정 조회
+<br/>
+
+# 3. 클래스 검색/조회
+
+## &nbsp;&nbsp;3-1. 클래스검색(카테고리)
+
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/5073306d-2e91-47eb-96bc-b1bffbce5389"> <br/><br/>
+- 검색 옵션 ( 지역 분류, 클래스 분류, 날짜, 난이도, 가격 ) 선택 후, 해당 조건에 맞는 클래스 목록 검색
+- Pagination을 이용하여 조건으로 검색된 클래스의 목록을 조회
+  
+## &nbsp;&nbsp;3-2. 클래스검색(지도)
 
 <img src="https://github.com/pknu05/Final-Project/assets/123910896/0b57b0f5-1818-4c37-a131-933872858fef"> <br/><br/>
-
-- 검색 옵션 ( 지역 분류, 클래스 분류, 날짜, 난이도, 가격 ) 선택 후, 해당 조건에 맞는 클래스 목록 검색
 - 지역 및 날짜 선택 시, 지도 범위 내에 해당 조건에 맞는 클래스 장소 마커 표시 ( 카카오 맵 API 활용 → 오버레이 활용, 각 클래스 대표 이미지를 마커로 사용, 복수 마커 )
 <br/>
 
-**5. 클래스 신청(장바구니)**
+# 5. 클래스 신청 및 결제
+
+## &nbsp;&nbsp;5-1. 클래스 신청(장바구니)
 
 <img src="https://github.com/pknu05/Final-Project/assets/123910896/8b682cf6-86a1-422b-9642-5b2946c5dd8d"> <br/><br/>
-
 - 주문한 클래스를 장바구니에 저장했을 때 장바구니 페이지에서 주문한 목록을 출력
 - checkbox로 체크되어있는 목록은 신청인원과 자동으로 계산이 되어 결제 금액에 총 금액이 출력
 - 선택된 checkbox 값을 통하여 BasketController를 통하여 삭제 기능 구현을 구현
-- 결제 화면버튼을 이용하여 결제 페이지로 이동
+
+## &nbsp;&nbsp;5-2. 클래스 신청(결제)
+
+<img src="https://github.com/pknu05/Final-Project/assets/123910896/a7b3d7c8-6bfd-490b-88a6-f07a8fd1f1ae"> <br/><br/>
+- import.payment API를 이용하여 선택한 클래스를 실제로 결제할 수 있도록 구현 
 <br/>
 
-**6. 신청/리뷰내역 조회**
+# 6. 신청/리뷰내역 조회
+
+## &nbsp;&nbsp;6-1. 신청 내역 조회(상세보기)
+
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/c523d16b-b6a2-4770-b2a5-1decdf6ebae7"> <br/><br/>
+- Pagination을 이용하여 내가 신청한 클래스를 결제완료, 결제취소, 참여완료에 따라 조회
+- 결제상태에 따라 상세보기시 나오는 결제내역 변경(신청취소시 취소정보 표시)
+
+## &nbsp;&nbsp;6-2. 리뷰 작성
 
 <img src="https://github.com/pknu05/Final-Project/assets/123910896/cef7e83e-60ca-40c4-b821-969321412ffd"> <br/><br/>
+- 참여완료 상태일때만 리뷰등록 버튼 활성화
+- 평점 1~5 입력 (radio 타입 사용), 내용 입력(Quill editor 사용), 이미지 첨부(개수 제한) 후 DB에 저장
+- Pagination을 이용하여 내가 작성한 리뷰 내역 전체,날짜순 조회 
 
-- 리뷰 내용 작성 ( 참여 완료 상태일 때만 가능)
-- 평점 입력 (1~5), 내용 입력(editor 사용), 이미지 첨부(개수 제한)
-- 내가 작성한 리뷰 내역 전체 조회 ( Pagination )
-- 리뷰 작성 내역 상세 확인 ( RestController )
-- 해당 클래스 리뷰 내역 확인(RestController, Pagination)
+## &nbsp;&nbsp;6-3. 리뷰 추천
+
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/938a6c55-9795-43b6-81ef-c1deb09751f4"> <br/><br/>
+- 리뷰 등록시 클래스 상세페이지에서 조회 가능
+- rest API를 이용하여 추천해요 버튼 클릭시 해당하는 리뷰 조회수 증가
 <br/>
 
-**7. 신청/문의 알람**
+# 7. 신청/문의 알람
+
+## &nbsp;&nbsp;7-1. 신청 승인
 
 <img src=""> <br/><br/>
+- 신청승인
+-  
 
+
+## &nbsp;&nbsp;7-2. 문의 답변
+
+<img src=""> <br/><br/>
 - 해당 클래스 문의 등록(문의하기 Modal) ⇒ 로그인 상태가 아닐 시, 로그인 페이지 이동
 - 내 클래스 문의 내역 확인 및 처리 상태 확인
 - 답변 대기 상태 시, 문의 답변 가능
 - 문의 답변 (Modal)
 <br/>
 
-**8. 신청/결제 취소**
-
-<img src="https://github.com/pknu05/Final-Project/assets/123910896/e0c338be-6421-443f-8eb4-7085e3b45d4b"> <br/><br/>
-
-- 페이지네이션 기능
-- 결제 취소 기능 (Modal)
-<br/>
-
-**9. 결제**
-
-<img src="https://github.com/pknu05/Final-Project/assets/123910896/a7b3d7c8-6bfd-490b-88a6-f07a8fd1f1ae"> <br/><br/>
-
-- 
-- 
-- 
-<br/>
-
-**10. 커뮤니티**
+# 8. 커뮤니티(글쓰기,댓글)
 
 <img src="https://github.com/pknu05/Final-Project/assets/123910896/fd403bf2-7428-46a8-b5d2-a1d5068c537c"> <br/><br/>
 
-- CommunityController를 이용하여 DB에 등록
-- 페이지네이션 활성화
+- 글에 목적에 따른 글 분류를 선택하여 글작성 + 수정,삭제 기능 구현
+- Pagination을 이용하여 전체 커뮤니티 글 조회 
 - 로그인이 되었을 때만 댓글 작성가능 (로그인이 되어있지 않은 상태에서 댓글입력시 로그인화면으로 이동)
 <br/>
 
-**11. 회원가입**
+# 9. 관리자
 
 <img src=""> <br/><br/>
 
-- MemberController로 DB에 저장
-- 중복된 아이디에 대해서는 사용불가 알림
-  (탈퇴된 아이디도 재사용 불가능)
-- 회원가입시 조건 충족되지 않을시 회원가입 안됨
-<br/> 
+- 관리자
+<br/>
 
-**12. 아이디찾기(인증)**
-
-<img src=""> <br/><br/>
-
-- 이름 이메일 전화번호 하나라도 저장된 정보와 다르면 아이디 정보 제공되지 않음
-- 아이디 찾기로 아이디 정보가 뜰경우에만 비밀번호 재설정 버튼 활성화
-
-<br/> 
-**13. 비밀번호교체 회원탈퇴**
-
-<img src="https://github.com/pknu05/Final-Project/assets/123910896/9a66befd-5ac0-4b21-825e-1b9af54a22e7"> <br/><br/>
-
-- 사용하는 ID와 현재 비밀번호, 새 비밀번호 입력해야 비밀번호 변경 가능능
-- 비밀번호를 입력한뒤 탈퇴 동의서 체크해야 회원탈퇴 가능
-
-<br/> 
-
-# :bulb: <a name="result">결론(수정필요)</a>
+# :bulb: <a name="result">결론</a>
 
 웹 개발 프로젝트를 진행하면서 주제 선정, ERD 설계, 기능 정의, 프로토타입 설정, 사전 조사의 중요성을 알게 되었습니다. 이러한 단계를 통해 프로젝트를 시작하기 전 팀원들과 함께 체계적인 사전 설계를 하였고, 그 결과 프로젝트의 원활한 진행과 프로젝트의 목표에 부합하는 사이트를 제작할 수 있었습니다.
 
@@ -246,7 +275,7 @@
 
 마지막으로, 개발자 입장에서 좋은 사이트를 만드는 것도 중요하지만 사용자 입장에서 편리하고 유용한 사이트를 만드는 것이 더욱 중요하다는 점, 사용자의 니즈와 요구사항을 고려하여 사용자 경험을 최적화하는 노력이 필요하다는 것을 인지했습니다.<br/><br/>
 
-# :mag_right: <a name="fullfill">보완할점(수정필요)</a>
+# :mag_right: <a name="fullfill">보완할점</a>
 
 - ERD 설계시 테이블 사이의 관계를 명확하게 설계하지 못했던 점
 - 테이블 view 생성시 여러번 번복하여 작업시간이 길이진 점
@@ -257,4 +286,4 @@
 
 # :bookmark: <a name="url">배포</a>
 <a href="http://13.125.14.162:8080/ROOT2/orca/home.do">Orca Web Page</a>
-- AWS를 이용한 배포
+- AWS와 Docker를 이용한 배포
