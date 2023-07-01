@@ -178,7 +178,7 @@
 
 ## &nbsp;&nbsp;2-3. 클래스 상세정보 조회
 
-<img src="https://github.com/pknu05/Final-Project/assets/123917210/f0e5d7d2-fede-49e9-b634-65cb48311fce"> <br/><br/>
+<img src="https://github.com/pknu05/Final-Project/assets/44632544/f207bdd6-e76e-474b-9130-a69c7a3f0f14"> <br/><br/>
 - 등록한 클래스의 상세정보를 조회할 수 있는 페이지 (리뷰추천, 문의하기, 신청하기 기능으로 구성)
 - 달력에서 참여가능한 날짜를 확인한 후 시간과 신청할 인원수를 선택
      
