@@ -149,7 +149,7 @@
 
 <h3>● 천현빈</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-End : 장바구니 추가/조회/삭제
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-End : 장바구니 추가/조회/삭제, 클래스 신청
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-End : 장바구니 페이지, 결제 페이지, 결제 완료 페이지
 
 <h3>● 이재호</h3>
