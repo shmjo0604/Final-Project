@@ -225,6 +225,7 @@
 <img src="https://github.com/pknu05/Final-Project/assets/44632544/32c83bfa-0ecd-4143-a1d2-b2a4cf63fad2"> <br/><br/>
 - 등록한 일정별 신청인원 조회
 - 신청내역 => 신청자 정보 확인, 클래스 종료 시 신청 처리상태 결제완료에서 참여완료로 업데이트(승인)
+<br/>
 
 # 4. 클래스 검색/조회
 
