@@ -2,10 +2,10 @@
 # :clipboard: 목차
 
 - :books: <a href="#outline">개요</a>
-- :wrench: <a href="#tech">기술스택</a>
-- :scroll: <a href="#tech">ERD 다이어그램</a>
-- :family: <a href="#team">팀원소개</a>
-- :bookmark_tabs: <a href="#function">기능구현</a>
+- :wrench: <a href="#tech">기술 스택</a>
+- :scroll: <a href="#tech">ERD(Entity-Relation Diagram)</a>
+- :family: <a href="#team">팀원 역할 소개</a>
+- :bookmark_tabs: <a href="#function">기능 구현 시연 영상</a>
   - 홈화면
   - 1.&nbsp;로그인
   	- 1-1. 회원가입
