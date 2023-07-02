@@ -55,7 +55,7 @@
 
 <br/>
 
-# :wrench: <a name="tech">기술스택</a>
+# :wrench: <a name="tech">기술 스택</a>
 <h4>데이터베이스</h4>
 <div align="left">
    <img src="https://img.shields.io/badge/ORACLE-F80000?style=for-the-badge&logo=oracle&logoColor=white" />
@@ -103,11 +103,11 @@
 
 <img src="https://github.com/pknu05/Final-Project/assets/123917210/e6a68e07-16cc-470d-99e6-c9eddb188595" />
 
-## 일정등록 및 신청
+## 일정 등록 및 신청
 
 <img src="https://github.com/pknu05/Final-Project/assets/123917210/4c9bcf23-48ef-40d5-ae1d-5969c36910f1" />
 
-## 신청상태 및 리뷰
+## 신청 및 리뷰 내역
 
 <img src="https://github.com/pknu05/Final-Project/assets/123917210/a01b51af-2c8b-408d-a6c6-af09dd772cd1" />
 
@@ -119,12 +119,12 @@
 
 <img src="https://github.com/pknu05/Final-Project/assets/123917210/67f25d40-93e0-418a-9e13-48689dd23afa" />
 
-## 신청/문의 알람
+## 신청/문의 알림
 
 <img src="https://github.com/pknu05/Final-Project/assets/123917210/3d43d89b-d764-42cb-b298-f888a1499dab" />
 <br/><br/>
 
-# :family: <a name="team">팀원 역할 및 소개</a>
+# :family: <a name="team">팀원 역할 소개</a>
 <div><br/>
 	
 <h3>● 서명호</h3>
@@ -159,7 +159,7 @@
 
 </div><br/>
 
-# :bookmark_tabs: <a name="function">기능구현</a>
+# :bookmark_tabs: <a name="function">기능 구현 시연 영상</a>
 <br/>
 
 # 홈 화면
