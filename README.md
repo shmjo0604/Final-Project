@@ -13,11 +13,11 @@
 	- 1-3. 비밀번호 찾기
   - 2.&nbsp;클래스 등록
    	- 2-1. 클래스 등록
-    - 2-2. 클래스 승인(관리자)
-    - 2-3. 클래스 상세정보 조회
+	- 2-2. 클래스 승인(관리자)
+	- 2-3. 클래스 상세정보 조회
   - 3.&nbsp;일정 및 신청관리
   	- 3-1. 일정관리
-     - 3-2. 신청관리
+	- 3-2. 신청관리
   - 4.&nbsp;클래스 검색/조회
 	- 4-1. 클래스검색(지역, 카테고리, 날짜, 난이도, 가격)
 	- 4-2. 클래스검색(지도)
@@ -32,7 +32,7 @@
   - 8.&nbsp;신청/문의 알림
 	- 8-1. 클래스 신청 알림(판매자)
 	- 8-2. 클래스 문의 알림(판매자)
-    - 8-3. 클래스 문의 답변완료 알림(구매자)
+	- 8-3. 클래스 문의 답변완료 알림(구매자)
     
 - :bulb: <a href="#result">결론</a>
 - :mag_right: <a href="#fullfill">보완할점</a>
@@ -95,8 +95,33 @@
 
 # :scroll: <a name="team">ERD</a>
 
-<br/>
-<img src="https://github.com/pknu05/Final-Project/assets/44632544/8a346ba7-67cc-4300-bc2d-8a1e0f100532" />
+## 전체 ERD
+
+<img src="https://github.com/pknu05/Final-Project/assets/44632544/8a346ba7-67cc-4300-bc2d-8a1e0f100532" width="100%"/>
+
+## 클래스 등록
+
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/ac26abe1-7ac8-482f-8d19-c913af47ea1b" />
+
+## 일정등록 및 신청
+
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/cf721c78-d75a-483a-8aa4-87398624b5a7" />
+
+## 신청상태 및 리뷰
+
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/a01b51af-2c8b-408d-a6c6-af09dd772cd1" />
+
+## 커뮤니티
+
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/d5a9d256-c419-47f8-8a92-a3d830da9fb7" />
+
+## 클래스 문의
+
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/67f25d40-93e0-418a-9e13-48689dd23afa" />
+
+## 신청/문의 알람
+
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/3d43d89b-d764-42cb-b298-f888a1499dab" />
 <br/><br/>
 
 # :family: <a name="team">팀원 역할 및 소개</a>
