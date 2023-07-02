@@ -43,15 +43,15 @@
 <br/>
 <img src="https://github.com/pknu05/Final-Project/assets/44632544/3af41267-72d3-48ff-8dfd-aac0d62ae130"><br/><br/>
 
->**프로젝트**: 원데이클래스 사이트
+> **프로젝트** : 원데이클래스 매칭 플랫폼
 >
->**기획 및 제작** : 스페셜데이
+> **기획 및 제작** : 스페셜데이
 >
->**분류**: 팀프로젝트
+> **분류** : 팀 프로젝트
 >
->**제작 기간**: 2023.05.19 ~ 2023.06.13
+> **제작 기간** : 2023.05.15 ~ 2023.06.13
 >
->**프로젝트 주제**: 바쁜 일상속에서 자신에게 특별한 하루를 선물해줄 수 있는 원데이클래스 사이트 제작 
+> **프로젝트 주제** : 바쁜 일상속에서 자신에게 특별한 하루를 선물해줄 수 있는 원데이클래스 웹 애플리케이션 제작
 
 <br/>
 
@@ -129,33 +129,33 @@
 	
 <h3>● 서명호</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-end : 회원정보수정, 클래스 검색(조회), 신청/문의 알림, 이메일 인증, 클래스 신청, 결제
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-end : 메인페이지(header), 클래스검색 페이지, 클래스상세 페이지
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-End : 로그인, 로그아웃, 클래스 검색(목록/지도), 신청/문의 알림, 이메일 인증, 클래스 신청&결제, 클래스 문의 답변, 계정 관리(정보 수정, 비밀번호 변경, 회원 탈퇴)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-End : 헤더, 클래스 검색 페이지, 클래스 상세 페이지
 
 <h3>● 김은정</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-end :  클래스 등록, 클래스 수정, 클래스 목록조회, 문의내역 조회(판매자), 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-end : 메인페이지, 클래스등록 페이지, 클래스관리 페이지, 문의내역(판매자)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-End :  클래스 등록/수정/삭제, 내 클래스 조회, 클래스 활성/비활성, 문의 접수 내역 조회 
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-End : 홈, 클래스 등록 페이지, 클래스 관리 페이지
 
 <h3>● 이성희</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-end : 클래스 승인, 클래스 활성/비활성, 일정등록 및 조회, 일정수정 및 삭제, 클래스 참여승인 	
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-end : 마이페이지, 일정관리 페이지, 신청관리 페이지, 관리자 페이지
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-End :  클래스 일정 등록 및 조회, 일정 수정 및 삭제, 클래스 신청 인원 관리, 클래스 관리자 승인 	
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-End : 마이페이지, 일정 관리 페이지, 신청 관리 페이지, 관리자 페이지
 
 <h3>● 박성주</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-end : 로그인, 아이디/비번번호 찾기, 회원탈퇴, 커뮤니티 관리, 댓글등록
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-end : 로그인 페이지, 아이디/비밀번호 찾기페이지, 커뮤니티 페이지 
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-End : 회원가입, 아이디 찾기, 커뮤니티, 댓글
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-end : 회원가입 페이지, 로그인 페이지, 아이디 찾기 모달, 커뮤니티 
 
 <h3>● 천현빈</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-end : 장바구니 추가, 장바구니 수정 및 삭제, 장바구니 조회, 결제정보 조회
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-end : 장바구니 페이지, 결제확인 페이지, 결제완료 페이지
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-End : 장바구니 추가/조회/삭제
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-End : 장바구니 페이지, 결제 페이지, 결제 완료 페이지
 
 <h3>● 이재호</h3>
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-end : 신청 내역조회, 결제 상세정보, 리뷰내역 조회, 리뷰 상세보기, 리뷰추천
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-end : 마이페이지, 신청목록 페이지, 리뷰목록 페이지, 결제상세 페이지, 리뷰상세 페이지
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Back-End : 신청 내역 조회, 리뷰 작성, 리뷰 내역 조회, 리뷰 추천
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Front-End : 마이페이지 신청 및 리뷰 내역 상세 정보 모달
 
 </div><br/>
 
