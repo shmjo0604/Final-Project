@@ -101,11 +101,11 @@
 
 ## 클래스 등록
 
-<img src="https://github.com/pknu05/Final-Project/assets/123917210/ac26abe1-7ac8-482f-8d19-c913af47ea1b" />
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/e6a68e07-16cc-470d-99e6-c9eddb188595" />
 
 ## 일정등록 및 신청
 
-<img src="https://github.com/pknu05/Final-Project/assets/123917210/cf721c78-d75a-483a-8aa4-87398624b5a7" />
+<img src="https://github.com/pknu05/Final-Project/assets/123917210/4c9bcf23-48ef-40d5-ae1d-5969c36910f1" />
 
 ## 신청상태 및 리뷰
 
