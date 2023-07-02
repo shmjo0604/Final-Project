@@ -3,7 +3,7 @@
 
 - :books: <a href="#outline">개요</a>
 - :wrench: <a href="#tech">기술 스택</a>
-- :scroll: <a href="#tech">ERD(Entity-Relation Diagram)</a>
+- :scroll: <a href="#erd">ERD(Entity-Relation Diagram)</a>
 - :family: <a href="#team">팀원 역할 소개</a>
 - :bookmark_tabs: <a href="#function">기능 구현 시연 영상</a>
   - 홈화면
@@ -93,7 +93,7 @@
    <img src="https://img.shields.io/badge/FIGMA-F24E1E?style=for-the-badge&logo=figma&logoColor=white" />
 </div><br/>
 
-# :scroll: <a name="team">ERD</a>
+# :scroll: <a name="erd">ERD</a>
 
 ## 전체 ERD
 
