@@ -100,7 +100,7 @@
                         <td>
                             <div class="d-flex justify-content-center">
                                 <th:block th:if="${(obj.maximum-obj.cnt) > 0}">
-                                    <select class="form-select w-50" th:onchange="changeperson(this.value, [[${obj.totalprice}]], [[${objStat.index}]])">
+                                    <select class="form-select w-75" th:onchange="changeperson(this.value, [[${obj.totalprice}]], [[${objStat.index}]])">
                                         <option th:each="number : ${#numbers.sequence(1, obj.maximum-obj.cnt)}"
                                             th:text="${number}" th:selected="${number} == ${obj.cnt}"></option>
                                     </select>
