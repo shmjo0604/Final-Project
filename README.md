@@ -6,30 +6,30 @@
 - :scroll: <a href="#erd">ERD(Entity-Relation Diagram)</a>
 - :family: <a href="#team">팀원 역할 소개</a>
 - :bookmark_tabs: <a href="#function">기능 구현 시연 영상</a>
-  - 홈화면
-  - 1.&nbsp;<a href="#fun1">로그인
+  - <a href="#fun0">홈화면
+  - <a href="#fun1">1.&nbsp;로그인</a>
   	- 1-1. 회원가입
    	- 1-2. 아이디 찾기
 	- 1-3. 비밀번호 찾기
-  - 2.&nbsp;<a href="#fun2">클래스 등록
+  - <a href="#fun2">2.&nbsp;클래스 등록</a>
    	- 2-1. 클래스 등록
 	- 2-2. 클래스 승인(관리자)
 	- 2-3. 클래스 상세정보 조회
-  - 3.&nbsp;<a href="#fun3">일정 및 신청관리
+  - <a href="#fun3">3.&nbsp;일정 및 신청관리</a>
   	- 3-1. 일정관리
 	- 3-2. 신청관리
-  - 4.&nbsp;<a href="#fun4">클래스 검색 및 조회
+  - <a href="#fun4">4.&nbsp;클래스 검색 및 조회</a>
 	- 4-1. 클래스검색(지역, 카테고리, 날짜, 난이도, 가격)
 	- 4-2. 클래스검색(지도)
-  - 5.&nbsp;<a href="#fun5">클래스 신청 및 결제
+  - <a href="#fun5">5.&nbsp;클래스 신청 및 결제</a>
 	- 5-1. 클래스 신청(장바구니)
 	- 5-2. 클래스 신청(결제)
-  - 6.&nbsp;<a href="#fun6">신청/리뷰내역 조회
+  - <a href="#fun6">6.&nbsp;신청/리뷰내역 조회</a>
 	- 6-1. 신청 내역 상세보기
 	- 6-2. 리뷰 작성
 	- 6-3. 리뷰 추천 
-  - 7.&nbsp;<a href="#fun7">커뮤니티(게시글 및 댓글 작성)
-  - 8.&nbsp;<a href="#fun8">신청/문의 알림
+  - <a href="#fun7">7.&nbsp;커뮤니티(게시글 및 댓글 작성)</a>
+  - <a href="#fun8">8.&nbsp;신청/문의 알림</a>
 	- 8-1. 클래스 신청 알림(판매자)
 	- 8-2. 클래스 문의 알림(판매자)
 	- 8-3. 클래스 문의 답변완료 알림(구매자)
@@ -162,7 +162,7 @@
 # :bookmark_tabs: <a name="function">기능 구현 시연 영상</a>
 <br/>
 
-# 홈 화면
+# <a name="fun0">홈 화면
 
 <img src="https://github.com/pknu05/Final-Project/assets/123917210/ed817021-bec0-4326-8095-33406b9dd377"><br/><br/>
 
