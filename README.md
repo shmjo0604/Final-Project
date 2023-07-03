@@ -215,14 +215,14 @@
 # 3. <a name="fun3">클래스 관리(판매자)
 ## &nbsp;&nbsp;3-1. 클래스 조회
 
-<img src=""> <br/><br/>
+<img src="https://github.com/pknu05/Final-Project/assets/44632544/cb5f37da-1893-4289-9a12-2b15e94d2a86"> <br/><br/>
 - 등록한 클래스를 관리, 수정, 삭제, 조회, 비활성화/활성화 할 수 있는 페이지
 - 비활성화 시 클래스 조회, 관리, 수정, 삭제가 불가능
   
 <br/>
 
 ## &nbsp;&nbsp;3-2. 문의내역 조회
-<img src=""> <br/><br/>
+<img src="https://github.com/pknu05/Final-Project/assets/44632544/f96e19dc-6351-4ff0-80e5-afbbed9338f0"> <br/><br/>
 - 문의 내역을 조회하는 페이지
 - 문의 내역 답변을 작성,수정할 수 있는 페이지
 - 답변완료/답변대기 상태에 따른 조회 기능
