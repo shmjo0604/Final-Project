@@ -229,10 +229,10 @@
 
 <br/>
 
-# 4. <a name="fun4">일정 및 신청관리
+# 4. <a name="fun4">일정 및 신청관리(판매자)
 ## &nbsp;&nbsp;4-1. 일정관리
 
-<img src="https://github.com/pknu05/Final-Project/assets/44632544/f587ff02-0d04-4073-b015-0e58e6b1ab54"> <br/><br/>
+<img src="https://github.com/pknu05/Final-Project/assets/44632544/e5edb216-474a-4de2-a23c-8599b9d7e309"> <br/><br/>
 - 일정등록을 위한 필수정보(날짜, 시간, 인원) 유효성 검사, 난이도변경에 따른 추가 금액 입력란 활성화 및 할인율 설정, 총 금액확인 기능 구현
 - Fullcalendar 라이브러리를 이용한 달력 구현, 등록한 클래스 일정 정보를 달력에서 월별 조회
 - 사이드바에서 Rest Api를 활용하여 전체일정 조회, 특정 일정 수정 및 삭제, 전체삭제 기능 구현
@@ -241,7 +241,7 @@
 ## &nbsp;&nbsp;4-2. 신청관리
 <img src="https://github.com/pknu05/Final-Project/assets/44632544/32c83bfa-0ecd-4143-a1d2-b2a4cf63fad2"> <br/><br/>
 - 등록한 일정별 신청인원 조회
-- 신청내역 => 신청자 정보 확인, 클래스 종료 시 신청 처리상태 결제완료에서 참여완료로 업데이트(승인)
+- 신청자 정보 확인, 클래스 종료 시 신청 처리상태 결제완료에서 참여완료로 업데이트(승인)
 <br/>
 
 # 5. <a name="fun5">클래스 검색/조회
